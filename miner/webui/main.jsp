@@ -34,9 +34,9 @@
 </head>
 
 <s:url id="ajaxHome" value="AjaxHome.action" />
-<s:url id="simpleSearch" value="SimpleSearch.action" />
-<s:url id="advSearch" value="AdvSearch.action" />
-<s:url id="ajaxTest" value="/ajax.AjaxHome.action" />
+<s:url id="simpleSearchTab" value="SimpleSearchTab.action" />
+<s:url id="advSearchTab" value="AdvSearchTab.action" />
+<s:url id="ajaxTest" value="/AjaxHome.action" />
 
 
 <body>
@@ -52,8 +52,12 @@
                 <!--// START SNIPPET: tabbedpanel-tag-->
                 <s:tabbedPanel id="test2" theme="simple" cssStyle="width:100%; height:450px;" doLayout="true">
                       <s:div theme="ajax"  id="home" label="Home" href="%{ajaxHome}" />                      
-                      <s:div theme="ajax"  href="%{simpleSearch}" id="ryh1" label="Simple Search" />
-                      <s:div theme="ajax"  href="%{advSearch}" id="advsearch" label="Advanced Search" />                      
+                      <s:div theme="ajax"  href="%{simpleSearchTab}" id="ryh1" label="Simple Search" />
+                      <s:div theme="ajax"  href="%{advSearchTab}" id="advsearch" label="Advanced Search" />                      
+                      <s:div theme="ajax"  id="viewresultsTab" cssStyle="display: none" label="View Results">
+                          Search Results:
+                          <div id='searchresults' style="border: 1px solid yellow;display:block">&nbsp;</div>
+                      </s:div>
                   </s:tabbedPanel>
                 <!--// END SNIPPET: tabbedpanel-tag-->
              </td>
