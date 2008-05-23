@@ -1,18 +1,27 @@
 package gov.nih.nci.system.web.struts.ajaxaction;
 
-import com.opensymphony.xwork2.Action;
-
-import java.io.Serializable;
 import org.apache.log4j.Logger;
+
+import gov.nih.nci.system.web.struts.action.Result;
 
 /**
  */
-public class SimpleSearch implements Action, Serializable {
+public class SimpleSearch extends Result 
+{
 	private static Logger log = Logger.getLogger(SimpleSearch.class
 			.getName());
 
-	public String execute() throws Exception {
-		log.debug("SimpleSearch.action called so that localized messages are available on AJAX Home.jsp");		
+	public String execute() throws Exception {		
+		String submitValue = getBtnSearch();
+		log.debug("submitValue: " + submitValue);
+		
+		String query=null;
+		//if(submitValue != null && submitValue.equalsIgnoreCase("Submit"))
+		{
+			query = "GetHTML?query=gov.nih.nci.cabio.domain.Gene&gov.nih.nci.cabio.domain.Gene[@symbol=brca1]";
+			log.debug("query: " + query);			   	
+			setQuery(query);			
+		}		
         return SUCCESS;
     }
 }	
