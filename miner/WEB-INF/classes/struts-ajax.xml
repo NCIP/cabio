@@ -8,11 +8,11 @@
             <result>/webui/AjaxHome.jsp</result>
         </action>
         
-        <action name="SimpleSearch" class="gov.nih.nci.system.web.struts.ajaxaction.SimpleSearch">
+        <action name="SimpleSearchTab" class="gov.nih.nci.system.web.struts.ajaxaction.SimpleSearchTab">
             <result>/webui/SimpleSearch.jsp</result>
         </action>
 
-        <action name="AdvSearch" class="gov.nih.nci.system.web.struts.ajaxaction.AdvancedSearch">
+        <action name="AdvSearchTab" class="gov.nih.nci.system.web.struts.ajaxaction.AdvancedSearchTab">
             <result>/webui/AdvSearch.jsp</result>
         </action>
 
@@ -21,78 +21,14 @@
 			<result name="login" type="chain">Home</result>
 			<result>/webui/Content.jsp</result>
 		</action>
+        
+		<action name="SimpleSearch"
+			class="gov.nih.nci.system.web.struts.ajaxaction.SimpleSearch">
+			<result name="login" type="chain">Home</result>
+			<result type="redirect">${query}</result>
+		</action>
 
-<!-- 
-        <action name="AjaxRemoteLink" class="org.apache.struts2.showcase.ajax.AjaxTestAction">
-            <result>/ajax/AjaxResult2.js</result>
-        </action>
-
-        <action name="AjaxRemoteForm" class="org.apache.struts2.showcase.ajax.AjaxTestAction">
-            <result>/ajax/AjaxResult3.jsp</result>
-        </action>
-
-        <action name="Test1">
-            <result>/ajax/remoteforms/test2.jsp</result>
-        </action>
-
-        <action name="Test2">
-            <result>/ajax/remoteforms/test3.jsp</result>
-        </action>
-
-        <action name="Test3">
-            <result>/ajax/testjs.jsp</result>
-        </action>
-
-        <action name="JSONList">
-            <result>/ajax/JSONList.js</result>
-        </action>
-
-        <action name="tree">
-            <result>/ajax/tree/tree.jsp</result>
-        </action>
-
-        <action name="getCategory" class="org.apache.struts2.showcase.ajax.tree.GetCategory">
-            <result>/ajax/tree/getCategory.jsp</result>
-        </action>
-
-        <action name="toggle" class="org.apache.struts2.showcase.ajax.tree.Toggle">
-            <result>/ajax/tree/toggle.jsp</result>
-        </action>
-
-        <action name="example4">
-        	<result type="freemarker">/ajax/tabbedpanel/example4.ftl</result>
-        </action>
-
-        <action name="example5" class="org.apache.struts2.showcase.ajax.Example5Action">
-        	<result name="input">/ajax/tabbedpanel/example5.jsp</result>
-        	<result>/ajax/tabbedpanel/example5Ok.jsp</result>
-        </action>
-     -->
     </package>
 
-
-    <package name="ajaxNoDecorate" namespace="/nodecorate" extends="struts-default">
-    	<!--  example 4 -->
-    	<!-- 
-        <action name="panel1" class="org.apache.struts2.showcase.ajax.Example4ShowPanelAction" method="panel1">
-    		<result type="freemarker">/ajax/tabbedpanel/nodecorate/panel1.ftl</result>
-    	</action>
-    	<action name="panel2">
-    		<result type="freemarker">/ajax/tabbedpanel/nodecorate/panel2.ftl</result>
-    	</action>
-    	<action name="panel3">
-    		<result type="freemarker">/ajax/tabbedpanel/nodecorate/panel3.ftl</result>
-    	</action>
-    	<action name="panel2Submit" class="org.apache.struts2.showcase.ajax.Example4ShowPanelAction" method="panel2">
-    		<result type="freemarker">/ajax/tabbedpanel/nodecorate/panel2Submit.ftl</result>
-    	</action>
-    	<action name="panel3Submit" class="org.apache.struts2.showcase.ajax.Example4ShowPanelAction" method="panel3">
-    		<result type="freemarker">/ajax/tabbedpanel/nodecorate/panel3Submit.ftl</result>
-    	</action>
-       <action name="AutocompleterExample" class="org.apache.struts2.showcase.ajax.AutocompleterExampleAction">
-           <result type="freemarker">/ajax/options.ftl</result>
-       </action>
-       -->
-    </package>
     
 </struts>
