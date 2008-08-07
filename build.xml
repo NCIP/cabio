@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<project name="portal" basedir="." default="dist"> 
+
+<property file="build.properties"/>
+	
+<property name="project.dir" value="." />
+<property name="ant.project.name" value="caBIO Portlets" />
+<property name="dist.dir" value="dist" />
+<property name="src.dir" value="src" />
+<property name="webroot.dir" value="${project.dir}/WebRoot" />
+<property name="war.file" value="cabioportlets.war" />
+	
+<property name="app.server.dir" value="/usr/local/portal-liferay/jboss-4.0.5.GA" />	
+<property name="app.server.deploy.dir" value="${app.server.dir}/server/default/deploy" />
+<property name="app.server.type" value="jboss-tomcat" />
+<property name="liferay.ROOT.WAR.dir" value="${app.server.deploy.dir}/liferay-portal.war" /> 
+<property name="deploy.specific.wars" value="${war.file}" />
+
+	
+<path id="project.classpath">
+    <fileset dir="${webroot.dir}/WEB-INF/lib" /> 
+    <fileset dir="${app.server.dir}/server/default/lib/ext" />
+	<fileset dir="${app.server.dir}/server/default/lib" />
+    <fileset dir="${liferay.ROOT.WAR.dir}/WEB-INF/lib" /> 
+</path>
+
+<target name="clean" 
+		description="Removes generated files">
+	<delete dir="${dist.dir}" quiet="true"/>
+</target>
+
+<target name="compile" description="Compiles the Java source files" >
+	<javac srcdir="${src.dir}" destdir="${webroot.dir}/WEB-INF/classes" debug="true">
+        <classpath refid="project.classpath"/>
+		<include name="**/*.java"/>
+	</javac>
+</target>
+
+<target name="copy-resources" description="Copy resource files" >
+	<copy todir="${webroot.dir}/WEB-INF/classes" overwrite="true">
+		<fileset dir="${src.dir}">
+			<include name="**/*" />
+			<exclude name="**/*.java" />
+		</fileset>
+	</copy>
+</target>
+	
+<target name="dist" depends="clean,compile,copy-resources" 
+		description="Creates portlet WAR file distribution">
+	<echo message="${ant.project.name}: Creates portlet WAR file distribution"/>
+	<mkdir dir="${dist.dir}"/>
+	<zip destfile="${dist.dir}/${war.file}" whenempty="skip">
+		<zipfileset dir="${webroot.dir}" prefix="">
+		</zipfileset>
+	</zip>
+</target>
+	
+<target name="deploy" depends="dist">
+	
+	<java classname="com.liferay.portal.tools.PortletDeployer"
+		  classpathref="project.classpath" fork="true" newenvironment="true">
+
+		<!-- Required Arguments -->
+		<jvmarg value="-Ddeployer.base.dir=${dist.dir}" />
+		<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+		<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+		<jvmarg value="-Ddeployer.portlet.taglib.dtd=${liferay.ROOT.WAR.dir}/WEB-INF/tld/liferay-portlet.tld" />
+		<jvmarg value="-Ddeployer.unpack.war=true" />
+
+		<!-- Optional Arguments -->
+
+		<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+
+		<!-- Dependent Libraries -->
+
+		<arg value="${liferay.ROOT.WAR.dir}/WEB-INF/lib/util-bridges.jar" />
+		<arg value="${liferay.ROOT.WAR.dir}/WEB-INF/lib/util-java.jar" />
+		<arg value="${liferay.ROOT.WAR.dir}/WEB-INF/lib/util-taglib.jar" />
+
+		<!-- Specific WARs -->
+
+		<arg line="${deploy.specific.wars}" />
+	</java>
+</target>
+	
+</project>
