@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ****************************************************************************************************-->
+<!--                                 caCORE API Client Demo Build Script				                 -->
+<!-- ****************************************************************************************************-->
+<project name="caCORE API Client Demo" default="init" basedir=".">
+
+	<property name="conf.dir" value="conf" />
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="." />
+	<property name="numberTimeToRun" value="1" />
+	<property name="timeDelayInSecond" value="15" />	
+	<property file="conf/searchapiconfig.properties"/>
+	<path id="cp">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${conf.dir}" />
+	</path>
+
+	<!-- ************************************************************************************************-->
+	<!--    Run caBIO Client Demo                                                                        -->
+	<!-- ************************************************************************************************-->
+	<target name="runindex" depends="init">		
+		<mkdir dir="${index_location}"/>
+		<java classname="gov.nih.nci.indexgen.IndexGenerator" fork="true">
+			<classpath refid="cp" />
+			<classpath>
+				<pathelement location="${src.dir}" />
+			</classpath>
+			<sysproperty key="log4j.configuration" value="${conf.dir}/log4j.properties" />
+		</java>
+
+	</target>
+
+	<!-- ************************************************************************************************-->
+	<target name="init">
+		<replace dir="${conf.dir}">
+			<replacefilter token="@INDEXBASE@" value="${index_location}" />
+			<replacefilter token="@CONNECTION_URL@" value="${connection_url}" />
+			<replacefilter token="@DRIVER@" value="${connection_driver}" />
+			<replacefilter token="@USER_NAME@" value="${user_name}" />
+			<replacefilter token="@PASSWORD@" value="${password}" />
+			<replacefilter token="@SHOWSQL@" value="${show_sql}" />
+		</replace>
+		<replace file="${conf.dir}/hibernate.cfg.xml" value="">
+			<replacetoken><![CDATA[<property name="connection.datasource">java:/cabio</property>]]></replacetoken>
+		</replace>
+	</target>
+
+	
+</project>

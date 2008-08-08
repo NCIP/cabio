@@ -1,0 +1,75 @@
+import gov.nih.nci.codegen.transformer.UMLClassJetTransformer;
+import gov.nih.nci.codegen.Artifact;
+import gov.nih.nci.codegen.artifact.BaseArtifact;
+import gov.nih.nci.codegen.util.TransformerUtils;
+import gov.nih.nci.codegen.GenerationException;
+import gov.nih.nci.codegen.transformer.UMLClassJetTransformer;
+
+import gov.nih.nci.ncicb.xmiinout.domain.UMLModel;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLClass;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLAttribute;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLAssociation;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLAssociationEnd;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLTaggedValue;
+
+import java.util.List;
+
+public class CLASS extends UMLClassJetTransformer{
+
+	
+	public boolean isClassIndexed(UMLClass klass) {
+        UMLTaggedValue indexClassTag = klass.getTaggedValue("ca_index_class");
+		
+		if (indexClassTag!=null) {			
+			if (indexClassTag.getValue().equalsIgnoreCase("true")) {
+			
+				// check super class
+				try {
+					UMLClass superKlass = TransformerUtils.getSuperClass(klass);
+	                
+					if(superKlass!=null && !superKlass.getName().equals("java.lang.Object")) {
+					
+	                    UMLTaggedValue indexSuperclassTag = 
+	                        superKlass.getTaggedValue("ca_index_class");
+	                        
+						if(indexSuperclassTag == null || 
+								!indexSuperclassTag.getValue().equalsIgnoreCase("true")) {
+							// superclass says to not index
+							return false;
+						}
+					}
+				}
+                catch (GenerationException e) {
+                	e.printStackTrace();
+                }
+                
+                // no super class
+                return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isFieldIndexed(UMLAttribute attr){
+		UMLTaggedValue indexAttTag = attr.getTaggedValue("ca_index_attribute");
+		if (indexAttTag != null) {
+			return (indexAttTag.getValue().equalsIgnoreCase("true"));
+		}
+		return false;
+	}
+	
+	public boolean isFieldId(UMLAttribute attr){
+        return attr.getName().equalsIgnoreCase("id");
+	}
+	
+	public Artifact executeTemplate(UMLModel model, UMLClass klass) throws GenerationException{
+		BaseArtifact artifact = new BaseArtifact();
+		artifact.setContent(generate(model, klass));
+		artifact.createSourceName(klass);
+		return artifact;
+	}
+	
+	public String generate(UMLModel model, UMLClass klass)  throws GenerationException{
+		return "";
+	}
+}
