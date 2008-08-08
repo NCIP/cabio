@@ -7,22 +7,31 @@
 	                             http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
   
     <portlet>
-        <description>caBIO Simple Search with FreestyleLM</description>
-        <portlet-name>cabiosimplesearch</portlet-name>
-        <display-name>caBIO Simple Search</display-name>
-        <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+        <description>caBIO Portlet</description>
+        <portlet-name>cabioportlet</portlet-name>
+        <display-name>caBIO Portlet</display-name>
+		<portlet-class>org.apache.portals.bridges.struts.StrutsPortlet</portlet-class>
         <init-param>
-            <name>contextConfigLocation</name>
-            <value>/WEB-INF/ajaxSimpleSearch-portlet.xml</value>
+            <name>ViewPage</name>
+            <value>/portlet_action/cabioportlet/view</value>
+        </init-param>
+        <init-param>
+            <name>ServletContextProvider</name>
+            <value>com.liferay.util.apache.bridges.struts.LiferayServletContextProviderWrapper</value>
         </init-param>
         <supports>
             <mime-type>text/html</mime-type>
-            <portlet-mode>view</portlet-mode>
         </supports>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
         <portlet-info>
-            <title>caBIO Simple Search</title>
-            <short-title>caBIO</short-title>
-            <keywords>cabio,ajax,rest,examples</keywords>
+            <title>caBIO Portlet</title>
+            <short-title>caBIO Porlet</short-title>
+            <keywords>cabio</keywords>
         </portlet-info>
     </portlet>
         

@@ -16,9 +16,12 @@
 <property name="liferay.ROOT.WAR.dir" value="${app.server.deploy.dir}/liferay-portal.war" /> 
 <property name="deploy.specific.wars" value="${war.file}" />
 
-	
+
 <path id="project.classpath">
-    <fileset dir="${webroot.dir}/WEB-INF/lib" /> 
+    <fileset dir="${webroot.dir}/WEB-INF/lib" />
+</path>
+	
+<path id="liferay.classpath">
     <fileset dir="${app.server.dir}/server/default/lib/ext" />
 	<fileset dir="${app.server.dir}/server/default/lib" />
     <fileset dir="${liferay.ROOT.WAR.dir}/WEB-INF/lib" /> 
@@ -58,7 +61,7 @@
 <target name="deploy" depends="dist">
 	
 	<java classname="com.liferay.portal.tools.PortletDeployer"
-		  classpathref="project.classpath" fork="true" newenvironment="true">
+		  classpathref="liferay.classpath" fork="true" newenvironment="true">
 
 		<!-- Required Arguments -->
 		<jvmarg value="-Ddeployer.base.dir=${dist.dir}" />
