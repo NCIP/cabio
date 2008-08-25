@@ -115,39 +115,6 @@ div.pathwayDiagram {
  -->
  
 
-<script language="javascript">
-
-jQuery(document).ajaxError(function(e, req, settings){
-    
-    caBioSimpleSearch.enabledUI(true);
-    
-    r = req.responseText
-    if (r.match(/caCORE HTTP Servlet Error/)) {
-        // Yes, this is next part is very fragile, but 
-        // the SDK's error handling doesn't leave us with much choice
-        error = r.split('\r\n')[3]
-    }
-    else {
-        error = 'Unknown error'
-    }
-
-    sr = jQuery("#searchResults")
-    sr.empty()
-    sr.append('<div class="error">'+error+'</div>')
-
-    // log the error if possible
-    if (window.console && window.console.error) {
-        document.body.style.cursor = "default";
-        console.error(arguments);
-    }
-});
-
-jQuery(document).ready(function(){
-    caBioSimpleSearch.showAdvOptions();
-    jQuery.historyInit(caBioSimpleSearch.loadFromHash);
-});
-
-</script>
 
 <script language="javascript">
     
@@ -253,39 +220,27 @@ var caBioSimpleSearch = function() {
 	var searchResults = '';
 	
 	/**
-	 * Utililty function to check for Adobe SVG viewer
-	 */
-	function isASVInstalled() {
-		try {
-			var asv = new ActiveXObject("Adobe.SVGCtl");
-			return true;
-		}
-		catch(e) { }
-		return false;
-	}
-
-	/**
 	 * Concatenate the values of the specified attributes.
 	 * @param p hash of attribute names -> values
 	 * @param f array of attribute names
 	 */
 	function concatFields(p, f) { 
-	    var r = ''
-	    i = 0
+	    var r = '';
+	    var i = 0;
 	    for(k in f) {
 	        if (p[f[k]] != undefined) {
-	            if (i++>0) r+=", "
-	            r += p[f[k]]
+	            if (i++>0) r+=", ";
+	            r += p[f[k]];
 	        }
 	    }
-	    return r
+	    return r;
 	}
 	
 	/**
 	 * Escape the given XML (or HTML) so that it can be shown on the web page.
 	 */
 	function escapeXML(xml) {
-	    return xml.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;")
+	    return xml.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
 	}
 	
 	/** 
@@ -296,129 +251,129 @@ var caBioSimpleSearch = function() {
 	 */
 	function trunc(label, len) {
 	    if (label.length > len) {
-	        return label.substring(0, len-3) + "<b>...</b>"
+	        return label.substring(0, len-3) + "<b>...</b>";
 	    }
-	    return label
+	    return label;
 	}
 	
 	/**
 	 * Highlight occurances of text in the given label.
 	 */
 	function highlight(label, wordList) {
-	    h = label
+	    h = label;
 	    for(var i=0; i<wordList.length; i++) {
-	        h = h.replace(new RegExp("("+wordList[i]+")","gi"), "<b>$1</b>")
+	        h = h.replace(new RegExp("("+wordList[i]+")","gi"), "<b>$1</b>");
 	    }
-	    return h
+	    return h;
 	}
 	
 	function doSearch(page) {
 	
-	    currPage = page
+	    currPage = page;
 	        
-	    var searchText = jQuery.trim(jQuery("#searchText").val())
+	    var searchText = jQuery.trim(jQuery("#searchText").val());
 	    
 	    if (searchText == '') {
-	    	jQuery("#searchResults").empty()
-	        return
+	    	jQuery("#searchResults").empty();
+	        return;
 	    }
 	   
-	    searchString = searchText
-	    searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ")
+	    searchString = searchText;
+	    searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ");
 	
 	    if (jQuery("#matchall").is(":checked")) {
-	        searchString = "+"+searchWords.join(" +")
+	        searchString = "+"+searchWords.join(" +");
 	    }
 	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
-	    				new RegExp("\\s+")," ").split(" ").join(" -")
-	    if (exclude) searchString += " -"+exclude
+	    				new RegExp("\\s+")," ").split(" ").join(" -");
+	    if (exclude) searchString += " -"+exclude;
 	
-	    caBioSimpleSearch.enabledUI(false)
-	    var sh = jQuery("#searchHibernate").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : ''
+	    caBioSimpleSearch.enabledUI(false);
+	    var sh = jQuery("#searchHibernate").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : '';
 	    
 	    var data = 'query=SearchQuery&SearchQuery[@keyword='+
 	              searchString+']'+sh+'&pageSize='+
-	              PAGE_SIZE+'&pageNumber='+page
+	              PAGE_SIZE+'&pageNumber='+page;
 	              
 	    //jQuery("#debug").append(proxyUrl+"?"+data)
 	    
 	    jQuery.ajax({ 
 	        type: "GET", dataType: "xml", url: proxyUrl, data: data,
 	        success: processResults
-	    })
+	    });
 	}
 	
 	function processResults(xml) {
 	
-	    jQuery("#searchResults").empty()
+	    jQuery("#searchResults").empty();
 	    
-	    qr = jQuery("queryResponse",xml)
+	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
-	        r = '<div class="summary">No results found for <b>'+searchString+'</b></div>'
-	        jQuery("#searchResults").append(r)
+	        r = '<div class="summary">No results found for <b>'+searchString+'</b></div>';
+	        jQuery("#searchResults").append(r);
 	    }
 	    else {
-	        numPages = parseInt(jQuery("pages",qr).attr("count"))
-	        numRecords = parseInt(jQuery("recordCounter",qr).text())
-	        startRecord = parseInt(jQuery("start",qr).text())
-	        endRecord = parseInt(jQuery("end",qr).text())
+	        numPages = parseInt(jQuery("pages:first",qr).attr("count"));
+	        numRecords = parseInt(jQuery("recordCounter:first",qr).text());
+	        startRecord = parseInt(jQuery("start:first",qr).text());
+	        endRecord = parseInt(jQuery("end:first",qr).text());
 	
 	        summary = '<div class="summary">Results <b>'+startRecord+'</b> - <b>'
-	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b></div>'
-	        jQuery("#searchResults").append(summary)
+	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b></div>';
+	        jQuery("#searchResults").append(summary);
 	
 	        jQuery("class", qr).each(function(){
 	
-	            var r = processClassNode(this)
+	            var r = processClassNode(this);
 	
 	            var f = jQuery("#searchFormat").is(":checked") ? 
-	                caBIO_DomainFormats[r.className] : undefined
+	                caBIO_DomainFormats[r.className] : undefined;
 	
 	            var title = '';
 	            var desc = '';
 	            
 	            if (f != undefined) {
-	                title = highlight(trunc(concatFields(r.properties, f['title']), MAX_TITLE_LEN), searchWords)
-	                desc = highlight(trunc(concatFields(r.properties, f['desc']), MAX_DESC_LEN), searchWords)
+	                title = highlight(trunc(concatFields(r.properties, f['title']), MAX_TITLE_LEN), searchWords);
+	                desc = highlight(trunc(concatFields(r.properties, f['desc']), MAX_DESC_LEN), searchWords);
 	            }
 	            else {
 	                for(k in r.properties) {
 	                    if ((k.substring(0,1) != '_') && (k != 'id')) {
-	                        desc += k+': '+highlight(trunc(escapeXML(r.properties[k]), MAX_DESC_LEN), searchWords)+"<br/>"
+	                        desc += k+': '+highlight(trunc(escapeXML(r.properties[k]), MAX_DESC_LEN), searchWords)+"<br/>";
 	                    }
 	                }
 	            }
 	
-	            if (title == '') title = r.className+'#'+r.id
+	            if (title == '') title = r.className+'#'+r.id;
 	
-	            detailsUrl = GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']'
+	            detailsUrl = GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']';
 	
-	            h = '<div class="result"><h2><a href="javascript:caBioSimpleSearch.loadDetails(\''+r.className+'\','+r.id+')">'
-	            h += title+'</a></h2><span class="desc">'+desc+'</span>'
-	            h += '<span class="className">'+r.className+'</span>' 
-	            h += '</div>'
-	            jQuery("#searchResults").append(h)
+	            h = '<div class="result"><h2><a href="javascript:caBioSimpleSearch.loadDetails(\''+r.className+'\','+r.id+')">';
+	            h += title+'</a></h2><span class="desc">'+desc+'</span>';
+	            h += '<span class="className">'+r.className+'</span>';
+	            h += '</div>';
+	            jQuery("#searchResults").append(h);
 	            
 	        })
 	
 	        if (numPages > 1) {
 	
-	            var rp = ''
-	            var i
+	            var rp = '';
+	            var i;
 	            for(i=1; i<=numPages; i++) {
 	                if (i == currPage) {
-	                    rp += ' '+i
+	                    rp += ' '+i;
 	                }
 	                else if ((i > currPage-6) && (i < currPage+6)) {
-	                    rp += ' <a href="javascript:loadSearch('+i+')">'+i+'</a>'   
+	                    rp += ' <a href="javascript:loadSearch('+i+')">'+i+'</a>'   ;
 	                }
 	            }
 	
-	            prev = (currPage > 1)?"<a href='javascript:caBioSimpleSearch.changePage(-1)'>Previous</a>&nbsp;":""
-	            next = (currPage < numPages)?"<a href='javascript:caBioSimpleSearch.changePage(1)'>Next</a>":""
+	            prev = (currPage > 1)?"<a href='javascript:caBioSimpleSearch.changePage(-1)'>Previous</a>&nbsp;":"";
+	            next = (currPage < numPages)?"<a href='javascript:caBioSimpleSearch.changePage(1)'>Next</a>":"";
 	
-	            pages = '<div class="pages">'+prev+rp+' &nbsp;'+next+'</div>'
-	            jQuery("#searchResults").append(pages)
+	            pages = '<div class="pages">'+prev+rp+' &nbsp;'+next+'</div>';
+	            jQuery("#searchResults").append(pages);
 	        }
 	    }
 	    
@@ -429,7 +384,7 @@ var caBioSimpleSearch = function() {
 	
 	    searchResults = jQuery("#searchResults").html()
 	    
-	    caBioSimpleSearch.enabledUI(false)
+	    caBioSimpleSearch.enabledUI(false);
 	    jQuery.ajax({ 
 	        type: "GET", dataType: "xml", url: proxyUrl,
 	        data: 'query='+className+'&'+className+'[@id='+id+']',
@@ -439,26 +394,26 @@ var caBioSimpleSearch = function() {
 	
 	function processObjectDetails(xml) {
 	
-	    var searchText = jQuery("#searchText").val()
-	    jQuery("#searchResults").empty()
+	    var searchText = jQuery("#searchText").val();
+	    jQuery("#searchResults").empty();
 	 
-	    qr = jQuery("queryResponse",xml)
+	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
-	        r = '<div class="summary">Object not found</div>'
-	        jQuery("#searchResults").append(r)
+	        r = '<div class="summary">Object not found</div>';
+	        jQuery("#searchResults").append(r);
 	    }
 	    else {	
 	        jQuery("class", qr).each(function(){
 	
 	            var r = processClassNode(this);
 	
-	            h = '<div class="result"><table class="properties">'
-	            h += '<tr><th colspan="2" class="header"><span class="link-extenal">'
-	            h += '<a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']">'
-	            h += r.className+'#'+r.id+'</a></span></th></tr>'
+	            h = '<div class="result"><table class="properties">';
+	            h += '<tr><th colspan="2" class="header"><span class="link-extenal">';
+	            h += '<a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']">';
+	            h += r.className+'#'+r.id+'</a></span></th></tr>';
 	            for(k in r.properties) {
 	                if ((k.substring(0,1) !== '_') && (k != 'id')) {
-	                    var val = r.properties[k]
+	                    var val = r.properties[k];
 	                    var v = '';
 	                    if (!jQuery.browser.msie && val.substring(0,5)==='<?xml') {
 	                    
@@ -470,26 +425,26 @@ var caBioSimpleSearch = function() {
 	                    	//jQuery("#debug").empty()
 	                    	//jQuery("#debug").append(escapeXML(val))
 	                    
-	    					v = '<div id="pathway_'+r.id+'" class="pathwayDiagram" onclick="jQuery.modal.close()">'
-	    					v += '<object width="600" height="500" name="svg" codebase="http://www.adobe.com/svg/viewer/install/" '
-	    					v += 'classid="clsid:78156a80-c6a1-4bbf-8e6a-3cd390eeb4e2" '
-	    					v += "data='data:image/svg+xml,"+val+"' " +'type="image/svg+xml"></object>'
-                            v += '</div>'
-                            jQuery("body").append(v)
+	    					v = '<div id="pathway_'+r.id+'" class="pathwayDiagram" onclick="jQuery.modal.close()">';
+	    					v += '<object width="600" height="500" name="svg" codebase="http://www.adobe.com/svg/viewer/install/" ';
+	    					v += 'classid="clsid:78156a80-c6a1-4bbf-8e6a-3cd390eeb4e2" ';
+	    					v += "data='data:image/svg+xml,"+val+"' " +'type="image/svg+xml"></object>';
+                            v += '</div>';
+                            jQuery("body").append(v);
 
-                            v = '<input type="submit" value="View Image" onclick="caBioSimpleSearch.showPathway('+r.id+')"/>'
+                            v = '<input type="submit" value="View Image" onclick="caBioSimpleSearch.showPathway('+r.id+')"/>';
 
 	                    }
 	                    else {
-		                    v = escapeXML(val)
+		                    v = escapeXML(val);
 	                    }
 	                    
-	                    h += '<tr><th>'+k+'</th><td><div class="value">'
-	                    h += highlight(v, searchWords)+"</div></td></tr>"
+	                    h += '<tr><th>'+k+'</th><td><div class="value">';
+	                    h += highlight(v, searchWords)+"</div></td></tr>";
 	                }
 	            }
-	            h += '</table></div>'
-	            jQuery("#searchResults").append(h)
+	            h += '</table></div>';
+	            jQuery("#searchResults").append(h);
 	            
 	        })
 	    }
@@ -504,9 +459,9 @@ var caBioSimpleSearch = function() {
 	 */
 	function processClassNode(classNode) {
 	    if (jQuery(classNode).attr('name') == 'gov.nih.nci.search.SearchResult') {
-	        return processSearchResult(classNode)
+	        return processSearchResult(classNode);
 	    }
-	    return processDomainObject(classNode)
+	    return processDomainObject(classNode);
 	}
 	
 	/**
@@ -517,26 +472,26 @@ var caBioSimpleSearch = function() {
 	    props = jQuery("field[@name='properties']", classNode).text();
 	
 	    // get rid of the surrounding {}'s
-	    props = props.substring(1,props.length-1)
+	    props = props.substring(1,props.length-1);
 	    // create property hashmap
-	    p = {}
-	    re = /,(?=( \w+\=))/
-	    ar = props.split(re)
-	    re = /(\w+)\=(.*)/
+	    p = {};
+	    re = /,(?=( \w+\=))/;
+	    ar = props.split(re);
+	    re = /(\w+)\=(.*)/;
 	    for(i=0; i<ar.length; i++) {
-	        vals = re.exec(ar[i])
-	        key = vals[1]
-	        value = vals[2]
+	        vals = re.exec(ar[i]);
+	        key = vals[1];
+	        value = vals[2];
 	        if (value != '') {
-	            p[key] = value
+	            p[key] = value;
 	        }
 	    }
 	    
-	    result = new Object()
-	    result.className = jQuery("field[@name='className']", classNode).text()
-	    result.id = jQuery("field[@name='id']", classNode).text()
-	    result.properties = p
-	    return result
+	    result = new Object();
+	    result.className = jQuery("field[@name='className']", classNode).text();
+	    result.id = jQuery("field[@name='id']", classNode).text();
+	    result.properties = p;
+	    return result;
 	}
 	
 	/**
@@ -545,19 +500,19 @@ var caBioSimpleSearch = function() {
 	function processDomainObject(classNode) {
 	
 	    // create property hashmap
-	    p = {}
+	    p = {};
 	    jQuery("field", classNode).each(function() {
 	        if (jQuery(this).attr('xlink:type') == undefined) {
-	            key = jQuery(this).attr('name')
-	            p[key] = jQuery(this).text()
+	            key = jQuery(this).attr('name');
+	            p[key] = jQuery(this).text();
 	        }
 	    })
 	
-	    result = new Object()
-	    result.className = jQuery(classNode).attr('name')
-	    result.id = jQuery("field[@name='id']", classNode).text()
-	    result.properties = p
-	    return result
+	    result = new Object();
+	    result.className = jQuery(classNode).attr('name');
+	    result.id = jQuery("field[@name='id']", classNode).text();
+	    result.properties = p;
+	    return result;
 	}
 	
 	/**** public API ****/
@@ -565,34 +520,34 @@ var caBioSimpleSearch = function() {
 	return {
 		
 	loadSearch : function (page) {
-        jQuery.historyLoad("caBioSimpleSearch_search_"+page)
+        jQuery.historyLoad("caBioSimpleSearch_search_"+page);
 	},
 	
 	loadDetails : function (className, id) {
-        jQuery.historyLoad("caBioSimpleSearch_details_"+className+"_"+id)
+        jQuery.historyLoad("caBioSimpleSearch_details_"+className+"_"+id);
 	},
 	
 	loadFromHash : function (hash) {
 		
 	    if (hash) {
-	    	re = /^(\w+?)_(\w+?)_(.*)/
-	    	h = hash.match(re)
+	    	re = /^(\w+?)_(\w+?)_(.*)/;
+	    	h = hash.match(re);
 	    	if (h.length < 4) {
 	    		console.error("[loadFromHash] invalid hash: "+hash);
-	    		return
+	    		return;
 	    	}
-            window[h[1]][h[2]](h[3])
+            window[h[1]][h[2]](h[3]);
 	    }
 	
 	},
 	
     search : function(hash) {
-        doSearch(parseInt(hash))
+        doSearch(parseInt(hash));
     },
     
     details : function(hash) {
     	h = hash.split("_");
-        doObjectDetails(h[0],parseInt(h[1]))
+        doObjectDetails(h[0],parseInt(h[1]));
     },
     
 	/**
@@ -600,7 +555,7 @@ var caBioSimpleSearch = function() {
 	 */
 	changePage : function (inc) {
 	    currPage += inc;
-	    caBioSimpleSearch.loadSearch(currPage)
+	    caBioSimpleSearch.loadSearch(currPage);
 	},
 	
 	/**
@@ -614,21 +569,21 @@ var caBioSimpleSearch = function() {
 	 * Go back to the search results. Called from an object details screen.
 	 */
 	restoreSearch : function () {
-	    jQuery("#searchResults").empty().append(searchResults)
+	    jQuery("#searchResults").empty().append(searchResults);
 	},
 	
 	/**
 	 * Toggle the "Advanced Options" drop down box.
 	 */
 	toggleOptions : function () {
-	    ab = jQuery("#adv_box")
+	    ab = jQuery("#adv_box");
 	    if (ab.is(":hidden")) {
-	    	ab.css("display","block")
-	        jQuery("#adv_link>img").attr('src',downGreyImg)
+	    	ab.css("display","block");
+	        jQuery("#adv_link>img").attr('src',downGreyImg);
 	    }
 	    else {
-	    	ab.css("display","none")
-	        jQuery("#adv_link>img").attr('src',downBlueImg)
+	    	ab.css("display","none");
+	        jQuery("#adv_link>img").attr('src',downBlueImg);
 	    }
 	},
 	
@@ -637,15 +592,15 @@ var caBioSimpleSearch = function() {
 	 */
 	enabledUI : function (enabled) {
 		if (enabled) {
-		    jQuery("#searchText").removeAttr("disabled")
-		    jQuery("#searchButton").removeAttr("disabled")
-		    jQuery("#searchButton").attr("value","Search")
+		    jQuery("#searchText").removeAttr("disabled");
+		    jQuery("#searchButton").removeAttr("disabled");
+		    jQuery("#searchButton").attr("value","Search");
 		    document.body.style.cursor = "default";
 		}
 		else {
-		    jQuery("#searchText").attr("disabled","disabled")
-		    jQuery("#searchButton").attr("disabled","disabled")
-		    jQuery("#searchButton").attr("value","Loading...")
+		    jQuery("#searchText").attr("disabled","disabled");
+		    jQuery("#searchButton").attr("disabled","disabled");
+		    jQuery("#searchButton").attr("value","Loading...");
 		    document.body.style.cursor = "wait";
 		}
 	},
@@ -661,14 +616,47 @@ var caBioSimpleSearch = function() {
                 dialog.overlay.one("click", function () {
                     jQuery.modal.close();
                 });
-            },
-        
+            }
         });
 		return false;
 	}
 
 	};
 }();
+
+</script>
+
+<script language="javascript">
+
+jQuery(document).ajaxError(function(e, req, settings){
+    
+    caBioSimpleSearch.enabledUI(true);
+    
+    r = req.responseText;
+    if (r.match(/caCORE HTTP Servlet Error/)) {
+        // Yes, this is next part is very fragile, but 
+        // the SDK's error handling doesn't leave us with much choice
+        error = r.split('\r\n')[3];
+    }
+    else {
+        error = 'Unknown error';
+    }
+
+    sr = jQuery("#searchResults");
+    sr.empty();
+    sr.append('<div class="error">'+error+'</div>');
+
+    // log the error if possible
+    if (window.console && window.console.error) {
+        document.body.style.cursor = "default";
+        console.error(arguments);
+    }
+});
+
+jQuery(document).ready(function(){
+    caBioSimpleSearch.showAdvOptions();
+    jQuery.historyInit(caBioSimpleSearch.loadFromHash);
+});
 
 </script>
 
