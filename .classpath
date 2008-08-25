@@ -49,9 +49,8 @@
 	<classpathentry kind="lib" path="build/system/lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="build/system/lib/xwork-2.0-beta-1.jar"/>
 	<classpathentry kind="lib" path="test/lib/junit-4.3.1.jar"/>
-	<classpathentry kind="lib" path="output/remote-client/lib/cabio41-beans.jar"/>
-	<classpathentry kind="lib" path="output/indexgen/lib/cabio41-indexgen.jar"/>
 	<classpathentry kind="lib" path="system/lib/commons-cli-1.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4"/>
+	<classpathentry kind="lib" path="output/remote-client/lib/cabio42-beans.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
