@@ -1,120 +1,5 @@
-<!--  %@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %-->
-
-<style type="text/css">
-div.results {
-    max-width: 450px;
-}
-
-div.result {
-    margin-top: 10px;
-}
-
-div.result h2 {
-    font-size: 11pt;
-    font-weight: normal;
-    margin: 0px;
-}
-
-div.result span.desc {
-    display: block;
-    font-size: 10pt;
-}
-
-div.result span.className {
-    display: block;
-    font-size: 10pt;
-    color: #226600;
-}
-
-div.summary {
-    width: 100%;
-    padding: 2px;
-    background: #ddf;
-    border-top: 1px solid #99b;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-div.pages {
-    width: 100%;
-    padding: 2px;
-    margin-top: 20px;
-}
-
-div.error {
-    margin-top: 20px;
-    color: red;
-}
-
-table.properties {
-	margin-top: 5px;
-    border-collapse: collapse;
-}
-
-table.properties th {
-    font-weight: normal;
-    text-align: left;
-	vertical-align: top;
-    width: 30%;
-    border: 1px solid #aaa;
-	padding: 2px;
-}
-
-table.properties th.header {
-	font-size: 110%;
-}
-
-table.properties td {
-    font-weight: normal;
-    border: 1px solid #aaa;
-	padding: 2px;
-}
-
-table.properties div.value {
-	max-height: 250px;
-	overflow: auto;
-}
-
-a#adv_link {
-    text-decoration: none;
-}
-
-div#adv_box {
-    margin-left: 10px;
-    margin-top: 2px;
-    padding: 3px;
-    display: none;
-}
-
-div.pathwayDiagram {
-    display: none;
-}
-
-#modalOverlay {
-  	background-color: #000;
-  	cursor:wait;
-}
-
-#modalContainer {
-	top: 15%;
-  	left: 50%;
-  	margin-left: -300px;
-  	background-color:#000;
-}
-
-
-</style>
-
 <script type="text/javascript" src="<c:url value="/js/jquery.history.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/jquery.simplemodal-1.1.1.js"/>"></script>
-
-<!-- 
-<script type="text/javascript" src="everything_unpacked.js"></script>
-<script type="text/javascript" src="jquery.history.js"></script>
-<script type="text/javascript" src="jquery.simplemodal-1.1.1.js"></script>
- -->
- 
-
 
 <script language="javascript">
     
@@ -202,11 +87,6 @@ var caBioSimpleSearch = function() {
 
 	var proxyUrl = "/cabioportlets/proxy";
 	//proxyUrl = "/cgi-bin/proxy.py";
-	
-	var downBlueImg = "<c:url value='/images/down_arrow_blue.png'/>";
-	var downGreyImg = "<c:url value='/images/down_arrow_grey.png'/>";
-	//downBlueImg = "down_arrow_blue.png";
-	//downGreyImg = "down_arrow_grey.png";
 	
 	var PAGE_SIZE = 5;
 	var MAX_TITLE_LEN = 60;
@@ -365,7 +245,7 @@ var caBioSimpleSearch = function() {
 	                    rp += ' '+i;
 	                }
 	                else if ((i > currPage-6) && (i < currPage+6)) {
-	                    rp += ' <a href="javascript:loadSearch('+i+')">'+i+'</a>'   ;
+	                    rp += ' <a href="javascript:caBioSimpleSearch.loadSearch('+i+')">'+i+'</a>'   ;
 	                }
 	            }
 	
@@ -557,34 +437,12 @@ var caBioSimpleSearch = function() {
 	    currPage += inc;
 	    caBioSimpleSearch.loadSearch(currPage);
 	},
-	
-	/**
-	 * Called when the page is loaded to add an image to the advanced options.
-	 */
-	showAdvOptions : function () {
-    	jQuery("#adv_link").html('<img src="'+downBlueImg+'" border="0"/> Advanced Options');
-	},
 
 	/** 
 	 * Go back to the search results. Called from an object details screen.
 	 */
 	restoreSearch : function () {
 	    jQuery("#searchResults").empty().append(searchResults);
-	},
-	
-	/**
-	 * Toggle the "Advanced Options" drop down box.
-	 */
-	toggleOptions : function () {
-	    ab = jQuery("#adv_box");
-	    if (ab.is(":hidden")) {
-	    	ab.css("display","block");
-	        jQuery("#adv_link>img").attr('src',downGreyImg);
-	    }
-	    else {
-	    	ab.css("display","none");
-	        jQuery("#adv_link>img").attr('src',downBlueImg);
-	    }
 	},
 	
 	/**
@@ -654,7 +512,7 @@ jQuery(document).ajaxError(function(e, req, settings){
 });
 
 jQuery(document).ready(function(){
-    caBioSimpleSearch.showAdvOptions();
+    caBioCommon.createDropBox("#adv_link");
     jQuery.historyInit(caBioSimpleSearch.loadFromHash);
 });
 
@@ -664,7 +522,7 @@ jQuery(document).ready(function(){
 <input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/>
 <br/>
 
-<a id="adv_link" href="javascript:caBioSimpleSearch.toggleOptions()">Advanced Options</a>
+<a id="adv_link" href="javascript:caBioCommon.toggleDropBox('#adv_box')">Advanced Options</a>
 <div id="adv_box">
 	Match:
 	<input type="radio" name="match" id="matchany" checked="checked"> any 
@@ -682,5 +540,3 @@ jQuery(document).ready(function(){
 	xmlns:svg="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink">
 </div>
-
-<div id="debug"></div>

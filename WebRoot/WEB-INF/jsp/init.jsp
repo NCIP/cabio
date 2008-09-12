@@ -1,7 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jstl/sql_rt" prefix="sql" %>
-<%@ taglib uri="http://java.sun.com/jstl/xml_rt" prefix="x" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jstl/xml" prefix="x" %>
 
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
@@ -34,4 +34,6 @@
 
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
+<%-- This tag must appear to define the following variables in the JSP page: 
+	 renderRequest, renderResponse, and portletConfig. --%>
 <portlet:defineObjects />

@@ -1,0 +1,160 @@
+div.results {
+    max-width: 450px;
+}
+
+div.result {
+    margin-top: 10px;
+}
+
+div.result h2 {
+    font-size: 11pt;
+    font-weight: normal;
+    margin: 0px;
+}
+
+div.result span.desc {
+    display: block;
+    font-size: 10pt;
+}
+
+div.result span.className {
+    display: block;
+    font-size: 10pt;
+    color: #226600;
+}
+
+div.summary {
+    width: 100%;
+    padding: 2px;
+    background: #ddf;
+    border-top: 1px solid #99b;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.pages {
+    width: 100%;
+    padding: 2px;
+    margin-top: 20px;
+}
+
+div.error {
+    margin-top: 20px;
+    color: red;
+}
+
+table.properties {
+    margin-top: 5px;
+    border-collapse: collapse;
+}
+
+table.properties th {
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+    width: 30%;
+    border: 1px solid #aaa;
+    padding: 2px;
+}
+
+table.properties th.header {
+    font-size: 110%;
+}
+
+table.properties td {
+    font-weight: normal;
+    border: 1px solid #aaa;
+    padding: 2px;
+}
+
+table.properties div.value {
+    max-height: 250px;
+    overflow: auto;
+}
+
+div#adv_box {
+    margin-left: 10px;
+    margin-top: 2px;
+    padding: 3px;
+    display: none;
+}
+
+div.pathwayDiagram {
+    display: none;
+}
+
+#modalOverlay {
+    background-color: #000;
+    cursor:wait;
+}
+
+#modalContainer {
+    top: 15%;
+    left: 50%;
+    margin-left: -300px;
+    background-color:#000;
+}
+
+
+div.category {
+    display: block;
+}
+
+div.category a {
+    text-decoration: none;
+}
+
+div.category a:hover {
+    text-decoration: underline;
+}
+
+div.queries {
+    display: none;
+    margin: 10px 0px 10px 20px;
+}
+
+div.queries table tr td {
+    vertical-align: top;
+}
+
+div.query {
+    display: none;
+    padding: 5px;
+}
+
+div.query table tr td {
+    vertical-align: center;
+    padding: 3px;
+}
+
+
+
+div.cannedResults h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+div.cannedResults table {
+    border-collapse: collapse;
+}
+
+div.cannedResults table th {
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+div.cannedResults table td {
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    vertical-align: top;
+}
+
+

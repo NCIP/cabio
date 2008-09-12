@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="conf"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-portlet.jar"/>
@@ -20,9 +21,24 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-lang.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-validator.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/oro.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/util-java.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/util-lr-bridges.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/acegi-security-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/asm.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio41-beans.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio41-client-framework.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/castor-1.0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-collections-3.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate-search.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sdk-client-framework.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xercesImpl.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

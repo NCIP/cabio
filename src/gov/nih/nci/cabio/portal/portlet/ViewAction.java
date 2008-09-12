@@ -13,7 +13,7 @@ public class ViewAction extends Action {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse res) {
 	    
-		return mapping.findForward("portlet.cabioportlet.view");
+		return mapping.findForward("cabioportlet.view");
 	}
 
 }

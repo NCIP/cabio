@@ -2,5 +2,30 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
                                    "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
 <tiles-definitions>   
-    <definition name="portlet.cabioportlet.view" path="/WEB-INF/jsp/view.jsp"/>
+
+	<definition name="cabioportlet.template" path="/WEB-INF/jsp/template.jsp" />
+
+    <definition name="cabioportlet.view" extends="cabioportlet.template">
+		<put name="portlet_content" value="/WEB-INF/jsp/view.jsp" />
+	</definition>
+    
+    <definition name="cabioportlet.absoluteRangeQuery.results" extends="cabioportlet.template">
+		<put name="form_content" value="/WEB-INF/jsp/canned/absoluteRangeQuery.jsp" />
+		<put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+	</definition>
+    
+    <definition name="cabioportlet.gridRangeQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/gridRangeQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.reporterByNameQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/reporterByNameQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.error" extends="cabioportlet.template">
+		<put name="portlet_content" value="/WEB-INF/jsp/error.jsp" />
+	</definition>
+	
 </tiles-definitions>
