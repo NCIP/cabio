@@ -24,6 +24,16 @@
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
+    <definition name="cabioportlet.reporterBySNPQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/reporterBySNPQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.reporterByGeneQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/reporterByGeneQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
     <definition name="cabioportlet.error" extends="cabioportlet.template">
 		<put name="portlet_content" value="/WEB-INF/jsp/error.jsp" />
 	</definition>

@@ -46,7 +46,7 @@ public class Results {
             objs.add(new ResultItem(className, o));
         }
 
-        log.info("done grouping into "+items.size()+" classes");
+        log.info("done grouping "+results.size()+" items into "+items.size()+" classes");
     }
 
     /**

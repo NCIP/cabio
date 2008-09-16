@@ -11,6 +11,10 @@
             type="gov.nih.nci.cabio.portal.portlet.canned.GridRangeQueryForm"/>
         <form-bean name="ReporterByNameQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByNameQueryForm"/>
+        <form-bean name="ReporterBySNPQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.ReporterBySNPQueryForm"/>
+        <form-bean name="ReporterByGeneQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryForm"/>
 
 	</form-beans>
 	
@@ -43,14 +47,34 @@
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
         
+        <action path="/cabioportlet/reporterBySNPQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.ReporterBySNPQueryAction"
+                name="ReporterBySNPQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.reporterBySNPQuery.results" path="/portlet_action/cabioportlet/reporterBySNPQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/reporterByGeneQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryAction"
+                name="ReporterByGeneQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.reporterByGeneQuery.results" path="/portlet_action/cabioportlet/reporterByGeneQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
         <action path="/cabioportlet/absoluteRangeQuery/results" 
                 forward="cabioportlet.absoluteRangeQuery.results" />
-        
         <action path="/cabioportlet/gridRangeQuery/results" 
                 forward="cabioportlet.gridRangeQuery.results" />
         
         <action path="/cabioportlet/reporterByNameQuery/results" 
                 forward="cabioportlet.reporterByNameQuery.results" />
+        <action path="/cabioportlet/reporterBySNPQuery/results" 
+                forward="cabioportlet.reporterBySNPQuery.results" />
+        <action path="/cabioportlet/reporterByGeneQuery/results" 
+                forward="cabioportlet.reporterByGeneQuery.results" />
+                
         
     </action-mappings>
     

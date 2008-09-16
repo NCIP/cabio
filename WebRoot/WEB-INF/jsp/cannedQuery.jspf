@@ -70,10 +70,8 @@ Select category:
 	    <option value="queries_microarray_reporterbyname">Reporter Lookup by Name</option>
         </select>
     </td><td>
-<%-- 
         <jsp:include page="/WEB-INF/jsp/canned/reporterByGeneQuery.jsp" flush="true"/>
         <jsp:include page="/WEB-INF/jsp/canned/reporterBySNPQuery.jsp" flush="true"/>
---%>
         <jsp:include page="/WEB-INF/jsp/canned/reporterByNameQuery.jsp" flush="true"/>
     </td></tr>
     </table>
