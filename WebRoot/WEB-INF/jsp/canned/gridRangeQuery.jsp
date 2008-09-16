@@ -7,7 +7,7 @@
 
     <table>
 
-    <tr><tdtitle="Grid identifier (bigid) of a genomic feature">Grid Id</td><td>
+    <tr><td title="Grid identifier (bigid) of a genomic feature">Grid Id</td><td>
     <html:text property="gridId" size="40"/>
     </td></tr>
 
