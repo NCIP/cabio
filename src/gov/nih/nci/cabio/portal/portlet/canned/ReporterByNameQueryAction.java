@@ -3,6 +3,7 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
 import gov.nih.nci.cabio.domain.ArrayReporter;
+import gov.nih.nci.cabio.domain.ArrayReporterCytogeneticLocation;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;

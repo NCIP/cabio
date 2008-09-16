@@ -141,6 +141,13 @@ public class Results {
             String attr = (d < 0) ? path : path.substring(0,d);
 
             // TODO: add support for [] array notation
+            int a = attr.indexOf('[');
+            int b = attr.indexOf(']');
+            int index = -1;
+            if (a > 0) {
+                index = Integer.parseInt(attr.substring(a+1,b));
+                attr = attr.substring(0,a);
+            }
             
             Object nextObj;
             try {
@@ -152,11 +159,26 @@ public class Results {
             }
 
             if (d < 0) {
+                // this is the target attribute
                 return nextObj;
             }
             else {
                 String nextPath = path.substring(d+1);
                 if (nextObj instanceof List) {
+                    List nextList = (List)nextObj;
+                    
+                    // just need one element from the list
+                    if (index >= 0) {
+                        try {
+                            nextObj = nextList.get(index);
+                        }
+                        catch (IndexOutOfBoundsException e) {
+                            return "";
+                        }
+                        return resolve(nextObj, nextPath);
+                    }
+                    
+                    // aggregate all the elements in the list
                     StringBuffer buf = new StringBuffer();
                     int c = 0;
                     for(Object e : (List)nextObj) {
