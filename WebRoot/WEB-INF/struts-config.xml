@@ -15,6 +15,8 @@
             type="gov.nih.nci.cabio.portal.portlet.canned.ReporterBySNPQueryForm"/>
         <form-bean name="ReporterByGeneQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryForm"/>
+        <form-bean name="GeneBySymbolQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryForm"/>
 
 	</form-beans>
 	
@@ -63,6 +65,14 @@
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
         
+        <action path="/cabioportlet/geneBySymbolQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryAction"
+                name="GeneBySymbolQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.geneBySymbolQuery.results" path="/portlet_action/cabioportlet/geneBySymbolQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
         <action path="/cabioportlet/absoluteRangeQuery/results" 
                 forward="cabioportlet.absoluteRangeQuery.results" />
         <action path="/cabioportlet/gridRangeQuery/results" 
@@ -75,6 +85,9 @@
         <action path="/cabioportlet/reporterByGeneQuery/results" 
                 forward="cabioportlet.reporterByGeneQuery.results" />
                 
+        <action path="/cabioportlet/geneBySymbolQuery/results" 
+                forward="cabioportlet.geneBySymbolQuery.results" />
+                
         
     </action-mappings>
     
@@ -84,4 +97,7 @@
         <set-property property="definitions-parser-validate" value="true"/>
     </plug-in>
      
+    <plug-in className="gov.nih.nci.cabio.portal.portlet.AppLoadPlugin">
+    </plug-in>
+    
 </struts-config>

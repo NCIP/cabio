@@ -22,13 +22,11 @@ public class GridRangeQueryAction extends Action {
 
     private static Log log = LogFactory.getLog(GridRangeQueryAction.class);
     
-    private CaBioApplicationService as; 
-    private CannedObjectConfig objectConfig;
+    private CaBioApplicationService as;
     
     public GridRangeQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
-        this.objectConfig = new CannedObjectConfig();
     }
     
 	@Override
@@ -58,9 +56,6 @@ public class GridRangeQueryAction extends Action {
             log.info("result size: "+results.size());
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-	        // TODO: remove this after development
-	        this.objectConfig = new CannedObjectConfig();
-            req.setAttribute("objectConfig", objectConfig);
 
             return mapping.findForward("cabioportlet.gridRangeQuery.results");
 	    }

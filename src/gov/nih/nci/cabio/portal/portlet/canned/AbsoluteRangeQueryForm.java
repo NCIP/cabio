@@ -2,6 +2,7 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.cabio.portal.portlet.GenomicFeature;
 import gov.nih.nci.cabio.portal.portlet.StaticQueries;
 
 import java.util.List;
@@ -16,36 +17,7 @@ import org.apache.commons.logging.LogFactory;
 public class AbsoluteRangeQueryForm extends PaginatedForm {
 
     private static Log log = LogFactory.getLog(AbsoluteRangeQueryForm.class);
-   
-    public enum GenomicFeature {
-
-        GenePhysicalLocation("Gene"),
-        SNPPhysicalLocation("SNP"),
-        NucleicAcidPhysicalLocation("Nucleic Acid Sequence"),
-        MarkerPhysicalLocation("Genomic Marker"),
-        TranscriptPhysicalLocation("Transcript"),
-        CytobandPhysicalLocation("Cytoband"),
-        ArrayReporterPhysicalLocation("Microarray Reporter");
-
-        private static final String PACKAGE = "gov.nih.nci.cabio.domain.";
-                
-        private String label;
         
-        private GenomicFeature(String label) {
-            this.label = label;
-        }
-
-        public String getValue() {
-            return PACKAGE+toString();
-        }
-        
-        public String getLabel() {
-            return label;
-        }
-    }
-    
-    private final GenomicFeature[] classFilterValues = GenomicFeature.values();
-    
     private String taxon = "Hs";
     private String chromosomeNumber = "1";
     private String assembly = "reference";
@@ -61,9 +33,12 @@ public class AbsoluteRangeQueryForm extends PaginatedForm {
         return StaticQueries.getTaxonValues();
     }
 
-
     public List<String> getAssemblyValues() {
         return StaticQueries.getAssemblyValues();
+    }
+
+    public GenomicFeature[] getClassFilterValues() {
+        return GenomicFeature.values();
     }
     
     public Long getChromosomeId() {
@@ -74,13 +49,10 @@ public class AbsoluteRangeQueryForm extends PaginatedForm {
         return null;
     }
 
+    
     /**************************************************************************/
     /**                     AUTO-GENERATED BEAN METHODS                       */
     /**************************************************************************/
-
-    public GenomicFeature[] getClassFilterValues() {
-        return classFilterValues;
-    }
 
     public String getTaxon() {
         return taxon;

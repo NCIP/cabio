@@ -27,12 +27,18 @@
     
 <% if (formContent != null) { %>
     
+    <!-- 
+    <div style="padding: 5px 0px 5px 0px">
+        <a href="<c:out value="${portletURL}"/>">Back to report categories</a>
+    </div>
+     -->
+     
+    <a href="javascript:caBioCommon.toggleDropBox('.query')" id="query_link" >Report Query Form</a>
     <script>    
-	jQuery(document).ready(function(){
-	    caBioCommon.createDropBox('#query_link');
-	});
+    jQuery(document).ready(function(){
+        caBioCommon.createDropBox('#query_link');
+    });
     </script>
-    <a id="query_link" href="javascript:caBioCommon.toggleDropBox('.query')">Query Form</a>
 
     <jsp:include page="<%= formContent %>" flush="true"/>
 <% } %>

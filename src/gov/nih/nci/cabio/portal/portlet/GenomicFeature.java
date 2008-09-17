@@ -1,4 +1,4 @@
-package gov.nih.nci.cabio.portal.portlet.canned;
+package gov.nih.nci.cabio.portal.portlet;
 
 public enum GenomicFeature {
 

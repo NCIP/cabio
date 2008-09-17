@@ -2,12 +2,13 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 
 import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
-import gov.nih.nci.cabio.domain.SNP;
-import gov.nih.nci.cabio.domain.SNPArrayReporter;
+import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +21,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class ReporterBySNPQueryAction extends Action {
+public class GeneBySymbolQueryAction extends Action {
 
-    private static Log log = LogFactory.getLog(ReporterBySNPQueryAction.class);
+    private static Log log = LogFactory.getLog(GeneBySymbolQueryAction.class);
     
     private CaBioApplicationService as;
     private ArrayAnnotationService aas;
     
-    public ReporterBySNPQueryAction() throws Exception {
+    public GeneBySymbolQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
         this.aas = new ArrayAnnotationServiceImpl(as);
@@ -38,18 +39,35 @@ public class ReporterBySNPQueryAction extends Action {
             HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 	    try {
-	        ReporterBySNPQueryForm f = (ReporterBySNPQueryForm)form;
+	        GeneBySymbolQueryForm f = (GeneBySymbolQueryForm)form;
 	        
-            log.info("snp: "+f.getDbsnpId());
+//            String[] geneSymbols = f.getGeneSymbol().split("\\s*,\\s*");
+//            Collection<Gene> results = aas.getGeneAnnotations(geneList);
+
+	        String symbol = f.getGeneSymbol().toLowerCase();
+	        
+            log.info("gene: "+symbol);
             log.info("page: "+f.getPage());
-                        
-            SNP snp = new SNP();
-            snp.setDBSNPID(f.getDbsnpId());
-            List<SNPArrayReporter> results = as.search(SNPArrayReporter.class, snp);
+
+            String HQL = 
+                     "select gene from gov.nih.nci.cabio.domain.Gene gene " +
+                     "left join fetch gene.databaseCrossReferenceCollection as dbxr " +
+                     "left join fetch gene.chromosome " +
+                     "left join fetch gene.geneAliasCollection " +
+                     "left join fetch gene.taxon as taxon " +
+                     "where dbxr.dataSourceName = 'LOCUS_LINK_ID' " +
+                     "and (lower(gene.hugoSymbol) like ? or lower(gene.symbol) like ?)";
+             
+
+            List<String> params = new ArrayList<String>();
+            params.add(symbol);
+            params.add(symbol);
+            
+            List<Gene> results =  as.query(new HQLCriteria(HQL,params));
 
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
 
-            return mapping.findForward("cabioportlet.reporterBySNPQuery.results");
+            return mapping.findForward("cabioportlet.geneBySymbolQuery.results");
 	    }
 	    catch (Exception e) {
 	        log.error(e);

@@ -29,13 +29,11 @@ public class ReporterByNameQueryAction extends Action {
     
     private CaBioApplicationService as;
     private ArrayAnnotationService aas;
-    private CannedObjectConfig objectConfig;
     
     public ReporterByNameQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
         this.aas = new ArrayAnnotationServiceImpl(as);
-        this.objectConfig = new CannedObjectConfig();
     }
     
 	@Override
@@ -71,9 +69,6 @@ public class ReporterByNameQueryAction extends Action {
             }
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-	        // TODO: remove this after development
-	        this.objectConfig = new CannedObjectConfig();
-            req.setAttribute("objectConfig", objectConfig);
 
             return mapping.findForward("cabioportlet.reporterByNameQuery.results");
 	    }

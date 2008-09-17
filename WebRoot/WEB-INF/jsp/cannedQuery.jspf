@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
 
 function displayQuery(selectList) {
     // hide all query divs
-    var queryDivs = jQuery("div[@class=query]",jQuery(selectList).parents("div"));
+    var queryDivs = jQuery("div[@class=query]",jQuery(selectList).parents("div")[0]);
     queryDivs.css("display","none");
     // show the selected div
     selectedId = jQuery(":selected",selectList).val();
@@ -81,7 +81,16 @@ Select category:
     <a href='#'>Genomic Annotations</a></div>
 
 <div id="queries_genomics" class="queries">
-TBD
+    <table>
+    <tr><td>
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+        <option value="queries_genomics_genebysymbol">Gene Lookup by Symbol</option>
+        </select>
+    </td><td>
+        <jsp:include page="/WEB-INF/jsp/canned/geneBySymbolQuery.jsp" flush="true"/>
+    </td></tr>
+    </table>
 </div>
 
 

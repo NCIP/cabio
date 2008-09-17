@@ -26,13 +26,11 @@ public class ReporterByGeneQueryAction extends Action {
     
     private CaBioApplicationService as;
     private ArrayAnnotationService aas;
-    private CannedObjectConfig objectConfig;
     
     public ReporterByGeneQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
         this.aas = new ArrayAnnotationServiceImpl(as);
-        this.objectConfig = new CannedObjectConfig();
     }
     
 	@Override
@@ -51,9 +49,6 @@ public class ReporterByGeneQueryAction extends Action {
             List<ExpressionArrayReporter> results = as.search(ExpressionArrayReporter.class, gene);
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-	        // TODO: remove this after development
-	        this.objectConfig = new CannedObjectConfig();
-            req.setAttribute("objectConfig", objectConfig);
 
             return mapping.findForward("cabioportlet.reporterByGeneQuery.results");
 	    }

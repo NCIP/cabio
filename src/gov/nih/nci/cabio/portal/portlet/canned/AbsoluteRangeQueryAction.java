@@ -23,12 +23,10 @@ public class AbsoluteRangeQueryAction extends Action {
     private static Log log = LogFactory.getLog(AbsoluteRangeQueryAction.class);
     
     private CaBioApplicationService as; 
-    private CannedObjectConfig objectConfig;
     
     public AbsoluteRangeQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
-        this.objectConfig = new CannedObjectConfig();
     }
     
 	@Override
@@ -60,9 +58,6 @@ public class AbsoluteRangeQueryAction extends Action {
             log.info("result size: "+results.size());
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-	        // TODO: remove this after development
-	        this.objectConfig = new CannedObjectConfig();
-            req.setAttribute("objectConfig", objectConfig);
 
             return mapping.findForward("cabioportlet.absoluteRangeQuery.results");
 	    }

@@ -1,5 +1,7 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
+import gov.nih.nci.cabio.portal.portlet.GenomicFeature;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,13 +12,14 @@ public class GridRangeQueryForm extends PaginatedForm {
 
     private static Log log = LogFactory.getLog(GridRangeQueryForm.class);
     
-    private final GenomicFeature[] classFilterValues = GenomicFeature.values();
-    
     private String gridId = "hdl://2500.1.PMEUQUCCL5/DXZ7ZIOFOE";
     private String downstreamPad = "100";
     private String upstreamPad = "100";
     private String classFilter = "";
-    
+
+    public GenomicFeature[] getClassFilterValues() {
+        return GenomicFeature.values();
+    }
     
     /**************************************************************************/
     /**                     AUTO-GENERATED BEAN METHODS                       */
@@ -46,9 +49,6 @@ public class GridRangeQueryForm extends PaginatedForm {
     }
     public void setClassFilter(String classFilter) {
         this.classFilter = classFilter;
-    }
-    public GenomicFeature[] getClassFilterValues() {
-        return classFilterValues;
     }
 
     
