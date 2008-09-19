@@ -7,8 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * This configuration object defines the fields which are displayed in the 
+ * results of a canned query. The object is loaded from a tab-delimited 
+ * configuration file in the classpath, which supports the following attribute 
+ * syntax:
+ * <ul> 
+ * <li>attribute
+ * <li>object.attribute
+ * <li>collection.attribute (attributes are aggregated)
+ * <li>collection[0].attribute
+ * </ul>
+ * 
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public class CannedObjectConfig {
 
+    private static Log log = LogFactory.getLog(CannedObjectConfig.class);
+    
     private Map<String,ClassObject> classes = new HashMap<String,ClassObject>();
     
     public CannedObjectConfig() throws Exception {
@@ -20,15 +39,25 @@ public class CannedObjectConfig {
         while((line = reader.readLine()) != null) {
             if ("".equals(line.trim())) continue;
             String[] v = line.split("\t");
-            if (v.length != 3) {
-                throw new Exception("Config file is invalid. Three columns were not found on this line: '"+line+"'");
+
+            try {
+                if (v.length == 2 || "".equals(v[1])) {
+                    classes.put(v[0], new ClassObject(v[0], v[2]));
+                }
+                else if (v.length == 3) {
+                    ClassObject classObj = classes.get(v[0]);
+                    if (classObj == null) {
+                        throw new Exception("Class not defined before use: "+v[0]);
+                    }
+                    classObj.addAttribute(v[1], v[2]);
+                }
+                else {
+                    throw new Exception("Config file has invalid number of entries.");
+                }
             }
-            if ("".equals(v[1])) {
-                classes.put(v[0], new ClassObject(v[0], v[2]));
-            }
-            else {
-                ClassObject classObj = classes.get(v[0]);
-                classObj.addAttribute(v[1], v[2]);
+            catch (Exception e) {
+                log.error("Error parsing line: "+line);
+                throw e;
             }
         }
     }

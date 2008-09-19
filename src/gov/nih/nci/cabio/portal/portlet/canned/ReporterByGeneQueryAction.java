@@ -1,9 +1,7 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
-import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
 import gov.nih.nci.cabio.domain.ExpressionArrayReporter;
-import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.cabio.portal.portlet.ReportService;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
@@ -25,12 +23,12 @@ public class ReporterByGeneQueryAction extends Action {
     private static Log log = LogFactory.getLog(ReporterByGeneQueryAction.class);
     
     private CaBioApplicationService as;
-    private ArrayAnnotationService aas;
+    private ReportService rs;
     
     public ReporterByGeneQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
-        this.aas = new ArrayAnnotationServiceImpl(as);
+        this.rs = new ReportService(as);
     }
     
 	@Override
@@ -39,21 +37,18 @@ public class ReporterByGeneQueryAction extends Action {
 
 	    try {
 	        ReporterByGeneQueryForm f = (ReporterByGeneQueryForm)form;
-	        
-            log.info("gene: "+f.getGeneSymbol());
+            String geneInput = f.getGeneSymbol();
+            
+            log.info("gene: "+geneInput);
             log.info("page: "+f.getPage());
 
-            Gene gene = new Gene();
-            gene.setSymbol(f.getGeneSymbol());
-            
-            List<ExpressionArrayReporter> results = as.search(ExpressionArrayReporter.class, gene);
+            List<ExpressionArrayReporter> results =  rs.getReportersByGene(geneInput);
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-
             return mapping.findForward("cabioportlet.reporterByGeneQuery.results");
 	    }
 	    catch (Exception e) {
-	        log.error(e);
+            log.error("Action error",e);
             req.setAttribute("errorMessage", e.getMessage());
 	        return mapping.findForward("cabioportlet.error");
 	    }

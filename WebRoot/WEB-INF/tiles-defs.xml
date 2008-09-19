@@ -39,6 +39,21 @@
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
+    <definition name="cabioportlet.agentToGenesQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/agentToGenesQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.diseaseToGenesQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/diseaseToGenesQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.geneAssociationsQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/geneAssociationsQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
     <definition name="cabioportlet.error" extends="cabioportlet.template">
 		<put name="portlet_content" value="/WEB-INF/jsp/error.jsp" />
 	</definition>

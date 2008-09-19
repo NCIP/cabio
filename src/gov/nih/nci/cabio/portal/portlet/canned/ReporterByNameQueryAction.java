@@ -3,7 +3,6 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
 import gov.nih.nci.cabio.domain.ArrayReporter;
-import gov.nih.nci.cabio.domain.ArrayReporterCytogeneticLocation;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
@@ -73,7 +72,7 @@ public class ReporterByNameQueryAction extends Action {
             return mapping.findForward("cabioportlet.reporterByNameQuery.results");
 	    }
 	    catch (Exception e) {
-	        log.error(e);
+            log.error("Action error",e);
             req.setAttribute("errorMessage", e.getMessage());
 	        return mapping.findForward("cabioportlet.error");
 	    }

@@ -1,6 +1,6 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.cabio.domain.GeneDiseaseAssociation;
 import gov.nih.nci.cabio.portal.portlet.ReportService;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
@@ -18,14 +18,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class GeneBySymbolQueryAction extends Action {
+public class DiseaseToGenesQueryAction extends Action {
 
-    private static Log log = LogFactory.getLog(GeneBySymbolQueryAction.class);
+    private static Log log = LogFactory.getLog(DiseaseToGenesQueryAction.class);
     
     private CaBioApplicationService as;
     private ReportService rs;
     
-    public GeneBySymbolQueryAction() throws Exception {
+    public DiseaseToGenesQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
         this.rs = new ReportService(as);
@@ -36,19 +36,18 @@ public class GeneBySymbolQueryAction extends Action {
             HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 	    try {
-	        GeneBySymbolQueryForm f = (GeneBySymbolQueryForm)form;
-	        String symbol = f.getGeneSymbol();
+	        DiseaseToGenesQueryForm f = (DiseaseToGenesQueryForm)form;
+            String diseaseInput = f.getDisease();
 	        
-            log.info("gene: "+symbol);
+            log.info("disease: "+diseaseInput);
             log.info("page: "+f.getPage());
+            List<GeneDiseaseAssociation> results = rs.getGenesByDisease(diseaseInput);
             
-            List<Gene> results =  rs.getGenesBySymbol(symbol);
-
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-            return mapping.findForward("cabioportlet.geneBySymbolQuery.results");
+            return mapping.findForward("cabioportlet.diseaseToGenesQuery.results");
 	    }
 	    catch (Exception e) {
-            log.error("Action error",e);
+	        log.error("Action error",e);
             req.setAttribute("errorMessage", e.getMessage());
 	        return mapping.findForward("cabioportlet.error");
 	    }

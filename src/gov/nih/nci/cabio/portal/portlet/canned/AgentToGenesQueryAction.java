@@ -1,6 +1,6 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.cabio.domain.GeneAgentAssociation;
 import gov.nih.nci.cabio.portal.portlet.ReportService;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
@@ -18,14 +18,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class GeneBySymbolQueryAction extends Action {
+public class AgentToGenesQueryAction extends Action {
 
-    private static Log log = LogFactory.getLog(GeneBySymbolQueryAction.class);
+    private static Log log = LogFactory.getLog(AgentToGenesQueryAction.class);
     
     private CaBioApplicationService as;
     private ReportService rs;
     
-    public GeneBySymbolQueryAction() throws Exception {
+    public AgentToGenesQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
         this.rs = new ReportService(as);
@@ -36,16 +36,15 @@ public class GeneBySymbolQueryAction extends Action {
             HttpServletRequest req, HttpServletResponse res) throws Exception {
 
 	    try {
-	        GeneBySymbolQueryForm f = (GeneBySymbolQueryForm)form;
-	        String symbol = f.getGeneSymbol();
+	        AgentToGenesQueryForm f = (AgentToGenesQueryForm)form;
+            String agentInput = f.getAgent();
 	        
-            log.info("gene: "+symbol);
+            log.info("gene: "+agentInput);
             log.info("page: "+f.getPage());
-            
-            List<Gene> results =  rs.getGenesBySymbol(symbol);
 
+            List<GeneAgentAssociation> results =  rs.getGenesByAgent(agentInput);
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-            return mapping.findForward("cabioportlet.geneBySymbolQuery.results");
+            return mapping.findForward("cabioportlet.agentToGenesQuery.results");
 	    }
 	    catch (Exception e) {
             log.error("Action error",e);

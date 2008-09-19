@@ -17,6 +17,12 @@
             type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryForm"/>
         <form-bean name="GeneBySymbolQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryForm"/>
+        <form-bean name="AgentToGenesQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryForm"/>
+        <form-bean name="DiseaseToGenesQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.DiseaseToGenesQueryForm"/>
+        <form-bean name="GeneAssociationsQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GeneAssociationsQueryForm"/>
 
 	</form-beans>
 	
@@ -73,6 +79,31 @@
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
         
+        <action path="/cabioportlet/agentToGenesQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryAction"
+                name="AgentToGenesQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.agentToGenesQuery.results" path="/portlet_action/cabioportlet/agentToGenesQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/diseaseToGenesQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.DiseaseToGenesQueryAction"
+                name="DiseaseToGenesQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.diseaseToGenesQuery.results" path="/portlet_action/cabioportlet/diseaseToGenesQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/geneAssociationsQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GeneAssociationsQueryAction"
+                name="GeneAssociationsQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.geneAssociationsQuery.results" path="/portlet_action/cabioportlet/geneAssociationsQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        
         <action path="/cabioportlet/absoluteRangeQuery/results" 
                 forward="cabioportlet.absoluteRangeQuery.results" />
         <action path="/cabioportlet/gridRangeQuery/results" 
@@ -88,6 +119,12 @@
         <action path="/cabioportlet/geneBySymbolQuery/results" 
                 forward="cabioportlet.geneBySymbolQuery.results" />
                 
+        <action path="/cabioportlet/agentToGenesQuery/results" 
+                forward="cabioportlet.agentToGenesQuery.results" />
+        <action path="/cabioportlet/diseaseToGenesQuery/results" 
+                forward="cabioportlet.diseaseToGenesQuery.results" />
+        <action path="/cabioportlet/geneAssociationsQuery/results" 
+                forward="cabioportlet.geneAssociationsQuery.results" />
         
     </action-mappings>
     

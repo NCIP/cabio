@@ -1,9 +1,7 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
-import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
-import gov.nih.nci.cabio.domain.SNP;
 import gov.nih.nci.cabio.domain.SNPArrayReporter;
+import gov.nih.nci.cabio.portal.portlet.ReportService;
 import gov.nih.nci.cabio.portal.portlet.Results;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
@@ -25,12 +23,12 @@ public class ReporterBySNPQueryAction extends Action {
     private static Log log = LogFactory.getLog(ReporterBySNPQueryAction.class);
     
     private CaBioApplicationService as;
-    private ArrayAnnotationService aas;
+    private ReportService rs;
     
     public ReporterBySNPQueryAction() throws Exception {
         this.as = (CaBioApplicationService)
             ApplicationServiceProvider.getApplicationService();
-        this.aas = new ArrayAnnotationServiceImpl(as);
+        this.rs = new ReportService(as);
     }
     
 	@Override
@@ -42,17 +40,14 @@ public class ReporterBySNPQueryAction extends Action {
 	        
             log.info("snp: "+f.getDbsnpId());
             log.info("page: "+f.getPage());
-                        
-            SNP snp = new SNP();
-            snp.setDBSNPID(f.getDbsnpId());
-            List<SNPArrayReporter> results = as.search(SNPArrayReporter.class, snp);
 
+            List<SNPArrayReporter> results =  rs.getReportersBySNP(f.getDbsnpId());
+            
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
-
             return mapping.findForward("cabioportlet.reporterBySNPQuery.results");
 	    }
 	    catch (Exception e) {
-	        log.error(e);
+            log.error("Action error",e);
             req.setAttribute("errorMessage", e.getMessage());
 	        return mapping.findForward("cabioportlet.error");
 	    }

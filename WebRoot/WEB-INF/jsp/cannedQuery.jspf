@@ -106,21 +106,19 @@ TBD
     <a href='#'>Cancer Gene Index</a></div>
 
 <div id="queries_cancer" class="queries">
-TBD
+    <table>
+    <tr><td>
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+        <option value="queries_cancer_diseasetogenes">Disease to Genes</option>
+        <option value="queries_cancer_agenttogenes">Agent to Genes</option>
+        <option value="queries_cancer_geneassociations">Gene to Diseases/Agents</option>
+        </select>
+    </td><td>
+        <jsp:include page="/WEB-INF/jsp/canned/diseaseToGenesQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/agentToGenesQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/geneAssociationsQuery.jsp" flush="true"/>
+    </td></tr>
+    </table>
 </div>
 
-
-<html:errors/>
-
-<div class="results" id="cannedSearchResults">
-
-    <c:if test="${absoluteRangeQueryResults != null}">
-	    <c:forEach var="result" items="${absoluteRangeQueryResults}">
-	    	<c:out value="${result.class.name}"/>#<c:out value="${result.id}"/>, 
-	   		<c:out value="${result.chromosomalStartPosition}"/> -
-	   		<c:out value="${result.chromosomalEndPosition}"/>
-	   		<br/>
-		</c:forEach>
-	</c:if>
-	
-</div>

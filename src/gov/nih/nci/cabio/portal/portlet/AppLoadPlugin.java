@@ -46,8 +46,8 @@ public class AppLoadPlugin implements org.apache.struts.action.PlugIn {
                 "objectConfig", new CannedObjectConfig());
         }
         catch (Exception e) {
-            log.fatal("Failed to load canned object configuration, cannot proceed.");
-            throw new ServletException("Failed to load data for caBIO Portlet",e);
+            log.fatal("Failed to load canned object configuration, cannot proceed.",e);
+            throw new ServletException("Failed to load data for caBIO Portlet");
         }
     }
 }

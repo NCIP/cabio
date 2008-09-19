@@ -60,7 +60,7 @@ public class GridRangeQueryAction extends Action {
             return mapping.findForward("cabioportlet.gridRangeQuery.results");
 	    }
 	    catch (Exception e) {
-	        log.error(e);
+            log.error("Action error",e);
             req.setAttribute("errorMessage", e.getMessage());
 	        return mapping.findForward("cabioportlet.error");
 	    }
