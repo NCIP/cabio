@@ -10,7 +10,7 @@
     <tr><td title="Microarray platform">Microarray</td><td>
     <html:select property="microarray">
     <html:option value="">Select...</html:option>
-    <html:optionsCollection property="microarrays" value="name" label="description"/>
+    <html:optionsCollection name="globalQueries" property="microarrays" value="name" label="description"/>
     </html:select>
     </td></tr>
     

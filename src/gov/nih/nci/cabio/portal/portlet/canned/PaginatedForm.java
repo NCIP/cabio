@@ -2,6 +2,11 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 
 import org.apache.struts.action.ActionForm;
 
+/**
+ * A form which keeps track of the current page in the result set.
+ * 
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public class PaginatedForm extends ActionForm {
 
     private String page = "0";

@@ -18,6 +18,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public class AgentToGenesQueryAction extends Action {
 
     private static Log log = LogFactory.getLog(AgentToGenesQueryAction.class);
@@ -39,7 +42,7 @@ public class AgentToGenesQueryAction extends Action {
 	        AgentToGenesQueryForm f = (AgentToGenesQueryForm)form;
             String agentInput = f.getAgent();
 	        
-            log.info("gene: "+agentInput);
+            log.info("agent: "+agentInput);
             log.info("page: "+f.getPage());
 
             List<GeneAgentAssociation> results =  rs.getGenesByAgent(agentInput);

@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ModuleConfig;
 
 /**
- * Runs when struts is started (as configured in the struts-config.xml) and 
+ * Runs when Struts is started (as configured in the struts-config.xml) and 
  * loads common data for the caBIO portlet.
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
@@ -28,20 +28,25 @@ public class AppLoadPlugin implements org.apache.struts.action.PlugIn {
 
         log.info("Init caBIO Portlet");
         
-        if (StaticQueries.getTaxonValues().isEmpty()) {
-            log.error("Unable to load taxon data.");
-        }
-        if (StaticQueries.getAssemblyValues().isEmpty()) {
-            log.error("Unable to load assembly data.");
-        }
-        if (StaticQueries.getTaxonChromosomes().isEmpty()) {
-            log.error("Unable to load chromosome data.");
-        }
-        if (StaticQueries.getMicroarrays().isEmpty()) {
-            log.error("Unable to load microarray data.");
-        }
+        // calling the getters initializes the static data 
+        
+//        if (StaticQueries.getTaxonValues().isEmpty()) {
+//            log.error("Unable to load taxon data.");
+//        }
+//        if (StaticQueries.getAssemblyValues().isEmpty()) {
+//            log.error("Unable to load assembly data.");
+//        }
+//        if (StaticQueries.getTaxonChromosomes().isEmpty()) {
+//            log.error("Unable to load chromosome data.");
+//        }
+//        if (StaticQueries.getMicroarrays().isEmpty()) {
+//            log.error("Unable to load microarray data.");
+//        }
         
         try {
+            actionServlet.getServletContext().setAttribute(
+                "globalQueries", new GlobalQueries());
+            
             actionServlet.getServletContext().setAttribute(
                 "objectConfig", new CannedObjectConfig());
         }

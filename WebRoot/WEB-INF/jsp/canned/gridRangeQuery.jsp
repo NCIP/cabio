@@ -22,7 +22,8 @@
     <tr><td title="Genomic feature type(s) to view">Display</td><td>
     <html:select property="classFilter">
     <html:option value="">All</html:option>
-    <html:optionsCollection property="classFilterValues" value="value" label="label"/>
+    <html:optionsCollection name="globalQueries" property="classFilterValues" 
+                            value="value" label="label"/>
     </html:select>
     </td></tr>
 

@@ -18,6 +18,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public class AbsoluteRangeQueryAction extends Action {
 
     private static Log log = LogFactory.getLog(AbsoluteRangeQueryAction.class);

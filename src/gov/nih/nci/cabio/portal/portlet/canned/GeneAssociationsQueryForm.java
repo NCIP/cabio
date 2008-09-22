@@ -12,7 +12,6 @@ public class GeneAssociationsQueryForm extends PaginatedForm {
     /**                     AUTO-GENERATED BEAN METHODS                       */
     /**************************************************************************/
  
-    
     public String getGeneSymbol() {
         return geneSymbol;
     }

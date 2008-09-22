@@ -1,12 +1,5 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.domain.Microarray;
-import gov.nih.nci.cabio.portal.portlet.StaticQueries;
-
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
@@ -19,7 +12,6 @@ public class ReporterByNameQueryForm extends PaginatedForm {
     /**************************************************************************/
     /**                     AUTO-GENERATED BEAN METHODS                       */
     /**************************************************************************/
- 
     
     public String getMicroarray() {
         return microarray;
@@ -33,10 +25,5 @@ public class ReporterByNameQueryForm extends PaginatedForm {
     public void setReporterId(String reporterId) {
         this.reporterId = reporterId;
     }
-    
-    public List<Microarray> getMicroarrays() {
-        return StaticQueries.getMicroarrays();
-    }
-    
     
 }

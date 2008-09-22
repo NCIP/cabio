@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Convenience class for queries in the canned reports portlet.
+ * Convenience class for queries in the canned reports portlet. The queries 
+ * defined here do some eager-fetching of results. Note that due to SDK defects,
+ * it best to never eager-fetch associations with a cardinality greater than 1.
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
@@ -127,7 +129,7 @@ public class ReportService {
         return appService.query(new HQLCriteria(REPORTERS_BY_GENE_HQL,params));
     }
     
-
+    
     /**
      * Returns all reporters for a given SNP.  
      * @param dbSNPId SNP.DBSNPID
@@ -143,7 +145,7 @@ public class ReportService {
         return appService.query(new HQLCriteria(REPORTERS_BY_SNP_HQL,params));
     }
     
-
+    
     /**
      * Returns all genes for a given symbol.  
      * @param geneSymbol
@@ -157,11 +159,6 @@ public class ReportService {
         List<String> params = duplicateId(geneSymbol.toLowerCase());
         return appService.query(new HQLCriteria(GENES_BY_SYMBOL_HQL,params));
     }
-    
-    
-    
-    
-    
     
     /**
      * Shortcut method to create a parameter array with the same parameter twice.

@@ -16,9 +16,15 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class StaticQueries {
+/**
+ * Any global data that must be queried from caBIO is available in this class.
+ * One singleton instance is stored in the application context. 
+ * 
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
+public class GlobalQueries {
 
-    private static Log log = LogFactory.getLog(StaticQueries.class);
+    private static Log log = LogFactory.getLog(GlobalQueries.class);
     
     private static final String GET_DISTINCT_ASSEMBLIES_HQL = 
         "select distinct assembly from gov.nih.nci.cabio.domain.PhysicalLocation";
@@ -33,9 +39,9 @@ public class StaticQueries {
     
     private static List<Microarray> microarrays;
     
-    static {
+    public GlobalQueries() {
 
-        log.info("Loading static data...");
+        log.info("Loading global data...");
         
         try {
             as = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
@@ -84,27 +90,31 @@ public class StaticQueries {
             // load microarrays
             microarrays = as.search(Microarray.class, new Microarray());
             
-            log.info("Completed loading static data.");
+            log.info("Completed loading global data.");
         }
         catch (Exception e) {
-            log.error("Error creating AbsoluteRangeQueryAction",e);
+            log.error("Error loading global data",e);
         }
     }
     
-    public static Map<String,List<Chromosome>> getTaxonChromosomes() {
+    public Map<String,List<Chromosome>> getTaxonChromosomes() {
         return taxon2chroms;
     }
     
-    public static List<Taxon> getTaxonValues() {
+    public List<Taxon> getTaxonValues() {
         return taxons;
     }
 
-    public static List<String> getAssemblyValues() {
+    public List<String> getAssemblyValues() {
         return assemblyValues;
     }
 
-    public static List<Microarray> getMicroarrays() {
+    public List<Microarray> getMicroarrays() {
         return microarrays;
+    }
+
+    public GenomicFeature[] getClassFilterValues() {
+        return GenomicFeature.values();
     }
     
 }

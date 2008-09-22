@@ -4,20 +4,27 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A map which only supports the get() method, for use with JSTL's expression
+ * syntax. The containsKey method will always return true, for efficiency. The
+ * rest of the methods will throw an UnsupportedOperationException.
+ * 
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public abstract class GetOnlyMap implements Map<String,Object> {
 
     public abstract Object get(Object key);
     
-    public void clear() {
-        throw new UnsupportedOperationException();
-    }
-
     public boolean containsKey(Object key) {
         return true;
     }
 
+    public void clear() {
+        throw new UnsupportedOperationException();
+    }
+    
     public boolean containsValue(Object value) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     public Set<Entry<String, Object>> entrySet() {

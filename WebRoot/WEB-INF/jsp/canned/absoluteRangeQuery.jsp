@@ -11,11 +11,11 @@
     <script language="javascript">
     var taxonChromosomes = {
     <c:forEach var="taxon" varStatus="status"
-        items="${absoluteRangeQueryForm.taxonValues}">
+        items="${globalQueries.taxonValues}">
         
         '<c:out value="${taxon.abbreviation}"/>' : [
             <c:forEach var="chrom" varStatus="innerStatus"
-                items="${absoluteRangeQueryForm.taxonChromosomes[taxon.abbreviation]}">
+                items="${globalQueries.taxonChromosomes[taxon.abbreviation]}">
             '<c:out value="${chrom.number}"/>'<c:if test="${not innerStatus.last}">,</c:if>
             </c:forEach>
         ]<c:if test="${not status.last}">,</c:if>
@@ -55,7 +55,8 @@
     <tr><td title="Species or taxon">Species</td><td>
     <html:select property="taxon" styleId="queries_range_absolute_taxonList" onchange="populateChromosome(this)">
     <html:option value="">Select...</html:option>
-    <html:optionsCollection property="taxonValues" value="abbreviation" label="scientificName"/>
+    <html:optionsCollection name="globalQueries" property="taxonValues" 
+                            value="abbreviation" label="scientificName"/>
     </html:select>
     </td></tr>
     
@@ -67,7 +68,7 @@
     <tr><td title="Genome assembly">Assembly</td><td>
     <html:select property="assembly">
     <html:option value="">Select...</html:option>
-    <html:options property="assemblyValues"/>
+    <html:options name="globalQueries" property="assemblyValues"/>
     </html:select>
     </td></tr>
     
@@ -82,7 +83,8 @@
     <tr><td title="Genomic feature type(s) to view">Display</td><td>
     <html:select property="classFilter">
     <html:option value="">All</html:option>
-    <html:optionsCollection property="classFilterValues" value="value" label="label"/>
+    <html:optionsCollection name="globalQueries" property="classFilterValues" 
+                            value="value" label="label"/>
     </html:select>
     </td></tr>
 

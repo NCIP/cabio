@@ -1,12 +1,9 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
 import gov.nih.nci.cabio.domain.Chromosome;
-import gov.nih.nci.cabio.domain.Taxon;
-import gov.nih.nci.cabio.portal.portlet.GenomicFeature;
-import gov.nih.nci.cabio.portal.portlet.StaticQueries;
+import gov.nih.nci.cabio.portal.portlet.GlobalQueries;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,24 +22,10 @@ public class AbsoluteRangeQueryForm extends PaginatedForm {
     private String end = "109433982";
     private String classFilter = "";
 
-    public Map<String,List<Chromosome>> getTaxonChromosomes() {
-        return StaticQueries.getTaxonChromosomes();
-    }
-    
-    public List<Taxon> getTaxonValues() {
-        return StaticQueries.getTaxonValues();
-    }
-
-    public List<String> getAssemblyValues() {
-        return StaticQueries.getAssemblyValues();
-    }
-
-    public GenomicFeature[] getClassFilterValues() {
-        return GenomicFeature.values();
-    }
-    
     public Long getChromosomeId() {
-        List<Chromosome> chroms = getTaxonChromosomes().get(taxon);
+        GlobalQueries queries = (GlobalQueries)
+            getServlet().getServletContext().getAttribute("globalQueries");
+        List<Chromosome> chroms = queries.getTaxonChromosomes().get(taxon);
         for(Chromosome c : chroms) {
             if (c.getNumber().equals(chromosomeNumber)) return c.getId();
         }

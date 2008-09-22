@@ -8,6 +8,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * The basic view action for the caBIO portlet. 
+ * 
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ */
 public class ViewAction extends Action {
     
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
