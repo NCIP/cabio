@@ -25,7 +25,7 @@ public class ReportService {
     private static final String GENES_BY_AGENT_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneAgentAssociation assoc " +
              "left join fetch assoc.gene as gene " +
-             "left join fetch assoc.agent as agent " +
+             "left join  assoc.agent as agent " +
              "left join fetch assoc.evidence " +
              "where (lower(agent.name) like ? or lower(agent.EVSId) like ?)";
 
