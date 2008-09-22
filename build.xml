@@ -7,6 +7,7 @@
 <property name="ant.project.name" value="caBIO Portlets" />
 <property name="dist.dir" value="dist" />
 <property name="src.dir" value="src" />
+<property name="conf.dir" value="conf" />
 <property name="webroot.dir" value="${project.dir}/WebRoot" />
 <property name="war.file" value="cabioportlets.war" />
 	
@@ -40,12 +41,16 @@
 </target>
 
 <target name="copy-resources" description="Copy resource files" >
-	<copy todir="${webroot.dir}/WEB-INF/classes" overwrite="true">
-		<fileset dir="${src.dir}">
-			<include name="**/*" />
-			<exclude name="**/*.java" />
-		</fileset>
-	</copy>
+    <copy todir="${webroot.dir}/WEB-INF/classes" overwrite="true">
+        <fileset dir="${conf.dir}">
+            <include name="**/*" />
+        </fileset>
+    </copy>
+    <replace dir="${webroot.dir}/WEB-INF/classes">
+    	<include name="application-config-client.xml"/>
+        <include name="cabioportlet.properties"/>
+        <replacefilter token="http://cabioapi.nci.nih.gov/cabio41" value="${remote.api.url}" />
+    </replace>
 </target>
 	
 <target name="dist" depends="clean,compile,copy-resources" 
