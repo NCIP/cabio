@@ -140,7 +140,6 @@ public class Results {
             int d = path.indexOf('.');
             String attr = (d < 0) ? path : path.substring(0,d);
 
-            // TODO: add support for [] array notation
             int a = attr.indexOf('[');
             int b = attr.indexOf(']');
             int index = -1;

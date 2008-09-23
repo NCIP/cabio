@@ -5,6 +5,7 @@ import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,10 +82,9 @@ public class GlobalQueries {
             }
 
             // load assembly values
-            assemblyValues = new ArrayList<String>();
-            assemblyValues.add("reference");
-            // TODO: add index for assembly
-            //assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
+//            assemblyValues = new ArrayList<String>();
+//            assemblyValues.add("reference");
+            assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
             Collections.sort(assemblyValues);
             
             // load microarrays
