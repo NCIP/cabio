@@ -93,13 +93,25 @@ Select category:
     </table>
 </div>
 
-
+ <!--  Pathway Canned Queries  -->
 <div id="category_pathways" class="category"><img src="" class="catind"> 
     <a href='#'>Pathways</a></div>
 
 <div id="queries_pathways" class="queries">
-TBD
+    <table>
+    <tr><td>
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+        <option value="queries_pathwayByName">Pathway By Name</option>
+        <option value="queries_pathwayByGene">Pathway By Gene Symbol</option>        
+        </select>
+    </td><td>
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayByGeneQuery.jsp" flush="true"/>        
+    </td></tr>
+    </table>
 </div>
+
 
 
 <div id="category_cancer" class="category"><img src="" class="catind"> 

@@ -2,6 +2,7 @@ package gov.nih.nci.cabio.portal.portlet;
 
 import gov.nih.nci.cabio.domain.ExpressionArrayReporter;
 import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.GeneAgentAssociation;
 import gov.nih.nci.cabio.domain.GeneDiseaseAssociation;
 import gov.nih.nci.cabio.domain.GeneFunctionAssociation;
@@ -12,6 +13,15 @@ import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.Hibernate;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Convenience class for queries in the canned reports portlet. The queries 
@@ -25,7 +35,7 @@ public class ReportService {
     private static final String GENES_BY_AGENT_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneAgentAssociation assoc " +
              "left join fetch assoc.gene as gene " +
-             "left join  assoc.agent as agent " +
+             "left join fetch assoc.agent as agent " +
              "left join fetch assoc.evidence " +
              "where (lower(agent.name) like ? or lower(agent.EVSId) like ?)";
 
@@ -62,6 +72,12 @@ public class ReportService {
              "where dbxr.dataSourceName = 'LOCUS_LINK_ID' " +
              "and (lower(gene.hugoSymbol) like ? or lower(gene.symbol) like ?)";
      
+   
+    private static final String PATHWAY_BY_SYMBOL_HQL = "select pathway from " +
+    "gov.nih.nci.cabio.domain.Pathway pathway " +
+    "left join pathway.geneCollection as genes " +
+    "where (lower(genes.hugoSymbol) like ? or lower(genes.symbol) like ?)";
+    
     
     private final CaBioApplicationService appService;
     
@@ -158,6 +174,41 @@ public class ReportService {
 
         List<String> params = duplicateId(geneSymbol.toLowerCase());
         return appService.query(new HQLCriteria(GENES_BY_SYMBOL_HQL,params));
+    }
+    
+    /**
+     * Returns all pathways for a given name.  
+     * @param pathwayName (Name of the pathway)
+     * @return List of Pathways. 
+     * @throws ApplicationException
+     */
+    public List<Pathway> getPathwaysByName(
+            String pathwayName) throws ApplicationException {
+
+    	  String pName = pathwayName.toLowerCase();
+          List<String> params = new ArrayList<String>();          
+          params.add(pName);
+         
+          DetachedCriteria criteria = DetachedCriteria.forClass(Pathway.class);
+          criteria.setFetchMode("gene", FetchMode.JOIN);       
+          criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+          criteria.add(Restrictions.like("name",pName, MatchMode.ANYWHERE).ignoreCase());          
+          
+         return appService.query(criteria);
+          
+      }
+    
+    /**
+     * Returns all pathways for a given symbol.  
+     * @param geneSymbol (Gene Symbol)
+     * @return List of Pathways. 
+     * @throws ApplicationException
+     */
+     public List<Pathway> getPathwaysBySymbol(
+            String geneSymbol) throws ApplicationException {
+
+        List<String> params = duplicateId(geneSymbol.toLowerCase());
+        return appService.query(new HQLCriteria(PATHWAY_BY_SYMBOL_HQL,params));
     }
     
     /**

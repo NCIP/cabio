@@ -24,7 +24,13 @@
         <form-bean name="GeneAssociationsQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.GeneAssociationsQueryForm"/>
 
-	</form-beans>
+ <!--Pathway Canned Queries-->
+ 		 <form-bean name="PathwayByNameQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByNameQueryForm"/>
+       <form-bean name="PathwayByGeneQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByGeneQueryForm"/>
+
+        </form-beans>
 	
     <action-mappings>
     
@@ -103,6 +109,23 @@
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
         
+        <!-- Pathway Stuff -->
+           <action path="/cabioportlet/pathwayByNameQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByNameQueryAction"
+                name="PathwayByNameQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByNameQuery.results" path="/portlet_action/cabioportlet/pathwayByNameQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/pathwayByGeneQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByGeneQueryAction"
+                name="PathwayByGeneQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByGeneQuery.results" path="/portlet_action/cabioportlet/pathwayByGeneQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        <!--end of pathway stuff -->
         
         <action path="/cabioportlet/absoluteRangeQuery/results" 
                 forward="cabioportlet.absoluteRangeQuery.results" />
@@ -125,6 +148,13 @@
                 forward="cabioportlet.diseaseToGenesQuery.results" />
         <action path="/cabioportlet/geneAssociationsQuery/results" 
                 forward="cabioportlet.geneAssociationsQuery.results" />
+
+ <!--Pathway stuff -->
+        <action path="/cabioportlet/pathwayByNameQuery/results" 
+                forward="cabioportlet.pathwayByNameQuery.results" />
+        <action path="/cabioportlet/pathwayByGeneQuery/results" 
+                forward="cabioportlet.pathwayByGeneQuery.results" />
+<!--end of Pathway stuff -->
         
     </action-mappings>
     

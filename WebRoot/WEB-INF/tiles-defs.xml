@@ -54,6 +54,18 @@
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
+     <!--  Pathway Canned Queries  -->
+    <definition name="cabioportlet.pathwayByNameQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+    <definition name="cabioportlet.pathwayByGeneQuery.results" extends="cabioportlet.template">
+        <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByGeneQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+
     <definition name="cabioportlet.error" extends="cabioportlet.template">
 		<put name="portlet_content" value="/WEB-INF/jsp/error.jsp" />
 	</definition>
