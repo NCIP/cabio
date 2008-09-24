@@ -209,13 +209,15 @@ var caBioSimpleSearch = function() {
 	
 	            h = '<div class="result"><table class="properties">';
 	            h += '<tr><th colspan="2" class="header"><span class="link-extenal">';
-	            h += '<a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']">';
+	            h += '<a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_blank">';
 	            h += r.className+'#'+r.id+'</a></span></th></tr>';
 	            for(k in r.properties) {
 	                if ((k.substring(0,1) !== '_') && (k != 'id')) {
 	                    var val = r.properties[k];
 	                    var v = '';
-	                    if (!jQuery.browser.msie && val.substring(0,5)==='<?xml') {
+	                    // TODO: this no longer works for some reason, so it's 
+	                    // disabled with a "false" below until we can figure out why
+	                    if (false && !jQuery.browser.msie && val.substring(0,5)==='<?xml') {
 	                    
 	                    	val = val.replace(
 	                    		new RegExp('\n','g'),' ').replace( // convert new lines to spaces
