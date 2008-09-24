@@ -27,22 +27,7 @@ public class AppLoadPlugin implements org.apache.struts.action.PlugIn {
             throws ServletException {
 
         log.info("Init caBIO Portlet");
-        
-        // calling the getters initializes the static data 
-        
-//        if (StaticQueries.getTaxonValues().isEmpty()) {
-//            log.error("Unable to load taxon data.");
-//        }
-//        if (StaticQueries.getAssemblyValues().isEmpty()) {
-//            log.error("Unable to load assembly data.");
-//        }
-//        if (StaticQueries.getTaxonChromosomes().isEmpty()) {
-//            log.error("Unable to load chromosome data.");
-//        }
-//        if (StaticQueries.getMicroarrays().isEmpty()) {
-//            log.error("Unable to load microarray data.");
-//        }
-        
+                
         try {
             actionServlet.getServletContext().setAttribute(
                 "globalQueries", new GlobalQueries());

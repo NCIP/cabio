@@ -47,6 +47,7 @@ public class GlobalQueries {
         log.info("Loading global data...");
         
         try {
+            log.info("Loading taxon and chromosome data...");
             as = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
             
             List<Chromosome> results = as.search(Chromosome.class, new Chromosome());
@@ -82,15 +83,18 @@ public class GlobalQueries {
                     }
                 });
             }
+            log.info("Done loading taxon and chromosome data.");
 
             // load assembly values
-//            assemblyValues = new ArrayList<String>();
-//            assemblyValues.add("reference");
+            log.info("Loading assembly data...");
             assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
             Collections.sort(assemblyValues);
+            log.info("Done loading assembly data.");
             
             // load microarrays
+            log.info("Loading microarray data...");
             microarrays = as.search(Microarray.class, new Microarray());
+            log.info("Done loading microarray data.");
             
             log.info("Completed loading global data.");
         }
