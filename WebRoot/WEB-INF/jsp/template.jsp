@@ -6,18 +6,37 @@
 
 <div id="cabio">
 
+<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="right">
+
+<div style="color: #444; margin-bottom: 10px;">
+The caBIO system is a repository of data useful in biomedical research. 
+This portlet is an easy way to get started with caBIO.<br/>
+<a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank"> 
+Learn more</a> about caBIO and its various APIs.
+</div>
+
 <%
-	String tabs1 = ParamUtil.getString(request, "tabs1", "Reports");
+	String tab = ParamUtil.getString(request, "tabs1");
+	if ("".equals(tab)) {
+        tab = (String)session.getAttribute("tab");
+        if (tab == null) {
+            tab = "Simple Search";
+        }
+	}
+	
+    session.setAttribute("tab",tab);
+	
 	PortletURL portletURL = renderResponse.createRenderURL();
 	//portletURL.setWindowState(WindowState.MAXIMIZED);
 	portletURL.setParameter("struts_action", "/cabioportlet/view");
-	portletURL.setParameter("tabs1", tabs1);
+	portletURL.setParameter("tabs1", tab);
+	
 %>
 
 <liferay-ui:tabs
-	names="Simple Search,Reports,Advanced Search"
+	names="Simple Search,Reports"
 	url="<%= portletURL.toString() %>"
-	value="<%= tabs1 %>"
+	value="<%= tab %>"
 />
 
 <html:errors/>
@@ -26,12 +45,6 @@
     name="form_content" classname="java.lang.String" ignore="true" />
     
 <% if (formContent != null) { %>
-    
-    <!-- 
-    <div style="padding: 5px 0px 5px 0px">
-        <a href="<c:out value="${portletURL}"/>">Back to report categories</a>
-    </div>
-     -->
      
     <a href="javascript:caBioCommon.toggleDropBox('.query')" id="query_link" >Report Query Form</a>
     <script>    
