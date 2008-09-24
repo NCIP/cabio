@@ -2,10 +2,10 @@ package gov.nih.nci.cabio.portal.portlet;
 
 import gov.nih.nci.cabio.domain.ExpressionArrayReporter;
 import gov.nih.nci.cabio.domain.Gene;
-import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.GeneAgentAssociation;
 import gov.nih.nci.cabio.domain.GeneDiseaseAssociation;
 import gov.nih.nci.cabio.domain.GeneFunctionAssociation;
+import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.SNPArrayReporter;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
@@ -13,15 +13,6 @@ import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.Hibernate;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * Convenience class for queries in the canned reports portlet. The queries 
@@ -72,11 +63,10 @@ public class ReportService {
              "where dbxr.dataSourceName = 'LOCUS_LINK_ID' " +
              "and (lower(gene.hugoSymbol) like ? or lower(gene.symbol) like ?)";
      
-   
     private static final String PATHWAY_BY_SYMBOL_HQL = "select pathway from " +
-    "gov.nih.nci.cabio.domain.Pathway pathway " +
-    "left join pathway.geneCollection as genes " +
-    "where (lower(genes.hugoSymbol) like ? or lower(genes.symbol) like ?)";
+            "gov.nih.nci.cabio.domain.Pathway pathway " +
+            "left join pathway.geneCollection as genes " +
+            "where (lower(genes.hugoSymbol) like ? or lower(genes.symbol) like ?)";
     
     
     private final CaBioApplicationService appService;
@@ -177,7 +167,7 @@ public class ReportService {
     }
     
     /**
-     * Returns all pathways for a given name.  
+     * Returns all pathways for a given name.
      * @param pathwayName (Name of the pathway)
      * @return List of Pathways. 
      * @throws ApplicationException
@@ -185,18 +175,16 @@ public class ReportService {
     public List<Pathway> getPathwaysByName(
             String pathwayName) throws ApplicationException {
 
-    	  String pName = pathwayName.toLowerCase();
-          List<String> params = new ArrayList<String>();          
-          params.add(pName);
-         
-          DetachedCriteria criteria = DetachedCriteria.forClass(Pathway.class);
-          criteria.setFetchMode("gene", FetchMode.JOIN);       
-          criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-          criteria.add(Restrictions.like("name",pName, MatchMode.ANYWHERE).ignoreCase());          
-          
-         return appService.query(criteria);
-          
-      }
+        Pathway pathway = new Pathway();
+        if (!pathwayName.matches("^(h|m)_")) {
+            pathway.setName("*"+pathwayName);
+        }
+        else {
+            pathway.setName(pathwayName);
+        }
+        
+        return appService.search(Pathway.class, pathway);
+    }
     
     /**
      * Returns all pathways for a given symbol.  
@@ -204,7 +192,7 @@ public class ReportService {
      * @return List of Pathways. 
      * @throws ApplicationException
      */
-     public List<Pathway> getPathwaysBySymbol(
+     public List<Pathway> getPathwaysByGeneSymbol(
             String geneSymbol) throws ApplicationException {
 
         List<String> params = duplicateId(geneSymbol.toLowerCase());
