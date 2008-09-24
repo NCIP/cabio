@@ -1,9 +1,5 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-
-/**
- * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
- */
 public class PathwayByGeneQueryForm extends PaginatedForm {
 
     private String geneSymbol = "brca1";
