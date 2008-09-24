@@ -24,7 +24,6 @@ public class Results {
 
     private static Log log = LogFactory.getLog(Results.class);
 
-    private static final String CABIO_URL = "http://cabioapi.nci.nih.gov/cabio41/GetHTML";
     private static final int PAGE_SIZE = 50;
     
     private final List resultList;
@@ -106,7 +105,7 @@ public class Results {
      * Finally, ResultItems also support certain special underscore properties:
      * <ul>
      * <li>_obj: allows direct access to the underlying object
-     * <li>_refurl: returns a URL for accessing the object in caBIO
+     * <li>_querystr: returns the query string for the REST URL for accessing the object in caBIO
      * </ul>
      */
     public class ResultItem extends GetOnlyMap {
@@ -122,10 +121,10 @@ public class Results {
         public Object get(Object key) {
             String attributePath = (String)key;
             if ("_obj".equals(key)) return obj;
-            if ("_refurl".equals(key)) {
+            if ("_querystr".equals(key)) {
                 try {
                     Object id = ReflectionUtils.get(obj, "id");
-                    return CABIO_URL+"?query="+className+"&"+className+"[@id="+id+"]";
+                    return "?query="+className+"&"+className+"[@id="+id+"]";
                 }
                 catch (Exception e) {
                     log.error("Error constructing URL",e);
@@ -192,5 +191,4 @@ public class Results {
             }
         }
     }
-    
 }

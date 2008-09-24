@@ -32,8 +32,9 @@
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
 			<td><c:out value="${item[attr.name]}"/></td>
 		</c:forEach>
-		<td><span class="link-extenal"><a href="<c:out value="${item._refurl}"/>" target="_blank">
-			<c:out value="${item._obj.id}"/></a></span></td>
+		<td><span class="link-extenal">
+            <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
+                <c:out value="${item._obj.id}"/></a></span></td>
 	  	</tr>
 	</c:forEach>
 	

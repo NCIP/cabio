@@ -11,7 +11,7 @@ var caBioSimpleSearch = function() {
 	var PAGE_SIZE = 5;
 	var MAX_TITLE_LEN = 60;
 	var MAX_DESC_LEN = 150;
-	var GETHTML_URL = '<bean:message key="cabio.portlet.restapi.getxml.url"/>?query=';
+	var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
 
 	// Current state
 	var currPage = 1;

@@ -18,7 +18,7 @@
     
     <bean name="/proxy" class="gov.nih.nci.cabio.portal.portlet.RESTProxyServletController"
     		autowire="byName">
-    	<property name="caBIORestURL" value="${cabio.portlet.restapi.getxml.url}"/>
+    	<property name="caBIORestURL" value="${cabio.restapi.url}"/>
   	</bean>
 
 </beans>

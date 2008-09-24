@@ -32,7 +32,7 @@ public class RESTProxyServletController extends AbstractController {
         
         byte[] xmlBytes = null;
         try {
-            String url = caBIORestURL+"?"+URLDecoder.decode(request.getQueryString(), "UTF-8");
+            String url = caBIORestURL+"GetXML?"+URLDecoder.decode(request.getQueryString(), "UTF-8");
             URI uri = new URI(url, false);
             HttpClient client = new HttpClient();
             HttpMethod method = new GetMethod();
