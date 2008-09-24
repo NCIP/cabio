@@ -89,7 +89,7 @@ public class ReportService {
     public List<GeneAgentAssociation> getGenesByAgent(String agentNameOrCui) 
             throws ApplicationException {
 
-        List<String> params = duplicateId(agentNameOrCui.toLowerCase());
+        List<String> params = duplicateId(convertInput(agentNameOrCui));
         return appService.query(new HQLCriteria(GENES_BY_AGENT_HQL,params));
     }
 
@@ -103,7 +103,7 @@ public class ReportService {
     public List<GeneDiseaseAssociation> getGenesByDisease(
             String diseaseNameOrCui) throws ApplicationException {
 
-        List<String> params = duplicateId(diseaseNameOrCui.toLowerCase());
+        List<String> params = duplicateId(convertInput(diseaseNameOrCui));
         return appService.query(new HQLCriteria(GENES_BY_DISEASE_HQL,params));
     }
     
@@ -117,7 +117,7 @@ public class ReportService {
     public List<GeneFunctionAssociation> getGeneAssociations(
             String geneSymbol) throws ApplicationException {
          
-        List<String> params = duplicateId(geneSymbol.toLowerCase());
+        List<String> params = duplicateId(convertInput(geneSymbol));
         return appService.query(new HQLCriteria(GENE_ASSOCIATIONS_HQL,params));
     }
     
@@ -131,7 +131,7 @@ public class ReportService {
     public List<ExpressionArrayReporter> getReportersByGene(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(geneSymbol.toLowerCase());
+        List<String> params = duplicateId(convertInput(geneSymbol));
         return appService.query(new HQLCriteria(REPORTERS_BY_GENE_HQL,params));
     }
     
@@ -145,9 +145,8 @@ public class ReportService {
     public List<SNPArrayReporter> getReportersBySNP(
             String dbSNPId) throws ApplicationException {
 
-        String lowerId = dbSNPId.toLowerCase();
         List<String> params = new ArrayList<String>();
-        params.add(lowerId);
+        params.add(dbSNPId.toLowerCase());
         return appService.query(new HQLCriteria(REPORTERS_BY_SNP_HQL,params));
     }
     
@@ -162,7 +161,7 @@ public class ReportService {
     public List<Gene> getGenesBySymbol(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(geneSymbol.toLowerCase());
+        List<String> params = duplicateId(convertInput(geneSymbol));
         return appService.query(new HQLCriteria(GENES_BY_SYMBOL_HQL,params));
     }
     
@@ -195,9 +194,19 @@ public class ReportService {
      public List<Pathway> getPathwaysByGeneSymbol(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(geneSymbol.toLowerCase());
+        List<String> params = duplicateId(convertInput(geneSymbol));
         return appService.query(new HQLCriteria(PATHWAY_BY_SYMBOL_HQL,params));
     }
+     
+     /**
+      * Converts input for use in HQL. Converts to lower case and replaces
+      * star (*) wildcards with amperstand (%) wildcards.
+      * @param input
+      * @return converted input
+      */
+     private String convertInput(String input) {
+         return input.toLowerCase().replaceAll("\\*", "%");
+     }
     
     /**
      * Shortcut method to create a parameter array with the same parameter twice.
