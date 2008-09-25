@@ -66,10 +66,13 @@
     </td></tr>
 
     <tr><td title="Genome assembly">Assembly</td><td>
+    <html:text property="assembly" size="10"/>
+    <%--
     <html:select property="assembly">
     <html:option value="">Select...</html:option>
     <html:options name="globalQueries" property="assemblyValues"/>
     </html:select>
+    --%>
     </td></tr>
     
     <tr><td title="Start position on the chromosome">Start Position</td><td>

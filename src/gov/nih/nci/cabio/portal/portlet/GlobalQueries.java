@@ -84,10 +84,10 @@ public class GlobalQueries {
             log.info("Done loading taxon and chromosome data.");
 
             // load assembly values
-            log.info("Loading assembly data...");
-            assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
-            Collections.sort(assemblyValues);
-            log.info("Done loading assembly data.");
+//            log.info("Loading assembly data...");
+//            assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
+//            Collections.sort(assemblyValues);
+//            log.info("Done loading assembly data.");
             
             // load microarrays
             log.info("Loading microarray data...");
