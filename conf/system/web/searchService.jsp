@@ -18,6 +18,11 @@
 	String startIndex = request.getParameter("startIndex")!= null?request.getParameter("startIndex"):"";	
 	String words = request.getParameter("WORDS")!= null?request.getParameter("WORDS"):"";	
 	String exclude = request.getParameter("EXCLUDE_TEXT")!= null?request.getParameter("EXCLUDE_TEXT"):"";	
+	String excludeReplacement = null;
+	if ( exclude !=null )
+	{	
+        excludeReplacement= exclude.trim().replaceAll("[ \t,]+", " -");
+    } 
 	
 	
 	IndexSearchUtils searchUtils = new IndexSearchUtils();
@@ -62,21 +67,21 @@
 	    	}	    	
 	    	
 	    }
-	    
+	  
 	    if(query.equals("")){
 	    	query = searchString;
 	    	if(!exclude.equals("")){
 	    		if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
 	    			query = "-"+ searchString;
 	    		}else{
-	    			query += " -"+ exclude;
+	    			query += " -"+ excludeReplacement;
 	    		}	    		
 	    	}
 	    	searchQuery.setKeyword(query);
 	    }else{
 	    	if(!exclude.equals("")){
 	    		if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
-	    			query += "-"+ exclude;
+	    			query += "-"+ excludeReplacement;
 	    		}
 	      	}
 	      	searchQuery.setKeyword(query);	    	
