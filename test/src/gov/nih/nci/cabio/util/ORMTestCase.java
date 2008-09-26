@@ -1,11 +1,10 @@
 package gov.nih.nci.cabio.util;
 
-import java.util.Collection;
 
+import gov.nih.nci.common.util.ReflectionUtils;
 import junit.framework.TestCase;
 
-import org.hibernate.collection.PersistentSet;
-import org.springframework.aop.framework.Advised;
+import org.hibernate.collection.PersistentCollection;
 
 /**
  * Provides additional assertions for testing ORM (SDK/Hibernate-based) systems.
@@ -15,37 +14,28 @@ import org.springframework.aop.framework.Advised;
 public class ORMTestCase extends TestCase {
 
     /**
-     * Assert that a given object was preloaded, in other words, it's not
-     * just a proxy shell, but a real object. This is useful if you have a 
-     * one-to-one or many-to-one association which is eagerly fetched. You can
-     * call this like so:
+     * Assert that the specified association was preloaded, in other words, 
+     * it's not just a proxy shell, but a real object or collection, with the
+     * data locally available. You can call this like so:
      * <code>
-     * assertPreloaded("Gene was not preloaded",obj.getGene())
+     * assertPreloaded(gene,"geneCollection")
+     * assertPreloaded(gene,"taxon")
      * </code>
-     * @param msg Assertion message
-     * @param obj The object to test
+     * @param obj The domain object (a Hibernate proxy) 
+     * @param roleName The role name of the association to be tested
      */
-    protected void assertPreloaded(String msg, Object obj) throws Exception {
-        assertNotNull(obj);
-        Object target = ((Advised)obj).getTargetSource().getTarget();
-        assertFalse(msg, target.getClass().getName().contains("EnhancerByCGLIB"));
+    protected void assertPreloaded(Object obj, String roleName) throws Exception {
+        Object orig = ReflectionUtils.upwrap(obj);
+        Object association = ReflectionUtils.get(orig, roleName);
+        if (roleName != null) {
+            if (association instanceof PersistentCollection) {
+                PersistentCollection ps = (PersistentCollection)association;
+                assertTrue(roleName+" is not preloaded", ps.wasInitialized());
+            }
+            else { 
+                assertFalse(roleName+" is not preloaded", 
+                    association.getClass().getName().contains("CGLIB"));
+            }
+        }
     }
-    
-    /**
-     * Assert that a given collection was preloaded, in other words, it's not
-     * just a proxy shell, but a real collection. This is useful if you have a 
-     * one-to-many or many-to-many association which is eagerly fetched. You can
-     * call this like so:
-     * <code>
-     * assertPreloaded("Gene collection was not preloaded",obj.getGeneCollection())
-     * </code>
-     * @param msg Assertion message
-     * @param collection The collection to test
-     */
-    protected void assertPreloaded(String msg, Collection collection) {
-        assertNotNull(collection);
-        PersistentSet ps = (PersistentSet)collection;
-        assertTrue(msg, ps.wasInitialized());
-    }
-    
 }

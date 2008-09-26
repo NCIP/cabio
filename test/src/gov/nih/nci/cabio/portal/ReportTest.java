@@ -28,9 +28,9 @@ public class ReportTest extends ORMTestCase {
         assertFalse(results.isEmpty());
         for(GeneAgentAssociation o : results) {
             assertEquals(agent, o.getAgent().getName().toLowerCase());
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Agent was not preloaded", o.getAgent());
-            assertPreloaded("Evidence was not preloaded", o.getEvidence());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"agent");
+            assertPreloaded(o,"evidence");
         }
     }
 
@@ -42,9 +42,9 @@ public class ReportTest extends ORMTestCase {
         assertFalse(results.isEmpty());
         for(GeneAgentAssociation o : results) {
             assertEquals(agentCui, o.getAgent().getEVSId());
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Agent was not preloaded", o.getAgent());
-            assertPreloaded("Evidence was not preloaded", o.getEvidence());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"agent");
+            assertPreloaded(o,"evidence");
         }
     }
     
@@ -57,9 +57,9 @@ public class ReportTest extends ORMTestCase {
         for(GeneDiseaseAssociation o : results) {
             assertNotNull(o.getGene());
             assertEquals(disease, o.getDiseaseOntology().getName().toLowerCase());
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Disease was not preloaded", o.getDiseaseOntology());
-            assertPreloaded("Evidence was not preloaded", o.getEvidence());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"diseaseOntology");
+            assertPreloaded(o,"evidence");
         }
     }
 
@@ -72,9 +72,9 @@ public class ReportTest extends ORMTestCase {
         for(GeneDiseaseAssociation o : results) {
             assertNotNull(o.getGene());
             assertEquals(diseaseCui, o.getDiseaseOntology().getEVSId());
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Disease was not preloaded", o.getDiseaseOntology());
-            assertPreloaded("Evidence was not preloaded", o.getEvidence());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"diseaseOntology");
+            assertPreloaded(o,"evidence");
         }
     }
     
@@ -88,8 +88,8 @@ public class ReportTest extends ORMTestCase {
             assertNotNull(o.getGene());
             assertTrue(geneSymbol.equalsIgnoreCase(o.getGene().getSymbol())
                 ||geneSymbol.equalsIgnoreCase(o.getGene().getHugoSymbol()));
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Evidence was not preloaded", o.getEvidence());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"evidence");
         }
     }
     
@@ -102,8 +102,8 @@ public class ReportTest extends ORMTestCase {
         for(ExpressionArrayReporter o : results) {
             assertTrue((geneSymbol.equalsIgnoreCase(o.getGene().getSymbol())
                 ||geneSymbol.equalsIgnoreCase(o.getGene().getHugoSymbol())));
-            assertPreloaded("Gene was not preloaded", o.getGene());
-            assertPreloaded("Microarray was not preloaded", o.getMicroarray());
+            assertPreloaded(o,"gene");
+            assertPreloaded(o,"microarray");
         }
     }
     
@@ -115,8 +115,8 @@ public class ReportTest extends ORMTestCase {
         assertFalse(results.isEmpty());
         for(SNPArrayReporter o : results) {
             assertEquals(dbSNPId, o.getSNP().getDBSNPID());
-            assertPreloaded("SNP was not preloaded", o.getSNP());
-            assertPreloaded("Microarray was not preloaded", o.getMicroarray());
+            assertPreloaded(o,"SNP");
+            assertPreloaded(o,"microarray");
         }
     }
 
