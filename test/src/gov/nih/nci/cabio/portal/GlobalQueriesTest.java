@@ -21,9 +21,9 @@ public class GlobalQueriesTest extends ORMTestCase {
         this.q = new GlobalQueries();
     }
 
-    public void testAssemblyValues() throws Exception {
-        assertNotNull(q.getAssemblyValues());
-    }
+//    public void testAssemblyValues() throws Exception {
+//        assertNotNull(q.getAssemblyValues());
+//    }
 
     public void testClassFilterValues() throws Exception {
         assertNotNull(q.getClassFilterValues());
