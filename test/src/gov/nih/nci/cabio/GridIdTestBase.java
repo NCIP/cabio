@@ -41,10 +41,10 @@ public abstract class GridIdTestBase extends TestCase {
         // ensure the grid id points to the correct object
         Object dataObj = appService.getDataObject(bigid);
         
-        // get the interal id
+        // get the internal id
         String id = String.valueOf(ReflectionUtils.get(obj, "id"));
         String did = String.valueOf(ReflectionUtils.get(dataObj, "id"));
-        assertEquals("id",id, did);
+        assertEquals("id",id,did);
         
     }
 }

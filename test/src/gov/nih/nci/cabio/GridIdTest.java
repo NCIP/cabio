@@ -164,4 +164,9 @@ public class GridIdTest extends GridIdTestBase {
         testGridId(new MarkerRelativeLocation());
     }
 
+    public static void main(String[] argv) throws Exception {
+        GridIdTest test = new GridIdTest();
+        test.setUp();
+        test.testHomologousAssociation();
+    }
 }
