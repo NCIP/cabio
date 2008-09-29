@@ -22,6 +22,7 @@ import gov.nih.nci.cabio.util.IncIterator;
 import gov.nih.nci.cabio.util.ORMTestCase;
 import gov.nih.nci.cabio.util.OnceIterator;
 import gov.nih.nci.common.util.ReflectionUtils;
+import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 
 import java.io.BufferedReader;
@@ -33,7 +34,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * Unit tests for the Array Annotation API in caBIO.
@@ -48,23 +55,118 @@ public class AnnotationAPITest extends ORMTestCase {
     
     private static final boolean BENCHMARK_SUBLISTS = false;
     
-    private final CaBioApplicationService appService = AllTests.getService();
+    private static final CaBioApplicationService appService = AllTests.getService();
 
-    private final ArrayAnnotationService am = new ArrayAnnotationServiceImpl(appService);
+    private static final ArrayAnnotationService am = new ArrayAnnotationServiceImpl(appService);
     
-    private List<String> genes;
-    private List<String> snps;
-    private List<String> exprReporters;
-    private List<String> exonReporters;
-    private List<String> snpReporters;
+    private static List<String> genes;
+    private static List<String> snps;
+    private static List<String> exprReporters;
+    private static List<String> exonReporters;
+    private static List<String> snpReporters;
     
     @Override
     protected void setUp() throws Exception {
-        this.genes = loadListFromFile("data/genes.txt");
-        this.snps = loadListFromFile("data/snps.txt");
-        this.exprReporters = loadListFromFile("data/expr_reporters.txt");
-        this.exonReporters = loadListFromFile("data/exon_reporters.txt");
-        this.snpReporters = loadListFromFile("data/snp_reporters.txt");
+    }
+    
+    static {
+        System.out.println("loading symbol lists...");
+        
+        try {
+        
+            // create gene list
+            DetachedCriteria criteria = DetachedCriteria.forClass(ExpressionArrayReporter.class);
+            criteria.createAlias("gene", "gene");
+            criteria.createCriteria("microarray").add(Restrictions.eq("name", EXPR_ARRAY));
+            criteria.add(Restrictions.isNotNull("gene.hugoSymbol")).
+                    add(Restrictions.sqlRestriction("rownum <= 2200")).
+                    addOrder(Order.asc("gene.hugoSymbol"));
+            criteria.setProjection(Projections.distinct(Projections.projectionList()
+                    .add(Projections.property("gene.hugoSymbol"))
+                    ));
+            genes = getUniqueSymbols(appService.query(criteria));
+            
+            // create snp list
+            criteria = DetachedCriteria.forClass(SNPArrayReporter.class);
+            criteria.createAlias("SNP", "snp");
+            criteria.createCriteria("microarray").add(Restrictions.eq("name", SNP_ARRAY));
+            criteria.add(Restrictions.isNotNull("snp.DBSNPID")).
+                    add(Restrictions.sqlRestriction("rownum <= 2200")).
+                    addOrder(Order.asc("snp.DBSNPID"));
+            criteria.setProjection(Projections.distinct(Projections.projectionList()
+                    .add(Projections.property("snp.DBSNPID"))
+                    ));
+            snps = getUniqueSymbols(appService.query(criteria));
+    
+            // create expression reporter list
+            criteria = DetachedCriteria.forClass(ExpressionArrayReporter.class);
+            criteria.createAlias("gene", "gene");
+            criteria.createCriteria("microarray").add(Restrictions.eq("name", EXPR_ARRAY));
+            criteria.add(Restrictions.isNotNull("gene.hugoSymbol")).
+                    add(Restrictions.sqlRestriction("rownum <= 2200")).
+                    addOrder(Order.asc("name"));
+            criteria.setProjection(Projections.distinct(Projections.projectionList()
+                    .add(Projections.property("name"))
+                    ));
+            exprReporters = getUniqueSymbols(appService.query(criteria));
+    
+            // create exon reporter list
+            criteria = DetachedCriteria.forClass(ExonArrayReporter.class);
+            criteria.createAlias("geneCollection", "genes");
+            criteria.createCriteria("microarray").add(Restrictions.eq("name", EXON_ARRAY));
+            criteria.add(Restrictions.isNotNull("genes.hugoSymbol")).
+                    add(Restrictions.sqlRestriction("rownum <= 2200")).
+                    addOrder(Order.asc("name"));
+            criteria.setProjection(Projections.distinct(Projections.projectionList()
+                    .add(Projections.property("name"))
+                    ));
+            exonReporters = getUniqueSymbols(appService.query(criteria));
+    
+            // create snp reporter list
+            criteria = DetachedCriteria.forClass(SNPArrayReporter.class);
+            criteria.createAlias("SNP", "snp");
+            criteria.createCriteria("microarray").add(Restrictions.eq("name", SNP_ARRAY));
+            criteria.add(Restrictions.isNotNull("snp.DBSNPID")).
+                    add(Restrictions.sqlRestriction("rownum <= 2200")).
+                    addOrder(Order.asc("name"));
+            criteria.setProjection(Projections.distinct(Projections.projectionList()
+                    .add(Projections.property("name"))
+                    ));
+            snpReporters = getUniqueSymbols(appService.query(criteria));
+    
+            System.out.println("genes: "+genes.size());
+            System.out.println("snps: "+snps.size());
+            System.out.println("exprReporters: "+exprReporters.size());
+            System.out.println("exonReporters: "+exonReporters.size());
+            System.out.println("snpReporters: "+snpReporters.size());
+        
+        } catch (ApplicationException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static List<String> getUniqueSymbols(List resultList){
+
+        Map<String,Integer> symbolCount = new HashMap<String,Integer>();
+        try {
+            for(Object o : resultList) {
+                String symbol = (String)o;
+                int c = symbolCount.containsKey(symbol) 
+                        ? symbolCount.get(symbol) : 0;
+                c++;
+                symbolCount.put(symbol,c);
+            }
+        }
+        catch (NoSuchElementException e) {
+            // hopefully this only happens at the very end and we can ignore it
+        }
+        
+        List<String> unique = new ArrayList<String>();
+        for(String symbol : symbolCount.keySet()) {
+            if (symbolCount.get(symbol)==1) unique.add(symbol);
+        }
+        
+        return unique;
     }
     
     /**
@@ -152,25 +254,21 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no gene: "+er.getName(),er.getGene());
 
-                ExpressionArrayReporter orig = (ExpressionArrayReporter)ReflectionUtils.upwrap(er);
-
-                assertPreloaded("Gene was not preloaded",orig.getGene());
+                assertPreloaded(er, "gene");
                 
-                Collection c = orig.getPhysicalLocationCollection();
-                assertPreloaded("PhysicalLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(er, "physicalLocationCollection");
+                for(Object o : er.getPhysicalLocationCollection()) {
                     PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded("Chromosome was not preloaded",pl.getChromosome());
+                    assertPreloaded(pl, "chromosome");
                 }
+
+                assertPreloaded(er, "cytogeneticLocationCollection");
                 
-                c = orig.getCytogeneticLocationCollection();
-                assertPreloaded("CytogeneticLocation collection was not initialized", c);
-                
-                for(Object o : c) {
+                for(Object o : er.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
                     if (cl.getStartCytoband() != null) {
                         // TODO: remove check for null once that column is fixed
-                        assertPreloaded("Start Cytoband was not preloaded",cl.getStartCytoband());
+                        assertPreloaded(cl, "startCytoband");
                     }
                 }
 
@@ -208,23 +306,18 @@ public class AnnotationAPITest extends ORMTestCase {
             for(ExonArrayReporter er : results) {
                 assertNotNull("Reporter has no name",er.getName());
                 
-                ExonArrayReporter orig = (ExonArrayReporter)ReflectionUtils.upwrap(er);
+                assertPreloaded(er, "geneCollection");
 
-                Collection c = orig.getGeneCollection();
-                assertPreloaded("Gene collection was not initialized", c);
-
-                c = orig.getPhysicalLocationCollection();
-                assertPreloaded("PhysicalLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(er, "physicalLocationCollection");
+                for(Object o : er.getPhysicalLocationCollection()) {
                     PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded("Chromosome was not preloaded",pl.getChromosome());
+                    assertPreloaded(pl, "chromosome");
                 }
                 
-                c = orig.getCytogeneticLocationCollection();
-                assertPreloaded("CytogeneticLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(er, "cytogeneticLocationCollection");
+                for(Object o : er.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded("Start Cytoband was not preloaded",cl.getStartCytoband());
+                    assertPreloaded(cl, "startCytoband");
                 }
                 
                 reporters.add(er.getName());
@@ -261,22 +354,19 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no SNP: "+er.getName(),er.getSNP());
 
-                SNPArrayReporter orig = (SNPArrayReporter)ReflectionUtils.upwrap(er);
+                assertPreloaded(er, "SNP");
 
-                assertPreloaded("SNP was not preloaded",orig.getSNP());
-                
-                Collection c = orig.getPhysicalLocationCollection();
-                assertPreloaded("PhysicalLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(er, "SNP");
+                assertPreloaded(er, "physicalLocationCollection");
+                for(Object o : er.getPhysicalLocationCollection()) {
                     PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded("Chromosome was not preloaded",pl.getChromosome());
+                    assertPreloaded(pl, "chromosome");
                 }
                 
-                c = orig.getCytogeneticLocationCollection();
-                assertPreloaded("CytogeneticLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(er, "cytogeneticLocationCollection");
+                for(Object o : er.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded("Start Cytoband was not preloaded",cl.getStartCytoband());
+                    assertPreloaded(cl, "chromosome");
                 }
                 
                 reporters.add(er.getName());
@@ -313,18 +403,13 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Gene has no symbol: "+gene.getId(),gene.getSymbol());
                 assertNotNull("Gene has no chromosome: "+gene.getId(),gene.getChromosome());
 
-                Gene orig = (Gene)ReflectionUtils.upwrap(gene);
+                assertPreloaded(gene, "chromosome");
+                assertPreloaded(gene, "databaseCrossReferenceCollection");
+                assertPreloaded(gene, "cytogeneticLocationCollection");
                 
-                assertPreloaded("Chromosome was not preloaded",orig.getChromosome());
-
-                Collection c = orig.getDatabaseCrossReferenceCollection();
-                assertPreloaded("DatabaseCrossReference collection was not initialized",c);
-
-                c = orig.getCytogeneticLocationCollection();
-                assertPreloaded("CytogeneticLocation collection was not initialized",c);
-                for(Object o : c) {
+                for(Object o : gene.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded("Start Cytoband was not preloaded",cl.getStartCytoband());
+                    assertPreloaded(cl, "startCytoband");
                 }
             }
         }
@@ -484,20 +569,16 @@ public class AnnotationAPITest extends ORMTestCase {
             for(SNP snp : results) {
                 assertNotNull("SNP has no dbSNP id: "+snp.getId(),snp.getDBSNPID());
                 
-                SNP orig = (SNP)ReflectionUtils.upwrap(snp);
-
-                Collection c = orig.getPhysicalLocationCollection();
-                assertPreloaded("PhysicalLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(snp, "physicalLocationCollection");
+                for(Object o : snp.getPhysicalLocationCollection()) {
                     PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded("Chromosome was not preloaded",pl.getChromosome());
+                    assertPreloaded(pl, "chromosome");
                 }
                 
-                c = orig.getCytogeneticLocationCollection();
-                assertPreloaded("CytogeneticLocation collection was not initialized", c);
-                for(Object o : c) {
+                assertPreloaded(snp, "cytogeneticLocationCollection");
+                for(Object o : snp.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded("Start Cytoband was not preloaded",cl.getStartCytoband());
+                    assertPreloaded(cl, "startCytoband");
                 }
             }
         }
@@ -527,7 +608,7 @@ public class AnnotationAPITest extends ORMTestCase {
         long start = System.currentTimeMillis();
         Collection<SNP> results = am.getSnpsNearGene(symbol,pad,pad);
         long end = System.currentTimeMillis();
-        assertEquals("Number of SNPs",10,results.size());
+        assertTrue("Less than 10 SNPs found near Gene",results.size()>10);
         
         verifySNPsNearGene(symbol, pad, assembly, results);
         
@@ -546,7 +627,7 @@ public class AnnotationAPITest extends ORMTestCase {
         long start = System.currentTimeMillis();
         Collection<SNP> results = am.getSnpsNearGene(symbol,pad,pad,assembly);
         long end = System.currentTimeMillis();
-        assertEquals("Number of SNPs",10,results.size());
+        assertTrue("Less than 10 SNPs found near Gene",results.size()>10);
         
         verifySNPsNearGene(symbol, pad, assembly, results);
         
@@ -648,6 +729,6 @@ public class AnnotationAPITest extends ORMTestCase {
     public static void main(String[] argv) throws Exception {
         AnnotationAPITest test = new AnnotationAPITest();
         test.setUp();
-        test.testMouseTaxon();
+        test.testGetExonReporterAnnotations();
     }
 }
