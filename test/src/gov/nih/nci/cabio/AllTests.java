@@ -8,7 +8,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * A test suite with all the unit tests for caBIO.
+ * A test suite with all the unit tests for caBIO. These tests are run by
+ * AntHillPro with the nightly build.  
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
@@ -39,21 +40,22 @@ public class AllTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Test for gov.nih.nci.cabio");
         //$JUnit-BEGIN$
-        suite.addTestSuite(ArraysTest.class);
-        suite.addTestSuite(QueryTest.class);
-        suite.addTestSuite(GridIdTest.class);
-        suite.addTestSuite(XMLTest.class);
-        suite.addTestSuite(CQLTest.class);
-        suite.addTestSuite(CaBIGStandardModelTest.class);
-        suite.addTestSuite(MarkerTest.class);
-        suite.addTestSuite(WSTest.class);
-        suite.addTestSuite(SVGTest.class);
-        suite.addTestSuite(CGDCTest.class);
-        suite.addTestSuite(DefectTest.class);
-        suite.addTestSuite(RangeQueryTest.class);
         suite.addTestSuite(AnnotationAPITest.class);
+        suite.addTestSuite(ArraysTest.class);
+        suite.addTestSuite(CaBIGStandardModelTest.class);
+        suite.addTestSuite(CGDCTest.class);
+        suite.addTestSuite(CQLTest.class);
+        suite.addTestSuite(DefectTest.class);
         suite.addTestSuite(DevGuideTest.class);
+        suite.addTestSuite(FreestyleLMTest.class);
+        suite.addTestSuite(GridIdTest.class);
+        suite.addTestSuite(MarkerTest.class);
+        suite.addTestSuite(QueryTest.class);
+        suite.addTestSuite(RangeQueryTest.class);
         suite.addTestSuite(ReflectionUtilsTest.class);
+        suite.addTestSuite(SVGTest.class);
+        suite.addTestSuite(WSTest.class);
+        suite.addTestSuite(XMLTest.class);
         //$JUnit-END$
         return suite;
     }
