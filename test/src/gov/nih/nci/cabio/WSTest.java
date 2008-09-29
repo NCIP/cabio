@@ -6,6 +6,8 @@ import gov.nih.nci.cabio.domain.GeneOntology;
 import gov.nih.nci.cabio.domain.GeneOntologyRelationship;
 import gov.nih.nci.cabio.domain.Taxon;
 
+import java.util.Map;
+
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 
@@ -13,6 +15,8 @@ import junit.framework.TestCase;
 
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Tests for the caBIO web services. This suite contains unit tests for each
@@ -22,11 +26,25 @@ import org.apache.axis.client.Service;
  */
 public class WSTest extends TestCase {
 
-    private static final String url = 
-        "http://127.0.0.1:8080/cabio41/services/caBIOService";
+    private static String url = "http://127.0.0.1:8080/cabio41/services/caBIOService";
     
     private Call call; 
         
+    static {
+        // attempt to get the right URL from the Java client configuration
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("application-config-client.xml");
+        if (ctx != null) {
+            Map<String,Object> serviceInfoMap = (Map<String, Object>) ctx.getBean("ServiceInfo");
+            if (serviceInfoMap != null) {
+                String serviceURL = (String)serviceInfoMap.get("APPLICATION_SERVICE_URL");
+                if (serviceURL != null) {
+                    url = serviceURL+"/services/caBIOService";
+                }
+            }
+        }
+        System.out.println("WS URL: "+url);
+    }
+    
     /**
      * Setup the Axis Call object and initialize the WS type mappings 
      * used in the test cases.
@@ -74,7 +92,7 @@ public class WSTest extends TestCase {
         String version = (String)call.invoke(new Object[0]);
         
         assertNotNull(version);
-        assertEquals("4.0",version);
+        assertEquals("4.2",version);
     }
 
     /**

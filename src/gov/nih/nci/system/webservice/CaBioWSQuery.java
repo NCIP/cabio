@@ -16,9 +16,16 @@ public class CaBioWSQuery extends WSQueryImpl {
     
     private static final WSUtils wsUtils = new WSUtils();
     
+    private String version = "4.2";
+    
     public CaBioWSQuery() {
         super();
     }
+    
+    public String getVersion(){
+        return version;
+    }
+    
     /**
      * Implements the freestyleLM search
      */
