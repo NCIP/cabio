@@ -49,7 +49,7 @@
 										<table summary="" cellpadding="0" cellspacing="0" border="0"
 											height="100%" width="100%">
 											<tr>
-												<td class="welcomeTitle" height="20">WELCOME TO CABIO v4.1</td>
+												<td class="welcomeTitle" height="20">WELCOME TO CABIO v4.2</td>
 											</tr>
 											<tr>
 												<td class="welcomeContent" valign="top">The cancer
@@ -77,15 +77,15 @@
 													caBIO Download site</a> - Contains download packages and
 													release notes</li>
 													<li><a
-														href="http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/41/caBIO41_release_notes">caBIO
-													4.1 Release Notes</a> - Latest release notes for caBIO</li>
+														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO
+													4.2 Release Notes</a> - Latest release notes for caBIO</li>
 													<li><a
-														href="http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/41/caBIO41_data_release_notes">caBIO 4.1
+														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO 4.2
 													Data Refresh Release Notes</a> - Release notes describing
 													the current data content of caBIO</li>
-													<li><a href="docs">caBIO 4.1 javadocs</a> - Java API
+													<li><a href="docs">caBIO 4.2 javadocs</a> - Java API
 													documentation</li>
-													<li><a href="http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/41/caBIO41_tech_guide">caBIO 4.1 Tech Guide</a> - Technical
+													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO 4.2 Tech Guide</a> - Technical
 													Guide</li>
 												</ul>
 												</td>
