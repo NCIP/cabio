@@ -216,10 +216,12 @@
 				<include name="**/indexgen/**/*"/>
 			</fileset>
 			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/build/classes">
-				<include name="**/domain/*"/>					
+				<include name="**/domain/*"/>
+				<include name="**/pathways/*" />
 			</fileset>
 			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
 				<include name="**/domain/*.hbm.xml"/>				
+				<include name="**/pathways/*.hbm.xml"/>
 			</fileset>
 			<fileset dir="${project.build.dir}/system/build/classes">
 				<include name="**/system/util/StringClobType.class"/>							
