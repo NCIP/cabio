@@ -34,7 +34,7 @@
 		</c:forEach>
 		<td><span class="link-extenal">
             <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
-                <c:out value="${item._obj.id}"/></a></span></td>
+                <c:out value="${item.id}"/></a></span></td>
 	  	</tr>
 	</c:forEach>
 	
