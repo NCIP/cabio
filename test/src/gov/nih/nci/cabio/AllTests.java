@@ -53,6 +53,7 @@ public class AllTests {
         suite.addTestSuite(QueryTest.class);
         suite.addTestSuite(RangeQueryTest.class);
         suite.addTestSuite(ReflectionUtilsTest.class);
+        suite.addTestSuite(RESTAPITest.class);
         suite.addTestSuite(SVGTest.class);
         suite.addTestSuite(WSTest.class);
         suite.addTestSuite(XMLTest.class);

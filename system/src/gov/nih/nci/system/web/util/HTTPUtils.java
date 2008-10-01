@@ -440,7 +440,6 @@ public class HTTPUtils implements Serializable{
 		xmlElement.addContent(new Element("recordCounter").setText(counter));
 
 		if(resultSet.length >0){
-
 			if(pageSize != null){
 				rowCount = Integer.parseInt(pageSize);
 			}
@@ -836,8 +835,8 @@ public class HTTPUtils implements Serializable{
 			if(startIndex != null || !startIndex.equals("0")){
 				index = Integer.parseInt(startIndex);
 			}
-			if(resultCounter != null){
-				counter = Integer.parseInt(resultCounter);
+			if(pageSize != null){
+                counter = Integer.parseInt(pageSize);
 			}
 			if (roleName != null){
 				results = applicationService.getAssociation(criteria, roleName);
@@ -852,17 +851,9 @@ public class HTTPUtils implements Serializable{
 			throw ex;
 		}
 
-
-		if((counter + index) > results.size()){
-			counter = results.size();
-		}
-		else{
-			counter += index;
-		}
-
 		Object[] resultSet = new Object[counter];
-		for(int i = index, s=0; i< counter; i++,s++){
-			resultSet[s]= results.get(i);
+		for(int i=index, s=0; i<results.size() && s<counter; i++,s++){
+			resultSet[s] = results.get(i);
 		}
 
 		return resultSet;
