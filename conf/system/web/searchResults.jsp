@@ -56,12 +56,6 @@
 			<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
 			<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
                   </td></tr>
-                 <tr><td align=left>
-                  <font size=2 color=blue>(To search for either "word1" or "word2" and "word3" use query:</font>
-                 </td></tr>
-                 <tr><td align=left>  
-                  <font size=2 color=blue>(word1 OR word2) AND word3. Go <a href="<%=adrs%>">here</a> for more advanced search)</font>
-                 </td></tr>
                 </table>
  		</td>
  	</tr>
