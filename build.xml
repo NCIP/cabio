@@ -8,6 +8,7 @@
 <property name="dist.dir" value="dist" />
 <property name="src.dir" value="src" />
 <property name="conf.dir" value="conf" />
+<property name="lib.dir" value="lib" />
 <property name="webroot.dir" value="${project.dir}/WebRoot" />
 <property name="war.file" value="cabioportlets.war" />
 	
@@ -19,6 +20,7 @@
 
 
 <path id="project.classpath">
+    <fileset dir="${lib.dir}" />
     <fileset dir="${webroot.dir}/WEB-INF/lib" />
 </path>
 	
@@ -31,6 +33,8 @@
 <target name="clean" 
 		description="Removes generated files">
 	<delete dir="${dist.dir}" quiet="true"/>
+    <delete dir="${webroot.dir}/WEB-INF/classes" quiet="true"/>
+    <mkdir dir="${webroot.dir}/WEB-INF/classes"/>
 </target>
 
 <target name="compile" description="Compiles the Java source files" >
