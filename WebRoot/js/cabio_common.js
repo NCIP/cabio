@@ -56,7 +56,7 @@ var caBioCommon = function() {
      * Highlight occurances of text in the given label.
      */
     highlight : function (label, wordList) {
-        h = label;
+        var h = label;
         for(var i=0; i<wordList.length; i++) {
             h = h.replace(new RegExp("("+wordList[i]+")","gi"), "<b>$1</b>");
         }
