@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebWorksHelpIX version="5.0" xmlns="urn:WebWorks-Help-Index-Schema">
+  <g t="B" o="002">
+    <i t="Becoming a registered user">
+      <j l="1" />
+    </i>
+  </g>
+  <g t="O" o="002">
+    <i t="Online help">
+      <i t="locating topics of interest">
+        <j l="1#1089533" />
+      </i>
+      <i t="printing">
+        <j l="1#1089553" />
+      </i>
+    </i>
+    <i t="Online help, using">
+      <j l="1" />
+    </i>
+  </g>
+  <g t="R" o="002">
+    <i t="Registration">
+      <j l="1" />
+    </i>
+  </g>
+  <g t="U" o="002">
+    <i t="Using online help">
+      <j l="1" />
+    </i>
+  </g>
+</WebWorksHelpIX>

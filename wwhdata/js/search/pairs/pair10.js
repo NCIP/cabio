@@ -1,0 +1,22 @@
+function FileData_Pairs(x)
+{
+x.t("hugo","symbol");
+x.t("gene","lookup");
+x.t("gene","symbol");
+x.t("creating","reports");
+x.t("portlet","creating");
+x.t("string","input");
+x.t("input","field");
+x.t("cabio","portlet");
+x.t("cabio","data");
+x.t("annotations","gene");
+x.t("annotations","using");
+x.t("annotations","genomic");
+x.t("reports","cabio");
+x.t("data","genomic");
+x.t("using","cabio");
+x.t("lookup","gene");
+x.t("symbol","hugo");
+x.t("symbol","string");
+x.t("genomic","annotations");
+}

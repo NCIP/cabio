@@ -1,0 +1,24 @@
+function FileData_Pairs(x)
+{
+x.t("hugo","symbol");
+x.t("field","gene");
+x.t("gene","gene");
+x.t("gene","symbol");
+x.t("creating","reports");
+x.t("name","string");
+x.t("name","pathway");
+x.t("portlet","creating");
+x.t("string","input");
+x.t("input","field");
+x.t("cabio","portlet");
+x.t("cabio","data");
+x.t("reports","cabio");
+x.t("pathways","name");
+x.t("pathways","pathways");
+x.t("pathways","using");
+x.t("data","pathways");
+x.t("using","cabio");
+x.t("symbol","hugo");
+x.t("symbol","string");
+x.t("pathway","name");
+}
