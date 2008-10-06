@@ -10,11 +10,13 @@
       <i t="Performing an Advanced Search" l="6" />
     </i>
     <i t="Creating Reports of caBIO Data" l="7">
-      <i t="Range Queries" l="8" />
+      <i t="Genome Range Queries" l="8" />
       <i t="Microarray Annotations" l="9" />
       <i t="Genomic Annotations" l="10" />
       <i t="Pathways" l="11" />
       <i t="Cancer Gene Index" l="12" />
     </i>
   </i>
+  <i t="caBIO Portlet Glossary" l="13" />
+  <i t="Using Application Support" l="14" />
 </WebWorksHelpTOC>

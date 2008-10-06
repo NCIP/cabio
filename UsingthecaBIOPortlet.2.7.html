@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <!-- MOTW-DISABLED saved from url=(0014)about:internet -->
-    <title>Range Queries</title>
+    <title>Genome Range Queries</title>
     <link rel="StyleSheet" href="css/UsingthecaBIOPortlet.css" type="text/css" media="all" />
     <link rel="StyleSheet" href="css/webworks.css" type="text/css" media="all" />
     <script type="text/javascript" language="JavaScript1.2" src="wwhdata/common/context.js"></script>
@@ -28,120 +28,114 @@
   <body style="" onLoad="WWHUpdate();" onUnload="WWHUnload();" onKeyDown="WWHHandleKeyDown((document.all||document.getElementById||document.layers)?event:null);" onKeyPress="WWHHandleKeyPress((document.all||document.getElementById||document.layers)?event:null);" onKeyUp="WWHHandleKeyUp((document.all||document.getElementById||document.layers)?event:null);">
     <br />
     <div class="WebWorks_Breadcrumbs" style="text-align: left;">
-      <a class="WebWorks_Breadcrumb_Link" href="UsingthecaBIOPortlet.2.1.html#1073629">Using the caBIO Portlet</a> &gt; <a class="WebWorks_Breadcrumb_Link" href="UsingthecaBIOPortlet.2.6.html#1073629">Creating Reports of caBIO Data</a> &gt; Range Queries </div>
+      <a class="WebWorks_Breadcrumb_Link" href="UsingthecaBIOPortlet.2.1.html#1074302">Using the caBIO Portlet</a> &gt; <a class="WebWorks_Breadcrumb_Link" href="UsingthecaBIOPortlet.2.6.html#1074302">Creating Reports of caBIO Data</a> &gt; Genome Range Queries </div>
     <hr align="left" />
     <blockquote>
-      <div class="Heading2"><a name="1073629">Range Queries </a></div>
-      <div class="Body_Text"><a name="1073631">Absolute Range Query</a></div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073633">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073633">Taxon (drop down list)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073634">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073634">Chromosome Number  (drop down list, populated based on taxon)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073635">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073635">Start (integer input field)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073636">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073636">End (integer input field)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073637">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073637">Result class filter (multi-select list with genomic feature class names , default to </a>all)</div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Body_Text"><a name="1073639">Grid Id Range Query</a></div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073641">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073641">Grid Id of a genomic feature </a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073642">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073642">Left range (integer input field with default value)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073643">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073643">Right range (integer input field with default value) </a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="Bullet_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073644">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Bullet_inner" style="width: 18pt; white-space: nowrap;">•</div>
-            </td>
-            <td width="100%">
-              <div class="Bullet_inner"><a name="1073644">Result class filter (multi-select list with genomic feature class names)</a></div>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <div class="Heading2"><a name="1074302">Genome Range Queries </a></div>
+      <div class="Heading3NOTOC"><span class="Bold"><a name="1073631">Absolute Range Query</a></span></div>
+      <table id="1074753" class="Table_-_Feature_Description" style="text-align: left;" cellspacing="2">
+        <caption></caption>
+        <tr>
+          <td id="tc1074755" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 125.24976pt;">
+            <div class="Table_Header"><a name="1074755">Report Option</a></div>
+          </td>
+          <td id="tc1074757" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 296.54928pt;">
+            <div class="Table_Header"><a name="1074757">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074803" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074803">Species</a></div>
+          </td>
+          <td id="tc1074805" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074805">Select a species from the drop-down list.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074807" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074807">Chromosome</a></div>
+          </td>
+          <td id="tc1074809" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074809">Chromosome numbers associated with the selected species</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074811" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074811">Assembly</a></div>
+          </td>
+          <td id="tc1074769" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074769">Select an assembly.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074825" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074825">Start Position</a></div>
+          </td>
+          <td id="tc1074773" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074773">Enter a start position.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074839" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074839">End Position</a></div>
+          </td>
+          <td id="tc1074777" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074777">Enter an end position.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074853" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074853">Display</a></div>
+          </td>
+          <td id="tc1074855" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074855">Select which genomic feature class to display in the report. </a></div>
+          </td>
+        </tr>
+      </table>
+      <div class="Heading3NOTOC"><a name="1073639">Grid Id Range Query</a></div>
+      <table id="1074694" class="Table_-_Feature_Description" style="text-align: left;" cellspacing="2">
+        <caption></caption>
+        <tr>
+          <td id="tc1074696" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 125.24976pt;">
+            <div class="Table_Header"><a name="1074696">Report Option</a></div>
+          </td>
+          <td id="tc1074698" style="background-color: LightSteelBlue; border-bottom-color: Black; border-bottom-style: solid; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6pt; vertical-align: middle; width: 296.54928pt;">
+            <div class="Table_Header"><a name="1074698">Description</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074700" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074700">Grid ID</a></div>
+          </td>
+          <td id="tc1074702" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074702">Identifier for a genomic feature</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074704" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074704">Downstream Distance</a></div>
+          </td>
+          <td id="tc1074706" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074706">Enter a downstream distance.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074708" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074708">Upstream Distance</a></div>
+          </td>
+          <td id="tc1074710" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074710">Enter an upstream distance.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1074712" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1074712">Display</a></div>
+          </td>
+          <td id="tc1075027" style="border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1075027">Select which genomic feature class to display in the report. </a></div>
+          </td>
+        </tr>
+      </table>
       <script type="text/javascript" language="JavaScript1.2">
         <!--
           // Clear related topics

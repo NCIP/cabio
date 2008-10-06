@@ -4,7 +4,7 @@ x.t("searching","cabio");
 x.t("available","cabio");
 x.t("provide","specific");
 x.t("within","cagrid");
-x.t("community","menu");
+x.t("community","tab");
 x.t("advanced","search");
 x.t("cagrid","portal");
 x.t("entering","term");
