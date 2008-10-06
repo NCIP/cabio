@@ -6,6 +6,11 @@
 
 <div id="cabio">
 
+<a href="<bean:message key="online.help.url"/>" target="_blank">
+    <img src="<c:url value="/images/questionMark.gif"/>" 
+        align="left" style="clear:all; margin-right:10px;">
+</a>
+
 <img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="right">
 
 <div style="color: #444; margin-bottom: 10px;">
