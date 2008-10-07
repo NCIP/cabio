@@ -129,7 +129,8 @@ public class SearchAPIDAO implements DAO {
 		try {            
  			if (searchQuery.getKeyword() != null) {
 				String startChars = "^[*?].+";
-				String charNeedsEscape = ".+[^(\\Q\\\\E)][(\\Q()\\\\E)\\[\\]\\^{}!:\"].*";
+				//String charNeedsEscape = ".+[^(\\Q\\\\E)][(\\Q()\\\\E)\\[\\]\\^{}!:\"].*";
+				String charNeedsEscape = ".+[^(\\Q\\\\E)][\\[\\]\\^{}!:\"].*";
 				String searchString = searchQuery.getKeyword();
                 if(searchString.trim().matches(startChars)){                   
                     throw new FreestyleLMException("FreestyleLM Search does not support leading wildcard characters '*' or '?'");
