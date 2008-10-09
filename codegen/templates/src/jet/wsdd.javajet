@@ -25,18 +25,17 @@
 	<parameter name="className" value="gov.nih.nci.system.webservice.CaBioWSQuery"/>
 	<parameter name="allowedMethods" value="*"/>
 	<parameter name="extraClasses"
-	value="gov.nih.nci.search.SearchQuery,gov.nih.nci.search.SearchResult,gov.nih.nci.search.Sort,gov.nih.nci.search.RangeFilter,java.util.HashMap, <%=TransformerUtils.getWSDDServiceValue(classColl)%>"/>
+	value="gov.nih.nci.search.SearchQuery,gov.nih.nci.search.SearchResult,gov.nih.nci.search.Sort,gov.nih.nci.search.RangeFilter,<%=TransformerUtils.getWSDDServiceValue(classColl)%>"/>
 <% for(UMLClass klass:classColl){
 	pkgName = TransformerUtils.getFullPackageName(klass);
 %>	
 	<beanMapping xmlns:myNS="urn:<%=TransformerUtils.reversePackageName(pkgName)%>"  qname="myNS:<%=klass.getName()%>" languageSpecificType="java:<%= pkgName + '.' + klass.getName()%>" />
 <% } %>	
- <beanMapping languageSpecificType="java:gov.nih.nci.search.SearchQuery" qname="ns257:SearchQuery" xmlns:ns257="urn:search.nci.nih.gov"/>
+  <beanMapping languageSpecificType="java:gov.nih.nci.search.SearchQuery" qname="ns257:SearchQuery" xmlns:ns257="urn:search.nci.nih.gov"/>
   <beanMapping languageSpecificType="java:gov.nih.nci.search.SearchResult" qname="ns258:SearchResult" xmlns:ns258="urn:search.nci.nih.gov"/>
   <beanMapping languageSpecificType="java:gov.nih.nci.search.Sort" qname="ns259:Sort" xmlns:ns259="urn:search.nci.nih.gov"/>
   <beanMapping languageSpecificType="java:gov.nih.nci.search.RangeFilter" qname="ns260:RangeFilter" xmlns:ns260="urn:search.nci.nih.gov"/>
-  <beanMapping languageSpecificType="java:java.util.HashMap" qname="ns261:HashMap" xmlns:ns261="urn:search.nci.nih.gov"/>
- 	
+  
 </service>
 <transport name="http">
   <requestFlow>

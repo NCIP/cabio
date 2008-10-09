@@ -1,7 +1,7 @@
 package gov.nih.nci.search;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Shaziya Muhsin
@@ -13,7 +13,7 @@ public class SearchResult implements Serializable {
     private String className;
     private Integer hit;
     private String keyword;
-    private HashMap properties;
+    private Map properties;
     private String displayText;
     private String id;
 
@@ -41,11 +41,11 @@ public class SearchResult implements Serializable {
         this.keyword = keyword;
     }
 
-    public HashMap getProperties() {
+    public Map getProperties() {
         return properties;
     }
 
-    public void setProperties(HashMap properties) {
+    public void setProperties(Map properties) {
         this.properties = properties;
     }
 
