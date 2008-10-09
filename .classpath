@@ -52,5 +52,6 @@
 	<classpathentry kind="lib" path="system/lib/commons-cli-1.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SDK4"/>
 	<classpathentry kind="lib" path="output/remote-client/lib/cabio42-beans.jar"/>
+	<classpathentry kind="lib" path="test/lib/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
