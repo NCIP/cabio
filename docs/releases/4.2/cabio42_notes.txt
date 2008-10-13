@@ -30,9 +30,48 @@
 
   Data from the Pathway Interaction Database (PID) (http://pid.nci.nih.gov/) has
   been added to the Pathway object and to a new supporting model in the 
-  gov.nih.nci.cabio.pathways package. 
+  gov.nih.nci.cabio.pathways package.  
 
-  For details, please consult the caBIO Technical Guide.
+  Pathway Interactions
+    * Pathway Reference
+    * Macroprocess
+    * Biochemical
+    * Gene Regulation
+    
+  Pathway Participant:
+    * Condition
+    * PhysicalParticipant
+
+  Pathway PhysicalParticipant
+    * Input
+    * Output
+    * PositiveControl
+    * NegativeControl
+    * ComplexComponent
+
+  Pathway PhysicalEntity
+    * ComplexEntity
+    * SmallMoleculeEntity
+    * ProteinEntity
+    * RNAEntity
+
+  Pathway ProteinEntity
+    * ProteinSubunit
+
+  In addition, the following new attributes and associations were added to 
+  the existin caBIO domain object:
+    * EvidenceCode.Interaction
+    * Evidence.Interaction
+    * Pathway.Interaction
+    * Pathway.PathwayReference
+    * Pathway.curator
+    * Pathway.reviewer
+    * Pathway.source
+    * Protein.ProteinEntity
+    * Agent.SmallMoleculeEntity
+    * NucleicAcidSequence.RNAEntity
+ 
+ For details, please consult the caBIO Technical Guide.
  
  
 ================================================================================
@@ -40,7 +79,9 @@
 ================================================================================
 
   GF12202: Duplicate relative locations
-  
+ 
+  GF13683: GeneRelativeLocation missing for rs200577
+ 
   GF13974: Protein.proteinSequence cardinality
   
   GF14125: WS unit tests should use SERVER_URL
@@ -67,6 +108,17 @@
 ================================================================================
 
 The following defects are known to exist in this build:
+
+  GF13669: null big id for GeneRelativeLocation  
+
+  GF12098: Histopathology Data.
+
+  GF12812: Inconsistent data from Gene to Library
+
+  GF13321: Standardize on one dataset for associating Entrez with Unigene.
+
+  GF13595: It returns different results from Gene to ExpressionArrayReporter 
+           through different paths.   
 
   GF16868: Support for pagination with Range Query API
 
