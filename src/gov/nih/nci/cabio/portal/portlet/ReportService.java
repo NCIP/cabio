@@ -146,7 +146,7 @@ public class ReportService {
             String dbSNPId) throws ApplicationException {
 
         List<String> params = new ArrayList<String>();
-        params.add(dbSNPId.toLowerCase());
+        params.add(dbSNPId.toLowerCase().trim());
         return appService.query(new HQLCriteria(REPORTERS_BY_SNP_HQL,params));
     }
     
@@ -174,12 +174,13 @@ public class ReportService {
     public List<Pathway> getPathwaysByName(
             String pathwayName) throws ApplicationException {
 
+        String inputName = pathwayName.trim();
         Pathway pathway = new Pathway();
-        if (!pathwayName.matches("^(h|m)_")) {
-            pathway.setName("*"+pathwayName);
+        if (!inputName.matches("^(h|m)_")) {
+            pathway.setName("*"+inputName);
         }
         else {
-            pathway.setName(pathwayName);
+            pathway.setName(inputName);
         }
         
         return appService.search(Pathway.class, pathway);
@@ -205,7 +206,7 @@ public class ReportService {
       * @return converted input
       */
      private String convertInput(String input) {
-         return input.toLowerCase().replaceAll("\\*", "%");
+         return input.toLowerCase().trim().replaceAll("\\*", "%");
      }
     
     /**
