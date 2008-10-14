@@ -39,7 +39,7 @@ Learn more</a> about caBIO and its various APIs.
 %>
 
 <liferay-ui:tabs
-	names="Simple Search,Reports"
+	names="Simple Search,Templated Searches"
 	url="<%= portletURL.toString() %>"
 	value="<%= tab %>"
 />
