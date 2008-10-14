@@ -14,7 +14,7 @@
 <img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="right">
 
 <div style="color: #444; margin-bottom: 10px;">
-The caBIO system is a repository of data useful in biomedical research. 
+caBIO is a repository of data useful in biomedical research, compiled from multiple primary sources. 
 This portlet is an easy way to get started with caBIO.<br/>
 <a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank"> 
 Learn more</a> about caBIO and its various APIs.
