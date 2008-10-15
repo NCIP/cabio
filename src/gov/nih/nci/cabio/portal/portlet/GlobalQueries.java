@@ -3,9 +3,9 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
-import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,35 +19,90 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Any global data that must be queried from caBIO is available in this class.
- * One singleton instance is stored in the application context. 
+ * One singleton instance is stored in the application context. This class
+ * attempts to preload all of the data when an instance is created. If that 
+ * fails (for example if the caBIO application server is down when the Portal is
+ * started), we will instead attempt to load pieces of data as they are requested.
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
 public class GlobalQueries {
 
     private static Log log = LogFactory.getLog(GlobalQueries.class);
-    
-    private static final String GET_DISTINCT_ASSEMBLIES_HQL = 
-        "select distinct assembly from gov.nih.nci.cabio.domain.PhysicalLocation";
-    
-    private static CaBioApplicationService as; 
         
-    private static Map<String,List<Chromosome>> taxon2chroms = new HashMap<String,List<Chromosome>>();
+    private CaBioApplicationService as; 
+        
+    private Map<String,List<Chromosome>> taxon2chroms = new HashMap<String,List<Chromosome>>();
     
-    private static List<Taxon> taxons = new ArrayList<Taxon>();
-
-    private static List<String> assemblyValues;
+    private List<Taxon> taxons = new ArrayList<Taxon>();
     
-    private static List<Microarray> microarrays;
+    private List<Microarray> microarrays;
     
+    /**
+     * Create a new instance of GlobalQueries and attempt to preload all the 
+     * data necessary. Generally this object needs to be created only once
+     * for the entire application, and stored in the application context. 
+     */
     public GlobalQueries() {
         
-        log.info("Loading global data...");
+        try {
+            log.info("Preloading global data...");
+            as = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
+            loadTaxonChromosomes();
+            loadMicroarrays();
+            log.info("Completed preloading global data.");
+            
+        }
+        catch (Exception e) {
+            log.error("Error preloading global data",e);
+        }
         
+    }
+    
+    /**
+     * Returns a map keyed by Taxon.abbreviation, with values consisting of 
+     * lists of Chromosome objects corresponding to each Taxon. This method
+     * may do a query if the data was not successfully preloaded when the 
+     * portal was started up.
+     * @return map of Taxon.abbreviation -> Chromosome list
+     */
+    public Map<String,List<Chromosome>> getTaxonChromosomes() {
+        if (taxon2chroms == null) loadTaxonChromosomes();
+        return taxon2chroms;
+    }
+
+    /**
+     * Returns a list of Taxons in caBIO which have associated Chromosomes. 
+     * The last part is important, because there may be Taxons in caBIO 
+     * which do NOT have Chromosomes, and are thus not useful to query on. 
+     * @return list of Taxon objects
+     */
+    public List<Taxon> getTaxonValues() {
+        if (taxons == null) loadTaxonChromosomes();
+        return taxons;
+    }
+
+    /**
+     * Returns a list of Microarrays in caBIO.
+     * @return list of Microarray objects
+     */
+    public List<Microarray> getMicroarrays() {
+        if (microarrays == null) loadMicroarrays();
+        return microarrays;
+    }
+
+    /**
+     * Returns the list of possible GenomicFeature enumeration values.
+     * @return Array of GenomicFeature values
+     */
+    public GenomicFeature[] getClassFilterValues() {
+        return GenomicFeature.values();
+    }
+
+    private void loadTaxonChromosomes() {
+
         try {
             log.info("Loading taxon and chromosome data...");
-            as = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
-            
             List<Chromosome> results = as.search(Chromosome.class, new Chromosome());
             for (Chromosome c : results) {
                 String taxon = c.getTaxon().getAbbreviation();
@@ -82,43 +137,21 @@ public class GlobalQueries {
                 });
             }
             log.info("Done loading taxon and chromosome data.");
-
-            // load assembly values
-//            log.info("Loading assembly data...");
-//            assemblyValues = as.query(new HQLCriteria(GET_DISTINCT_ASSEMBLIES_HQL));
-//            Collections.sort(assemblyValues);
-//            log.info("Done loading assembly data.");
-            
-            // load microarrays
+        }
+        catch (ApplicationException e) {
+            log.error("Error loading taxon and chromosome data.",e);
+        }
+    }
+    
+    private void loadMicroarrays() {
+        
+        try {
             log.info("Loading microarray data...");
             microarrays = as.search(Microarray.class, new Microarray());
             log.info("Done loading microarray data.");
-            
-            log.info("Completed loading global data.");
         }
-        catch (Exception e) {
-            log.error("Error loading global data",e);
+        catch (ApplicationException e) {
+            log.error("Error loading microarray data.",e);
         }
     }
-    
-    public Map<String,List<Chromosome>> getTaxonChromosomes() {
-        return taxon2chroms;
-    }
-    
-    public List<Taxon> getTaxonValues() {
-        return taxons;
-    }
-
-    public List<String> getAssemblyValues() {
-        return assemblyValues;
-    }
-
-    public List<Microarray> getMicroarrays() {
-        return microarrays;
-    }
-
-    public GenomicFeature[] getClassFilterValues() {
-        return GenomicFeature.values();
-    }
-    
 }
