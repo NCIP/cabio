@@ -2496,18 +2496,19 @@ div.Heading3
 
 div.Heading3NOTOC
 {
-  color: #000000;
-  font-family: "Palatino Linotype";
+  color: #516186;
+  font-family: Sans-Serif;
   font-size: 12.0pt;
-  font-style: normal;
+  font-style: italic;
   font-variant: normal;
   font-weight: bold;
   margin-bottom: 0.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-bottom: 10px;
   text-align: Left;
-  text-indent: 18pt;
+  text-indent: 0pt;
   text-transform: none;
   vertical-align: baseline;
 }
@@ -2517,14 +2518,15 @@ div.Heading3NOTOC
   margin-bottom: 0.0pt;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-bottom: 10px;
 }
 
 .Heading3NOTOC_inner
 {
-  color: #000000;
-  font-family: "Palatino Linotype";
+  color: #516186;
+  font-family: Sans-Serif;
   font-size: 12.0pt;
-  font-style: normal;
+  font-style: italic;
   font-variant: normal;
   font-weight: bold;
   text-align: Left;
