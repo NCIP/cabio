@@ -7,7 +7,7 @@
 
     <table>
     
-    <tr><td title="Gene symbol">Gene / HUGO Symbol</td><td>
+    <tr><td title="Unigene or HUGO gene symbol">Gene Symbol</td><td>
     <html:text property="geneSymbol" size="30"/>
     </td></tr>
 
