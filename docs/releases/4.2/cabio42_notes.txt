@@ -59,7 +59,7 @@
     * ProteinSubunit
 
   In addition, the following new attributes and associations were added to 
-  the existin caBIO domain object:
+  the existing caBIO domain objects:
     * EvidenceCode.Interaction
     * Evidence.Interaction
     * Pathway.Interaction
