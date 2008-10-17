@@ -24,7 +24,6 @@
 
 <%@ page import="gov.nih.nci.search.*,
 		 gov.nih.nci.system.web.util.*,
-		 gov.nih.nci.common.util.search.*,
 		 java.lang.reflect.*,
 		 java.util.*" %>
 <%
@@ -52,7 +51,8 @@
  		<td align=left valign=top>
                 <table>
                   <tr><td>
- 			<INPUT TYPE=TEXT SIZE=60 name="searchString" value="<%=searchString%>">					
+ 			<INPUT TYPE=TEXT SIZE=60 name="searchString" value="<%=searchString%>">
+ 			<a href="http://lucene.apache.org/java/docs/queryparsersyntax.html"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
 			<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
 			<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
                   </td></tr>
@@ -110,14 +110,14 @@ String preClassName = "";
 			%><table><tr><td><br><div class="formTitle">Class: <%=className%></div></td></tr></table><%
 				//display heading
 				%><table border=1 style="word-break:break-all;table-layout:fixed"><%
-				%><tr><th bgcolor="#FAF8CC" width="325" cellpadding=2><div class="para"><b><i>Class</b></i></div></th><%
+				%><tr><th bgcolor="#FAF8CC" width="325" cellpadding=2><div class="para"><i><b>Class</b></i></div></th><%
 				int propCount = result.getProperties().size();				
 				int pCount = 0;
 				for(Iterator it=result.getProperties().keySet().iterator();it.hasNext();){
 					String key = (String) it.next();					
 					if(!key.equalsIgnoreCase("_hibernate_class")){
 						%>						
-						<th bgcolor="#FAF8CC" width="325" cellpadding=2 ><div class="para"><b><i><%=key%></b></i></div></td>						
+						<th bgcolor="#FAF8CC" width="325" cellpadding=2 ><div class="para"><i><b><%=key%></b></i></div></th>						
 						<%
 						propString[pCount] = new String(key);
 						pCount++;
