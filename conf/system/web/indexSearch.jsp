@@ -63,7 +63,7 @@
 		 		     <INPUT TYPE=TEXT name="EXCLUDE_TEXT" value="" >
 		 		</td>
 		 		</tr>
- 		
+ 		<tr>
  		<td>
  			<INPUT TYPE=CHECKBOX NAME="FULL_TEXT_SEARCH" VALUE="FULL_TEXT_SEARCH" CHECKED/>Full Text Search
  		</td>
@@ -86,8 +86,7 @@
   			<OPTION Selected>1000</OPTION>
   			</SELECT>
   		</td>
- 		</tr>
- 	</tr>
+ 		</tr> 	
 </table>
 	
 </form>
