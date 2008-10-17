@@ -79,6 +79,7 @@ public class GlobalQueries {
      */
     public List<Taxon> getTaxonValues() {
         if (taxons == null) loadTaxonChromosomes();
+        if (taxons == null) return new ArrayList<Taxon>();
         return taxons;
     }
 
@@ -88,7 +89,9 @@ public class GlobalQueries {
      */
     public List<Microarray> getMicroarrays() {
         if (microarrays == null) loadMicroarrays();
-        return microarrays;
+        //if (microarrays == null) 
+            return new ArrayList<Microarray>();
+        //return microarrays;
     }
 
     /**
