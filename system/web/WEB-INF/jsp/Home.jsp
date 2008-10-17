@@ -77,15 +77,15 @@
 													caBIO Download site</a> - Contains download packages and
 													release notes</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO
+														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO
 													4.2 Release Notes</a> - Latest release notes for caBIO</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO 4.2
+														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO 4.2
 													Data Refresh Release Notes</a> - Release notes describing
 													the current data content of caBIO</li>
 													<li><a href="docs">caBIO 4.2 javadocs</a> - Java API
 													documentation</li>
-													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO 4.2 Tech Guide</a> - Technical
+													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO 4.2 Tech Guide</a> - Technical
 													Guide</li>
 												</ul>
 												</td>
@@ -103,7 +103,7 @@
 												<table summary="" cellpadding="2" cellspacing="0" border="0"
 													width="100%" class="sidebarSection">
 													<tr>
-														<td class="sidebarTitle" height="20">SELECT CRITERIA</td>
+														<td class="sidebarTitle" height="20">Search for Biological Entities</td>
 													</tr>
 													<tr>
 														<td class="sidebarContent" align="center"><s:form
@@ -130,12 +130,8 @@
 													<tr>
 														<td class="sidebarContent">
 														<ul>
-														    <li>Genome Range Queries</li>
-														    <li>Array Annotation API</li>
-														    <li>Model updates to support caBIG™ standards</li>
-														    <li>Cancer Gene Index data</li>
-														    <li>UniSTS Marker Data</li>
-															<!--  li><a href="search">FreestyleLM Search API</a></li -->
+														    <li><a href="http://cagrid-portal-qa.nci.nih.gov/web/guest/community">caBIO portlet</a></li>
+														    <li>Pathway Interaction Database model and data</li>
 														</ul>
 														</td>
 													</tr>
@@ -150,7 +146,7 @@
 												<table summary="" cellpadding="0" cellspacing="0" border="0"
 													width="100%" height="100%" class="sidebarSection">
 													<tr>
-														<td class="sidebarTitle" height="20">DID YOU KNOW?</td>
+														<td class="sidebarTitle" height="20">Text Search</td>
 													</tr>
 													<tr>
 														<td class="sidebarContent" valign="top"><!-- freestyle search -->
@@ -162,7 +158,7 @@
 															</tr>
 															<tr>
 																<td colspan="2" align=center><INPUT TYPE=TEXT SIZE=60
-																	name="searchString" value=""></td>
+																	name="searchString" value="">&nbsp;<a href="http://lucene.apache.org/java/docs/queryparsersyntax.html"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right"><INPUT TYPE=SUBMIT
