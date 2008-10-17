@@ -3,7 +3,7 @@
 <BODY>
 <font size=5><b><u>
 Freestyle Lexical Mine Error:<br>
-</font></b></u>
+</u></b></font>
 
 <%
 if(request.getAttribute("javax.servlet.jsp.jspException") != null){
