@@ -4,7 +4,7 @@ P.fA("Welcome to the caBIO Portlet Online Help","Welcome%20to%20caBIO%20Portlet.
 P.fA("Using the Online Help","Welcome%20to%20caBIO%20Portlet.1.2.html");
 P.fA("Using the caBIO Portlet","UsingthecaBIOPortlet.2.1.html");
 P.fA("Understanding the caBIO Portlet","UsingthecaBIOPortlet.2.2.html");
-P.fA("Searching for caBIO Data","UsingthecaBIOPortlet.2.3.html");
+P.fA("Searching caBIO Data","UsingthecaBIOPortlet.2.3.html");
 P.fA("Performing a Simple Search","UsingthecaBIOPortlet.2.4.html");
 P.fA("Performing an Advanced Search","UsingthecaBIOPortlet.2.5.html");
 P.fA("Creating Reports of caBIO Data","UsingthecaBIOPortlet.2.6.html");
