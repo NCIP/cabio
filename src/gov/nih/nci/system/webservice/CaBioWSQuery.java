@@ -1,5 +1,6 @@
 package gov.nih.nci.system.webservice;
 
+import gov.nih.nci.system.applicationservice.ApplicationService;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.applicationservice.impl.CaBioApplicationServiceImpl;
 import gov.nih.nci.system.webservice.util.WSUtils;
@@ -31,7 +32,8 @@ public class CaBioWSQuery extends WSQueryImpl {
      */
     public List search(gov.nih.nci.search.SearchQuery searchQuery)
             throws Exception {
-        return super.queryObject(searchQuery.getClass().getName(), searchQuery);
+        ApplicationService applicationService = (ApplicationService)getWebApplicationContext().getBean("ApplicationServiceImpl");
+        return ((CaBioApplicationService)applicationService).search(searchQuery);
     }
 
     /**

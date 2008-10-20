@@ -5,6 +5,8 @@ import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.GeneOntology;
 import gov.nih.nci.cabio.domain.GeneOntologyRelationship;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.SearchResult;
 
 import java.util.Map;
 
@@ -45,6 +47,13 @@ public class WSTest extends TestCase {
         System.out.println("WS URL: "+url);
     }
     
+    private void register(String urn, Class clazz) {
+        QName qn = new QName(urn, clazz.getSimpleName());
+        call.registerTypeMapping(clazz, qn,
+                new org.apache.axis.encoding.ser.BeanSerializerFactory(clazz, qn),
+                new org.apache.axis.encoding.ser.BeanDeserializerFactory(clazz, qn));
+    }
+    
     /**
      * Setup the Axis Call object and initialize the WS type mappings 
      * used in the test cases.
@@ -54,31 +63,13 @@ public class WSTest extends TestCase {
         Service service = new Service();
         this.call = (Call)service.createCall();
         call.setTargetEndpointAddress(new java.net.URL(url));
-
-        QName qnGene = new QName("urn:domain.cabio.nci.nih.gov", "Gene");
-        call.registerTypeMapping(Gene.class, qnGene,
-                new org.apache.axis.encoding.ser.BeanSerializerFactory(Gene.class, qnGene),
-                new org.apache.axis.encoding.ser.BeanDeserializerFactory(Gene.class, qnGene));
-
-        QName qnChromosome = new QName("urn:domain.cabio.nci.nih.gov", "Chromosome");
-        call.registerTypeMapping(Chromosome.class, qnChromosome,
-                new org.apache.axis.encoding.ser.BeanSerializerFactory(Chromosome.class, qnChromosome),
-                new org.apache.axis.encoding.ser.BeanDeserializerFactory(Chromosome.class, qnChromosome));
-
-        QName qnTaxon = new QName("urn:domain.cabio.nci.nih.gov", "Taxon");
-        call.registerTypeMapping(Taxon.class, qnTaxon,
-                new org.apache.axis.encoding.ser.BeanSerializerFactory(Taxon.class, qnTaxon),
-                new org.apache.axis.encoding.ser.BeanDeserializerFactory(Taxon.class, qnTaxon));
-
-        QName qnGeneOntology = new QName("urn:domain.cabio.nci.nih.gov", "GeneOntology");
-                call.registerTypeMapping(GeneOntology.class, qnGeneOntology,
-                new org.apache.axis.encoding.ser.BeanSerializerFactory(GeneOntology.class, qnGeneOntology),
-                new org.apache.axis.encoding.ser.BeanDeserializerFactory(GeneOntology.class, qnGeneOntology));
-
-        QName qnGeneOntologyRelationship = new QName("urn:domain.cabio.nci.nih.gov", "GeneOntologyRelationship");
-                call.registerTypeMapping(GeneOntologyRelationship.class, qnGeneOntologyRelationship,
-                new org.apache.axis.encoding.ser.BeanSerializerFactory(GeneOntologyRelationship.class, qnGeneOntologyRelationship),
-                new org.apache.axis.encoding.ser.BeanDeserializerFactory(GeneOntologyRelationship.class, qnGeneOntologyRelationship));
+        register("urn:domain.cabio.nci.nih.gov", Gene.class);
+        register("urn:domain.cabio.nci.nih.gov", Chromosome.class);
+        register("urn:domain.cabio.nci.nih.gov", Taxon.class);
+        register("urn:domain.cabio.nci.nih.gov", GeneOntology.class);
+        register("urn:domain.cabio.nci.nih.gov", GeneOntologyRelationship.class);
+        register("urn:search.nci.nih.gov", SearchQuery.class);
+        register("urn:search.nci.nih.gov", SearchResult.class);
     }
 
     /**
@@ -266,4 +257,34 @@ public class WSTest extends TestCase {
         assertNotNull(dataObject);
         assertEquals(dataObject.getBigid(), bigId);
     }
+    
+    /**
+     * Ensure Freestyle search with a SearchQuery works.
+     */
+    public void testFreestyleSearch() throws Exception {
+
+        SearchQuery query = new SearchQuery();
+        query.setKeyword("Tirapazamine");
+        
+        call.clearOperation();
+        call.setOperationName(new QName("caBIOService", "search"));
+        call.addParameter("arg1",org.apache.axis.encoding.XMLType.XSD_ANYTYPE,ParameterMode.IN);     
+        call.setReturnType(org.apache.axis.encoding.XMLType.SOAP_ARRAY);
+        Object[] resultList = (Object[])call.invoke(new Object[] {query});
+        
+        assertNotNull(resultList);
+        assertTrue(resultList.length>0);
+
+        boolean agentFound = false;
+        for(Object o : resultList) {
+            SearchResult sr = (SearchResult)o;
+            assertNotNull(sr);
+            if (sr.getClassName().endsWith(".Agent")) {
+                agentFound = true;
+            }
+        }
+        
+        assertTrue("No agent found in results",agentFound);
+    }
+
 }
