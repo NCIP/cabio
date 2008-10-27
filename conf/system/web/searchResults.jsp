@@ -52,7 +52,7 @@
                 <table>
                   <tr><td>
  			<INPUT TYPE=TEXT SIZE=60 name="searchString" value="<%=searchString%>">
- 			<a href="http://lucene.apache.org/java/docs/queryparsersyntax.html"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
+ 			<a href="https://gforge.nci.nih.gov/plugins/scmsvn/viewcvs.php/*checkout*/docs/lucene_queryparsersyntax.html?root=cabiodb"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
 			<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
 			<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
                   </td></tr>
