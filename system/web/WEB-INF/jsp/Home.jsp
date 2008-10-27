@@ -158,7 +158,7 @@
 															</tr>
 															<tr>
 																<td colspan="2" align=center><INPUT TYPE=TEXT SIZE=60
-																	name="searchString" value="">&nbsp;<a href="http://lucene.apache.org/java/docs/queryparsersyntax.html"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																	name="searchString" value="">&nbsp;<a href="https://gforge.nci.nih.gov/plugins/scmsvn/viewcvs.php/*checkout*/docs/lucene_queryparsersyntax.html?root=cabiodb"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right"><INPUT TYPE=SUBMIT
