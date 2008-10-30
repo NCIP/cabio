@@ -89,9 +89,8 @@ public class GlobalQueries {
      */
     public List<Microarray> getMicroarrays() {
         if (microarrays == null) loadMicroarrays();
-        //if (microarrays == null) 
-            return new ArrayList<Microarray>();
-        //return microarrays;
+        if (microarrays == null) return new ArrayList<Microarray>();
+        return microarrays;
     }
 
     /**
