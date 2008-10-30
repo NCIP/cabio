@@ -45,25 +45,25 @@
 <div class="pages">
 <c:if test="${results.numPages > 1}">
     
-	<c:if test="${results.page > 1}">
-		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page}"/>-1)'>Previous</a>
+	<c:if test="${results.page > 0}">
+		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page-1}"/>)'>Previous</a>
 	</c:if>
 	
-	<c:forEach begin="1" end="${results.numPages+1}" varStatus="status">
+	<c:forEach begin="0" end="${results.numPages}" varStatus="status">
 	
 		<c:choose>
 			<c:when test='${status.index == results.page}'>
-				<c:out value="${status.index}"/>
+				<c:out value="${status.index+1}"/>
 			</c:when>
 			<c:when test='${status.index > results.page-6 && status.index < results.page+6 }'>
-				<a href="javascript:caBioResults.loadPage(<c:out value="${status.index}"/>)"><c:out value="${status.index}"/></a>
+				<a href="javascript:caBioResults.loadPage(<c:out value="${status.index}"/>)"><c:out value="${status.index+1}"/></a>
 			</c:when>
 		</c:choose>
 	
 	</c:forEach>
 	
-	<c:if test="${results.page < results.numPages}">
-		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page}"/>+1)'>Next</a>
+	<c:if test="${results.page < results.numPages-2}">
+		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page+1}"/>)'>Next</a>
 	</c:if>
 	
 </c:if>

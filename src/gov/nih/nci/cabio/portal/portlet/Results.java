@@ -59,7 +59,7 @@ public class Results {
      * Returns the page number represented by this object.
      */
     public int getPage() {
-        return page+1;
+        return page;
     }
     
     /**

@@ -55,6 +55,7 @@ Learn more</a> about caBIO and its various APIs.
     <script>    
     jQuery(document).ready(function(){
         caBioCommon.createDropBox('#query_link');
+        jQuery("#page").val("0");
     });
     </script>
 
