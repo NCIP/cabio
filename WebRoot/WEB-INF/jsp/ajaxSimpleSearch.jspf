@@ -7,10 +7,8 @@
 var caBioSimpleSearch = function() {
 
 	var proxyUrl = "/cabioportlets/proxy";
+    var PAGE_SIZE = 5;
 	
-	var PAGE_SIZE = 5;
-	var MAX_TITLE_LEN = 60;
-	var MAX_DESC_LEN = 150;
 	var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
 
 	// Current state
@@ -92,6 +90,18 @@ var caBioSimpleSearch = function() {
 	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b></div>';
 	        jQuery("#searchResults").append(summary);
 	
+	        // Attempt to show enough text to fill the current portlet width
+	        var width = jQuery("#cabio")[0].clientWidth;
+	        // The conversion numbers are based on linear regression of the 
+	        // following "optimal" line lengths establised by experimentation
+	        // with different portal layouts:
+	        //   columns  width  maxTitleLen  maxDescLen
+	        //   50/50    465    70           170
+	        //   70/30    665    100          240
+	        //   100/0    970    150          350
+	        maxTitleLen = parseInt(width*0.15);
+	        maxDescLen = parseInt(width*0.36);
+	
 	        jQuery("class", qr).each(function(){
 	
 	            var r = processClassNode(this);
@@ -103,8 +113,8 @@ var caBioSimpleSearch = function() {
 	            var desc = '';
 	            
 	            if (f != undefined) {
-	                title = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['title']), MAX_TITLE_LEN), searchWords);
-	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), MAX_DESC_LEN), searchWords);
+	                title = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['title']), maxTitleLen), searchWords);
+	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), maxDescLen), searchWords);
 	            }
 	            else {
 	                for(k in r.properties) {
