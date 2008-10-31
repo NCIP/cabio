@@ -11,9 +11,9 @@
         align="right">
 </a>
 
-<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="left" style="clear:all; margin-right:10px;">
+<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="left" style="clear:all; margin-left: 10px;">
 
-<div style="color: #444; margin-bottom: 10px;">
+<div style="color: #444; margin-bottom: 20px;">
 caBIO is a repository of data useful in biomedical research, compiled from multiple primary sources. 
 This portlet is an easy way to get started with caBIO.<br/>
 <a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank"> 

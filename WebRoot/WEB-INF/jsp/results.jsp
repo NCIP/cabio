@@ -30,7 +30,7 @@
    	<c:forEach var="item" items="${results.items[element.key]}">
 	  	<tr>
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
-			<td><c:out value="${item[attr.name]}"/></td>
+			<td><div><c:out value="${item[attr.name]}"/></div></td>
 		</c:forEach>
 		<td><span class="link-extenal">
             <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
