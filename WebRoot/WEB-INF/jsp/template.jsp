@@ -8,10 +8,10 @@
 
 <a href="<bean:message key="online.help.url"/>" target="_blank">
     <img src="<c:url value="/images/questionMark.gif"/>" 
-        align="left" style="clear:all; margin-right:10px;">
+        align="right">
 </a>
 
-<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="right">
+<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="left" style="clear:all; margin-right:10px;">
 
 <div style="color: #444; margin-bottom: 10px;">
 caBIO is a repository of data useful in biomedical research, compiled from multiple primary sources. 
@@ -22,9 +22,9 @@ Learn more</a> about caBIO and its various APIs.
 
 <%
 	String tab = ParamUtil.getString(request, "tabs1");
-	if ("".equals(tab)) {
+	if ((tab == null) || "".equals(tab)) {
         tab = (String)session.getAttribute("tab");
-        if (tab == null) {
+        if ((tab == null) || "".equals(tab)) {
             tab = "Simple Search";
         }
 	}
