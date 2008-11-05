@@ -157,8 +157,8 @@
 																	name="caCORE Search API" border="0" align=middle></td>
 															</tr>
 															<tr>
-																<td colspan="2" align=center><INPUT TYPE=TEXT SIZE=60
-																	name="searchString" value="">&nbsp;<a href="https://gforge.nci.nih.gov/plugins/scmsvn/viewcvs.php/*checkout*/docs/lucene_queryparsersyntax.html?root=cabiodb"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																<td colspan="2" align=center nowrap><INPUT TYPE=TEXT SIZE=60
+																	name="searchString" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right"><INPUT TYPE=SUBMIT
