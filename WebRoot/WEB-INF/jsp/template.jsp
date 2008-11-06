@@ -8,17 +8,19 @@
 
 <a href="<bean:message key="online.help.url"/>" target="_blank">
     <img src="<c:url value="/images/questionMark.gif"/>" 
-        align="right">
+        style="float: right; margin-left: 8px;">
 </a>
 
-<img src="<c:url value="/images/sdkLogoSmall.gif"/>" align="left" style="clear:all; margin-left: 10px;">
+<div style="color: #444;">
+<img src="<c:url value="/images/sdkLogoSmall.gif"/>" style="float: left; margin-right: 8px;">
 
-<div style="color: #444; margin-bottom: 20px;">
 caBIO is a repository of data useful in biomedical research, compiled from multiple primary sources. 
 This portlet is an easy way to get started with caBIO.<br/>
 <a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank"> 
 Learn more</a> about caBIO and its various APIs.
 </div>
+
+<div style="clear: both; margin-bottom: 10px;"></div>
 
 <%
 	String tab = ParamUtil.getString(request, "tabs1");
