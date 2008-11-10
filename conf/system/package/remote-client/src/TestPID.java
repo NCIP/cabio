@@ -6,9 +6,9 @@ import gov.nih.nci.cabio.pathways.ComplexComponent;
 import gov.nih.nci.cabio.pathways.ComplexEntity;
 import gov.nih.nci.cabio.pathways.EntityAccession;
 import gov.nih.nci.cabio.pathways.EntityName;
+import gov.nih.nci.cabio.pathways.FamilyMember;
 import gov.nih.nci.cabio.pathways.Interaction;
 import gov.nih.nci.cabio.pathways.PhysicalEntity;
-import gov.nih.nci.cabio.pathways.PhysicalEntityFamily;
 import gov.nih.nci.cabio.pathways.PhysicalParticipant;
 import gov.nih.nci.cabio.pathways.ProteinEntity;
 import gov.nih.nci.cabio.pathways.ProteinSubunit;
@@ -120,16 +120,6 @@ public class TestPID {
                 }
             }
         }
-        else if (e instanceof PhysicalEntityFamily) {
-            PhysicalEntityFamily pe = (PhysicalEntityFamily)e;
-            System.out.println("Molecule type: family");
-            System.out.print("Family members: ");
-            if (printList(pe.getMemberCollection())) {
-                for (PhysicalParticipant comp : pe.getMemberCollection()) {
-                    System.out.println("  PhysicalParticipant: "+getNames(comp.getPhysicalEntity()));
-                }
-            }
-        }
         else {
             System.out.println("ERROR: Unknown molecule type, "+e.getClass());
         }
@@ -139,19 +129,26 @@ public class TestPID {
         Collection<PhysicalParticipant> participants = e.getPhysicalParticipantCollection();
         Collection<ComplexComponent> complexUses = new ArrayList<ComplexComponent>();
         Collection<PhysicalParticipant> interactionUses = new ArrayList<PhysicalParticipant>();
-        Collection<PhysicalEntityFamily> families = new HashSet<PhysicalEntityFamily>();
+        Collection<PhysicalEntity> families = new HashSet<PhysicalEntity>();
         for(PhysicalParticipant pp : participants) {
             if (pp instanceof ComplexComponent) {
                 complexUses.add((ComplexComponent)pp);
             }
+            else if (pp instanceof FamilyMember) {
+                families.addAll(((FamilyMember)pp).getFamilyCollection());
+            }
             else {
                 interactionUses.add(pp);
             }
-            if (!pp.getFamilyCollection().isEmpty()) {
-                families.addAll(pp.getFamilyCollection());
-            }
         }
 
+        System.out.print("Family members: ");
+        if (printList(e.getMemberCollection())) {
+            for (FamilyMember fm : e.getMemberCollection()) {
+                System.out.println("  FamilyMember: "+getNames(fm.getPhysicalEntity()));
+            }
+        }
+        
         System.out.println("Is member of family: "+getFamilyList(families));
         
         System.out.print("Uses in complexes: ");
@@ -237,10 +234,10 @@ public class TestPID {
     /**
      * Returns a comma-delimited list of accession numbers for the given PhysicalEntity.
      */
-    private static final String getFamilyList(Collection<PhysicalEntityFamily> families) throws Exception {
+    private static final String getFamilyList(Collection<PhysicalEntity> families) throws Exception {
         StringBuffer sb = new StringBuffer();
         int i = 0;
-        for(PhysicalEntityFamily f : families) {
+        for(PhysicalEntity f : families) {
             if (i++>0) sb.append(", ");
             sb.append(f.getEntityNameCollection().iterator().next().getName());
         }
