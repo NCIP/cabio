@@ -209,6 +209,7 @@ public class TestPID {
      * Returns a comma-delimited list of names for the given PhysicalEntity.
      */
     private static final String getNames(PhysicalEntity e) throws Exception {
+        if (e == null) return "PhysicalEntity";
         StringBuffer sb = new StringBuffer();
         int i = 0;
         for(EntityName en : e.getEntityNameCollection()) {
@@ -222,6 +223,7 @@ public class TestPID {
      * Returns a slash-delimited list of pathways.
      */
     private static final String getPathways(Interaction interaction) throws Exception {
+        if (interaction == null) return "null";
         StringBuffer sb = new StringBuffer();
         int i = 0;
         for(Pathway p : interaction.getPathwayCollection()) {
