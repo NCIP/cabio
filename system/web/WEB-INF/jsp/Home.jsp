@@ -130,7 +130,7 @@
 													<tr>
 														<td class="sidebarContent">
 														<ul>
-														    <li><a href="http://cagrid-portal-qa.nci.nih.gov/web/guest/community">caBIO portlet</a></li>
+														    <li><a href="http://cagrid-portal.nci.nih.gov/web/guest/community">caBIO portlet</a></li>
 														    <li>Pathway Interaction Database model and data</li>
 														</ul>
 														</td>
