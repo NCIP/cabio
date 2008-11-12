@@ -30,11 +30,26 @@
    	<c:forEach var="item" items="${results.items[element.key]}">
 	  	<tr>
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
-			<td><div><c:out value="${item[attr.name]}"/></div></td>
+			<td>
+			<c:choose>
+			<c:when test="${attr.lastPart == 'pubmedId'}">
+			    <div class="link-extenal" style="text-align: right">
+			        <a href="http://www.ncbi.nlm.nih.gov/pubmed/<c:out value="${item[attr.name]}"/>" target="_blank">
+			             <c:out value="${item[attr.name]}"/></a>
+			    </div>
+			</c:when>
+			<c:otherwise>
+			    <div><c:out value="${item[attr.name]}"/></div>
+			</c:otherwise>
+			</c:choose>
+			</td>
 		</c:forEach>
-		<td><span class="link-extenal">
-            <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
-                <c:out value="${item.id}"/></a></span></td>
+		<td>
+		    <div class="link-extenal" style="text-align: right">
+                <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
+                    <c:out value="${item.id}"/></a>
+            </div>
+        </td>
 	  	</tr>
 	</c:forEach>
 	

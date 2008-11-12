@@ -217,6 +217,9 @@ var caBioSimpleSearch = function() {
                             v = '<input type="submit" value="View Image" onclick="caBioSimpleSearch.showPathway('+r.id+')"/>';
 
 	                    }
+	                    else if (k === 'pubmedId') {
+	                        v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_blank">'+val+'</a></span>';
+	                    }
 	                    else {
 		                    v = caBioCommon.escapeXML(val);
 	                    }

@@ -83,6 +83,12 @@ public class CannedObjectConfig {
         public String getLabel() {
             return label;
         }
+        
+        public String getLastPart() {
+            int lastDot = name.lastIndexOf('.');
+            if (lastDot < 0) return name;
+            return name.substring(lastDot+1);
+        }
     }
     
     public class ClassObject extends LabeledObject {
