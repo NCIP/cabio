@@ -91,7 +91,7 @@ var caBioSimpleSearch = function() {
 	        jQuery("#searchResults").append(summary);
 	
 	        // Attempt to show enough text to fill the current portlet width
-	        var width = jQuery("#cabio")[0].clientWidth;
+	        var width = jQuery("#cabio")[0].offsetWidth;
 	        // The conversion numbers are based on linear regression of the 
 	        // following "optimal" line lengths establised by experimentation
 	        // with different portal layouts:
