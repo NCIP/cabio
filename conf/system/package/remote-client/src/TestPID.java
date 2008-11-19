@@ -37,8 +37,8 @@ public class TestPID {
         as = (CaBioApplicationService) 
             ApplicationServiceProvider.getApplicationService(); 
         
-        // RNA example (http://pid.nci.nih.gov/MoleculePage?molid=502656)
-        printEntity("TERC"); 
+        // RNA example (http://pid.nci.nih.gov/MoleculePage?molid=101810)
+        printEntity("Met-tRNA"); 
         
         // Compound example (http://pid.nci.nih.gov/MoleculePage?molid=560)
         printEntity("dinoprostone");
@@ -55,6 +55,11 @@ public class TestPID {
         // Another family example (http://pid.nci.nih.gov/MoleculePage?molid=201132)
         printEntity("RAS family"); 
          
+        // Protein used in 2 different complexes (http://pid.nci.nih.gov/MoleculePage?molid=503377)
+        printEntity("GYS1");
+
+        // Protein used in 2 different complexes (http://pid.nci.nih.gov/MoleculePage?molid=503376)
+        printEntity("glycogen synthase 1 tetramer, I form"); 
     }
     
     private static final void printEntity(String name) throws Exception {
@@ -166,8 +171,7 @@ public class TestPID {
         if (printList(interactionUses)) {
             System.out.println("  Role, Location, State, PTM, Interaction, Source, Pathways");
             System.out.println("  ---------------------------------------------------------");
-            for(PhysicalParticipant pp : participants) {
-                if (pp instanceof ComplexComponent) continue;
+            for(PhysicalParticipant pp : interactionUses) {
                 String role = getClassName(pp);
                 Interaction interaction = pp.getInteraction();
                 System.out.print("  "+role+", "+pp.getLocation()+", "+pp.getActivityState()+", "+pp.getPostTranslationalMod());
@@ -176,6 +180,8 @@ public class TestPID {
                 }
             }
         }
+
+        System.out.println();
     }
     
     /**
