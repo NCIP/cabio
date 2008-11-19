@@ -14,6 +14,7 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -213,24 +214,10 @@ public class SVGManipulator {
     public Document getSvgDiagram() throws Exception {
         if (this.svgDiagram == null) {
             if (this.svgString != null) {
-                DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-                        .newInstance();
-                documentBuilderFactory.setNamespaceAware(true);
-                DocumentBuilder documentBuilder = documentBuilderFactory
-                        .newDocumentBuilder();
-                StringReader stringIn = new StringReader(svgString);
-                svgDiagram = documentBuilder
-                        .parse(new InputSource(stringIn));
+                this.svgDiagram = parse(svgString);
 
                 if (this.originalSvg == null) {
-                    DocumentBuilderFactory documentBuilderFactory0 = DocumentBuilderFactory
-                            .newInstance();
-                    documentBuilderFactory0.setNamespaceAware(true);
-                    DocumentBuilder documentBuilder0 = documentBuilderFactory0
-                            .newDocumentBuilder();
-                    StringReader stringIn0 = new StringReader(svgString);
-                    this.originalSvg = documentBuilder0
-                            .parse(new InputSource(stringIn0));
+                    this.originalSvg = parse(svgString);
                 }
             }
         }
@@ -568,6 +555,25 @@ public class SVGManipulator {
         return buf.toString();
     }
 
+    private Document parse(String svgString)  {
+
+        try {
+            DocumentBuilderFactory documentBuilderFactory = 
+                DocumentBuilderFactory.newInstance();
+            documentBuilderFactory.setNamespaceAware(true);
+            documentBuilderFactory.setFeature(
+                "http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+            DocumentBuilder documentBuilder = 
+                documentBuilderFactory.newDocumentBuilder();
+            StringReader stringIn = new StringReader(svgString);
+            return documentBuilder.parse(new InputSource(stringIn));
+        }
+        catch (Exception e) {
+            log.error("Parse failed",e);
+        }
+        return null;
+    }
+    
     /**
      * This method reset the svg document and return the original svg document.
      * 
@@ -576,8 +582,6 @@ public class SVGManipulator {
     public Document reset() throws Exception {
         this.svgDiagram = null;
 
-        String tempString = null;
-
         if (originalSvg != null) {
             StringWriter stringOut = new StringWriter();
             OutputFormat outformat = new OutputFormat();
@@ -585,16 +589,7 @@ public class SVGManipulator {
             XMLSerializer xmlserializer = new XMLSerializer(outformat);
             xmlserializer.setOutputCharStream(stringOut);
             xmlserializer.serialize(this.originalSvg);
-            tempString = stringOut.toString();
-
-            DocumentBuilderFactory documentBuilderFactory0 = DocumentBuilderFactory
-                    .newInstance();
-            documentBuilderFactory0.setNamespaceAware(true);
-            DocumentBuilder documentBuilder0 = documentBuilderFactory0
-                    .newDocumentBuilder();
-            StringReader stringIn0 = new StringReader(tempString);
-            this.svgDiagram = documentBuilder0.parse(new InputSource(
-                    stringIn0));
+            this.svgDiagram = parse(stringOut.toString());
         }
         return this.svgDiagram;
     }
