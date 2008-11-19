@@ -51,6 +51,7 @@ public class AllTests {
         suite.addTestSuite(GridIdTest.class);
         suite.addTestSuite(MarkerTest.class);
         suite.addTestSuite(QueryTest.class);
+        suite.addTestSuite(PIDTest.class);
         suite.addTestSuite(RangeQueryTest.class);
         suite.addTestSuite(ReflectionUtilsTest.class);
         suite.addTestSuite(RESTAPITest.class);
