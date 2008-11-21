@@ -32,7 +32,7 @@ var caBioFormats = function() {
 	        "ids":["pubmedId"]
 	    },
         "gov.nih.nci.cabio.domain.EvidenceCode":{
-            "title":["evidenceCode"],
+            "title":["evidenceCode"]
         },
 	    "gov.nih.nci.cabio.domain.Gene":{
 	        "title":["symbol"],
