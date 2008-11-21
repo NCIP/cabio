@@ -12,10 +12,16 @@ var caBioFormats = function() {
 	    "gov.nih.nci.cabio.domain.Anomaly":{
 	        "title":["description"]
 	    },
+        "gov.nih.nci.cabio.domain.Chromosome":{
+            "title":["number"]
+        },
 	    "gov.nih.nci.cabio.domain.ClinicalTrialProtocol":{
 	        "title":["title"],
 	        "desc":["leadOrganizationId","leadOrganizationName"]
 	    },
+        "gov.nih.nci.cabio.domain.Cytoband":{
+            "title":["name"]
+        },
 	    "gov.nih.nci.cabio.domain.DiseaseOntology":{
 	        "title":["EVSId"],
 	        "desc":["name"]
@@ -25,6 +31,9 @@ var caBioFormats = function() {
 	        "desc":["comments"],
 	        "ids":["pubmedId"]
 	    },
+        "gov.nih.nci.cabio.domain.EvidenceCode":{
+            "title":["evidenceCode"],
+        },
 	    "gov.nih.nci.cabio.domain.Gene":{
 	        "title":["symbol"],
 	        "desc":["fullName"]
@@ -62,6 +71,10 @@ var caBioFormats = function() {
 	    "gov.nih.nci.cabio.domain.ProteinAlias":{
 	        "title":["name"]
 	    },
+        "gov.nih.nci.cabio.domain.ProteinDomain":{
+            "title":["source","accessionNumber"],
+            "desc":["description"]
+        },
 	    "gov.nih.nci.cabio.domain.Protocol":{
 	        "title":["name"],
 	        "desc":["type"]
@@ -70,6 +83,14 @@ var caBioFormats = function() {
 	        "title":["CTEPNAME"],
 	        "desc":["diseaseCategory"]
 	    },
+        "gov.nih.nci.cabio.domain.Target":{
+            "title":["name"],
+            "desc":["type"]
+        },
+        "gov.nih.nci.cabio.domain.Taxon":{
+            "title":["commonName"],
+            "desc":["scientificName","ethnicityStrain"]
+        },
 	    "gov.nih.nci.cabio.domain.Tissue":{
 	        "title":["name", "displayValue"],
 	        "desc":["description"]

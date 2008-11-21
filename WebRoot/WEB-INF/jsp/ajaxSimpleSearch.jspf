@@ -119,7 +119,7 @@ var caBioSimpleSearch = function() {
 	            else {
 	                for(k in r.properties) {
 	                    if ((k.substring(0,1) != '_') && (k != 'id')) {
-	                        desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),MAX_DESC_LEN), searchWords)+"<br/>";
+	                        desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), searchWords)+"<br/>";
 	                    }
 	                }
 	            }
