@@ -89,7 +89,7 @@ public class Results {
      * Returns the total number of pages.
      */
     public int getNumPages() {
-        return resultList.size() / PAGE_SIZE;
+        return (int)Math.ceil((float)resultList.size() / (float)PAGE_SIZE);
     }
     
     /**

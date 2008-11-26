@@ -64,7 +64,7 @@
 		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page-1}"/>)'>Previous</a>
 	</c:if>
 	
-	<c:forEach begin="0" end="${results.numPages}" varStatus="status">
+	<c:forEach begin="0" end="${results.numPages-1}" varStatus="status">
 	
 		<c:choose>
 			<c:when test='${status.index == results.page}'>
