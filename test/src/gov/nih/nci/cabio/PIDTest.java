@@ -56,7 +56,7 @@ public class PIDTest extends TestCase {
         
         Collection<Pathway> pathways = interaction.getPathwayCollection();
         assertEquals("Number of pathways with interactions where "+name+" is input", 1, pathways.size());
-        assertEquals("regulation of eif2",pathways.iterator().next().getName());
+        assertEquals("h_eif2Pathway",pathways.iterator().next().getName());
     }
 
     /**
@@ -202,11 +202,9 @@ public class PIDTest extends TestCase {
      */
     public void testMacroprocess() throws Exception {
     
-        String name = "h_caspasepathway";
+        String name = "h_caspasePathway";
         Pathway pathway = new Pathway();
         pathway.setName(name);
-        // TODO: remove this when duplicate pathway bug is fixed (GF17829)
-        pathway.setBigid("hdl://2500.1.PMEUQUCCL5/B45MUUKEEJA7NF");
         List<Pathway> results = appService.search(Pathway.class, pathway);
         assertEquals("Number of results for "+name,1,results.size());
         pathway = results.get(0);
