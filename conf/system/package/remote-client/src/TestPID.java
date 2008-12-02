@@ -60,6 +60,9 @@ public class TestPID {
 
         // Protein used in 2 different complexes (http://pid.nci.nih.gov/MoleculePage?molid=503376)
         printEntity("glycogen synthase 1 tetramer, I form"); 
+        
+        // Protein used in 2 different complexes (http://pid.nci.nih.gov/search/MoleculePage?molid=502721)
+        printEntity("Ubiquinone"); 
     }
     
     private static final void printEntity(String name) throws Exception {
