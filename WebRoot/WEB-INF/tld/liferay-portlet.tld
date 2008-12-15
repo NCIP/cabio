@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
 
 <taglib>
-	<tlibversion>1.0</tlibversion>
-	<jspversion>1.1</jspversion>
-	<shortname>portlet</shortname>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.1</jsp-version>
+	<short-name>portlet</short-name>
 	<uri>http://java.sun.com/portlet</uri>
 	<tag>
 		<name>actionURL</name>
-		<tagclass>com.liferay.taglib.portlet.ActionURLTag</tagclass>
-		<teiclass>com.liferay.taglib.portlet.ActionURLTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portlet.ActionURLTag</tag-class>
+		<tei-class>com.liferay.taglib.portlet.ActionURLTei</tei-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>windowState</name>
 			<required>false</required>
@@ -34,19 +34,19 @@
 	</tag>
 	<tag>
 		<name>defineObjects</name>
-		<tagclass>com.liferay.taglib.portlet.DefineObjectsTag</tagclass>
-		<teiclass>com.liferay.taglib.portlet.DefineObjectsTei</teiclass>
-		<bodycontent>empty</bodycontent>
+		<tag-class>com.liferay.taglib.portlet.DefineObjectsTag</tag-class>
+		<tei-class>com.liferay.taglib.portlet.DefineObjectsTei</tei-class>
+		<body-content>empty</body-content>
 	</tag>
 	<tag>
 		<name>namespace</name>
-		<tagclass>com.liferay.taglib.portlet.NamespaceTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portlet.NamespaceTag</tag-class>
+		<body-content>JSP</body-content>
 	</tag>
 	<tag>
 		<name>param</name>
-		<tagclass>com.liferay.taglib.util.ParamTag</tagclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.util.ParamTag</tag-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>name</name>
 			<required>true</required>
@@ -60,9 +60,9 @@
 	</tag>
 	<tag>
 		<name>renderURL</name>
-		<tagclass>com.liferay.taglib.portlet.RenderURLTag</tagclass>
-		<teiclass>com.liferay.taglib.portlet.RenderURLTei</teiclass>
-		<bodycontent>JSP</bodycontent>
+		<tag-class>com.liferay.taglib.portlet.RenderURLTag</tag-class>
+		<tei-class>com.liferay.taglib.portlet.RenderURLTei</tei-class>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>windowState</name>
 			<required>false</required>
