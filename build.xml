@@ -55,6 +55,7 @@
     	<include name="application-config-client.xml"/>
         <include name="cabioportlet.properties"/>
         <replacefilter token="http://cabioapi.nci.nih.gov/cabio41" value="${remote.api.url}" />
+        <replacefilter token="CABIO_VERSION" value="${remote.api.version}" />
     </replace>
 </target>
 	
