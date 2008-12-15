@@ -4,6 +4,12 @@
 
 <script type="text/javascript" src="<c:url value="/js/cabio_common.js"/>"></script>
 
+<script language="javascript">
+    var PROXY_URL = "/cabioportlets/proxy";
+    var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
+    var DETAILS_URL = "<c:url value="/objectDetails"/>";
+</script>
+
 <div id="cabio">
 
 <a href="<bean:message key="online.help.url"/>" target="_blank">
@@ -14,10 +20,10 @@
 <div style="color: #444;">
 <img src="<c:url value="/images/sdkLogoSmall.gif"/>" style="float: left; margin-right: 8px;">
 
-caBIO is a repository of data useful in biomedical research, compiled from multiple primary sources. 
-This portlet is an easy way to get started with caBIO.<br/>
-<a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank"> 
-Learn more</a> about caBIO and its various APIs.
+<span class="link-extenal"><a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank">caBIO</a></span> 
+is a repository of data useful in biomedical research, compiled from multiple primary sources. 
+This portlet uses <span class="link-extenal"><a href="<bean:message key="cabio.restapi.url"/>" target="_blank">caBIO version <bean:message key="cabio.restapi.version"/></a></span>.
+
 </div>
 
 <div style="clear: both; margin-bottom: 10px;"></div>

@@ -130,4 +130,25 @@ public class ReportTest extends ORMTestCase {
             assertEquals(pathwayName,o.getName());
         }
     }
+    
+    public void testPathwayDetails() throws Exception {
+
+        String pathwayName = "h_ephA4Pathway";
+        List<Pathway> results = rs.getPathwaysByName(pathwayName);
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        Pathway pathway = results.get(0);
+        
+        Pathway p = (Pathway)rs.getDetailObject(Pathway.class, pathway.getId());
+        assertNotNull(p);
+        assertEquals(p.getBigid(), pathway.getBigid());
+        assertEquals(p.getDisplayValue(), pathway.getDisplayValue());
+        assertPreloaded(p, "taxon");
+    }
+    
+    public void testGeneDiseaseAssociation() throws Exception {
+
+        Object o = rs.getDetailObject(GeneDiseaseAssociation.class, 138674L);
+        assertNotNull(o);
+    }
 }

@@ -2,11 +2,75 @@
  * Common functions for the caBIO portlets. 
  */
 var caBioCommon = function() {
-
+    
     var downBlueImg = "/cabioportlets/images/down_arrow_blue.png";
     var downGreyImg = "/cabioportlets/images/down_arrow_grey.png";
 
+    /**
+     * Process a SearchResult <class> node.
+     */
+    function processSearchResult(classNode) {
+    
+        props = jQuery("field[@name='properties']", classNode).text();
+    
+        // get rid of the surrounding {}'s
+        props = props.substring(1,props.length-1);
+        // create property hashmap
+        p = {};
+        re = /,(?=( \w+\=))/;
+        ar = props.split(re);
+        re = /(\w+)\=(.*)/;
+        for(i=0; i<ar.length; i++) {
+            vals = re.exec(ar[i]);
+            key = vals[1];
+            value = vals[2];
+            if (value != '') {
+                p[key] = value;
+            }
+        }
+        
+        result = new Object();
+        result.className = jQuery("field[@name='className']", classNode).text();
+        result.id = jQuery("field[@name='id']", classNode).text();
+        result.properties = p;
+        return result;
+    }
+    
+    /**
+     * Process a domain object <class> node.
+     */
+    function processDomainObject(classNode) {
+    
+        // create property hashmap
+        p = {};
+        jQuery("field", classNode).each(function() {
+            if (jQuery(this).attr('xlink:type') == undefined) {
+                key = jQuery(this).attr('name');
+                p[key] = jQuery(this).text();
+            }
+        })
+    
+        result = new Object();
+        result.className = jQuery(classNode).attr('name');
+        result.id = jQuery("field[@name='id']", classNode).text();
+        result.properties = p;
+        return result;
+    }
+    
+    /**** public API ****/
+    
     return {
+    
+    searchWords : [],
+    
+    enabledUI : function (enabled) {
+        if (enabled) {
+            document.body.style.cursor = "default";
+        }
+        else {
+            document.body.style.cursor = "wait";
+        }
+    },
     
     /**
      * Called when the page is loaded to add an image to a dropdown box.
@@ -61,8 +125,67 @@ var caBioCommon = function() {
             h = h.replace(new RegExp("("+wordList[i]+")","gi"), "<b>$1</b>");
         }
         return h;
-    }
-        
+    },
+    
+    /**
+     * Process a <class> node returned by the caBIO REST API
+     * and return an object with the following properties:
+     * - className: the fully-qualified class name
+     * - id: the primary key of the object
+     * - properties: a hashmap of object attribute values
+     */
+    processClassNode : function(classNode) {
+        if (jQuery(classNode).attr('name') == 'gov.nih.nci.search.SearchResult') {
+            return processSearchResult(classNode);
+        }
+        return processDomainObject(classNode);
+    },
+    
+    /**
+     * Process a history hash in the form "namespace_function_parameters" and 
+     * parse the hash to execute namespace.function(parameters). The parameters
+     * string can be an underscore delimited list of parameters, which the 
+     * event callback needs to deal with.
+     * This is used in conjunction with jquery.history to achieve back button 
+     * functionality with Ajax updates.
+     */
+    loadFromHash : function (hash) {
+        if (hash) {
+            re = /^(\w+?)_(\w+?)_(.*)/;
+            h = hash.match(re);
+            if (h.length < 4) {
+                console.error("[loadFromHash] invalid hash: "+hash);
+                return;
+            }
+            window[h[1]][h[2]](h[3]);
+        }
+    },
+    
+    restError : function(e, req, settings){
+    
+	    caBioCommon.enabledUI(true);
+	    
+	    r = req.responseText;
+	    if (r.match(/caCORE HTTP Servlet Error/)) {
+	        // Yes, this is next part is very fragile, but 
+	        // the SDK's error handling doesn't leave us with much choice
+	        error = r.split('\r\n')[3];
+	    }
+	    else {
+	        error = 'Unknown error';
+	    }
+	
+	    sr = jQuery("#searchResults");
+	    sr.empty();
+	    sr.append('<div class="error">'+error+'</div>');
+	
+	    // log the error if possible
+	    if (window.console && window.console.error) {
+	        document.body.style.cursor = "default";
+	        console.error(arguments);
+	    }
+	}
+
     };
 }();
         

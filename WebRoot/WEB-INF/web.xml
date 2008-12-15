@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" >
+
 
     <display-name>caBIO Portlets</display-name>
 
@@ -79,35 +79,49 @@
         <servlet-name>proxy</servlet-name>
         <url-pattern>/proxy/*</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ObjectDetailServlet</servlet-name>
+        <servlet-class>gov.nih.nci.cabio.portal.portlet.ObjectDetailsJSONServlet</servlet-class>
+    </servlet>
 
-    <taglib>
-        <taglib-uri>http://java.sun.com/portlet</taglib-uri>
-        <taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
-    </taglib>
+    <servlet-mapping>
+         <servlet-name>ObjectDetailServlet</servlet-name>
+         <url-pattern>/objectDetails</url-pattern>
+    </servlet-mapping>
     
-    <taglib>
-        <taglib-uri>http://struts.apache.org/tags-bean</taglib-uri>
-        <taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
-    </taglib>
-    
-    <taglib>
-        <taglib-uri>http://portals.apache.org/bridges/struts/tags-portlet-html</taglib-uri>
-        <taglib-location>/WEB-INF/tld/struts-portlet-html.tld</taglib-location>
-    </taglib>
-    
-    <taglib>
-        <taglib-uri>http://struts.apache.org/tags-logic</taglib-uri>
-        <taglib-location>/WEB-INF/tld/struts-logic.tld</taglib-location>
-    </taglib>
-    
-    <taglib>
-        <taglib-uri>http://struts.apache.org/tags-nested</taglib-uri>
-        <taglib-location>/WEB-INF/tld/struts-nested.tld</taglib-location>
-    </taglib>
-    
-    <taglib>
-        <taglib-uri>http://struts.apache.org/tags-tiles</taglib-uri>
-        <taglib-location>/WEB-INF/tld/struts-tiles.tld</taglib-location>
-    </taglib>
+    <jsp-config>
+
+	    <taglib>
+	        <taglib-uri>http://java.sun.com/portlet</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
+	    </taglib>
+	    
+	    <taglib>
+	        <taglib-uri>http://struts.apache.org/tags-bean</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/struts-bean.tld</taglib-location>
+	    </taglib>
+	    
+	    <taglib>
+	        <taglib-uri>http://portals.apache.org/bridges/struts/tags-portlet-html</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/struts-portlet-html.tld</taglib-location>
+	    </taglib>
+	    
+	    <taglib>
+	        <taglib-uri>http://struts.apache.org/tags-logic</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/struts-logic.tld</taglib-location>
+	    </taglib>
+	    
+	    <taglib>
+	        <taglib-uri>http://struts.apache.org/tags-nested</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/struts-nested.tld</taglib-location>
+	    </taglib>
+	    
+	    <taglib>
+	        <taglib-uri>http://struts.apache.org/tags-tiles</taglib-uri>
+	        <taglib-location>/WEB-INF/tld/struts-tiles.tld</taglib-location>
+	    </taglib>
+	    
+    </jsp-config>
     
 </web-app>

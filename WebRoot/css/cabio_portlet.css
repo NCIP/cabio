@@ -22,6 +22,11 @@ div.result span.className {
     color: #226600;
 }
 
+div.back {
+	font-size: 1.1em;
+	font-weight: bold;	
+}
+
 div.summary {
     width: 100%;
     padding: 2px;
@@ -54,10 +59,12 @@ table.properties th {
     width: 30%;
     border: 1px solid #aaa;
     padding: 2px;
+    background-color: #eeeeee;
 }
 
 table.properties th.header {
     font-size: 1.1em;
+    font-weight: bold;
 }
 
 table.properties td {
@@ -69,6 +76,17 @@ table.properties td {
 table.properties div.value {
     max-height: 250px;
     overflow: auto;
+}
+
+div.externalLinks h3 {
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+div.externalLinks ul {
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
 div#adv_box {
@@ -94,6 +112,19 @@ div.pathwayDiagram {
     background-color:#000;
 }
 
+#tooltip {
+    position: absolute;
+    z-index: 3000;
+    border: 1px solid #111;
+    background-color: #FFFFCC;
+    padding: 5px;
+    width: 30em;
+}
+
+#tooltip h3 { 
+	font-size: 1.1em;
+	font-weight: normal;
+}
 
 div.category {
     display: block;
@@ -155,8 +186,13 @@ div.cannedResults table td {
     vertical-align: top;
 }
 
-div.cannedResults table td div {
-    max-height: 10em; 
-    overflow-y: auto;
+div.cannedResults table tr.highlight td {
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    vertical-align: top;
+    background-color: #DBFFFD;
+    cursor:pointer;
+    cursor:hand;
 }
 

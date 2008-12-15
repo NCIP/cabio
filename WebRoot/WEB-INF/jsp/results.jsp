@@ -1,5 +1,14 @@
 <%@ include file="/WEB-INF/jsp/init.jsp" %>
 
+<script type="text/javascript" src="<c:url value="/js/jquery.history.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/cabio_objdetails.js"/>"></script>
+
+<script type="text/javascript"  src="<c:url value="/js/jquery.bgiframe.js"/>"></script>
+<script type="text/javascript"  src="<c:url value="/js/jquery.dimensions.min.js"/>"></script>
+<script type="text/javascript"  src="<c:url value="/js/jquery.tooltip.js"/>"></script>
+
+<div class="results" id="objectDetails"></div>
+<div class="results" id="searchResults">
 <div class="cannedResults">
 <c:choose>
 <c:when test="${results == null || results.numRecords == 0}">
@@ -10,7 +19,8 @@
 <c:otherwise>
 
 	<div class="summary">Results <b><c:out value="${results.startRecord}"/></b> - <b>
-	  <c:out value="${results.endRecord}"/></b> of <b><c:out value="${results.numRecords}"/></b>
+	  <c:out value="${results.endRecord}"/></b> of <b><c:out value="${results.numRecords}"/></b> 
+	  (click on a row to view details)
 	</div>
 	      
   	<c:forEach var="element" items="${results.items}">
@@ -18,17 +28,21 @@
    
     <h3><c:out value="${classConfig.label}"/></h3>
     <table>
+    
 	<tr>
 	
    	<c:forEach var="attr" items="${classConfig.attributes}">
 		<th><c:out value="${attr.label}"/></th>
 	</c:forEach>
 	
-	<th>Details</th>
 	</tr>
 	
    	<c:forEach var="item" items="${results.items[element.key]}">
-	  	<tr>
+   	
+   	    <tr onclick="caBioResults.loadDetails(this, '<c:out value="${item._className}"/>', '<c:out value="${item.id}"/>')"
+   	        onmouseover="caBioResults.changeStyle(this, 'highlight')" 
+   	        onmouseout="caBioResults.changeStyle(this, '')">
+
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
 			<td>
 			<c:choose>
@@ -39,17 +53,31 @@
 			    </div>
 			</c:when>
 			<c:otherwise>
-			    <div><c:out value="${item[attr.name]}"/></div>
+				
+	            <c:choose>
+	            <c:when test="${fn:length(item[attr.name]) > 100}">
+	                <div title="<c:out value="${item[attr.name]}"/>" class="attribute">
+	                    <c:out value="${fn:substring(item[attr.name], 0, 97)}"/>
+	                    <b>...</b>
+	                </div>
+	            </c:when>
+	            <c:otherwise>
+                    <c:out value="${item[attr.name]}"/>
+	            </c:otherwise>
+	            </c:choose>
+			    
 			</c:otherwise>
 			</c:choose>
 			</td>
 		</c:forEach>
+		<!-- 
 		<td>
 		    <div class="link-extenal" style="text-align: right">
                 <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
                     <c:out value="${item.id}"/></a>
             </div>
         </td>
+         -->
 	  	</tr>
 	</c:forEach>
 	
@@ -88,15 +116,37 @@
 
 var caBioResults = function() {
 	return {
+	
 	loadPage : function (page) {
         jQuery(".query #page").val(page)
 		jQuery(".query form").submit()
-	}
+	},
+	
+    changeStyle : function (obj, newClass) {
+        obj.className = newClass;
+    },
+    
+    loadDetails : function (obj, className, id) {
+        obj.className = '';
+        caBioObjectDetails.loadDetails(className, id);
+    }
+    
 	};
 }();
+
+jQuery(document).ajaxError(caBioCommon.restError);
+
+jQuery(document).ready(function(){
+    jQuery.historyInit(caBioCommon.loadFromHash);
+    jQuery(".attribute").Tooltip({
+        showURL: false 
+    });
+});
 
 </script>
 
 </c:otherwise>
 </c:choose>
+
+</div>
 </div>

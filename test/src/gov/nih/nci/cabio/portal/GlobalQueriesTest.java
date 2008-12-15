@@ -41,7 +41,7 @@ public class GlobalQueriesTest extends ORMTestCase {
     public void testTaxonChromosomes() throws Exception {
         assertNotNull(q.getTaxonChromosomes());
         for(Taxon t : q.getTaxonValues()) {
-            List<Chromosome> chroms = q.getTaxonChromosomes().get(t);
+            List<Chromosome> chroms = q.getTaxonChromosomes().get(t.getAbbreviation());
             assertNotNull(chroms);
         }
     }

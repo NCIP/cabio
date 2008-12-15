@@ -1,21 +1,18 @@
 <script type="text/javascript" src="<c:url value="/js/jquery.history.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/jquery.simplemodal-1.1.1.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/cabio_formats.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/cabio_objdetails.js"/>"></script>
 
 <script language="javascript">
 
+    
 var caBioSimpleSearch = function() {
 
-	var proxyUrl = "/cabioportlets/proxy";
     var PAGE_SIZE = 5;
-	
-	var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
 
 	// Current state
 	var currPage = 1;
-	var searchWords = [];
 	var searchString = '';
-	var searchResults = '';
 	
 	/**
 	 * Concatenate the values of the specified attributes.
@@ -34,7 +31,6 @@ var caBioSimpleSearch = function() {
 	    return r;
 	}
 	
-	
 	function doSearch(page) {
 	
 	    currPage = page;
@@ -47,26 +43,26 @@ var caBioSimpleSearch = function() {
 	    }
 	   
 	    searchString = searchText;
-	    searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ");
+	    caBioCommon.searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ");
 	
 	    if (jQuery("#matchall").is(":checked")) {
-	        searchString = "+"+searchWords.join(" +");
+	        searchString = "+"+caBioCommon.searchWords.join(" +");
 	    }
 	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
 	    				new RegExp("\\s+")," ").split(" ").join(" -");
 	    if (exclude) searchString += " -"+exclude;
 	
-	    caBioSimpleSearch.enabledUI(false);
+	    caBioCommon.enabledUI(false);
 	    var sh = jQuery("#searchHibernate").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : '';
 	    
 	    var data = 'query=SearchQuery&SearchQuery[@keyword='+
 	              searchString+']'+sh+'&pageSize='+
 	              PAGE_SIZE+'&pageNumber='+page;
 	              
-	    //jQuery("#debug").append(proxyUrl+"?"+data)
+	    //jQuery("#debug").append(PROXY_URL+"?"+data)
 	    
 	    jQuery.ajax({ 
-	        type: "GET", dataType: "xml", url: proxyUrl, data: data,
+	        type: "GET", dataType: "xml", url: PROXY_URL, data: data,
 	        success: processResults
 	    });
 	}
@@ -104,7 +100,7 @@ var caBioSimpleSearch = function() {
 	
 	        jQuery("class", qr).each(function(){
 	
-	            var r = processClassNode(this);
+	            var r = caBioCommon.processClassNode(this);
 	
 	            var f = jQuery("#searchFormat").is(":checked") ? 
 	                caBioFormats.summary[r.className] : undefined;
@@ -113,13 +109,13 @@ var caBioSimpleSearch = function() {
 	            var desc = '';
 	            
 	            if (f != undefined) {
-	                title = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['title']), maxTitleLen), searchWords);
-	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), maxDescLen), searchWords);
+	                title = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['title']), maxTitleLen), caBioCommon.searchWords);
+	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), maxDescLen), caBioCommon.searchWords);
 	            }
 	            else {
 	                for(k in r.properties) {
 	                    if ((k.substring(0,1) != '_') && (k != 'id')) {
-	                        desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), searchWords)+"<br/>";
+	                        desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), caBioCommon.searchWords)+"<br/>";
 	                    }
 	                }
 	            }
@@ -128,7 +124,7 @@ var caBioSimpleSearch = function() {
 	
 	            detailsUrl = GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']';
 	
-	            h = '<div class="result"><h2><a href="javascript:caBioSimpleSearch.loadDetails(\''+r.className+'\','+r.id+')">';
+	            h = '<div class="result"><h2><a href="javascript:caBioObjectDetails.loadDetails(\''+r.className+'\','+r.id+')">';
 	            h += title+'</a></h2><span class="desc">'+desc+'</span>';
 	            h += '<span class="className">'+r.className+'</span>';
 	            h += '</div>';
@@ -157,147 +153,9 @@ var caBioSimpleSearch = function() {
 	        }
 	    }
 	    
-	    caBioSimpleSearch.enabledUI(true);
-	}
-	
-	function doObjectDetails(className, id) {
-	
-	    searchResults = jQuery("#searchResults").html()
-	    
-	    caBioSimpleSearch.enabledUI(false);
-	    jQuery.ajax({ 
-	        type: "GET", dataType: "xml", url: proxyUrl,
-	        data: 'query='+className+'&'+className+'[@id='+id+']',
-	        success: processObjectDetails
-	    })
-	}
-	
-	function processObjectDetails(xml) {
-	
-	    var searchText = jQuery("#searchText").val();
-	    jQuery("#searchResults").empty();
-	 
-	    qr = jQuery("queryResponse",xml);
-	    if (qr.length == 0) {
-	        r = '<div class="summary">Object not found</div>';
-	        jQuery("#searchResults").append(r);
-	    }
-	    else {	
-	        jQuery("class", qr).each(function(){
-	
-	            var r = processClassNode(this);
-	
-	            h = '<div class="result"><table class="properties">';
-	            h += '<tr><th colspan="2" class="header"><span class="link-extenal">';
-	            h += '<a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_blank">';
-	            h += r.className+'#'+r.id+'</a></span></th></tr>';
-	            for(k in r.properties) {
-	                if ((k.substring(0,1) !== '_') && (k != 'id')) {
-	                    var val = r.properties[k];
-	                    var v = '';
-	                    // TODO: this no longer works for some reason, so it's 
-	                    // disabled with a "false" below until we can figure out why
-	                    if (false && !jQuery.browser.msie && val.substring(0,5)==='<?xml') {
-	                    
-	                    	val = val.replace(
-	                    		new RegExp('\n','g'),' ').replace( // convert new lines to spaces
-		                    	new RegExp("'",'g'),"\\'").replace( // escape single quotes
-		                    	new RegExp('&','g'),'&amp;') // escape ampersands
-	                    	
-	                    	//jQuery("#debug").empty()
-	                    	//jQuery("#debug").append(caBioCommon.escapeXML(val))
-	                    
-	    					v = '<div id="pathway_'+r.id+'" class="pathwayDiagram" onclick="jQuery.modal.close()">';
-	    					v += '<object width="600" height="500" name="svg" codebase="http://www.adobe.com/svg/viewer/install/" ';
-	    					v += 'classid="clsid:78156a80-c6a1-4bbf-8e6a-3cd390eeb4e2" ';
-	    					v += "data='data:image/svg+xml,"+val+"' " +'type="image/svg+xml"></object>';
-                            v += '</div>';
-                            jQuery("body").append(v);
-
-                            v = '<input type="submit" value="View Image" onclick="caBioSimpleSearch.showPathway('+r.id+')"/>';
-
-	                    }
-	                    else if (k === 'pubmedId') {
-	                        v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_blank">'+val+'</a></span>';
-	                    }
-	                    else {
-		                    v = caBioCommon.escapeXML(val);
-	                    }
-	                    
-	                    h += '<tr><th>'+k+'</th><td><div class="value">';
-	                    h += caBioCommon.highlight(v, searchWords)+"</div></td></tr>";
-	                }
-	            }
-	            h += '</table></div>';
-	            jQuery("#searchResults").append(h);
-	            
-	        })
-	    }
-	    caBioSimpleSearch.enabledUI(true);
-	}
-	
-	/**
-	 * Process a <class> node and return an object with the following properties:
-	 * - className: the fully-qualified class name
-	 * - id: the primary key of the object
-	 * - properties: a hashmap of object attribute values
-	 */
-	function processClassNode(classNode) {
-	    if (jQuery(classNode).attr('name') == 'gov.nih.nci.search.SearchResult') {
-	        return processSearchResult(classNode);
-	    }
-	    return processDomainObject(classNode);
-	}
-	
-	/**
-	 * Process a SearchResult <class> node.
-	 */
-	function processSearchResult(classNode) {
-	
-	    props = jQuery("field[@name='properties']", classNode).text();
-	
-	    // get rid of the surrounding {}'s
-	    props = props.substring(1,props.length-1);
-	    // create property hashmap
-	    p = {};
-	    re = /,(?=( \w+\=))/;
-	    ar = props.split(re);
-	    re = /(\w+)\=(.*)/;
-	    for(i=0; i<ar.length; i++) {
-	        vals = re.exec(ar[i]);
-	        key = vals[1];
-	        value = vals[2];
-	        if (value != '') {
-	            p[key] = value;
-	        }
-	    }
-	    
-	    result = new Object();
-	    result.className = jQuery("field[@name='className']", classNode).text();
-	    result.id = jQuery("field[@name='id']", classNode).text();
-	    result.properties = p;
-	    return result;
-	}
-	
-	/**
-	 * Process a domain object <class> node.
-	 */
-	function processDomainObject(classNode) {
-	
-	    // create property hashmap
-	    p = {};
-	    jQuery("field", classNode).each(function() {
-	        if (jQuery(this).attr('xlink:type') == undefined) {
-	            key = jQuery(this).attr('name');
-	            p[key] = jQuery(this).text();
-	        }
-	    })
-	
-	    result = new Object();
-	    result.className = jQuery(classNode).attr('name');
-	    result.id = jQuery("field[@name='id']", classNode).text();
-	    result.properties = p;
-	    return result;
+        jQuery("#objectDetails").hide();
+        jQuery("#searchResults").show();
+	    caBioCommon.enabledUI(true);
 	}
 	
 	/**** public API ****/
@@ -308,31 +166,9 @@ var caBioSimpleSearch = function() {
         jQuery.historyLoad("caBioSimpleSearch_search_"+page);
 	},
 	
-	loadDetails : function (className, id) {
-        jQuery.historyLoad("caBioSimpleSearch_details_"+className+"_"+id);
-	},
-	
-	loadFromHash : function (hash) {
-		
-	    if (hash) {
-	    	re = /^(\w+?)_(\w+?)_(.*)/;
-	    	h = hash.match(re);
-	    	if (h.length < 4) {
-	    		console.error("[loadFromHash] invalid hash: "+hash);
-	    		return;
-	    	}
-            window[h[1]][h[2]](h[3]);
-	    }
-	
-	},
 	
     search : function(hash) {
         doSearch(parseInt(hash));
-    },
-    
-    details : function(hash) {
-    	h = hash.split("_");
-        doObjectDetails(h[0],parseInt(h[1]));
     },
     
 	/**
@@ -341,31 +177,6 @@ var caBioSimpleSearch = function() {
 	changePage : function (inc) {
 	    currPage += inc;
 	    caBioSimpleSearch.loadSearch(currPage);
-	},
-
-	/** 
-	 * Go back to the search results. Called from an object details screen.
-	 */
-	restoreSearch : function () {
-	    jQuery("#searchResults").empty().append(searchResults);
-	},
-	
-	/**
-	 * Enable or disable the UI while processing something.
-	 */
-	enabledUI : function (enabled) {
-		if (enabled) {
-		    jQuery("#searchText").removeAttr("disabled");
-		    jQuery("#searchButton").removeAttr("disabled");
-		    jQuery("#searchButton").attr("value","Search");
-		    document.body.style.cursor = "default";
-		}
-		else {
-		    jQuery("#searchText").attr("disabled","disabled");
-		    jQuery("#searchButton").attr("disabled","disabled");
-		    jQuery("#searchButton").attr("value","Loading...");
-		    document.body.style.cursor = "wait";
-		}
 	},
 	
 	/**
@@ -391,34 +202,29 @@ var caBioSimpleSearch = function() {
 
 <script language="javascript">
 
-jQuery(document).ajaxError(function(e, req, settings){
-    
-    caBioSimpleSearch.enabledUI(true);
-    
-    r = req.responseText;
-    if (r.match(/caCORE HTTP Servlet Error/)) {
-        // Yes, this is next part is very fragile, but 
-        // the SDK's error handling doesn't leave us with much choice
-        error = r.split('\r\n')[3];
-    }
-    else {
-        error = 'Unknown error';
-    }
-
-    sr = jQuery("#searchResults");
-    sr.empty();
-    sr.append('<div class="error">'+error+'</div>');
-
-    // log the error if possible
-    if (window.console && window.console.error) {
-        document.body.style.cursor = "default";
-        console.error(arguments);
-    }
-});
+jQuery(document).ajaxError(caBioCommon.restError);
 
 jQuery(document).ready(function(){
+
     caBioCommon.createDropBox("#adv_link");
-    jQuery.historyInit(caBioSimpleSearch.loadFromHash);
+    
+    jQuery.historyInit(caBioCommon.loadFromHash);
+    
+    // override enabledUI function to add search form toggling
+    caBioCommon.enabledUI = function (enabled) {
+        if (enabled) {
+            jQuery("#searchText").removeAttr("disabled");
+            jQuery("#searchButton").removeAttr("disabled");
+            jQuery("#searchButton").attr("value","Search");
+            document.body.style.cursor = "default";
+        }
+        else {
+            jQuery("#searchText").attr("disabled","disabled");
+            jQuery("#searchButton").attr("disabled","disabled");
+            jQuery("#searchButton").attr("value","Loading...");
+            document.body.style.cursor = "wait";
+        }
+    };
 });
 
 </script>
@@ -440,8 +246,5 @@ jQuery(document).ready(function(){
 	<input type="checkbox" id="searchHibernate"/> Map to objects (slower)
 </div>
 
-<div class="results" id="searchResults"
-	xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:svg="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink">
-</div>
+<div class="results" id="objectDetails"></div>
+<div class="results" id="searchResults"></div>
