@@ -19,7 +19,7 @@
 	<property name="anthill.dependency.artifacts.dir" value=".."/>
 	<property name="sdk.home.dir" value="${anthill.dependency.artifacts.dir}/cacoresdk/SDK4" />
 	<property name="build.properties" value="dev.properties"/>
-	<property name="project.home.dir" value="." />
+	<property name="project.home.dir" value="../cabioapi" />
 	<property name="test.dir" value="${project.home.dir}/test" />
 
 	<property name="test.dir" value="${project.home.dir}/test" />
