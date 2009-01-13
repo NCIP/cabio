@@ -55,9 +55,9 @@
 			<c:otherwise>
 				
 	            <c:choose>
-	            <c:when test="${fn:length(item[attr.name]) > 100}">
+	            <c:when test="${fn:length(item[attr.name]) > 90}">
 	                <div title="<c:out value="${item[attr.name]}"/>" class="attribute">
-	                    <c:out value="${fn:substring(item[attr.name], 0, 97)}"/>
+	                    <c:out value="${fn:substring(item[attr.name], 0, 87)}"/>
 	                    <b>...</b>
 	                </div>
 	            </c:when>
