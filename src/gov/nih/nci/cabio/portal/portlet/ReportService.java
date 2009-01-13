@@ -276,8 +276,11 @@ public class ReportService {
      */
     public List<Pathway> getPathwaysByName(
             String pathwayName) throws ApplicationException {
-
+        
         String inputName = pathwayName.trim();
+        
+        if ("".equals(inputName)) return new ArrayList<Pathway>();
+        
         Pathway pathway = new Pathway();
         if (!inputName.matches("^(h|m)_")) {
             pathway.setName("*"+inputName);
