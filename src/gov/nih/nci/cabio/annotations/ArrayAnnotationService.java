@@ -63,9 +63,6 @@ public interface ArrayAnnotationService {
      * populated with the following annotations:
      * <ul>
      * <li>gene
-     * <li>physicalLocationCollection.chromosome
-     * <li>cytogeneticLocationCollection
-     * <li>cytogeneticLocationCollection.cytoband
      * </ul>
      * @param arrayPlatform expression microarray name
      * @param reporterIds list of reporter names
@@ -78,15 +75,8 @@ public interface ArrayAnnotationService {
 
     /**
      * Given an array and list of reporter names, return the 
-     * ExonArrayReporter objects corresponding to the reporter names, 
-     * populated with the following annotations:
-     * <ul>
-     * <li>geneCollection
-     * <li>physicalLocationCollection
-     * <li>physicalLocationCollection.chromosome
-     * <li>cytogeneticLocationCollection
-     * <li>cytogeneticLocationCollection.cytoband
-     * </ul>
+     * ExonArrayReporter objects corresponding to the reporter names.
+     * 
      * @param arrayPlatform exon microarray name
      * @param reporterIds list of reporter names
      * @return list of prepopulated array reporters
@@ -102,10 +92,6 @@ public interface ArrayAnnotationService {
      * populated with the following annotations:
      * <ul>
      * <li>SNP
-     * <li>physicalLocationCollection
-     * <li>physicalLocationCollection.chromosome
-     * <li>cytogeneticLocationCollection
-     * <li>cytogeneticLocationCollection.cytoband
      * </ul>
      * @param arrayPlatform SNP microarray name
      * @param reporterIds list of reporter names
@@ -120,9 +106,6 @@ public interface ArrayAnnotationService {
      * Returns a collection of the requested genes, populated with the 
      * following annotations:
      * <ul>
-     * <li>cytogeneticLocationCollection
-     * <li>cytogeneticLocationCollection.startCytoband
-     * <li>databaseCrossReferenceCollection
      * <li>chromosome
      * </ul>
      * @param geneSymbols list of HUGO gene symbols
@@ -193,13 +176,7 @@ public interface ArrayAnnotationService {
     
     /**
      * Returns the specified SNP preloaded with annotations. 
-     * The associations which are preloaded:
-     * <ul>
-     * <li>physicalLocationCollection
-     * <li>physicalLocationCollection.chromosome
-     * <li>cytogeneticLocationCollection
-     * <li>cytogeneticLocationCollection.startCytoband
-     * </ul>
+     * 
      * @param arrayPlatform Microarray name
      * @param dbSnpIds list of dbSNP Ids
      * @return SNP objects preloaded with associations

@@ -4,7 +4,6 @@ import gov.nih.nci.cabio.annotations.ArrayAnnotationService;
 import gov.nih.nci.cabio.annotations.ArrayAnnotationServiceImpl;
 import gov.nih.nci.cabio.domain.ArrayReporter;
 import gov.nih.nci.cabio.domain.Chromosome;
-import gov.nih.nci.cabio.domain.Cytoband;
 import gov.nih.nci.cabio.domain.CytobandPhysicalLocation;
 import gov.nih.nci.cabio.domain.CytogeneticLocation;
 import gov.nih.nci.cabio.domain.ExonArrayReporter;
@@ -21,7 +20,7 @@ import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.cabio.util.IncIterator;
 import gov.nih.nci.cabio.util.ORMTestCase;
 import gov.nih.nci.cabio.util.OnceIterator;
-import gov.nih.nci.common.util.ReflectionUtils;
+import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 
@@ -134,11 +133,11 @@ public class AnnotationAPITest extends ORMTestCase {
                     ));
             snpReporters = getUniqueSymbols(appService.query(criteria));
     
-            System.out.println("genes: "+genes.size());
-            System.out.println("snps: "+snps.size());
-            System.out.println("exprReporters: "+exprReporters.size());
-            System.out.println("exonReporters: "+exonReporters.size());
-            System.out.println("snpReporters: "+snpReporters.size());
+            System.out.println("Test genes: "+genes.size());
+            System.out.println("Test SNPs: "+snps.size());
+            System.out.println("Test expr reporters: "+exprReporters.size());
+            System.out.println("Test exon reporters: "+exonReporters.size());
+            System.out.println("Test SNP reporters: "+snpReporters.size());
         
         } catch (ApplicationException e) {
             e.printStackTrace();
@@ -244,37 +243,31 @@ public class AnnotationAPITest extends ORMTestCase {
             
             long start = System.currentTimeMillis();
             Collection<ExpressionArrayReporter> results = am.getExpressionReporterAnnotations(EXPR_ARRAY, sublist);
-            long end = System.currentTimeMillis();
-            System.out.println("getExpressionReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
-
             Set<String> reporters = new HashSet<String>();
             
             for(ExpressionArrayReporter er : results) {
+
+                assertPreloaded(er, "gene");
                 
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no gene: "+er.getName(),er.getGene());
 
-                assertPreloaded(er, "gene");
-                
-                assertPreloaded(er, "physicalLocationCollection");
                 for(Object o : er.getPhysicalLocationCollection()) {
                     PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded(pl, "chromosome");
+                    pl.getChromosome();
                 }
-
-                assertPreloaded(er, "cytogeneticLocationCollection");
                 
                 for(Object o : er.getCytogeneticLocationCollection()) {
                     CytogeneticLocation cl = (CytogeneticLocation)o;
-                    if (cl.getStartCytoband() != null) {
-                        // TODO: remove check for null once that column is fixed
-                        assertPreloaded(cl, "startCytoband");
-                    }
+                    cl.getStartCytoband();
                 }
 
                 reporters.add(er.getName());
             }
-            
+
+            long end = System.currentTimeMillis();
+            System.out.println("getExpressionReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
+
             for(String reporterId : sublist) {
                 assertTrue("Requested reporter not in results: "+
                     reporterId,reporters.contains(reporterId));
@@ -298,30 +291,29 @@ public class AnnotationAPITest extends ORMTestCase {
             long start = System.currentTimeMillis();
             Collection<ExonArrayReporter> results = 
                 am.getExonReporterAnnotations(EXON_ARRAY, sublist);
-            long end = System.currentTimeMillis();
-            System.out.println("getExonReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
 
             Set<String> reporters = new HashSet<String>();
             
             for(ExonArrayReporter er : results) {
                 assertNotNull("Reporter has no name",er.getName());
                 
-                assertPreloaded(er, "geneCollection");
-
-                assertPreloaded(er, "physicalLocationCollection");
-                for(Object o : er.getPhysicalLocationCollection()) {
-                    PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded(pl, "chromosome");
+                for(Gene o : er.getGeneCollection()) {
+                    assertNotNull(o.getId());
                 }
                 
-                assertPreloaded(er, "cytogeneticLocationCollection");
-                for(Object o : er.getCytogeneticLocationCollection()) {
-                    CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded(cl, "startCytoband");
+                for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
+                    assertNotNull(o.getId());
+                }
+                
+                for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
                 
                 reporters.add(er.getName());
             }
+            
+            long end = System.currentTimeMillis();
+            System.out.println("getExonReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
 
             for(String reporterId : sublist) {
                 assertTrue("Requested reporter not in results: "+
@@ -345,8 +337,6 @@ public class AnnotationAPITest extends ORMTestCase {
             long start = System.currentTimeMillis();
             Collection<SNPArrayReporter> results = 
                 am.getSNPReporterAnnotations(SNP_ARRAY, sublist);
-            long end = System.currentTimeMillis();
-            System.out.println("getSNPReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
 
             Set<String> reporters = new HashSet<String>();
             
@@ -354,23 +344,19 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no SNP: "+er.getName(),er.getSNP());
 
-                assertPreloaded(er, "SNP");
-
-                assertPreloaded(er, "SNP");
-                assertPreloaded(er, "physicalLocationCollection");
-                for(Object o : er.getPhysicalLocationCollection()) {
-                    PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded(pl, "chromosome");
+                for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
                 
-                assertPreloaded(er, "cytogeneticLocationCollection");
-                for(Object o : er.getCytogeneticLocationCollection()) {
-                    CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded(cl, "chromosome");
+                for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
                 
                 reporters.add(er.getName());
             }
+
+            long end = System.currentTimeMillis();
+            System.out.println("getSNPReporterAnnotations("+sublist.size()+" reporters) took "+(end-start)+" ms");
             
             for(String reporterId : sublist) {
                 assertTrue("Requested reporter not in results: "+
@@ -392,26 +378,35 @@ public class AnnotationAPITest extends ORMTestCase {
             
             long start = System.currentTimeMillis();
             Collection<Gene> results = am.getGeneAnnotations(sublist);
-            long end = System.currentTimeMillis();
-            System.out.println("getGeneAnnotations("+sublist.size()+" genes) took "+(end-start)+" ms");
 
             // Result size could be bigger if multiple Unigenes have the same symbol
             assertTrue("Result size is smaller than input size", 
                 (sublist.size()<=results.size()));
             
+            System.out.println("SIZE "+results.size());
             for(Gene gene : results) {
+                
+                assertNotNull(gene.getChromosome());
+                
                 assertNotNull("Gene has no symbol: "+gene.getId(),gene.getSymbol());
                 assertNotNull("Gene has no chromosome: "+gene.getId(),gene.getChromosome());
 
-                assertPreloaded(gene, "chromosome");
-                assertPreloaded(gene, "databaseCrossReferenceCollection");
-                assertPreloaded(gene, "cytogeneticLocationCollection");
+                Collection<DatabaseCrossReference> dxr = gene.getDatabaseCrossReferenceCollection();
+                assertEquals(1,dxr.size());
+                assertEquals("Locus link id was not preloaded","LOCUS_LINK_ID",
+                    dxr.iterator().next().getDataSourceName());
                 
-                for(Object o : gene.getCytogeneticLocationCollection()) {
-                    CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded(cl, "startCytoband");
+                for(PhysicalLocation o : gene.getPhysicalLocationCollection()) {
+                    assertNotNull(o.getId());
+                }
+                
+                for(CytogeneticLocation o : gene.getCytogeneticLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
             }
+
+            long end = System.currentTimeMillis();
+            System.out.println("getGeneAnnotations("+sublist.size()+" genes) took "+(end-start)+" ms");
         }
     }
     
@@ -432,18 +427,11 @@ public class AnnotationAPITest extends ORMTestCase {
 
             long start = System.currentTimeMillis();
             Collection<CytobandPhysicalLocation> results = am.getCytobandPositions(c.getNumber());
-            long end = System.currentTimeMillis();
-            System.out.println(c.getNumber()+"\t"+results.size()+"\t"+(end-start));
 
             if (results.size() > 0) {
                 for(CytobandPhysicalLocation location : results) {
 
-                    CytobandPhysicalLocation orig = 
-                        (CytobandPhysicalLocation)ReflectionUtils.upwrap(location);
-
-                    assertTrue("Cytoband was not eagerly loaded",
-                            orig.getCytoband().getClass().getName().equals(
-                            Cytoband.class.getName()));
+                    assertNotNull(location.getCytoband());
                     
                     assertTrue("Cytoband name does not start with its " +
                             "chromosome number: "+ location.getCytoband().getName(),
@@ -451,6 +439,9 @@ public class AnnotationAPITest extends ORMTestCase {
                                 c.getNumber().toLowerCase()));
                 }
             }
+            
+            long end = System.currentTimeMillis();
+            System.out.println(c.getNumber()+"\t"+results.size()+"\t"+(end-start));
         }
     }
 
@@ -516,6 +507,7 @@ public class AnnotationAPITest extends ORMTestCase {
         
         for(GeneAlias alias : aliases) {
             assertNotNull(alias.getName());
+            assertNotNull(alias.getGeneCollection());
             
             // uncomment when SDK defect #12636 is fixed
 //            GeneAlias orig = (GeneAlias)ReflectionUtils.upwrap(alias);
@@ -560,8 +552,6 @@ public class AnnotationAPITest extends ORMTestCase {
             
             long start = System.currentTimeMillis();
             Collection<SNP> results = am.getSNPAnnotations(sublist);
-            long end = System.currentTimeMillis();
-            System.out.println("getSNPAnnotations("+sublist.size()+" SNPs) took "+(end-start)+" ms");
 
             assertEquals("Result size is not equal to input size", 
                 sublist.size(),results.size());
@@ -569,18 +559,17 @@ public class AnnotationAPITest extends ORMTestCase {
             for(SNP snp : results) {
                 assertNotNull("SNP has no dbSNP id: "+snp.getId(),snp.getDBSNPID());
                 
-                assertPreloaded(snp, "physicalLocationCollection");
-                for(Object o : snp.getPhysicalLocationCollection()) {
-                    PhysicalLocation pl = (PhysicalLocation)o;
-                    assertPreloaded(pl, "chromosome");
+                for(PhysicalLocation o : snp.getPhysicalLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
                 
-                assertPreloaded(snp, "cytogeneticLocationCollection");
-                for(Object o : snp.getCytogeneticLocationCollection()) {
-                    CytogeneticLocation cl = (CytogeneticLocation)o;
-                    assertPreloaded(cl, "startCytoband");
+                for(CytogeneticLocation o : snp.getCytogeneticLocationCollection()) {
+                    assertNotNull(o.getId());
                 }
             }
+            
+            long end = System.currentTimeMillis();
+            System.out.println("getSNPAnnotations("+sublist.size()+" SNPs) took "+(end-start)+" ms");
         }
     }
 
@@ -657,7 +646,7 @@ public class AnnotationAPITest extends ORMTestCase {
             Collection<SNP> results) throws Exception {
         
         Collection<Gene> genes = am.getGenesForSymbol(symbol);
-        
+
         // ensure each SNP actually falls in one of the gene CDS ranges
         for(SNP snp : results) {
             boolean inGene = false;
@@ -729,6 +718,6 @@ public class AnnotationAPITest extends ORMTestCase {
     public static void main(String[] argv) throws Exception {
         AnnotationAPITest test = new AnnotationAPITest();
         test.setUp();
-        test.testGetExonReporterAnnotations();
+        test.testGetGeneAnnotations();
     }
 }

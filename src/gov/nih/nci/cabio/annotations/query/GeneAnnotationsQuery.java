@@ -28,10 +28,10 @@ public class GeneAnnotationsQuery extends InListQuery {
         params.addAll(subList);
         
         String hql = "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-                "left join fetch gene.cytogeneticLocationCollection as cl " +
-                "left join fetch cl.startCytoband " +
-                //"left join fetch gene.pathwayCollection " +
-                //"left join fetch gene.geneOntologyCollection " +
+//                "left join fetch gene.cytogeneticLocationCollection as cl " +
+//                "left join fetch cl.startCytoband " +
+//                "left join fetch gene.pathwayCollection " +
+//                "left join fetch gene.geneOntologyCollection " +
                 "left join fetch gene.databaseCrossReferenceCollection as dcr " +
                 "left join fetch gene.chromosome " +
                 "left join gene.taxon as taxon " +

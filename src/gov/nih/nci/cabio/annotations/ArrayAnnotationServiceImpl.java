@@ -52,7 +52,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
     
     private static final String GET_SNPS_NEAR_GENE_HQL = 
             "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-            "left join fetch gene.physicalLocationCollection as pl " +
+            "left join gene.physicalLocationCollection as pl " +
             "left join fetch gene.chromosome " +
             "left join gene.taxon as taxon " +
             "where pl.chromosome = gene.chromosome " +
@@ -226,7 +226,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
             createCriteria("taxon").
             add(Restrictions.eq("abbreviation", taxon));     
         
-        List results = appService.query(criteria);
+        List<CytobandPhysicalLocation> results = appService.query(criteria);
         return results;
 	}
     
@@ -249,7 +249,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         criteria.createCriteria("taxon").add(Restrictions.eq("abbreviation", taxon));
         criteria.add(Restrictions.eq("hugoSymbol", hugoSymbol).ignoreCase());
         
-        Collection result = appService.query(criteria);
+        Collection<Gene> result = appService.query(criteria);
         return result;
     }
 
@@ -264,13 +264,13 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         criteria.add(Restrictions.eq("hugoSymbol", symbol).ignoreCase());
         criteria.createCriteria("taxon").add(Restrictions.eq("abbreviation", taxon));
 
-        List genes = appService.query(criteria);
+        List<Gene> genes = appService.query(criteria);
         if (genes.isEmpty()) throw new ApplicationException(
             "No gene exists with HUGO symbol "+symbol);
 
-        List results = new ArrayList();
-        for(Object g : genes) {
-            results.addAll(((Gene)g).getGeneAliasCollection());
+        List<GeneAlias> results = new ArrayList<GeneAlias>();
+        for(Gene g : genes) {
+            results.addAll(g.getGeneAliasCollection());
         }
         
         return results;
@@ -315,7 +315,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
             createCriteria("geneRelativeLocationCollection").
             createCriteria("SNP").add(Restrictions.eq("DBSNPID", dbSnpId));
         
-        List results = appService.query(criteria);
+        List<Gene> results = appService.query(criteria);
         return results;
     }
     
@@ -332,9 +332,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         params.add(symbol);
         params.add(taxon);
         
-        // Attempted to use DetachedCriteria for this, but for some reason
-        // it wouldn't prefetch the physicalLocationCollection correctly. 
-        Collection result = appService.query(
+        Collection<Gene> result = appService.query(
             new HQLCriteria(GET_SNPS_NEAR_GENE_HQL,params));
 
         if (result == null || result.isEmpty()) 
@@ -347,17 +345,14 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         Long chromosomeId = null;
         
         // construct all padded ranges
-        for(Object o : result) {
-            Gene gene = ((Gene)o);
+        for(Gene gene : result) {
             if (chromosomeId == null) chromosomeId = gene.getChromosome().getId();
             Collection<GenePhysicalLocation> pls = gene.getPhysicalLocationCollection();
             for(GenePhysicalLocation pl : pls) {
-                
-                // This check is not needed if physicalLocationCollection is 
-                // correctly eager loaded. But it's good to have a failsafe...
-                if (!assembly.equals(pl.getAssembly()) && 
-                        !"CDS".equals(pl.getFeatureType())) {
-                    log.warn("Eager fetch failed for getSnpsNearGene.");
+
+                if (!assembly.equals(pl.getAssembly()) 
+                        || !"CDS".equals(pl.getFeatureType()) 
+                        || !chromosomeId.equals(pl.getChromosome().getId())) {
                     continue;
                 }
                 
@@ -396,7 +391,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
                 Restrictions.sqlRestriction("{alias}.chromosome_id = ?", 
                 chromosomeId, Hibernate.LONG));
         
-        List results = appService.query(dc);
+        List<SNP> results = appService.query(dc);
         return results;
     }
     

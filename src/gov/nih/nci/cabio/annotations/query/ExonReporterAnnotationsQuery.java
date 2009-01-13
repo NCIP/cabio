@@ -31,11 +31,11 @@ public class ExonReporterAnnotationsQuery extends InListQuery {
         
         String hql = "select reporter from " +
                 "gov.nih.nci.cabio.domain.ExonArrayReporter reporter " +
-                "left join fetch reporter.geneCollection " +
-                "left join fetch reporter.physicalLocationCollection as pl " +
-                "left join fetch pl.chromosome " +
-                "left join fetch reporter.cytogeneticLocationCollection as cl " +
-                "left join fetch cl.startCytoband " +
+//                "left join fetch reporter.geneCollection " +
+//                "left join fetch reporter.physicalLocationCollection as pl " +
+//                "left join fetch pl.chromosome " +
+//                "left join fetch reporter.cytogeneticLocationCollection as cl " +
+//                "left join fetch cl.startCytoband " +
                 "left join reporter.microarray as microarray " +
                 "where microarray.name = ? " +
                 "and reporter.name in "+getPlaceholders(subList);
