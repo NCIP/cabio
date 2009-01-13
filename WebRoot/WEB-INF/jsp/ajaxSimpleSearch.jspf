@@ -46,7 +46,7 @@ var caBioSimpleSearch = function() {
 	    caBioCommon.searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ");
 	
 	    if (jQuery("#matchall").is(":checked")) {
-	        searchString = "+"+caBioCommon.searchWords.join(" +");
+	        searchString = caBioCommon.searchWords.join(" AND ");
 	    }
 	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
 	    				new RegExp("\\s+")," ").split(" ").join(" -");
