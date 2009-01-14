@@ -3,7 +3,7 @@
                                   Version 4.2
 
                                  Release Notes
-                                 November, 2008
+                                 January, 2009
 
 
                National Cancer Institute Center for Bioinformatics
@@ -139,7 +139,7 @@ The following defects are known to exist in this build:
 
   The 4.2 release tag is available here:
   
-    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_42_RELEASE
+    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_42_QA_11192008
 
   The version of the SDK which this release of caBIO was tested with is still
   found in the cacoresdk CVS repository, under "SDK4". The CVS tag is:

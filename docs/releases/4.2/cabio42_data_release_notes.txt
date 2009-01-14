@@ -1,9 +1,10 @@
-        Data Release notes for caBIO 4.2 Database  (10/08)
+        Data Release notes for caBIO 4.2 Database  
+               January, 2009
 
 1. Data Sources refreshed in this update
 2. Data sources not refreshed in this update
 3. Bugs fixed for this update
-4. caBIO Database and Load Scripts Enhancements
+4. Known Issues
 5. Objects to which new data was added
 6. Data sources anticipated to be refreshed in the next update
 7. Access to caBIO data
@@ -226,7 +227,7 @@ Grid service
 
 http://cabiogrid32.nci.nih.gov:80/wsrf/services/cagrid/CaBIO32GridSvc
 
-http://cabiogrid40.nci.nih.gov:80/wsrf/services/cagrid/CaBIO32GridSvc
+http://cabiogrid40.nci.nih.gov:80/wsrf/services/cagrid/CaBIO40GridSvc
 
 
 Thank you for your interest in caBIO!
