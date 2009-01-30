@@ -89,6 +89,10 @@ s) CTEP Protocols
 Updated as new Protocols are made available
 
 
+t) Cancer Gene Index 
+
+Updated as new annotations are made available
+
 
 2. Data sources not refreshed in this update
 ============================================
