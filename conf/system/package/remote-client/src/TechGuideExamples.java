@@ -144,7 +144,7 @@ public class TechGuideExamples {
 
         try {
             System.out.println("\nExample Six: HQL Search");
-            String hqlString = "FROM Gene g WHERE g.symbol LIKE 'BRCA%'";
+            String hqlString = "FROM gov.nih.nci.domain.Gene g WHERE g.symbol LIKE 'BRCA%'";
             HQLCriteria hqlC = new HQLCriteria(hqlString);
             List resultList = appService.query(hqlC);
             System.out.println("Total # of records = " + resultList.size());
