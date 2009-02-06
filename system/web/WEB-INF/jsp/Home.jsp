@@ -5,9 +5,14 @@
 <head>
 <title>caBIO Home Page</title>
 <link rel="stylesheet" type="text/css" href="styleSheet.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.suggest.css" />
 <link rel="icon" type="image/x-ico" href="favicon.ico" />
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <script src="script.js" type="text/javascript"></script>
+<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
+<script src="js/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>
+<script src="js/jquery.suggest.js" type="text/javascript"></script>
 </head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" border="0"
@@ -158,7 +163,7 @@
 															</tr>
 															<tr>
 																<td colspan="2" align=center nowrap><INPUT TYPE=TEXT SIZE=60
-																	name="searchString" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																	name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right"><INPUT TYPE=SUBMIT
@@ -168,6 +173,13 @@
 															<tr>
 														</table>
 														</form>
+														<script type="text/javascript">
+														jQuery(function() {
+															jQuery("#freestyleLM").suggest("suggest",{
+															     minchars:1
+															});
+														});
+														</script>
 														<!-- freestyle search --></td>
 													</tr>
 												</table>

@@ -16,8 +16,8 @@
 <link rel="icon" type="image/x-ico" href="favicon.ico" />
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-<script type="text/javascript" src="/cabio41/script.js"></script>
-<script type="text/javascript" src="/cabio41/jquery-1.2.3.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="js/jquery-1.2.3.min.js"></script>
 
 <style type="text/css">
 

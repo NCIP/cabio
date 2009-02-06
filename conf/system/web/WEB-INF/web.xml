@@ -71,6 +71,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>AutoCompletionService</servlet-name>
+        <servlet-class>gov.nih.nci.system.web.AutoCompletionService</servlet-class>            
+    </servlet>
+    
+    <servlet>
         <servlet-name>AxisServlet</servlet-name>
         <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class> 
     </servlet>
@@ -120,11 +125,17 @@
     	<servlet-name>IndexService</servlet-name>
     	<url-pattern>/IndexService</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
     	<servlet-name>search</servlet-name>
     	<url-pattern>/search</url-pattern>
     </servlet-mapping>
 
+     <servlet-mapping>
+        <servlet-name>AutoCompletionService</servlet-name>
+        <url-pattern>/suggest</url-pattern>
+    </servlet-mapping>
+    
 	<mime-mapping>
 		<extension>wsdl</extension>
 		<mime-type>text/xml</mime-type>
