@@ -1,0 +1,172 @@
+
+                                     caBIO 
+                                  Version 4.2
+
+                                 Release Notes
+                                 January, 2009
+
+
+               National Cancer Institute Center for Bioinformatics
+
+================================================================================
+                                    Contents
+================================================================================
+
+1.0 New Features and Updates
+2.0 Resolved Issues
+3.0 Known Issues
+4.0 SVN Tags
+5.0 Bugs and Support
+6.0 Documentation
+
+
+================================================================================
+                           1.0 New Features and Updates
+================================================================================
+
+--------------------------------------------------------------------------------
+ 1.1 Pathway Data
+--------------------------------------------------------------------------------
+
+  Data from the Pathway Interaction Database (PID) (http://pid.nci.nih.gov/) has
+  been added to the Pathway object and to a new supporting model in the 
+  gov.nih.nci.cabio.pathways package.  
+
+  Pathway Interactions
+    * Pathway Reference
+    * Macroprocess
+    * Biochemical
+    * Gene Regulation
+    
+  Pathway Participant:
+    * Condition
+    * PhysicalParticipant
+
+  Pathway PhysicalParticipant
+    * Input
+    * Output
+    * PositiveControl
+    * NegativeControl
+    * ComplexComponent
+
+  Pathway PhysicalEntity
+    * ComplexEntity
+    * SmallMoleculeEntity
+    * ProteinEntity
+    * RNAEntity
+
+  Pathway ProteinEntity
+    * ProteinSubunit
+
+  In addition, the following new attributes and associations were added to 
+  the existing caBIO domain objects:
+    * EvidenceCode.Interaction
+    * Evidence.Interaction
+    * Pathway.Interaction
+    * Pathway.PathwayReference
+    * Pathway.curator
+    * Pathway.reviewer
+    * Pathway.source
+    * Protein.ProteinEntity
+    * Agent.SmallMoleculeEntity
+    * NucleicAcidSequence.RNAEntity
+ 
+ For details, please consult the caBIO Technical Guide.
+ 
+ 
+================================================================================
+                              2.0 Resolved Issues
+================================================================================
+
+  GF12202: Duplicate relative locations
+ 
+  GF13683: GeneRelativeLocation missing for rs200577
+ 
+  GF13974: Protein.proteinSequence cardinality
+  
+  GF14125: WS unit tests should use SERVER_URL
+  
+  GF14559: Overflow error on "next" page of large result set (from range query).
+  
+  GF14566: Invalid cytoband names
+  
+  GF15756: Broken pathway diagram for h_eosinophilsPathway
+  
+  GF16162: Web service method getVersion returns the SDK version, not the 
+           caBIO version
+
+  GF16335: Taxon.commonName
+  
+  GF16793: "RecName: Full=" in Protein.name
+
+  GF16795: Missing SNP for SNP_A-1705928 
+  
+  GF17025: Web service uses HashMap instead of Map
+  
+================================================================================
+                               3.0 Known Issues 
+================================================================================
+
+The following defects are known to exist in this build:
+
+  GF13669: null big id for GeneRelativeLocation  
+
+  GF12098: Histopathology Data.
+
+  GF12812: Inconsistent data from Gene to Library
+
+  GF13321: Standardize on one dataset for associating Entrez with Unigene.
+
+  GF13595: It returns different results from Gene to ExpressionArrayReporter 
+           through different paths.   
+
+  GF16868: Support for pagination with Range Query API
+
+  GF16801: big id collision between CytogeneticLocation and SNPArrayReporter
+
+  GF16772: Revisit eager loading of collections in Annotation API
+ 
+  GF15495: FreestyleLM: HIBERNATE_SEARCH does not handle Collection fields correctly
+
+
+================================================================================
+                                 4.0 SVN Tags
+================================================================================
+
+  The caBIO code base has been migrated to an SVN repository:
+  
+    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/
+
+  The 4.2 release tag is available here:
+  
+    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_42_QA_11192008
+
+  The version of the SDK which this release of caBIO was tested with is still
+  found in the cacoresdk CVS repository, under "SDK4". The CVS tag is:
+
+    CACORE_SDK_401_RC1_04152008
+
+
+================================================================================
+                              5.0 Bugs and Support
+================================================================================
+
+There are multiple ways to get assistance with and provide feedback on caBIO:
+
+  o Contact NCICB Application Support at ncicb@pop.nci.nih.gov 
+  
+  o Post your questions to the caBIO_Users or caBIO_Developers listserv. You 
+    may join either of these mailing lists at: 
+        * https://list.nih.gov/archives/cabio_users.html 
+        * https://list.nih.gov/archives/cabio_developers.html 
+        
+  o Join the caBIO GForge project at https://gforge.nci.nih.gov/projects/cabiodb 
+    to view existing caBIO feature requests and defects
+ 
+
+================================================================================
+                               6.0 Documentation
+================================================================================
+
+The release documentation can be found at:
+http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/guide
