@@ -75,7 +75,7 @@
 	*********************************************************************** -->
 	<target name="run" depends="compile" description="Runs the test">
 		<SDKecho message="${ant.project.name}: Running the test"/>
-		<java classname="TestClient" fork="true">
+		<java classname="TestClient" fork="true" maxmemory="1024m">
 			<classpath refid="runtime" />
 		</java>
 	</target>
