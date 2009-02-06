@@ -1,0 +1,51 @@
+<%@ jet package="gov.nih.nci.codegen.transformer.jet" 
+        class="WSDDTransformer"
+        skeleton="ModelTransformerBase.skeleton" %>
+<%  
+	Collection<UMLClass> classColl = TransformerUtils.getAllClasses(model);
+	String pkgName;
+ %>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+	xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+<handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+<handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+
+<service name="AdminService" provider="java:MSG">
+  <parameter name="allowedMethods" value="AdminService"/>
+  <parameter name="enableRemoteAdmin" value="false"/>
+  <parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+</service>
+<service name="Version" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+</service>
+<service name="<%=(String)configurationParams.get("WEBSERVICE_NAME")%>" style="java:RPC" use="literal">
+	<parameter name="className" value="gov.nih.nci.system.webservice.CaBioWSQuery"/>
+	<parameter name="allowedMethods" value="*"/>
+	<parameter name="extraClasses"
+	value="gov.nih.nci.search.SearchQuery,gov.nih.nci.search.SearchResult,gov.nih.nci.search.Sort,gov.nih.nci.search.RangeFilter,<%=TransformerUtils.getWSDDServiceValue(classColl)%>"/>
+<% for(UMLClass klass:classColl){
+	pkgName = TransformerUtils.getFullPackageName(klass);
+%>	
+	<beanMapping xmlns:myNS="urn:<%=TransformerUtils.reversePackageName(pkgName)%>"  qname="myNS:<%=klass.getName()%>" languageSpecificType="java:<%= pkgName + '.' + klass.getName()%>" />
+<% } %>	
+  <beanMapping languageSpecificType="java:gov.nih.nci.search.SearchQuery" qname="ns257:SearchQuery" xmlns:ns257="urn:search.nci.nih.gov"/>
+  <beanMapping languageSpecificType="java:gov.nih.nci.search.SearchResult" qname="ns258:SearchResult" xmlns:ns258="urn:search.nci.nih.gov"/>
+  <beanMapping languageSpecificType="java:gov.nih.nci.search.Sort" qname="ns259:Sort" xmlns:ns259="urn:search.nci.nih.gov"/>
+  <beanMapping languageSpecificType="java:gov.nih.nci.search.RangeFilter" qname="ns260:RangeFilter" xmlns:ns260="urn:search.nci.nih.gov"/>
+  
+</service>
+<transport name="http">
+  <requestFlow>
+   <handler type="URLMapper"/>
+   <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </requestFlow>
+</transport>
+<transport name="local">
+  <responseFlow>
+   <handler type="LocalResponder"/>
+  </responseFlow>
+</transport>
+</deployment>

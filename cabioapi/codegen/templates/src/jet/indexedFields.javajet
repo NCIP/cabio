@@ -1,0 +1,22 @@
+<%@ jet package="gov.nih.nci.codegen.transformer.jet" 
+        class="SearchIndexTransformer"
+        skeleton="ModelTransformerBase.skeleton" %>
+<%
+java.util.Collection<gov.nih.nci.ncicb.xmiinout.domain.UMLClass> classColl = TransformerUtils.getAllClasses(model);
+for(gov.nih.nci.ncicb.xmiinout.domain.UMLClass klass:classColl){
+	if(gov.nih.nci.codegen.util.FreestyleTransformerUtils.isClassIndexed(klass)){
+		String className = gov.nih.nci.codegen.util.TransformerUtils.getFullPackageName(klass)+"."+klass.getName() +"=_hibernate_class;id;";
+		java.lang.StringBuffer indexedFields = new java.lang.StringBuffer(className);
+		for(gov.nih.nci.ncicb.xmiinout.domain.UMLAttribute attr:klass.getAttributes()){
+			if(gov.nih.nci.codegen.util.FreestyleTransformerUtils.isAttributeIndexed(attr)){
+				indexedFields.append(attr.getName() +";");
+			}
+		}
+		%>
+<%=indexedFields.toString()%>
+		<%
+	}	
+}
+%>        
+
+
