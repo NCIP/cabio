@@ -1,0 +1,6 @@
+
+drop index AR_REPREC_ID_GENECHIP_A;
+drop index AR_REPREC_ID_REPRESENTA;
+drop index AR_REPREC_ID_PROBE_SET_;
+
+--EXIT;

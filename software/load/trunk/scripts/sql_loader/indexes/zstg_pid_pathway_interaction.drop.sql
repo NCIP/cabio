@@ -1,0 +1,5 @@
+
+drop index ZSTG_PIDTION_PATHWAY_ID;
+drop index ZSTG_PIDTION_INTERACTIO;
+
+--EXIT;

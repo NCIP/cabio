@@ -1,0 +1,8 @@
+
+drop index ZSTG_MOUMRNA_CHROMOSOME;
+drop index ZSTG_MOUMRNA_TEND;
+drop index ZSTG_MOUMRNA_TSTART;
+drop index ZSTG_MOUMRNA_TNAME;
+drop index ZSTG_MOUMRNA_QNAME;
+
+--EXIT;

@@ -1,0 +1,13 @@
+/Affy_DataCleaner.pl////
+/Affy_HG_U133_Alignments_DataFormatter.pl////
+/Affy_HG_U133_ChromosomeLocation_DataFormatter.pl////
+/Affy_HG_U133_DataFormatter.pl////
+/Affy_HG_U133_DataSeparator.pl////
+/Affy_HG_U133_DataSeparator_2.pl////
+/Affy_HG_U133_DataSeparator_3.pl////
+/Affy_HG_U133_GoBiologicalProcess_DataFormatter.pl////
+/Affy_HG_U133_GoCellularComponent_DataFormatter.pl////
+/Affy_HG_U133_GoMolecularFunction_DataFormatter.pl////
+/Affy_HG_U133_Interpro_DataFormatter.pl////
+/Affy_HG_U133_Pathway_DataFormatter.pl////
+/Affymetrix_HG_U133_DataParser.sh////

@@ -1,0 +1,12 @@
+
+drop index PROTEIN_ENCE_CHECKSUM;
+drop index PROTSEQ;
+drop index SYS_IL0000012720C00004$$;
+drop index PROTEINNCE_BIG_ID_LWR;
+drop index PROTEIN_ENCE_DALTONWEIG;
+drop index PROTEIN_ENCE_LENGTH;
+drop index PROTEIN_ENCE_ID;
+drop index PROTEIN_ENCE_PROTEIN_ID;
+drop index PROTEIN_ENCE_CHECKSUM_LWR;
+
+--EXIT;

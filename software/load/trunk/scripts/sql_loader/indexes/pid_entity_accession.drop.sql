@@ -1,0 +1,11 @@
+
+drop index PID_ENTISION_ACCESSION_LWR;
+drop index PID_ENTISION_ACCESSION;
+drop index PID_ENTISION_DATABASE;
+drop index PID_ENTISION_ID;
+drop index PID_ENTISION_PID_PHYSIC;
+drop index PID_ENTISION_DATABASE_LWR;
+drop index SYS_C0017726;
+drop index SYS_C0017725;
+
+--EXIT;

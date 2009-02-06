@@ -1,0 +1,6 @@
+
+drop index SYS_C0016504;
+drop index PID_FAMIPANT_PHYSICAL_E;
+drop index PID_FAMIPANT_PARTICIPAN;
+
+--EXIT;

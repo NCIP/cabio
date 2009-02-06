@@ -1,0 +1,15 @@
+LOAD DATA 
+ 
+INFILE '/cabio/cabiodb/cabio_data/temp/protein/PROTEIN_EMBL.dat'
+ 
+APPEND
+ 
+INTO TABLE PROTEIN_EMBL 
+ 
+REENABLE DISABLED_constraints  
+FIELDS TERMINATED BY "	"
+ 
+TRAILING NULLCOLS
+(ID	sequence(MAX,1),
+  PROTEIN_ID "TRIM(:PROTEIN_ID)",
+  ACC_NUM "TRIM(:ACC_NUM)")

@@ -1,0 +1,40 @@
+
+
+***********************************************************************
+Fatal NI connect error 12545, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/app/oracle/product/9iClient/bin/oracle)(ARGV0=oracle)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=)(HOST=cbiows502.nci.nih.gov)(USER=cabiodb))))
+
+  VERSION INFORMATION:
+	TNS for Linux: Version 9.2.0.4.0 - Production
+	Oracle Bequeath NT Protocol Adapter for Linux: Version 9.2.0.4.0 - Production
+  Time: 17-DEC-2007 16:22:55
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12545
+    TNS-12545: Connect failed because target host or object does not exist
+    ns secondary err code: 12560
+    nt main err code: 515
+    TNS-00515: Connect failed because target host or object does not exist
+    nt secondary err code: 2
+    nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12545, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=beq)(PROGRAM=/app/oracle/product/9iClient/bin/oracle)(ARGV0=oracle)(ARGS='(DESCRIPTION=(LOCAL=YES)(ADDRESS=(PROTOCOL=beq)))')(DETACH=NO))(CONNECT_DATA=(CID=(PROGRAM=)(HOST=cbiows502.nci.nih.gov)(USER=cabiodb))))
+
+  VERSION INFORMATION:
+	TNS for Linux: Version 9.2.0.4.0 - Production
+	Oracle Bequeath NT Protocol Adapter for Linux: Version 9.2.0.4.0 - Production
+  Time: 17-DEC-2007 16:22:55
+  Tracing not turned on.
+  Tns error struct:
+    nr err code: 0
+    ns main err code: 12545
+    TNS-12545: Connect failed because target host or object does not exist
+    ns secondary err code: 12560
+    nt main err code: 515
+    TNS-00515: Connect failed because target host or object does not exist
+    nt secondary err code: 2
+    nt OS err code: 0

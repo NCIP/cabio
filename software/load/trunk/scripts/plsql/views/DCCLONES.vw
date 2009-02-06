@@ -1,0 +1,13 @@
+CREATE OR REPLACE FORCE VIEW CABIODEV.DCCLONES
+(REPORTER_NAME)
+AS 
+SELECT DISTINCT REPORTER_NAME
+FROM dcop.reporter@todcop
+WHERE database_reference_id IS NULL
+AND reporter_id IN (
+ SELECT reporter_id FROM dcop.reporter@todcop
+ MINUS
+ SELECT reporter_id FROM GENE_REPORTER )
+AND REPORTER_NAME LIKE '%:%';
+
+

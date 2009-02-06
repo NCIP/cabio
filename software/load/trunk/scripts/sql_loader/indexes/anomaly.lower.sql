@@ -1,0 +1,4 @@
+
+create index ANOMALYMALY_ANOMALY_TY_lwr on ANOMALY(lower(ANOMALY_TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+--EXIT;

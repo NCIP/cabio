@@ -1,0 +1,8 @@
+CREATE OR REPLACE FORCE VIEW CABIODEV.CLONE_GENE
+(CLONE_ID, GENE_ID)
+AS 
+SELECT seq.CLONE_id, gs.gene_id FROM
+SEQUENCE seq, GENE_SEQUENCE gs
+WHERE seq.sequence_id = gs.sequence_id;
+
+

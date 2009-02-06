@@ -1,0 +1,5 @@
+
+drop index SYS_C004536;
+drop index HISTOPASTOPATHOLOGY_TST_BIG_ID;
+
+--EXIT;

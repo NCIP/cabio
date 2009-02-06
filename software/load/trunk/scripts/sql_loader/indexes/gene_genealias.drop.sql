@@ -1,0 +1,6 @@
+
+drop index GENE_GENLIAS_GENE_ALIAS;
+drop index GENE_GENLIAS_ALIAS_ID;
+drop index GENE_GENLIAS_GENE_ID;
+
+--EXIT;

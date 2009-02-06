@@ -1,0 +1,10 @@
+
+drop index CLONE_RETION_NUCLEIC_AC;
+drop index CLONE_RION_BIG_ID_LWR;
+drop index CLONE_RETION_TYPE_LWR;
+drop index CLONE_RION_BIG_ID;
+drop index CLONE_RETION_TYPE;
+drop index CLONE_RETION_ID;
+drop index CLONE_RETION_CLONE_ID;
+
+--EXIT;

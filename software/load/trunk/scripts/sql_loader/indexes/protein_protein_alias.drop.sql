@@ -1,0 +1,5 @@
+
+drop index PK_PROTEIN_PROTEIN_ALIAS;
+drop index PROTEIN_LIAS_PROTEIN_AL;
+
+--EXIT;

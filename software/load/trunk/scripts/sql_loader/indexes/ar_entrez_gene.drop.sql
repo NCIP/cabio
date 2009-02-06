@@ -1,0 +1,6 @@
+
+drop index AR_ENTREGENE_PROBE_SET_;
+drop index AR_ENTREGENE_GENECHIP_A;
+drop index AR_ENTREGENE_ENTREZ_GEN;
+
+--EXIT;

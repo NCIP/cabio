@@ -1,0 +1,10 @@
+
+drop index GOOBIGID;
+drop index GO_ONTO_ONTOLOGY_BIG_ID_LWR;
+drop index GO_ONTOLLOGY_MM_GENES;
+drop index GO_ONTOLLOGY_HS_GENES;
+drop index GO_ONTOLLOGY_GO_NAME;
+drop index GO_ONTOLLOGY_GO_ID;
+drop index GO_ONTOLLOGY_GO_NAME_LWR;
+
+--EXIT;
