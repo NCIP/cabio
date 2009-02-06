@@ -1,0 +1,6 @@
+
+drop index MARKER_MTION_SORT_ORDER;
+drop index MARKER_MTION_MARKER_REL;
+drop index MARKER_MTION_MARKER_ID;
+
+--EXIT;

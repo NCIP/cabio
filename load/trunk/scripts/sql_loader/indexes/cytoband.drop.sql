@@ -1,0 +1,11 @@
+
+drop index CYTOBANTOBAND_BIG_ID_LWR;
+drop index CYTOBIGID;
+drop index CYTOBANDBAND_NAME_LWR;
+drop index CYTOBANDBAND_CHROMOSOME;
+drop index CYTOBANDBAND_PHYSICAL_L;
+drop index CYTOBANDBAND_NAME;
+drop index CYTOBANDBAND_ID;
+drop index CYTOUNIQ;
+
+--EXIT;

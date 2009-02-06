@@ -1,0 +1,4 @@
+
+create index ZSTG_PROEMBL_ACC_NUM_lwr on ZSTG_PROTEIN_EMBL(lower(ACC_NUM)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+--EXIT;

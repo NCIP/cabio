@@ -1,0 +1,14 @@
+
+drop index MARKERRKER_ACCNO;
+drop index MARKERRKER_TAXON_ID;
+drop index MARKERRKER_NAME;
+drop index MARKERBIGID;
+drop index MARKERRKER_BIG_ID_LWR;
+drop index MARKERRKER_TYPE;
+drop index MARKERRKER_MARKER_ID;
+drop index MARKERRKER_ID;
+drop index MARKERRKER_TYPE_LWR;
+drop index MARKERRKER_MARKER_ID_LWR;
+drop index MARKERRKER_NAME_LWR;
+
+--EXIT;

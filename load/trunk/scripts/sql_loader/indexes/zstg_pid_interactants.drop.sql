@@ -1,0 +1,8 @@
+
+drop index ZSTG_PIDANTS_INTERACTIO;
+drop index ZSTG_PIDANTS_ORDER_OF_I;
+drop index ZSTG_PIDANTS_PHYSICALEN;
+drop index ZSTG_PIDANTS_ROLE;
+drop index ZSTG_PIDANTS_ROLE_LWR;
+
+--EXIT;

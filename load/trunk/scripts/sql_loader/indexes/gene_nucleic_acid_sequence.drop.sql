@@ -1,0 +1,6 @@
+
+drop index PK_GENE_SEQUENCE;
+drop index GENE_NUCENCE_GENE_ID;
+drop index GENE_NUCENCE_GENE_SEQUE;
+
+--EXIT;

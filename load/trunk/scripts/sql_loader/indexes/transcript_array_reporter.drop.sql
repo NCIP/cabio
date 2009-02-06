@@ -1,0 +1,9 @@
+
+drop index TRANSARREP_BIGID_IDX;
+drop index TRANSCRIRTER_MICROARRAY;
+drop index TRANSCRIRTER_NAME;
+drop index TRANSCRIRTER_ID;
+drop index TRANSCRTER_BIG_ID_LWR;
+drop index TRANSCRIRTER_NAME_LWR;
+
+--EXIT;

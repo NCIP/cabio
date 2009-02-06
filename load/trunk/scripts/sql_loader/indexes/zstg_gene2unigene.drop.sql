@@ -1,0 +1,5 @@
+
+drop index ZSTG_GENGENE_GENEID;
+drop index ZSTG_GENGENE_UNIGENE_CL;
+
+--EXIT;

@@ -1,0 +1,7 @@
+
+drop index PROTEIN_SION_ID;
+drop index PROTEIN_SION_SECONDARY_;
+drop index PROTEIN_SION_PROTEIN_ID;
+drop index PROTEIN_SION_SECONDARY__LWR;
+
+--EXIT;

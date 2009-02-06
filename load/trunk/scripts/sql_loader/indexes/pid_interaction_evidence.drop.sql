@@ -1,0 +1,6 @@
+
+drop index SYS_C0016507;
+drop index PID_INTEENCE_INTERACTIO;
+drop index PID_INTEENCE_EVIDENCE_I;
+
+--EXIT;

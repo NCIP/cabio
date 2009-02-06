@@ -1,0 +1,7 @@
+
+drop index PROTEIN_ORDS_PROTEIN_ID;
+drop index PROTEIN_ORDS_ID;
+drop index PROTEIN_ORDS_KEYWORD;
+drop index PROTEIN_ORDS_KEYWORD_LWR;
+
+--EXIT;

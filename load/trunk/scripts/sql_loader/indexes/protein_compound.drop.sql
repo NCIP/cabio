@@ -1,0 +1,4 @@
+
+drop index PROTEVALUEVARCH;
+
+--EXIT;
