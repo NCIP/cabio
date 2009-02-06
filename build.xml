@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--************************************************************************
+* This is the top-level build file for the project. It creates a local copy 
+* of the caCORE SDK, copies this project's custom file versions over top of 
+* it and then calls the build-project.xml ant script to actually build the 
+* system. 
+*************************************************************************-->
+		
+<project name="caBIO_API" default="build-system" basedir=".">
+
+	<!--************************************************************************
+    * When using this build file as a template to create other caCORE-based 
+    * systems, the following must be customized.
+	*************************************************************************-->
+    
+	<description>Build script for the caBIO API</description>
+
+	<property name="anthill.dependency.artifacts.dir" value=".."/>
+	<property name="sdk.home.dir" value="${anthill.dependency.artifacts.dir}/cacoresdk/SDK4" />
+	<property name="build.properties" value="dev.properties"/>
+	<property name="project.home.dir" value="." />
+	<property name="test.dir" value="${project.home.dir}/test" />
+
+	<property name="test.dir" value="${project.home.dir}/test" />
+	
+	<property file="${project.home.dir}/conf/deploy.properties"  />
+	
+	<target name="help" 
+			description="Lists commonly used targets">
+		<echo>========================</echo>
+		<echo> caBIO API Build Script</echo>
+		<echo>========================</echo>
+		<echo>ant clean        - Remove generated build artifacts</echo>
+		<echo>ant build-system - Build entire system</echo>
+		<echo>ant dist-zips    - Create distribution zips</echo>
+	</target>
+
+	<target name="load-project" 
+			description="Copy the project's custom conf files and model over the SDK">
+
+		<!-- copy model -->
+		<copy todir="${project.build.dir}/models" overwrite="true">
+			<fileset dir="${project.home.dir}/models">
+				<include name="*.xmi" />
+			</fileset>
+		</copy>
+			
+		<!-- copy codegen templates -->
+		<copy todir="${project.build.dir}/codegen" overwrite="true">
+			<fileset dir="${project.home.dir}/codegen">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		
+		<!-- copy configuration -->
+		<copy todir="${project.build.dir}/conf" overwrite="true">
+			<fileset dir="${project.home.dir}/conf">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<!-- copy system -->
+        <copy todir="${project.build.dir}/system" overwrite="true">
+            <fileset dir="${project.home.dir}/system">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+
+		<replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
+			<replacefilter token="@INDEXBASE@" value="${index_base}" />
+		</replace>
+
+	</target>
+	
+	
+	<!--************************************************************************
+    * The rest of this file is generally not project specific and should 
+    * not need to be modified. 
+	*************************************************************************-->
+
+	<property name="project.build.dir" value="${project.home.dir}/build" />
+	<property name="project.output.dir" value="${project.home.dir}/output" />
+	<property name="project.sourcedist.dir" value="${project.home.dir}/output/cabioapi" />
+
+	<property name="project.warfile" value="${project.output.dir}/webapp/${PROJECT_NAME}.war" />
+	
+	<property name="project.sourcedist" value="${PROJECT_NAME}_source" />
+	<property name="project.javaclientdist" value="${PROJECT_NAME}_java_client" />
+	<property name="project.wsclientdist" value="${PROJECT_NAME}_ws_client" />
+	<property name="project.javadoc" value="${PROJECT_NAME}_javadocs" />
+	<property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
+	
+	<target name="clean" 
+			description="Removes generated files">
+    	<delete dir="${project.build.dir}" quiet="true"/>
+    	<delete dir="${project.output.dir}" quiet="true"/>
+	</target>
+	
+	<condition property="project.ready">
+		<available file="${project.build.dir}/build.xml"/>
+	</condition>
+
+	<condition property="webapp.ready">
+		<available file="${project.warfile}"/>
+	</condition>
+		
+	<target name="build-system" depends="create-build"
+			description="Generate the entire system">
+		
+		<ant antfile="build-project.xml" inheritAll="false"/>
+			
+		<copy tofile="${project.output.dir}/remote-client/README.txt"
+			file="docs/README-client.txt">
+		</copy>
+		
+	</target>
+	
+	<target name="create-build">
+		<antcall target="load-sdk" />
+		<antcall target="load-project" />
+	</target>
+
+	<target name="load-sdk" unless="project.ready"
+			description="Make a local copy of the SDK">
+
+		<mkdir dir="${project.build.dir}"/>
+		<mkdir dir="${project.build.dir}/models"/>
+	
+		<copy todir="${project.build.dir}">
+			<fileset dir="${sdk.home.dir}">
+				<include name="build.*" />
+				<include name="build-scripts/**/*" />
+				<include name="codegen/**/*" />
+				<include name="conf/**/*" />
+				<include name="system/**/*" />
+			</fileset>
+		</copy>
+		
+	</target>
+	  		
+	<target name="dist-source" 
+			description="Create a source distribution ready to be zipped">
+	  
+		<fail message="Project must be built before calling this target. Type 'ant help' for more information.">
+	   		<condition>
+	       		<not><available file="${project.warfile}"/></not>
+	        </condition>
+	    </fail>
+		
+    	<delete dir="${project.sourcedist.dir}" quiet="true"/>
+		<mkdir dir="${project.sourcedist.dir}"/>
+
+		<!-- copy system java code -->
+        <copy todir="${project.sourcedist.dir}/system" overwrite="true">
+            <fileset dir="${project.home.dir}/system">
+                <include name="**/*.java" />
+            </fileset>
+        	<filterchain>
+        		<concatfilter prepend="docs/LICENSE.txt"/>
+        	</filterchain>
+        </copy>
+
+		<!-- copy system  -->
+        <copy todir="${project.sourcedist.dir}/system" overwrite="true">
+            <fileset dir="${project.home.dir}/system">
+                <exclude name="**/*.java" />
+            </fileset>
+        </copy>
+
+		<!-- copy the rest -->
+        <copy todir="${project.sourcedist.dir}" overwrite="true">
+            <fileset dir="${project.home.dir}">
+                <include name="models/*.xmi" />
+                <include name="conf/**/*" />
+                <include name="codegen/**/*" />
+                <include name="test/**/*" />
+                <include name="docs/*" />
+                <include name="*.xml" />
+            </fileset>
+        </copy>
+
+		<!-- copy deployment files -->
+        <copy todir="${project.sourcedist.dir}/deploy" overwrite="true">
+            <fileset dir="${project.home.dir}/docs/deploy">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+		
+		<!-- copy war file -->
+        <copy todir="${project.sourcedist.dir}/deploy" overwrite="true"
+        		file="${project.warfile}"/>
+		
+	</target>
+	
+	<target name="dist-zips" depends="dist-source"
+		description="Creates all the distribution zips">
+
+		<delete>
+			<fileset dir="${project.output.dir}" includes="*.zip"/>
+		</delete>
+		
+		<zip destfile="${project.output.dir}/${project.sourcedist}.zip">
+    	    <zipfileset prefix="${project.sourcedist}" 
+    	    	dir="${project.sourcedist.dir}"/>
+    	</zip>
+
+		<zip destfile="${project.output.dir}/${project.javaclientdist}.zip">
+    	    <zipfileset prefix="${project.javaclientdist}" 
+    	    	dir="${project.output.dir}/remote-client"/>
+    	</zip>
+
+		<zip destfile="${project.output.dir}/${project.wsclientdist}.zip">
+    	    <zipfileset prefix="${project.wsclientdist}" 
+				dir="${project.output.dir}/ws-client"/>
+    	</zip>
+		
+		<zip destfile="${project.output.dir}/${project.javadoc}.zip">
+    	    <zipfileset prefix="${project.javadoc}" 
+    	    	dir="${project.output.dir}/docs"/>
+    	</zip>
+
+		<zip destfile="${project.output.dir}/${project.indexgen}.zip">
+			<zipfileset prefix="indexGenerator"
+				dir="${project.output.dir}/indexgen" />
+		</zip>
+		
+	</target>
+	
+
+	<!--************************************************************************
+    * Remote deployment and testing
+	*************************************************************************-->
+	
+    <property file="${build.properties}" />
+	
+    <target name="remote-deploy" 
+    		description="Deploys the webapp to a remote machine.">
+
+        <echo>Copying files to remote file system "${SSH.USER}@${SSH.HOST}:${SSH.PATH}"</echo>
+    	
+        <scp todir="${SSH.USER}@${SSH.HOST}:${SSH.PATH}" port="${SSH.PORT}" 
+        		passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true" 
+        		file="${project.warfile}">
+        </scp>
+    	
+    	<sshexec username="${SSH.USER}" host="${SSH.HOST}" port="${SSH.PORT}" 
+    			passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true" failonerror="false" 
+    			command="mv ${SSH.PATH}/${PROJECT_NAME}.war ${JBOSS.DEPLOY.DIR}" />
+
+        <sleep seconds="30"/>
+        	
+    </target>
+
+    <target name="testreport-deploy"
+    		description="Deploys the testing reports to a remote machine.">
+
+    	<property name="tmp.dir" value="${SSH.PATH}/reports/${PROJECT_NAME}" />
+    	
+        <echo>Creating remote directory "${SSH.USER}@${SSH.HOST}:${SSH.PATH}/reports/${PROJECT_NAME}"</echo>
+    	
+    	<sshexec username="${SSH.USER}" host="${SSH.HOST}" port="${SSH.PORT}" 
+    			passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="false" failonerror="false" 
+    			command="mkdir -p ${tmp.dir}" />
+    				
+        <echo>Copying test report to remote system "${SSH.USER}@${SSH.HOST}:${tmp.dir}"</echo>
+
+        <scp todir="${SSH.USER}@${SSH.HOST}:${tmp.dir}" port="${SSH.PORT}" 
+        		passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true">
+        	<fileset dir="${test.dir}/report"/>
+        </scp>
+
+        <echo>Deploying report to "${REPORT.DEPLOY.DIR}"</echo>
+
+    	<sshexec username="${SSH.USER}" host="${SSH.HOST}" port="${SSH.PORT}" 
+    			passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true" failonerror="false" 
+    			command="rm -r ${REPORT.DEPLOY.DIR}" />
+
+    	<sshexec username="${SSH.USER}" host="${SSH.HOST}" port="${SSH.PORT}" 
+    			passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true" failonerror="false" 
+    			command="mkdir -p ${REPORT.DEPLOY.DIR}" />
+    	
+    	<sshexec username="${SSH.USER}" host="${SSH.HOST}" port="${SSH.PORT}" 
+    			passphrase="${SSH.PASSPHRASE}" keyfile="${SSH.KEYFILE}" trust="true" verbose="true" failonerror="false" 
+    			command="mv ${tmp.dir} ${REPORT.DEPLOY.DIR}/${PROJECT_NAME}" />
+    	
+    </target>
+    		
+    <target name="build-deploy-test" depends="build-system, remote-deploy"
+    		description="Builds, deploys and runs the unit tests.">
+
+        <echo>Deploying to ${TIER.NAME} tier</echo>
+    	
+		<ant dir="${test.dir}" target="report" 
+			inheritall="false" inheritrefs="false" />
+
+		<ant target="testreport-deploy"/>
+
+   	</target>
+
+      <target name="remove.cvs">
+           <delete dir="**/CVS/**" />
+           <delete includeemptydirs="true">
+               <fileset dir="." defaultexcludes="no">
+                    <include name="CVS" />
+                    <include name="**/CVS/**/*.*" />
+                    <include name="**/*.cvsignore" />  
+               </fileset>
+           </delete>
+      </target>	
+</project>
