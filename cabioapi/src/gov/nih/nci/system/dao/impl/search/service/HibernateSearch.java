@@ -29,7 +29,7 @@ public class HibernateSearch implements Searchable {
     /**
      * Default constructor
      */
-    public HibernateSearch() throws Exception {
+    public HibernateSearch() {
     	properties = SearchAPIProperties.getInstance();
     }
 

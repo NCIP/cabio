@@ -38,12 +38,6 @@ public class SearchAPIDAO implements DAO {
 	private final String FILTER_COLON = ":";
 
 	/**
-	 * Constructor
-	 */
-	public SearchAPIDAO() {		
-	}
-
-	/**
 	 * Performs queries against the lucene indexes
 	 * 
 	 * @param searchQuery
@@ -51,36 +45,35 @@ public class SearchAPIDAO implements DAO {
 	 * @return
 	 * @throws FreestyleLMException
 	 */
-	public List query(SearchQuery searchQuery) throws FreestyleLMException {        
-		List resultList = new ArrayList();
-		try {
-			Searchable searchService = null;            
-            if(searchQuery.getQueryType() == null){
-                searchQuery.setQueryType(QueryType.FULL_TEXT_SEARCH.toString());
-            }
-			if (searchQuery.getQueryType().equals(QueryType.HIBERNATE_SEARCH.toString())) {
-                searchService = new HibernateSearch();
-			}
-            else if(searchQuery.getQueryType().equals(QueryType.FULL_TEXT_SEARCH.toString())){
-                searchService = new FullTextSearch();
-            }else{
-                throw new FreestyleLMException("Invalid query type: "+ searchQuery.getQueryType()+" - should be of "+ QueryType.FULL_TEXT_SEARCH.toString() +" or "+ QueryType.HIBERNATE_SEARCH.toString() );
-            }            
-            if (searchQuery.getSort() != null){
-                if(searchQuery.getSort().getSortByClassName()){
-                    resultList = searchService.query(getQueryString(searchQuery),searchQuery.getSort());
-                }
-                else{
-                    resultList = searchService.query(getQueryString(searchQuery));
-                }
+	public List query(SearchQuery searchQuery) throws FreestyleLMException {
+		
+		Searchable searchService = null;   
+        if(searchQuery.getQueryType() == null){
+            searchQuery.setQueryType(QueryType.FULL_TEXT_SEARCH.toString());
+        }
+		if (searchQuery.getQueryType().equals(QueryType.HIBERNATE_SEARCH.toString())) {
+            searchService = new HibernateSearch();
+		}
+        else if(searchQuery.getQueryType().equals(QueryType.FULL_TEXT_SEARCH.toString())){
+            searchService = new FullTextSearch();
+        }
+        else {
+            throw new FreestyleLMException("Invalid query type: "+ searchQuery.getQueryType()+" - should be of "+ QueryType.FULL_TEXT_SEARCH.toString() +" or "+ QueryType.HIBERNATE_SEARCH.toString() );
+        }     
+
+        List resultList = new ArrayList();
+        if (searchQuery.getSort() != null){
+            if(searchQuery.getSort().getSortByClassName()){
+                resultList = searchService.query(getQueryString(searchQuery),searchQuery.getSort());
             }
             else{
                 resultList = searchService.query(getQueryString(searchQuery));
-            }            
+            }
+        }
+        else{
+            resultList = searchService.query(getQueryString(searchQuery));
+        }            
 	
-		} catch (Exception ex) {
-			throw new FreestyleLMException("Search failed: "+ ex.getMessage());            
-		}
 		return resultList;
 	}
 
@@ -93,28 +86,22 @@ public class SearchAPIDAO implements DAO {
 	 * @throws FreestyleLMException
 	 */
 	public Response query(Request request) throws FreestyleLMException {
-		List resultList = null;
-		Object searchObject = request.getRequest();        
-		try {
-			SearchQuery searchQuery = null;
-			if (searchObject instanceof NestedCriteria) {
-				NestedCriteria criteria = (NestedCriteria) searchObject;                
-                if(criteria.getSourceObjectList()!=null){
-                    searchQuery = (SearchQuery)criteria.getSourceObjectList().get(0);
-                }				
-			} 
-            else if (searchObject instanceof SearchQuery) {
-				searchQuery = (SearchQuery)searchObject;
-			}
-            else {
-                log.error("No query for: "+searchObject.getClass().getName());
-            }            
-			resultList = query(searchQuery);
+		Object searchObject = request.getRequest();
+		SearchQuery searchQuery = null;
+		if (searchObject instanceof NestedCriteria) {
+			NestedCriteria criteria = (NestedCriteria) searchObject;                
+            if(criteria.getSourceObjectList()!=null){
+                searchQuery = (SearchQuery)criteria.getSourceObjectList().get(0);
+            }				
 		} 
-        catch (Exception ex) {
-			throw new FreestyleLMException("Exception in SearchAPIDAO " + ex);
+        else if (searchObject instanceof SearchQuery) {
+			searchQuery = (SearchQuery)searchObject;
 		}
-		return new Response(resultList);
+        else {
+            throw new FreestyleLMException(
+                "No query for: "+searchObject.getClass().getName());
+        }
+		return new Response(query(searchQuery));
 	}
 
 	/**

@@ -28,7 +28,7 @@ import org.xml.sax.InputSource;
  */
 public class RESTAPITest extends TestCase {
 
-    private static String GET_XML_URL = "http://127.0.0.1:8080/cabio42/GetXML";
+    private static String GET_XML_URL;
 
     private static final XPathFactory factory = XPathFactory.newInstance();
     private static final XPath xpath = factory.newXPath();
@@ -37,16 +37,9 @@ public class RESTAPITest extends TestCase {
     
     static {
         // attempt to get the right URL from the Java client configuration
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("application-config-client.xml");
-        if (ctx != null) {
-            Map<String,Object> serviceInfoMap = (Map<String, Object>) ctx.getBean("ServiceInfo");
-            if (serviceInfoMap != null) {
-                String serviceURL = (String)serviceInfoMap.get("APPLICATION_SERVICE_URL");
-                if (serviceURL != null) {
-                    GET_XML_URL = serviceURL+"/GetXML";
-                }
-            }
-        }
+        ApplicationContext ctx = 
+            new ClassPathXmlApplicationContext("application-config-client.xml");
+        GET_XML_URL = (String) ctx.getBean("RemoteServerURL") + "/GetXML?";
         System.out.println("REST URL: "+GET_XML_URL);
     }
     

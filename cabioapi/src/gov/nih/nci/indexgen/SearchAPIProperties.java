@@ -97,9 +97,6 @@ public class SearchAPIProperties {
             }
             log.info("loaded properties from "+propertiesFileName);
         }
-        catch (Exception ex) {
-            throw new Exception(ex.getMessage());
-        }
         finally {
             is.close();
         }
@@ -151,11 +148,8 @@ public class SearchAPIProperties {
                 indexProperties.put(key, fields);
             }
         }
-        catch (Exception e) {
-            log.error(e);
-        }
         finally {
-            is.close();
+            if (is != null) is.close();
         }
         return fieldList;
     }

@@ -95,6 +95,7 @@ public class RangeQueryTest extends TestCase {
         // Transcript 2986605
         String bigId = "hdl://2500.1.PMEUQUCCL5/ZVOGFO5WSV";
         Transcript transcript = (Transcript)appService.getDataObject(bigId);
+        assertNotNull(transcript);
         
         FeatureRangeQuery query = new FeatureRangeQuery();
         query.setFeature(transcript);

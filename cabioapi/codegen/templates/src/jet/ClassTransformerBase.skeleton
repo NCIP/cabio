@@ -25,7 +25,7 @@ public class CLASS extends UMLClassJetTransformer{
 			
 				// check super class
 				try {
-					UMLClass superKlass = TransformerUtils.getSuperClass(klass);
+					UMLClass superKlass = transformerUtils.getSuperClass(klass);
 	                
 					if(superKlass!=null && !superKlass.getName().equals("java.lang.Object")) {
 					
@@ -63,7 +63,7 @@ public class CLASS extends UMLClassJetTransformer{
 	}
 	
 	public Artifact executeTemplate(UMLModel model, UMLClass klass) throws GenerationException{
-		BaseArtifact artifact = new BaseArtifact();
+		BaseArtifact artifact = new BaseArtifact(transformerUtils);
 		artifact.setContent(generate(model, klass));
 		artifact.createSourceName(klass);
 		return artifact;

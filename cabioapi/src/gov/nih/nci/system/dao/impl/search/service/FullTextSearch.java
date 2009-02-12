@@ -37,30 +37,17 @@ public class FullTextSearch implements Searchable {
     /**
      * Performs a full text search for a given string
      */
-    public List query(String searchString)throws FreestyleLMException{
-        List results = new ArrayList();
-        try{           
-            results = luceneSearch(searchString);
-        }
-        catch(Exception ex){
-            throw new FreestyleLMException("Full text search failed: " + ex.getMessage(), ex);
-        }
-        return results;
+    public List query(String searchString) throws FreestyleLMException {
+        return luceneSearch(searchString);
 
     }
     /**
      * Performs a text based search for a given String.
      * If sort is set to true the results returned are sorted. 
      */
-    public List query(String searchString, gov.nih.nci.search.Sort sort)throws FreestyleLMException{
-        List results = new ArrayList();
-        try{
-            results = luceneSearch(searchString, sort);
-        }
-        catch(Exception ex){
-            throw new FreestyleLMException("Full text search failed: "+ ex.getMessage(),ex);
-        }
-        return results;
+    public List query(String searchString, gov.nih.nci.search.Sort sort)
+            throws FreestyleLMException {
+        return luceneSearch(searchString, sort);
     }
     
     /**
@@ -94,7 +81,7 @@ public class FullTextSearch implements Searchable {
      * @return
      * @throws Exception
      */
-    private String getIndexLocation() throws Exception{
+    private String getIndexLocation() throws Exception {
         SearchAPIProperties prop = SearchAPIProperties.getInstance();
         String indexFileLocation = prop.getIndexLocation();
         log.debug("Index Location: "+ indexFileLocation);
@@ -122,7 +109,7 @@ public class FullTextSearch implements Searchable {
         return new ParallelMultiSearcher(searchers);        
     }
     
-    public List luceneSearch(String searchString) throws Exception{
+    public List luceneSearch(String searchString) throws FreestyleLMException {
         return luceneSearch(searchString, new gov.nih.nci.search.Sort());
     }
     
@@ -132,7 +119,9 @@ public class FullTextSearch implements Searchable {
      * @return
      * @throws Exception
      */
-    public List luceneSearch(String searchString, gov.nih.nci.search.Sort sort) throws FreestyleLMException, Exception{        
+    public List luceneSearch(String searchString, gov.nih.nci.search.Sort sort) 
+            throws FreestyleLMException {
+        
         ParallelMultiSearcher multiSearcher = null;
         Query query = null;
         List results = new ArrayList();
@@ -142,8 +131,8 @@ public class FullTextSearch implements Searchable {
                 multiSearcher = getIndexSearchers();
             }
             catch(Exception ex){
-                throw new FreestyleLMException("Unable to get lucene searchers "+ ex.getMessage(),ex);
-            }                
+                throw new FreestyleLMException("Unable to get Lucene searchers",ex);
+            }
             String searchFields[] = getIndexedFields();            
             QueryParser parser = new MultiFieldQueryParser(searchFields, new StandardAnalyzer());
             query = parser.parse(searchString);
@@ -166,7 +155,7 @@ public class FullTextSearch implements Searchable {
             multiSearcher.close();
         }
         catch (Exception e){
-            throw new FreestyleLMException("Lucene Search Error " + e.getMessage(),e);
+            throw new FreestyleLMException("Lucene Search Error",e);
         }
         return results;
     }

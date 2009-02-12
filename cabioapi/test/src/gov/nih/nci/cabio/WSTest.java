@@ -8,8 +8,6 @@ import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.search.SearchQuery;
 import gov.nih.nci.search.SearchResult;
 
-import java.util.Map;
-
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 
@@ -28,23 +26,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class WSTest extends TestCase {
 
-    private static String url = "http://127.0.0.1:8080/cabio41/services/caBIOService";
+    private static String WS_URL;
     
     private Call call; 
         
     static {
         // attempt to get the right URL from the Java client configuration
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("application-config-client.xml");
-        if (ctx != null) {
-            Map<String,Object> serviceInfoMap = (Map<String, Object>) ctx.getBean("ServiceInfo");
-            if (serviceInfoMap != null) {
-                String serviceURL = (String)serviceInfoMap.get("APPLICATION_SERVICE_URL");
-                if (serviceURL != null) {
-                    url = serviceURL+"/services/caBIOService";
-                }
-            }
-        }
-        System.out.println("WS URL: "+url);
+        ApplicationContext ctx = 
+            new ClassPathXmlApplicationContext("application-config-client.xml");
+        WS_URL = (String) ctx.getBean("RemoteServerURL") + "/services/caBIOService";
+        System.out.println("WS URL: "+WS_URL);
     }
     
     private void register(String urn, Class clazz) {
@@ -62,7 +53,7 @@ public class WSTest extends TestCase {
 
         Service service = new Service();
         this.call = (Call)service.createCall();
-        call.setTargetEndpointAddress(new java.net.URL(url));
+        call.setTargetEndpointAddress(new java.net.URL(WS_URL));
         register("urn:domain.cabio.nci.nih.gov", Gene.class);
         register("urn:domain.cabio.nci.nih.gov", Chromosome.class);
         register("urn:domain.cabio.nci.nih.gov", Taxon.class);
