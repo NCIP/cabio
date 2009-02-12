@@ -60,15 +60,16 @@ public class IndexSearchService extends HttpServlet {
                 else {
                     try {
                         SearchQuery searchQuery = searchUtils.getSearchQuery();
-                        //log.info("Searching for: "+ searchQuery.getKeyword());
+//                        log.info("Searching for: "+ searchQuery.getKeyword());
                         List results = query(searchQuery);
-                        //log.info("Number of records found: "+ results.size());
+//                        log.info("Number of records found: "+ results.size());
                         searchUtils.setResultSet(results);
                         searchUtils.setResultCounter(results.size());
                         searchUtils.setNewQuery(false);
                         searchUtils.organizeResults();
                     }
                     catch(Exception ex) {
+                        log.error(ex);
                         throw new ServletException(ex);
                     }
                 }
@@ -79,8 +80,8 @@ public class IndexSearchService extends HttpServlet {
             }
      
         }
-        catch(Throwable ex) {   
-            log.error("Error",ex);           
+        catch (Exception ex) {   
+            log.error("Error",ex);
             request.setAttribute("javax.servlet.jsp.jspException", ex);
             dispatcher = request.getRequestDispatcher("/searchError.jsp"); 
             

@@ -53,7 +53,7 @@ public class SearchQuery implements Serializable {
     public void setResultCollection(Collection resultCollection) {
         this.resultCollection = resultCollection;
     }   
-    public void setQueryType(String type) throws Exception {
+    public void setQueryType(String type) {
         queryType = type;
     }
     public String getQueryType() {

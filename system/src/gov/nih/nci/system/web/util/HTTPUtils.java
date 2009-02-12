@@ -64,7 +64,7 @@ public class HTTPUtils implements Serializable{
 		this.classCache = (ClassCache)ctx.getBean("ClassCache");
 		this.applicationService = (ApplicationService)ctx.getBean("ApplicationServiceImpl");
 		
-		Properties systemProperties = (Properties) ctx.getBean("SystemProperties");
+		Properties systemProperties = (Properties) ctx.getBean("WebSystemProperties");
 		
 		try {
 			String rowCounter = systemProperties.getProperty("rowCounter");
@@ -128,7 +128,7 @@ public class HTTPUtils implements Serializable{
 	}
 
 	/**
-	 * Sets argument values based on a given queryTest
+	 * Sets argument values based on a given queryText
 	 * @param queryText - http query
 	 * @throws Exception
 	 */
@@ -338,14 +338,13 @@ public class HTTPUtils implements Serializable{
 	 * @param criteria - specifies the criteria string
 	 * @return
 	 */
-
 	public List<String> getSearchCriteriaList(String criteria){
+		
 		List<String> criteriaList = new ArrayList<String>();
 		String delimiter = null;
 		if(criteria.indexOf(SystemConstant.FORWARD_SLASH)>0){
 			delimiter = SystemConstant.FORWARD_SLASH_STR;
-		}
-		else {
+		} else {
 			delimiter = SystemConstant.BACK_SLASH;
 		}
         StringBuffer critString = new StringBuffer();
@@ -356,8 +355,7 @@ public class HTTPUtils implements Serializable{
             if(valid){
                 criteriaList.add(critString.toString());            
                 critString = new StringBuffer();            
-            }
-            else{
+            } else {
                 int len = critString.length();
                 if(criteria.length()>critString.length()){
                     for(int i = len; i<criteria.length() ; i++){
@@ -379,8 +377,7 @@ public class HTTPUtils implements Serializable{
         for(int i=0; i<query.length(); i++){    
             if(query.charAt(i)=='['){
                 startCounter++;
-            }
-            else if(query.charAt(i)==']'){
+            } else if (query.charAt(i)==']'){
                 endCounter++;
             }
         }    
@@ -392,8 +389,11 @@ public class HTTPUtils implements Serializable{
     
 	/**
 	 * Generates an org.jdom.Document based on a resultSet
-	 * @param resultSet - specifies a list of populated domain objects
-	 * @param pageNumber - specifies the page number
+	 * 
+	 * @param resultSet -
+	 *            specifies a list of populated domain objects
+	 * @param pageNumber -
+	 *            specifies the page number
 	 * @return
 	 * @throws Exception
 	 */
