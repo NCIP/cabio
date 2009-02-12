@@ -1,13 +1,14 @@
 package gov.nih.nci.codegen.util;
-import gov.nih.nci.codegen.GenerationException;
-import gov.nih.nci.ncicb.xmiinout.domain.*;
-import gov.nih.nci.ncicb.xmiinout.util.*;
+
+import gov.nih.nci.ncicb.xmiinout.domain.UMLClass;
+import gov.nih.nci.ncicb.xmiinout.domain.UMLAttribute;
+
 /*
  * Created on Sep 10, 2007
  * ShaziyaMuhsin
  * 
  */
-public class FreestyleTransformerUtils extends TransformerUtils{
+public class FreestyleTransformerUtils {
 
     public FreestyleTransformerUtils() {
         super();       

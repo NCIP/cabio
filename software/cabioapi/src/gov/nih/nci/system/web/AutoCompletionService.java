@@ -40,7 +40,7 @@ public class AutoCompletionService extends HttpServlet {
     public void init() throws ServletException {
         WebApplicationContext ctx =  
             WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        this.sessionFactory = ((ORMDAOImpl)ctx.getBean("ORMDAOFactory")).getHibernateTemplate().getSessionFactory();
+        this.sessionFactory = ((ORMDAOImpl)ctx.getBean("ORMDAO")).getHibernateTemplate().getSessionFactory();
     }
 
     /**

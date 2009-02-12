@@ -21,6 +21,7 @@ import gov.nih.nci.cabio.util.IncIterator;
 import gov.nih.nci.cabio.util.ORMTestCase;
 import gov.nih.nci.cabio.util.OnceIterator;
 import gov.nih.nci.common.domain.DatabaseCrossReference;
+import gov.nih.nci.common.util.ReflectionUtils;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 
@@ -53,6 +54,7 @@ public class AnnotationAPITest extends ORMTestCase {
     private static final String EXON_ARRAY = "HuEx-1_0-st-v2";
     
     private static final boolean BENCHMARK_SUBLISTS = false;
+    private static final boolean BENCHMARK_ASSOCIATIONS = false;
     
     private static final CaBioApplicationService appService = AllTests.getService();
 
@@ -252,14 +254,16 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no gene: "+er.getName(),er.getGene());
 
-                for(Object o : er.getPhysicalLocationCollection()) {
-                    PhysicalLocation pl = (PhysicalLocation)o;
-                    pl.getChromosome();
-                }
-                
-                for(Object o : er.getCytogeneticLocationCollection()) {
-                    CytogeneticLocation cl = (CytogeneticLocation)o;
-                    cl.getStartCytoband();
+                if (BENCHMARK_ASSOCIATIONS) {
+                    for(Object o : er.getPhysicalLocationCollection()) {
+                        PhysicalLocation pl = (PhysicalLocation)o;
+                        pl.getChromosome();
+                    }
+                    
+                    for(Object o : er.getCytogeneticLocationCollection()) {
+                        CytogeneticLocation cl = (CytogeneticLocation)o;
+                        cl.getStartCytoband();
+                    }
                 }
 
                 reporters.add(er.getName());
@@ -296,17 +300,19 @@ public class AnnotationAPITest extends ORMTestCase {
             
             for(ExonArrayReporter er : results) {
                 assertNotNull("Reporter has no name",er.getName());
-                
-                for(Gene o : er.getGeneCollection()) {
-                    assertNotNull(o.getId());
-                }
-                
-                for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
-                    assertNotNull(o.getId());
-                }
-                
-                for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
-                    assertNotNull(o.getId());
+
+                if (BENCHMARK_ASSOCIATIONS) {
+                    for(Gene o : er.getGeneCollection()) {
+                        assertNotNull(o.getId());
+                    }
+                    
+                    for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
+                    
+                    for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
                 }
                 
                 reporters.add(er.getName());
@@ -344,12 +350,14 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertNotNull("Reporter has no name",er.getName());
                 assertNotNull("Reporter has no SNP: "+er.getName(),er.getSNP());
 
-                for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
-                    assertNotNull(o.getId());
-                }
-                
-                for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
-                    assertNotNull(o.getId());
+                if (BENCHMARK_ASSOCIATIONS) {
+                    for(PhysicalLocation o : er.getPhysicalLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
+                    
+                    for(CytogeneticLocation o : er.getCytogeneticLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
                 }
                 
                 reporters.add(er.getName());
@@ -395,13 +403,15 @@ public class AnnotationAPITest extends ORMTestCase {
                 assertEquals(1,dxr.size());
                 assertEquals("Locus link id was not preloaded","LOCUS_LINK_ID",
                     dxr.iterator().next().getDataSourceName());
-                
-                for(PhysicalLocation o : gene.getPhysicalLocationCollection()) {
-                    assertNotNull(o.getId());
-                }
-                
-                for(CytogeneticLocation o : gene.getCytogeneticLocationCollection()) {
-                    assertNotNull(o.getId());
+
+                if (BENCHMARK_ASSOCIATIONS) {
+                    for(PhysicalLocation o : gene.getPhysicalLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
+                    
+                    for(CytogeneticLocation o : gene.getCytogeneticLocationCollection()) {
+                        assertNotNull(o.getId());
+                    }
                 }
             }
 
@@ -510,11 +520,11 @@ public class AnnotationAPITest extends ORMTestCase {
             assertNotNull(alias.getGeneCollection());
             
             // uncomment when SDK defect #12636 is fixed
-//            GeneAlias orig = (GeneAlias)ReflectionUtils.upwrap(alias);
-//            Collection<Gene> c = orig.getGeneCollection();
-//            for(Gene g : c) {
-//                assertEquals("HUGO symbol mismatch",symbol,g.getHugoSymbol());
-//            }
+            GeneAlias orig = (GeneAlias)ReflectionUtils.upwrap(alias);
+            Collection<Gene> c = orig.getGeneCollection();
+            for(Gene g : c) {
+                assertEquals("HUGO symbol mismatch",symbol,g.getHugoSymbol());
+            }
         }
     }
     

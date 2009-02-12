@@ -10,7 +10,6 @@ import gov.nih.nci.system.dao.impl.gridid.GridIdDAO;
 import gov.nih.nci.system.util.ClassCache;
 
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -31,9 +30,8 @@ public class CaBioApplicationServiceImpl extends ApplicationServiceImpl
     private final ClassCache classCache;
     
     
-    public CaBioApplicationServiceImpl(ClassCache classCache,
-            Properties systemProperties) {
-        super(classCache, systemProperties);
+    public CaBioApplicationServiceImpl(ClassCache classCache) {
+        super(classCache);
         
         // hold onto this so that we can do our own DAO queries
         this.classCache = classCache;
