@@ -8,14 +8,9 @@
 *************************************************************************-->
         
 <project name="caBIO_API" default="build-system" basedir=".">
-
-    <!--************************************************************************
-    * When using this build file as a template to create other caCORE-based 
-    * systems, the following must be customized.
-    *************************************************************************-->
     
     <description>Build script for the caBIO API</description>
-
+    	
     <property name="anthill.dependency.artifacts.dir" value=".."/>
     <property name="sdk.home.dir" value="${anthill.dependency.artifacts.dir}/cacoresdk" />
     <property name="build.properties" value="dev.properties"/>
@@ -34,6 +29,69 @@
         <echo>ant clean        - Remove generated build artifacts</echo>
         <echo>ant build-system - Build entire system</echo>
         <echo>ant dist-zips    - Create distribution zips</echo>
+    </target>
+
+    <property name="project.build.dir" value="${project.home.dir}/build" />
+    <property name="project.output.dir" value="${project.home.dir}/output" />
+    <property name="project.sourcedist.dir" value="${project.home.dir}/output/cabioapi" />
+
+    <property name="project.warfile" value="${project.output.dir}/webapp/${PROJECT_NAME}.war" />
+    
+    <property name="project.sourcedist" value="${PROJECT_NAME}_source" />
+    <property name="project.javaclientdist" value="${PROJECT_NAME}_java_client" />
+    <property name="project.wsclientdist" value="${PROJECT_NAME}_ws_client" />
+    <property name="project.javadoc" value="${PROJECT_NAME}_javadocs" />
+    <property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
+   
+    <condition property="project.ready">
+        <available file="${project.build.dir}/build.xml"/>
+    </condition>
+
+    <condition property="webapp.ready">
+        <available file="${project.warfile}"/>
+    </condition>
+
+    <target name="clean" 
+            description="Removes generated files">
+        <delete dir="${project.build.dir}" quiet="true"/>
+        <delete dir="${project.output.dir}" quiet="true"/>
+    </target>
+
+    <target name="build-system" depends="create-build,tag-build"
+            description="Generate the entire system">
+
+        <ant antfile="build-project.xml" inheritAll="false"/>
+            
+        <copy tofile="${project.output.dir}/remote-client/README.txt"
+            file="docs/README-client.txt">
+        </copy>
+    	
+    </target>
+	
+    <target name="create-build">
+        <antcall target="load-sdk" />
+        <antcall target="load-project" />
+    </target>
+
+    <target name="load-sdk" unless="project.ready"
+            description="Make a local copy of the SDK">
+
+        <mkdir dir="${project.build.dir}"/>
+        <mkdir dir="${project.build.dir}/models"/>
+        <mkdir dir="${project.build.dir}/models/database-scripts"/>
+    
+        <copy todir="${project.build.dir}">
+            <fileset dir="${sdk.home.dir}">
+                <include name="build.*" />
+                <include name="build-scripts/**/*" />
+                <include name="codegen/**/*" />
+                <include name="conf/**/*" />
+                <include name="system/**/*" />
+                <include name="grid/**/*" />
+                <include name="writable-api/**/*" />
+            </fileset>
+        </copy>
+        
     </target>
 
     <target name="load-project" 
@@ -67,7 +125,7 @@
                 <include name="local.properties" />
             </fileset>
         </copy>
-                	
+                    
         <!-- copy system -->
         <copy todir="${project.build.dir}/system" overwrite="true">
             <fileset dir="${project.home.dir}/system">
@@ -80,76 +138,38 @@
         </replace>
 
     </target>
-    
-    
-    <!--************************************************************************
-    * The rest of this file is generally not project specific and should 
-    * not need to be modified. 
-    *************************************************************************-->
 
-    <property name="project.build.dir" value="${project.home.dir}/build" />
-    <property name="project.output.dir" value="${project.home.dir}/output" />
-    <property name="project.sourcedist.dir" value="${project.home.dir}/output/cabioapi" />
+    <target name="tag-build" 
+            description="Populates the version.properties for this build">
 
-    <property name="project.warfile" value="${project.output.dir}/webapp/${PROJECT_NAME}.war" />
-    
-    <property name="project.sourcedist" value="${PROJECT_NAME}_source" />
-    <property name="project.javaclientdist" value="${PROJECT_NAME}_java_client" />
-    <property name="project.wsclientdist" value="${PROJECT_NAME}_ws_client" />
-    <property name="project.javadoc" value="${PROJECT_NAME}_javadocs" />
-    <property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
-    
-    <target name="clean" 
-            description="Removes generated files">
-        <delete dir="${project.build.dir}" quiet="true"/>
-        <delete dir="${project.output.dir}" quiet="true"/>
+        <exec executable="svn" output="${project.build.dir}/svninfo.xml">
+            <arg value="info"/>
+            <arg value="--xml"/>
+        </exec>
+    	
+        <xmlproperty file="${project.build.dir}/svninfo.xml" collapseattributes="true"/>
+    	
+    	<tstamp>
+    	   <format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+    	</tstamp>
+
+        <echo file="${project.build.dir}/version.properties" 
+            message="build.version=${DISPLAY_VERSION}${line.separator}"/>
+        	
+        <echo file="${project.build.dir}/version.properties" append="true"
+        	message="build.version.webapp=${WEBAPP_VERSION}${line.separator}"/>
+    	
+        <echo file="${project.build.dir}/version.properties" append="true"
+            message="build.svn.url=${info.entry.url}${line.separator}"/>
+        	
+        <echo file="${project.build.dir}/version.properties" append="true"
+            message="build.svn.revision=${info.entry.revision}${line.separator}"/>
+        	
+        <echo file="${project.build.dir}/version.properties" append="true"
+            message="build.date=${timestamp}"/>
+    	
     </target>
-    
-    <condition property="project.ready">
-        <available file="${project.build.dir}/build.xml"/>
-    </condition>
-
-    <condition property="webapp.ready">
-        <available file="${project.warfile}"/>
-    </condition>
-        
-    <target name="build-system" depends="create-build"
-            description="Generate the entire system">
-        
-        <ant antfile="build-project.xml" inheritAll="false"/>
-            
-        <copy tofile="${project.output.dir}/remote-client/README.txt"
-            file="docs/README-client.txt">
-        </copy>
-        
-    </target>
-    
-    <target name="create-build">
-        <antcall target="load-sdk" />
-        <antcall target="load-project" />
-    </target>
-
-    <target name="load-sdk" unless="project.ready"
-            description="Make a local copy of the SDK">
-
-        <mkdir dir="${project.build.dir}"/>
-        <mkdir dir="${project.build.dir}/models"/>
-        <mkdir dir="${project.build.dir}/models/database-scripts"/>
-    
-        <copy todir="${project.build.dir}">
-            <fileset dir="${sdk.home.dir}">
-                <include name="build.*" />
-                <include name="build-scripts/**/*" />
-                <include name="codegen/**/*" />
-                <include name="conf/**/*" />
-                <include name="system/**/*" />
-                <include name="grid/**/*" />
-                <include name="writable-api/**/*" />
-            </fileset>
-        </copy>
-        
-    </target>
-            
+        	
     <target name="dist-source" 
             description="Create a source distribution ready to be zipped">
       

@@ -167,6 +167,12 @@
         <copy todir="${package.client.ws.lib.dir}"
             file="${system.dir}/lib/hibernate-search.jar" />
             
+        <!-- copy version.properties to webapp dir -->
+        <concat destfile="${system.config.web.classes.dir}/messages.properties"
+                append="true">
+		    <filelist dir="." files="version.properties"/>
+	    </concat>
+            
         <!-- copy FreestyleLM configuration for webapp --> 
         <copy todir="${system.config.web.classes.dir}">
             <fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
