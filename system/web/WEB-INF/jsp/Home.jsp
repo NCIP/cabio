@@ -54,7 +54,7 @@
 										<table summary="" cellpadding="0" cellspacing="0" border="0"
 											height="100%" width="100%">
 											<tr>
-												<td class="welcomeTitle" height="20">WELCOME TO CABIO v4.2</td>
+												<td class="welcomeTitle" height="20">WELCOME TO CABIO v<s:text name="build.version"/></td>
 											</tr>
 											<tr>
 												<td class="welcomeContent" valign="top">The cancer
@@ -83,16 +83,34 @@
 													release notes</li>
 													<li><a
 														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO
-													4.2 Release Notes</a> - Latest release notes for caBIO</li>
+													<s:text name="build.version"/> Release Notes</a> - Latest release notes for caBIO</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO 4.2
+														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO <s:text name="build.version"/>
 													Data Refresh Release Notes</a> - Release notes describing
 													the current data content of caBIO</li>
-													<li><a href="docs">caBIO 4.2 javadocs</a> - Java API
+													<li><a href="docs">caBIO <s:text name="build.version"/> javadocs</a> - Java API
 													documentation</li>
-													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO 4.2 Tech Guide</a> - Technical
+													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
 													Guide</li>
 												</ul>
+												
+												<br>
+												<s:set name="url" scope="page" value="%{getText('build.svn.url')}"/>
+												<%
+												    String url = (String)pageContext.getAttribute("url");
+												    if (url != null) {
+											            if (url.contains("/tags/")) {
+											                url = url.replaceFirst("^.*?/tags/", "");
+											                url = url.replaceFirst("/.*?$", "");
+											            }
+											            else {
+											                url = url.replaceFirst("/+$", "");
+											                url = url.substring(url.lastIndexOf('/')+1);
+											            }
+												    }
+												%>
+                                                caBIO API <s:text name="build.version"/>, SVN:<a href="<s:text name="build.svn.url"/>"><%=url%></a>, Revision <s:text name="build.svn.revision"/>, Build <s:text name="build.date"/><br>
+                                                
 												</td>
 											</tr>
 										</table>
