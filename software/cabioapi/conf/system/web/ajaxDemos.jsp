@@ -11,7 +11,7 @@
 <head>
 <title>AJAX with REST</title>
 
-<link rel="stylesheet" type="text/css" href="/cabio41/styleSheet.css" />
+<link rel="stylesheet" type="text/css" href="styleSheet.css" />
 
 <link rel="icon" type="image/x-ico" href="favicon.ico" />
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -74,7 +74,10 @@ $(document).ajaxError(function(){
     }
 });
 
-deferred = "<img src='images/ajax-loading.gif'/>"
+var deferred = "<img src='images/ajax-loading.gif'/>";
+var context = "/cabio<s:text name="build.version.webapp"/>";
+var getXMLURL = context+"/GetXML";
+var getHTMLURL = context+"/GetHTML"; 
 
 </script>
 
@@ -150,7 +153,7 @@ function ex1_load() {
     var symbol = $("#ex1_symbol").val()
     
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=ExpressionArrayReporter&Gene[@hugoSymbol="+symbol+"]&pageSize=10",  
              success: function(xml){
 
@@ -190,7 +193,7 @@ Reporters: <ul style="margin:0px" id="ex1_results"></ul>
 function ex2_lookup_taxon(id, clusterId) {
 
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Taxon&Gene[@id="+id+"]",  
              success: function(xml){
 
@@ -210,7 +213,7 @@ function ex2_verify() {
     var symbol = $("#ex2_symbol").val()
     
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Gene&Gene[@symbol="+symbol+"]&pageSize=10",  
              success: function(xml){
 
@@ -231,7 +234,7 @@ function ex2_verify() {
                     $("#ex2_results").append("<tr><td><input type='radio' name='ex2_gene_group'></td><td>"+symbol+"</td>"+
                         "<td id='gene_"+id+"'>"+deferred+"</td>"+
                         "<td>"+fullName+"</td><td align='center'>"+
-                        "<a href='/cabio41/GetHTML?query=Gene&Gene[id="+id+"]' target='_new'>"+
+                        "<a href='"+getHTMLURL+"?query=Gene&Gene[id="+id+"]' target='_new'>"+
                         "<img src='images/red_arrow.gif' border='0'/></td></tr>")
                     
                     ex2_lookup_taxon(id, clusterId)
@@ -288,7 +291,7 @@ function ex3_load_arrays() {
     arrays_loaded = true;
             
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Microarray&Microarray[@type=oligo]",  
              success: function(xml){
 
@@ -309,7 +312,7 @@ function ex3_loadassoc(erid) {
 
     // Load ExpressionArrayReporter
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Gene&ExpressionArrayReporter[@id="+erid+"]",  
              success: function(xml){
 
@@ -323,7 +326,7 @@ function ex3_loadassoc(erid) {
     
     // Load Chromosome
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Chromosome&ArrayReporterPhysicalLocation/ArrayReporter[@id="+erid+"]",  
              success: function(xml){
              
@@ -334,7 +337,7 @@ function ex3_loadassoc(erid) {
     
     // Load PhysicalLocation
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=ArrayReporterPhysicalLocation&ExpressionArrayReporter[@id="+erid+"]",  
              success: function(xml){
 
@@ -346,7 +349,7 @@ function ex3_loadassoc(erid) {
     
     // Load ProteinDomains
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=ProteinDomain&ExpressionArrayReporter[@id="+erid+"]",  
              success: function(xml){
 
@@ -378,7 +381,7 @@ function ex3_load() {
     document.body.style.cursor = "wait";
     
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=ExpressionArrayReporter&ExpressionArrayReporter[@name="+name+"]/Microarray[@id="+maid+"]",  
              success: function(xml){
 
@@ -406,7 +409,7 @@ function ex3_load() {
                 rows += "<tr><th>Location</th><td id='ex3_loc'>"+deferred+"</td></tr>"
                 rows += "<tr><th>InterPro</th><td id='ex3_pds'>"+deferred+"</td></tr>"
                 rows += "<tr><th>Details</th><td class='nopad'>"
-                rows += "<a href='/cabio41/GetHTML?query=ArrayReporter&ArrayReporter[@id="+id+"]' target='_new'>"
+                rows += "<a href='"+getHTMLURL+"?query=ArrayReporter&ArrayReporter[@id="+id+"]' target='_new'>"
                 rows += "<img src='images/red_arrow.gif' border='0'/></td></tr>"
                 
                 $("#ex3_results").append("<table class='results'>"+rows+"</table>")
@@ -466,7 +469,7 @@ function ex4_load_chroms() {
     chroms_loaded = true;
             
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Chromosome&Taxon[@id=5]",  
              success: function(xml){
 
@@ -508,7 +511,7 @@ function ex4_load(page) {
     document.body.style.cursor = "wait";
     
     $.ajax({ type: "GET", dataType: "xml",
-             url: "/cabio41/GetXML", 
+             url: getXMLURL, 
              data: "query=Cytoband&Chromosome[@id="+cid+"]&pageSize=10&pageNumber="+page,  
              success: function(xml){
 
@@ -534,7 +537,7 @@ function ex4_load(page) {
                     bigid = $("field[name='bigid']", this).text();
                     
                     html += "<tr><td>"+name+"</td><td>"+bigid+"</td><td align='center'>"
-                    html += "<a href='/cabio41/GetHTML?query=SNP&SNP[@id="+id+"]' target='_new'>"
+                    html += "<a href='"+getHTMLURL+"?query=SNP&SNP[@id="+id+"]' target='_new'>"
                     html += "<img src='images/red_arrow.gif' border='0'/></td></tr>"
                 })
                 
@@ -597,6 +600,3 @@ Chromosome: <select id='ex4_chroms' onFocus='ex4_load_chroms()'>
 </table>
 </body>
 </html>
-
-
-
