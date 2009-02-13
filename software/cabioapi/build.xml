@@ -17,7 +17,7 @@
     <description>Build script for the caBIO API</description>
 
     <property name="anthill.dependency.artifacts.dir" value=".."/>
-    <property name="sdk.home.dir" value="${anthill.dependency.artifacts.dir}/SDK41" />
+    <property name="sdk.home.dir" value="${anthill.dependency.artifacts.dir}/cacoresdk" />
     <property name="build.properties" value="dev.properties"/>
     <property name="project.home.dir" value="." />
     <property name="test.dir" value="${project.home.dir}/test" />
