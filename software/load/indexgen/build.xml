@@ -1,50 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ****************************************************************************************************-->
-<!--                                 caCORE API Client Demo Build Script				                 -->
-<!-- ****************************************************************************************************-->
-<project name="caCORE API Client Demo" default="init" basedir=".">
-
-	<property name="conf.dir" value="conf" />
-	<property name="lib.dir" value="lib" />
-	<property name="src.dir" value="." />
-	<property name="numberTimeToRun" value="1" />
-	<property name="timeDelayInSecond" value="15" />	
-	<property file="conf/searchapiconfig.properties"/>
-	<path id="cp">
-		<fileset dir="lib">
-			<include name="**/*.jar" />
-		</fileset>
-		<pathelement path="${conf.dir}" />
-	</path>
-
-	<!-- ************************************************************************************************-->
-	<!--    Run caBIO Client Demo                                                                        -->
-	<!-- ************************************************************************************************-->
-	<target name="runindex" depends="init">		
-		<mkdir dir="${index_location}"/>
-		<java classname="gov.nih.nci.indexgen.IndexGenerator" fork="true">
-			<classpath refid="cp" />
-			<classpath>
-				<pathelement location="${src.dir}" />
-			</classpath>
-			<sysproperty key="log4j.configuration" value="${conf.dir}/log4j.properties" />
-		</java>
-
-	</target>
+<project name="caBIO Combined Index Generator" default="runindex" basedir=".">
+    <!--
+    This build file runs FreestyleLM indexgen for each version of caBIO
+    currently in production. Output files are copied to the top-level
+    log/ directory after each generator runs. For monitoring during the run
+    you must tail the build/.../output.log for the version currently being run.
+    -->
 	
-	<target name="init">
-		<copy tofile="${conf.dir}/freestyle.cfg.xml" file="freestyle_idxgen.cfg.xml" overwrite="true"/>
-		<replace dir="${conf.dir}">
-			<replacefilter token="@INDEXBASE@" value="${index_location}" />
-			<replacefilter token="@CONNECTION_URL@" value="${connection_url}" />
-			<replacefilter token="@DRIVER@" value="${connection_driver}" />
-			<replacefilter token="@USER_NAME@" value="${user_name}" />
-			<replacefilter token="@PASSWORD@" value="${password}" />
-			<replacefilter token="@SHOWSQL@" value="${show_sql}" />
-		</replace>
-		
-	</target>
+    <property name="build.dir" value="build"/>
+    <property name="log.dir" value="log"/>
+    <property file="build.properties"/>
+    <property name="cabio40.index.dir" value="${index_location}/40/indexes"/>
+    <property name="cabio41.index.dir" value="${index_location}/41/indexes"/>
+    <property name="cabio42.index.dir" value="${index_location}/42/indexes"/>
 
-	<!-- ************************************************************************************************-->
+    <target name="clean" description="Removes generated files">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+	
+    <target name="init">
+    	
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${log.dir}"/>
+    	
+        <copy todir="${build.dir}" overwrite="true">
+            <fileset dir="versions">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+
+        <replace dir="${build.dir}" includes="**/*.properties">
+            <replacefilter token="@CONNECTION_URL@" value="${connection_url}" />
+            <replacefilter token="@DRIVER@" value="${connection_driver}" />
+            <replacefilter token="@USER_NAME@" value="${user_name}" />
+            <replacefilter token="@PASSWORD@" value="${password}" />
+            <replacefilter token="@SHOWSQL@" value="${show_sql}" />
+        </replace>
+
+        <mkdir dir="${cabio40.index.dir}"/>
+        <mkdir dir="${cabio41.index.dir}"/>
+        <mkdir dir="${cabio42.index.dir}"/>
+    	
+        <replace dir="${build.dir}/4.0" includes="**/*.properties">
+            <replacefilter token="@INDEXBASE@" value="${cabio40.index.dir}" />
+        </replace>
+        <replace dir="${build.dir}/4.1" includes="**/*.properties">
+            <replacefilter token="@INDEXBASE@" value="${cabio41.index.dir}" />
+        </replace>
+        <replace dir="${build.dir}/4.2" includes="**/*.properties">
+            <replacefilter token="@INDEXBASE@" value="${cabio42.index.dir}" />
+        </replace>
+    	
+    </target>
+    	
+	<target name="runindex" depends="init">
+
+		<echo message="Running caBIO 4.0 index generator"/>
+        <ant antfile="${build.dir}/4.0/build.xml" target="runindex" inheritAll="false"/>
+        <copy file="${build.dir}/4.0/log/output.log" tofile="${log.dir}/output_4.0.log" overwrite="true"/>
+
+        <echo message="Running caBIO 4.1 index generator"/>
+        <ant antfile="${build.dir}/4.1/build.xml" target="runindex" inheritAll="false"/>
+        <copy file="${build.dir}/4.1/log/output.log" tofile="${log.dir}/output_4.1.log" overwrite="true"/>
+
+        <echo message="Running caBIO 4.2 index generator"/>
+        <ant antfile="${build.dir}/4.2/build.xml" target="runindex" inheritAll="false"/>
+        <copy file="${build.dir}/4.2/log/output.log" tofile="${log.dir}/output_4.2.log" overwrite="true"/>
+
+	</target>
 	
 </project>
