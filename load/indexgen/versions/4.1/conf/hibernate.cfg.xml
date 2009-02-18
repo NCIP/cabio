@@ -4,12 +4,12 @@
 	<session-factory>
 	
 		<!-- Properties for the session factory -->
-		
 		<property name="dialect">org.hibernate.dialect.OracleDialect</property>
-		<property name="connection.url">jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:cbdev </property>	
-			<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>	
-			<property name="connection.username">cabiodev</property>
-			<property name="connection.password">cabiodev505</property>
+		<property name="max_fetch_depth">1</property>
+		<property name="cglib.use_reflection_optimizer">false</property>
+		<property name="jdbc.batch_versioned_data">true</property>
+		<property name="jdbc.use_streams_for_binary">true</property>
+		<property name="cache.use_query_cache">false</property>
 		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 
 		<!-- Mapped Resources -->
@@ -26,13 +26,15 @@
 		<mapping resource="gov/nih/nci/cabio/domain/ProteinAlias.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Target.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/GeneAlias.hbm.xml" />
-		<mapping resource="gov/nih/nci/cabio/domain/GenericArray.hbm.xml" />
+		<mapping resource="gov/nih/nci/cabio/domain/EvidenceCode.hbm.xml" />
+		<mapping resource="gov/nih/nci/cabio/domain/MarkerAlias.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Vocabulary.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/OrganOntologyRelationship.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/OrganOntology.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Protocol.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Anomaly.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Agent.hbm.xml" />
+		<mapping resource="gov/nih/nci/cabio/domain/GeneFunctionAssociation.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Exon.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/RelativeLocation.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Library.hbm.xml" />
@@ -45,8 +47,8 @@
 		<mapping resource="gov/nih/nci/cabio/domain/Tissue.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/GeneOntologyRelationship.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Transcript.hbm.xml" />
-		<mapping resource="gov/nih/nci/cabio/domain/GenericReporter.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/Pathway.hbm.xml" />
+		<mapping resource="gov/nih/nci/cabio/domain/Evidence.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/ProteinSequence.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/CloneRelativeLocation.hbm.xml" />
 		<mapping resource="gov/nih/nci/cabio/domain/ClinicalTrialProtocol.hbm.xml" />
