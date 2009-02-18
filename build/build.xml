@@ -57,7 +57,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<property name="download.dir" location="${target.dir}/download" />
 	<property name="pt.dir" location="${target.dir}/persistent-transient" />
 	<property name="working.dir" location="${target.dir}/working" />
-      <property name="cacore.sdk.dir" location="${software.dir}/${cacore-sdk.binaries.relative.dir}"/>
+      <property name="cacore-sdk.dir" location="${software.dir}/${cacore-sdk.binaries.relative.dir}"/>
 
 	<!-- Ivy Related props -->
 	<property name="ivy.settings.file" value="ivy-settings.xml" />
@@ -313,7 +313,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                                 </not>
                         </and>
                         <then>
-                                <unzip src="${download.dir}/${cacore-sdk.binaries.file}" dest="${cacore.sdk.dir}"/>
+                                <unzip src="${download.dir}/${cacore-sdk.binaries.file}" dest="${cacore-sdk.dir}"/>
                         </then>
                 </if>
         </target>
@@ -353,9 +353,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 	<target name="build:cabio-webapp" depends="init, build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
-		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.build.file}" target="${cabio-webapp.build.target}" dir="${cabio-webapp.base.dir}">
-			<property name="dist.dir" value="${cabio-webapp.dist.dir}" />
-			<property name="env.GLOBUS_LOCATION" value="${env.GLOBUS_LOCATION}"/>
+		<!-- ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.build.file}" target="${cabio-webapp.build.target}" dir="${cabio-webapp.base.dir}" -->
+            <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">
 		</ant>
 	</target>
 
