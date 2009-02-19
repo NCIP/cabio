@@ -1,5 +1,9 @@
 	
 	/*
+	 * Modified by Konrad Rokicki for caBIO purposes:
+	 *  1) Fixed behavior when minchars=0
+	 *  2) Surround suggestions with quotes
+	 *
 	 *	jquery.suggest 1.1 - 2007-08-06
 	 *	
 	 *	Uses code and techniques from following libraries:
@@ -97,6 +101,7 @@
 	
 					}
 					
+			    // KR: added check for no previous search, for the first char typed
 				} else if (($input.val().length != prevLength)||(prevLength === 0)) {
 
 					if (timeout) 
@@ -113,6 +118,8 @@
 			function suggest() {
 			
 				var q = $.trim($input.val());
+				// KR: remove quotes from input before suggesting
+                q = q.replace(new RegExp("\"","gi"), "");
 
 				if (q.length >= options.minchars) {
 					
@@ -244,7 +251,8 @@
 				$currentResult = getCurrentResult();
 			
 				if ($currentResult) {
-					$input.val($currentResult.text());
+				    // KR: Add quotes around anything selected from the list
+					$input.val('"'+$currentResult.text()+'"');
 					$results.hide();
 					
 					if (options.onSelect)
