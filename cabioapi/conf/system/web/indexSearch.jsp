@@ -1,11 +1,13 @@
 <%@page contentType="text/html"%>
 <HTML>
 <HEAD>
-<title>Index Search</title>
+<title>FreestyleLM Search</title>
 <link href="styleSheet.css" type="text/css" rel="stylesheet" />
-<SCRIPT> 
-
-</SCRIPT>
+<link rel="stylesheet" type="text/css" href="css/jquery.suggest.css" />
+<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
+<script src="js/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>
+<script src="js/jquery.suggest.js" type="text/javascript"></script>
 </HEAD>
 <BODY>
 
@@ -50,11 +52,16 @@
  				
  		<tr>
  		<td align=center>
- 			<INPUT TYPE=TEXT SIZE=60 name="searchString" value="<%=searchString%>">					
+ 			<INPUT TYPE=TEXT SIZE=60 id="freestyleLM" name="searchString" value="<%=searchString%>">					
 			<INPUT TYPE=SUBMIT NAME="search" VALUE="Search">
  		</td>
  		<tr>
  		</table>
+	    <script type="text/javascript">
+	    jQuery(function() {
+	        jQuery("#freestyleLM").suggest("suggest",{minchars:1});
+	    });
+	    </script>
  		<table align=center>
 		<tr>
 		 		<td> <INPUT TYPE=RADIO VALUE=WITH_ALL NAME=WORDS> match all words<br>
