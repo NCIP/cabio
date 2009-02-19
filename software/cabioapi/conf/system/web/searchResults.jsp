@@ -3,7 +3,11 @@
 <HEAD>
 <title>SearchIndex</title>
 <link href="styleSheet_flm.css" type="text/css" rel="stylesheet" />
-
+<link rel="stylesheet" type="text/css" href="css/jquery.suggest.css" />
+<script src="js/jquery-1.2.3.min.js" type="text/javascript"></script>
+<script src="js/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="js/jquery.dimensions.min.js" type="text/javascript"></script>
+<script src="js/jquery.suggest.js" type="text/javascript"></script>
 </HEAD>
 <BODY>
 
@@ -51,7 +55,7 @@
  		<td align=left valign=top>
                 <table>
                   <tr><td>
- 			<INPUT TYPE=TEXT SIZE=60 name="searchString" value="<%=searchString%>">
+ 			<INPUT TYPE=TEXT SIZE=60 id="freestyleLM" name="searchString" value="<%=searchString%>">
  			<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
 			<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
 			<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
@@ -59,6 +63,11 @@
                 </table>
  		</td>
  	</tr>
+    <script type="text/javascript">
+    jQuery(function() {
+        jQuery("#freestyleLM").suggest("suggest",{minchars:1});
+    });
+    </script>
 <tr bgColor="#FAF8CC"><td align=left width=25%><%=searchUtils.getResultCounter()%> records found</td><td align=right>
 <%
 if(startIndex != null){
