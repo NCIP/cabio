@@ -193,9 +193,7 @@
 														</form>
 														<script type="text/javascript">
 														jQuery(function() {
-															jQuery("#freestyleLM").suggest("suggest",{
-															     minchars:1
-															});
+															jQuery("#freestyleLM").suggest("suggest",{minchars:1});
 														});
 														</script>
 														<!-- freestyle search --></td>
