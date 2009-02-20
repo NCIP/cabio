@@ -109,7 +109,7 @@
 											            }
 												    }
 												%>
-                                                caBIO API <s:text name="build.version"/>, SVN:<a href="<s:text name="build.svn.url"/>"><%=url%></a>, Revision <s:text name="build.svn.revision"/>, Build <s:text name="build.date"/><br>
+                                                caBIO API <s:text name="build.version"/>, Tag: <a href="<s:text name="build.svn.url"/>" title="Revision <s:text name="build.svn.revision"/>"><%=url%></a>, Build Date: <s:text name="build.date"/><br>
                                                 
 												</td>
 											</tr>
