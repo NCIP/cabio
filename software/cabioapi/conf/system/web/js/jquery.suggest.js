@@ -252,7 +252,9 @@
 			
 				if ($currentResult) {
 				    // KR: Add quotes around anything selected from the list
-					$input.val('"'+$currentResult.text()+'"');
+                    var q = $.trim($currentResult.text());
+				    if (q.match(' ')) q = '"'+q+'"';
+					$input.val(q);
 					$results.hide();
 					
 					if (options.onSelect)
