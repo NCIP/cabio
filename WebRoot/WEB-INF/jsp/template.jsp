@@ -14,16 +14,15 @@
 
 <a href="<bean:message key="online.help.url"/>" target="_blank">
     <img src="<c:url value="/images/questionMark.gif"/>" 
-        style="float: right; margin-left: 8px;">
+        style="float: right; margin-left: 8px;"/>
 </a>
 
 <div style="color: #444;">
-<img src="<c:url value="/images/sdkLogoSmall.gif"/>" style="float: left; margin-right: 8px;">
-
-<span class="link-extenal"><a href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO" target="_blank">caBIO</a></span> 
-is a repository of data useful in biomedical research, compiled from multiple primary sources. 
-This portlet uses <span class="link-extenal"><a href="<bean:message key="cabio.restapi.url"/>" target="_blank">caBIO version <bean:message key="cabio.restapi.version"/></a></span>.
-
+<img src="<c:url value="/images/sdkLogoSmall.gif"/>" style="float: left; margin-right: 8px;"/>
+The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>" target="_blank">caBIO portlet</a></span>
+&nbsp;is a portal user interface built on top of the caBIO APIs. 
+<span class="link-extenal"><a href="<bean:message key="link.cabio.api"/>" target="_blank">caBIO</a></span> 
+&nbsp;is a repository of data useful in biomedical research, compiled from multiple primary sources. 
 </div>
 
 <div style="clear: both; margin-bottom: 10px;"></div>
@@ -47,7 +46,7 @@ This portlet uses <span class="link-extenal"><a href="<bean:message key="cabio.r
 %>
 
 <liferay-ui:tabs
-	names="Simple Search,Templated Searches"
+	names="Simple Search,Templated Searches,About"
 	url="<%= portletURL.toString() %>"
 	value="<%= tab %>"
 />
