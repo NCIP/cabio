@@ -13,10 +13,10 @@ var caBioObjectDetails = function() {
         var searchText = jQuery("#searchText").val();
         jQuery("#searchResults").hide();
      
-        if (r.errorMessage) {
-            var h = '<div class="summary">Object not found</div>';
-            h += '<div class="error">'+r.errorClass+": "+r.errorMessage+'</div>';
-            jQuery("#objectDetails").append(h).show();
+        if (r.exceptionClass) {
+            var h = '<div class="summary">Error retrieving object</div>';
+            h += '<div class="error">'+r.exceptionMessage+'</div>';
+            jQuery("#objectDetails").empty().append(h).show();
         }
         else {  	
 	        var h = '<div>'
