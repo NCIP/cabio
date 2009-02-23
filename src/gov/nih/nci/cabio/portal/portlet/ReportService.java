@@ -160,7 +160,7 @@ public class ReportService {
             hql += target + ".id = '"+id+"'";
         }
 
-        // TODO: We can't use wildcards here because some ids are Integers 
+        // TODO: We can't use placeholders here because some ids are Integers 
         // instead of Longs (GF18404). When that's fixed, we can do the 
         // following, which is more efficient:
         
