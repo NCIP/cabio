@@ -1,6 +1,5 @@
 package gov.nih.nci.cabio.portal.portlet;
 
-import gov.nih.nci.cabio.domain.ClinicalTrialProtocol;
 import gov.nih.nci.cabio.portal.portlet.canned.CannedObjectConfig;
 import gov.nih.nci.cabio.portal.portlet.canned.ClassObject;
 import gov.nih.nci.cabio.portal.portlet.canned.LabeledObject;
@@ -93,7 +92,7 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
         Object obj = rs.getDetailObject(clazz, longId);
         
         if (obj == null) {
-            throw new Exception(className+" not found with id: "+id);
+            throw new Exception("Cannot find "+className+" with id "+id+".");
         }
         
         if (config == null) {
