@@ -30,10 +30,6 @@ import net.handle.server.IDSvcInterfaceFactory;
 import net.handle.server.ResourceIdInfo;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * Provides DAO functionality to perform Grid Id and Range queries.
@@ -120,28 +116,34 @@ public class GridIdDAO implements DAO {
         log.info("rangeQuery("+lstart+","+lend+") assembly="+
             rangeQuery.getAssembly()+" partial="+rangeQuery.getAllowPartialMatches());
 
-        DetachedCriteria dc = DetachedCriteria.forClass(targetClass);
+        List<Object> params = new ArrayList<Object>();
+        params.add(rangeQuery.getAssembly());
+        params.add(chromosomeId);
+        params.add(lstart);
+        params.add(lend);
         
-        dc.add(Restrictions.eq("assembly", rangeQuery.getAssembly()));
+        // The restriction on CHROMOSOME_ID works because it is an 
+        // unambiguous column. This way we can avoid the join to Chromosome.
+        StringBuffer hql = new StringBuffer(
+                "from "+targetClass.getName()+" as p " +
+                "where p.assembly = ? " +
+                "and CHROMOSOME_ID = ? ");
         
         if (rangeQuery.getAllowPartialMatches()) {
-            dc = dc.add(Restrictions.or(
-                Restrictions.between("chromosomalStartPosition",lstart,lend),
-                Restrictions.between("chromosomalEndPosition",lstart,lend)));
+            hql.append("and ((p.chromosomalStartPosition between ? and ?) " +
+            		   "or (p.chromosomalEndPosition between ? and ?)) ");
+            params.add(lstart);
+            params.add(lend);
         }
         else {
-            dc = dc.add(Restrictions.and(
-                Restrictions.ge("chromosomalStartPosition",lstart), 
-                Restrictions.le("chromosomalEndPosition",lend)));
+            hql.append("and p.chromosomalStartPosition >= ? " +
+            		   "and p.chromosomalEndPosition <= ? ");
         }
-
-        dc = dc.addOrder(Order.asc("chromosomalStartPosition"))   
-               .add( Restrictions.sqlRestriction("{alias}.chromosome_id = ?", 
-                     chromosomeId, Hibernate.LONG));
         
-        List results = appService.query(dc);
-        return results;
+        String hqlQuery = hql.toString()+"order by p.chromosomalStartPosition";
+        String hqlCount = "select count(*) "+hqlQuery;
         
+        return appService.query(new HQLCriteria(hqlQuery, hqlCount, params));
     }
 
     /**
@@ -161,7 +163,7 @@ public class GridIdDAO implements DAO {
 
         if (feature instanceof PhysicalLocation) {
             location = (PhysicalLocation)feature;
-            // must do a seperate query to get the chromosome because this 
+            // must do a separate query to get the chromosome because this 
             // feature object has no session
             List results = appService.getAssociation(feature, "chromosome");
             Chromosome c = (Chromosome)results.get(0);
@@ -187,7 +189,6 @@ public class GridIdDAO implements DAO {
                     "where f.id = ? " +
                     "and p.assembly = ? " +
                     "group by c.id";
-            
             
             List params = new ArrayList();
             
