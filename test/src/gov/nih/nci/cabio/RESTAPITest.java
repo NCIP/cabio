@@ -1,8 +1,5 @@
 package gov.nih.nci.cabio;
 
-import java.io.InputStream;
-import java.util.Map;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
