@@ -18,6 +18,8 @@ import gov.nih.nci.cabio.domain.GenePhysicalLocation;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.domain.SNP;
 import gov.nih.nci.cabio.domain.SNPArrayReporter;
+import gov.nih.nci.cabio.domain.SNPPhysicalLocation;
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
@@ -51,14 +53,14 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
     private static final String DEFAULT_ASSEMBLY = "reference";
     
     private static final String GET_SNPS_NEAR_GENE_HQL = 
-            "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-            "left join gene.physicalLocationCollection as pl " +
-            "left join fetch gene.chromosome " +
-            "left join gene.taxon as taxon " +
+            "select pl from gov.nih.nci.cabio.domain.GenePhysicalLocation pl " +
+            "left join pl.gene as gene " +
+            "left join pl.gene.taxon as taxon " +
+            "left join fetch pl.chromosome " +
             "where pl.chromosome = gene.chromosome " +
             "and pl.featureType = 'CDS' " + 
             "and pl.assembly = ? " +
-            "and gene.hugoSymbol = ? " +
+            "and (gene.hugoSymbol = ? or gene.symbol = ?) " +
             "and taxon.abbreviation = ? ";
 
     private final CaBioApplicationService appService;
@@ -330,10 +332,12 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         List params = new ArrayList();
         params.add(assembly);
         params.add(symbol);
+        params.add(symbol);
         params.add(taxon);
         
-        Collection<Gene> result = appService.query(
-            new HQLCriteria(GET_SNPS_NEAR_GENE_HQL,params));
+        Collection<GenePhysicalLocation> result = appService.query(
+            new HQLCriteria(GET_SNPS_NEAR_GENE_HQL,
+                QueryUtils.createCountQuery(GET_SNPS_NEAR_GENE_HQL),params));
 
         if (result == null || result.isEmpty()) 
             throw new ApplicationException("No genes found for symbol "+symbol);
@@ -345,21 +349,12 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
         Long chromosomeId = null;
         
         // construct all padded ranges
-        for(Gene gene : result) {
-            if (chromosomeId == null) chromosomeId = gene.getChromosome().getId();
-            Collection<GenePhysicalLocation> pls = gene.getPhysicalLocationCollection();
-            for(GenePhysicalLocation pl : pls) {
+        for(GenePhysicalLocation pl : result) {
+            if (chromosomeId == null) chromosomeId = pl.getChromosome().getId();
 
-                if (!assembly.equals(pl.getAssembly()) 
-                        || !"CDS".equals(pl.getFeatureType()) 
-                        || !chromosomeId.equals(pl.getChromosome().getId())) {
-                    continue;
-                }
-                
-                rawRanges.add(new GenomeRange(
-                    pl.getChromosomalStartPosition() - upPad,
-                    pl.getChromosomalEndPosition() + downPad));
-            }
+            rawRanges.add(new GenomeRange(
+                pl.getChromosomalStartPosition() - upPad,
+                pl.getChromosomalEndPosition() + downPad));
         }
 
         // combine overlapping ranges
@@ -375,7 +370,7 @@ public class ArrayAnnotationServiceImpl implements ArrayAnnotationService {
             }
         }
 
-        // query for SNPs on the given assembly in the combined ranges
+        // query for SNPs on the given assembly in the combined ranges        
         DetachedCriteria dc = DetachedCriteria.forClass(SNP.class)
                 .createCriteria("physicalLocationCollection")
                 .add(Restrictions.eq("assembly",assembly));
