@@ -1,6 +1,7 @@
 package gov.nih.nci.cabio.annotations.query;
 
 import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
@@ -28,10 +29,6 @@ public class GeneAnnotationsQuery extends InListQuery {
         params.addAll(subList);
         
         String hql = "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-//                "left join fetch gene.cytogeneticLocationCollection as cl " +
-//                "left join fetch cl.startCytoband " +
-//                "left join fetch gene.pathwayCollection " +
-//                "left join fetch gene.geneOntologyCollection " +
                 "left join fetch gene.databaseCrossReferenceCollection as dcr " +
                 "left join fetch gene.chromosome " +
                 "left join gene.taxon as taxon " +
@@ -39,7 +36,7 @@ public class GeneAnnotationsQuery extends InListQuery {
                 "and dcr.dataSourceName = 'LOCUS_LINK_ID' " +
                 "and gene.hugoSymbol in "+getPlaceholders(subList);
         
-        return new HQLCriteria(hql,params);
+        return new HQLCriteria(hql,QueryUtils.createCountQuery(hql),params);
     }
     
     protected void processResult(Object result) {

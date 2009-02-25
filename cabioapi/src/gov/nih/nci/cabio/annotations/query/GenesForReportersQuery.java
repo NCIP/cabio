@@ -1,5 +1,6 @@
 package gov.nih.nci.cabio.annotations.query;
 
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
@@ -38,8 +39,8 @@ public class GenesForReportersQuery extends InListQuery {
                 "and microarray.name = ? " +
                 "and reporter.name in "+getPlaceholders(subList)+" "+
                 "order by reporter.name";
-        
-        return new HQLCriteria(hql,params);
+
+        return new HQLCriteria(hql,QueryUtils.createCountQuery(hql),params);
     }
     
     protected void processResult(Object result) {

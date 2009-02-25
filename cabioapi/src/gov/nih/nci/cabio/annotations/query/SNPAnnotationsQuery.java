@@ -1,6 +1,7 @@
 package gov.nih.nci.cabio.annotations.query;
 
 import gov.nih.nci.cabio.domain.SNP;
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
@@ -23,13 +24,9 @@ public class SNPAnnotationsQuery extends InListQuery {
 
         String hql = "select snp from " +
                 "gov.nih.nci.cabio.domain.SNP snp " +
-//                "left join fetch snp.physicalLocationCollection as l " +
-//                "left join fetch l.chromosome as c " +
-//                "left join fetch snp.cytogeneticLocationCollection cl " +
-//                "left join fetch cl.startCytoband " +
                 "where snp.DBSNPID in "+getPlaceholders(subList);
-        
-        return new HQLCriteria(hql,subList);
+
+        return new HQLCriteria(hql,QueryUtils.createCountQuery(hql),subList);
     }
     
     protected void processResult(Object result) {
