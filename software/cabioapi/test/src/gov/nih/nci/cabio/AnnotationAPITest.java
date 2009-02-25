@@ -41,6 +41,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.aop.framework.Advised;
 
 /**
  * Unit tests for the Array Annotation API in caBIO.
@@ -391,7 +392,6 @@ public class AnnotationAPITest extends ORMTestCase {
             assertTrue("Result size is smaller than input size", 
                 (sublist.size()<=results.size()));
             
-            System.out.println("SIZE "+results.size());
             for(Gene gene : results) {
                 
                 assertNotNull(gene.getChromosome());
@@ -603,11 +603,11 @@ public class AnnotationAPITest extends ORMTestCase {
         String symbol = "A1CF";
         String assembly = "reference";
         
-        Long pad = new Long(0);
+        Long pad = new Long(1);
         long start = System.currentTimeMillis();
         Collection<SNP> results = am.getSnpsNearGene(symbol,pad,pad);
         long end = System.currentTimeMillis();
-        assertTrue("Less than 10 SNPs found near Gene",results.size()>10);
+		assertTrue("Less than 10 SNPs found near Gene",results.size()>10);
         
         verifySNPsNearGene(symbol, pad, assembly, results);
         
@@ -654,11 +654,21 @@ public class AnnotationAPITest extends ORMTestCase {
 
     private void verifySNPsNearGene(String symbol, Long pad, String assembly, 
             Collection<SNP> results) throws Exception {
+
+        long kbpad = pad * 1000;
         
         Collection<Gene> genes = am.getGenesForSymbol(symbol);
 
+        // Workaround for SDK bug GF19565
+        Map<Gene,Collection<GenePhysicalLocation>> gene2locs = 
+            new HashMap<Gene,Collection<GenePhysicalLocation>>();
+        for(Gene gene : genes) {
+            gene2locs.put(gene, gene.getPhysicalLocationCollection());
+        }
+        
         // ensure each SNP actually falls in one of the gene CDS ranges
         for(SNP snp : results) {
+
             boolean inGene = false;
             Collection<SNPPhysicalLocation> spls = snp.getPhysicalLocationCollection();
             for(SNPPhysicalLocation spl : spls) {
@@ -668,26 +678,24 @@ public class AnnotationAPITest extends ORMTestCase {
                 }
                 
                 for(Gene gene : genes) {
-                    
                     if (!spl.getChromosome().getId().equals(gene.getChromosome().getId())) {
                         continue;   
                     }
                     
-                    Collection<GenePhysicalLocation> gpls = 
-                        gene.getPhysicalLocationCollection();
-                    
+                    Collection<GenePhysicalLocation> gpls = gene2locs.get(gene);
                     for(GenePhysicalLocation gpl : gpls) {
+                        
                         if (!"CDS".equals(gpl.getFeatureType())) {
                             continue;
                         }
                         if (!spl.getAssembly().equals(gpl.getAssembly())) {
                             continue;
                         }
-                        if (gpl.getChromosomalStartPosition()-pad > 
+                        if (gpl.getChromosomalStartPosition()-kbpad > 
                                 spl.getChromosomalStartPosition()) {
                             continue;
                         }
-                        if (gpl.getChromosomalEndPosition()+pad < 
+                        if (gpl.getChromosomalEndPosition()+kbpad < 
                                 spl.getChromosomalEndPosition()) {
                             continue;
                         }
@@ -728,6 +736,6 @@ public class AnnotationAPITest extends ORMTestCase {
     public static void main(String[] argv) throws Exception {
         AnnotationAPITest test = new AnnotationAPITest();
         test.setUp();
-        test.testGetGeneAnnotations();
+        test.testGetSnpsNearGene();
     }
 }
