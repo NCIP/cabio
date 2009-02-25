@@ -40,7 +40,7 @@ public class AllTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Test for gov.nih.nci.cabio");
         //$JUnit-BEGIN$
-        //suite.addTestSuite(AnnotationAPITest.class);
+        suite.addTestSuite(AnnotationAPITest.class);
         suite.addTestSuite(ArraysTest.class);
         suite.addTestSuite(CaBIGStandardModelTest.class);
         suite.addTestSuite(CGDCTest.class);
@@ -48,7 +48,7 @@ public class AllTests {
         suite.addTestSuite(DefectTest.class);
         suite.addTestSuite(DevGuideTest.class);
         suite.addTestSuite(FreestyleLMTest.class);
-        //suite.addTestSuite(GridIdTest.class);
+        suite.addTestSuite(GridIdTest.class);
         suite.addTestSuite(MarkerTest.class);
         suite.addTestSuite(PIDTest.class);
         suite.addTestSuite(QueryTest.class);
