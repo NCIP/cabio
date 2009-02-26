@@ -658,13 +658,6 @@ public class AnnotationAPITest extends ORMTestCase {
         long kbpad = pad * 1000;
         
         Collection<Gene> genes = am.getGenesForSymbol(symbol);
-
-        // Workaround for SDK bug GF19565
-        Map<Gene,Collection<GenePhysicalLocation>> gene2locs = 
-            new HashMap<Gene,Collection<GenePhysicalLocation>>();
-        for(Gene gene : genes) {
-            gene2locs.put(gene, gene.getPhysicalLocationCollection());
-        }
         
         // ensure each SNP actually falls in one of the gene CDS ranges
         for(SNP snp : results) {
@@ -678,11 +671,14 @@ public class AnnotationAPITest extends ORMTestCase {
                 }
                 
                 for(Gene gene : genes) {
+                    
                     if (!spl.getChromosome().getId().equals(gene.getChromosome().getId())) {
                         continue;   
                     }
                     
-                    Collection<GenePhysicalLocation> gpls = gene2locs.get(gene);
+                    Collection<GenePhysicalLocation> gpls = 
+                        gene.getPhysicalLocationCollection();
+                    
                     for(GenePhysicalLocation gpl : gpls) {
                         
                         if (!"CDS".equals(gpl.getFeatureType())) {
