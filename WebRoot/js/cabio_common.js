@@ -3,6 +3,10 @@
  */
 var caBioCommon = function() {
     
+    // Pager: max number of pages to show in each direction from the current page
+    var NUM_PAGES_SHOWN = 8;
+    
+    // Drop down arrows
     var downBlueImg = "/cabioportlets/images/down_arrow_blue.png";
     var downGreyImg = "/cabioportlets/images/down_arrow_grey.png";
 
@@ -122,17 +126,106 @@ var caBioCommon = function() {
     highlight : function (label, wordList) {
         var h = label;
         for(var i=0; i<wordList.length; i++) {
-            h = h.replace(new RegExp("("+wordList[i]+")","gi"), "<b>$1</b>");
+            var w = jQuery.trim(wordList[i]);
+            if (w) {
+                h = h.replace(new RegExp("("+w+")","gi"), "<b>$1</b>");
+            }
         }
         return h;
     },
     
     /**
+     * Tokenize the given string into an array of words and phrases. If you 
+     * put a phrase in quotes it will come through as a single token.
+     */
+    tokenize : function (s) {
+        var a = [];
+        var curr = "";
+        var open = false;
+        for(i=0; i<s.length; i++) {
+            if (s[i] == '"') {
+               if (open) {
+                   a[a.length] = curr;
+                   curr = "";
+               }
+               open = !open;
+            }
+            else if (s[i] == ' ') {
+               if (open) {
+                    curr += s[i];
+               }
+               else if (curr) {
+                   a[a.length] = curr;
+                   curr = "";
+               }
+            }
+            else {
+               curr += s[i];
+            }
+        }
+        if (curr) a[a.length] = curr;
+        return a;
+    },
+    
+    /**
+     * Creates and returns a string of HTML to display a simple pager.
+     * @param numPages total number of pages
+     * @param currPage current page (1 indexed)
+     * @param pkgName Javascript object with a loadSearch method that will be 
+     *                called when the user switches pages.
+     */
+    createPager : function(numPages, currPage, pkgName) {
+    
+	    var rp = '';
+	    var leftpadded = false; 
+	    var rightpadded = false;
+	    
+	    for(i=1; i<=numPages; i++) {
+	        if (i == currPage) {
+	            rp += ' '+i;
+	        }
+	        else if (((i > currPage-NUM_PAGES_SHOWN) 
+	              && (i < currPage+NUM_PAGES_SHOWN))
+	              || (i == 1) || (i == numPages)) {
+	            rp += ' <a href="javascript:'+pkgName+'.loadSearch('+i+')">'+i+'</a>';
+	        }
+	        else if ((i <= currPage-NUM_PAGES_SHOWN) && (i > 1)) {
+	            if (!leftpadded) {
+	                rp += ' ...';
+	                leftpadded = true;
+	            }
+	        }
+	        else if ((i >= currPage+NUM_PAGES_SHOWN) && (i < numPages)) {
+	            if (!rightpadded) {
+	                rp += ' ...';
+	                rightpadded = true;
+	            }
+	        }
+	    }
+	    
+	    pages = '<div class="pages">';
+	    
+	    if (currPage > 1) {
+	       pages += '<a href="javascript:'+pkgName+'.loadSearch('+(currPage-1)+')">Previous</a>&nbsp; ';
+	    }
+	    
+	    pages += rp;
+	    
+	    if (currPage < numPages) {
+	       pages += '&nbsp; <a href="javascript:'+pkgName+'.loadSearch('+(currPage+1)+')">Next</a>';
+	    }
+	    
+	    pages += '</div>';
+	    
+        return pages;
+    },
+    
+    /**
      * Process a <class> node returned by the caBIO REST API
      * and return an object with the following properties:
-     * - className: the fully-qualified class name
-     * - id: the primary key of the object
-     * - properties: a hashmap of object attribute values
+     * @param className the fully-qualified class name
+     * @param id the primary key of the object
+     * @param properties a hashmap of object attribute values
      */
     processClassNode : function(classNode) {
         if (jQuery(classNode).attr('name') == 'gov.nih.nci.search.SearchResult') {

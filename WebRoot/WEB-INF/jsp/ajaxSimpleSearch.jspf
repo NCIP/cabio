@@ -8,13 +8,11 @@
 
 <script language="javascript">
 
-    
 var caBioSimpleSearch = function() {
-
-    var PAGE_SIZE = 5;
 
 	// Current state
 	var currPage = 1;
+    var pageSize = 5;
 	var searchString = '';
 	
 	/**
@@ -38,30 +36,38 @@ var caBioSimpleSearch = function() {
 	
 	    currPage = page;
 	        
-	    var searchText = jQuery.trim(jQuery("#searchText").val());
+	    searchString = jQuery.trim(jQuery("#searchText").val());
 	    
-	    if (searchText == '') {
+	    if (searchString == '') {
 	    	jQuery("#searchResults").empty();
 	        return;
 	    }
-	   
-	    searchString = searchText;
-	    caBioCommon.searchWords = searchString.replace(new RegExp("\\s+")," ").split(" ");
+	    
+        caBioCommon.enabledUI(false);
+	     
+        // remove special FreestyleLM syntax chars and collapse spaces
+	    caBioCommon.searchWords = caBioCommon.tokenize(searchString.replace(
+		    new RegExp("(\\\\|\\+|\\-|\\&|\\||\\!|\\(|\\)|\\{|\\}|\\[|\\]|\\^|~|\\*|\\?|\\:)\\s?","g")," ").replace(
+		    new RegExp("\\s+","g")," "));
 	
-	    if (jQuery("#matchall").is(":checked")) {
-	        searchString = caBioCommon.searchWords.join(" AND ");
+	    // add AND if the query string is not already a quoted phrase
+	    if (jQuery("#matchAll").is(":checked")) {
+	        var a = caBioCommon.tokenize(searchString);
+	        for (i in a) if (a[i].match(" ")) a[i] = '"'+a[i]+'"';
+	        searchString = a.join(' AND ');
 	    }
 	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
 	    				new RegExp("\\s+")," ").split(" ").join(" -");
 	    if (exclude) searchString += " -"+exclude;
-	
-	    caBioCommon.enabledUI(false);
-	    var sh = jQuery("#searchHibernate").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : '';
+	   
+	    var sh = jQuery("#viewObjects").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : '';
+	    
+	    pageSize = parseInt(jQuery("#pageSize").val());
 	    
 	    var data = 
 	       'relativeURL=GetXML&query=SearchQuery&SearchQuery[@keyword='+
             searchString+']'+sh+'&pageSize='+
-            PAGE_SIZE+'&startIndex='+((page-1)*PAGE_SIZE);
+            pageSize+'&startIndex='+((page-1)*pageSize);
 	              
 	    //jQuery("#debug").append(PROXY_URL+"?"+data)
 	    
@@ -84,7 +90,7 @@ var caBioSimpleSearch = function() {
 	        numRecords = parseInt(jQuery("recordCounter:first",qr).text());
 	        startRecord = parseInt(jQuery("start:first",qr).text());
 	        endRecord = parseInt(jQuery("end:first",qr).text());
-            numPages = Math.ceil(numRecords / PAGE_SIZE);
+            numPages = Math.ceil(numRecords / pageSize);
 	
 	        summary = '<div class="summary">Results <b>'+startRecord+'</b> - <b>'
 	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b></div>';
@@ -106,7 +112,7 @@ var caBioSimpleSearch = function() {
 	
 	            var r = caBioCommon.processClassNode(this);
 	
-	            var f = jQuery("#searchFormat").is(":checked") ? 
+	            var f = jQuery("#viewSimple").is(":checked") ? 
 	                caBioFormats.summary[r.className] : undefined;
 	
 	            var title = '';
@@ -128,31 +134,23 @@ var caBioSimpleSearch = function() {
 	
 	            detailsUrl = GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']';
 	
+	            // Convert class name for display, i.e.
+	            // "gov.nih.nci.cabio.domain.ClinicalTrialProtocol" to
+	            // "Clinical Trial Protocol"
+	            var cn = r.className;
+	            cn = cn.substring(cn.lastIndexOf('.')+1);
+	            cn = cn.replace(new RegExp("([A-Z])","g")," $1").substring(1);
+	
 	            h = '<div class="result"><h2><a href="javascript:caBioObjectDetails.loadDetails(\''+r.className+'\','+r.id+')">';
 	            h += title+'</a></h2><span class="desc">'+desc+'</span>';
-	            h += '<span class="className">'+r.className+'</span>';
+	            h += '<span class="className">'+cn+'</span>';
 	            h += '</div>';
 	            jQuery("#searchResults").append(h);
 	            
 	        })
 	
 	        if (numPages > 1) {
-	
-	            var rp = '';
-	            var i;
-	            for(i=1; i<=numPages; i++) {
-	                if (i == currPage) {
-	                    rp += ' '+i;
-	                }
-	                else if ((i > currPage-6) && (i < currPage+6)) {
-	                    rp += ' <a href="javascript:caBioSimpleSearch.loadSearch('+i+')">'+i+'</a>';
-	                }
-	            }
-	
-	            prev = (currPage > 1)?"<a href='javascript:caBioSimpleSearch.changePage(-1)'>Previous</a>&nbsp;":"";
-	            next = (currPage < numPages)?"<a href='javascript:caBioSimpleSearch.changePage(1)'>Next</a>":"";
-	
-	            pages = '<div class="pages">'+prev+rp+' &nbsp;'+next+'</div>';
+	            caBioCommon.createPager(numPages, currPage, "caBioSimpleSearch");
 	            jQuery("#searchResults").append(pages);
 	        }
 	    }
@@ -175,14 +173,6 @@ var caBioSimpleSearch = function() {
         doSearch(parseInt(hash));
     },
     
-	/**
-	 * Change the current page by the given number of pages (may be negative).
-	 */
-	changePage : function (inc) {
-	    currPage += inc;
-	    caBioSimpleSearch.loadSearch(currPage);
-	},
-	
 	/**
 	 * Show a pathway diagram in a modal dialog (Firefox only).
 	 */
@@ -245,15 +235,22 @@ jQuery(function() {
 
 <a id="adv_link" href="javascript:caBioCommon.toggleDropBox('#adv_box')">Advanced Options</a>
 <div id="adv_box">
-	Match:
-	<input type="radio" name="match" id="matchany" checked="checked"> any 
-	<input type="radio" name="match" id="matchall"> all 
+    View:
+    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> simple 
+    <input type="radio" name="viewMode" id="viewObjects"> objects
+    <br/>
+	Match Terms:
+	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
+	<input type="radio" name="matchMode" id="matchAll"> all 
 	<br/>
 	Exclude: <input id="exclude" type="text"/>
 	<br/>
-	<input type="checkbox" id="searchFormat" checked="checked"/> Domain-specific formatting
-	<br/>
-	<input type="checkbox" id="searchHibernate"/> Map to objects (slower)
+	Results per page: 
+	<select id="pageSize"> 
+	<option value="5" selected="selected">5</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	</select>
 </div>
 
 <div class="results" id="objectDetails"></div>

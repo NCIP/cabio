@@ -12,15 +12,15 @@ var caBioObjectDetails = function() {
     
         var searchText = jQuery("#searchText").val();
         jQuery("#searchResults").hide();
-     
+
+        var h = '<div>'
+        h += '<div class="summary"><a class="back" href="javascript:caBioObjectDetails.restoreResults()">&#171; Return to results</a></div>';
+                 
         if (r.exceptionClass) {
-            var h = '<div class="summary">Error retrieving object</div>';
             h += '<div class="error">'+r.exceptionMessage+'</div>';
             jQuery("#objectDetails").empty().append(h).show();
         }
         else {  	
-	        var h = '<div>'
-	        h += '<div class="summary"><a class="back" href="javascript:caBioObjectDetails.restoreResults()">&#171; Return to results</a></div>';
 	        h += '<table class="properties"><tr><th colspan="2" class="header">'+r.label+'</th></tr>';
 	        for(i in r.attributes) {
                 var k = r.attributes[i].name || "";

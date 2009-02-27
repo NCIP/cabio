@@ -85,40 +85,22 @@
     
 </c:forEach>
 
-<div class="pages">
+<div id="pager"></div>
+
 <c:if test="${results.numPages > 1}">
-    
-	<c:if test="${results.page > 0}">
-		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page-1}"/>)'>Previous</a>
-	</c:if>
-	
-	<c:forEach begin="0" end="${results.numPages-1}" varStatus="status">
-	
-		<c:choose>
-			<c:when test='${status.index == results.page}'>
-				<c:out value="${status.index+1}"/>
-			</c:when>
-			<c:when test='${status.index > results.page-6 && status.index < results.page+6 }'>
-				<a href="javascript:caBioResults.loadPage(<c:out value="${status.index}"/>)"><c:out value="${status.index+1}"/></a>
-			</c:when>
-		</c:choose>
-	
-	</c:forEach>
-	
-	<c:if test="${results.page < results.numPages-2}">
-		<a href='javascript:caBioResults.loadPage(<c:out value="${results.page+1}"/>)'>Next</a>
-	</c:if>
-	
+<script language="javascript">
+    var pager = caBioCommon.createPager(<c:out value="${results.numPages}"/>, <c:out value="${results.page+1}"/>, "caBioResults");
+    jQuery("#pager").append(pager);
+</script>
 </c:if>
-</div>
 
 <script language="javascript">
 
 var caBioResults = function() {
 	return {
 	
-	loadPage : function (page) {
-        jQuery(".query #page").val(page)
+	loadSearch : function (page) {
+        jQuery(".query #page").val(page-1)
 		jQuery(".query form").submit()
 	},
 	
