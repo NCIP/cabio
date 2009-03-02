@@ -48,10 +48,10 @@
 
 "case_sensitive" = "no"
 storage_type = "sql" 
-sql_settings = { sql_url = "CABIO_URL" 
-			    sql_driver = "oracle.jdbc.driver.OracleDriver" 
-                sql_login = "CABIO_USERNAME" 
-                sql_passwd = "CABIO_PASSWORD" 
+sql_settings = { sql_url = "@database.url@" 
+			    sql_driver = "@database.driver@" 
+                sql_login = "@database.user@" 
+                sql_passwd = "@database.password@" 
                 sql_read_only = "no"} 
 }
 "IDSvcInterface_class" = "net.handle.server.HandleRepositoryIDInterface"
