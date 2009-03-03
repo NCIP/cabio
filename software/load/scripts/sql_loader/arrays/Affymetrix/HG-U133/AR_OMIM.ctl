@@ -1,11 +1,13 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HG-U133/OMIM_out.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HG-U133/OMIM_out_2.txt'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/OMIM_out.txt'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/OMIM_out_2.txt'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/OMIM_out_3.txt'
  
 APPEND
  
 INTO TABLE ar_omim_id_tmp
+when GENECHIP_ARRAY <> 'GeneChip Array'
  
 FIELDS TERMINATED BY "|"
  
