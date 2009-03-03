@@ -56,13 +56,13 @@ execute load_data.load_libraries;
 @$LOAD/indexes/library_keyword.lower.sql;
 @$LOAD/indexes/library_keyword.cols.sql;
 
-CREATE INDEX tissuecode_parent on tissue_code(parent);
-CREATE INDEX tissuecode_relationship on tissue_code(relationship);
+CREATE INDEX tissuecode_parent on tissue_code(parent) tablespace cabio_fut;
+CREATE INDEX tissuecode_relationship on tissue_code(relationship) cabio_fut;
 COMMIT;
 analyze table tissue_code compute statistics;
 
-CREATE INDEX histcode_parent on histology_code(parent);
-CREATE INDEX histcode_relationship on histology_code(relationship);
+CREATE INDEX histcode_parent on histology_code(parent) tablespace cabio_fut;
+CREATE INDEX histcode_relationship on histology_code(relationship) tablespace cabio_fut;
 COMMIT;
 analyze table histology_code compute statistics;
 

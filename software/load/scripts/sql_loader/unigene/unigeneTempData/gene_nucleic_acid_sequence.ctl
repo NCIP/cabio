@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/ncbi_unigene/genesequence.dat'
+INFILE '$CABIO_DATA_DIR/ncbi_unigene/genesequence.dat'
  
 APPEND
  

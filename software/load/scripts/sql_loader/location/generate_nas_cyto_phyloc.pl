@@ -180,7 +180,7 @@ my($snpid, $startcytoId, $endcytoId, $chrId);
 my %snpCytoHash;
 
 my $dbh = DBI->connect($ENV{'DBI_DRIVER'}, $ENV{'SCHEMA'}, $ENV{'SCHEMA_PWD'}) || die  "Error ".DBI->errstr;
-my $sql = qq(SELECT DISTINCT A.ID,E.ID,E.ID,A.chromosome_ID FROM   snp_tv A, SNPCYTOIDS E WHERE  lower(A.DB_SNP_ID) = lower(E.DBSNP_RS_ID));
+my $sql = qq(SELECT DISTINCT A.ID,E.ID,E.ID,A.chromosome_ID FROM   snp_tv A, zstg_snpcytoids E WHERE  lower(A.DB_SNP_ID) = lower(E.DBSNP_RS_ID));
 my $sth = $dbh->prepare($sql);
 $sth->execute();
 $sth->bind_columns(\$snpid, \$startcytoId, \$endcytoId, \$chrId);
@@ -199,7 +199,7 @@ my($geneid, $startcytoId, $endcytoId, $chrId);
 my %geneCytoHash;
 
 my $dbh = DBI->connect($ENV{'DBI_DRIVER'}, $ENV{'SCHEMA'}, $ENV{'SCHEMA_PWD'}) || die  "Error ".DBI->errstr;
-my $sql = qq(SELECT distinct a.gene_id, c.id START_cytoband_LOC_ID,d.id as END_CYTOBAND_LOC_ID,  a.chromosome_id from zstg_gene a, startCytoIds c, endCytoIds d where a.start_cytoband = c.start_cytoband(+) and a.gene_id = c.gene_id(+) and a.chromosome_id = c.chromosome_id(+) and a.end_cytoband = d.end_cytoband(+) and a.gene_id = d.gene_id(+) and c.gene_id = d.gene_id and a.chromosome_id = d.chromosome_id(+));
+my $sql = qq(SELECT distinct a.gene_id, c.id START_cytoband_LOC_ID,d.id as END_CYTOBAND_LOC_ID,  a.chromosome_id from zstg_gene a, zstg_startcytoids c, zstg_endcytoids d where a.start_cytoband = c.start_cytoband(+) and a.gene_id = c.gene_id(+) and a.chromosome_id = c.chromosome_id(+) and a.end_cytoband = d.end_cytoband(+) and a.gene_id = d.gene_id(+) and c.gene_id = d.gene_id and a.chromosome_id = d.chromosome_id(+));
 my $sth = $dbh->prepare($sql);
 $sth->execute();
 $sth->bind_columns(\$geneid, \$startcytoId, \$endcytoId, \$chrId);

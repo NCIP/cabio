@@ -1,7 +1,7 @@
 --$markerHash{$id."|".$chrStart} = $id."|".$chrId."|".$chrStart."|".$chrStop."|".$fullName;
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/marker/phylocMarker.txt'
+INFILE '$CABIO_DATA_DIR/temp/marker/phylocMarker.txt'
 APPEND
  
 INTO TABLE physical_location 

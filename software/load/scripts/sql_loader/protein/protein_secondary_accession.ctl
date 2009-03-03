@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/protein/protein_secondary_accession.dat'
+INFILE '$CABIO_DATA_DIR/temp/protein/protein_secondary_accession.dat'
  
 APPEND
  

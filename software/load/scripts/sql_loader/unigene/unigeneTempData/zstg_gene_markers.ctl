@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/ncbi_unigene/geneMarker.dat'
+INFILE '$CABIO_DATA_DIR/ncbi_unigene/geneMarker.dat'
  
 APPEND
  

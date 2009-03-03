@@ -72,6 +72,7 @@ truncate table ZSTG_PID_COMPLEX_COMPONENT;
 @$LOAD/constraints.sql ZSTG_PID_INTERACTION
 @$LOAD/constraints.sql ZSTG_PID_PATHWAY
 @$LOAD/constraints.sql ZSTG_PID_INTERACTIONCONDITION
+@$LOAD/constraints.sql ZSTG_PID_COMPLEX_COMPONENT
 
 @$LOAD/triggers.sql ZSTG_PID_INTERACTIONREFERENCE
 @$LOAD/triggers.sql ZSTG_PID_ENTITYNAME
@@ -96,6 +97,7 @@ truncate table ZSTG_PID_COMPLEX_COMPONENT;
 @$LOAD/triggers.sql ZSTG_PID_INTERACTION
 @$LOAD/triggers.sql ZSTG_PID_PATHWAY
 @$LOAD/triggers.sql ZSTG_PID_INTERACTIONCONDITION
+@$LOAD/triggers.sql ZSTG_PID_COMPLEX_COMPONENT
 
 
 @$LOAD/indexes/zstg_pid_interactionreference.drop.sql
@@ -147,4 +149,5 @@ truncate table ZSTG_PID_COMPLEX_COMPONENT;
 @$LOAD/constraints/zstg_pid_interaction.disable.sql
 @$LOAD/constraints/zstg_pid_pathway.disable.sql
 @$LOAD/constraints/zstg_pid_interactioncondition.disable.sql
+@$LOAD/constraints/zstg_pid_complex_component.disable.sql
 exit;

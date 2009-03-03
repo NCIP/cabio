@@ -3,9 +3,9 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/Reactome/Interactions.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/BioCarta/Interactions.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/NCI_Nature/Interactions.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/Reactome/Interactions.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/BioCarta/Interactions.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/NCI_Nature/Interactions.txt'
  
 APPEND
  

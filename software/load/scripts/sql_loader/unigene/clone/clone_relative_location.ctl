@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/ncbi_unigene/nas.dat_nas_hsmm_revised.dat_clone_nas_revised.dat'
+INFILE '$CABIO_DATA_DIR/ncbi_unigene/nas.dat_nas_hsmm_revised.dat_clone_nas_revised.dat'
  
 APPEND
  

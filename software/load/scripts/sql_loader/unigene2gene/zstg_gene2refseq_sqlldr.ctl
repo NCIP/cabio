@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/unigene2gene/gene2refseq.txt'
+INFILE '$CABIO_DATA_DIR/unigene2gene/gene2refseq.txt'
 
 APPEND
  

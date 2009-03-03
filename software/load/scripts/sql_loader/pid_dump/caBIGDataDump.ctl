@@ -1,7 +1,7 @@
 LOAD DATA  
   
  
-INFILE '/cabio/cabiodb/cabio_data/pid/dump/pid_data.dat' 
+INFILE '$CABIO_DATA_DIR/pid/dump/pid_data.dat' 
   
 APPEND 
   

@@ -3,9 +3,9 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/Reactome/MoleculeFamilies.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/BioCarta/MoleculeFamilies.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/NCI_Nature/MoleculeFamilies.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/Reactome/MoleculeFamilies.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/BioCarta/MoleculeFamilies.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/NCI_Nature/MoleculeFamilies.txt'
  
 APPEND
  

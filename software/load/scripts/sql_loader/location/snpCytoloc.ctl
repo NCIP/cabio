@@ -2,7 +2,7 @@
 -- Adds data from SNP to provenance, url_source_reference, source_reference, etc
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/snp/snpCytoPhyloc.txt'
+INFILE '$CABIO_DATA_DIR/temp/snp/snpCytoPhyloc.txt'
  
 APPEND
 

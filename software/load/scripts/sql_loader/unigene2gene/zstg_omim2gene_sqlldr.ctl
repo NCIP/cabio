@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/unigene2gene/mim2gene.txt'
+INFILE '$CABIO_DATA_DIR/unigene2gene/mim2gene.txt'
  
 APPEND
  

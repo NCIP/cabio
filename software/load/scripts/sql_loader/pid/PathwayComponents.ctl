@@ -3,9 +3,9 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/Reactome/PathwayComponent.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/BioCarta/PathwayComponent.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/pid/NCI_Nature/PathwayComponent.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/Reactome/PathwayComponent.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/BioCarta/PathwayComponent.txt'
+INFILE '$CABIO_DATA_DIR/temp/pid/NCI_Nature/PathwayComponent.txt'
  
 APPEND
  

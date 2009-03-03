@@ -1,12 +1,11 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/relative_clone/human/seq_gene.md'
-INFILE '/cabio/cabiodb/cabio_data/relative_clone/mouse/seq_gene.md'
+INFILE '$CABIO_DATA_DIR/relative_clone/human/seq_gene.md'
+INFILE '$CABIO_DATA_DIR/relative_clone/mouse/seq_gene.md'
 
 APPEND
  
 INTO TABLE zstg_seqgene 
- 
 REENABLE DISABLED_constraints  
 FIELDS TERMINATED BY "	"
 TRAILING NULLCOLS

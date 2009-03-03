@@ -1,12 +1,11 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/marker/human/seq_sts.md'
-INFILE '/cabio/cabiodb/cabio_data/marker/mouse/seq_sts.md'
+INFILE '$CABIO_DATA_DIR/marker/human/seq_sts.md'
+INFILE '$CABIO_DATA_DIR/marker/mouse/seq_sts.md'
 
 APPEND
  
 INTO TABLE zstg_seqsts 
- 
 REENABLE DISABLED_constraints  
 FIELDS TERMINATED BY "	"
 TRAILING NULLCOLS
