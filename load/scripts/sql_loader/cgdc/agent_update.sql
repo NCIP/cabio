@@ -33,8 +33,8 @@ commit;
   
 COMMIT;
 
-drop table zstg_agent;
-create table zstg_agent tablespace cabio_map_fut as select * from agent;
+truncate table zstg_agent;
+insert into zstg_agent select * from agent;
 commit;
 EXIT;
   

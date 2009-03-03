@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/cgdc/MissingAgentEVSIds.dat'
+INFILE '$CABIO_DATA_DIR/cgdc/MissingAgentEVSIds.dat'
  
 APPEND
  

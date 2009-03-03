@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/cgdc/diseaseontology.dat'
+INFILE '$CABIO_DATA_DIR/temp/cgdc/diseaseontology.dat'
  
 APPEND
  

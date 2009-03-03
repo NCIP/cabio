@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/cgdc/agents.txt'
+INFILE '$CABIO_DATA_DIR/cgdc/agents.txt'
  
 APPEND
  

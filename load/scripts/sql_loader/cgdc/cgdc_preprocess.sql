@@ -9,10 +9,9 @@ TRUNCATE TABLE evidence_evidence_code REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_agent_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_diseaseonto_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_evidence_cgid REUSE STORAGE;
-TRUNCATE TABLEzstg_gene_genealias_cgid REUSE STORAGE;
+TRUNCATE TABLE zstg_gene_genealias_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_role_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_rolecode_cgid REUSE STORAGE;
-TRUNCATE TABLE agent_diseaseontology REUSE STORAGE; 
 #TRUNCATE TABLE gene_function_association REUSE STORAGE;
 TRUNCATE TABLE zstg_missing_agent_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_missing_diseaseontol_cgid REUSE STORAGE;
@@ -26,7 +25,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/indexer_new.sql evidence_code
 @$LOAD/indexer_new.sql evidence
 @$LOAD/indexer_new.sql evidence_evidence_code
-@$LOAD/indexer_new.sql agent_diseaseontology
 @$LOAD/indexer_new.sql zstg_gene_agent_cgid
 @$LOAD/indexer_new.sql zstg_gene_diseaseonto_cgid 
 @$LOAD/indexer_new.sql zstg_gene_evidence_cgid 
@@ -46,7 +44,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/constraints.sql evidence_code
 @$LOAD/constraints.sql evidence
 @$LOAD/constraints.sql evidence_evidence_code
-@$LOAD/constraints.sql agent_diseaseontology
 @$LOAD/constraints.sql zstg_gene_agent_cgid
 @$LOAD/constraints.sql zstg_gene_genealias_cgid
 @$LOAD/constraints.sql zstg_gene_diseaseonto_cgid 
@@ -66,7 +63,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/triggers.sql evidence_code
 @$LOAD/triggers.sql evidence
 @$LOAD/triggers.sql evidence_evidence_code
-@$LOAD/triggers.sql agent_diseaseontology
 @$LOAD/triggers.sql zstg_gene_agent_cgid
 @$LOAD/triggers.sql zstg_gene_genealias_cgid
 @$LOAD/triggers.sql zstg_gene_diseaseonto_cgid 
@@ -84,7 +80,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/constraints/evidence_code.disable.sql
 @$LOAD/constraints/evidence.disable.sql
 @$LOAD/constraints/evidence_evidence_code.disable.sql
-@$LOAD/constraints/agent_diseaseontology.disable.sql
 @$LOAD/constraints/zstg_gene_agent_cgid.disable.sql
 @$LOAD/constraints/zstg_gene_genealias_cgid.disable.sql
 @$LOAD/constraints/zstg_gene_diseaseonto_cgid.disable.sql
@@ -103,7 +98,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/indexes/evidence_code.drop.sql
 @$LOAD/indexes/evidence.drop.sql
 @$LOAD/indexes/evidence_evidence_code.drop.sql
-@$LOAD/indexes/agent_diseaseontology.drop.sql
 @$LOAD/indexes/zstg_gene_agent_cgid.drop.sql
 @$LOAD/indexes/zstg_gene_genealias_cgid.drop.sql
 @$LOAD/indexes/zstg_gene_diseaseonto_cgid.drop.sql
@@ -123,7 +117,6 @@ TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
 @$LOAD/triggers/evidence_code.disable.sql
 @$LOAD/triggers/evidence.disable.sql
 @$LOAD/triggers/evidence_evidence_code.disable.sql
-@$LOAD/triggers/agent_diseaseontology.disable.sql
 @$LOAD/triggers/zstg_gene_agent_cgid.disable.sql
 @$LOAD/triggers/zstg_gene_genealias_cgid.disable.sql
 @$LOAD/triggers/zstg_gene_diseaseonto_cgid.disable.sql
