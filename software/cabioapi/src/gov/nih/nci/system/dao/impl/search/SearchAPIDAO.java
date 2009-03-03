@@ -169,8 +169,10 @@ public class SearchAPIDAO implements DAO {
 		} 
         catch (Exception ex) {
 			throw new FreestyleLMException("Unable to create query: " + ex.getMessage());
-		}        
-		return keyword.toString();
+		}       
+        String keywords = keyword.toString();
+        keywords.replaceAll( " [aA][nN][dD] ", FILTER_AND);
+		return keywords;
 	}
 
     public List<String> getAllClassNames() {
