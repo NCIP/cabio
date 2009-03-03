@@ -12,7 +12,7 @@ my (@LineArr, $genechipname);
 my $input_file_name = $ARGV[0];
 my $out_file_name = $ARGV[1];
 
-my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HG-U133');
+my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HG-U133A');
 my $input_file = "$outdir/$ARGV[0]";
 my $out_file = "$outdir/$ARGV[1]";
 

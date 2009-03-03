@@ -5,7 +5,7 @@ use ParseUtils;
 
 my $input_file_name = $ARGV[0];
 
-my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HG-U133');
+my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HG-U133A');
 my $input_file = "$indir/$input_file_name";
 my $out_file01 = "$outdir/RNA_probesets_out_3.txt";
 my $out_file02 = "$outdir/representative_public_ID_file_out_3.txt";
