@@ -13,8 +13,9 @@ use ParseUtils;
 my $input_file_name = $ARGV[0];
 my $prefix = $input_file_name;
 $prefix =~ s/\.annot\.csv$//;
+my $arrayName = $ARGV[1]; 
 
-my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HuMapping');
+my ($indir,$outdir) = getFullDataPaths("arrays/Affymetrix/$arrayName");
 print "Indir is $indir and outdir is $outdir \n";
 my $input_file = "$indir/$input_file_name";
 my $pre_file = "$outdir/annotations_$prefix.dat";
