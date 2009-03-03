@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/cytoband/mouse_cytoband.txt'
+INFILE '$CABIO_DATA_DIR/temp/cytoband/mouse_cytoband.txt'
  
 APPEND
  

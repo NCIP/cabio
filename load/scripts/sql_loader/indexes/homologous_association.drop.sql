@@ -1,9 +1,9 @@
 
-drop index HOMOLOGION_BIG_ID_LWR;
-drop index HABIGID;
-drop index HOMOLOGOTION_SIMILARITY;
+drop index SYS_C0021113_IDX;
 drop index HOMOLOGOTION_HOMOLOGOUS;
+drop index HOMOLOGOTION_SIMILARITY;
 drop index HOMOLOGOTION_ID;
-drop index HOMO_GENEID_LWR_IDX;
+drop index HOMOLOGION_BIG_ID;
+drop index HOMOLOGION_BIG_ID_LWR;
 
 --EXIT;

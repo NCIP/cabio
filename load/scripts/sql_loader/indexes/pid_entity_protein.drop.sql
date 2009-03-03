@@ -2,6 +2,7 @@
 drop index PID_ENTITEIN_PHYSICAL_E;
 drop index PID_ENTITEIN_PROTEIN_ID;
 drop index PID_ENTITEIN_GENE_ID;
-drop index SYS_C0016502;
+drop index SYS_C0016502_IDX;
+drop index SYS_C0021151_IDX;
 
 --EXIT;

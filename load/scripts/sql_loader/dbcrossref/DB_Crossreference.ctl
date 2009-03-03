@@ -1,5 +1,5 @@
 LOAD DATA
-INFILE '/cabio/cabiodb/cabio_data/ncbi_unigene/geneIdDs2.dat'
+INFILE '$CABIO_DATA_DIR/ncbi_unigene/geneIdDs2.dat'
 APPEND
 INTO TABLE database_cross_reference
 REENABLE DISABLED_constraints

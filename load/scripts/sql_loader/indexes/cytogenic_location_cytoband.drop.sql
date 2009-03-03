@@ -1,5 +1,6 @@
 
-drop index CCCBIGID;
+drop index CYTOGENAND_BIG_ID;
+drop index SYS_C0021080_IDX;
 drop index CYTOGENIBAND_END_CYTOBA;
 drop index CYTOGENIBAND_START_CYTO;
 drop index CYTOGENIBAND_CHROMOSOME;

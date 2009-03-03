@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/histo/gene_histo.txt'
+INFILE '$CABIO_DATA_DIR/temp/histo/gene_histo.txt'
 APPEND
  
 INTO TABLE gene_histopathology 

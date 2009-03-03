@@ -30,7 +30,7 @@ sub getGeneKeywords() {
 my($gid, $clust, $libId, $keywords);
 my @split_kw;
 my $dbh = DBI->connect($ENV{'DBI_DRIVER'}, $ENV{'SCHEMA'}, $ENV{'SCHEMA_PWD'}) || die  "Error ".DBI->errstr;
-my $sql = qq(SELECT distinct gene_ID, CLUSTER_NUMBER, library_ID, KEYWORD from GENE_KW);
+my $sql = qq(SELECT distinct gene_ID, CLUSTER_NUMBER, library_ID, KEYWORD from ZSTG_GENE_KW);
 my $sth = $dbh->prepare($sql);
 $sth->execute();
 $sth->bind_columns(\$gid, \$clust, \$libId, \$keywords);
