@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Agilent/aCGH244K/accessions.dat'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Agilent/aCGH244K/accessions.dat'
 
 APPEND
  
