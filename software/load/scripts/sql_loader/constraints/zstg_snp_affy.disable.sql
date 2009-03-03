@@ -1,4 +1,8 @@
 
+alter table ZSTG_SNP_AFFY disable constraint SYS_C005223;
+alter table ZSTG_SNP_AFFY disable constraint SYS_C005224;
+alter table ZSTG_SNP_AFFY disable constraint SYS_C005225;
+alter table ZSTG_SNP_AFFY disable constraint SYS_C005226;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005205;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005206;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005207;
@@ -17,9 +21,5 @@ alter table ZSTG_SNP_AFFY disable constraint SYS_C005219;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005220;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005221;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005222;
-alter table ZSTG_SNP_AFFY disable constraint SYS_C005223;
-alter table ZSTG_SNP_AFFY disable constraint SYS_C005224;
-alter table ZSTG_SNP_AFFY disable constraint SYS_C005225;
-alter table ZSTG_SNP_AFFY disable constraint SYS_C005226;
 
 --EXIT;

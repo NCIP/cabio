@@ -1,10 +1,11 @@
 
-alter table GENE_FUNCTION_ASSOCIATION disable constraint GFABIGID;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint GFA_PK;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C005913;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C005914;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C005915;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C005916;
-alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C005917;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C0021101;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C004462;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C004463;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C004464;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C004465;
+alter table GENE_FUNCTION_ASSOCIATION disable constraint SYS_C004466;
+
+alter table GENE_FUNCTION_ASSOCIATION disable primary key;
 
 --EXIT;

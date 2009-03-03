@@ -14,4 +14,6 @@ alter table ZSTG_GENE2REFSEQ disable constraint SYS_C004926;
 alter table ZSTG_GENE2REFSEQ disable constraint SYS_C004927;
 alter table ZSTG_GENE2REFSEQ disable constraint SYS_C004928;
 
+alter table ZSTG_GENE2REFSEQ disable primary key;
+
 --EXIT;

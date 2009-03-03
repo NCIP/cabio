@@ -1,8 +1,8 @@
 
-alter table EVIDENCE disable constraint EVBIGID;
-alter table EVIDENCE disable constraint EVIDENCE_PK_1;
-alter table EVIDENCE disable constraint SYS_C005862;
-alter table EVIDENCE disable constraint SYS_C005863;
-alter table EVIDENCE disable constraint SYS_C005864;
+alter table EVIDENCE disable constraint SYS_C004408;
+alter table EVIDENCE disable constraint SYS_C004409;
+alter table EVIDENCE disable constraint SYS_C004410;
+
+alter table EVIDENCE disable primary key;
 
 --EXIT;

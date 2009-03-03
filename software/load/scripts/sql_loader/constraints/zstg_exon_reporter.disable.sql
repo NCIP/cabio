@@ -8,6 +8,7 @@ alter table ZSTG_EXON_REPORTER disable constraint SYS_C004888;
 alter table ZSTG_EXON_REPORTER disable constraint SYS_C004889;
 alter table ZSTG_EXON_REPORTER disable constraint SYS_C004890;
 alter table ZSTG_EXON_REPORTER disable constraint SYS_C004892;
-alter table ZSTG_EXON_REPORTER disable constraint PK_ZSTG_EXON_REPORTER;
+
+alter table ZSTG_EXON_REPORTER disable primary key;
 
 --EXIT;

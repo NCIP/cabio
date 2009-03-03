@@ -8,6 +8,7 @@ alter table POPULATION_FREQUENCY disable constraint SYS_C004643;
 alter table POPULATION_FREQUENCY disable constraint SYS_C004644;
 alter table POPULATION_FREQUENCY disable constraint SYS_C004645;
 alter table POPULATION_FREQUENCY disable constraint PFBIGID;
-alter table POPULATION_FREQUENCY disable constraint SYS_C004646;
+
+alter table POPULATION_FREQUENCY disable primary key;
 
 --EXIT;

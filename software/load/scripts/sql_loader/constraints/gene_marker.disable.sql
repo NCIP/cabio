@@ -1,4 +1,4 @@
 
-alter table GENE_MARKER disable constraint GENE_MARKER_PK;
+alter table GENE_MARKER disable primary key;
 
 --EXIT;

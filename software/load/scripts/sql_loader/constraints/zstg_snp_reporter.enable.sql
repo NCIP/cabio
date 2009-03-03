@@ -4,4 +4,9 @@ alter table ZSTG_SNP_REPORTER enable constraint SYS_C005240;
 alter table ZSTG_SNP_REPORTER enable constraint SYS_C005241;
 alter table ZSTG_SNP_REPORTER enable constraint PK_ZSTG_SNP_REPORTER;
 
+alter table ZSTG_SNP_REPORTER enable primary key;
+
 --EXIT;
+create unique index PK_ZSTG_SNP_REPORTER_idx on ZSTG_SNP_REPORTER
+(ID) tablespace CABIO_MAP_FUT;
+alter table ZSTG_SNP_REPORTER enable constraint PK_ZSTG_SNP_REPORTER using index PK_ZSTG_SNP_REPORTER_idx;
