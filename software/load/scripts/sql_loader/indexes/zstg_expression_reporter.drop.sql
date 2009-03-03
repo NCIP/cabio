@@ -1,5 +1,4 @@
 
-drop index ER_NAME_INDEX;
 drop index ZSTG_EXPRTER_ASSEMBLY;
 drop index ZSTG_EXPRTER_CYTO_STOP;
 drop index ZSTG_EXPRTER_CYTO_START;
@@ -14,5 +13,6 @@ drop index ZSTG_EXPRTER_SEQUENCE_S;
 drop index ZSTG_EXPRTER_SEQUENCE_T;
 drop index ZSTG_EXPRTER_MICROARRAY;
 drop index ZSTG_EXPRTER_ID;
+drop index ER_NAME_INDEX;
 
 --EXIT;

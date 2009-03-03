@@ -7,5 +7,5 @@
 @$LOAD/constraints/gene_histopathology.enable.sql
 @$LOAD/triggers/gene_histopathology.enable.sql
 
-DROP TABLE gene_KW;
+DROP TABLE zstg_gene_KW;
 EXIT;

@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/image_clone/cumulative_arrayed_plates.out'
+INFILE '$CABIO_DATA_DIR/temp/image_clone/cumulative_arrayed_plates.out'
  
 APPEND
  

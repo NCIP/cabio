@@ -1,4 +1,4 @@
 
-drop index GOGPK;
+drop index GOGPK_IDX;
 
 --EXIT;
