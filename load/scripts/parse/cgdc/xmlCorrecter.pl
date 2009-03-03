@@ -21,8 +21,6 @@ while(<INFILE>) {
  $_ =~s/^\s+//g;
  $_ =~s/\s+$//g;
  $_ =~s/[^ -~]//g;
- #print "$counter\n"; 
- #print $_ unless ($counter < 8392910);
 
  if($_ =~/<([A-Za-z]+)>/) {
  $startTag = $1;
