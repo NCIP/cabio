@@ -1,10 +1,10 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/cgdc/gene_genealias.dat'
+INFILE '$CABIO_DATA_DIR/temp/cgdc/gene_genealias.dat'
  
 APPEND
  
-INTO TABLEzstg_gene_genealias_cgid 
+INTO TABLE zstg_gene_genealias_cgid 
  
 REENABLE DISABLED_constraints  
 FIELDS TERMINATED BY "|"

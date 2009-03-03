@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/cgdc/rolecodes.dat'
+INFILE '$CABIO_DATA_DIR/temp/cgdc/rolecodes.dat'
  
 APPEND
  
