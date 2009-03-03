@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/marker/UniSTS.aliases'
+INFILE '$CABIO_DATA_DIR/temp/marker/UniSTS.aliases'
 
 APPEND
  

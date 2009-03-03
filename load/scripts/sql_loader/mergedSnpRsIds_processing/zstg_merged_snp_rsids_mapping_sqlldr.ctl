@@ -1,7 +1,7 @@
 LOAD DATA 
-INFILE '/cabio/cabiodb/cabio_data/mergedSNPids/RsMergeArch.bcp.out' 
-BADFILE '/cabio/cabiodb/cabio_data/mergedSNPids/RsMergeArch.bad'
-DISCARDFILE '/cabio/cabiodb/cabio_data/mergedSNPids/RsMergeArch.dsc'
+INFILE '$CABIO_DATA_DIR/mergedSNPids/RsMergeArch.bcp.out' 
+BADFILE '$CABIO_DATA_DIR/mergedSNPids/RsMergeArch.bad'
+DISCARDFILE '$CABIO_DATA_DIR/mergedSNPids/RsMergeArch.dsc'
 
 
 INTO TABLE zstg_merged_snp_rsids_mapping

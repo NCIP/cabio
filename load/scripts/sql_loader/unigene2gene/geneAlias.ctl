@@ -3,8 +3,8 @@ LOAD DATA
 -- NCBI Gene Alias
 -- HUGO 
 
-INFILE '/cabio/cabiodb/cabio_data/temp/unigene2gene/geneAlias.out'
-INFILE '/cabio/cabiodb/cabio_data/temp/unigene2gene/hgncgeneAlias.out'
+INFILE '$CABIO_DATA_DIR/temp/unigene2gene/geneAlias.out'
+INFILE '$CABIO_DATA_DIR/temp/unigene2gene/hgncgeneAlias.out'
  
 REPLace
  

@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/relative_clone/all_mrna_human_stage.dat'
+INFILE '$CABIO_DATA_DIR/temp/relative_clone/all_mrna_human_stage.dat'
  
 APPEND
  

@@ -3,7 +3,7 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/ncbi_unigene/phylocGene.txt'
+INFILE '$CABIO_DATA_DIR/temp/ncbi_unigene/phylocGene.txt'
 APPEND
  
 INTO TABLE physical_location 

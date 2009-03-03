@@ -30,9 +30,9 @@ INSERT
                        WHERE Z.marker_ID = M.MARKER_ID AND M.TYPE = 'UNISTS');
 COMMIT;
 
---INSERT INTO gene_marker(GENE_ID, MARKER_ID) SELECT DISTINCT A.GENE_ID, B.ID FROM zstg_gene_markers A, MARKER B, gene_tv C WHERE A.marker_ID = B.MARKER_ID AND B.TYPE = 'UNISTS' AND A.gene_ID = C.gene_ID AND C.taxon_ID = B.TAXON_ID;
+INSERT INTO gene_marker(GENE_ID, MARKER_ID) SELECT DISTINCT A.GENE_ID, B.ID FROM zstg_gene_markers A, MARKER B, gene_tv C WHERE A.marker_ID = B.MARKER_ID AND B.TYPE = 'UNISTS' AND A.gene_ID = C.gene_ID AND C.taxon_ID = B.TAXON_ID;
 
- insert into gene_marker(gene_id, marker_id) select distinct g.gene_id, m.id from gene_tv g, marker m, gene_nucleic_acid_sequence gn, nucleic_acid_sequence n where m.ACCNO = n.ACCESSION_NUMBER and n.ID = gn.GENE_SEQUENCE_ID and gn.GENE_ID = g.GENE_ID and g.TAXON_ID = m.TAXON_ID  and m.type = 'UNISTS';
+-- insert into gene_marker(gene_id, marker_id) select distinct g.gene_id, m.id from gene_tv g, marker m, gene_nucleic_acid_sequence gn, nucleic_acid_sequence n where m.ACCNO = n.ACCESSION_NUMBER and n.ID = gn.GENE_SEQUENCE_ID and gn.GENE_ID = g.GENE_ID and g.TAXON_ID = m.TAXON_ID  and m.type = 'UNISTS';
 
 COMMIT;
 @$LOAD/indexes/marker.cols.sql;

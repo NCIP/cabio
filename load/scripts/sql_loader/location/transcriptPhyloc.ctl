@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/transcript/phylocTranscript.txt'
+INFILE '$CABIO_DATA_DIR/temp/transcript/phylocTranscript.txt'
  
 APPEND
  

@@ -13,7 +13,7 @@ CREATE INDEX np_pi_idx on new_protein(protein_id);
 CREATE INDEX g2u_uc_idx on zstg_gene2UNIGENE(UNIGENE_CLUSTER);
 drop table zstg_gpid;
 
-CREATE TABLE ZSTG_GPID as SELECT distinct g2u.geneID, g2u.UNIGENE_CLUSTER, np.PROTEIN_ID from zstg_gene2UNIGENE g2u, zstg_gene2accession g2a, new_protein np WHERE g2u.GENEID = g2a.GENEID and substr(g2a.protein_accession,0,decode(instr(g2a.protein_accession,'.'),0,length(g2a.protein_accession), instr(g2a.protein_accession,'.')-1)) = rtrim(np.PRIMARY_ACCESSION);
+CREATE TABLE ZSTG_GPID tablespace cabio_map_fut as SELECT distinct g2u.geneID, g2u.UNIGENE_CLUSTER, np.PROTEIN_ID from zstg_gene2UNIGENE g2u, zstg_gene2accession g2a, new_protein np WHERE g2u.GENEID = g2a.GENEID and substr(g2a.protein_accession,0,decode(instr(g2a.protein_accession,'.'),0,length(g2a.protein_accession), instr(g2a.protein_accession,'.')-1)) = rtrim(np.PRIMARY_ACCESSION);
 
 DROP INDEX gtv_tid_idx;
 DROP INDEX gtv_cid_idx;

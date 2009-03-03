@@ -3,7 +3,7 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/cytoband/cytobandCytoPhyloc.txt'
+INFILE '$CABIO_DATA_DIR/temp/cytoband/cytobandCytoPhyloc.txt'
  
 APPEND
 

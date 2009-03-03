@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/exon/phylocExon.txt'
+INFILE '$CABIO_DATA_DIR/temp/exon/phylocExon.txt'
  
 APPEND
  

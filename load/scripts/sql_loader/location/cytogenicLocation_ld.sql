@@ -40,7 +40,7 @@ INSERT ALL
   INTO cytogenic_location_cytoband (gene_ID, START_cytoband_LOC_ID, 
 END_cytoband_LOC_ID, chromosome_ID) SELECT DISTINCT A.gene_ID, C.ID 
 START_cytoband_LOC_ID, D.ID END_CYTOBAND_LOC_ID, A.chromosome_ID FROM zstg_gene 
-A, STARTCYTOIDS C, ENDCYTOIDS D
+A, zstg_startcytoids C, zstg_endcytoids D
  WHERE A.START_cytoband = C.START_CYTOBAND AND A.END_CYTOBAND = D.END_CYTOBAND 
 AND A.chromosome_ID = C.CHROMOSOME_ID AND A.CHROMOSOME_ID = D.CHROMOSOME_ID; 
 

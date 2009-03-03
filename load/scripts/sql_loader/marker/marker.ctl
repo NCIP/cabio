@@ -1,7 +1,7 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/marker/human/UniSTS_human.sts'
-INFILE '/cabio/cabiodb/cabio_data/marker/mouse/UniSTS_mouse.sts'
+INFILE '$CABIO_DATA_DIR/marker/human/UniSTS_human.sts'
+INFILE '$CABIO_DATA_DIR/marker/mouse/UniSTS_mouse.sts'
 
 APPEND
  

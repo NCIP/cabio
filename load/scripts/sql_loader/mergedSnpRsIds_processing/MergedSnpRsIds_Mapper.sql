@@ -1,11 +1,12 @@
 -- Processing for Merged Snp Tables
 -- Add indexes on ZSTG_MERGEDSNPRSIDS_MAPPING table
 @$LOAD/indexer_new.sql zstg_merged_snp_rsids_mapping
+@$LOAD/indexes/zstg_merged_snp_rsids_mapping.drop.sql
 @$LOAD/indexes/zstg_merged_snp_rsids_mapping.cols.sql
 @$LOAD/indexes/zstg_merged_snp_rsids_mapping.lower.sql
 
 -- Add primary key constraint on ZSTG_MERGED SNP Rs Ids table on OLD_RS_ID
---ALTER TABLE zstg_merged_snp_rsids_mapping add constraint ZSTG_MERGED_SNP_RSIDS_MAP_PK primary key("OLD_RS_ID"); 
+ALTER TABLE zstg_merged_snp_rsids_mapping add constraint ZSTG_MERGED_SNP_RSIDS_MAP_PK primary key("OLD_RS_ID") using index tablespace cabio_map_fut; 
 
 
 -- Create temporary table zstg_snprep_sntv_ids_mpng that maps the DBSNPRSIds and SNPTVIds 
@@ -14,30 +15,30 @@ Analyze table zstg_merged_snp_rsids_mapping compute statistics;
 Analyze table zstg_snp_affy compute statistics;
 Analyze table snp_reporter compute statistics;
 Analyze table zstg_snp_illumina compute statistics;
-DROP TABLE TMP_MERGEDIDS;
-CREATE TABLE TMP_MERGEDIDS AS SELECT DISTINCT A.ID, CURRENT_RS_ID
+DROP TABLE ZSTG_TMP_MERGEDIDS;
+CREATE TABLE ZSTG_TMP_MERGEDIDS tablespace cabio_map_fut AS SELECT DISTINCT A.ID, CURRENT_RS_ID
       FROM array_reporter_ch A, zstg_snp_affy C, zstg_merged_snp_rsids_mapping D
    WHERE A.SNP_ID IS NULL AND LOWER(TRIM(A.NAME)) = LOWER(TRIM(C.PROBE_SET_ID)) 
                      AND LOWER(TRIM(C.DBSNP_RS_ID)) = LOWER(TRIM(D.OLD_RS_ID)); 
 COMMIT;
 SELECT COUNT(*)
-  FROM TMP_MERGEDIDS;
+  FROM ZSTG_TMP_MERGEDIDS;
 
 INSERT
-  INTO TMP_MERGEDIDS SELECT DISTINCT A.ID, CURRENT_RS_ID
+  INTO ZSTG_TMP_MERGEDIDS SELECT DISTINCT A.ID, CURRENT_RS_ID
   FROM array_reporter_ch A, zstg_snp_illumina C, zstg_merged_snp_rsids_mapping D
                       WHERE
                     A.SNP_ID IS NULL AND TRIM(A.NAME) = TRIM(C.DBSNP_RS_ID) AND
                             TRIM(C.DBSNP_RS_ID) = TRIM(D.OLD_RS_ID);
 COMMIT;
 SELECT COUNT(*)
-  FROM TMP_MERGEDIDS;
+  FROM ZSTG_TMP_MERGEDIDS;
 
 TRUNCATE TABLE zstg_snprep_sntv_ids_mpng;
 
 INSERT
   INTO zstg_snprep_sntv_ids_mpng SELECT DISTINCT A.ID, B.ID
-                                   FROM TMP_MERGEDIDS A, snp_tv B
+                                   FROM ZSTG_TMP_MERGEDIDS A, snp_tv B
                                   WHERE A.CURRENT_RS_ID = B.DB_SNP_ID;
 COMMIT;
 SELECT COUNT(*)
@@ -76,6 +77,6 @@ COMMIT;
 -- Procedure and table dropped
 DROP PROCEDURE DELETEDUPIDS_MRGIDMAPPING;
 --DROP TABLE zstg_snprep_sntv_ids_mpng;
-DROP TABLE TMP_MERGEDIDS;
+DROP TABLE ZSTG_TMP_MERGEDIDS;
 
 EXIT;

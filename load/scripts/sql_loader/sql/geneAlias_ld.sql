@@ -36,7 +36,7 @@ CREATE SEQUENCE gene_ALIAS_ID_SEQ;
 ALTER TRIGGER gene_ALIAS_ID_LOAD enable;
 TRUNCATE TABLE gene_alias_object_tv REUSE STORAGE;
 
---INSERT INTO gene_alias_object_tv(GENE_ALIAS_ID,ALIAS_TYPE, NAME, GENE_ID) SELECT GENE_ALIAS_ID_SEQ.nextval, ALIAS_TYPE,NAME,GENE_ID from GENE_ALIAS_OBJECT;
+INSERT INTO gene_alias_object_tv(GENE_ALIAS_ID,ALIAS_TYPE, NAME, GENE_ID) SELECT GENE_ALIAS_ID_SEQ.nextval, ALIAS_TYPE,NAME,GENE_ID from GENE_ALIAS_OBJECT;
 
 -- Add new aliases from Entrez  and HUGO --
 INSERT INTO gene_alias_object_tv(ALIAS_TYPE, NAME) SELECT distinct TYPE, trim(SYNONYMS) from zstg_geneALIAS a, zstg_gene2unigene b, gene_tv c where a.locuslinkid = b.geneid and substr(b.UNIGENE_CLUSTER, instr(b.unigene_cluster,'.')+1)=c.CLUSTER_ID and SYNONYMS not like '%-%' and SYNONYMS is NOT NULL and decode(substr(b.unigene_cluster,0,2),'Hs',5, 'Mm',6) = c.taxon_id;

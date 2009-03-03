@@ -1,7 +1,7 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/relative_clone/phylocMRNA.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/relative_clone/phylocEST.txt'
+INFILE '$CABIO_DATA_DIR/temp/relative_clone/phylocMRNA.txt'
+INFILE '$CABIO_DATA_DIR/temp/relative_clone/phylocEST.txt'
  
 APPEND
  

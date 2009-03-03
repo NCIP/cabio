@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/ncbi_unigene/geneTv.dat'
+INFILE '$CABIO_DATA_DIR/ncbi_unigene/geneTv.dat'
  
 APPEND
 INTO TABLE source_reference 

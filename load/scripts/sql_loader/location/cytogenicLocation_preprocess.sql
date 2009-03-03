@@ -3,14 +3,14 @@ COLUMN V_MAXROW NEW_VALUE V_MAXROW;
 
 TRUNCATE TABLE cytogenic_location_cytoband REUSE STORAGE;
 
-@$LOAD/indexer_new.sql cytogenic_location_cytoband;
-@$LOAD/indexes/cytogenic_location_cytoband.drop.sql;
-
 @$LOAD/triggers.sql cytogenic_location_cytoband;
 @$LOAD/triggers/cytogenic_location_cytoband.disable.sql;
 
 @$LOAD/constraints.sql cytogenic_location_cytoband;
 @$LOAD/constraints/cytogenic_location_cytoband.disable.sql;
+
+@$LOAD/indexer_new.sql cytogenic_location_cytoband;
+@$LOAD/indexes/cytogenic_location_cytoband.drop.sql;
 
 SELECT MAX(ID) + 1 AS V_MAXROW
   FROM physical_location; 

@@ -2,7 +2,7 @@
 -- Adds data from SNP to provenance, url_source_reference, source_reference, etc
 -- Replicates provenance_SNP_LD
 LOAD DATA 
-INFILE '/cabio/cabiodb/cabio_data/temp/protein/Protein_ProvData.dat'
+INFILE '$CABIO_DATA_DIR/temp/protein/Protein_ProvData.dat'
  
 APPEND
 INTO TABLE URL_source_reference 
