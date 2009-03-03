@@ -1,9 +1,9 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping50K_Hind240.dat'
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping50K_Xba240.dat'
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping250K_Nsp.dat'
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping250K_Sty.dat'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping50K_Hind240.dat'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping50K_Xba240.dat'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping250K_Nsp.dat'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HuMapping/population_freq_Mapping250K_Sty.dat'
  
 APPEND
  
