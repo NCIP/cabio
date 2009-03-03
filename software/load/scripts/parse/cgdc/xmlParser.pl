@@ -4,7 +4,7 @@ use warnings;
 use XML::Parser::Expat;
 use DBI;
 use ParseUtils;
-my $parser = new XML::Parser::Expat(ProtocolEncoding=>'UTF-8');
+my $parser = new XML::Parser::Expat();
 
 my ($indir, $outdir) = getFullDataPaths('cgdc');
 chomp($ARGV[0]);
@@ -80,8 +80,6 @@ sub sh
   open CGDC, ">:utf8", "$outdir/cgdc.dat" || die "Error opening CGDC.dat \n";
   open GAE, ">:utf8", "$outdir/gae.dat" || die "Error opening GAE.dat \n";
   open GDE, ">:utf8", "$outdir/gde.dat" || die "Error opening GDE.dat \n";
-  open DISCARD, ">:utf8", "$outdir/disacrd.dat" || die "Error opening DISCARD.dat \n";
-  open FOUND, ">:utf8", "$outdir/found.dat" || die "Error opening FOUND.dat \n";
   }
   
   if($el eq 'GeneEntry') {
@@ -123,10 +121,7 @@ sub eh
   if (exists ($geneHash{$hugoSymbol})) {
   $geneTvId = $geneHash{$hugoSymbol};
   ($geneId, $chrId, $taxId)= split(/\|/, $geneTvId);
-  print FOUND "Gene Id using HUGO Gene Symbol is $geneId \n";	
-  } else {
-  print DISCARD "Didnt find caBIO Gene Id for Hugo Gene Symbol is $hugoSymbol \n"; 
-	}
+  } 
   }
 
   if ($el eq 'GeneAlias') {
@@ -144,10 +139,7 @@ sub eh
   if (exists($locusLinkHash{$LocusLinkID})) {
   $geneTvId = $locusLinkHash{$LocusLinkID};
   ($geneId, $chrId, $taxId)= split(/\|/, $geneTvId);
-  print FOUND "Gene Id using LocusLink is $geneId where geneTvId in HASH is $geneTvId and element is $element\n";
   &loadAlias($geneId, $geneTvId, \@GeneAlias);
-  } else {
-  print DISCARD "Didnt find gene Id for LocusLink Id $element \n";
   }
   }
 
@@ -157,11 +149,8 @@ sub eh
   if(exists($accessionHash{$GenbankAccessionID})){
   $geneTvId = $accessionHash{$GenbankAccessionID};
   ($geneId, $chrId, $taxId)= split(/\|/, $geneTvId);
-  print FOUND "Gene Id using Genbank Accession is $geneId where HASH element is $geneTvId  element is $element\n";
   &loadAlias($geneId, $geneTvId, \@GeneAlias);
-  } else {
-  print DISCARD "Didnt find caBIO Gene Id using Genbank accession number for $element \n";
-  }
+  } 
   }
 
 
@@ -171,11 +160,8 @@ sub eh
   if(exists($accessionHash{$RefSeqID})){
   $geneTvId = $accessionHash{$RefSeqID};
   ($geneId, $chrId, $taxId)= split(/\|/, $geneTvId);
-  print FOUND "Gene Id using RefSeq is $geneId where value in hash is $geneTvId RefSeq Id is $element\n";
   &loadAlias($geneId, $geneTvId, \@GeneAlias);
-  } else {
-  print DISCARD "Didnt find caBIO Gene Id using RefSeqID for $element \n";
-  }
+  } 
   }
 
   # Uniprot
@@ -348,7 +334,6 @@ sub eh
 
  
 if($el eq 'GeneEntryCollection') {
- #print "Printing All Agents Maximum Agent is ", $AgentId, "\n";
  print  AGENT "DRUGTERM|AGENT_ID|EVS_ID|GENE_ID|CHR_ID|TAX_ID\n"; 
  foreach my $drugTerm (sort keys %DrugNCI) {
  print AGENT "$drugTerm|$DrugNCI{$drugTerm}\n";
@@ -472,7 +457,6 @@ if($el eq 'GeneEntryCollection') {
   close EVEVIDENCECODE;
 
 
- print "Printing All DiseaseOntologies Maximum DiseaseOntology is ", $DiseaseOntologyId, "\n";
  print DISEASEONTOLOGY "DISEASE_TERM|DIS_ID|EVS_ID|GENE_ID|HIST_ID|PARENT|CONCEPT_CODE\n";
  foreach my $disTerm (sort keys %DiseaseNCI) {
  print DISEASEONTOLOGY "$disTerm|$DiseaseNCI{$disTerm}\n";
@@ -503,8 +487,6 @@ if($el eq 'GeneEntryCollection') {
  }
 }
  close GENEGENEALIAS;
- close DISCARD;
- close FOUND;
 }
 
 # Set element to NULL each time, before reading a new tag

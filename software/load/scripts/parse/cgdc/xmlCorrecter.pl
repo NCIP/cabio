@@ -7,24 +7,27 @@ chomp($ARGV[0]);
 
 my ($inFile) = "$indir/$ARGV[0]";
 my ($outFile) = "$indir/$ARGV[1]";
-open (INFILE, "<:utf8", "$inFile") || die "Error opening $inFile \n";
-open (OUTFILE,">:utf8", "$outFile") || die "Error opening $outFile \n";
+open (INFILE, "<$inFile") || die "Error opening $inFile \n";
+open (OUTFILE,">$outFile") || die "Error opening $outFile \n";
 my ($startTag, $endTag, $foundStart, $foundEnd, $tag);
 $startTag ="";
 $endTag ="";
 $foundStart = 0;
 $foundEnd = 0;
+my $counter=0;
 my @arr;
 while(<INFILE>) {
  chomp $_;
  $_ =~s/^\s+//g;
  $_ =~s/\s+$//g;
+ $_ =~s/[^ -~]//g;
+ #print "$counter\n"; 
+ #print $_ unless ($counter < 8392910);
 
  if($_ =~/<([A-Za-z]+)>/) {
  $startTag = $1;
  $startTag =~s/^\s+//g;
  $startTag =~s/\s+$//g;
-# print "FOUND START TAG $startTag $_\n";
  push(@arr, $1);
  }
  if($_ =~/<\/([A-Za-z]+)>/) {
@@ -33,12 +36,9 @@ while(<INFILE>) {
  $endTag =~s/\s+$//g;
  $foundEnd = 1;
  $tag = $arr[$#arr];
-# print "FOUND END TAG $endTag **$tag** $_\n";
  } 
  if($tag ne $endTag) {
-# print "DIDNT MATCH DIDNT MATCH \n";
  print OUTFILE "<",$endTag,"/>\n";
- #print "<",$endTag,"/>\n"; 
  }
  else{
  print OUTFILE "$_\n";
@@ -46,12 +46,9 @@ while(<INFILE>) {
  if($foundEnd) { 
  $tmp = pop(@arr);
  }
- #print "$_ ";
-  if ($foundEnd) {
- # print "popped out $tmp";
+ if ($foundEnd) {
  $foundEnd = 0;
-  }
- #print "\n";
-
  }
+ }
+ $counter++;
 }
