@@ -10,8 +10,9 @@ use strict;
 use ParseUtils;
 
 my $prefix = $ARGV[0];
+my $arrayName = $ARGV[1];
 
-my ($indir,$outdir) = getFullDataPaths('arrays/Affymetrix/HuEx10ST');
+my ($indir,$outdir) = getFullDataPaths("arrays/Affymetrix/$arrayName");
 my $probeset_infile = "$indir/$prefix.probeset.csv";
 my $transcript_infile = "$indir/$prefix.transcript.csv";
 my $probeset_outfile = "$outdir/$prefix.probeset.dat";
