@@ -52,7 +52,7 @@ echo "Finished generating SQL Loader input files for Affymetrix HG-U133  MicroAr
 
 # Generate for third type of array
 
-perl Affy_HG_U133_DataSeparator_3.pl HT_HG-U133B.annot.csv
+perl Affy_HG_U133_DataSeparator_3.pl HT_HG-U133A.annot.csv
 
 echo "Generating SQL Loader specific input data from Affy HT HG U133B MicroArray data"
 perl Affy_HG_U133_DataFormatter.pl representative_public_ID_file_out_3.txt representative_public_ID_out_3.txt representative_public_ID_out_3.log 
