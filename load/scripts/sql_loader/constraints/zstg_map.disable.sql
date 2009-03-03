@@ -9,4 +9,6 @@ alter table ZSTG_MAP disable constraint SYS_C005008;
 alter table ZSTG_MAP disable constraint SYS_C005009;
 alter table ZSTG_MAP disable constraint SYS_C005010;
 
+alter table ZSTG_MAP disable primary key;
+
 --EXIT;

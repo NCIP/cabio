@@ -1,4 +1,4 @@
 
-alter table EVIDENCE_EVIDENCE_CODE disable constraint EV_EVCODE_PK;
+alter table EVIDENCE_EVIDENCE_CODE disable primary key;
 
 --EXIT;

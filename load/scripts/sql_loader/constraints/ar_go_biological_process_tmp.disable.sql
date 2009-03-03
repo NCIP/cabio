@@ -5,4 +5,6 @@ alter table AR_GO_BIOLOGICAL_PROCESS_TMP disable constraint SYS_C004235;
 alter table AR_GO_BIOLOGICAL_PROCESS_TMP disable constraint SYS_C004236;
 alter table AR_GO_BIOLOGICAL_PROCESS_TMP disable constraint SYS_C004237;
 
+alter table AR_GO_BIOLOGICAL_PROCESS_TMP disable primary key;
+
 --EXIT;

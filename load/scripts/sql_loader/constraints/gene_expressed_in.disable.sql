@@ -1,4 +1,4 @@
 
-alter table GENE_EXPRESSED_IN disable constraint PK_GENE_EXPRESSED_IN;
+alter table GENE_EXPRESSED_IN disable primary key;
 
 --EXIT;

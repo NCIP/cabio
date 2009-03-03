@@ -8,7 +8,7 @@ alter table ZSTG_MOUSE_CYTOBAND disable constraint SYS_C005033;
 alter table ZSTG_MOUSE_CYTOBAND disable constraint SYS_C005034;
 alter table ZSTG_MOUSE_CYTOBAND disable constraint SYS_C005035;
 alter table ZSTG_MOUSE_CYTOBAND disable constraint SYS_C005036;
-alter table ZSTG_MOUSE_CYTOBAND disable constraint CYTOBAND_M_UNIQ;
 alter table ZSTG_MOUSE_CYTOBAND disable constraint MOUSE_CYT_ID;
+alter table ZSTG_MOUSE_CYTOBAND disable constraint CYTOBAND_M_UNIQ;
 
 --EXIT;
