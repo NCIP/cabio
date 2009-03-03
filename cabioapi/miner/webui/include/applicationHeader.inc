@@ -11,7 +11,7 @@
 							 			    <INPUT TYPE=TEXT SIZE="40px" name="searchString" value="" >
 							 			</td><td width="20px" align="right" valign="top">							 							
 										    <INPUT TYPE=SUBMIT NAME="search" VALUE="Search">										
-										    <INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" VALUE="FULL_TEXT_SEARCH" />					
+										    <INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" VALUE="FULL_TEXT_SEARCH">					
 										</td>
 								</form>
 								<!-- freestyle search -->								
