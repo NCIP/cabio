@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/arrays/Illumina/HumanHap550K/HumanHap550v3_Gene_Annotation.txt'
+INFILE '$CABIO_DATA_DIR/arrays/Illumina/HumanHap550K/HumanHap550v3_Gene_Annotation.txt'
  
 APPEND
  
