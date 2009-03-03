@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HG-U133_Plus2/EC_out.txt'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133_Plus2/EC_out.txt'
  
 APPEND
  
