@@ -2,8 +2,8 @@
 @$LOAD/constraints.sql ar_ec_tmp
 @$LOAD/constraints.sql ar_ensembl
 @$LOAD/constraints.sql ar_ensembl_tmp
-@$LOAD/constraints.sql ar_omim
-@$LOAD/constraints.sql ar_omim_tmp
+@$LOAD/constraints.sql ar_omim_id
+@$LOAD/constraints.sql ar_omim_id_tmp
 @$LOAD/constraints.sql ar_rna_probesets_affy
 @$LOAD/constraints.sql ar_rna_probesets_affy_tmp
 @$LOAD/constraints.sql ar_alignments
@@ -29,7 +29,7 @@
 @$LOAD/constraints.sql ar_refseq_transcripts
 @$LOAD/constraints.sql ar_refseq_transcripts_tmp
 @$LOAD/constraints.sql ar_representative_public_id
-@$LOAD/constraints.sql ar_representative_public_id_tmp
+@$LOAD/constraints.sql ar_rep_public_id_tmp
 @$LOAD/constraints.sql ar_swissprot
 @$LOAD/constraints.sql ar_swissprot_tmp
 @$LOAD/constraints.sql ar_unigene_id
