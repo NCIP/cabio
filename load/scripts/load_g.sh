@@ -20,7 +20,7 @@ time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/all_ref_constraints.sql 1>r
 time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/constraints/disable.referential.sql 1>>refConstraints.log 2>&1
  
 echo "Beginning PL/SQL procedures that load from CGAP (BIOPATHWAYS, LIBRARIES, etc)";
-time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/sql/cgap_dataLoad.sql 1>cgapLoad.log 2>&1 &
+time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/sql/cgap_dataLoad.sql 1>$LOAD/sql/cgapLoad.log 2>&1 &
 wait
 
 echo "Done download " | mail -s "Finished download and library-load " viswanathl@mail.nih.gov
@@ -40,7 +40,7 @@ sh parse_MicroArray_Data.sh 1>>$parse_LOG 2>>$parse_BAD
 echo "Done Parse " | mail -s "Finished parse " viswanathl@mail.nih.gov
 
 # Load Data
-echo "Beginning Data Loads(array and non-array data) using SQL Loader and SQL"
+echo "Beginning Data Loads"
 cd $CABIO_DIR/scripts/sql_loader
 rm *.log
 rm *.bad
