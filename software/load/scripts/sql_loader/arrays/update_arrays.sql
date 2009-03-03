@@ -53,21 +53,30 @@ zstg_rna_probesets Z
 
 COMMIT;
 
+delete from zstg_rna_probesets_tmp where genechip_array = 'GeneChip Array';
+delete from zstg_rna_probesets_tmp x where x.GENECHIP_ARRAY = 'please see the bundled README file.';
+commit;
+
 INSERT
 INTO microarray (ID, ARRAY_NAME, ANNOTATION_DATE, GENOME_VERSION, PLATFORM, TYPE
 ,
   DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, geneCHIP_ARRAY,
 ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT 
-DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HT_HG-U133A',
-'Human Genome U133A 2.0 Array', 'HG-U133A_2') AS geneCHIP_ARRAY, TO_DATE(
+DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HG-U133A',
+'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B', 'HG-U133B') AS geneCHIP_ARRAY, TO_DATE(
 ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE, geneCHIP_ARRAY AS DESCRIPTION, DECODE
 (geneCHIP_ARRAY, 'Human Genome U133A Array', 'GPL96',
-'Human Genome U133A 2.0 Array', 'GPL571') AS ACCESSION, DECODE(geneCHIP_ARRAY,
+'Human Genome U133A 2.0 Array', 'GPL571', 'HT Human Genome U133A', 'GPL96', 'Human Genome U133B', 'GPL97') AS ACCESSION, DECODE(geneCHIP_ARRAY,
 'Human Genome U133A Array',
-'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133A',
 'Human Genome U133A 2.0 Array',
-'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133A_2') AS LSID FROM 
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133A_2',
+'HT Human Genome U133A',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
+'Human Genome U133B Array',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B'
+ ) AS LSID FROM 
 zstg_rna_probesets_tmp Z);
 
 COMMIT;
@@ -310,7 +319,7 @@ gene_ID FROM gene_tv
 A.ACCESSION = N.ACCESSION_NUMBER(+));
 
 COMMIT; 
-CREATE INDEX ER_NAME_INDEX ON zstg_expression_reporter(NAME);
+CREATE INDEX ER_NAME_INDEX ON zstg_expression_reporter(NAME) tablespace cabio_map_fut;
 
 UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM 
 zstg_cgh_accessions A, nucleic_acid_sequence N
@@ -357,7 +366,7 @@ zstg_exon_trans_affy;
 COMMIT;
 ANALYZE TABLE transcript COMPUTE STATISTICS;
 
-CREATE INDEX transcript_MI_INDEX ON TRANSCRIPT(MANUFACTURER_ID);
+CREATE INDEX transcript_MI_INDEX ON TRANSCRIPT(MANUFACTURER_ID) tablespace cabio_fut;
 
 INSERT
   INTO exon (MANUFACTURER_ID, transcript_ID, source) SELECT EXON_ID, ID,
@@ -365,7 +374,7 @@ INSERT
 transcript T
                     WHERE Z.transcript_CLUSTER_ID = T.MANUFACTURER_ID);
 COMMIT;
-CREATE INDEX exon_MI_INDEX ON EXON(MANUFACTURER_ID);
+CREATE INDEX exon_MI_INDEX ON EXON(MANUFACTURER_ID) tablespace cabio_fut;
 
 INSERT
  INTO microarray (ID, ARRAY_NAME, PLATFORM, TYPE, DESCRIPTION, ACCESSION) SELECT 
@@ -400,7 +409,7 @@ MANUFACTURER_PSR_ID, PROBE_COUNT, STRAND, transcript_ID, exon_ID FROM
 zstg_exon_reporter;
 COMMIT;
 
-CREATE INDEX ER_TI_INDEX ON exon_reporter(transcript_ID);
+CREATE INDEX ER_TI_INDEX ON exon_reporter(transcript_ID) tablespace cabio_fut;
 ANALYZE TABLE exon_reporter COMPUTE STATISTICS;
 
 
@@ -410,7 +419,7 @@ transcript T, gene_tv G
      WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.transcript_CLUSTER_ID =
 T.MANUFACTURER_ID;
 COMMIT;
-CREATE INDEX TG_TI_INDEX ON transcript_gene(TRANSCRIPT_ID);
+CREATE INDEX TG_TI_INDEX ON transcript_gene(TRANSCRIPT_ID) tablespace cabio_fut;
 ANALYZE TABLE transcript_gene COMPUTE STATISTICS;
 
 

@@ -12,6 +12,10 @@ sh load.sh $1
 cd "$CABIO_DIR"/scripts/sql_loader/arrays/Affymetrix/HG-U133
 sh load.sh $1 
 
+cd "$CABIO_DIR"/scripts/sql_loader/arrays/Affymetrix/U133B
+sh load.sh $1 
+
+
 cd "$CABIO_DIR"/scripts/sql_loader/arrays/Affymetrix/HuMapping
 sh load.sh $1 
 
