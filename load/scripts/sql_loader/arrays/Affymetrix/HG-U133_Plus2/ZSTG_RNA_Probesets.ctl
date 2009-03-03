@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/arrays/Affymetrix/HG-U133_Plus2/HG-U133_Plus_2.annot.csv'
+INFILE '$CABIO_DATA_DIR/arrays/Affymetrix/HG-U133_Plus2/HG-U133_Plus_2.annot.csv'
  
 APPEND
  
