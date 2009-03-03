@@ -1,12 +1,16 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HG-U133/alignments_out.txt'
-INFILE '/cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/HG-U133/alignments_out_2.txt'
+INFILE "$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/alignments_out.txt"
+INFILE "$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/alignments_out_2.txt"
+INFILE "$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U133A/alignments_out_3.txt"
  
 APPEND
  
 INTO TABLE ar_alignments_tmp
- 
+
+when GENECHIP_ARRAY <> 'GeneChip Array'
+
+
 FIELDS TERMINATED BY "|"
  
 TRAILING NULLCOLS

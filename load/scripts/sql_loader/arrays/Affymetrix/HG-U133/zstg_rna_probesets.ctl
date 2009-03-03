@@ -1,12 +1,14 @@
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/arrays/Affymetrix/HG-U133/HG-U133A.annot.csv'
+INFILE '$CABIO_DATA_DIR/arrays/Affymetrix/HG-U133A/HG-U133A.annot.csv'
+INFILE '$CABIO_DATA_DIR/arrays/Affymetrix/HG-U133A/HT_HG-U133A.annot.csv'
  
 APPEND
  
 INTO TABLE ZSTG_RNA_Probesets_TMP 
- 
 REENABLE DISABLED_constraints 
+when GENECHIP_ARRAY <> 'GeneChip Array'
+ 
 FIELDS TERMINATED BY "," optionally enclosed by '"'
 TRAILING NULLCOLS 
 (PROBE_SET_ID,
