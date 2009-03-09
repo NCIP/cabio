@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM DATA_SOURCE
+/
+
+--
+-- DATA_SOURCE  (Synonym) 
+--
+--  Dependencies: 
+--   DATA_SOURCE (Table)
+--
+CREATE PUBLIC SYNONYM DATA_SOURCE FOR DATA_SOURCE
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM LIBRARY
+/
+
+--
+-- LIBRARY  (Synonym) 
+--
+--  Dependencies: 
+--   LIBRARY (Table)
+--
+CREATE PUBLIC SYNONYM LIBRARY FOR LIBRARY
+/
+
+

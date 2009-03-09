@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_GENE
+/
+
+--
+-- ZSTG_GENE  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_GENE (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_GENE FOR ZSTG_GENE
+/
+
+

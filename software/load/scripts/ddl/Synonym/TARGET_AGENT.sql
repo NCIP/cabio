@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM TARGET_AGENT
+/
+
+--
+-- TARGET_AGENT  (Synonym) 
+--
+--  Dependencies: 
+--   TARGET_AGENT (Table)
+--
+CREATE PUBLIC SYNONYM TARGET_AGENT FOR TARGET_AGENT
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_ENTREZ_GENE
+/
+
+--
+-- AR_ENTREZ_GENE  (Synonym) 
+--
+--  Dependencies: 
+--   AR_ENTREZ_GENE (Table)
+--
+CREATE PUBLIC SYNONYM AR_ENTREZ_GENE FOR AR_ENTREZ_GENE
+/
+
+

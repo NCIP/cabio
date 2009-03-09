@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM VOCABULARY
+/
+
+--
+-- VOCABULARY  (Synonym) 
+--
+--  Dependencies: 
+--   VOCABULARY (Table)
+--
+CREATE PUBLIC SYNONYM VOCABULARY FOR VOCABULARY
+/
+
+

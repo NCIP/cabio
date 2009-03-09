@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM SNPCYTOIDS
+/
+
+--
+-- SNPCYTOIDS  (Synonym) 
+--
+--  Dependencies: 
+--   SNPCYTOIDS (Table)
+--
+CREATE PUBLIC SYNONYM SNPCYTOIDS FOR SNPCYTOIDS
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_SWISSPROT
+/
+
+--
+-- AR_SWISSPROT  (Synonym) 
+--
+--  Dependencies: 
+--   AR_SWISSPROT (Table)
+--
+CREATE PUBLIC SYNONYM AR_SWISSPROT FOR AR_SWISSPROT
+/
+
+

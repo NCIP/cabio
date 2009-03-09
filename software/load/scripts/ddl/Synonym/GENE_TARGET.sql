@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM GENE_TARGET
+/
+
+--
+-- GENE_TARGET  (Synonym) 
+--
+--  Dependencies: 
+--   GENE_TARGET (Table)
+--
+CREATE PUBLIC SYNONYM GENE_TARGET FOR GENE_TARGET
+/
+
+

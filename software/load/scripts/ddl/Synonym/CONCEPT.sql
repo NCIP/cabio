@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CONCEPT
+/
+
+--
+-- CONCEPT  (Synonym) 
+--
+--  Dependencies: 
+--   CONCEPT (Table)
+--
+CREATE PUBLIC SYNONYM CONCEPT FOR CONCEPT
+/
+
+

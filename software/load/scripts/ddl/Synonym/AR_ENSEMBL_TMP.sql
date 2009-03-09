@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_ENSEMBL_TMP
+/
+
+--
+-- AR_ENSEMBL_TMP  (Synonym) 
+--
+--  Dependencies: 
+--   AR_ENSEMBL_TMP (Table)
+--
+CREATE PUBLIC SYNONYM AR_ENSEMBL_TMP FOR AR_ENSEMBL_TMP
+/
+
+
