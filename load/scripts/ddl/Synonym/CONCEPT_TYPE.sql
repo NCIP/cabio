@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CONCEPT_TYPE
+/
+
+--
+-- CONCEPT_TYPE  (Synonym) 
+--
+--  Dependencies: 
+--   CONCEPT_TYPE (Table)
+--
+CREATE PUBLIC SYNONYM CONCEPT_TYPE FOR CONCEPT_TYPE
+/
+
+

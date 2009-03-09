@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CONTEXT
+/
+
+--
+-- CONTEXT  (Synonym) 
+--
+--  Dependencies: 
+--   CONTEXT (Table)
+--
+CREATE PUBLIC SYNONYM CONTEXT FOR CONTEXT
+/
+
+

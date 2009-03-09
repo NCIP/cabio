@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_GENE_TITLE
+/
+
+--
+-- AR_GENE_TITLE  (Synonym) 
+--
+--  Dependencies: 
+--   AR_GENE_TITLE (Table)
+--
+CREATE PUBLIC SYNONYM AR_GENE_TITLE FOR AR_GENE_TITLE
+/
+
+

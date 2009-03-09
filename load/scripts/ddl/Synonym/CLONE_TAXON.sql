@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CLONE_TAXON
+/
+
+--
+-- CLONE_TAXON  (Synonym) 
+--
+--  Dependencies: 
+--   CLONE_TAXON (Table)
+--
+CREATE PUBLIC SYNONYM CLONE_TAXON FOR CLONE_TAXON
+/
+
+

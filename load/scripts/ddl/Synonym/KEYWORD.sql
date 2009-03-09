@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM KEYWORD
+/
+
+--
+-- KEYWORD  (Synonym) 
+--
+--  Dependencies: 
+--   KEYWORD (Table)
+--
+CREATE PUBLIC SYNONYM KEYWORD FOR KEYWORD
+/
+
+

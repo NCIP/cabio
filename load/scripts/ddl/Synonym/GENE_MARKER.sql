@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM GENE_MARKER
+/
+
+--
+-- GENE_MARKER  (Synonym) 
+--
+--  Dependencies: 
+--   GENE_MARKER (Table)
+--
+CREATE PUBLIC SYNONYM GENE_MARKER FOR GENE_MARKER
+/
+
+

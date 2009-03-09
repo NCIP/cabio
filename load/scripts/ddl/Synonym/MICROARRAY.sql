@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM MICROARRAY
+/
+
+--
+-- MICROARRAY  (Synonym) 
+--
+--  Dependencies: 
+--   MICROARRAY (Table)
+--
+CREATE PUBLIC SYNONYM MICROARRAY FOR MICROARRAY
+/
+
+
