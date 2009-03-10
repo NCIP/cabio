@@ -292,15 +292,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	</target>
 
 	<!-- Wrapper build target, call appropriate builds for sub-projects -->
-       <target name="build:retrieve:cacore-sdk">                                
+       <target name="build:retrieve:cacore-sdk">                
                 <if>
                         <and>
                                 <equals arg1="${cacore-sdk.required}" arg2="true"/>
-                                <not>
-                                        <available file="${download.dir}/${cacore-sdk.binaries.file}"/>
-                                </not>
+                                <available file="${download.dir}/${cacore-sdk.binaries.file}"/>
+                                
                         </and>
                         <then>
+                                <echo message="retrieving cacore SDK ..." />
                                 <get src="${cacore-sdk.src.url}" dest="${download.dir}/${cacore-sdk.binaries.file}" />
                         </then>
                 </if>
@@ -309,11 +309,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 <if>
                         <and>
                                 <equals arg1="${cacore-sdk.required}" arg2="true"/>
-                                <not>
-                                        <available file="${cacore-sdk.dir}"/>
-                                </not>
+                                <available file="${cacore-sdk.dir}"/>                                
                         </and>
                         <then>
+                                <echo message="extracting cacore SDK ..." />
                                 <unzip src="${download.dir}/${cacore-sdk.binaries.file}" dest="${cacore-sdk.dir}"/>
                         </then>
                 </if>
@@ -355,7 +354,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		</copy -->
 	</target>
 
-	<target name="build:cabio-webapp" depends="init,build:cabio-webapp:downloadcacoresdk,build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">
+	<target name="build:cabio-webapp" depends="init, build:cabio-webapp:downloadcacoresdk, build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
 		<!-- ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.build.file}" target="${cabio-webapp.build.target}" dir="${cabio-webapp.base.dir}" -->
             <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
