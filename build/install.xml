@@ -88,6 +88,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<property name="db-upgrade.dir.dest" value="${working.dir}/${db-upgrade.dist.relative.dir}" />
 	<property name="jboss-conf.dir.src" value="${basedir}/${jboss-conf.dist.relative.dir}" />
 	<property name="jboss-conf.dir.dest" value="${working.dir}/${jboss-conf.dist.relative.dir}" />
+	<property name="cabio-conf.dir.src" value="${basedir}/${cabio-conf.dist.relative.dir}" />
+	<property name="cabio-conf.dir.dest" value="${working.dir}/${cabio-conf.dist.relative.dir}" />
+	<property name="jboss-cabio-conf.dir" value="${jboss.home}/server/${jboss.server.name}/data" />
+    	<property name="cabio.propertyservice.cacore.property.value" value="${jboss-cabio-conf.dir}/cacore.properties" />
+
+    
 
 	<!-- Jboss binding configurtion related properties -->
 	<property name="jboss.binding.template.location" value="${bda-utils.dir}/resource/${jboss.template.relative.dir}/bindings.xml"/>
@@ -96,7 +102,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<!-- *-ds.xml and WAR -->
 	<property name="cabio-webapp.dir.dist" value="${basedir}/${cabio-webapp.dist.relative.dir}" />
 	<property name="cabio-webapp.ds.file" value="cabio-ds.xml" />
-	<property name="cabio-webapp.war.file" value="cabio.war" />
+	<property name="cabio-webapp.war.file" value="${cabio-webapp.project.name}.war" />
 
 	<!-- Grid related properties -->
 	<property name="grid.resource.dir" value="${basedir}/${grid.dist.relative.dir}" />
@@ -304,6 +310,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 			<filter token="tomcat.home" value="${jboss.home}"/>
 			<filter token="database.dialect" value="${database.dialect}"/>
 			<filter token="hibernate.cfg.file.path" value="${hibernate.cfg.file.path}"/>
+                  <filter token="cabio-conf.handler_path" value="${jboss-cabio-conf.dir}/svr_1"/>
 		</filterset>
 	
 		<property name="db.prop.list" value="database.url,database.user,database.password,database.name"/>
@@ -322,7 +329,17 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<filtersfile file="${properties.file}"/>
 				<filtersfile file="project.properties"/>
 			</filterset>
-		</copy> 
+		</copy>             
+		<copy todir="${cabio-conf.dir.dest}" filtering="true">
+			<fileset dir="${cabio-conf.dir.src}">
+				<include name="**/*"/>
+			</fileset>
+			<filterset refid="embedded.filterset"/>
+			<filterset>
+				<filtersfile file="${properties.file}"/>
+				<filtersfile file="project.properties"/>
+			</filterset>
+		</copy>             
 	</target>
 
 	<!-- Wrapper install database target, depends on both MySQL and Oracle sub-targets, ifs should ensure only one is run.  Target path can be skipped by exlude.database also calls upgrade:database -->
@@ -408,6 +425,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		<!--
 		<copy file="${jboss-conf.dir.dest}/${jboss.web.xml.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 		-->
+            <!-- This code is for updating properties.service.xml, make sure to add {line.separator} 
+                 after each property def as the property delimiter, if this is not included you will 
+                 not get the desired results. If you do not use properties service.xml you can delete this code. -->
+            <var name="property.block" value="${cabio.propertyservice.cacore.property.name}=${cabio.propertyservice.cacore.property.value}${line.separator}"/>
+            <jboss-update-properties-service property.block="${property.block}"/>
+            <copy todir="${jboss-cabio-conf.dir}" overwrite="true">
+                 <fileset dir="${cabio-conf.dir.dest}/data">
+                      <include name="**/*" />
+                 </fileset>
+            </copy>
 	</target>
 
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss" >
@@ -613,8 +640,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		install:tomcat:stop,
 		install:validation:pre-install:ports,
 		install:clean,
-		install:init,
-		install:database,
+		install:init,		
 		install:tomcat,
 		install:jboss,
 		install:post,
@@ -667,7 +693,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		install:validation:pre-install,
 		install:jboss:stop,
 		install:init,
-		upgrade:database,
 		upgrade:jboss,
 		upgrade:tomcat,
 		install:validation:post-install
