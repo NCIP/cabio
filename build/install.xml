@@ -339,7 +339,27 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<filtersfile file="${properties.file}"/>
 				<filtersfile file="project.properties"/>
 			</filterset>
-		</copy>             
+		</copy> 
+
+            <!-- make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App -->
+            <echo message="make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App"/> 
+            <if>
+                  <not>
+                        <available file="${cabio-webapp.index_base}"/>
+                  </not>                                
+                  <then>                                
+                        <mkdir dir="${cabio-webapp.index_base}" />
+                  </then>
+            </if>                 
+            <if>
+                  <not>
+                        <available file="${cabio-webapp.cache_path}"/>
+                  </not>                                
+                  <then>                                
+                        <mkdir dir="${cabio-webapp.cache_path}" />
+                  </then>
+            </if>                 
+            
 	</target>
 
 	<!-- Wrapper install database target, depends on both MySQL and Oracle sub-targets, ifs should ensure only one is run.  Target path can be skipped by exlude.database also calls upgrade:database -->
