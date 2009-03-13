@@ -72,11 +72,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="cabio-webapp.build.file" value="build.xml" />
-	<property name="cabio-api.build.file" value="build.xml" />
+	<property name="cabio-api.build.file" value="build.xml" />      
 
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="cabio-api.build.target" value="build:all" />
-	<property name="cabio-webapp.build.target" value="build-system" />
+	<property name="cabio-webapp.build.target" value="build-system" />      
 
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 	<property name="cabio-webapp.maven.profile.list" value="local,bda" />
@@ -379,6 +379,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		</ant>
 
             <!-- copy all the files under cabioapi/docs/deploy/data to exploded/cabio/data folder -->
+            <echo message="copy all the files under cabioapi/docs/deploy/data to exploded/cabio/data folder"/>
             <delete dir="${cabio-conf.dist.dir}" />
             <mkdir dir="${cabio-conf.dist.dir}" />
             <copy todir="${cabio-conf.dist.dir}" overwrite="true">
@@ -387,6 +388,35 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                       <exclude name="**/.svn" />
                   </fileset>
             </copy> 
+	</target>
+
+	<target name="build:database:indexes" depends="init" description="Call indexgen sub-projects build target to produce index files">
+            <property name="cabio-webapp.load.dir" value="${software.dir}/load" />
+            <property name="cabio-webapp.indexgen.dir" value="${cabio-webapp.load.dir}/indexgen" />
+            <property name="cabio-webapp.indexgen.build.file" value="build.xml" />
+            <property name="cabio-webapp.indexgen.build.target" value="runindex" />
+            <property name="indexes.output.dir" location="${cabio-webapp.base.dir}/docs/deploy/data/indexes" />              
+            <!-- property name="indexes.output.dir" value="C:/dev43bda/software/cabioapi/docs/deploy/data/indexes" / -->
+            <property name="database.9i.url" value="jdbc:oracle:thin:@${database.server}:${database.port}:${database.9i.name}" />
+            <echo message="Database URL info for indexgen: ${database.9i.url}" />
+            <echo message="Database URL info for indexgen: ${database.user}/${database.password}" />
+            <echo message="Index File output dir: ${indexes.output.dir}" />
+
+ 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
+            <if>
+                 <not>
+                      <available file="${indexes.output.dir}/40"/>
+                 </not>                                
+                 <then>
+                      <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.indexgen.dir}/${cabio-webapp.indexgen.build.file}" target="${cabio-webapp.indexgen.build.target}">
+                           <!-- output the data into a stable place so it won't need to rebuild if it already exists -->                   
+			         <property name="index_location" value="${indexes.output.dir}"/>                  
+                           <property name="connection_url" value="${database.9i.url}"/>
+                           <property name="user_name" value="${database.user}"/>
+                           <property name="password" value="${database.password}"/>
+		          </ant>
+                 </then>
+            </if>                 
 	</target>
 
 	<target name="dist:gui-installer" description="Makes Gui-Installer distribution">
