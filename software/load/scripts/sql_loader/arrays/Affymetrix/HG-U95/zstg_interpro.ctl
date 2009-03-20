@@ -1,0 +1,19 @@
+LOAD DATA 
+ 
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U95/interpro_out_3.txt'
+INFILE '$CABIO_DATA_DIR/temp/arrays/Affymetrix/HG-U95/interpro_out_2.txt'
+ 
+APPEND
+ 
+INTO TABLE ZSTG_INTERPRO_TMP
+ 
+FIELDS TERMINATED BY "|"
+TRAILING NULLCOLS
+ 
+(PROBE_SET_ID,
+ ACCESSION_NUMBER,
+ DESCRIPTION char(2000),
+ SCORE,
+genechip_array)
+
+
