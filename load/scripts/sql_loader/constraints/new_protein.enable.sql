@@ -1,3 +1,12 @@
+create unique index SYS_C0021126_idx on NEW_PROTEIN
+(NAME,COPYRIGHTSTATEMENT,KEYWORD,UNIPROTCODE,SECONDARY_ACCESSION,PRIMARY_ACCESSION,PROTEIN_ID) tablespace CABIO_FUT;
+alter table NEW_PROTEIN enable constraint SYS_C0021126 using index SYS_C0021126_idx;
+create unique index NP_PK_idx on NEW_PROTEIN
+(PROTEIN_ID) tablespace CABIO_FUT;
+alter table NEW_PROTEIN enable constraint NP_PK using index NP_PK_idx;
+create unique index PROTUNIQ_idx on NEW_PROTEIN
+(PRIMARY_ACCESSION) tablespace CABIO_FUT;
+alter table NEW_PROTEIN enable constraint PROTUNIQ using index PROTUNIQ_idx;
 
 alter table NEW_PROTEIN enable constraint SYS_C0021126;
 alter table NEW_PROTEIN enable constraint SYS_C0021126;
@@ -17,12 +26,3 @@ alter table NEW_PROTEIN enable constraint PROTUNIQ;
 alter table NEW_PROTEIN enable primary key;
 
 --EXIT;
-create unique index SYS_C0021126_idx on NEW_PROTEIN
-(NAME,COPYRIGHTSTATEMENT,KEYWORD,UNIPROTCODE,SECONDARY_ACCESSION,PRIMARY_ACCESSION,PROTEIN_ID) tablespace CABIO_FUT;
-alter table NEW_PROTEIN enable constraint SYS_C0021126 using index SYS_C0021126_idx;
-create unique index NP_PK_idx on NEW_PROTEIN
-(PROTEIN_ID) tablespace CABIO_FUT;
-alter table NEW_PROTEIN enable constraint NP_PK using index NP_PK_idx;
-create unique index PROTUNIQ_idx on NEW_PROTEIN
-(PRIMARY_ACCESSION) tablespace CABIO_FUT;
-alter table NEW_PROTEIN enable constraint PROTUNIQ using index PROTUNIQ_idx;

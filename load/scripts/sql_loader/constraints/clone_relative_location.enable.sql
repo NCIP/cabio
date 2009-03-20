@@ -1,3 +1,9 @@
+create unique index SYS_C0021074_idx on CLONE_RELATIVE_LOCATION
+(NUCLEIC_ACID_SEQUENCE_ID,CLONE_ID,TYPE) tablespace CABIO_FUT;
+alter table CLONE_RELATIVE_LOCATION enable constraint SYS_C0021074 using index SYS_C0021074_idx;
+create unique index PK_CLONE_RELATIVE_LOCATION_idx on CLONE_RELATIVE_LOCATION
+(ID) tablespace CABIO_FUT;
+alter table CLONE_RELATIVE_LOCATION enable constraint PK_CLONE_RELATIVE_LOCATION using index PK_CLONE_RELATIVE_LOCATION_idx;
 
 alter table CLONE_RELATIVE_LOCATION enable constraint SYS_C0021074;
 alter table CLONE_RELATIVE_LOCATION enable constraint SYS_C0021074;
@@ -11,9 +17,3 @@ alter table CLONE_RELATIVE_LOCATION enable constraint PK_CLONE_RELATIVE_LOCATION
 alter table CLONE_RELATIVE_LOCATION enable primary key;
 
 --EXIT;
-create unique index SYS_C0021074_idx on CLONE_RELATIVE_LOCATION
-(NUCLEIC_ACID_SEQUENCE_ID,CLONE_ID,TYPE) tablespace CABIO_FUT;
-alter table CLONE_RELATIVE_LOCATION enable constraint SYS_C0021074 using index SYS_C0021074_idx;
-create unique index PK_CLONE_RELATIVE_LOCATION_idx on CLONE_RELATIVE_LOCATION
-(ID) tablespace CABIO_FUT;
-alter table CLONE_RELATIVE_LOCATION enable constraint PK_CLONE_RELATIVE_LOCATION using index PK_CLONE_RELATIVE_LOCATION_idx;

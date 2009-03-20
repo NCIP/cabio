@@ -1,3 +1,9 @@
+create unique index SYS_C0021092_idx on EXON_REPORTER
+(EXON_ID,TRANSCRIPT_ID,STRAND,PROBE_COUNT,MANUFACTURER_PSR_ID,MICROARRAY_ID,NAME) tablespace CABIO_FUT;
+alter table EXON_REPORTER enable constraint SYS_C0021092 using index SYS_C0021092_idx;
+create unique index EXON_REPORTER_PK_idx on EXON_REPORTER
+(ID) tablespace CABIO_FUT;
+alter table EXON_REPORTER enable constraint EXON_REPORTER_PK using index EXON_REPORTER_PK_idx;
 
 alter table EXON_REPORTER enable constraint SYS_C0021092;
 alter table EXON_REPORTER enable constraint SYS_C0021092;
@@ -19,9 +25,3 @@ alter table EXON_REPORTER enable constraint EXON_REPORTER_PK;
 alter table EXON_REPORTER enable primary key;
 
 --EXIT;
-create unique index SYS_C0021092_idx on EXON_REPORTER
-(EXON_ID,TRANSCRIPT_ID,STRAND,PROBE_COUNT,MANUFACTURER_PSR_ID,MICROARRAY_ID,NAME) tablespace CABIO_FUT;
-alter table EXON_REPORTER enable constraint SYS_C0021092 using index SYS_C0021092_idx;
-create unique index EXON_REPORTER_PK_idx on EXON_REPORTER
-(ID) tablespace CABIO_FUT;
-alter table EXON_REPORTER enable constraint EXON_REPORTER_PK using index EXON_REPORTER_PK_idx;

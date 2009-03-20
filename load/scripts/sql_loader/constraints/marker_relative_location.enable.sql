@@ -1,3 +1,9 @@
+create unique index SYS_C0021123_idx on MARKER_RELATIVE_LOCATION
+(PROBE_SET_ID,SNP_ID,DISTANCE,ORIENTATION,TYPE) tablespace CABIO_FUT;
+alter table MARKER_RELATIVE_LOCATION enable constraint SYS_C0021123 using index SYS_C0021123_idx;
+create unique index MARKER_RL_PK_idx on MARKER_RELATIVE_LOCATION
+(ID) tablespace CABIO_FUT;
+alter table MARKER_RELATIVE_LOCATION enable constraint MARKER_RL_PK using index MARKER_RL_PK_idx;
 
 alter table MARKER_RELATIVE_LOCATION enable constraint SYS_C0021123;
 alter table MARKER_RELATIVE_LOCATION enable constraint SYS_C0021123;
@@ -14,9 +20,3 @@ alter table MARKER_RELATIVE_LOCATION enable constraint SYS_C0016539;
 alter table MARKER_RELATIVE_LOCATION enable primary key;
 
 --EXIT;
-create unique index SYS_C0021123_idx on MARKER_RELATIVE_LOCATION
-(PROBE_SET_ID,SNP_ID,DISTANCE,ORIENTATION,TYPE) tablespace CABIO_FUT;
-alter table MARKER_RELATIVE_LOCATION enable constraint SYS_C0021123 using index SYS_C0021123_idx;
-create unique index MARKER_RL_PK_idx on MARKER_RELATIVE_LOCATION
-(ID) tablespace CABIO_FUT;
-alter table MARKER_RELATIVE_LOCATION enable constraint MARKER_RL_PK using index MARKER_RL_PK_idx;
