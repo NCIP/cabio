@@ -1,0 +1,9 @@
+
+SQL*Loader: Release 10.2.0.1.0 - Production on Wed Mar 18 15:28:29 2009
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+SQL*Loader-350: Syntax error at line 9.
+Expecting "(", found "FELDS".
+FELDS TERMINATED BY "," optionally enclosed by '"'
+^
