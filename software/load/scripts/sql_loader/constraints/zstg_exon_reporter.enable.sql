@@ -1,3 +1,6 @@
+create unique index PK_ZSTG_EXON_REPORTER_idx on ZSTG_EXON_REPORTER
+(ID) tablespace CABIO_MAP_FUT;
+alter table ZSTG_EXON_REPORTER enable constraint PK_ZSTG_EXON_REPORTER using index PK_ZSTG_EXON_REPORTER_idx;
 
 alter table ZSTG_EXON_REPORTER enable constraint SYS_C004883;
 alter table ZSTG_EXON_REPORTER enable constraint SYS_C004884;
@@ -12,6 +15,3 @@ alter table ZSTG_EXON_REPORTER enable constraint PK_ZSTG_EXON_REPORTER;
 alter table ZSTG_EXON_REPORTER enable primary key;
 
 --EXIT;
-create unique index PK_ZSTG_EXON_REPORTER_idx on ZSTG_EXON_REPORTER
-(ID) tablespace CABIO_MAP_FUT;
-alter table ZSTG_EXON_REPORTER enable constraint PK_ZSTG_EXON_REPORTER using index PK_ZSTG_EXON_REPORTER_idx;

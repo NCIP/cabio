@@ -7,8 +7,8 @@ alter table NUCLEIC_ACID_SEQUENCE disable constraint SYS_C004617;
 alter table NUCLEIC_ACID_SEQUENCE disable constraint SYS_C004618;
 alter table NUCLEIC_ACID_SEQUENCE disable constraint SYS_C004619;
 alter table NUCLEIC_ACID_SEQUENCE disable constraint SYS_C004620;
-alter table NUCLEIC_ACID_SEQUENCE disable constraint NASNODUPS;
 alter table NUCLEIC_ACID_SEQUENCE disable constraint NASBIGID;
+alter table NUCLEIC_ACID_SEQUENCE disable constraint NASNODUPS;
 
 alter table NUCLEIC_ACID_SEQUENCE disable primary key;
 

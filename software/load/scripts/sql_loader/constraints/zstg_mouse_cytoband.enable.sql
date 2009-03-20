@@ -1,3 +1,9 @@
+create unique index MOUSE_CYT_ID_idx on ZSTG_MOUSE_CYTOBAND
+(ID) tablespace CABIO_MAP_FUT;
+alter table ZSTG_MOUSE_CYTOBAND enable constraint MOUSE_CYT_ID using index MOUSE_CYT_ID_idx;
+create unique index CYTOBAND_M_UNIQ_idx on ZSTG_MOUSE_CYTOBAND
+(CYTOBAND) tablespace CABIO_MAP_FUT;
+alter table ZSTG_MOUSE_CYTOBAND enable constraint CYTOBAND_M_UNIQ using index CYTOBAND_M_UNIQ_idx;
 
 alter table ZSTG_MOUSE_CYTOBAND enable constraint SYS_C005028;
 alter table ZSTG_MOUSE_CYTOBAND enable constraint SYS_C005029;
@@ -12,9 +18,3 @@ alter table ZSTG_MOUSE_CYTOBAND enable constraint MOUSE_CYT_ID;
 alter table ZSTG_MOUSE_CYTOBAND enable constraint CYTOBAND_M_UNIQ;
 
 --EXIT;
-create unique index MOUSE_CYT_ID_idx on ZSTG_MOUSE_CYTOBAND
-(ID) tablespace CABIO_MAP_FUT;
-alter table ZSTG_MOUSE_CYTOBAND enable constraint MOUSE_CYT_ID using index MOUSE_CYT_ID_idx;
-create unique index CYTOBAND_M_UNIQ_idx on ZSTG_MOUSE_CYTOBAND
-(CYTOBAND) tablespace CABIO_MAP_FUT;
-alter table ZSTG_MOUSE_CYTOBAND enable constraint CYTOBAND_M_UNIQ using index CYTOBAND_M_UNIQ_idx;

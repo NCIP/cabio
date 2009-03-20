@@ -1,3 +1,6 @@
+create unique index SYS_C0021063_idx on AR_REFSEQ_TRANSCRIPTS
+(GENECHIP_ARRAY,REFSEQ_TRANSCRIPTS_ID,PROBE_SET_ID) tablespace CABIO_MAP_FUT;
+alter table AR_REFSEQ_TRANSCRIPTS enable constraint SYS_C0021063 using index SYS_C0021063_idx;
 
 alter table AR_REFSEQ_TRANSCRIPTS enable constraint SYS_C0021063;
 alter table AR_REFSEQ_TRANSCRIPTS enable constraint SYS_C0021063;
@@ -9,6 +12,3 @@ alter table AR_REFSEQ_TRANSCRIPTS enable constraint SYS_C004278;
 alter table AR_REFSEQ_TRANSCRIPTS enable primary key;
 
 --EXIT;
-create unique index SYS_C0021063_idx on AR_REFSEQ_TRANSCRIPTS
-(GENECHIP_ARRAY,REFSEQ_TRANSCRIPTS_ID,PROBE_SET_ID) tablespace CABIO_MAP_FUT;
-alter table AR_REFSEQ_TRANSCRIPTS enable constraint SYS_C0021063 using index SYS_C0021063_idx;
