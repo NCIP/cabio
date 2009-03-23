@@ -23,7 +23,7 @@ values (1, 'PIR', 'Protein Information Resource, National Biomedical Research Fo
 
 Insert into INTERNET_SOURCE (ID, NAME, OWNER_INSTITUTION, OWNER_PERSONS, SOURCE_URI)
 values (2, 'caBIO', 'NCI Center for Bioinformatics', 'Dr. George A. Komatsoulis',
-'http://cabio.nci.nih.nih.gov/cacore30/server/HTTPServer');
+'http://cabio_fut.nci.nih.nih.gov/cacore30/server/HTTPServer');
 
 Commit;
 
@@ -66,7 +66,7 @@ Commit;
       1,
       2,
       1,
-	'gov.nih.nci.cabio.domain.Protein',
+	'gov.nih.nci.cabio_fut.domain.Protein',
 	aRec.protein_ID);
 
       IF MOD(aID, 500) = 0 THEN

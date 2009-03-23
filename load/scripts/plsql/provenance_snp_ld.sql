@@ -59,7 +59,7 @@ Commit;
       5,
       2,
       5,
-	'gov.nih.nci.cabio.domain.snp',
+	'gov.nih.nci.cabio_fut.domain.snp',
 	aRec.ID);
 
       IF MOD(aID, 500) = 0 THEN

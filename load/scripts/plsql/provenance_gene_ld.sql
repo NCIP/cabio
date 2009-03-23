@@ -60,7 +60,7 @@ Commit;
       3,
       2,
       3,
-	'gov.nih.nci.cabio.domain.gene',
+	'gov.nih.nci.cabio_fut.domain.gene',
 	aRec.gene_ID);
 
       IF MOD(aID, 500) = 0 THEN
