@@ -22,7 +22,7 @@ BEGIN
       	
       VALUES
      	(aRec.ROWNUM + V_MAXROW,aRec.ID,aRec.tsc_ID,
-      	'gov.nih.nci.cabio.domain.SNP','SNP','SNP Consortium');
+      	'gov.nih.nci.cabio_fut.domain.SNP','SNP','SNP Consortium');
 
       IF MOD(aID, 500) = 0 THEN
          COMMIT;

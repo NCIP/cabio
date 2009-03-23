@@ -22,7 +22,7 @@ BEGIN
       	
       VALUES
      	(aRec.rownum + V_MAXROW, aRec.GENE_ID, aRec.EC,
-      	'gov.nih.nci.cabio.domain.Gene','EC_ID','Enzyme Commission');
+      	'gov.nih.nci.cabio_fut.domain.Gene','EC_ID','Enzyme Commission');
 
       IF MOD(aID, 500) = 0 THEN
          COMMIT;

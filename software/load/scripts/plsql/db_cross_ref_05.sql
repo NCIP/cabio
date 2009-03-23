@@ -22,7 +22,7 @@ BEGIN
       	
       VALUES
      	(aRec.ROWNUM + V_MAXROW,aRec.ID,aRec.REFSEQ_PROTEIN_ID,
-      	'gov.nih.nci.cabio.domain.Protein','REFSEQ_PROTEIN_ID','RefSeq');
+      	'gov.nih.nci.cabio_fut.domain.Protein','REFSEQ_PROTEIN_ID','RefSeq');
 
       IF MOD(aID, 500) = 0 THEN
          COMMIT;

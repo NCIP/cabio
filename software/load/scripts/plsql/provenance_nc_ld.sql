@@ -60,7 +60,7 @@ Commit;
       4,
       2,
       4,
-	'gov.nih.nci.cabio.domain.nucleicacidsequence',
+	'gov.nih.nci.cabio_fut.domain.nucleicacidsequence',
 	aRec.ID);
 
       IF MOD(aID, 500) = 0 THEN
