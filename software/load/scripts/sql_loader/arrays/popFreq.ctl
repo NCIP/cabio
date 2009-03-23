@@ -3,7 +3,7 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/population_frequency/popFreq.txt'
+INFILE '$CABIO_DATA_DIR/temp/population_frequency/popFreq.txt'
  
 APPEND 
 

@@ -50,3 +50,4 @@
 @$LOAD/constraints.sql zstg_cgh_accessions
 @$LOAD/constraints.sql zstg_cgh_agilent
 @$LOAD/constraints.sql zstg_snp_illumina
+@$LOAD/constraints.sql zstg_rna_probesets_tmp

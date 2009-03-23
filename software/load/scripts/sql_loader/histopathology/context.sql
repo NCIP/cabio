@@ -1,2 +1,2 @@
-INSERT INTO context(CONTEXT_CODE, histology_code, tissue_code) VALUES(911,15416,26);
+INSERT INTO context(CONTEXT_CODE, histology_code, tissue_code) VALUES(912,15498,26);
 EXIT;

@@ -18,11 +18,11 @@ CREATE TABLE ZSTG_GPID tablespace cabio_map_fut as SELECT distinct g2u.geneID, g
 DROP INDEX gtv_tid_idx;
 DROP INDEX gtv_cid_idx;
 
-CREATE INDEX tmp_pid_idx on tmp_gpid(protein_id);
-CREATE INDEX tmp_pid_gid_idx on tmp_gpid(protein_id, geneid);
+CREATE INDEX tmp_pid_idx on zstg_gpid(protein_id);
+CREATE INDEX tmp_pid_gid_idx on zstg_gpid(protein_id, geneid);
 CREATE INDEX gtv_tid_idx on gene_tv(taxon_id);
 CREATE INDEX gtv_cid_idx on gene_tv(cluster_id);
-CREATE INDEX tmp_ucid_idx on tmp_GPID(substr(unigene_cluster, 4));
+CREATE INDEX tmp_ucid_idx on zstg_GPID(substr(unigene_cluster, 4));
 
 TRUNCATE TABLE gene_protein_tv REUSE STORAGE;
 @$LOAD/indexer_new.sql gene_protein_tv

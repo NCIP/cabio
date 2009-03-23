@@ -46,3 +46,8 @@
 @$LOAD/constraints/ar_unigene_id_tmp.enable.sql
 @$LOAD/constraints/zstg_interpro_tmp.enable.sql
 @$LOAD/constraints/zstg_rna_probesets_tmp.enable.sql
+@$LOAD/constraints/zstg_cgh_accessions.enable.sql
+@$LOAD/constraints/zstg_cgh_agilent.enable.sql
+@$LOAD/constraints/zstg_rna_agilent.enable.sql
+@$LOAD/constraints/zstg_snp_illumina.enable.sql
+@$LOAD/constraints/zstg_rna_probesets_tmp.enable.sql

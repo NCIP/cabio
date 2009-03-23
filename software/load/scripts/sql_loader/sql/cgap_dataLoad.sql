@@ -22,39 +22,39 @@ SPOOL &SPOOLFILENAME;
 @$LOAD/constraints.sql library_keyword  
 @$LOAD/triggers.sql library_keyword
 
+@$LOAD/indexes/library.drop.sql;
 @$LOAD/constraints/library.disable.sql;
 @$LOAD/triggers/library.disable.sql;
-@$LOAD/indexes/library.drop.sql;
 
+@$LOAD/indexes/tissue_sample.drop.sql;
 @$LOAD/constraints/tissue_sample.disable.sql;
 @$LOAD/triggers/tissue_sample.disable.sql;
-@$LOAD/indexes/tissue_sample.drop.sql;
 
+@$LOAD/indexes/library_histopathology.drop.sql;
 @$LOAD/constraints/library_histopathology.disable.sql;
 @$LOAD/triggers/library_histopathology.disable.sql;
-@$LOAD/indexes/library_histopathology.drop.sql;
 
+@$LOAD/indexes/library_keyword.drop.sql;
 @$LOAD/constraints/library_keyword.disable.sql;
 @$LOAD/triggers/library_keyword.disable.sql;
-@$LOAD/indexes/library_keyword.drop.sql;
 
 execute load_data.load_libraries;
 
-@$LOAD/constraints/library.enable.sql;
 @$LOAD/indexes/library.cols.sql;
 @$LOAD/indexes/library.lower.sql;
+@$LOAD/constraints/library.enable.sql;
 
-@$LOAD/constraints/tissue_sample.enable.sql;
 @$LOAD/indexes/tissue_sample.lower.sql;
 @$LOAD/indexes/tissue_sample.cols.sql;
+@$LOAD/constraints/tissue_sample.enable.sql;
 
-@$LOAD/constraints/library_histopathology.enable.sql;
 @$LOAD/indexes/library_histopathology.lower.sql;
 @$LOAD/indexes/library_histopathology.cols.sql;
+@$LOAD/constraints/library_histopathology.enable.sql;
 
-@$LOAD/constraints/library_keyword.enable.sql;
 @$LOAD/indexes/library_keyword.lower.sql;
 @$LOAD/indexes/library_keyword.cols.sql;
+@$LOAD/constraints/library_keyword.enable.sql;
 
 CREATE INDEX tissuecode_parent on tissue_code(parent) tablespace cabio_fut;
 CREATE INDEX tissuecode_relationship on tissue_code(relationship) cabio_fut;

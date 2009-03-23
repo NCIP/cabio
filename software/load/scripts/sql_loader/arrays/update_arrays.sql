@@ -157,10 +157,14 @@ GENOME_VERSION, DB_SNP_VERSION, 'Affymetrix', 'snp', DESCRIPTION, ACCESSION, LSI
 'Mapping250K_Nsp', 'GPL3718', 'Mapping250K_Sty', 'GPL3720', 'Mapping50K_Hind240'
 ,
   'GPL2004', 'Mapping50K_Xba240', 'GPL2005') AS ACCESSION, DECODE(ARRAY_NAME,
-'Mapping250K_Nsp', 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping250K_Nsp'
-,
+'Mapping250K_Nsp', 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping250K_Nsp',
   'Mapping250K_Sty',
-'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping250K_Sty') AS LSID FROM 
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping250K_Sty',
+  'Mapping50K_Hind240',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping50K_Hind240',
+  'Mapping50K_Xba240',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:Mapping50K_Xba240'
+) AS LSID FROM 
 zstg_snp_affy Z);
 
 COMMIT;
@@ -333,9 +337,8 @@ COMMIT;
 
 INSERT
   INTO microarray (ID, ARRAY_NAME, GENOME_VERSION, PLATFORM, TYPE, DESCRIPTION,
-ACCESSION) SELECT microarray_SEQ.NEXTVAL, 'HumanHap550Kv3', GENOME_BUILD,
-'Illumina', 'snp', 'HumanHap550 Genotyping BeadChip' AS DESCRIPTION, '' AS 
-ACCESSION FROM zstg_snp_illumina Z
+ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, 'HumanHap550Kv3', GENOME_BUILD,
+'Illumina', 'snp', 'HumanHap550 Genotyping BeadChip' AS DESCRIPTION, '' AS ACCESSION, 'URN:LSID:illumina.com:PhysicalArrayDesign:HumanHap550v3_A' as LSID FROM zstg_snp_illumina Z
             WHERE ROWNUM = 1;
 COMMIT;
 SELECT microarray_SEQ.CURRVAL
@@ -377,9 +380,9 @@ COMMIT;
 CREATE INDEX exon_MI_INDEX ON EXON(MANUFACTURER_ID) tablespace cabio_fut;
 
 INSERT
- INTO microarray (ID, ARRAY_NAME, PLATFORM, TYPE, DESCRIPTION, ACCESSION) SELECT 
+ INTO microarray (ID, ARRAY_NAME, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID) SELECT 
 microarray_SEQ.NEXTVAL, 'HuEx-1_0-st-v2', 'Affymetrix', 'exon',
-'Human Exon 1.0 ST Array', 'GPL5188' FROM DUAL;
+'Human Exon 1.0 ST Array', 'GPL5188','URN:LSID:Affymetrix.com:PhysicalArrayDesign:HuEx-1_0-st-v2'  FROM DUAL;
 
 SELECT microarray_SEQ.CURRVAL
   INTO :microarray_ID FROM DUAL;

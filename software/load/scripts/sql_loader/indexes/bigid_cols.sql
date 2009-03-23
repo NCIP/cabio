@@ -1,5 +1,6 @@
 
 create index PROTOCOSES_BIG_ID on PROTOCOL_DISEASES(BIG_ID) tablespace CABIO_FUT;
+create index PROTOCOOLS_BIG_ID on PROTOCOLS(BIG_ID) tablespace CABIO_FUT;
 create index ZSTG_MAKER_BIG_ID on ZSTG_MARKER(BIG_ID) tablespace CABIO_MAP_FUT;
 create index ZSTG_TAGET_BIG_ID on ZSTG_TARGET(BIG_ID) tablespace CABIO_MAP_FUT;
 create index ZSTG_AG_BK_BIG_ID on ZSTG_AGENT_BK(BIG_ID) tablespace CABIO_MAP_FUT;
@@ -13,7 +14,6 @@ create index ORGANONHIP_BIG_ID on ORGANONTOLOGYRELATIONSHIP(BIG_ID) tablespace C
 create index HISTOPATST_BIG_ID on HISTOPATHOLOGY_TST(BIG_ID) tablespace CABIO_FUT;
 create index DISEASEHIP_BIG_ID on DISEASE_RELATIONSHIP(BIG_ID) tablespace CABIO_FUT;
 create index CHROMOSOME_BIG_ID on CHROMOSOME(BIG_ID) tablespace CABIO_FUT;
-create index PROTOCOOLS_BIG_ID on PROTOCOLS(BIG_ID) tablespace CABIO_FUT;
 create index ANOMALYALY_BIG_ID on ANOMALY(BIG_ID) tablespace CABIO_FUT;
 create index ZSTG_AGENT_BIG_ID on ZSTG_AGENT(BIG_ID) tablespace CABIO_FUT;
 create index ZSTG_BI_TV_BIG_ID on ZSTG_BIO_PATHWAYS_TV(BIG_ID) tablespace CABIO_FUT;

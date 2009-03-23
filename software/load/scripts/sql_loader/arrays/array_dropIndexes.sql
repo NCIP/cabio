@@ -18,6 +18,9 @@
 @$LOAD/indexes/ar_unigene_id.drop.sql
 @$LOAD/indexes/zstg_interpro.drop.sql
 @$LOAD/indexes/zstg_rna_probesets.drop.sql
+@$LOAD/indexes/zstg_rna_agilent.drop.sql
+@$LOAD/indexes/zstg_cgh_accessions.drop.sql
+@$LOAD/indexes/zstg_cgh_agilent.drop.sql
 @$LOAD/indexes/zstg_genetic_map.drop.sql
 @$LOAD/indexes/zstg_microsatellite.drop.sql
 @$LOAD/indexes/zstg_pop_frequency.drop.sql

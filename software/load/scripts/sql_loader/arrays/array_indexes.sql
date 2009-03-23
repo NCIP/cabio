@@ -26,6 +26,9 @@
 @$LOAD/indexer_new.sql zstg_exon_affy
 @$LOAD/indexer_new.sql zstg_exon_trans_affy
 @$LOAD/indexer_new.sql zstg_exon_trans_genes
+@$LOAD/indexer_new.sql zstg_rna_agilent
+@$LOAD/indexer_new.sql zstg_cgh_accessions
+@$LOAD/indexer_new.sql zstg_cgh_agilent
 @$LOAD/indexer_new.sql ar_ensembl_tmp
 @$LOAD/indexer_new.sql ar_ec_tmp
 @$LOAD/indexer_new.sql ar_omim_id_tmp
