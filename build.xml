@@ -82,6 +82,7 @@
         <include name="cabioportlet.properties"/>
         <replacefilter token="CABIO_URL" value="${remote.api.url}" />
         <replacefilter token="CABIO_VERSION" value="${remote.api.version}" />
+        <replacefilter token="ONLINE_HELP_URL" value="${online.help.url}" />
         <replacefilter token="BUILD_VERSION" value="${build.version}" />
         <replacefilter token="BUILD_SVN_TAG" value="${build.svn.url}" />
         <replacefilter token="BUILD_SVN_REVISION" value="${build.svn.revision}" />
