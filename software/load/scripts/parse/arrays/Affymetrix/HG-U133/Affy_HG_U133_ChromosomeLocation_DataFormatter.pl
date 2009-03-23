@@ -40,9 +40,10 @@ foreach my $line(<INFILE>) {
                     $tmpVar =~s/^chr//g;
 		    if($tmpVar=~/\;/) {
 		    @tmpArr = split ('\;',$tmpVar);
+
 		    $tmpArr[0] =~/(\S+)[p|q|cen](.)*/g;
 		    $chrNumber = $1;
-
+		  
 			if(($chrNumber =~/_/) && (!(exists($chrHash->{$chrNumber})))) {
 			  @chrArr = split('_',$chrNumber);
 			  $assembly = $chrNumber;
@@ -57,6 +58,9 @@ foreach my $line(<INFILE>) {
 		        } 
 			chomp($tmpArr[1]);
 			chomp($tmpArr[0]);
+
+			# for chr1p|1p36.3 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$go_array[0],$go_array[$i],$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
 		    @tmpArr = ();		
 		    }elsif($tmpVar =~/\|/) {
@@ -76,6 +80,7 @@ foreach my $line(<INFILE>) {
 			if($tmpArr[1]=~/^[p|q]/) {
 		           $tmpArr[1] = $chrNumber.$tmpArr[1];	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$go_array[0],$go_array[$i],$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
 		    @tmpArr = ();		
 		    } elsif($tmpVar =~/-/) {
@@ -94,6 +99,7 @@ foreach my $line(<INFILE>) {
 			if($tmpArr[1]=~/^[p|q]/) {
 		           $tmpArr[1] = $chrNumber.$tmpArr[1];	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$go_array[0],$go_array[$i],$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
 		    @tmpArr = ();
 		   }		
@@ -112,6 +118,7 @@ foreach my $line(<INFILE>) {
 			if($tmpVar=~/^[p|q]/) {
 		           $tmpVar = $chrNumber.$tmpVar;	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$go_array[0],$go_array[$i],$tmpVar,$tmpVar,$tmpVar,$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
 		    }
                 }
@@ -140,6 +147,7 @@ foreach my $line(<INFILE>) {
 			if($tmpArr[1]=~/^[p|q]/) {
 		           $tmpArr[1] = $chrNumber.$tmpArr[1];	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                    print OUTFILE "$probe_set_id,$general_id,$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
                     @tmpArr = ();
                     } elsif($tmpVar =~/\|/) {
@@ -158,6 +166,7 @@ foreach my $line(<INFILE>) {
 			if($tmpArr[1]=~/^[p|q]/) {
 		           $tmpArr[1] = $chrNumber.$tmpArr[1];	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                    print OUTFILE "$probe_set_id,$general_id,$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
                     @tmpArr = ();
                     } elsif($tmpVar =~/-/) {
@@ -176,6 +185,7 @@ foreach my $line(<INFILE>) {
 			if($tmpArr[1]=~/^[p|q]/) {
 		           $tmpArr[1] = $chrNumber.$tmpArr[1];	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$probe_set_id,$general_id,$tmpVar,$tmpArr[0],$tmpArr[1],$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
                     @tmpArr = ();
                    }
@@ -194,6 +204,7 @@ foreach my $line(<INFILE>) {
 			if($tmpVar=~/^[p|q]/) {
 		           $tmpVar = $chrNumber.$tmpVar;	
 		        } 
+			$tmpArr[0] = $tmpArr[1] unless (length($tmpArr[0]) >3);
                     print OUTFILE "$probe_set_id,$general_id,$tmpVar,$tmpVar,$tmpVar,$chrNumber,$chrArr[0],$assembly,$genechipname,$chrId\n";
                     }
         }
