@@ -56,7 +56,7 @@ TRAILING NULLCOLS
   IMMEDIATE_source_ID CONSTANT "4",
   SUPPLYING_source_ID CONSTANT "2",
   ORIGINAL_source_ID CONSTANT "4",
-  FULLY_QUALIFIED_CLASS_NAME CONSTANT "gov.nih.nci.cabio.domain.nucleicacidsequence",
+  FULLY_QUALIFIED_CLASS_NAME CONSTANT "gov.nih.nci.cabio_fut.domain.nucleicacidsequence",
   ACCESSION_NUMBER filler POSITION(1),
   sequence_type_FILLER filler,
   description filler,

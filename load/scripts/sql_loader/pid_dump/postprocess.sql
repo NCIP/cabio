@@ -71,6 +71,7 @@
 @$LOAD/constraints/zstg_pid_entityaccession.enable.sql
 @$LOAD/constraints/zstg_pid_interaction.enable.sql
 @$LOAD/constraints/zstg_pid_pathway.enable.sql
+@$LOAD/constraints/zstg_pid_complex_component.enable.sql
 @$LOAD/constraints/zstg_pid_interactioncondition.enable.sql
 exit;
 

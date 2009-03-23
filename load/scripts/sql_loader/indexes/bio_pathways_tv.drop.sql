@@ -13,6 +13,8 @@ drop index BIO_PATHS_TV_CURATOR;
 drop index BIO_PATHS_TV_REVIEWER;
 drop index BIO_PATHS_TV_SOURCE;
 drop index BIO_PATHS_TV_PID_ID;
+drop index BIO_PAT_TV_BIG_ID_LWR;
+drop index BIO_PAT_TV_BIG_ID;
 drop index BIO_PATHS_TV_PATHWAY_ID;
 drop index SYS_IL0000012050C00006$$;
 drop index SYS_IL0000012050C00007$$;

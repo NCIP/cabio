@@ -871,8 +871,6 @@ select distinct bc_id, pathway_id from gene_pathway;
 
 commit;
 
--- In the above, there are currently 41 Pathways where more than one gene id matches, currently picking only the smallest of it
-
 
 @$LOAD/indexes/pid_entity_accession.cols.sql
 @$LOAD/indexes/bio_pathways_tv.cols.sql

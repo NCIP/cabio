@@ -1,4 +1,6 @@
 
+drop index AGENTENT_BIG_ID_LWR;
+drop index AGENTENT_BIG_ID;
 drop index AGENTGENT_AGENT_TYPE_LWR;
 drop index AGENTGENT_AGENT_NAME_LWR;
 drop index AGENTGENT_AGENT_SOUR_LWR;

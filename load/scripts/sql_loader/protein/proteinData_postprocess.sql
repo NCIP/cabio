@@ -11,6 +11,9 @@ update protein_alias set name = replace(name,'AltName: ','');
 update protein_alias set name = replace(name,';','');
 commit ;
 
+delete from protein_alias where rowid not in (select MIN(rowid) from protein_alias group by protein_ID, name);
+commit;
+
 -- GF17149 -> Protein Protein Alias
 insert into protein_protein_alias (protein_id, protein_alias_id) select protein_id, id from protein_alias;
 commit;
@@ -57,13 +60,13 @@ commit;
 @$LOAD/constraints/protein_sequence.enable.sql;
 @$LOAD/constraints/protein_taxon.enable.sql;
 
---ANALYZE TABLE new_protein COMPUTE STATISTICS;
---ANALYZE TABLE protein_alias COMPUTE STATISTICS;
---ANALYZE TABLE zstg_protein_embl COMPUTE STATISTICS;
---ANALYZE TABLE protein_keywords COMPUTE STATISTICS;
---ANALYZE TABLE protein_secondary_accession COMPUTE STATISTICS;
---ANALYZE TABLE protein_sequence COMPUTE STATISTICS;
---ANALYZE TABLE protein_taxon COMPUTE STATISTICS;
+ANALYZE TABLE new_protein COMPUTE STATISTICS;
+ANALYZE TABLE protein_alias COMPUTE STATISTICS;
+ANALYZE TABLE zstg_protein_embl COMPUTE STATISTICS;
+ANALYZE TABLE protein_keywords COMPUTE STATISTICS;
+ANALYZE TABLE protein_secondary_accession COMPUTE STATISTICS;
+ANALYZE TABLE protein_sequence COMPUTE STATISTICS;
+ANALYZE TABLE protein_taxon COMPUTE STATISTICS;
 
 COMMIT;
 

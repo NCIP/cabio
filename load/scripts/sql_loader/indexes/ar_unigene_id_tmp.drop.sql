@@ -1,7 +1,2 @@
 
-drop index SYS_C0021070_IDX;
-drop index AR_UNIGE_TMP_GENECHIP_A;
-drop index AR_UNIGE_TMP_UNIGENE_ID;
-drop index AR_UNIGE_TMP_PROBE_SET_;
-
 --EXIT;

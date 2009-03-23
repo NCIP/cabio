@@ -1,6 +1,6 @@
 
 drop index SYS_C0020846_IDX;
-drop index ZSTG_GENKERS_MARKER_ID;
 drop index ZSTG_GENKERS_GENE_ID;
+drop index ZSTG_GENKERS_MARKER_ID;
 
 --EXIT;

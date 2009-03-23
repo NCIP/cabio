@@ -72,7 +72,7 @@ COMMIT;
 
 INSERT INTO target(TARGET_NAME, LOCUS_ID, TARGET_TYPE) select distinct X.target_name, X.locus_id, X.target_type from ( select distinct target_id, g.gene_id, symbol TARGET_NAME, gi.identifier LOCUS_ID, cancer_type, anomaly, 'gene' as TARGET_TYPE FROM gene_tv g, zstg_cmap_targets z, zstg_gene_identifiers gi WHERE g.gene_id = z.gene_id and g.gene_id = gi.gene_id and gi.data_source = 2) X; 
 
-INSERT INTO gene_target(target_id, gene_id)  select distinct t.target_id, gi.gene_id FROM TARGET t, zstg_gene_identifiers gi WHERE t.locus_id = gi.identifier and gi.data_source = 2;
+INSERT INTO gene_target(target_id, gene_id) select distinct t.target_id, g.gene_id FROM TARGET t, zstg_gene2unigene x, gene_tv g WHERE t.locus_id = x.GENEID and decode(substr(x.UNIGENE_CLUSTER,0,2),'Hs',5,'Mm',6) = g.taxon_id and substr(x.unigene_cluster,instr(x.unigene_cluster,'.')+1) = g.CLUSTER_ID; 
 
 INSERT INTO target_agent(target_id, agent_id) SELECT t.target_id, a.agent_id FROM zstg_cmap_targetagents z, TARGET t, AGENT a, zstg_cmap_agents za WHERE t.target_id = z.target_id and z.agent_id = za.agent_id and trim(lower(za.agent_name)) = trim(lower(a.agent_name)) and trim(lower(a.agent_source)) = trim(lower(za.agent_source)) and trim(lower(za.agent_comment)) = trim(lower(a.agent_comment));
 

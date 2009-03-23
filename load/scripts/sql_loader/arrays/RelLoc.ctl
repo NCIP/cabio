@@ -3,7 +3,7 @@
 -- Replicates provenance_SNP_LD
 LOAD DATA 
  
-INFILE '/cabio/cabiodb/cabio_data/temp/relativeLocation/relLoc2.txt'
+INFILE '/cabio_fut/cabio_futdb/cabio_fut_data/temp/relativeLocation/relLoc2.txt'
  
 APPEND 
 
