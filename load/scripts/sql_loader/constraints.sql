@@ -42,20 +42,6 @@ SELECT '--EXIT;'
 spool off;
 
 spool $LOAD/constraints/&tabName..enable.sql 
-SELECT 'alter table ' || A.TABLE_NAME || ' enable constraint ' ||
-       A.CONSTRAINT_NAME || ';'
-  FROM USER_constraints A, user_cons_columns X 
- WHERE UPPER(A.TABLE_NAME) = UPPER('&1') AND CONSTRAINT_TYPE NOT IN ('R') and A.CONSTRAINT_NAME = X.CONSTRAINT_NAME AND X.COLUMN_NAME <> 'BIG_ID';
-
-SELECT 'alter table ' || TABLE_NAME || ' enable primary key;' 
-  FROM USER_constraints
-  WHERE UPPER(TABLE_NAME) = UPPER('&1') AND CONSTRAINT_TYPE ='P';
-
-SELECT '--EXIT;'
-  FROM DUAL;
-spool off;
-
-spool $LOAD/constraints/&tabName..enable.sql append
 DECLARE 
 CURSOR disabledConstraints is select constraint_name from user_constraints where constraint_type in ('U', 'P') and upper(table_name) = upper('&1');
 
@@ -106,7 +92,7 @@ EXIT when disabledConstraints%NOTFOUND;
     if colNames is not null then
 
 	dbms_output.put_line('create unique index '|| indexName||' on '||tableName); 
-	dbms_output.put_line('('||colNames||') tablespace ' || tablespaceName ||';'); 
+	dbms_output.put_line('('||colNames||') tablespace ' || nvl(tablespaceName,'CABIO') ||';'); 
 	dbms_output.put_line('alter table '|| tableName || ' enable constraint '|| constraintName || ' using index ' || indexName ||';'); 
 
 
@@ -123,7 +109,20 @@ COMMIT;
 CLOSE disabledConstraints;
 END;
 /
+spool off;
 
+spool $LOAD/constraints/&tabName..enable.sql append
+SELECT 'alter table ' || A.TABLE_NAME || ' enable constraint ' ||
+       A.CONSTRAINT_NAME || ';'
+  FROM USER_constraints A, user_cons_columns X 
+ WHERE UPPER(A.TABLE_NAME) = UPPER('&1') AND CONSTRAINT_TYPE NOT IN ('R') and A.CONSTRAINT_NAME = X.CONSTRAINT_NAME AND X.COLUMN_NAME <> 'BIG_ID';
+
+SELECT 'alter table ' || TABLE_NAME || ' enable primary key;' 
+  FROM USER_constraints
+  WHERE UPPER(TABLE_NAME) = UPPER('&1') AND CONSTRAINT_TYPE ='P';
+
+SELECT '--EXIT;'
+  FROM DUAL;
 spool off; 
 
 

@@ -1,0 +1,68 @@
+
+SQL*Loader: Release 10.2.0.1.0 - Production on Thu Mar 19 10:45:27 2009
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Control File:   popFreq.ctl
+Data File:      /cabio/cabiodb/cabio_data/temp/population_frequency/popFreq.txt
+  Bad File:     popFreq.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50000
+Continuation:    none specified
+Path used:      Direct - with parallel option.
+
+Table POPULATION_FREQUENCY, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+PROBEID                             FIRST     *   |       CHARACTER            
+  (FILLER FIELD)
+ETHNIC                               NEXT     *   |       CHARACTER            
+  (FILLER FIELD)
+ALLELEFREQ                           NEXT     *   |       CHARACTER            
+  (FILLER FIELD)
+SNP_PROBESET_AFFY_ID                 NEXT     *   |       CHARACTER            
+ETHNICITY                            NEXT     *   |       CHARACTER            
+MAJOR_FREQUENCY                      NEXT     *   |       CHARACTER            
+MINOR_FREQUENCY                      NEXT     *   |       CHARACTER            
+HETEROZYGOUS_FREQUENCY               NEXT     *   |       CHARACTER            
+MAJOR_ALLELE                         NEXT     *   |       CHARACTER            
+MINOR_ALLELE                         NEXT     *   |       CHARACTER            
+DBSNPID                              NEXT     *   |       CHARACTER            
+  (FILLER FIELD)
+SNP_ID                               NEXT     *   |       CHARACTER            
+TYPE                                                      CONSTANT
+    Value is 'allele'
+ID                                                        SEQUENCE (MAX, 1)
+
+
+Table POPULATION_FREQUENCY:
+  2341775 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+Bind array size not used in direct path.
+Column array  rows :    5000
+Stream buffer bytes:  256000
+Read   buffer bytes: 1000000
+
+Total logical records skipped:          0
+Total logical records read:       2341775
+Total logical records rejected:         0
+Total logical records discarded:        0
+Total stream buffers loaded by SQL*Loader main thread:      677
+Total stream buffers loaded by SQL*Loader load thread:      451
+
+Run began on Thu Mar 19 10:45:27 2009
+Run ended on Thu Mar 19 10:45:53 2009
+
+Elapsed time was:     00:00:25.84
+CPU time was:         00:00:16.83
