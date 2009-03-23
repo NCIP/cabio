@@ -44,15 +44,15 @@
       <j l="3#1073205" />
     </i>
     <i t="Cancer Gene Index">
-      <j l="12" />
+      <j l="11" />
       <i t="Agent to Genes">
-        <j l="12#1076250" />
+        <j l="11#1076250" />
       </i>
       <i t="Disease to Genes">
-        <j l="12#1076090" />
+        <j l="11#1076090" />
       </i>
       <i t="Gene to Diseases/Agents">
-        <j l="12#1076397" />
+        <j l="11#1076397" />
       </i>
     </i>
     <i t="CBIIT, definition">
@@ -84,21 +84,21 @@
       <j l="13#1067151" />
     </i>
     <i t="Genome Range Queries">
-      <j l="8" />
+      <j l="7" />
       <i t="Absolute Range Query">
-        <j l="8#1078008" />
+        <j l="7#1078008" />
       </i>
       <i t="Grid Id Range Query">
-        <j l="8#1078039" />
+        <j l="7#1078039" />
       </i>
     </i>
     <i t="genome, definition">
       <j l="13#1060595" />
     </i>
     <i t="Genomic Annotations">
-      <j l="10" />
+      <j l="9" />
       <i t="Gene Lookup by Symbol">
-        <j l="10#1075627" />
+        <j l="9#1075627" />
       </i>
     </i>
     <i t="glossary">
@@ -106,6 +106,9 @@
     </i>
   </g>
   <g t="H" o="002">
+    <i t="Hibernate, definition">
+      <j l="13#1067498" />
+    </i>
     <i t="HUGO gene symbol, definition">
       <j l="13#1060632" />
     </i>
@@ -114,18 +117,21 @@
     <i t="library, definition">
       <j l="13#1067216" />
     </i>
+    <i t="Lucene, definition">
+      <j l="13#1067511" />
+    </i>
   </g>
   <g t="M" o="002">
     <i t="Microarray Annotations">
-      <j l="9" />
+      <j l="8" />
       <i t="Reporter Lookup by Gene">
-        <j l="9#1075354" />
+        <j l="8#1075354" />
       </i>
       <i t="Reporter Lookup by Name">
-        <j l="9#1075492" />
+        <j l="8#1075492" />
       </i>
       <i t="Reporter Lookup by SNP">
-        <j l="9#1081827" />
+        <j l="8#1081827" />
       </i>
     </i>
     <i t="microarray, definition">
@@ -161,12 +167,12 @@
       <j l="13#1067273" />
     </i>
     <i t="Pathways">
-      <j l="11" />
+      <j l="10" />
       <i t="Pathway By Gene">
-        <j l="11#1081358" />
+        <j l="10#1081358" />
       </i>
       <i t="Pathway By Name">
-        <j l="11#1081337" />
+        <j l="10#1081337" />
       </i>
     </i>
   </g>
@@ -176,56 +182,53 @@
     </i>
     <i t="reports">
       <i t="Absolute Range Query">
-        <j l="8#1078008" />
+        <j l="7#1078008" />
       </i>
       <i t="Agents to Genes">
-        <j l="12#1076250" />
+        <j l="11#1076250" />
       </i>
       <i t="Cancer Gene Index">
-        <j l="12" />
-      </i>
-      <i t="Disease to Genes">
-        <j l="12#1076090" />
-      </i>
-      <i t="Gene Lookup by Symbol">
-        <j l="10#1075627" />
-      </i>
-      <i t="Gene to Diseases/Agents">
-        <j l="12#1076397" />
-      </i>
-      <i t="Genome Range Queries category">
-        <j l="8" />
-      </i>
-      <i t="Genomic Annotations category">
-        <j l="10" />
-      </i>
-      <i t="Grid Id Range Query">
-        <j l="8#1078039" />
-      </i>
-      <i t="Microarray Annotations category">
-        <j l="9" />
-      </i>
-      <i t="Pathway By Gene">
-        <j l="11#1081358" />
-      </i>
-      <i t="Pathway By Name">
-        <j l="11#1081337" />
-      </i>
-      <i t="Pathways category">
         <j l="11" />
       </i>
+      <i t="Disease to Genes">
+        <j l="11#1076090" />
+      </i>
+      <i t="Gene Lookup by Symbol">
+        <j l="9#1075627" />
+      </i>
+      <i t="Gene to Diseases/Agents">
+        <j l="11#1076397" />
+      </i>
+      <i t="Genome Range Queries category">
+        <j l="7" />
+      </i>
+      <i t="Genomic Annotations category">
+        <j l="9" />
+      </i>
+      <i t="Grid Id Range Query">
+        <j l="7#1078039" />
+      </i>
+      <i t="Microarray Annotations category">
+        <j l="8" />
+      </i>
+      <i t="Pathway By Gene">
+        <j l="10#1081358" />
+      </i>
+      <i t="Pathway By Name">
+        <j l="10#1081337" />
+      </i>
+      <i t="Pathways category">
+        <j l="10" />
+      </i>
       <i t="Reporter Lookup by Gene">
-        <j l="9#1075354" />
+        <j l="8#1075354" />
       </i>
       <i t="Reporter Lookup by Name">
-        <j l="9#1075492" />
+        <j l="8#1075492" />
       </i>
       <i t="Reporter Lookup by SNP">
-        <j l="9#1081827" />
+        <j l="8#1081827" />
       </i>
-    </i>
-    <i t="reports, creating">
-      <j l="7#1074446" />
     </i>
   </g>
   <g t="S" o="002">
