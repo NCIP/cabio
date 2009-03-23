@@ -6,7 +6,7 @@ rm *.log *.bad
 
 echo "Disabling all referential integrity constraints \n";
 cd $CABIO_DIR/scripts/sql_loader
-time sqlplus $1 @$LOAD/all_ref_constraints.sql 1>>refConstraints.log
+time sqlplus $1 @$LOAD/all_ref_constraints.sql 1>refConstraints.log
 time sqlplus $1 @$LOAD/constraints/disable.referential.sql >>refConstraints.log
 
 mail -s "Disabling ref integrity constraints " viswanathl@mail.nih.gov < refConstraints.log 
@@ -35,7 +35,7 @@ rm *.bad *.log
 time sh geneTv_sqlldr.sh $1 1>geneTv_load.log 2>&1 
 
 cd $LOAD/unigene/nas 
-#time sh nas_sqlldr.sh $1 1>nas_load.log 2>&1 &
+time sh nas_sqlldr.sh $1 1>nas_load.log 2>&1 &
 
 cd $LOAD/unigene/clone 
 time sh cloneTables_sqlldr.sh $1 1>cloneTables_load.log 2>&1 &
@@ -98,19 +98,19 @@ time sqlplus $1 @loadGo.sql 1>GO.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading gene_protein_tv "
-time sqlplus $1 @Gene_Protein_TV_LD.sql 1>sqlLoad.log 2>&1 
+time sqlplus $1 @Gene_Protein_TV_LD.sql 1>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading generic_reporter-related tables"
-time sqlplus $1 @GenericReporter_ld.sql 1>>sqlLoad.log 2>&1 
+time sqlplus $1 @GenericReporter_ld.sql 1>>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading target-related tables"
-time sqlplus $1 @target_ld.sql 1>>sqlLoad.log 2>&1 
+time sqlplus $1 @target_ld.sql 1>>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading gene_organontology table"
-time sqlplus $1 @gene_organontology.sql 1>>sqlLoad.log 2>&1 
+time sqlplus $1 @gene_organontology.sql 1>>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading PATHWAYS tables"
@@ -122,24 +122,20 @@ echo "Loading Gene-Alias tables"
 
 cd $LOAD/pid 
 echo "Loading PID tables"
-time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
+time sh pidLoader.sh $1 1>pidLoader.log 2>&1 &
 
-cd $LOAD/pid_dump 
-echo "Loading PID tables"
-time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
+wait
 
 mail -s "SQL Log " viswanathl@mail.nih.gov < $LOAD/sql/sqlLoad.log 
 mail -s "GO Load Log " viswanathl@mail.nih.gov < $LOAD/GO/GO.log 
 mail -s "Homologene Log " viswanathl@mail.nih.gov < $LOAD/homologene/homoloGene.log 
 mail -s "DatabaseCrossReference Log " viswanathl@mail.nih.gov < $LOAD/dbcrossref/dbCrossRef.log 
 mail -s "PID (not related to model) Log " viswanathl@mail.nih.gov < $LOAD/pid/pidLoader.log 
-mail -s "PID (related to model) Log " viswanathl@mail.nih.gov < $LOAD/pid_dump/pidLoader.log 
-
 
 cd $LOAD/location
 echo "Loading LOCATION tables"
 # rm *.bad *.log
-time sh locationLoad.sh $1 1>locationLoad.log 2>&1 
+time sh locationLoad.sh $1 1>locationLoad.log 2>&1 &
 
 cd $LOAD/histopathology
 echo "Loading gene-histopathology tables"
@@ -148,7 +144,7 @@ time sh hist_update.sh $1 1>histLoad.log 2>&1 &
 cd $CABIO_DIR/scripts/sql_loader/arrays
 echo "Loading array tables"
 rm *.bad *.log
-time sh load.sh $1 1>Array_PLSQL_Ld.log 2>&1 
+time sh load.sh $1 1>Array_PLSQL_Ld.log 2>&1 &
 
 cd $LOAD/cgdc
 echo "Loading cancer-gene-index data"
@@ -156,32 +152,36 @@ rm *.bad *.log
 time sh cgdc_sqlldr.sh $1 1>cgdcLoad.log 2>&1 &
 wait
 
+cd $LOAD/pid_dump 
+echo "Loading PID tables"
+time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
+
+
 mail -s "Histo Load Log " viswanathl@mail.nih.gov < $LOAD/histopathology/histLoad.log 
 mail -s "Array PLSQL Log " viswanathl@mail.nih.gov < $LOAD/arrays/Array_PLSQL_Ld.log 
 mail -s "CGDC Load Log " viswanathl@mail.nih.gov < $LOAD/cgdc/cgdcLoad.log 
+mail -s "PID (related to model) Log " viswanathl@mail.nih.gov < $LOAD/pid_dump/pidLoader.log 
 
 echo "Finished Load P4 " |  mail -s " Beginning grid id " viswanathl@mail.nih.gov
-
-
 cd $LOAD/provenance
 echo "Loading provenance, source_reference, url_source_reference tables"
 rm *.bad *.log
-#time sh provenance_DataLoader.sh $1  1>provenance_load.log 2>&1 &
+time sh provenance_DataLoader.sh $1  1>provenance_load.log 2>&1 &
 
 
 # Grid Id Load
 time sqlplus $1  @$LOAD/bigid_lower_idx.sql
 time sqlplus $1  @$LOAD/indexes/drop.sql
 
-time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>refConstraints.log 
-time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>refConstraints.log 
+time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>bigid.log 
+time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log 
 
 echo "Beginning Grid Id Load"
 echo "Commenting these for the time being"
 
-cd /cabio/cabiodb/cabio42/grididloader/
+cd $CABIO_DIR/grididloader/
 rm *.bad *.log
-#time ant -Dtarget.env=dev  1>$grididload_LOG 2>&1
+time ant -Dtarget.env=dev  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
 
 mail -s " Grid Id Load Log " viswanathl@mail.nih.gov < $CABIO_DIR/gridid/$grididload_LOG 
 
@@ -202,15 +202,17 @@ echo "Loading other location tables"
 time sh postbigid.sh $1 1>>locationLoad.log 2>&1 
 
 
+sqlplus $1 @$LOAD/misc_indexes.sql 
+
 mail -s " Post Big Id Load Log " viswanathl@mail.nih.gov < postbigid.log 
 mail -s " Merged SNP Id Log " viswanathl@mail.nih.gov < mergedIdProcessing.log 
 mail -s " Location Log " viswanathl@mail.nih.gov < locationLoad.log 
 
 cd $LOAD
-time sqlplus $1 @$LOAD/constraints/enable.referential.sql 1>>refConstraints.log
 
-time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>refConstraints.log 
-time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>refConstraints.log 
+time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
+#time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
+time sqlplus $1 @$LOAD/constraints/enable.referential.sql 1>>refConstraints.log
 
 echo "Finished Load P8 " |  mail -s " Finished Load P8; finished enabling ref constraints " viswanathl@mail.nih.gov < refConstraints.log
 
