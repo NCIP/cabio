@@ -6,7 +6,8 @@
     log/ directory after each generator runs. For monitoring during the run
     you must tail the build/.../output.log for the version currently being run.
     -->
-	
+
+ 
     <property name="build.dir" value="build"/>
     <property name="log.dir" value="log"/>
     <property file="build.properties"/>
@@ -66,7 +67,19 @@
         <echo message="Running caBIO 4.2 index generator"/>
         <ant antfile="${build.dir}/4.2/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.2/log/output.log" tofile="${log.dir}/output_4.2.log" overwrite="true"/>
-
+          
 	</target>
-	
+
+      <target name="zip-indexes" depends="runindex">
+            <zip destfile="${index_location}/${indexes.file.name}">
+                <fileset dir="${index_location}">
+                     <include name="40/**" /> 
+                     <include name="41/**" />
+                     <include name="42/**" />  
+                </fileset>
+            </zip>         
+            <delete dir="${index_location}/40" />
+            <delete dir="${index_location}/41" />
+            <delete dir="${index_location}/42" />
+      </target>
 </project>
