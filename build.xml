@@ -78,7 +78,7 @@
     </copy>
     
 	<replace dir="${project.build.dir}">
-    	<include name="application-config-client.xml"/>
+        <include name="application-config-client*.xml"/>
         <include name="cabioportlet.properties"/>
         <replacefilter token="CABIO_URL" value="${remote.api.url}" />
         <replacefilter token="CABIO_VERSION" value="${remote.api.version}" />
