@@ -13,6 +13,7 @@ import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.SNPArrayReporter;
 import gov.nih.nci.cabio.domain.SNPPhysicalLocation;
 import gov.nih.nci.cabio.domain.TranscriptPhysicalLocation;
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
@@ -45,9 +46,12 @@ public class ReportService {
              "left join fetch assoc.evidence " +
              "where ";
     
-     private static final String GENES_BY_AGENT_HQL_WHERE = 
-             "(lower(agent.name) like ? or lower(agent.EVSId) like ?)";
+    private static final String GENES_BY_AGENT_HQL_WHERE_NAME = 
+             "lower(agent.name) like ?";
 
+    private static final String GENES_BY_AGENT_HQL_WHERE_CUI = 
+             "lower(agent.EVSId) like ?";
+     
     private static final String GENES_BY_DISEASE_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneDiseaseAssociation assoc " +
              "left join fetch assoc.gene as gene " +
@@ -55,9 +59,12 @@ public class ReportService {
              "left join fetch assoc.evidence " +
              "where ";
     
-    private static final String GENES_BY_DISEASE_HQL_WHERE = 
-             "(lower(disease.name) like ? or lower(disease.EVSId) like ?)";
+    private static final String GENES_BY_DISEASE_HQL_WHERE_NAME = 
+             "lower(disease.name) like ?";
 
+    private static final String GENES_BY_DISEASE_HQL_WHERE_CUI = 
+             "lower(disease.EVSId) like ?";
+    
     private static final String GENE_ASSOCIATIONS_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
              "left join fetch assoc.gene as gene " +
@@ -65,7 +72,7 @@ public class ReportService {
              "where ";
     
     private static final String GENE_ASSOCIATIONS_HQL_WHERE = 
-             "(lower(gene.symbol) like ? or lower(gene.hugoSymbol) like ?)";
+             "lower(gene.symbol) like ?";
 
     private static final String REPORTERS_BY_GENE_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.ExpressionArrayReporter reporter " +
@@ -74,7 +81,7 @@ public class ReportService {
              "where ";
     
     private static final String REPORTERS_BY_GENE_HQL_WHERE = 
-             "(lower(gene.symbol) like ? or lower(gene.hugoSymbol) like ?)";
+             "lower(gene.symbol) like ?";
 
     private static final String REPORTERS_BY_SNP_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.SNPArrayReporter reporter " +
@@ -94,7 +101,7 @@ public class ReportService {
              "and ";
 
     private static final String GENES_BY_SYMBOL_HQL_WHERE = 
-             "(lower(gene.hugoSymbol) like ? or lower(gene.symbol) like ?)";
+             "lower(gene.symbol) like ?";
      
     private static final String PATHWAY_BY_SYMBOL_HQL = 
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
@@ -103,7 +110,7 @@ public class ReportService {
             "where ";
 
     private static final String PATHWAY_BY_SYMBOL_HQL_WHERE = 
-            "(lower(genes.hugoSymbol) like ? or lower(genes.symbol) like ?)";
+            "lower(genes.symbol) like ?";
     
     
     private final CaBioApplicationService appService;
@@ -151,24 +158,18 @@ public class ReportService {
         String hql = detailObjectHQL.get(clazz);
 
         if (hql == null) {
-            hql = "select o from "+clazz.getName()+" o where o.id = '"+id+"'";
+            hql = "select o from "+clazz.getName()+" o where o.id = ?";
         }
         else {
             Matcher m = Pattern.compile("^select (\\w+?) from.*").matcher(hql);
             m.find();
             String target = m.group(1);
-            hql += target + ".id = '"+id+"'";
+            hql += target + ".id = ?";
         }
-
-        // TODO: We can't use placeholders here because some ids are Integers 
-        // instead of Longs (GF18404). When that's fixed, we can do the 
-        // following, which is more efficient:
         
-//        List<String> params = new ArrayList<String>();
-//        params.add(id.toString());
-//        List results = appService.query(new HQLCriteria(hql, params));
-        
-        List results = appService.query(new HQLCriteria(hql));
+        List<Long> params = new ArrayList<Long>();
+        params.add(id);
+        List results = appService.query(new HQLCriteria(hql, params));
                 
         if (results.isEmpty()) return null;
         return results.iterator().next();
@@ -185,9 +186,19 @@ public class ReportService {
     public List<GeneAgentAssociation> getGenesByAgent(String agentNameOrCui) 
             throws ApplicationException {
 
-        List<String> params = duplicateId(convertInput(agentNameOrCui));
-        return appService.query(new HQLCriteria(
-            GENES_BY_AGENT_HQL+GENES_BY_AGENT_HQL_WHERE,params));
+        String nameOrCui = convertInput(agentNameOrCui);
+        List<String> params = getListWithId(nameOrCui);
+        
+        String hql = GENES_BY_AGENT_HQL;
+        if (nameOrCui.matches("^c(\\d+)%?$")) {
+            hql += GENES_BY_AGENT_HQL_WHERE_CUI;
+        }
+        else {
+            hql += GENES_BY_AGENT_HQL_WHERE_NAME;
+        }
+
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
 
     
@@ -201,9 +212,19 @@ public class ReportService {
     public List<GeneDiseaseAssociation> getGenesByDisease(
             String diseaseNameOrCui) throws ApplicationException {
 
-        List<String> params = duplicateId(convertInput(diseaseNameOrCui));
-        return appService.query(new HQLCriteria(
-            GENES_BY_DISEASE_HQL+GENES_BY_DISEASE_HQL_WHERE,params));
+        String nameOrCui = convertInput(diseaseNameOrCui);
+        List<String> params = getListWithId(nameOrCui);
+
+        String hql = GENES_BY_DISEASE_HQL;
+        if (nameOrCui.matches("^c(\\d+)%?$")) {
+            hql += GENES_BY_DISEASE_HQL_WHERE_CUI;
+        }
+        else {
+            hql += GENES_BY_DISEASE_HQL_WHERE_NAME;
+        }
+
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
 
@@ -216,9 +237,10 @@ public class ReportService {
     public List<GeneFunctionAssociation> getGeneAssociations(
             String geneSymbol) throws ApplicationException {
          
-        List<String> params = duplicateId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(
-            GENE_ASSOCIATIONS_HQL+GENE_ASSOCIATIONS_HQL_WHERE,params));
+        String hql = GENE_ASSOCIATIONS_HQL+GENE_ASSOCIATIONS_HQL_WHERE;
+        List<String> params = getListWithId(convertInput(geneSymbol));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
 
@@ -231,9 +253,10 @@ public class ReportService {
     public List<ExpressionArrayReporter> getReportersByGene(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(
-            REPORTERS_BY_GENE_HQL+REPORTERS_BY_GENE_HQL_WHERE,params));
+        String hql = REPORTERS_BY_GENE_HQL+REPORTERS_BY_GENE_HQL_WHERE;
+        List<String> params = getListWithId(convertInput(geneSymbol));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
     
@@ -246,10 +269,11 @@ public class ReportService {
     public List<SNPArrayReporter> getReportersBySNP(
             String dbSNPId) throws ApplicationException {
 
+        String hql = REPORTERS_BY_SNP_HQL+REPORTERS_BY_SNP_HQL_WHERE;
         List<String> params = new ArrayList<String>();
         params.add(dbSNPId.toLowerCase().trim());
-        return appService.query(new HQLCriteria(
-            REPORTERS_BY_SNP_HQL+REPORTERS_BY_SNP_HQL_WHERE,params));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
     
@@ -263,9 +287,10 @@ public class ReportService {
     public List<Gene> getGenesBySymbol(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(
-            GENES_BY_SYMBOL_HQL+GENES_BY_SYMBOL_HQL_WHERE,params));
+        String hql = GENES_BY_SYMBOL_HQL+GENES_BY_SYMBOL_HQL_WHERE;
+        List<String> params = getListWithId(convertInput(geneSymbol));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
     /**
@@ -301,9 +326,10 @@ public class ReportService {
      public List<Pathway> getPathwaysByGeneSymbol(
             String geneSymbol) throws ApplicationException {
 
-        List<String> params = duplicateId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(
-            PATHWAY_BY_SYMBOL_HQL+PATHWAY_BY_SYMBOL_HQL_WHERE,params));
+        String hql = PATHWAY_BY_SYMBOL_HQL+PATHWAY_BY_SYMBOL_HQL_WHERE;
+        List<String> params = getListWithId(convertInput(geneSymbol));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
      
      /**
@@ -315,16 +341,15 @@ public class ReportService {
      private String convertInput(String input) {
          return input.toLowerCase().trim().replaceAll("\\*", "%");
      }
-    
-    /**
-     * Shortcut method to create a parameter array with the same parameter twice.
-     * @param id
-     * @return
-     */
-    private List<String> duplicateId(String id) {
-        List<String> params = new ArrayList<String>();
-        params.add(id);
-        params.add(id);
-        return params;
-    }
+
+     /**
+      * Shortcut method to create a parameter array with the same parameter twice.
+      * @param id
+      * @return
+      */
+     private List<String> getListWithId(String id) {
+         List<String> params = new ArrayList<String>();
+         params.add(id);
+         return params;
+     }
 }
