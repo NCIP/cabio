@@ -69,7 +69,7 @@ public class IndexSearchService extends HttpServlet {
                         searchUtils.organizeResults();
                     }
                     catch(Exception ex) {
-                        log.error(ex);
+                        log.error("Error",ex);
                         throw new ServletException(ex);
                     }
                 }
