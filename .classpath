@@ -41,9 +41,16 @@
 	<classpathentry kind="lib" path="test/lib/junit-4.3.1.jar"/>
 	<classpathentry kind="lib" path="test/lib/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio42-client-framework.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.14.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio42-beans.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/axis.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/caGrid-CQL-cql.1.0-1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio43-beans.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cabio43-client-framework.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cog-jglobus.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-discovery-0.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sdk-grid-remoting.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sdk-security.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
