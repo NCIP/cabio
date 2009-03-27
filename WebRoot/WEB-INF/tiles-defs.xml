@@ -10,62 +10,71 @@
 	</definition>
     
     <definition name="cabioportlet.absoluteRangeQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Absolute Range Query" />
 		<put name="form_content" value="/WEB-INF/jsp/canned/absoluteRangeQuery.jsp" />
 		<put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
 	</definition>
     
     <definition name="cabioportlet.gridRangeQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Grid Id Range Query" />
         <put name="form_content" value="/WEB-INF/jsp/canned/gridRangeQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.reporterByNameQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Reporter Lookup by Name" />
         <put name="form_content" value="/WEB-INF/jsp/canned/reporterByNameQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.reporterBySNPQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Reporter Lookup by SNP" />
         <put name="form_content" value="/WEB-INF/jsp/canned/reporterBySNPQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.reporterByGeneQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Reporter Lookup by Gene" />
         <put name="form_content" value="/WEB-INF/jsp/canned/reporterByGeneQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.geneBySymbolQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Gene Lookup by Symbol" />
         <put name="form_content" value="/WEB-INF/jsp/canned/geneBySymbolQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.agentToGenesQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Agent to Genes" />
         <put name="form_content" value="/WEB-INF/jsp/canned/agentToGenesQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.diseaseToGenesQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Disease to Genes" />
         <put name="form_content" value="/WEB-INF/jsp/canned/diseaseToGenesQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.geneAssociationsQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Gene to Diseases/Agents" />
         <put name="form_content" value="/WEB-INF/jsp/canned/geneAssociationsQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
-     <!--  Pathway Canned Queries  -->
     <definition name="cabioportlet.pathwayByNameQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Pathway By Name" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.pathwayByGeneQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Pathway By Gene Symbol" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByGeneQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
-
     <definition name="cabioportlet.error" extends="cabioportlet.template">
 		<put name="portlet_content" value="/WEB-INF/jsp/error.jsp" />
 	</definition>

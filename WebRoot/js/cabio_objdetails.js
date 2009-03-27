@@ -7,14 +7,18 @@
 var caBioObjectDetails = function() {
 
     var searchResults = '';
+    var savedNav = '';
     
     function processObjectDetails (r) {
+
+        savedNav = jQuery("#cabioNav").html();
+        var navback = '<div id="navback"><a href="javascript:caBioObjectDetails.restoreResults()">&#171; Return to results</a></div>';
+        jQuery("#cabioNav").empty().append(navback);
     
         var searchText = jQuery("#searchText").val();
         jQuery("#searchResults").hide();
 
         var h = '<div>'
-        h += '<div class="summary"><a class="back" href="javascript:caBioObjectDetails.restoreResults()">&#171; Return to results</a></div>';
                  
         if (r.exceptionClass) {
             h += '<div class="error">'+r.exceptionMessage+'</div>';
@@ -66,6 +70,7 @@ var caBioObjectDetails = function() {
      * Go back to the search results. Called from an object details screen.
      */
     restore : function () {
+        jQuery("#cabioNav").empty().append(savedNav);
         jQuery("#objectDetails").empty();
         jQuery("#searchResults").show();
     },

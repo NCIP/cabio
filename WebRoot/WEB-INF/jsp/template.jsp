@@ -4,12 +4,6 @@
 
 <script type="text/javascript" src="<c:url value="/js/cabio_common.js"/>"></script>
 
-<script language="javascript">
-    var PROXY_URL = "/cabioportlets/proxy";
-    var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
-    var DETAILS_URL = "<c:url value="/objectDetails"/>";
-</script>
-
 <div id="cabio">
 
 <a href="<bean:message key="online.help.url"/>" target="_blank">
@@ -36,14 +30,19 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
         }
 	}
 	
-    session.setAttribute("tab",tab);
-	
 	PortletURL portletURL = renderResponse.createRenderURL();
-	//portletURL.setWindowState(WindowState.MAXIMIZED);
 	portletURL.setParameter("struts_action", "/cabioportlet/view");
 	portletURL.setParameter("tabs1", tab);
 	
+    session.setAttribute("tab",tab);
+    session.setAttribute("portletURL",portletURL);
 %>
+
+<script language="javascript">
+    var PROXY_URL = "/cabioportlets/proxy";
+    var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
+    var DETAILS_URL = '<c:url value="/objectDetails"/>';
+</script>
 
 <liferay-ui:tabs
 	names="Simple Search,Templated Searches,About"
@@ -58,7 +57,12 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
     
 <% if (formContent != null) { %>
      
-    <a href="javascript:caBioCommon.toggleDropBox('.query')" id="query_link" >Report Query Form</a>
+	<tiles:useAttribute id="queryName" 
+	    name="query_name" classname="java.lang.String" ignore="true" />
+    
+    <a href="javascript:caBioCommon.toggleDropBox('.query')" id="query_link">
+        <c:out value="${queryName}"/></a>
+        
     <script>    
     jQuery(document).ready(function(){
         caBioCommon.createDropBox('#query_link');
@@ -67,6 +71,7 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
     </script>
 
     <jsp:include page="<%= formContent %>" flush="true"/>
+
 <% } %>
     
 <tiles:useAttribute id="tilesPortletContent" 

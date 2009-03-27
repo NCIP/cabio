@@ -40,6 +40,7 @@ var caBioSimpleSearch = function() {
 	    
 	    if (searchString == '') {
 	    	jQuery("#searchResults").empty();
+            jQuery("#cabioNav").hide();
 	        return;
 	    }
 	    
@@ -83,18 +84,18 @@ var caBioSimpleSearch = function() {
 	    
 	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
-	        r = '<div class="summary">No results found for <b>'+searchString+'</b></div>';
-	        jQuery("#searchResults").append(r);
+	        var summary = '<div id="summary">No results found for <b>'+searchString+'</b></div>';
+	        jQuery("#cabioNav").empty().append(summary).show();
 	    }
 	    else {
-	        numRecords = parseInt(jQuery("recordCounter:first",qr).text());
-	        startRecord = parseInt(jQuery("start:first",qr).text());
-	        endRecord = parseInt(jQuery("end:first",qr).text());
-            numPages = Math.ceil(numRecords / pageSize);
+	        var numRecords = parseInt(jQuery("recordCounter:first",qr).text());
+	        var startRecord = parseInt(jQuery("start:first",qr).text());
+	        var endRecord = parseInt(jQuery("end:first",qr).text());
+            var numPages = Math.ceil(numRecords / pageSize);
 	
-	        summary = '<div class="summary">Results <b>'+startRecord+'</b> - <b>'
+	        var summary = '<div id="summary">Results <b>'+startRecord+'</b> - <b>'
 	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b></div>';
-	        jQuery("#searchResults").append(summary);
+	        jQuery("#cabioNav").empty().append(summary).show();
 	
 	        // Attempt to show enough text to fill the current portlet width
 	        var width = jQuery("#cabio")[0].offsetWidth;
@@ -172,27 +173,39 @@ var caBioSimpleSearch = function() {
     search : function(hash) {
         doSearch(parseInt(hash));
     },
-    
-	/**
-	 * Show a pathway diagram in a modal dialog (Firefox only).
-	 */
-	showPathway : function (id) {
-		jQuery("#pathway_"+id).modal({
-            overlay: 60,
-            close: false,
-            onShow: function(dialog) { 
-                dialog.overlay.one("click", function () {
-                    jQuery.modal.close();
-                });
-            }
-        });
-		return false;
-	}
 
 	};
 }();
 
 </script>
+
+<input id="searchText" type="text" value="" size="40"/>
+<input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/>
+<br/>
+
+<a id="adv_link" href="javascript:caBioCommon.toggleDropBox('#adv_box')">Advanced Options</a>
+<div id="adv_box">
+	Match Terms:
+	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
+	<input type="radio" name="matchMode" id="matchAll"> all 
+	<br/>
+	Exclude: <input id="exclude" type="text"/>
+	<br/>
+    View:
+    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> simple 
+    <input type="radio" name="viewMode" id="viewObjects"> objects
+    <br/>
+	Results per page: 
+	<select id="pageSize"> 
+	<option value="5" selected="selected">5</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	</select>
+</div>
+
+<div id="cabioNav" style="display: none"></div>
+<div class="results" id="objectDetails"></div>
+<div class="results" id="searchResults"></div>
 
 <script language="javascript">
 
@@ -228,30 +241,3 @@ jQuery(function() {
 });
 
 </script>
-
-<input id="searchText" type="text" value="" size="40"/>
-<input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/>
-<br/>
-
-<a id="adv_link" href="javascript:caBioCommon.toggleDropBox('#adv_box')">Advanced Options</a>
-<div id="adv_box">
-    View:
-    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> simple 
-    <input type="radio" name="viewMode" id="viewObjects"> objects
-    <br/>
-	Match Terms:
-	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
-	<input type="radio" name="matchMode" id="matchAll"> all 
-	<br/>
-	Exclude: <input id="exclude" type="text"/>
-	<br/>
-	Results per page: 
-	<select id="pageSize"> 
-	<option value="5" selected="selected">5</option>
-	<option value="10">10</option>
-	<option value="15">15</option>
-	</select>
-</div>
-
-<div class="results" id="objectDetails"></div>
-<div class="results" id="searchResults"></div>

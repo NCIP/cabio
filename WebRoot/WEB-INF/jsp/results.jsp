@@ -7,22 +7,35 @@
 <script type="text/javascript"  src="<c:url value="/js/jquery.dimensions.min.js"/>"></script>
 <script type="text/javascript"  src="<c:url value="/js/jquery.tooltip.js"/>"></script>
 
-<div class="results" id="objectDetails"></div>
-<div class="results" id="searchResults">
-<div class="cannedResults">
 <c:choose>
-<c:when test="${results == null || results.numRecords == 0}">
+<c:when test="${results.numRecords == 0}">
 
-	<div class="summary">No results found</div>
+    <div id="cabioNav">
+	   <div id="summary">No results found</div>
+    </div>
 	
 </c:when>
 <c:otherwise>
 
-	<div class="summary">Results <b><c:out value="${results.startRecord}"/></b> - <b>
-	  <c:out value="${results.endRecord}"/></b> of <b><c:out value="${results.numRecords}"/></b> 
-	  (click on a row to view details)
-	</div>
-	      
+    <div id="cabioNav">
+	    <div id="navback">
+	        <a href="<%= session.getAttribute("portletURL") %>">&#171; Return to templates</a>
+	    </div>
+		<div id="summary">Results <b><c:out value="${results.startRecord}"/></b> - <b>
+		  <c:out value="${results.endRecord}"/></b> of <b><c:out value="${results.numRecords}"/></b> 
+		  (click on a row to view details)
+		</div>
+    </div>
+	     
+</c:otherwise>
+</c:choose>
+
+<c:if test="${results.numRecords > 0}">
+
+<div class="results" id="objectDetails"></div>
+<div class="results" id="searchResults">
+<div class="cannedResults">
+
   	<c:forEach var="element" items="${results.items}">
 	<c:set var="classConfig" value="${objectConfig.classes[element.key]}"/>
    
@@ -70,14 +83,6 @@
 			</c:choose>
 			</td>
 		</c:forEach>
-		<!-- 
-		<td>
-		    <div class="link-extenal" style="text-align: right">
-                <a href="<bean:message key="cabio.restapi.url"/>GetHTML<c:out value="${item._querystr}"/>" target="_blank">
-                    <c:out value="${item.id}"/></a>
-            </div>
-        </td>
-         -->
 	  	</tr>
 	</c:forEach>
 	
@@ -127,8 +132,7 @@ jQuery(document).ready(function(){
 
 </script>
 
-</c:otherwise>
-</c:choose>
+</div>
+</div>
 
-</div>
-</div>
+</c:if>
