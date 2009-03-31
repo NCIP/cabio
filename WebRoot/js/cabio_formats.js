@@ -19,6 +19,9 @@ var caBioFormats = function() {
 	        "title":["title"],
 	        "desc":["leadOrganizationId","leadOrganizationName"]
 	    },
+        "gov.nih.nci.cabio.pathways.Condition":{
+            "title":["name"]
+        },
         "gov.nih.nci.cabio.domain.Cytoband":{
             "title":["name"]
         },
@@ -26,6 +29,13 @@ var caBioFormats = function() {
 	        "title":["EVSId"],
 	        "desc":["name"]
 	    },
+        "gov.nih.nci.cabio.pathways.EntityAccession":{
+            "title":["accession"],
+            "desc":["database"]
+        },
+        "gov.nih.nci.cabio.pathways.EntityName":{
+            "title":["name"]
+        },
 	    "gov.nih.nci.cabio.domain.Evidence":{
 	        "title":["sentence"],
 	        "desc":["comments"],
@@ -53,6 +63,9 @@ var caBioFormats = function() {
 	        "title":["name"],
 	        "desc":["keyword"]
 	    },
+        "gov.nih.nci.cabio.pathways.Macroprocess":{
+            "title":["name"]
+        },
 	    "gov.nih.nci.cabio.domain.Microarray":{
 	        "title":["manufacturer","name"],
 	        "desc":["description"]
@@ -64,6 +77,9 @@ var caBioFormats = function() {
 	        "title":["name", "displayValue"],
 	        "desc":["description"]
 	    },
+        "gov.nih.nci.cabio.pathways.PhysicalParticipant":{
+            "title":["location","activityState","postTranslationalMod"]
+        },
 	    "gov.nih.nci.cabio.domain.Protein":{
 	        "title":["primaryAccession","name"],
 	        "desc":["keywords"]
