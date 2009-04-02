@@ -33,7 +33,11 @@
 
     <property name="project.build.dir" value="${project.home.dir}/build" />
     <property name="project.output.dir" value="${project.home.dir}/output" />
-    <property name="project.sourcedist.dir" value="${project.home.dir}/output/cabioapi" />
+    <property name="project.sourcedist.dir" value="${project.output.dir}/cabioapi" />
+    <property name="project.javaclientdist.dir" value="${project.output.dir}/remote-client" />
+    <property name="project.wsclientdist.dir" value="${project.output.dir}/ws-client" />
+    <property name="project.javadoc.dir" value="${project.output.dir}/docs" />
+    <property name="project.indexgen.dir" value="${project.output.dir}/indexgen" />
 
     <property name="project.warfile" value="${project.output.dir}/webapp/${PROJECT_NAME}.war" />
     
@@ -238,22 +242,22 @@
 
         <zip destfile="${project.output.dir}/${project.javaclientdist}.zip">
             <zipfileset prefix="${project.javaclientdist}" 
-                dir="${project.output.dir}/remote-client"/>
+                dir="${project.javaclientdist.dir}"/>
         </zip>
 
         <zip destfile="${project.output.dir}/${project.wsclientdist}.zip">
             <zipfileset prefix="${project.wsclientdist}" 
-                dir="${project.output.dir}/ws-client"/>
+                dir="${project.wsclientdist.dir}"/>
         </zip>
         
         <zip destfile="${project.output.dir}/${project.javadoc}.zip">
             <zipfileset prefix="${project.javadoc}" 
-                dir="${project.output.dir}/docs"/>
+                dir="${project.javadoc.dir}"/>
         </zip>
 
         <zip destfile="${project.output.dir}/${project.indexgen}.zip">
             <zipfileset prefix="indexGenerator"
-                dir="${project.output.dir}/indexgen" />
+                dir="${project.indexgen.dir}" />
         </zip>
         
     </target>
