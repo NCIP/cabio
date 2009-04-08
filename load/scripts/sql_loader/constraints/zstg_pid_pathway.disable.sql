@@ -1,7 +1,7 @@
 
-alter table ZSTG_PID_PATHWAY disable constraint SYS_C0021002;
-alter table ZSTG_PID_PATHWAY disable constraint SYS_C0021003;
-alter table ZSTG_PID_PATHWAY disable constraint SYS_C0021004;
-alter table ZSTG_PID_PATHWAY disable constraint SYS_C0021005;
+alter table ZSTG_PID_PATHWAY disable constraint SYS_C005496;
+alter table ZSTG_PID_PATHWAY disable constraint SYS_C005497;
+alter table ZSTG_PID_PATHWAY disable constraint SYS_C005498;
+alter table ZSTG_PID_PATHWAY disable constraint SYS_C005499;
 
 --EXIT;

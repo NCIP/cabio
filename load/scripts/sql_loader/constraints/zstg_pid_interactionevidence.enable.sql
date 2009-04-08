@@ -1,5 +1,5 @@
 
-alter table ZSTG_PID_INTERACTIONEVIDENCE enable constraint SYS_C0020984;
-alter table ZSTG_PID_INTERACTIONEVIDENCE enable constraint SYS_C0020985;
+alter table ZSTG_PID_INTERACTIONEVIDENCE enable constraint SYS_C005488;
+alter table ZSTG_PID_INTERACTIONEVIDENCE enable constraint SYS_C005489;
 
 --EXIT;

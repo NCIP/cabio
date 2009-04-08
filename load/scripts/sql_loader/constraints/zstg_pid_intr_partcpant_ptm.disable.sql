@@ -1,7 +1,7 @@
 
-alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C0020995;
-alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C0020992;
-alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C0020993;
-alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C0020994;
+alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C005481;
+alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C005482;
+alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C005483;
+alter table ZSTG_PID_INTR_PARTCPANT_PTM disable constraint SYS_C005484;
 
 --EXIT;

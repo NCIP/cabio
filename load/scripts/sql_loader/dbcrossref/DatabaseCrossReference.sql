@@ -21,7 +21,7 @@ CREATE UNIQUE INDEX G2G_TMP ON zstg_omim2gene(OMIM_NUMBER) NOLOGGING PARALLEL ta
 INSERT
   INTO database_cross_reference(gene_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
 source_TYPE)SELECT DISTINCT C.gene_ID GENE_ID, B.OMIM_NUMBER OMIM_ID, 
-'gov.nih.nci.cabio_fut.domain.Gene', 'OMIM_ID', 'Unigene' FROM zstg_gene2UNIGENE A, 
+'gov.nih.nci.cabio_fut.domain.Gene', 'OMIM', 'Unigene' FROM zstg_gene2UNIGENE A, 
 zstg_omim2gene B, gene_tv C
 WHERE A.geneID = B.GENEID AND SUBSTR(A.UNIGENE_CLUSTER, INSTR(A.UNIGENE_CLUSTER
 , '.') + 1) = C.CLUSTER_ID AND C.taxon_ID = 5;

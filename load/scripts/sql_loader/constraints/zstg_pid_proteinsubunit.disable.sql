@@ -1,7 +1,7 @@
 
-alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C0021012;
-alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C0021013;
-alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C0021014;
-alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C0021015;
+alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C005462;
+alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C005463;
+alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C005464;
+alter table ZSTG_PID_PROTEINSUBUNIT disable constraint SYS_C005465;
 
 --EXIT;

@@ -89,22 +89,22 @@ insert into zstg_pid_fmly_prtpnt_ptm select field1, field2, field3 from zstg_pid
 commit; 
 
 
-update zstg_pid_dump z set z.FIELD1 = z.identifier where z.IDENTIFIER like '%pid_geneentity%';
-update zstg_pid_dump z set z.FIELD1 = substr(z.field1,instr(z.field1,'y')+1) where z.field1 like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD1 = z.identifier where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD1 = substr(z.field1,instr(z.field1,'y')+1) where z.field1 like '%pid_geneentity%';
 commit;
-update zstg_pid_dump z set z.FIELD3 = substr(z.FIELD1, instr(z.FIELD1,'H')) where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD3 = substr(z.FIELD1, instr(z.FIELD1,'H')) where z.IDENTIFIER like '%pid_geneentity%';
 commit;
-update zstg_pid_dump z set z.FIELD1 = substr(z.FIELD1, 0, instr(z.FIELD1,'H')-1) where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD1 = substr(z.FIELD1, 0, instr(z.FIELD1,'H')-1) where z.IDENTIFIER like '%pid_geneentity%';
 commit;
-update zstg_pid_dump z set z.FIELD2 = substr(z.FIELD1, instr(z.FIELD1,' ')+1) where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD2 = substr(z.FIELD1, instr(z.FIELD1,' ')+1) where z.IDENTIFIER like '%pid_geneentity%';
 commit;
-update zstg_pid_dump z set z.FIELD2 = substr(z.FIELD1, instr(z.FIELD1,'   ')+1) where z.IDENTIFIER like '%pid_geneentity%';
-commit;
-
-update zstg_pid_dump z set z.FIELD1 = substr(z.FIELD1, 0, instr(z.FIELD1,'   ')-1) where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD2 = substr(z.FIELD1, instr(z.FIELD1,'   ')+1) where z.IDENTIFIER like '%pid_geneentity%';
 commit;
 
-update zstg_pid_dump z set z.identifier='pid_geneentity' where z.IDENTIFIER like '%pid_geneentity%';
+--update zstg_pid_dump z set z.FIELD1 = substr(z.FIELD1, 0, instr(z.FIELD1,'   ')-1) where z.IDENTIFIER like '%pid_geneentity%';
+commit;
+
+--update zstg_pid_dump z set z.identifier='pid_geneentity' where z.IDENTIFIER like '%pid_geneentity%';
 commit;
 
 
