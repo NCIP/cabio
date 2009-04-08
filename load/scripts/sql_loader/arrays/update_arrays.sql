@@ -63,7 +63,7 @@ INTO microarray (ID, ARRAY_NAME, ANNOTATION_DATE, GENOME_VERSION, PLATFORM, TYPE
   DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, geneCHIP_ARRAY,
 ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT 
 DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HG-U133A',
-'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B', 'HG-U133B') AS geneCHIP_ARRAY, TO_DATE(
+'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG-U95Av2', 'Human Genome U95B Array', 'HG-U95B') AS GENECHIP_ARRAY, TO_DATE(
 ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE, geneCHIP_ARRAY AS DESCRIPTION, DECODE
 (geneCHIP_ARRAY, 'Human Genome U133A Array', 'GPL96',
@@ -76,6 +76,10 @@ ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
 'Human Genome U133B Array',
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B'
+'Human Genome U95B Array',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG_U95B',
+'Human Genome U95Av2 Array',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG_U95Av2'
  ) AS LSID FROM 
 zstg_rna_probesets_tmp Z);
 
