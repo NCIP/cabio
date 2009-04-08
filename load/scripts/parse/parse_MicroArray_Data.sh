@@ -1,6 +1,8 @@
 #!/bin/sh
 
 echo "Parsing Microarray annotations data"
+cd "$CABIO_DIR"/scripts/parse/arrays
+perl processFileNames.pl
 
 echo "Parsing Affymetrix HG-U133_Plus2 MicroArray data"
 cd "$CABIO_DIR"/scripts/parse/arrays/Affymetrix/HG-U133_Plus2

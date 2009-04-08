@@ -52,6 +52,7 @@ TRUNCATE TABLE zstg_exon_affy REUSE STORAGE;
 TRUNCATE TABLE zstg_exon_trans_affy REUSE STORAGE;
 TRUNCATE TABLE zstg_exon_trans_genes REUSE STORAGE;
 TRUNCATE TABLE zstg_snp_associated_gene REUSE STORAGE;
+TRUNCATE TABLE zstg_microarray_versions REUSE STORAGE;
 
 -- Drop indexes for faster loading.
 -- They will be recreated in update_arrays.sql before the tables are used.

@@ -63,7 +63,7 @@ INTO microarray (ID, ARRAY_NAME, ANNOTATION_DATE, GENOME_VERSION, PLATFORM, TYPE
   DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, geneCHIP_ARRAY,
 ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT 
 DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HG-U133A',
-'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG-U95Av2', 'Human Genome U95B Array', 'HG-U95B') AS GENECHIP_ARRAY, TO_DATE(
+'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG_U95Av2', 'Human Genome U95B Array', 'HG_U95B') AS GENECHIP_ARRAY, TO_DATE(
 ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE, geneCHIP_ARRAY AS DESCRIPTION, DECODE
 (geneCHIP_ARRAY, 'Human Genome U133A Array', 'GPL96',
@@ -533,6 +533,11 @@ MRL.ID FROM zstg_microsatellite Z, marker_relative_location MRL, marker_lookup M
 MRL.ORIENTATION, 'downstream', 'upstream', 'upstream', 'downstream') AND M.NAME 
 = Z.marker AND M.ID = MRK.ID AND MRK.TYPE = 'UNISTS' AND M.taxon_ID = 5;
 COMMIT;
+
+-- add annotation versions to microarray table
+
+UPDATE microarray m SET annotation_version = 
+    (select annotation_version from zstg_microarray_versions v where v.array_name = m.array_name); 
 
 -- create indexes on user tables
 

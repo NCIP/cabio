@@ -11,13 +11,21 @@ use base 'Exporter';
 use File::Path;
 use DBI;
 
-our @EXPORT    = qw(getFullDataPaths getChromosomes testingSomething);
+our @EXPORT    = qw(getFullDataPath getFullDataPaths getChromosomes testingSomething);
 our @EXPORT_OK = qw($dataDir);
 
 our $dataDir = $ENV{'CABIO_DATA_DIR'};
 
 INIT {
     die "The CABIO_DATA_DIR environment variable is not set." unless ($dataDir);
+}
+
+#
+# Prepends the absolute CABIO_DATA_DIR to the given path fragment.
+#
+sub getFullDataPath {
+    my $path = shift;
+    return "$dataDir/$path";
 }
 
 #
