@@ -34,5 +34,8 @@ echo "Parsing Agilent Human Genome 44K data"
 cd "$CABIO_DIR"/scripts/parse/arrays/Agilent/HumanGenome44K
 sh Agilent_HumanGenome44K_DataParser.sh
 
+echo "Parsing Affymetrix HuEx10ST Microarray data"
+cd "$CABIO_DIR"/scripts/parse/arrays/Affymetrix/HuEx10ST
+sh exon_parser.sh
 
 echo "Finished parsing MicroArray Data"
