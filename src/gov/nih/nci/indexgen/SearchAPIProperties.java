@@ -162,7 +162,7 @@ public class SearchAPIProperties {
             }
             catch (Exception ex) {
                 throw new Exception("Error initializing session factory: "
-                        + ormFileName + ex.getMessage(), ex);
+                        + ormFileName, ex);
             }
         }
         else {
