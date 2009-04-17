@@ -3,7 +3,7 @@
 mkpath.pl $CABIO_DATA_DIR/relative_clone/human
 cd $CABIO_DATA_DIR/relative_clone/human
 echo "Removing existing files from $CABIO_DATA_DIR/relative_clone/human"
-rm -rf *
+# rm -rf *
 
 echo "\nDownloading EST Annotations for human from UCSC"
 wget -nv http://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/chr1_est.txt.gz 
@@ -66,7 +66,7 @@ wait
 mkpath.pl $CABIO_DATA_DIR/relative_clone/mouse
 cd $CABIO_DATA_DIR/relative_clone/mouse
 echo "\nRemoving existing files from $CABIO_DATA_DIR/relative_clone/mouse"		
-rm -rf *
+# rm -rf *
 
 echo "Downloading EST Annotations for mouse from UCSC"
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/mm9/database/chr1_est.txt.gz 

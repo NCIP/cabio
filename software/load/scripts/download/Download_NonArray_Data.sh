@@ -14,8 +14,6 @@ echo "\n\nDownloading Human and Mouse EST"
 sh download_ESTAnnotationsData_UCSC.sh 
 echo "\n\nDownloading Human and Mouse MRNA" 
 sh download_Mrna_UCSC.sh 
-echo "\n\nDownloading Human and Mouse Unigene" 
-sh download_Unigene_NCBI.sh 
 echo "\n\nDownloading CTEP data" 
 sh download_CTEPData.sh 
 echo "\n\nDownloading Marker data from UniSTS" 
@@ -24,4 +22,8 @@ echo "\nDownloading Unigene data \n"
 sh download_Unigene_NCBI.sh
 echo "\nDownloading PID data \n"
 sh download_PID.sh
+echo "\nDownloading GeneAlias data\n"
+sh download_GeneAlias.sh
+echo "\nDownloading Illumina Agilent data \n"
+sh download_Illumina_Agilent.sh
 echo "\n\nFinished downloading Cytoband, Uniprot, Unigene, TSC SNP, NCBI SNP, IMAGE CLONE, EST and CTEP data"

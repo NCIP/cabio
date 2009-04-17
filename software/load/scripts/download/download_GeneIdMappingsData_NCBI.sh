@@ -4,7 +4,7 @@ mkpath.pl $CABIO_DATA_DIR/unigene2gene
 cd $CABIO_DATA_DIR/unigene2gene
 
 echo "Removing files from $CABIO_DATA_DIR/unigene2gene"
-rm -rf *
+# rm -rf *
 
 echo "Downloading Accession numbers mapping (NCBI-Unigene, OMIM-Unigene, Gene-Accession)"
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2unigene

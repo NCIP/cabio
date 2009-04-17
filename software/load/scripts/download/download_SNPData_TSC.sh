@@ -3,7 +3,7 @@
 mkpath.pl $CABIO_DATA_DIR/TSC_SNP
 cd $CABIO_DATA_DIR/TSC_SNP
 echo "Removing existing files from $CABIO_DATA_DIR/TSC_SNP"
-rm -rf *
+# rm -rf *
 
 echo "Downloading the TSC SNP Annotations"
 wget -nv ftp://hapmap.org/tscsnp-data/snps/tabsep/snps_chrom1_tabsep.txt.gz &

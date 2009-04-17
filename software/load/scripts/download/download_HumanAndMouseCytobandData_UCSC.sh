@@ -4,7 +4,7 @@ mkpath.pl $CABIO_DATA_DIR/cytoband/human
 cd $CABIO_DATA_DIR/cytoband/human
 
 echo "Removing existing files from $CABIO_DATA_DIR/cytoband/human"
-rm -rf *
+# rm -rf *
 
 echo "\nDownloading human cytoband annotations data from UCSC"
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/cytoBand.txt.gz
@@ -15,7 +15,7 @@ mkpath.pl $CABIO_DATA_DIR/cytoband/mouse
 cd $CABIO_DATA_DIR/cytoband/mouse
 
 echo "\nRemoving existing files from $CABIO_DATA_DIR/cytoband/mouse"
-rm -rf *
+# rm -rf *
 
 echo "Downloading mouse cytoband annotations data from UCSC"
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/mm9/database/cytoBand.txt.gz

@@ -2,7 +2,7 @@
 
 cd $CABIO_DATA_DIR/ncbi_unigene                                                              
 echo "\nRemoving existing files from $CABIO_DATA_DIR/ncbi_unigene"
-rm -rf *
+# rm -rf *
 
 echo "Downloading Human Unigene sequences"
 wget -nv -O Hs.seq.all.gz ftp://ftp.ncbi.nih.gov/repository/UniGene/Homo_sapiens/Hs.seq.all.gz  

@@ -3,7 +3,7 @@
 mkpath.pl $CABIO_DATA_DIR/image_clone
 cd $CABIO_DATA_DIR/image_clone
 echo "Removing files from $CABIO_DATA_DIR/image_clone"
-rm -rf *
+# rm -rf *
 
 echo "Downloading the IMAGE clone data"
 wget -nv ftp://image.llnl.gov/image/outgoing/arrayed_plate_data/cumulative/cumu*
