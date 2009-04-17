@@ -22,6 +22,10 @@ echo "\n\nDownloading Marker data from UniSTS"
 sh download_Marker.sh
 echo "\nDownloading Unigene data \n"
 sh download_Unigene_NCBI.sh
+echo "\nDownloading gene alias data \n"
+sh download_GeneAlias.sh
 echo "\nDownloading PID data \n"
 sh download_PID.sh
+echo "\nDownloading Illumina Agilent data \n"
+sh download_Illumina_Agilent.sh
 echo "\n\nFinished downloading Cytoband, Uniprot, Unigene, TSC SNP, NCBI SNP, IMAGE CLONE, EST and CTEP data"
