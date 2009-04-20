@@ -399,6 +399,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                   </fileset>
             </copy> 
             
+            <!-- Do not copy index files around at this time
             <echo message="copy all the files under indexes to exploded/indexes folder"/>
             <property name="indexes.output.dir" value="${software.dir}/indexes" />
             <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
@@ -409,7 +410,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                         <include name="**/**" />                       
                    </fileset>
             </copy>                 
-
+            -->
+             
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
             <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
             <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.dist.target}">                   
