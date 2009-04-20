@@ -76,7 +76,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="cabio-api.build.target" value="build:all" />
-	<property name="cabio-webapp.build.target" value="build-system" />       
+	<property name="cabio-webapp.build.target" value="build-system" /> 
+      <property name="cabio-webapp.dist.target" value="dist-zips" />
 
 	<!-- Maven comamnd line arguments, bda profile is inside profiles.xml that gets copied to ear folder before build to override exiting properties -->
 	<property name="cabio-webapp.maven.profile.list" value="local,bda" />
@@ -342,6 +343,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 ">
         </target>
 
+       <!-- download the index files from the load server according to 
+            which tier it is deploying -->
+       <target name="build:cabio-webapp:download:indexfiles">
+            <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
+            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
+                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
+            <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
+       </target>
+
 	<target name="build:all" description="Builds all the sub projects, putting artifacts in the project level target directory, used by distribution targets to make distributions" depends="
 		validate:pre:build,
 		clean,
@@ -387,9 +397,33 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                       <include name="data/**/*" /> 
                       <exclude name="**/.svn" />
                   </fileset>
-            </copy>             
+            </copy> 
+            
+            <echo message="copy all the files under indexes to exploded/indexes folder"/>
+            <property name="indexes.output.dir" value="${software.dir}/indexes" />
+            <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
+            <delete dir="${cabio-webapp.indexes.dist.dir}" />
+            <mkdir dir="${cabio-webapp.indexes.dist.dir}" />
+            <copy todir="${cabio-webapp.indexes.dist.dir}" overwrite="true">
+                   <fileset dir="${indexes.output.dir}">                      
+                        <include name="**/**" />                       
+                   </fileset>
+            </copy>                 
+
+            <!-- make the distribution zip files by calling dist-zips target of caBIO -->
+            <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
+            <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.dist.target}">                   
+			<property name="project.output.dir" value="${dist.dir}"/>
+                  <property name="project.sourcedist.dir" value="${dist.exploded.dir}/output/cabioapi" />
+                  <property name="project.javaclientdist.dir" value="${dist.exploded.dir}/remote-client" />
+                  <property name="project.wsclientdist.dir" value="${dist.exploded.dir}/ws-client" />
+                  <property name="project.javadoc.dir" value="${dist.exploded.dir}/docs" />
+                  <property name="project.indexgen.dir" value="${dist.exploded.dir}/indexgen" />
+                  <property name="project.warfile" value="${dist.exploded.dir}/webapp/${cabio-webapp.project.name}.war" />
+		</ant>
 	</target>
 
+      <!-- the following target is currently not used since it is not realistic to run the indexgen on CI Server -->
 	<target name="build:database:indexes" depends="init" description="Call indexgen sub-projects build target to produce index files">
             <property name="cabio-webapp.load.dir" value="${software.dir}/load" />
             <property name="cabio-webapp.indexgen.dir" value="${cabio-webapp.load.dir}/indexgen" />
@@ -434,7 +468,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
             <property name="database.9i.url" value="jdbc:oracle:thin:@${database.server}:${database.port}:${database.9i.name}" />
             <property name="cabio-indexes.dist.relative.dir" value="indexes" />
             <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/${cabio-indexes.dist.relative.dir}" /> 
-            <property name="cabio.tmp.indexes.zipfile.name" value="cabioindexes.zip" />
+            <property name="cabio.tmp.indexgen.zipfile.name" value="cabioindexes.zip" />
             <echo message="Database URL info for indexgen: ${database.9i.url}" />
             <echo message="Database URL info for indexgen: ${database.user}/${database.password}" />            
             
@@ -444,21 +478,21 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 command="rm -r ${cabio.loadserver.indexgen.dir}; mkdir ${cabio.loadserver.indexgen.dir}; rm -r ${cabio.loadserver.indexfile.output.dir}; mkdir ${cabio.loadserver.indexfile.output.dir}" />
 
             <!--  zip up the indexgen files for easy transportation -->
-            <zip destfile="${cabio-webapp.load.dir}/${cabio.tmp.indexes.zipfile.name}" basedir="${cabio-webapp.indexgen.dir}" />
+            <zip destfile="${cabio-webapp.load.dir}/${cabio.tmp.indexgen.zipfile.name}" basedir="${cabio-webapp.indexgen.dir}" />
 
             <!-- secure copy the indexgen code to load server -->
             <scp todir="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.load.dir}" port="${ssh.loadserver.port}" 
-                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" file="${cabio-webapp.load.dir}/${cabio.tmp.indexes.zipfile.name}" />
-            <delete file="${cabio-webapp.load.dir}/${cabio.tmp.indexes.zipfile.name}" />            
+                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" file="${cabio-webapp.load.dir}/${cabio.tmp.indexgen.zipfile.name}" />
+            <delete file="${cabio-webapp.load.dir}/${cabio.tmp.indexgen.zipfile.name}" />            
 
             <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
-                command="cd ${cabio.loadserver.load.dir}; unzip ${cabio.tmp.indexes.zipfile.name} -d ${cabio.loadserver.indexgen.dir}; rm ${cabio.tmp.indexes.zipfile.name}" />            
+                command="cd ${cabio.loadserver.load.dir}; unzip ${cabio.tmp.indexgen.zipfile.name} -d ${cabio.loadserver.indexgen.dir}; rm ${cabio.tmp.indexgen.zipfile.name}" />            
 
  		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
             <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
-                command=". .profile;cd ${cabio.loadserver.indexgen.dir};ant -Dindex_location=${cabio.loadserver.indexfile.output.dir} -Duser_name=${database.user} -Dpassword=${database.password} -Dconnection_url=${database.9i.url} ${cabio-webapp.indexgen.build.target}" />
+                command=". .profile;cd ${cabio.loadserver.indexgen.dir};ant -Dindex_location=${cabio.loadserver.indexfile.output.dir} -Duser_name=${database.user} -Dpassword=${database.password} -Dindexes.file.name=${cabio.loadserver.indexfile.name} -Dconnection_url=${database.9i.url} ${cabio-webapp.indexgen.build.target}" />
 
 	</target>
 
