@@ -424,7 +424,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 			/>
 	</target>
 
-	<target name="install:jboss:cabio-webapp" description="Deploy cabio-webapp and common libraries to jboss installation" unless="exclude.jboss">
+	<target name="install:jboss:cabio-webapp" description="Deploy cabio-webapp and common libraries to jboss installation" unless="exclude.jboss" depends="install:database:indexes">
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -433,7 +433,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
 		<copy file="${bda-utils.dir}/clm-3.2.jar" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
 		-->
-		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />
+		<copy file="${database.driver.file}" todir="${jboss.home}/server/${jboss.server.name}/lib" overwrite="true" />            
 	</target>
 
 	<target name="install:jboss:cabio-webapp:configure" description="Configure cabio-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss">
@@ -485,7 +485,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 
 		<xmltask source="${jboss.home}/server/${jboss.server.name}/conf/log4j.xml"
 			dest="${jboss.home}/server/${jboss.server.name}/conf/log4j.xml">
-			<xmlcatalog refid="installer.catalog"/>
+			<xmlcatalog refid="bda.xml.catalog"/>
 			<remove path="/log4j:configuration/appender[@name='TestAppender']"/>
 			<insert path="/log4j:configuration">
 				<![CDATA[
@@ -533,10 +533,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 			grid-secure-configure-connector - configures secure grid
 		-->
 		<!-- Use below if you are defining all the ports in your install.xml not the NCICB port configuraitons-->
+            <!-- 
 		<jboss-configure
 			jboss.server.ports.name="bda-ports"
 			jboss.server.binding.template.location="${bda-utils.resource.dir}/template-binding.xml"
 			/>
+              -->
 		<!-- Default values for all attributes if you are using standard NCICB port configurations
 		<jboss-configure
 			/>
@@ -931,4 +933,41 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		<!-- configure datasource -->
 	</target>
 	<target name="install:tomcat:cabio-webapp:re-configure" description="Configure cabio-webapp application, copies over externalized properties or configurations that are not part of the tomcat configuration" unless="exclude.tomcat"/>
+
+      <!-- Assuming the indexes ZIP file has the folder structure as follows:
+                         cabioapi/indexes,
+                         cabioapi/41/indexes,
+                         cabioapi/42/indexes,
+                         cabioapi/43/indexes
+      -->
+      <target name="install:database:indexes" description="Install the index files for FreeStyle Search into the System based on the index and cache paths provided"  depends="install:init" unless="indexfiles.ready">
+            <!-- property name="cabio-webapp.indexes.dist.dir" value="${basedir}/indexes" / -->
+            <property name="cabio-webapp.indexes.dist.dir" value="${cabio.deploy.tmp.indexes.dir}" />
+            <delete includeemptydirs="true">
+                <fileset dir="${cabio-webapp.index_cache_base.dir}" includes="**/**">
+                </fileset>
+            </delete>                         
+            <copy todir="${cabio-webapp.index_cache_base.dir}">
+                 <fileset dir="${cabio-webapp.indexes.dist.dir}/40">
+                      <include name="**/**" />
+                 </fileset>  
+                 <fileset dir="${cabio-webapp.indexes.dist.dir}">
+                      <include name="41/**" />
+                      <include name="42/**" />
+                 </fileset>  
+            </copy>          
+            <!-- Currently cabio43 will have same index files as 42. It will change later -->
+            <mkdir dir="${cabio-webapp.index_cache_base.dir}/43" />
+            <copy todir="${cabio-webapp.index_cache_base.dir}/43">
+                 <fileset dir="${cabio-webapp.indexes.dist.dir}/42">
+                      <include name="**/**" />
+                 </fileset>  
+            </copy>
+
+            <!-- create the CACHE folder for each version -->
+            <mkdir dir="${cabio-webapp.index_cache_base.dir}/cache" />
+            <mkdir dir="${cabio-webapp.index_cache_base.dir}/41/cache" />
+            <mkdir dir="${cabio-webapp.index_cache_base.dir}/42/cache" />  
+            <mkdir dir="${cabio-webapp.index_cache_base.dir}/43/cache" />            
+      </target>
 </project>
