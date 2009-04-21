@@ -156,10 +156,6 @@ cd $LOAD/pid_dump
 echo "Loading PID tables"
 time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
 
-cd $LOAD/compara
-echo "Loading Compara tables"
-time sh load.sh $1 1>compara.log 2>&1 
-
 mail -s "Histo Load Log " viswanathl@mail.nih.gov < $LOAD/histopathology/histLoad.log 
 mail -s "Array PLSQL Log " viswanathl@mail.nih.gov < $LOAD/arrays/Array_PLSQL_Ld.log 
 mail -s "CGDC Load Log " viswanathl@mail.nih.gov < $LOAD/cgdc/cgdcLoad.log 
@@ -171,6 +167,7 @@ echo "Loading provenance, source_reference, url_source_reference tables"
 rm *.bad *.log
 time sh provenance_DataLoader.sh $1  1>provenance_load.log 2>&1 &
 
+time sqlplus $1  @$LOAD/keywords/keyword_load.sql
 
 # Grid Id Load
 time sqlplus $1  @$LOAD/bigid_lower_idx.sql
@@ -178,6 +175,7 @@ time sqlplus $1  @$LOAD/indexes/drop.sql
 
 time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>bigid.log 
 time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log 
+
 
 echo "Beginning Grid Id Load"
 echo "Commenting these for the time being"
@@ -204,6 +202,9 @@ cd $LOAD/location
 echo "Loading other location tables"
 time sh postbigid.sh $1 1>>locationLoad.log 2>&1 
 
+cd $LOAD/compara
+echo "Loading Compara tables"
+time sh load.sh $1 1>compara.log 2>&1 
 
 sqlplus $1 @$LOAD/misc_indexes.sql 
 
