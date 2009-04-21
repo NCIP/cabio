@@ -58,9 +58,15 @@ commit;
 -- how to handle instances with the 'ConstrainedRegion' discriminator.
 
 truncate table LOCATION_CH_43;
-insert into LOCATION_CH_43 select * from LOCATION_CH;
 
-commit;
+--insert into LOCATION_CH_43 select * from LOCATION_CH;
+-- Create a view for now because there isn't enough space in the database to 
+-- duplicate LOCATION_CH 
+
+create or replace view LOCATION_43 as
+    select * from location_ch
+    UNION ALL 
+    select * from location_ch_43;
 
 -- Insert constrained regions
 
