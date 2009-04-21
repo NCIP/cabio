@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE "c:/dev/cabio_data/compara/species.txt"
+INFILE '$CABIO_DATA_DIR/compara/species.txt'
  
 REPLACE
  

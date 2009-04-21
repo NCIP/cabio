@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE "c:/dev/cabio_data/compara/regions.txt"
+INFILE '$CABIO_DATA_DIR/compara/regions.txt'
  
 REPLACE
  
