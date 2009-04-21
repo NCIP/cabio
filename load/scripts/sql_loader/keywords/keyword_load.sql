@@ -1,31 +1,5 @@
-DROP TABLE KEYWORD;
-DROP TABLE STG_KEYWORD;
-DROP TABLE STG_KEYWORD_AGG;
-
--- Staging table for keywords, truncated before processing each class
-CREATE TABLE STG_KEYWORD ( 
-	SCORE NUMBER,
-	VALUE VARCHAR2(512)
-);
-
--- Aggregated staging table for keywords across all types. Scores are 
--- inversed (i.e. 1 is the best possible score).
-CREATE TABLE STG_KEYWORD_AGG ( 
-	SCORE NUMBER NOT NULL,
-	VALUE VARCHAR2(512) NOT NULL,
-	TYPE VARCHAR2(255) NOT NULL
-);
-
--- User table with normal scoring (0 is the worst score). Scores are 
--- combined across classes, so TYPE no longer makes sense, since any 
--- given keyword may come from multipe types.
-CREATE TABLE KEYWORD ( 
-	ID NUMBER NOT NULL,
-	SCORE NUMBER NOT NULL,
-	VALUE VARCHAR2(512) NOT NULL
-);
-
-ALTER TABLE KEYWORD ADD CONSTRAINT PK_KEYWORD PRIMARY KEY (ID);
+-- Loads the KEYWORDS table for auto-completion
+--
 
 -- This view is used to select from STG_KEYWORD and insert into STG_KEYWORD_AGG. 
 -- 
