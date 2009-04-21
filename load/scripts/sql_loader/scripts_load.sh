@@ -156,6 +156,9 @@ cd $LOAD/pid_dump
 echo "Loading PID tables"
 time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
 
+cd $LOAD/compara
+echo "Loading Compara tables"
+time sh load.sh $1 1>compara.log 2>&1 
 
 mail -s "Histo Load Log " viswanathl@mail.nih.gov < $LOAD/histopathology/histLoad.log 
 mail -s "Array PLSQL Log " viswanathl@mail.nih.gov < $LOAD/arrays/Array_PLSQL_Ld.log 
