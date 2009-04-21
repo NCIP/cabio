@@ -120,6 +120,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<!-- Where to write files retrieved by get, into the distribution area.  The file names come from project.properties  -->
 	<property name="jboss.dest.file" value="${download.dir}/${jboss.binaries.file}" />
 	<property name="tomcat.dest.file" value="${download.dir}/${tomcat.binaries.file}" />
+      <property name="jbosscp.dest.file" value="${download.dir}/${jbosscp.binaries.file}" />
+      <available file="${jbosscp.dest.file}" property="jbosscp.tools.exists" />
 
 	<!-- Default install time targets passed by deploy targets to the installer, can be overridden by being set on the command line if different target is desitred.  -->
 	<property name="install.target" value="install" />
@@ -343,15 +345,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 ">
         </target>
 
-       <!-- download the index files from the load server according to 
-            which tier it is deploying -->
-       <target name="build:cabio-webapp:download:indexfiles">
-            <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
-            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
-                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
-            <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
-       </target>
-
 	<target name="build:all" description="Builds all the sub projects, putting artifacts in the project level target directory, used by distribution targets to make distributions" depends="
 		validate:pre:build,
 		clean,
@@ -477,7 +470,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
             <!-- Prepare the load server and clean up old ones -->
             <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
-                command="rm -r ${cabio.loadserver.indexgen.dir}; mkdir ${cabio.loadserver.indexgen.dir}; rm -r ${cabio.loadserver.indexfile.output.dir}; mkdir ${cabio.loadserver.indexfile.output.dir}" />
+                command="rm -r ${cabio.loadserver.indexgen.dir}; mkdir ${cabio.loadserver.indexgen.dir}; mv ${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name} ${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" />
 
             <!--  zip up the indexgen files for easy transportation -->
             <zip destfile="${cabio-webapp.load.dir}/${cabio.tmp.indexgen.zipfile.name}" basedir="${cabio-webapp.indexgen.dir}" />
@@ -530,6 +523,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<target name="dist:tools:retrieve" description="Downloads binary applications from commonlibrary repository" depends="
 		init,
 		dist:tools:retrieve:jboss,
+            dist:tools:retrieve:jbosscp,
 		dist:tools:retrieve:tomcat
 		" />
 
@@ -547,6 +541,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 			</else>
 		</if>
 	</target>
+
+      <target name="dist:tools:retrieve:jbosscp" unless="jbosscp.tools.exists" description="Downloads JBOSS Cumulative Patch from binary repository and verifies checksum">
+                <!-- get src="${jbosscp.src.url}" dest="${jbosscp.dest.file}" / -->
+      </target>
+
 	<target name="dist:tools:retrieve:jboss-bindings"  description="Downloads JBOSS bindings filefrom binary repository and verifies checksum">
 		<get src="${jboss-bindings.src.url}" dest="${dist.exploded.dir}/${jboss-bindings.file}" />
 	</target>
