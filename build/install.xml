@@ -981,6 +981,104 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
        </target>
 
       <!-- bda-utils-1.0.0 changes -->
+      <target name="init:common">
+		<property name="application.url" value="http://${jboss.server.hostname}:${jboss.server.port}/${bda-blueprints-webapp.name}"/>
+		<!-- Conditionals -->
+		<available file="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml" property="jboss.exists"/>
+		<!-- bda-blueprints-webapp can use either Oracle or MySQL or PostgreSQL as its database platform, this is controled by the database.type property.  Based on the value of this property sent several variables for use during install -->
+		<echoproperties prefix="database"/>
+		<switch value="${database.type}">
+			<case value="oracle">
+				<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.3.0.jar"/>
+				<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="database.schema" value="${database.name}"/>
+			</case>
+			<case value="mysql">
+				<property name="database.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/mysql-connector-java-5.0.5.jar"/>
+				<property name="database.driver" value="com.mysql.jdbc.Driver"/>
+				<property name="database.schema" value="${database.name}"/>
+			</case>
+			<case value="postgresql">
+				<property name="database.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/postgresql-jdbc3-8.3-603.jar"/>
+				<property name="database.driver" value="org.postgresql.Driver"/>
+				<property name="database.schema" value="public"/>
+			</case>
+			<default>
+				<fail message="Invalid database type ${database.type}"/>
+			</default>
+		</switch>
+	
+		<path id="jdbc.driver.classpath">
+			<pathelement location="${database.driver.file}"/>
+		</path>
+	
+		<property name="properties.template.file" value="${basedir}/properties.template" />
+		<!-- figure out whether to use install-properties.template or upgrade-proprties.template based on the name of the properties file
+		<propertyregex property="properties.file.type"
+		="${properties.file}"
+		=".*(install|upgrade).*"
+		="\1"     
+			/>              
+		<echo message="Properties file type = ${properties.file.type}"/>
+		<switch value="${properties.file.type}">
+			<case value="install">
+				<property name="properties.template.file" value="install-properties.template" />
+			</case>         
+			<case value="upgrade">
+				<property name="properties.template.file" value="upgrade-properties.template" />
+			</case>         
+			<default>       
+				<fail message="Property file name must include 'install' or 'upgrade' so it can be determined which properties template should be used. If you are not certain include 'upgrade' in the name of your proeprties file."/>
+			</default>      
+		</switch>
+		-->
+		<filterset id="embedded.filterset">
+			<filter token="application.base.path" value="${application.base.path}"/>
+			<filter token="application.url" value="${application.url}"/>
+			<filter token="database.url" value="${database.url}"/>
+			<filter token="database.user" value="${database.user}"/>
+			<filter token="database.password" value="${database.password}"/>
+			<filter token="database.system.url" value="${database.system.url}"/>
+			<!-- added internal properties that may be used in a filtered copy -->
+			<filter token="database.driver" value="${database.driver}"/>
+			<!-- added for liquibase -->
+			<filter token="db-upgrade.run.dir" value="${db-upgrade.dir.dest}/${database.type}"/>
+			<filter token="jboss.home" value="${jboss.home}"/>
+			<filter token="tomcat.home" value="${tomcat.home}"/>
+			<filter token="database.dialect" value="${database.dialect}"/>
+			<filter token="hibernate.cfg.file.path" value="${hibernate.cfg.file.path}"/>
+			<filter token="env.LOGNAME" value="${env.LOGNAME}"/>
+			<filter token="env.JAVA_HOME" value="${env.JAVA_HOME}"/>
+			<filter token="project.name" value="project.name"/>
+			<filter token="" value=""/>
+		</filterset>
+
+		<!-- Added to convert location to file and path -->
+		<basename file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.file"/>
+		<dirname file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.dir"/>
+		<basename file="${tomcat.ssl.keystore.location}" property="tomcat.ssl.keystore.file"/>
+		<dirname file="${tomcat.ssl.keystore.location}" property="tomcat.ssl.keystore.dir"/>
+		<basename file="${tomcat.grid.secure.cert.location}" property="tomcat.grid.secure.cert.file"/>
+		<dirname file="${tomcat.grid.secure.cert.location}" property="tomcat.grid.secure.dir"/>
+		<basename file="${tomcat.grid.secure.key.location}" property="tomcat.grid.secure.key.file"/>
+		<basename file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.cert.file"/>
+		<dirname file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.dir"/>
+		<basename file="${jboss.grid.secure.key.location}" property="jboss.grid.secure.key.file"/>
+		<!--OS Temp dir -->
+		<condition property="os.temp.dir" value="/tmp">
+			<or>
+				<os family="unix" />
+				<os family="mac" />
+			</or>
+		</condition>
+	
+		<condition property="os.temp.dir" value="c:/temp">
+			<os family="windows" />
+		</condition>
+	</target>
       <target name="init:install" unless="upgrade.running">
                 <property name="install.running" value="true"/>
                 <!-- Set application.base.path based on platform -->
