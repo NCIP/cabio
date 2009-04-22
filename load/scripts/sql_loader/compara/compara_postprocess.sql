@@ -6,7 +6,6 @@
 
 -- Revert to static taxons 
 
-truncate table TAXON;
 insert into TAXON select from ZSTG_TAXON;
 
 -- Create taxon id sequence
@@ -38,12 +37,10 @@ commit;
 DROP SEQUENCE MULTI_ALIGN_SEQ;
 CREATE SEQUENCE MULTI_ALIGN_SEQ;
 
-truncate table MULTIPLE_ALIGNMENT;
 insert into MULTIPLE_ALIGNMENT
     select MULTI_ALIGN_SEQ.NEXTVAL, METHOD_NAME, 'Ensembl Compara', METHOD_CLASS, METHOD_ID  
     from ZSTG_COMPARA_METHODS;
 
-truncate table MULTIPLE_ALIGNMENT_TAXON;
 insert into MULTIPLE_ALIGNMENT_TAXON (MULTIPLE_ALIGNMENT_ID, TAXON_ID)
     select m.ID, t.TAXON_ID
     from MULTIPLE_ALIGNMENT m, ZSTG_COMPARA_SPECIES z, TAXON t
@@ -57,9 +54,8 @@ commit;
 -- we can't add them into LOCATION_CH because the older APIs will not know 
 -- how to handle instances with the 'ConstrainedRegion' discriminator.
 
-truncate table LOCATION_CH_43;
+insert into LOCATION_CH_43 select * from LOCATION_CH;
 
---insert into LOCATION_CH_43 select * from LOCATION_CH;
 -- Create a view for now because there isn't enough space in the database to 
 -- duplicate LOCATION_CH 
 
