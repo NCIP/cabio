@@ -6,15 +6,13 @@
 @$LOAD/indexer_new.sql location_ch_43;
 
 -- Generate constraint disable and enable scripts
-@$LOAD/constraints.sql taxon;
 @$LOAD/constraints.sql chromosome;
+@$LOAD/constraints.sql taxon;
 @$LOAD/constraints.sql multiple_alignment;
 @$LOAD/constraints.sql multiple_alignment_taxon;
 @$LOAD/constraints.sql location_ch_43;
 
--- Disable constraints 
-@$LOAD/constraints/taxon.disable.sql;
-
+-- Disable FK constraints 
 @$LOAD/constraints/bio_pathways.disable.sql;
 @$LOAD/constraints/bio_pathways_tv.disable.sql;
 @$LOAD/constraints/chromosome.disable.sql;
@@ -23,6 +21,8 @@
 @$LOAD/constraints/marker.disable.sql;
 @$LOAD/constraints/protein_taxon.disable.sql;
 
+-- Disable constraints 
+@$LOAD/constraints/taxon.disable.sql;
 @$LOAD/constraints/multiple_alignment.disable.sql;
 @$LOAD/constraints/multiple_alignment_taxon.disable.sql;
 @$LOAD/constraints/location_ch_43.disable.sql;
