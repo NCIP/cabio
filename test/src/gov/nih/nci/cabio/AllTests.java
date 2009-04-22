@@ -43,6 +43,7 @@ public class AllTests {
         suite.addTestSuite(AnnotationAPITest.class);
         suite.addTestSuite(ArraysTest.class);
         suite.addTestSuite(CaBIGStandardModelTest.class);
+        suite.addTestSuite(ComparaTest.class);
         suite.addTestSuite(CGDCTest.class);
         suite.addTestSuite(CQLTest.class);
         suite.addTestSuite(DefectTest.class);
