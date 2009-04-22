@@ -92,7 +92,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<property name="cabio-conf.dir.dest" value="${working.dir}/${cabio-conf.dist.relative.dir}" />
 	<property name="jboss-cabio-conf.dir" value="${jboss.home}/server/${jboss.server.name}/data" />
     	<property name="cabio.propertyservice.cacore.property.value" value="${jboss-cabio-conf.dir}/cacore.properties" />
-
+	<property name="cabio-indexes.dir.src" value="${basedir}/${cabio-indexes.dist.relative.dir}" />
+	<property name="cabio-indexes.dir.dest" value="${working.dir}/${cabio-indexes.dist.relative.dir}" />
     
 
 	<!-- Jboss binding configurtion related properties -->
@@ -340,6 +341,20 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<filtersfile file="project.properties"/>
 			</filterset>
 		</copy> 
+            
+            <!-- Copy the index files to working folder for packaging and scp to the deployment server later 
+            <if>
+                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
+            <then>
+                  <echo message="Copying the index files from ${cabio-indexes.dir.src} to ${cabio-indexes.dir.dest}" />
+    		      <copy todir="${cabio-indexes.dir.dest}" filtering="true">
+			     <fileset dir="${cabio-indexes.dir.src}">
+				    <include name="${cabio.loadserver.indexfile.tier.name}"/>
+			     </fileset>
+		      </copy> 
+            </then>
+            </if>
+            -->              
 
             <!-- make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App -->
             <echo message="make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App"/> 
@@ -940,9 +955,15 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                          cabioapi/42/indexes,
                          cabioapi/43/indexes
       -->
-      <target name="install:database:indexes" description="Install the index files for FreeStyle Search into the System based on the index and cache paths provided"  depends="install:init,build:cabio-webapp:download:indexfiles" unless="indexfiles.ready">
-            <!-- property name="cabio-webapp.indexes.dist.dir" value="${basedir}/indexes" / -->
-            <property name="cabio-webapp.indexes.dist.dir" value="${cabio.deploy.tmp.indexes.dir}" />
+      <condition property="cabio-webapp.indexes.dist.dir" value="${basedir}/indexes" >
+            <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
+      </condition>
+      <condition property="cabio-webapp.indexes.dist.dir" value="${cabio.deploy.tmp.indexes.dir}" >
+            <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="false"/>
+      </condition>
+
+      <target name="install:database:indexes" description="Install the index files for FreeStyle Search into the System based on the index and cache paths provided"  depends="install:init,install:cabio-webapp:download:indexfiles" unless="indexfiles.ready">
+            <!-- property name="cabio-webapp.indexes.dist.dir" value="${cabio.deploy.tmp.indexes.dir}" / -->
             <delete includeemptydirs="true">
                 <fileset dir="${cabio-webapp.index_cache_base.dir}" includes="**/**">
                 </fileset>
@@ -971,13 +992,22 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/43/cache" />            
       </target>
 
-       <!-- download the index files from the load server according to 
-            which tier it is deploying -->
-       <target name="build:cabio-webapp:download:indexfiles">
-            <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
-            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
+       <!-- download the index files from the load server according to which tier it is deploying -->
+       <!-- only download it directly from the storage server if configured so --> 
+       <target name="install:cabio-webapp:download:indexfiles">
+            <if>
+                 <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="false"/>
+            <then>
+                 <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
+                 <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
-            <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
+                 <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
+            </then>            
+            <else>
+                 <!-- unzip the files to be used -->
+                 <unzip src="${cabio-webapp.indexes.dist.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio-webapp.indexes.dist.dir}" /> 
+            </else>
+            </if>
        </target>
 
       <!-- bda-utils-1.0.0 changes -->
