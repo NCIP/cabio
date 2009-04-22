@@ -11,17 +11,17 @@
 @$LOAD/constraints.sql multiple_alignment_taxon;
 @$LOAD/constraints.sql location_ch_43;
 
--- Truncate target tables
-truncate table TAXON;
-truncate table MULTIPLE_ALIGNMENT;
-truncate table MULTIPLE_ALIGNMENT_TAXON;
-truncate table LOCATION_CH_43;
-
 -- Disable constraints if any 
 @$LOAD/constraints/taxon.disable.sql;
 @$LOAD/constraints/multiple_alignment.disable.sql;
 @$LOAD/constraints/multiple_alignment_taxon.disable.sql;
 @$LOAD/constraints/location_ch_43.disable.sql;
+
+-- Truncate target tables
+truncate table TAXON;
+truncate table MULTIPLE_ALIGNMENT;
+truncate table MULTIPLE_ALIGNMENT_TAXON;
+truncate table LOCATION_CH_43;
 
 --Drop indexes for relevant tables 
 @$LOAD/indexes/taxon.drop.sql;
