@@ -6,7 +6,7 @@
 
 -- Revert to static taxons 
 
-insert into TAXON select from ZSTG_TAXON;
+insert into TAXON select * from ZSTG_TAXON;
 
 -- Create taxon id sequence
 
