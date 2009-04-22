@@ -332,7 +332,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 </if>
         </target>
         <target name="validate:pre:build"
-                depends="build:cabio-webapp:downloadcacoresdk"
+                depends="build:cabio-webapp:downloadcacoresdk,build:cabio-webapp:download:indexfiles"
                 >                
                 <validate-pre-build
                         />
@@ -352,6 +352,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		build:cabio-webapp,
 		build:grid-sample
 		" />
+
+       <!-- download the index files from the load server according to which tier it is deploying -->
+       <target name="build:cabio-webapp:download:indexfiles">
+            <if>
+                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
+            <then>
+                  <mkdir dir="${software.dir}/indexes" />
+                  <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${software.dir}/indexes" port="${ssh.loadserver.port}" 
+                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
+            </then>
+            </if>
+       </target>
 
 	<target name="build:cabio-api" depends="init" description="Call api sub-projects build target to produce artifiacts">
 		<!--
@@ -392,18 +404,22 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                   </fileset>
             </copy> 
             
-            <!-- Do not copy index files around at this time
-            <echo message="copy all the files under indexes to exploded/indexes folder"/>
-            <property name="indexes.output.dir" value="${software.dir}/indexes" />
-            <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
-            <delete dir="${cabio-webapp.indexes.dist.dir}" />
-            <mkdir dir="${cabio-webapp.indexes.dist.dir}" />
-            <copy todir="${cabio-webapp.indexes.dist.dir}" overwrite="true">
-                   <fileset dir="${indexes.output.dir}">                      
-                        <include name="**/**" />                       
-                   </fileset>
-            </copy>                 
-            -->
+            <!-- copy index files around at this time if downloaded during build time -->
+            <if>                 
+                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
+            <then>
+                 <echo message="copy all the files under indexes to exploded/indexes folder"/>
+                 <property name="indexes.output.dir" value="${software.dir}/indexes" />
+                 <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
+                 <delete dir="${cabio-webapp.indexes.dist.dir}" />
+                 <mkdir dir="${cabio-webapp.indexes.dist.dir}" />
+                 <copy todir="${cabio-webapp.indexes.dist.dir}" overwrite="true">
+                      <fileset dir="${indexes.output.dir}">                      
+                           <include name="**/**" />                       
+                      </fileset>
+                 </copy>                 
+            </then>
+            </if>
              
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
             <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
