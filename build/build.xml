@@ -543,7 +543,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	</target>
 
       <target name="dist:tools:retrieve:jbosscp" unless="jbosscp.tools.exists" description="Downloads JBOSS Cumulative Patch from binary repository and verifies checksum">
-                <!-- get src="${jbosscp.src.url}" dest="${jbosscp.dest.file}" / -->
+           <echoproperties prefix="jbosscp"/>
+           <if>
+                  <isset property="jbosscp.src.url"/>
+           <then>
+                  <get src="${jbosscp.src.url}" dest="${jbosscp.dest.file}" />
+           </then>
+           <else>
+               <echo message="jbosscp.src.url not set skipping download of jboss cumulative patch"/>
+           </else>
+           </if>
       </target>
 
 	<target name="dist:tools:retrieve:jboss-bindings"  description="Downloads JBOSS bindings filefrom binary repository and verifies checksum">
