@@ -490,7 +490,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<copy todir="${user.dir}" file="${jboss-conf.dir.src}/log4j.dtd"/>
 			</case>
 		</switch>
-		-->
+		
 
 		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/conf/log4j.xml"
 			byline="true"
@@ -533,6 +533,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 			match="DOCTYPE log4j:configuration"
 			replace="DOCTYPE log4j:configuration SYSTEM &quot;log4j.dtd&quot;"
 			/>
+            -->
 	</target>
 	<target name="install:jboss:configure" description="Configure JBoss (bindings, login-config.xml, ect)" unless="exclude.jboss"
 		depends="
