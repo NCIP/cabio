@@ -29,7 +29,7 @@ insert into TAXON (TAXON_ID, SCIENTIFIC_NAME, COMMON_NAME)
             MINUS
             select distinct SCIENTIFIC_NAME from TAXON) d, ZSTG_COMPARA_SPECIES z
         WHERE d.SCIENTIFIC_NAME = z.SCIENTIFIC_NAME
-    ) s
+    ) s;
     
 commit;
 
