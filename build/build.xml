@@ -406,21 +406,35 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
             
             <!-- copy index files around at this time if downloaded during build time -->
             <if>                 
-                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
-            <then>
-                 <echo message="copy all the files under indexes to exploded/indexes folder"/>
-                 <property name="indexes.output.dir" value="${software.dir}/indexes" />
-                 <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
-                 <delete dir="${cabio-webapp.indexes.dist.dir}" />
-                 <mkdir dir="${cabio-webapp.indexes.dist.dir}" />
-                 <copy todir="${cabio-webapp.indexes.dist.dir}" overwrite="true">
-                      <fileset dir="${indexes.output.dir}">                      
-                           <include name="**/**" />                       
-                      </fileset>
-                 </copy>                 
-            </then>
+                 <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
+                 <then>
+                      <echo message="copy all the files under indexes to exploded/indexes folder"/>
+                      <property name="indexes.output.dir" value="${software.dir}/indexes" />
+                      <property name="cabio-webapp.indexes.dist.dir" value="${dist.exploded.dir}/indexes" />
+                      <delete dir="${cabio-webapp.indexes.dist.dir}" />
+                      <mkdir dir="${cabio-webapp.indexes.dist.dir}" />
+                      <copy todir="${cabio-webapp.indexes.dist.dir}" overwrite="true">
+                           <fileset dir="${indexes.output.dir}">                      
+                                <include name="**/**" />                       
+                           </fileset>
+                      </copy>                 
+                 </then>
+                 <else>
+                      <!-- Prepare the private key for deployment server to download indexfiles from storage/load server -->
+                      <!-- copy the private-key to exploded folder for distribution to deployment machine -->
+                      <echo message="copy the private key to exploded/properties folder"/>
+                      <property name="cabio-webapp.properties.privatekey.dist.dir" value="${dist.exploded.dir}/properties/ssh-keys" />
+                      <delete dir="${cabio-webapp.properties.privatekey.dist.dir}" />
+                      <mkdir dir="${cabio-webapp.properties.privatekey.dist.dir}" /> 
+                      <copy todir="${cabio-webapp.properties.privatekey.dist.dir}" overwrite="true">
+                             <fileset dir="${cabio-webapp.privatekey.dir}">                      
+                                   <include name="**/**" />                       
+                             </fileset>
+                      </copy>                  
+                 </else>
             </if>
-             
+        
+
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
             <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
             <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.dist.target}">                   
