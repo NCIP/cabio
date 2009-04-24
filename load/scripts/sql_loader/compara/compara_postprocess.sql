@@ -17,6 +17,7 @@ BEGIN
     Execute immediate ('DROP SEQUENCE TAXON_SEQ');
     Execute immediate ('CREATE SEQUENCE TAXON_SEQ START WITH '||N);
 END;
+/
 
 -- Insert new species into Taxon
 
@@ -56,14 +57,6 @@ commit;
 
 insert into LOCATION_CH_43 select * from LOCATION_CH;
 
--- Create a view for now because there isn't enough space in the database to 
--- duplicate LOCATION_CH 
-
-create or replace view LOCATION_43 as
-    select * from location_ch
-    UNION ALL 
-    select * from location_ch_43;
-
 -- Insert constrained regions
 
 DECLARE
@@ -73,6 +66,7 @@ BEGIN
     Execute immediate ('DROP SEQUENCE LOCATION43_SEQ');
     Execute immediate ('CREATE SEQUENCE LOCATION43_SEQ START WITH '||N);
 END;
+/
 
 insert into LOCATION_CH_43 (ID, CHROMOSOME_ID, DISCRIMINATOR, ASSEMBLY,
         CHROMOSOMAL_START_POSITION, CHROMOSOMAL_END_POSITION, 
@@ -91,17 +85,17 @@ commit;
 @$LOAD/indexes/taxon.lower.sql
 @$LOAD/indexes/multiple_alignment.lower.sql
 @$LOAD/indexes/multiple_alignment_taxon.lower.sql
-@$LOAD/indexes/location_ch_43.lower.sql
+--@$LOAD/indexes/location_ch_43.lower.sql
 
 @$LOAD/indexes/taxon.cols.sql
 @$LOAD/indexes/multiple_alignment.cols.sql
 @$LOAD/indexes/multiple_alignment_taxon.cols.sql
-@$LOAD/indexes/location_ch_43.cols.sql
+--@$LOAD/indexes/location_ch_43.cols.sql
 
 @$LOAD/constraints/taxon.enable.sql
 @$LOAD/constraints/multiple_alignment.enable.sql
 @$LOAD/constraints/multiple_alignment_taxon.enable.sql
-@$LOAD/constraints/location_ch_43.enable.sql
+--@$LOAD/constraints/location_ch_43.enable.sql
 
 -- analyze tables
 
