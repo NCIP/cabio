@@ -27,7 +27,7 @@ truncate table LOCATION_CH_43;
 @$LOAD/indexes/taxon.drop.sql;
 @$LOAD/indexes/multiple_alignment.drop.sql;
 @$LOAD/indexes/multiple_alignment_taxon.drop.sql;
-@$LOAD/indexes/location_ch_43.drop.sql;
+--@$LOAD/indexes/location_ch_43.drop.sql;
 
 EXIT;
 
