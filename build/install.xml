@@ -999,6 +999,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             <if>
                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="false"/>
             <then>
+                 <delete dir="${cabio.deploy.tmp.indexes.dir}" />
                  <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
                  <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
