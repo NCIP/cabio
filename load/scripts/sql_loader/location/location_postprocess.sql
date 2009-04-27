@@ -1,3 +1,5 @@
+@lch_bitmap_indexes.sql
+
 @$LOAD/indexes/location_tv.lower.sql
 @$LOAD/indexes/location_tv.cols.sql
 @$LOAD/indexes/location_ch.cols.sql
