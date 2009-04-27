@@ -82,20 +82,22 @@ commit;
 
 -- enable indexes and constraints
 
+@lch43_bitmap_indexes.sql
+
 @$LOAD/indexes/taxon.lower.sql
 @$LOAD/indexes/multiple_alignment.lower.sql
 @$LOAD/indexes/multiple_alignment_taxon.lower.sql
---@$LOAD/indexes/location_ch_43.lower.sql
+@$LOAD/indexes/location_ch_43.lower.sql
 
 @$LOAD/indexes/taxon.cols.sql
 @$LOAD/indexes/multiple_alignment.cols.sql
 @$LOAD/indexes/multiple_alignment_taxon.cols.sql
---@$LOAD/indexes/location_ch_43.cols.sql
+@$LOAD/indexes/location_ch_43.cols.sql
 
 @$LOAD/constraints/taxon.enable.sql
 @$LOAD/constraints/multiple_alignment.enable.sql
 @$LOAD/constraints/multiple_alignment_taxon.enable.sql
---@$LOAD/constraints/location_ch_43.enable.sql
+@$LOAD/constraints/location_ch_43.enable.sql
 
 -- analyze tables
 
