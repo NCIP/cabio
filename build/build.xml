@@ -390,6 +390,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                   <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
                   <property name="index_base" value="${cabio-webapp.index_base}"/>
                   <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
+                  <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
                   <!-- property name="dist.dir" value="${cabio-webapp.dist.dir}" / -->
 		</ant>
 
