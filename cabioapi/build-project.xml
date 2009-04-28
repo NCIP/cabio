@@ -247,17 +247,20 @@
 
 		<copy todir="${indexgen.dir}" overwrite="true">
 			<fileset dir="${project.home.dir}/conf/indexgen">
-				<include name="README.txt"/>
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
 			
+        <replace dir="${indexgen.dir}">
+            <replacefilter token="@DISPLAY_VERSION@" value="${DISPLAY_VERSION}" />
+        </replace>
+            
 		<copy todir="${indexgen.dir}/conf" overwrite="true">
 			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
 				<include name="indexedFields.properties"/>
 				<include name="hibernate.cfg.xml"/>						
 			</fileset>		
-			<fileset dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
+			<fileset dir="${project.home.dir}/conf/system/web/WEB-INF/classes">
 				<include name="searchapiconfig.properties"/>
 			</fileset>		
 			<fileset dir="${project.home.dir}/conf/indexgen">
@@ -265,6 +268,10 @@
 			</fileset>
 		</copy>
 		
+		<replace file="${indexgen.dir}/conf/hibernate.cfg.xml" value="">
+            <replacetoken><![CDATA[<property name="connection.datasource">java:/cabio</property>]]></replacetoken>
+        </replace>
+        
 		<copy todir="${indexgen.dir}/lib" overwrite="true">
 			<fileset dir="${project.build.dir}/system/lib">
 				<include name="antlr*.jar"/>
