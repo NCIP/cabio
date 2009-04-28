@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="caBIO 4.3 Index Generator" default="runindex" basedir=".">
+
+    <property name="log.dir" value="log" />
+    <property name="conf.dir" value="conf" />
+    <property file="conf/searchapiconfig.properties"/>
+    
+    <path id="cp">
+        <fileset dir="lib">
+            <include name="**/*.jar" />
+        </fileset>
+        <pathelement path="${conf.dir}" />
+    </path>
+
+    <target name="runindex">
+        <mkdir dir="${log.dir}"/>
+        <java classname="gov.nih.nci.indexgen.IndexGenerator" fork="true" output="./log/output.log">
+            <classpath refid="cp" />
+            <sysproperty key="log4j.configuration" value="${conf.dir}/log4j.properties" />
+        </java>
+    </target>
+
+</project>
