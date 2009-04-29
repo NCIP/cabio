@@ -26,6 +26,7 @@ public class AbsoluteRangeQueryForm extends PaginatedForm {
         GlobalQueries queries = (GlobalQueries)
             getServlet().getServletContext().getAttribute("globalQueries");
         List<Chromosome> chroms = queries.getTaxonChromosomes().get(taxon);
+        if (chroms == null) return null; 
         for(Chromosome c : chroms) {
             if (c.getNumber().equals(chromosomeNumber)) return c.getId();
         }
