@@ -10,7 +10,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/util-taglib.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/portal-impl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/portals-bridges.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/util-bridges.jar"/>
