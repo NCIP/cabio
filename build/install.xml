@@ -976,15 +976,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                  <fileset dir="${cabio-webapp.indexes.dist.dir}">
                       <include name="41/**" />
                       <include name="42/**" />
+                      <include name="43/**" />
                  </fileset>  
             </copy>          
-            <!-- Currently cabio43 will have same index files as 42. It will change later -->
-            <mkdir dir="${cabio-webapp.index_cache_base.dir}/43" />
-            <copy todir="${cabio-webapp.index_cache_base.dir}/43">
-                 <fileset dir="${cabio-webapp.indexes.dist.dir}/42">
-                      <include name="**/**" />
-                 </fileset>  
-            </copy>
 
             <!-- create the CACHE folder for each version -->
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/cache" />
