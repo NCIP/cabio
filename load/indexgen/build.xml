@@ -61,7 +61,6 @@
     	
 	<target name="runindex" depends="init">
         
-        <!-- 
 	  <echo message="Running caBIO 4.0 index generator"/>
         <ant antfile="${build.dir}/4.0/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.0/log/output.log" tofile="${log.dir}/output_4.0.log" overwrite="true"/>
@@ -73,7 +72,6 @@
         <echo message="Running caBIO 4.2 index generator"/>
         <ant antfile="${build.dir}/4.2/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.2/log/output.log" tofile="${log.dir}/output_4.2.log" overwrite="true"/>
-        -->
 
         <echo message="Running caBIO 4.3 index generator"/>
         <ant antfile="${build.dir}/4.3/build.xml" target="runindex" inheritAll="false"/>
