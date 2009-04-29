@@ -63,7 +63,7 @@
     </logical-key>
   </entity>
   
-  <entity class="GeneOntology" table="GO_ONTOLOGY" parallel="false">
+  <entity class="GeneOntology" table="GO_ONTOLOGY" parallel="true">
     <primary-key>GO_ID</primary-key>
     <logical-key>
       <property>GO_NAME</property>
@@ -169,7 +169,7 @@
     </logical-key>
   </entity>
  
-  <entity class="GeneOntologyRelationship" table="GO_RELATIONSHIP" parallel="false">
+  <entity class="GeneOntologyRelationship" table="GO_RELATIONSHIP" parallel="true">
     <primary-key>ID</primary-key>
     <logical-key>
       <property table="GO_ONTOLOGY" primary-key="GO_ID" foreign-key="CHILD_ID">GO_NAME</property>
@@ -196,7 +196,7 @@
     </logical-key>
   </entity>
 
-  <entity class="Library" table="LIBRARY" parallel="false">
+  <entity class="Library" table="LIBRARY" parallel="true">
     <primary-key>LIBRARY_ID</primary-key>
     <logical-key>
       <property>LIBRARY_NAME</property>
@@ -255,7 +255,7 @@
     </logical-key>
   </entity>
   
-  <entity class="PopulationFrequency" table="POPULATION_FREQUENCY" parallel="false">
+  <entity class="PopulationFrequency" table="POPULATION_FREQUENCY" parallel="true">
     <primary-key>ID</primary-key>
     <logical-key>
       <property>ETHNICITY</property>
@@ -412,7 +412,7 @@
     </logical-key>
   </entity>
   
-  <entity class="Evidence" table="EVIDENCE" parallel="false">
+  <entity class="Evidence" table="EVIDENCE" parallel="true">
     <primary-key>ID</primary-key>
     <logical-key>
       <property>PUBMED_ID</property>
@@ -430,7 +430,7 @@
     </logical-key>
   </entity>
 
- <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="false">
+ <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="true">
     <primary-key>ID</primary-key>
     <logical-key>
       <property entity="Gene" foreign-key="GENE_ID"/>
