@@ -449,6 +449,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		</ant>
 	</target>
 
+      <target name="test:dev:scp">
+            <sshexec username="${ssh.server.username}" host="${ssh.server.hostname}" port="${ssh.port}" 
+                passphrase="${ssh.server.passphrase}" keyfile="${ssh.key.file}" trust="true" verbose="true" failonerror="false" 
+                command="mkdir jimtest;" />
+      </target>
+
+
       <!-- the following target is currently not used since it is not realistic to run the indexgen on CI Server -->
 	<target name="build:database:indexes" depends="init" description="Call indexgen sub-projects build target to produce index files">
             <property name="cabio-webapp.load.dir" value="${software.dir}/load" />
