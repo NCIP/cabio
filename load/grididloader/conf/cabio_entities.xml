@@ -402,7 +402,7 @@
   </entity>
 
 
-  <entity class="GeneRelativeLocation" table="GENE_RELATIVE_LOCATION" parallel="false">
+  <entity class="GeneRelativeLocation" table="GENE_RELATIVE_LOCATION" parallel="true">
     <primary-key>ID</primary-key>
     <logical-key>
       <property entity="Gene" foreign-key="GENE_ID"/>
