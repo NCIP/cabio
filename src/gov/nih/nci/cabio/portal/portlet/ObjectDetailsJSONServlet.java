@@ -100,8 +100,11 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
             config = new ClassObject(className, label, label+"s");
             for(Field field : getFields(clazz)) {
                 String name = field.getName();
-                if (!name.equalsIgnoreCase("id"))
+                
+                if  (!name.equalsIgnoreCase("id")) 
                     config.addAttribute(name, name, true);
+                else if ( (name.equalsIgnoreCase("id")) && (className.equalsIgnoreCase("GeneOntology")))
+                	config.addAttribute(name, name, true);
             }
         }
         

@@ -3,6 +3,7 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation;
 import gov.nih.nci.cabio.domain.ExpressionArrayReporter;
 import gov.nih.nci.cabio.domain.Gene;
+import gov.nih.nci.cabio.domain.GeneOntology;
 import gov.nih.nci.cabio.domain.GeneAgentAssociation;
 import gov.nih.nci.cabio.domain.GeneDiseaseAssociation;
 import gov.nih.nci.cabio.domain.GeneFunctionAssociation;
@@ -99,9 +100,26 @@ public class ReportService {
              "left join fetch gene.taxon as taxon " +
              "where dbxr.dataSourceName = 'LOCUS_LINK_ID' " +
              "and ";
-
+             
     private static final String GENES_BY_SYMBOL_HQL_WHERE = 
              "lower(gene.symbol) like ?";
+
+     private static final String GO_BY_SYMBOL_HQL = 
+             "select geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
+             "left join fetch geneOntology.geneCollection as genes " +
+             "left join fetch genes.taxon as taxon " +
+             "left join fetch genes.chromosome as chromosome " +
+             "left join fetch genes.proteinCollection as proteins " +
+             "where "; 
+
+    private static final String GO_BY_SYMBOL_HQL_WHERE = 
+             "lower(genes.symbol) like ?";
+
+    private static final String GO_BY_PROTEIN_NAME_HQL_WHERE = 
+             "lower(proteins.name) like ?";
+
+    private static final String GO_BY_PROTEIN_ACCESSION_HQL_WHERE = 
+             "lower(proteins.primaryAccession) like ?";
      
     private static final String PATHWAY_BY_SYMBOL_HQL = 
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
@@ -112,7 +130,20 @@ public class ReportService {
     private static final String PATHWAY_BY_SYMBOL_HQL_WHERE = 
             "lower(genes.symbol) like ?";
     
+    private static final String PATHWAY_BY_PROTEIN_HQL = 
+            "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
+            "left join fetch pathway.taxon as taxon " +
+            "left join pathway.geneCollection as genes " +
+            "left join genes.proteinCollection as proteins " +
+            "where ";
     
+    private static final String PATHWAY_BY_PROTEIN_NAME_HQL = 
+    		"lower(proteins.name) like ?";
+    		
+    private static final String PATHWAY_BY_PROTEIN_PRIMARY_ACCESSION_HQL =
+            "lower(proteins.primaryAccession) like ?";
+            
+		 
     private final CaBioApplicationService appService;
     
     private Map<Class, String> detailObjectHQL = new HashMap<Class, String>();
@@ -293,6 +324,23 @@ public class ReportService {
             QueryUtils.createCountQuery(hql),params));
     }
     
+        /**
+     * Returns all gene ontology associations for a given protein name or accession.  
+     * @param proteinNameAccession
+     * @return List of GeneOntologies. 
+     * @throws ApplicationException
+     */
+    public List<GeneOntology> getGoByProtein(
+            String proteinNameAccession) throws ApplicationException {
+
+        String hql = GO_BY_SYMBOL_HQL+GO_BY_PROTEIN_NAME_HQL_WHERE+" OR "+GO_BY_PROTEIN_ACCESSION_HQL_WHERE;
+        List<String> params = getListWithId(convertInput(proteinNameAccession));
+        params.add(convertInput(proteinNameAccession));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+    }
+    
+    
     /**
      * Returns all pathways for a given name.
      * @param pathwayName (Name of the pathway)
@@ -313,6 +361,47 @@ public class ReportService {
         else {
             pathway.setName(inputName);
         }
+        
+        return appService.search(Pathway.class, pathway);
+    }
+    
+          
+    /**
+     * Returns all pathways for a given protein name or accession.
+     * @param proteinNameAccession (protein Name or accession)
+     * @return List of Pathways. 
+     * @throws ApplicationException
+     */
+    public List<Pathway> getPathwaysByProtein(
+            String proteinNameAccession) throws ApplicationException {
+        
+       String inputNameAccession = proteinNameAccession.trim();
+
+       String hql = PATHWAY_BY_PROTEIN_HQL+PATHWAY_BY_PROTEIN_NAME_HQL+" OR "+PATHWAY_BY_PROTEIN_PRIMARY_ACCESSION_HQL;
+        List<String> params = getListWithId(convertInput(inputNameAccession));
+        params.add(convertInput(inputNameAccession));        
+       return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+    }
+ 
+  
+    /**
+     * Returns all pathways for a given source.
+     * @param pathwayName (Source of the pathway)
+     * @return List of Pathways. 
+     * @throws ApplicationException
+     */
+    public List<Pathway> getPathwaysBySource(
+            String pathwaySource) throws ApplicationException {
+        
+        String inputSource = pathwaySource.trim();
+        
+        if ("".equals(inputSource)) return new ArrayList<Pathway>();
+        
+        Pathway pathway = new Pathway();
+        
+            pathway.setSource(inputSource);
+        
         
         return appService.search(Pathway.class, pathway);
     }

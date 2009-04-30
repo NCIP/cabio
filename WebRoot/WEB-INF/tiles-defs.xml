@@ -45,6 +45,12 @@
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
+        <definition name="cabioportlet.goByProteinNameAccessionQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Go Lookup by Protein Name or Uniprot Accession" />
+        <put name="form_content" value="/WEB-INF/jsp/canned/goByProteinNameAccessionQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
     <definition name="cabioportlet.agentToGenesQuery.results" extends="cabioportlet.template">
         <put name="query_name" value="Agent to Genes" />
         <put name="form_content" value="/WEB-INF/jsp/canned/agentToGenesQuery.jsp" />
@@ -66,6 +72,18 @@
     <definition name="cabioportlet.pathwayByNameQuery.results" extends="cabioportlet.template">
         <put name="query_name" value="Pathway By Name" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+   
+      <definition name="cabioportlet.pathwayBySourceQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Pathway By Source" />
+        <put name="form_content" value="/WEB-INF/jsp/canned/pathwayBySourceQuery.jsp" />
+        <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
+    </definition>
+    
+   <definition name="cabioportlet.pathwayByProteinQuery.results" extends="cabioportlet.template">
+        <put name="query_name" value="Pathway By Protein" />
+        <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByProteinQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     

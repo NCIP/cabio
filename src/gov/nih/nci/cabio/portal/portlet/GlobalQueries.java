@@ -3,6 +3,7 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
@@ -13,6 +14,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +41,8 @@ public class GlobalQueries {
     
     private List<Microarray> microarrays;
     
+    private List<Pathway> pathwaySources;
+    
     /**
      * Create a new instance of GlobalQueries and attempt to preload all the 
      * data necessary. Generally this object needs to be created only once
@@ -50,6 +55,7 @@ public class GlobalQueries {
             as = (CaBioApplicationService)ApplicationServiceProvider.getApplicationService();
             loadTaxonChromosomes();
             loadMicroarrays();
+            loadPathwaySources();
             log.info("Completed preloading global data.");
             
         }
@@ -93,6 +99,16 @@ public class GlobalQueries {
         return microarrays;
     }
 
+    /**
+     * Returns a list of Pathway providers in caBIO.
+     * @return list of String objects
+     */
+    public List<Pathway> getPathwaySources() {
+        if (pathwaySources == null) loadPathwaySources();
+        if (pathwaySources == null) return new ArrayList<Pathway>();
+        return pathwaySources;
+    }
+    
     /**
      * Returns the list of possible GenomicFeature enumeration values.
      * @return Array of GenomicFeature values
@@ -154,6 +170,29 @@ public class GlobalQueries {
         }
         catch (ApplicationException e) {
             log.error("Error loading microarray data.",e);
+        }
+    }
+    
+    private void loadPathwaySources() {
+        
+        try {
+            log.info("Loading pathway data...");
+            pathwaySources = new ArrayList<Pathway>();
+            List<Pathway> pathways = as.search(Pathway.class, new Pathway());
+            Set<String> pathwaySourceNames = new HashSet<String>(); 
+            
+            for (Pathway p : pathways) {
+            	String source = p.getSource();            	
+            	 if (source.length() > 0 && (!(pathwaySourceNames.contains(source)))) {
+            		 
+            		pathwaySourceNames.add(source);
+            		pathwaySources.add(p);
+                	}
+                }                    
+            log.info("Done loading pathway data.");
+        }
+        catch (ApplicationException e) {
+            log.error("Error loading pathway data.",e);
         }
     }
 }

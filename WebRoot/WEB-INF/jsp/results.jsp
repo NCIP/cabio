@@ -59,6 +59,12 @@
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
 			<td>
 			<c:choose>
+			<c:when test="${attr.lastPart == 'id'}">
+	                <div title="<c:out value="${item[attr.name]}"/>" class="id">
+	                     <c:out value="${item[attr.name]}"/>
+	                </div>			
+	          </c:when>
+
 			<c:when test="${attr.lastPart == 'pubmedId'}">
 			    <div class="link-extenal" style="text-align: right">
 			        <a href="http://www.ncbi.nlm.nih.gov/pubmed/<c:out value="${item[attr.name]}"/>" target="_blank">

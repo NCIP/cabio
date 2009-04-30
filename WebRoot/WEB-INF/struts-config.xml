@@ -17,6 +17,8 @@
             type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryForm"/>
         <form-bean name="GeneBySymbolQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryForm"/>
+        <form-bean name="GoByProteinNameAccessionQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GoByProteinNameAccessionQueryForm"/>
         <form-bean name="AgentToGenesQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryForm"/>
         <form-bean name="DiseaseToGenesQueryForm" 
@@ -27,7 +29,10 @@
             type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByNameQueryForm"/>
         <form-bean name="PathwayByGeneQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByGeneQueryForm"/>
-
+        <form-bean name="PathwayBySourceQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayBySourceQueryForm"/>
+		<form-bean name="PathwayByProteinQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByProteinQueryForm"/>
     </form-beans>
 	
     <action-mappings>
@@ -82,7 +87,15 @@
             <forward name="cabioportlet.geneBySymbolQuery.results" path="/portlet_action/cabioportlet/geneBySymbolQuery/results" redirect="true"/>
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
-        
+
+        <action path="/cabioportlet/goByProteinNameAccessionQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GoByProteinNameAccessionQueryAction"
+                name="GoByProteinNameAccessionQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.goByProteinNameAccessionQuery.results" path="/portlet_action/cabioportlet/goByProteinNameAccessionQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>        
+
         <action path="/cabioportlet/agentToGenesQuery"
                 type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryAction"
                 name="AgentToGenesQueryForm"
@@ -123,6 +136,22 @@
             <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
         </action>
         
+       <action path="/cabioportlet/pathwayBySourceQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayBySourceQueryAction"
+                name="PathwayBySourceQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayBySourceQuery.results" path="/portlet_action/cabioportlet/pathwayBySourceQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+       <action path="/cabioportlet/pathwayByProteinQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByProteinQueryAction"
+                name="PathwayByProteinQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByProteinQuery.results" path="/portlet_action/cabioportlet/pathwayByProteinQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
         <action path="/cabioportlet/absoluteRangeQuery/results" 
                 forward="cabioportlet.absoluteRangeQuery.results" />
         <action path="/cabioportlet/gridRangeQuery/results" 
@@ -137,6 +166,8 @@
                 
         <action path="/cabioportlet/geneBySymbolQuery/results" 
                 forward="cabioportlet.geneBySymbolQuery.results" />
+        <action path="/cabioportlet/goByProteinNameAccessionQuery/results" 
+                forward="cabioportlet.goByProteinNameAccessionQuery.results" />
                 
         <action path="/cabioportlet/agentToGenesQuery/results" 
                 forward="cabioportlet.agentToGenesQuery.results" />
@@ -149,7 +180,10 @@
                 forward="cabioportlet.pathwayByNameQuery.results" />
         <action path="/cabioportlet/pathwayByGeneQuery/results" 
                 forward="cabioportlet.pathwayByGeneQuery.results" />
-        
+        <action path="/cabioportlet/pathwayBySourceQuery/results" 
+                forward="cabioportlet.pathwayBySourceQuery.results" />
+        <action path="/cabioportlet/pathwayByProteinQuery/results" 
+                forward="cabioportlet.pathwayByProteinQuery.results" />
     </action-mappings>
     
     <message-resources parameter="cabioportlet" null="false" />
