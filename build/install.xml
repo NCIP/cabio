@@ -232,7 +232,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<basename file="${grid.secure.key.location}" property="grid.secure.key.file"/>
 
 	<!-- Start logging --> 
-	<property name="install-logs.dir" location="${application.base.path}/change-logs"/>
+	<property name="install-logs.dir" location="${user.home}/change-logs"/>
 	<mkdir dir="${install-logs.dir}"/>
 	<tstamp>
 		<format property="install.time" pattern="yyyy-MM-dd-HH-mm" />
@@ -257,7 +257,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 			</not>
 			<then>
 				<!-- Jboss backup, do not compress until install is finished -->
-				<property name="backup.jboss.base.dir" location="${application.base.path}/backup/jboss"/>
+				<property name="backup.jboss.base.dir" location="${user.home}/backup/jboss"/>
 		
 				<!-- So these directories won't be included in the backup, they are not needed to use jboss -->
 				<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
