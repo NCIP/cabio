@@ -457,7 +457,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
        <target name="test:download:indexfiles">
             <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
-            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
+            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.indexgen.loadserver.key.file}" trust="true" verbose="true" />
        </target>
 
