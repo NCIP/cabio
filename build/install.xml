@@ -357,7 +357,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             -->              
 
             <!-- make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App -->
-            <echo message="make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App"/> 
+            <echo message="make sure the index_base: ${cabio-webapp.index_base} and CACHE_PATH: ${cabio-webapp.cache_path}folders exists when installing caBIO Web App"/> 
             <if>
                   <not>
                         <available file="${cabio-webapp.index_base}"/>
