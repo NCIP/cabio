@@ -102,7 +102,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 
 	<!-- *-ds.xml and WAR -->
 	<property name="cabio-webapp.dir.dist" value="${basedir}/${cabio-webapp.dist.relative.dir}" />
-	<property name="cabio-webapp.ds.file" value="oracle-ds.xml" />
+	<property name="cabio-webapp.ds.file" value="cabio-ds.xml" />
 	<property name="cabio-webapp.war.file" value="${cabio-webapp.project.name}.war" />
 
 	<!-- Grid related properties -->
@@ -357,7 +357,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             -->              
 
             <!-- make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App -->
-            <echo message="make sure the index_base: ${cabio-webapp.index_base} and CACHE_PATH: ${cabio-webapp.cache_path}folders exists when installing caBIO Web App"/> 
+            <echo message="make sure the index_base: ${cabio-webapp.index_base} and CACHE_PATH: ${cabio-webapp.cache_path}   folders exists when installing caBIO Web App"/> 
             <if>
                   <not>
                         <available file="${cabio-webapp.index_base}"/>
