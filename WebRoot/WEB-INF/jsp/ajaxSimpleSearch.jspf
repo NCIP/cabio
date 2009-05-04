@@ -169,10 +169,9 @@ var caBioSimpleSearch = function() {
         jQuery.historyLoad("caBioSimpleSearch_search_"+page);
 	},
 	
-	
     search : function(hash) {
         doSearch(parseInt(hash));
-    },
+    }
 
 	};
 }();
