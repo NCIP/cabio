@@ -355,12 +355,7 @@ public class ReportService {
         if ("".equals(inputName)) return new ArrayList<Pathway>();
         
         Pathway pathway = new Pathway();
-        if (!inputName.matches("^(h|m)_")) {
-            pathway.setName("*"+inputName);
-        }
-        else {
-            pathway.setName(inputName);
-        }
+        pathway.setName(inputName);
         
         return appService.search(Pathway.class, pathway);
     }
