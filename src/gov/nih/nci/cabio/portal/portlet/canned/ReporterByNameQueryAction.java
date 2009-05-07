@@ -50,7 +50,7 @@ public class ReporterByNameQueryAction extends Action {
             log.info("page: "+f.getPage());
             
             List<String> reporterIds = new ArrayList<String>();
-            reporterIds.add(f.getReporterId());
+            reporterIds.add(f.getReporterId().trim());
             
             String arrayPlatform = f.getMicroarray();
             Microarray microarray = aas.getMicroarray(arrayPlatform);

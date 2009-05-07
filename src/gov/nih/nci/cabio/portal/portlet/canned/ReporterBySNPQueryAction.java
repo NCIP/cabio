@@ -44,7 +44,7 @@ public class ReporterBySNPQueryAction extends Action {
             log.info("snp: "+f.getDbsnpId());
             log.info("page: "+f.getPage());
 
-            List<SNPArrayReporter> results =  rs.getReportersBySNP(f.getDbsnpId());
+            List<SNPArrayReporter> results =  rs.getReportersBySNP(f.getDbsnpId().trim());
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
             return mapping.findForward("cabioportlet.reporterBySNPQuery.results");
