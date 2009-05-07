@@ -1,4 +1,4 @@
-package gov.nih.nci.cabio.portal.portlet;
+package gov.nih.nci.cabio.portal.portlet.printers;
 
 import gov.nih.nci.cabio.domain.Gene;
 
@@ -32,17 +32,24 @@ public class GeneCollectionJSONPrinter implements JSONPrinter {
         JSONObject json = new JSONObject();
         
         JSONArray cols = new JSONArray();
+        cols.put("Cluster Id");
         cols.put("Symbol");
         cols.put("Description");
         json.put("columnNames", cols);
+        json.put("count", collection.size());
         
         JSONArray rows = new JSONArray();
         
+        int c=0;
         for(Gene gene : collection) {
+            if (c >= 200) break;
+            
             JSONObject jsonObj = new JSONObject();
+            jsonObj.put("Cluster Id", gene.getClusterId());
             jsonObj.put("Symbol", gene.getSymbol());
             jsonObj.put("Description", gene.getFullName());
             rows.put(jsonObj);
+            c++;
         }
 
         json.put("rows", rows);

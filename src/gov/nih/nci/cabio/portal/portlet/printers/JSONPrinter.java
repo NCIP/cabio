@@ -1,4 +1,4 @@
-package gov.nih.nci.cabio.portal.portlet;
+package gov.nih.nci.cabio.portal.portlet.printers;
 
 import org.json.JSONException;
 import org.json.JSONObject;

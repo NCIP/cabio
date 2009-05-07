@@ -1,6 +1,6 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.portal.portlet.JSONPrinter;
+import gov.nih.nci.cabio.portal.portlet.printers.JSONPrinter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
