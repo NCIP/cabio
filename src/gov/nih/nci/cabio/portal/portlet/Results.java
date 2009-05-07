@@ -1,7 +1,5 @@
 package gov.nih.nci.cabio.portal.portlet;
 
-import gov.nih.nci.common.util.ReflectionUtils;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
