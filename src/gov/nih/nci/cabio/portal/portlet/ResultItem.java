@@ -56,6 +56,8 @@ public class ResultItem extends GetOnlyMap {
     
     private Object resolve(Object object, String path) {
 
+        if (object == null) return "";
+        
         int d = path.indexOf('.');
         String attr = (d < 0) ? path : path.substring(0,d);
 
