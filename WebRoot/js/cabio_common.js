@@ -143,16 +143,16 @@ var caBioCommon = function() {
         var curr = "";
         var open = false;
         for(i=0; i<s.length; i++) {
-            if (s[i] == '"') {
+            if (s.charAt(i) == '"') {
                if (open) {
                    a[a.length] = curr;
                    curr = "";
                }
                open = !open;
             }
-            else if (s[i] == ' ') {
+            else if (s.charAt(i) == ' ') {
                if (open) {
-                    curr += s[i];
+                    curr += s.charAt(i);
                }
                else if (curr) {
                    a[a.length] = curr;
@@ -160,7 +160,7 @@ var caBioCommon = function() {
                }
             }
             else {
-               curr += s[i];
+               curr += s.charAt(i);
             }
         }
         if (curr) a[a.length] = curr;
