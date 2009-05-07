@@ -86,7 +86,7 @@ Select category:
         <select onchange="displayQuery(this)">
         <option value="" selected="selected">Choose query...</option>
         <option value="queries_genomics_genebysymbol">Gene Lookup by Symbol</option>
-            <option value="queries_genomics_gobysymbol">Go Annotations Lookup by Protein</option>
+            <option value="queries_genomics_gobysymbol">Gene Ontology Lookup by Protein</option>
         </select>
     </td><td>
         <jsp:include page="/WEB-INF/jsp/canned/geneBySymbolQuery.jsp" flush="true"/>
@@ -104,10 +104,10 @@ Select category:
     <tr><td>
         <select onchange="displayQuery(this)">
         <option value="" selected="selected">Choose query...</option>
-        <option value="queries_pathwayByName">Pathway By Name</option>
-        <option value="queries_pathwayByGene">Pathway By Gene Symbol</option>
-        <option value="queries_pathwayBySource">Pathway By Source</option>
-        <option value="queries_pathwayByProtein">Pathway By Protein</option>          
+        <option value="queries_pathwayByName">Pathway by Name</option>
+        <option value="queries_pathwayByGene">Pathway by Gene Symbol</option>
+        <option value="queries_pathwayBySource">Pathway by Source</option>
+        <option value="queries_pathwayByProtein">Pathway by Protein</option>          
         </select>
     </td><td>
         <jsp:include page="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" flush="true"/>

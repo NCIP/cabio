@@ -106,14 +106,9 @@ public class ReportService {
 
      private static final String GO_BY_SYMBOL_HQL = 
              "select geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
-             "left join fetch geneOntology.geneCollection as genes " +
-             "left join fetch genes.taxon as taxon " +
-             "left join fetch genes.chromosome as chromosome " +
-             "left join fetch genes.proteinCollection as proteins " +
+             "left join geneOntology.geneCollection as genes " +
+             "left join genes.proteinCollection as proteins " +
              "where "; 
-
-    private static final String GO_BY_SYMBOL_HQL_WHERE = 
-             "lower(genes.symbol) like ?";
 
     private static final String GO_BY_PROTEIN_NAME_HQL_WHERE = 
              "lower(proteins.name) like ?";

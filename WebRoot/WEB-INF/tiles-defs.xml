@@ -46,7 +46,7 @@
     </definition>
     
         <definition name="cabioportlet.goByProteinNameAccessionQuery.results" extends="cabioportlet.template">
-        <put name="query_name" value="Go Lookup by Protein Name or Uniprot Accession" />
+        <put name="query_name" value="Gene Ontology Lookup by Protein" />
         <put name="form_content" value="/WEB-INF/jsp/canned/goByProteinNameAccessionQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
@@ -70,25 +70,25 @@
     </definition>
     
     <definition name="cabioportlet.pathwayByNameQuery.results" extends="cabioportlet.template">
-        <put name="query_name" value="Pathway By Name" />
+        <put name="query_name" value="Pathway by Name" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
    
       <definition name="cabioportlet.pathwayBySourceQuery.results" extends="cabioportlet.template">
-        <put name="query_name" value="Pathway By Source" />
+        <put name="query_name" value="Pathway by Source" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayBySourceQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
    <definition name="cabioportlet.pathwayByProteinQuery.results" extends="cabioportlet.template">
-        <put name="query_name" value="Pathway By Protein" />
+        <put name="query_name" value="Pathway by Protein" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByProteinQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>
     
     <definition name="cabioportlet.pathwayByGeneQuery.results" extends="cabioportlet.template">
-        <put name="query_name" value="Pathway By Gene Symbol" />
+        <put name="query_name" value="Pathway by Gene Symbol" />
         <put name="form_content" value="/WEB-INF/jsp/canned/pathwayByGeneQuery.jsp" />
         <put name="portlet_content" value="/WEB-INF/jsp/results.jsp" />
     </definition>

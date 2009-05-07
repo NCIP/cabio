@@ -90,6 +90,26 @@ table.properties div.value {
     overflow: auto;
 }
 
+
+table.nested {
+	width: 95%;
+    border-collapse: collapse;
+}
+
+table.nested th {
+    width: auto;
+    border: 1px solid #aaa;
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 2px;
+}
+	
+table.nested td {
+    border: 1px solid #aaa;
+    font-weight: normal;
+    padding: 2px;
+}
+
 div.externalLinks h3 {
 	margin-top: 10px;
 	font-weight: bold;

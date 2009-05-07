@@ -34,7 +34,26 @@ var caBioObjectDetails = function() {
                     v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_blank">'+val+'</a></span>';
                 }
                 else {
-                    v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
+                    if (typeof(val) == 'object') {
+                        var cdata = val['columnNames'];
+                        var rdata = val['rows'];
+                        v = '<table class="nested"><tr>';
+                        for(var ci in cdata) {
+                            v += '<th>'+cdata[ci]+'</th>';
+                        }
+                        v += '</tr>';
+                        for(var ri in rdata) {
+                            v += '<tr>';
+                            for(var ci in cdata) {
+                                v += '<td>'+rdata[ri][cdata[ci]]+'</td>';
+                            }
+                            v += '</tr>';
+                        }
+                        v += '</table>';
+                    }
+                    else {
+                        v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
+                    }
                 }
                 
                 h += '<tr><td>'+k+'</td><td><div class="value">';

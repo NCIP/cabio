@@ -59,11 +59,6 @@
 	   	<c:forEach var="attr" items="${classConfig.attributes}">
 			<td>
 			<c:choose>
-			<c:when test="${attr.lastPart == 'id'}">
-	                <div title="<c:out value="${item[attr.name]}"/>" class="id">
-	                     <c:out value="${item[attr.name]}"/>
-	                </div>			
-	          </c:when>
 
 			<c:when test="${attr.lastPart == 'pubmedId'}">
 			    <div class="link-extenal" style="text-align: right">
@@ -71,17 +66,21 @@
 			             <c:out value="${item[attr.name]}"/></a>
 			    </div>
 			</c:when>
+				
 			<c:otherwise>
 				
+				<c:set var="objValue" value='${item[attr.name]}' scope="request"/>
+				<% request.setAttribute("strValue", request.getAttribute("objValue").toString()); %>
+				
 	            <c:choose>
-	            <c:when test="${fn:length(item[attr.name]) > 90}">
-	                <div title="<c:out value="${item[attr.name]}"/>" class="attribute">
-	                    <c:out value="${fn:substring(item[attr.name], 0, 87)}"/>
+	            <c:when test="${fn:length(strValue) > 90}">
+	                <div title="<c:out value='${strValue}'/>" class="attribute">
+	                    <c:out value="${fn:substring(strValue, 0, 87)}"/>
 	                    <b>...</b>
 	                </div>
 	            </c:when>
 	            <c:otherwise>
-                    <c:out value="${item[attr.name]}"/>
+                    <c:out value="${strValue}"/>
 	            </c:otherwise>
 	            </c:choose>
 			    

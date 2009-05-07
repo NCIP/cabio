@@ -102,15 +102,21 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
                 String name = field.getName();
                 
                 if  (!name.equalsIgnoreCase("id")) 
-                    config.addAttribute(name, name, true);
-                else if ( (name.equalsIgnoreCase("id")) && (className.equalsIgnoreCase("GeneOntology")))
-                	config.addAttribute(name, name, true);
+                    config.addAttribute(name, name, true, null);
             }
         }
         
         return objectToJSON(new ResultItem(className, obj), config);
     }
     
+    /**
+     * Converts the given item to a JSON string representation, based on the 
+     * configuration provided.
+     * @param item the item to render into JSON
+     * @param config configuration for the class of the item
+     * @return JSON string representation of item
+     * @throws JSONException
+     */
     private String objectToJSON(ResultItem item, ClassObject config) 
             throws JSONException {
         
@@ -123,13 +129,20 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
         for (LabeledObject attr : config.getDetailAttributes()) {
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("name", attr.getLabel());
-            
             Object value = item.get(attr.getName());
-            if ((value == null) || ("".equals(value))) {
-                jsonObj.put("value", "-");
+            
+            JSONPrinter printer = attr.getPrinter();
+            if (printer != null) {
+                // print value in some special way if a printer is configured
+                jsonObj.put("value", printer.objectToJSON(value));
             }
             else {
-                jsonObj.put("value", value.toString());
+                if ((value == null) || ("".equals(value))) {
+                    jsonObj.put("value", "");
+                }
+                else {
+                    jsonObj.put("value", value.toString());
+                }
             }
             
             attributes.put(jsonObj);

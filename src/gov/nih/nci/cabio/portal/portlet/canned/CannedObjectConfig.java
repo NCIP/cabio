@@ -1,5 +1,7 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
+import gov.nih.nci.cabio.portal.portlet.JSONPrinter;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -62,7 +64,13 @@ public class CannedObjectConfig {
                     if (classObj == null) {
                         throw new Exception("Class not defined before use: "+v[0]);
                     }
-                    classObj.addAttribute(v[1], v[2], "detail".equals(v[3]));
+                    
+                    JSONPrinter printer = null;
+                    if (v.length > 4) {
+                        printer = (JSONPrinter)Class.forName(v[4]).newInstance();
+                    }
+                    
+                    classObj.addAttribute(v[1], v[2], "detail".equals(v[3]), printer);
                 }
             }
             catch (Exception e) {

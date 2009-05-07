@@ -7,7 +7,7 @@
 
     <table>
     
-    <tr><td title="Protein Name or Accession">Protein Name or Uniprot Accession<br></td><td>
+    <tr><td title="Protein Name or UniProt Accession">Protein Name or UniProt Accession<br></td><td>
     <html:text property="proteinNameAccession" size="20"/>
     </td></tr>
 
