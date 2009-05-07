@@ -3,6 +3,7 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.portal.portlet.canned.CannedObjectConfig;
 import gov.nih.nci.cabio.portal.portlet.canned.ClassObject;
 import gov.nih.nci.cabio.portal.portlet.canned.LabeledObject;
+import gov.nih.nci.cabio.portal.portlet.printers.JSONPrinter;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 
