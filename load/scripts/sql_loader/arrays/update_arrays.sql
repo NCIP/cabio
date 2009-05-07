@@ -75,7 +75,7 @@ ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'HT Human Genome U133A',
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
 'Human Genome U133B Array',
-'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B'
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B',
 'Human Genome U95B Array',
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG_U95B',
 'Human Genome U95Av2 Array',

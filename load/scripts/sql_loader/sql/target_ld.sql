@@ -1,12 +1,12 @@
-TRUNCATE TABLE zstg_cmap_genes REUSE STORAGE;
-TRUNCATE TABLE zstg_cmap_agents REUSE STORAGE;
-TRUNCATE TABLE zstg_cmap_targets REUSE STORAGE;
-TRUNCATE TABLE zstg_cmap_targetagents REUSE STORAGE;
-TRUNCATE TABLE zstg_cmap_ids REUSE STORAGE;
-TRUNCATE TABLE zstg_cmap_names REUSE STORAGE;
-TRUNCATE TABLE ontology_relationship REUSE STORAGE;
-TRUNCATE TABLE agent REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_genes REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_agents REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_targets REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_targetagents REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_ids REUSE STORAGE;
+--TRUNCATE TABLE zstg_cmap_names REUSE STORAGE;
+--TRUNCATE TABLE ontology_relationship REUSE STORAGE;
 
+TRUNCATE TABLE agent REUSE STORAGE;
 TRUNCATE TABLE target REUSE STORAGE;
 TRUNCATE TABLE gene_target REUSE STORAGE;
 TRUNCATE TABLE target_agent REUSE STORAGE;
@@ -46,10 +46,9 @@ commit;
 drop sequence target_id;
 create sequence target_id;
 alter trigger set_target_id enable;
---INSERT INTO zstg_cmap_genes(gene_id,gene_name) SELECT distinct zstg_gene_identifiers.gene_id,gene_name FROM CMAP.CMAP_GENES@WEB.NCI.NIH.GOV CMAP_G,zstg_gene_IDENTIFIERS WHERE data_source = 2 AND ZSTG_GENE_IDENTIFIERS.identifier = CMAP_G.gene_id;
-INSERT INTO zstg_cmap_genes(gene_id,gene_name) SELECT distinct c.gene_id,gene_name FROM CMAP.CMAP_GENES@WEB.NCI.NIH.GOV a,zstg_gene2unigene b, gene_tv c WHERE b.geneid = a.gene_id and decode(substr(b.unigene_cluster,0,2),'Hs',5,'Mm',6)=c.taxon_id;
+--INSERT INTO zstg_cmap_genes(gene_id,gene_name) SELECT distinct c.gene_id,gene_name FROM CMAP.CMAP_GENES@WEB.NCI.NIH.GOV a,zstg_gene2unigene b, gene_tv c WHERE b.geneid = a.gene_id and decode(substr(b.unigene_cluster,0,2),'Hs',5,'Mm',6)=c.taxon_id;
 
-INSERT INTO zstg_cmap_agents(agent_id,agent_name,agent_source,agent_comment) SELECT distinct SUBSTR(agent_id, 3),agent_name,agent_source,agent_comment FROM CMAP.CMAP_agentS@WEB.NCI.NIH.GOV;
+--INSERT INTO zstg_cmap_agents(agent_id,agent_name,agent_source,agent_comment) SELECT distinct SUBSTR(agent_id, 3),agent_name,agent_source,agent_comment FROM CMAP.CMAP_agentS@WEB.NCI.NIH.GOV;
 
 SELECT MAX(agent_ID)+1 AS V_MAXROW FROM AGENT; 
 DROP SEQUENCE agent_ID_SEQ;
@@ -59,15 +58,15 @@ CREATE SEQUENCE agent_id_seq start with &V_MAXROW increment by 1;
 insert into agent(agent_id, agent_name, agent_source, agent_comment) select agent_id_seq.nextval, agent_name, agent_source, agent_comment from (select distinct lower(trim(agent_name)) as agent_name, lower(trim(d.agent_source)) as agent_source, lower(trim(d.agent_comment)) as agent_comment from zstg_cmap_agents d minus select distinct lower(trim(agent_name)) as agent_name, lower(trim(agent_source)) as agent_source, lower(trim(agent_comment)) as agent_comment from agent);
 commit;
 
-INSERT INTO zstg_cmap_targets(target_id,gene_id, anomaly,cancer_type) SELECT distinct SUBSTR(target_id, 3), zstg_gene_identifiers.gene_id,ANOMALY,cancer_type FROM CMAP.CMAP_targetS@WEB.NCI.NIH.GOV CMAP_T,zstg_gene_identifiers WHERE data_source = 2 AND zstg_gene_IDENTIFIERS.identifier = CMAP_T.gene_id; 
+--INSERT INTO zstg_cmap_targets(target_id,gene_id, anomaly,cancer_type) SELECT distinct SUBSTR(target_id, 3), zstg_gene_identifiers.gene_id,ANOMALY,cancer_type FROM CMAP.CMAP_targetS@WEB.NCI.NIH.GOV CMAP_T,zstg_gene_identifiers WHERE data_source = 2 AND zstg_gene_IDENTIFIERS.identifier = CMAP_T.gene_id; 
 
-INSERT INTO zstg_cmap_targetagents(target_id, agent_id) SELECT distinct SUBSTR(target_id, 3), SUBSTR(agent_id, 3) FROM CMAP.CMAP_targetagentS@WEB.NCI.NIH.GOV CMAP_T;
+--INSERT INTO zstg_cmap_targetagents(target_id, agent_id) SELECT distinct SUBSTR(target_id, 3), SUBSTR(agent_id, 3) FROM CMAP.CMAP_targetagentS@WEB.NCI.NIH.GOV CMAP_T;
 
-INSERT INTO zstg_cmap_names(cmap_id, cmap_name) SELECT DISTINCT cmap_id, cmap_name FROM CMAP.CMAP_NAMES@WEB.NCI.NIH.GOV CMAP_T;
+--INSERT INTO zstg_cmap_names(cmap_id, cmap_name) SELECT DISTINCT cmap_id, cmap_name FROM CMAP.CMAP_NAMES@WEB.NCI.NIH.GOV CMAP_T;
 
-INSERT INTO zstg_cmap_ids(cmap_id, gene_id) SELECT cmap_id,zstg_gene_identifiers.gene_id FROM CMAP.CMAP_IDS@WEB.NCI.NIH.GOV CMAP_I,zstg_gene_identifiers WHERE data_source = 2 AND zstg_gene_IDENTIFIERS.identifier = CMAP_I.locus_id;
+--INSERT INTO zstg_cmap_ids(cmap_id, gene_id) SELECT cmap_id,zstg_gene_identifiers.gene_id FROM CMAP.CMAP_IDS@WEB.NCI.NIH.GOV CMAP_I,zstg_gene_identifiers WHERE data_source = 2 AND zstg_gene_IDENTIFIERS.identifier = CMAP_I.locus_id;
 
-INSERT INTO ontology_relationship(parent_id, child_id, relationship) SELECT DISTINCT cmap_parent, cmap_id, 'part-OF' rel FROM CMAP.CMAP_NAMES@WEB.NCI.NIH.GOV;
+--INSERT INTO ontology_relationship(parent_id, child_id, relationship) SELECT DISTINCT cmap_parent, cmap_id, 'part-OF' rel FROM CMAP.CMAP_NAMES@WEB.NCI.NIH.GOV;
 COMMIT; 
 
 INSERT INTO target(TARGET_NAME, LOCUS_ID, TARGET_TYPE) select distinct X.target_name, X.locus_id, X.target_type from ( select distinct target_id, g.gene_id, symbol TARGET_NAME, gi.identifier LOCUS_ID, cancer_type, anomaly, 'gene' as TARGET_TYPE FROM gene_tv g, zstg_cmap_targets z, zstg_gene_identifiers gi WHERE g.gene_id = z.gene_id and g.gene_id = gi.gene_id and gi.data_source = 2) X; 

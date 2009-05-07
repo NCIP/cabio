@@ -1,7 +1,7 @@
 
-alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C005502;
-alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C005503;
-alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C005504;
-alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C005505;
+alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C0020945;
+alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C0020946;
+alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C0020947;
+alter table ZSTG_PID_COMPLEX_COMPONENT disable constraint SYS_C0020948;
 
 --EXIT;

@@ -1,6 +1,6 @@
 
-drop index AR_PATHWHWAY_PROBE_SET_;
-drop index AR_PATHWHWAY_PATHWAY;
 drop index AR_PATHWHWAY_GENECHIP_A;
+drop index AR_PATHWHWAY_PATHWAY;
+drop index AR_PATHWHWAY_PROBE_SET_;
 
 --EXIT;

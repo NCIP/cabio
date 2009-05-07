@@ -1,5 +1,5 @@
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 18 16:57:30 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 15:02:23 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -1097,7 +1097,7 @@ SQL> drop index SYS_C0021167_IDX;
 
 Index dropped.
 
-SQL> drop index PROTEIN_MAIN_ACCESSION__LWR;
+SQL> drop index PROTEIN_MAIN_TYPE_LWR;
 
 Index dropped.
 
@@ -1105,15 +1105,11 @@ SQL> drop index PROTEIN_MAIN_DESCRIPTIO_LWR;
 
 Index dropped.
 
-SQL> drop index PROTEIN_MAIN_TYPE_LWR;
+SQL> drop index PROTEIN_MAIN_ACCESSION__LWR;
 
 Index dropped.
 
-SQL> drop index PROTEIN_MAIN_ID;
-
-Index dropped.
-
-SQL> drop index PROTEIN_MAIN_ACCESSION_;
+SQL> drop index PROTEIN_MAIN_TYPE;
 
 Index dropped.
 
@@ -1121,7 +1117,11 @@ SQL> drop index PROTEIN_MAIN_DESCRIPTIO;
 
 Index dropped.
 
-SQL> drop index PROTEIN_MAIN_TYPE;
+SQL> drop index PROTEIN_MAIN_ACCESSION_;
+
+Index dropped.
+
+SQL> drop index PROTEIN_MAIN_ID;
 
 Index dropped.
 
@@ -1141,11 +1141,7 @@ SQL> drop index SYS_C0021104_IDX;
 
 Index dropped.
 
-SQL> drop index GENE_RELTION_ORIENTATIO_LWR;
-
-Index dropped.
-
-SQL> drop index GENE_RELTION_DISTANCE_LWR;
+SQL> drop index GENE_RELTION_TYPE_LWR;
 
 Index dropped.
 
@@ -1153,27 +1149,15 @@ SQL> drop index GENE_RELTION_PROBE_SET__LWR;
 
 Index dropped.
 
-SQL> drop index GENE_RELTION_TYPE_LWR;
+SQL> drop index GENE_RELTION_DISTANCE_LWR;
 
 Index dropped.
 
-SQL> drop index GENE_RELTION_ID;
+SQL> drop index GENE_RELTION_ORIENTATIO_LWR;
 
 Index dropped.
 
-SQL> drop index GENE_RELTION_ORIENTATIO;
-
-Index dropped.
-
-SQL> drop index GENE_RELTION_DISTANCE;
-
-Index dropped.
-
-SQL> drop index GENE_RELTION_GENE_ID;
-
-Index dropped.
-
-SQL> drop index GENE_RELTION_SNP_ID;
+SQL> drop index GENE_RELTION_TYPE;
 
 Index dropped.
 
@@ -1181,7 +1165,23 @@ SQL> drop index GENE_RELTION_PROBE_SET_;
 
 Index dropped.
 
-SQL> drop index GENE_RELTION_TYPE;
+SQL> drop index GENE_RELTION_SNP_ID;
+
+Index dropped.
+
+SQL> drop index GENE_RELTION_GENE_ID;
+
+Index dropped.
+
+SQL> drop index GENE_RELTION_DISTANCE;
+
+Index dropped.
+
+SQL> drop index GENE_RELTION_ORIENTATIO;
+
+Index dropped.
+
+SQL> drop index GENE_RELTION_ID;
 
 Index dropped.
 
@@ -1193,7 +1193,7 @@ SQL> drop index SYS_C0021122_IDX;
 
 Index dropped.
 
-SQL> drop index MARKER_MTION_MARKER_ID;
+SQL> drop index MARKER_MTION_SORT_ORDER;
 
 Index dropped.
 
@@ -1201,7 +1201,7 @@ SQL> drop index MARKER_MTION_MARKER_REL;
 
 Index dropped.
 
-SQL> drop index MARKER_MTION_SORT_ORDER;
+SQL> drop index MARKER_MTION_MARKER_ID;
 
 Index dropped.
 
@@ -1221,11 +1221,7 @@ SQL> drop index SYS_C0021123_IDX;
 
 Index dropped.
 
-SQL> drop index MARKER_RTION_TYPE_LWR;
-
-Index dropped.
-
-SQL> drop index MARKER_RTION_ORIENTATIO_LWR;
+SQL> drop index MARKER_RTION_PROBE_SET__LWR;
 
 Index dropped.
 
@@ -1233,7 +1229,27 @@ SQL> drop index MARKER_RTION_DISTANCE_LWR;
 
 Index dropped.
 
-SQL> drop index MARKER_RTION_PROBE_SET__LWR;
+SQL> drop index MARKER_RTION_ORIENTATIO_LWR;
+
+Index dropped.
+
+SQL> drop index MARKER_RTION_TYPE_LWR;
+
+Index dropped.
+
+SQL> drop index MARKER_RTION_PROBE_SET_;
+
+Index dropped.
+
+SQL> drop index MARKER_RTION_SNP_ID;
+
+Index dropped.
+
+SQL> drop index MARKER_RTION_DISTANCE;
+
+Index dropped.
+
+SQL> drop index MARKER_RTION_ORIENTATIO;
 
 Index dropped.
 
@@ -1242,22 +1258,6 @@ SQL> drop index MARKER_RTION_ID;
 Index dropped.
 
 SQL> drop index MARKER_RTION_TYPE;
-
-Index dropped.
-
-SQL> drop index MARKER_RTION_ORIENTATIO;
-
-Index dropped.
-
-SQL> drop index MARKER_RTION_DISTANCE;
-
-Index dropped.
-
-SQL> drop index MARKER_RTION_SNP_ID;
-
-Index dropped.
-
-SQL> drop index MARKER_RTION_PROBE_SET_;
 
 Index dropped.
 
@@ -1277,15 +1277,7 @@ SQL> drop index SYS_C0021093_IDX;
 
 Index dropped.
 
-SQL> drop index EXPRESSIRTER_NAME_LWR;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_SEQUENCE_T_LWR;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_SEQUENCE_S_LWR;
+SQL> drop index EXPRESSIRTER_TARGET_DES_LWR;
 
 Index dropped.
 
@@ -1293,39 +1285,15 @@ SQL> drop index EXPRESSIRTER_TRANSCRIPT_LWR;
 
 Index dropped.
 
-SQL> drop index EXPRESSIRTER_TARGET_DES_LWR;
+SQL> drop index EXPRESSIRTER_SEQUENCE_S_LWR;
 
 Index dropped.
 
-SQL> drop index EXPRESSIRTER_ID;
+SQL> drop index EXPRESSIRTER_SEQUENCE_T_LWR;
 
 Index dropped.
 
-SQL> drop index EXPRESSIRTER_NAME;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_SEQUENCE_T;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_SEQUENCE_S;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_TRANSCRIPT;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_TARGET_DES;
-
-Index dropped.
-
-SQL> drop index EXPRESSIRTER_GENE_ID;
+SQL> drop index EXPRESSIRTER_NAME_LWR;
 
 Index dropped.
 
@@ -1333,55 +1301,43 @@ SQL> drop index EXPRESSIRTER_NAS_ID;
 
 Index dropped.
 
+SQL> drop index EXPRESSIRTER_GENE_ID;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_TARGET_DES;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_TRANSCRIPT;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_SEQUENCE_S;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_SEQUENCE_T;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_NAME;
+
+Index dropped.
+
+SQL> drop index EXPRESSIRTER_ID;
+
+Index dropped.
+
 SQL> 
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_expression_reporter.drop.sql;
 SQL> 
-SQL> drop index ZSTG_EXPRTER_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_SEQUENCE_T;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_SEQUENCE_S;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_TRANSCRIPT;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_TARGET_DES;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_GENE_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_NAS_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_CHROMOSOME;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_CHR_START;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_CHR_STOP;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXPRTER_CYTO_START;
+SQL> drop index ZSTG_EXPRTER_ASSEMBLY;
 
 Index dropped.
 
@@ -1389,7 +1345,51 @@ SQL> drop index ZSTG_EXPRTER_CYTO_STOP;
 
 Index dropped.
 
-SQL> drop index ZSTG_EXPRTER_ASSEMBLY;
+SQL> drop index ZSTG_EXPRTER_CYTO_START;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_CHR_STOP;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_CHR_START;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_CHROMOSOME;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_NAS_ID;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_GENE_ID;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_TARGET_DES;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_TRANSCRIPT;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_SEQUENCE_S;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_SEQUENCE_T;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXPRTER_ID;
 
 Index dropped.
 
@@ -1405,11 +1405,11 @@ SQL> drop index EXPREPPROTDOMPK_IDX;
 
 Index dropped.
 
-SQL> drop index EXPR_REPMAIN_EXPR_REPOR;
+SQL> drop index EXPR_REPMAIN_PROTEIN_DO;
 
 Index dropped.
 
-SQL> drop index EXPR_REPMAIN_PROTEIN_DO;
+SQL> drop index EXPR_REPMAIN_EXPR_REPOR;
 
 Index dropped.
 
@@ -1417,10 +1417,6 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/snp_reporter.drop.sql;
 SQL> 
-SQL> drop index SNP_REPTER_BIG_ID_LWR;
-
-Index dropped.
-
 SQL> drop index SNP_REPTER_BIG_ID;
 
 Index dropped.
@@ -1429,27 +1425,11 @@ SQL> drop index SYS_C0021185_IDX;
 
 Index dropped.
 
-SQL> drop index SNP_REPORTER_NAME_LWR;
-
-Index dropped.
-
 SQL> drop index SNP_REPORTER_PHAST_CONS_LWR;
 
 Index dropped.
 
-SQL> drop index SNP_REPORTER_ID;
-
-Index dropped.
-
-SQL> drop index SNP_REPORTER_NAME;
-
-Index dropped.
-
-SQL> drop index SNP_REPORTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index SNP_REPORTER_SNP_ID;
+SQL> drop index SNP_REPORTER_NAME_LWR;
 
 Index dropped.
 
@@ -1457,39 +1437,31 @@ SQL> drop index SNP_REPORTER_PHAST_CONS;
 
 Index dropped.
 
+SQL> drop index SNP_REPORTER_SNP_ID;
+
+Index dropped.
+
+SQL> drop index SNP_REPORTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index SNP_REPORTER_NAME;
+
+Index dropped.
+
+SQL> drop index SNP_REPORTER_ID;
+
+Index dropped.
+
+SQL> drop index SNP_REPTER_BIG_ID_LWR;
+
+Index dropped.
+
 SQL> 
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_snp_reporter.drop.sql;
 SQL> 
-SQL> drop index ZSTG_SNPRTER_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_NAME;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_SNP_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_PHAST_CONS;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_CHROMOSOME;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_CHR_START;
-
-Index dropped.
-
-SQL> drop index ZSTG_SNPRTER_CHR_STOP;
+SQL> drop index ZSTG_SNPRTER_CYTO_STOP;
 
 Index dropped.
 
@@ -1497,7 +1469,35 @@ SQL> drop index ZSTG_SNPRTER_CYTO_START;
 
 Index dropped.
 
-SQL> drop index ZSTG_SNPRTER_CYTO_STOP;
+SQL> drop index ZSTG_SNPRTER_CHR_STOP;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_CHR_START;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_CHROMOSOME;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_PHAST_CONS;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_SNP_ID;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_NAME;
+
+Index dropped.
+
+SQL> drop index ZSTG_SNPRTER_ID;
 
 Index dropped.
 
@@ -1509,11 +1509,11 @@ SQL> drop index SYS_C0016536_IDX;
 
 Index dropped.
 
-SQL> drop index EXON_REPGENE_EXON_REPOR;
+SQL> drop index EXON_REPGENE_GENE_ID;
 
 Index dropped.
 
-SQL> drop index EXON_REPGENE_GENE_ID;
+SQL> drop index EXON_REPGENE_EXON_REPOR;
 
 Index dropped.
 
@@ -1521,10 +1521,6 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon_reporter.drop.sql;
 SQL> 
-SQL> drop index EXON_RETER_BIG_ID_LWR;
-
-Index dropped.
-
 SQL> drop index EXON_RETER_BIG_ID;
 
 Index dropped.
@@ -1533,11 +1529,7 @@ SQL> drop index SYS_C0021092_IDX;
 
 Index dropped.
 
-SQL> drop index EXON_REPRTER_NAME_LWR;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_MANUFACTUR_LWR;
+SQL> drop index EXON_REPRTER_STRAND_LWR;
 
 Index dropped.
 
@@ -1545,31 +1537,11 @@ SQL> drop index EXON_REPRTER_PROBE_COUN_LWR;
 
 Index dropped.
 
-SQL> drop index EXON_REPRTER_STRAND_LWR;
+SQL> drop index EXON_REPRTER_MANUFACTUR_LWR;
 
 Index dropped.
 
-SQL> drop index EXON_REPRTER_ID;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_NAME;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_MANUFACTUR;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_PROBE_COUN;
-
-Index dropped.
-
-SQL> drop index EXON_REPRTER_STRAND;
+SQL> drop index EXON_REPRTER_NAME_LWR;
 
 Index dropped.
 
@@ -1577,7 +1549,35 @@ SQL> drop index EXON_REPRTER_EXON_ID;
 
 Index dropped.
 
+SQL> drop index EXON_REPRTER_STRAND;
+
+Index dropped.
+
+SQL> drop index EXON_REPRTER_PROBE_COUN;
+
+Index dropped.
+
+SQL> drop index EXON_REPRTER_MANUFACTUR;
+
+Index dropped.
+
+SQL> drop index EXON_REPRTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index EXON_REPRTER_NAME;
+
+Index dropped.
+
+SQL> drop index EXON_REPRTER_ID;
+
+Index dropped.
+
 SQL> drop index ER_TI_INDEX;
+
+Index dropped.
+
+SQL> drop index EXON_RETER_BIG_ID_LWR;
 
 Index dropped.
 
@@ -1593,39 +1593,7 @@ SQL> drop index ZSTG_EXTER_BIG_ID;
 
 Index dropped.
 
-SQL> drop index ZSTG_EXORTER_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_NAME;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_MICROARRAY;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_MANUFACTUR;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_PROBE_COUN;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_STRAND;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_TRANSCRIPT;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_EXON_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_EXORTER_CHROMOSOME;
+SQL> drop index ZSTG_EXORTER_STOP_LOCAT;
 
 Index dropped.
 
@@ -1633,7 +1601,39 @@ SQL> drop index ZSTG_EXORTER_START_LOCA;
 
 Index dropped.
 
-SQL> drop index ZSTG_EXORTER_STOP_LOCAT;
+SQL> drop index ZSTG_EXORTER_CHROMOSOME;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_EXON_ID;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_TRANSCRIPT;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_STRAND;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_PROBE_COUN;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_MANUFACTUR;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_MICROARRAY;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_NAME;
+
+Index dropped.
+
+SQL> drop index ZSTG_EXORTER_ID;
 
 Index dropped.
 
@@ -1641,10 +1641,6 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon.drop.sql;
 SQL> 
-SQL> drop index EXONXON_BIG_ID_LWR;
-
-Index dropped.
-
 SQL> drop index EXONXON_BIG_ID;
 
 Index dropped.
@@ -1653,19 +1649,11 @@ SQL> drop index SYS_C0021091_IDX;
 
 Index dropped.
 
-SQL> drop index EXONEXON_MANUFACTUR_LWR;
-
-Index dropped.
-
 SQL> drop index EXONEXON_SOURCE_LWR;
 
 Index dropped.
 
-SQL> drop index EXONEXON_ID;
-
-Index dropped.
-
-SQL> drop index EXONEXON_SOURCE;
+SQL> drop index EXONEXON_MANUFACTUR_LWR;
 
 Index dropped.
 
@@ -1673,7 +1661,19 @@ SQL> drop index EXONEXON_TRANSCRIPT;
 
 Index dropped.
 
+SQL> drop index EXONEXON_SOURCE;
+
+Index dropped.
+
+SQL> drop index EXONEXON_ID;
+
+Index dropped.
+
 SQL> drop index EXON_MI_INDEX;
+
+Index dropped.
+
+SQL> drop index EXONXON_BIG_ID_LWR;
 
 Index dropped.
 
@@ -1709,11 +1709,7 @@ SQL> drop index SYS_C0021192_IDX;
 
 Index dropped.
 
-SQL> drop index TRANSCRIRIPT_MANUFACTUR_LWR;
-
-Index dropped.
-
-SQL> drop index TRANSCRIRIPT_SOURCE_LWR;
+SQL> drop index TRANSCRIRIPT_PROBE_COUN_LWR;
 
 Index dropped.
 
@@ -1721,15 +1717,15 @@ SQL> drop index TRANSCRIRIPT_STRAND_LWR;
 
 Index dropped.
 
-SQL> drop index TRANSCRIRIPT_PROBE_COUN_LWR;
+SQL> drop index TRANSCRIRIPT_SOURCE_LWR;
 
 Index dropped.
 
-SQL> drop index TRANSCRIRIPT_ID;
+SQL> drop index TRANSCRIRIPT_MANUFACTUR_LWR;
 
 Index dropped.
 
-SQL> drop index TRANSCRIRIPT_SOURCE;
+SQL> drop index TRANSCRIRIPT_PROBE_COUN;
 
 Index dropped.
 
@@ -1737,7 +1733,11 @@ SQL> drop index TRANSCRIRIPT_STRAND;
 
 Index dropped.
 
-SQL> drop index TRANSCRIRIPT_PROBE_COUN;
+SQL> drop index TRANSCRIRIPT_SOURCE;
+
+Index dropped.
+
+SQL> drop index TRANSCRIRIPT_ID;
 
 Index dropped.
 
@@ -1761,35 +1761,7 @@ SQL> drop index SYS_C0021124_IDX;
 
 Index dropped.
 
-SQL> drop index MICROARRRRAY_ID;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_ARRAY_NAME;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_ANNOTATION;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_GENOME_VER;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_DBSNP_VERS;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_PLATFORM;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_TYPE;
-
-Index dropped.
-
-SQL> drop index MICROARRRRAY_DESCRIPTIO;
+SQL> drop index MICROARRRRAY_LSID;
 
 Index dropped.
 
@@ -1797,7 +1769,35 @@ SQL> drop index MICROARRRRAY_ACCESSION;
 
 Index dropped.
 
-SQL> drop index MICROARRRRAY_LSID;
+SQL> drop index MICROARRRRAY_DESCRIPTIO;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_TYPE;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_PLATFORM;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_DBSNP_VERS;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_GENOME_VER;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_ARRAY_NAME;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_ID;
+
+Index dropped.
+
+SQL> drop index MICROARRRRAY_ANNOTATION;
 
 Index dropped.
 
@@ -1940,7 +1940,7 @@ SQL> INSERT
   4    DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, geneCHIP_ARRAY,
   5  ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT
   6  DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HG-U133A',
-  7  'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B', 'HG-U133B') AS geneCHIP_ARRAY, TO_DATE(
+  7  'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG_U95Av2', 'Human Genome U95B Array', 'HG_U95B') AS GENECHIP_ARRAY, TO_DATE(
   8  ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
   9  'Affymetrix' AS PLATFORM, 'oligo' AS TYPE, geneCHIP_ARRAY AS DESCRIPTION, DECODE
  10  (geneCHIP_ARRAY, 'Human Genome U133A Array', 'GPL96',
@@ -1952,11 +1952,15 @@ SQL> INSERT
  16  'HT Human Genome U133A',
  17  'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
  18  'Human Genome U133B Array',
- 19  'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B'
- 20   ) AS LSID FROM
- 21  zstg_rna_probesets_tmp Z);
+ 19  'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B',
+ 20  'Human Genome U95B Array',
+ 21  'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG_U95B',
+ 22  'Human Genome U95Av2 Array',
+ 23  'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG_U95Av2'
+ 24   ) AS LSID FROM
+ 25  zstg_rna_probesets_tmp Z);
 
-6 rows created.
+7 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2027,7 +2031,7 @@ SQL> INSERT
  34  Z.geneCHIP_ARRAY = AL.GENECHIP_ARRAY(+) AND Z.GENECHIP_ARRAY =
  35  AC.geneCHIP_ARRAY(+));
 
-217205 rows created.
+239879 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2239,7 +2243,7 @@ SQL> SELECT microarray_SEQ.CURRVAL
 
    CURRVAL
 ----------
-	12
+	13
 
 1 row selected.
 
@@ -2250,7 +2254,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (
   4  )
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-56302 rows updated.
+59174 rows updated.
 
 SQL> COMMIT;
 
@@ -2263,7 +2267,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM
   4  )
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-53383 rows updated.
+56255 rows updated.
 
 SQL> 
 SQL> COMMIT;
@@ -2290,7 +2294,7 @@ SQL> SELECT microarray_SEQ.CURRVAL
 
    CURRVAL
 ----------
-	13
+	14
 
 1 row selected.
 
@@ -2342,7 +2346,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM
   4  = 1)
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-227050 rows updated.
+229922 rows updated.
 
 SQL> 
 SQL> COMMIT;
@@ -2369,7 +2373,7 @@ SQL> SELECT microarray_SEQ.CURRVAL
 
    CURRVAL
 ----------
-	14
+	15
 
 1 row selected.
 
@@ -2403,7 +2407,7 @@ SQL> INSERT
   3  transcript_CLUSTER_ID, STRAND, TOTAL_PROBES, 'Affymetrix' FROM
   4  zstg_exon_trans_affy;
 
-337420 rows created.
+337421 rows created.
 
 SQL> COMMIT;
 
@@ -2425,7 +2429,7 @@ SQL> INSERT
   4  transcript T
   5  			 WHERE Z.transcript_CLUSTER_ID = T.MANUFACTURER_ID);
 
-1062504 rows created.
+1063087 rows created.
 
 SQL> COMMIT;
 
@@ -2449,7 +2453,7 @@ SQL> SELECT microarray_SEQ.CURRVAL
 
    CURRVAL
 ----------
-	15
+	16
 
 1 row selected.
 
@@ -2471,7 +2475,7 @@ SQL> INSERT
  15  		  WHERE Z.transcript_CLUSTER_ID = T.MANUFACTURER_ID AND Z.exon_ID =
  16  E.MANUFACTURER_ID);
 
-2806938 rows created.
+2808822 rows created.
 
 SQL> COMMIT;
 
@@ -2484,7 +2488,7 @@ SQL> INSERT
   4  MANUFACTURER_PSR_ID, PROBE_COUNT, STRAND, transcript_ID, exon_ID FROM
   5  zstg_exon_reporter;
 
-1403751 rows created.
+1404693 rows created.
 
 SQL> COMMIT;
 
@@ -2507,7 +2511,7 @@ SQL> INSERT
   4  	  WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.transcript_CLUSTER_ID =
   5  T.MANUFACTURER_ID;
 
-34141 rows created.
+41425 rows created.
 
 SQL> COMMIT;
 
@@ -2528,7 +2532,7 @@ SQL> INSERT
   3  T, transcript_gene TG
   4  			  WHERE E.transcript_ID = T.ID AND T.ID = TG.TRANSCRIPT_ID;
 
-1023994 rows created.
+1149514 rows created.
 
 SQL> COMMIT;
 
@@ -2542,7 +2546,7 @@ SQL> INSERT
   5  ,
   6    gene_ID, nas_ID FROM zstg_expression_reporter;
 
-446568 rows created.
+469242 rows created.
 
 SQL> COMMIT;
 
@@ -2558,7 +2562,7 @@ SQL> INSERT
   7  expression_reporter ER
   8    WHERE Z.PROBE_SET_ID = ER.NAME AND Z.ACCESSION_NUMBER = PD.ACCESSION_NUMBER;
 
-26324 rows created.
+28290 rows created.
 
 SQL> COMMIT;
 
@@ -2651,7 +2655,7 @@ SQL> INSERT
   6  		  WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.TYPE = MRL.TYPE AND
   7  Z.FIRST_marker_ID = M.NAME AND M.taxon_ID = 5);
 
-1659719 rows created.
+1656565 rows created.
 
 SQL> COMMIT;
 
@@ -2671,7 +2675,7 @@ SQL> INSERT
   6  		  WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.TYPE = MRL.TYPE AND
   7  Z.SECOND_marker_ID = M.NAME AND M.taxon_ID = 5) ;
 
-1668750 rows created.
+1665236 rows created.
 
 SQL> COMMIT;
 
@@ -2689,11 +2693,19 @@ SQL> INSERT
   7  MRL.ORIENTATION, 'downstream', 'upstream', 'upstream', 'downstream') AND M.NAME
   8  = Z.marker AND M.ID = MRK.ID AND MRK.TYPE = 'UNISTS' AND M.taxon_ID = 5;
 
-1265542 rows created.
+1264714 rows created.
 
 SQL> COMMIT;
 
 Commit complete.
+
+SQL> 
+SQL> -- add annotation versions to microarray table
+SQL> 
+SQL> UPDATE microarray m SET annotation_version =
+  2  	 (select annotation_version from zstg_microarray_versions v where v.array_name = m.array_name);
+
+16 rows updated.
 
 SQL> 
 SQL> -- create indexes on user tables
@@ -2702,11 +2714,7 @@ SQL> @create_indexes;
 SQL> 
 SQL> @$LOAD/indexes/protein_domain.cols.sql;
 SQL> 
-SQL> create index PROTEIN_MAIN_TYPE on PROTEIN_DOMAIN(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index PROTEIN_MAIN_DESCRIPTIO on PROTEIN_DOMAIN(DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index PROTEIN_MAIN_ID on PROTEIN_DOMAIN(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2714,7 +2722,11 @@ SQL> create index PROTEIN_MAIN_ACCESSION_ on PROTEIN_DOMAIN(ACCESSION_NUMBER) PA
 
 Index created.
 
-SQL> create index PROTEIN_MAIN_ID on PROTEIN_DOMAIN(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index PROTEIN_MAIN_DESCRIPTIO on PROTEIN_DOMAIN(DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index PROTEIN_MAIN_TYPE on PROTEIN_DOMAIN(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2722,23 +2734,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/gene_relative_location.cols.sql;
 SQL> 
-SQL> create index GENE_RELTION_TYPE on GENE_RELATIVE_LOCATION(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index GENE_RELTION_PROBE_SET_ on GENE_RELATIVE_LOCATION(PROBE_SET_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index GENE_RELTION_SNP_ID on GENE_RELATIVE_LOCATION(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index GENE_RELTION_GENE_ID on GENE_RELATIVE_LOCATION(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index GENE_RELTION_DISTANCE on GENE_RELATIVE_LOCATION(DISTANCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index GENE_RELTION_ID on GENE_RELATIVE_LOCATION(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2746,7 +2742,23 @@ SQL> create index GENE_RELTION_ORIENTATIO on GENE_RELATIVE_LOCATION(ORIENTATION)
 
 Index created.
 
-SQL> create index GENE_RELTION_ID on GENE_RELATIVE_LOCATION(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index GENE_RELTION_DISTANCE on GENE_RELATIVE_LOCATION(DISTANCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index GENE_RELTION_GENE_ID on GENE_RELATIVE_LOCATION(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index GENE_RELTION_SNP_ID on GENE_RELATIVE_LOCATION(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index GENE_RELTION_PROBE_SET_ on GENE_RELATIVE_LOCATION(PROBE_SET_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index GENE_RELTION_TYPE on GENE_RELATIVE_LOCATION(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2754,7 +2766,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/marker_marker_rel_location.cols.sql;
 SQL> 
-SQL> create index MARKER_MTION_SORT_ORDER on MARKER_MARKER_REL_LOCATION(SORT_ORDER) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_MTION_MARKER_ID on MARKER_MARKER_REL_LOCATION(MARKER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2762,7 +2774,7 @@ SQL> create index MARKER_MTION_MARKER_REL on MARKER_MARKER_REL_LOCATION(MARKER_R
 
 Index created.
 
-SQL> create index MARKER_MTION_MARKER_ID on MARKER_MARKER_REL_LOCATION(MARKER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_MTION_SORT_ORDER on MARKER_MARKER_REL_LOCATION(SORT_ORDER) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2770,19 +2782,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/marker_relative_location.cols.sql;
 SQL> 
-SQL> create index MARKER_RTION_PROBE_SET_ on MARKER_RELATIVE_LOCATION(PROBE_SET_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MARKER_RTION_SNP_ID on MARKER_RELATIVE_LOCATION(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MARKER_RTION_DISTANCE on MARKER_RELATIVE_LOCATION(DISTANCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MARKER_RTION_ORIENTATIO on MARKER_RELATIVE_LOCATION(ORIENTATION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_RTION_ID on MARKER_RELATIVE_LOCATION(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2790,7 +2790,19 @@ SQL> create index MARKER_RTION_TYPE on MARKER_RELATIVE_LOCATION(TYPE) PARALLEL N
 
 Index created.
 
-SQL> create index MARKER_RTION_ID on MARKER_RELATIVE_LOCATION(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_RTION_ORIENTATIO on MARKER_RELATIVE_LOCATION(ORIENTATION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MARKER_RTION_DISTANCE on MARKER_RELATIVE_LOCATION(DISTANCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MARKER_RTION_SNP_ID on MARKER_RELATIVE_LOCATION(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MARKER_RTION_PROBE_SET_ on MARKER_RELATIVE_LOCATION(PROBE_SET_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2798,31 +2810,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/expression_reporter.cols.sql;
 SQL> 
-SQL> create index EXPRESSIRTER_NAS_ID on EXPRESSION_REPORTER(NAS_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_GENE_ID on EXPRESSION_REPORTER(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_TARGET_DES on EXPRESSION_REPORTER(TARGET_DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_TRANSCRIPT on EXPRESSION_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_SEQUENCE_S on EXPRESSION_REPORTER(SEQUENCE_SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_SEQUENCE_T on EXPRESSION_REPORTER(SEQUENCE_TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_MICROARRAY on EXPRESSION_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPRESSIRTER_ID on EXPRESSION_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2830,7 +2818,31 @@ SQL> create index EXPRESSIRTER_NAME on EXPRESSION_REPORTER(NAME) PARALLEL NOLOGG
 
 Index created.
 
-SQL> create index EXPRESSIRTER_ID on EXPRESSION_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPRESSIRTER_MICROARRAY on EXPRESSION_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_SEQUENCE_T on EXPRESSION_REPORTER(SEQUENCE_TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_SEQUENCE_S on EXPRESSION_REPORTER(SEQUENCE_SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_TRANSCRIPT on EXPRESSION_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_TARGET_DES on EXPRESSION_REPORTER(TARGET_DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_GENE_ID on EXPRESSION_REPORTER(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_NAS_ID on EXPRESSION_REPORTER(NAS_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2838,55 +2850,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_expression_reporter.cols.sql;
 SQL> 
-SQL> create index ZSTG_EXPRTER_ASSEMBLY on ZSTG_EXPRESSION_REPORTER(ASSEMBLY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_CYTO_STOP on ZSTG_EXPRESSION_REPORTER(CYTO_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_CYTO_START on ZSTG_EXPRESSION_REPORTER(CYTO_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_CHR_STOP on ZSTG_EXPRESSION_REPORTER(CHR_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_CHR_START on ZSTG_EXPRESSION_REPORTER(CHR_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_CHROMOSOME on ZSTG_EXPRESSION_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_NAS_ID on ZSTG_EXPRESSION_REPORTER(NAS_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_GENE_ID on ZSTG_EXPRESSION_REPORTER(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_TARGET_DES on ZSTG_EXPRESSION_REPORTER(TARGET_DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_TRANSCRIPT on ZSTG_EXPRESSION_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_SEQUENCE_S on ZSTG_EXPRESSION_REPORTER(SEQUENCE_SOURCE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_SEQUENCE_T on ZSTG_EXPRESSION_REPORTER(SEQUENCE_TYPE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXPRTER_MICROARRAY on ZSTG_EXPRESSION_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_EXPRTER_ID on ZSTG_EXPRESSION_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -2897,7 +2861,55 @@ ERROR at line 1:
 ORA-01408: such column list already indexed
 
 
-SQL> create index ZSTG_EXPRTER_ID on ZSTG_EXPRESSION_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_EXPRTER_MICROARRAY on ZSTG_EXPRESSION_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_SEQUENCE_T on ZSTG_EXPRESSION_REPORTER(SEQUENCE_TYPE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_SEQUENCE_S on ZSTG_EXPRESSION_REPORTER(SEQUENCE_SOURCE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_TRANSCRIPT on ZSTG_EXPRESSION_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_TARGET_DES on ZSTG_EXPRESSION_REPORTER(TARGET_DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_GENE_ID on ZSTG_EXPRESSION_REPORTER(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_NAS_ID on ZSTG_EXPRESSION_REPORTER(NAS_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_CHROMOSOME on ZSTG_EXPRESSION_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_CHR_START on ZSTG_EXPRESSION_REPORTER(CHR_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_CHR_STOP on ZSTG_EXPRESSION_REPORTER(CHR_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_CYTO_START on ZSTG_EXPRESSION_REPORTER(CYTO_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_CYTO_STOP on ZSTG_EXPRESSION_REPORTER(CYTO_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXPRTER_ASSEMBLY on ZSTG_EXPRESSION_REPORTER(ASSEMBLY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -2905,11 +2917,11 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/expr_reporter_protein_domain.cols.sql;
 SQL> 
-SQL> create index EXPR_REPMAIN_PROTEIN_DO on EXPR_REPORTER_PROTEIN_DOMAIN(PROTEIN_DOMAIN_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPR_REPMAIN_EXPR_REPOR on EXPR_REPORTER_PROTEIN_DOMAIN(EXPR_REPORTER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
-SQL> create index EXPR_REPMAIN_EXPR_REPOR on EXPR_REPORTER_PROTEIN_DOMAIN(EXPR_REPORTER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPR_REPMAIN_PROTEIN_DO on EXPR_REPORTER_PROTEIN_DOMAIN(PROTEIN_DOMAIN_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2917,15 +2929,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/snp_reporter.cols.sql;
 SQL> 
-SQL> create index SNP_REPORTER_PHAST_CONS on SNP_REPORTER(PHAST_CONSERVATION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index SNP_REPORTER_SNP_ID on SNP_REPORTER(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index SNP_REPORTER_MICROARRAY on SNP_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index SNP_REPORTER_ID on SNP_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2933,7 +2937,15 @@ SQL> create index SNP_REPORTER_NAME on SNP_REPORTER(NAME) PARALLEL NOLOGGING tab
 
 Index created.
 
-SQL> create index SNP_REPORTER_ID on SNP_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index SNP_REPORTER_MICROARRAY on SNP_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index SNP_REPORTER_SNP_ID on SNP_REPORTER(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index SNP_REPORTER_PHAST_CONS on SNP_REPORTER(PHAST_CONSERVATION) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2941,35 +2953,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_snp_reporter.cols.sql;
 SQL> 
-SQL> create index ZSTG_SNPRTER_CYTO_STOP on ZSTG_SNP_REPORTER(CYTO_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_CYTO_START on ZSTG_SNP_REPORTER(CYTO_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_CHR_STOP on ZSTG_SNP_REPORTER(CHR_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_CHR_START on ZSTG_SNP_REPORTER(CHR_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_CHROMOSOME on ZSTG_SNP_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_PHAST_CONS on ZSTG_SNP_REPORTER(PHAST_CONSERVATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_SNP_ID on ZSTG_SNP_REPORTER(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_SNPRTER_MICROARRAY on ZSTG_SNP_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_SNPRTER_ID on ZSTG_SNP_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -2977,7 +2961,35 @@ SQL> create index ZSTG_SNPRTER_NAME on ZSTG_SNP_REPORTER(NAME) PARALLEL NOLOGGIN
 
 Index created.
 
-SQL> create index ZSTG_SNPRTER_ID on ZSTG_SNP_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_SNPRTER_MICROARRAY on ZSTG_SNP_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_SNP_ID on ZSTG_SNP_REPORTER(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_PHAST_CONS on ZSTG_SNP_REPORTER(PHAST_CONSERVATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_CHROMOSOME on ZSTG_SNP_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_CHR_START on ZSTG_SNP_REPORTER(CHR_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_CHR_STOP on ZSTG_SNP_REPORTER(CHR_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_CYTO_START on ZSTG_SNP_REPORTER(CYTO_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_SNPRTER_CYTO_STOP on ZSTG_SNP_REPORTER(CYTO_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -2985,11 +2997,11 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon_reporter_gene.cols.sql;
 SQL> 
-SQL> create index EXON_REPGENE_GENE_ID on EXON_REPORTER_GENE(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPGENE_EXON_REPOR on EXON_REPORTER_GENE(EXON_REPORTER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
-SQL> create index EXON_REPGENE_EXON_REPOR on EXON_REPORTER_GENE(EXON_REPORTER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPGENE_GENE_ID on EXON_REPORTER_GENE(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -2997,7 +3009,27 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon_reporter.cols.sql;
 SQL> 
-SQL> create index EXON_REPRTER_EXON_ID on EXON_REPORTER(EXON_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPRTER_ID on EXON_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_NAME on EXON_REPORTER(NAME) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_MICROARRAY on EXON_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_MANUFACTUR on EXON_REPORTER(MANUFACTURER_PSR_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_PROBE_COUN on EXON_REPORTER(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_STRAND on EXON_REPORTER(STRAND) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3008,27 +3040,7 @@ ERROR at line 1:
 ORA-01408: such column list already indexed
 
 
-SQL> create index EXON_REPRTER_STRAND on EXON_REPORTER(STRAND) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_PROBE_COUN on EXON_REPORTER(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_MANUFACTUR on EXON_REPORTER(MANUFACTURER_PSR_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_MICROARRAY on EXON_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_NAME on EXON_REPORTER(NAME) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_ID on EXON_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPRTER_EXON_ID on EXON_REPORTER(EXON_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3036,39 +3048,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_exon_reporter.cols.sql;
 SQL> 
-SQL> create index ZSTG_EXORTER_STOP_LOCAT on ZSTG_EXON_REPORTER(STOP_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_START_LOCA on ZSTG_EXON_REPORTER(START_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_CHROMOSOME on ZSTG_EXON_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_EXON_ID on ZSTG_EXON_REPORTER(EXON_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_TRANSCRIPT on ZSTG_EXON_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_STRAND on ZSTG_EXON_REPORTER(STRAND) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_PROBE_COUN on ZSTG_EXON_REPORTER(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_MANUFACTUR on ZSTG_EXON_REPORTER(MANUFACTURER_PSR_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_EXORTER_MICROARRAY on ZSTG_EXON_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_EXORTER_ID on ZSTG_EXON_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -3076,7 +3056,39 @@ SQL> create index ZSTG_EXORTER_NAME on ZSTG_EXON_REPORTER(NAME) PARALLEL NOLOGGI
 
 Index created.
 
-SQL> create index ZSTG_EXORTER_ID on ZSTG_EXON_REPORTER(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_EXORTER_MICROARRAY on ZSTG_EXON_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_MANUFACTUR on ZSTG_EXON_REPORTER(MANUFACTURER_PSR_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_PROBE_COUN on ZSTG_EXON_REPORTER(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_STRAND on ZSTG_EXON_REPORTER(STRAND) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_TRANSCRIPT on ZSTG_EXON_REPORTER(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_EXON_ID on ZSTG_EXON_REPORTER(EXON_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_CHROMOSOME on ZSTG_EXON_REPORTER(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_START_LOCA on ZSTG_EXON_REPORTER(START_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_EXORTER_STOP_LOCAT on ZSTG_EXON_REPORTER(STOP_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -3084,11 +3096,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon.cols.sql;
 SQL> 
-SQL> create index EXONEXON_TRANSCRIPT on EXON(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXONEXON_SOURCE on EXON(SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXONEXON_ID on EXON(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3099,7 +3107,11 @@ ERROR at line 1:
 ORA-01408: such column list already indexed
 
 
-SQL> create index EXONEXON_ID on EXON(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXONEXON_SOURCE on EXON(SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXONEXON_TRANSCRIPT on EXON(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3107,10 +3119,6 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/transcript_gene.cols.sql;
 SQL> 
-SQL> create index TRANSCRIGENE_GENE_ID on TRANSCRIPT_GENE(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
 SQL> create index TRANSCRIGENE_TRANSCRIPT on TRANSCRIPT_GENE(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index TRANSCRIGENE_TRANSCRIPT on TRANSCRIPT_GENE(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT
                                                         *
@@ -3118,19 +3126,15 @@ ERROR at line 1:
 ORA-01408: such column list already indexed
 
 
+SQL> create index TRANSCRIGENE_GENE_ID on TRANSCRIPT_GENE(GENE_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
 SQL> 
 SQL> --EXIT;
 SQL> @$LOAD/indexes/transcript.cols.sql;
 SQL> 
-SQL> create index TRANSCRIRIPT_PROBE_COUN on TRANSCRIPT(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index TRANSCRIRIPT_STRAND on TRANSCRIPT(STRAND) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index TRANSCRIRIPT_SOURCE on TRANSCRIPT(SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index TRANSCRIRIPT_ID on TRANSCRIPT(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3141,7 +3145,15 @@ ERROR at line 1:
 ORA-01408: such column list already indexed
 
 
-SQL> create index TRANSCRIRIPT_ID on TRANSCRIPT(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index TRANSCRIRIPT_SOURCE on TRANSCRIPT(SOURCE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index TRANSCRIRIPT_STRAND on TRANSCRIPT(STRAND) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index TRANSCRIRIPT_PROBE_COUN on TRANSCRIPT(PROBE_COUNT) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3149,39 +3161,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/microarray.cols.sql;
 SQL> 
-SQL> create index MICROARRRRAY_LSID on MICROARRAY(LSID) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_ACCESSION on MICROARRAY(ACCESSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_DESCRIPTIO on MICROARRAY(DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_TYPE on MICROARRAY(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_PLATFORM on MICROARRAY(PLATFORM) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_DBSNP_VERS on MICROARRAY(DBSNP_VERSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_GENOME_VER on MICROARRAY(GENOME_VERSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_ANNOTATION on MICROARRAY(ANNOTATION_DATE) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MICROARRRRAY_ARRAY_NAME on MICROARRAY(ARRAY_NAME) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MICROARRRRAY_ANNOTATION on MICROARRAY(ANNOTATION_VERSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3189,11 +3169,50 @@ SQL> create index MICROARRRRAY_ID on MICROARRAY(ID) PARALLEL NOLOGGING tablespac
 
 Index created.
 
+SQL> create index MICROARRRRAY_ARRAY_NAME on MICROARRAY(ARRAY_NAME) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_ANNOTATION on MICROARRAY(ANNOTATION_DATE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+create index MICROARRRRAY_ANNOTATION on MICROARRAY(ANNOTATION_DATE) PARALLEL NOLOGGING tablespace CABIO_FUT
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create index MICROARRRRAY_GENOME_VER on MICROARRAY(GENOME_VERSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_DBSNP_VERS on MICROARRAY(DBSNP_VERSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_PLATFORM on MICROARRAY(PLATFORM) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_TYPE on MICROARRAY(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_DESCRIPTIO on MICROARRAY(DESCRIPTION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_ACCESSION on MICROARRAY(ACCESSION) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MICROARRRRAY_LSID on MICROARRAY(LSID) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
 SQL> 
 SQL> --EXIT;
 SQL> @$LOAD/indexes/protein_domain.lower.sql;
 SQL> 
-SQL> create index PROTEIN_MAIN_TYPE_lwr on PROTEIN_DOMAIN(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index PROTEIN_MAIN_ACCESSION__lwr on PROTEIN_DOMAIN(lower(ACCESSION_NUMBER)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3201,7 +3220,7 @@ SQL> create index PROTEIN_MAIN_DESCRIPTIO_lwr on PROTEIN_DOMAIN(lower(DESCRIPTIO
 
 Index created.
 
-SQL> create index PROTEIN_MAIN_ACCESSION__lwr on PROTEIN_DOMAIN(lower(ACCESSION_NUMBER)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index PROTEIN_MAIN_TYPE_lwr on PROTEIN_DOMAIN(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3209,11 +3228,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/gene_relative_location.lower.sql;
 SQL> 
-SQL> create index GENE_RELTION_TYPE_lwr on GENE_RELATIVE_LOCATION(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index GENE_RELTION_PROBE_SET__lwr on GENE_RELATIVE_LOCATION(lower(PROBE_SET_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index GENE_RELTION_ORIENTATIO_lwr on GENE_RELATIVE_LOCATION(lower(ORIENTATION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3221,7 +3236,11 @@ SQL> create index GENE_RELTION_DISTANCE_lwr on GENE_RELATIVE_LOCATION(lower(DIST
 
 Index created.
 
-SQL> create index GENE_RELTION_ORIENTATIO_lwr on GENE_RELATIVE_LOCATION(lower(ORIENTATION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index GENE_RELTION_PROBE_SET__lwr on GENE_RELATIVE_LOCATION(lower(PROBE_SET_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index GENE_RELTION_TYPE_lwr on GENE_RELATIVE_LOCATION(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3232,11 +3251,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/marker_relative_location.lower.sql;
 SQL> 
-SQL> create index MARKER_RTION_PROBE_SET__lwr on MARKER_RELATIVE_LOCATION(lower(PROBE_SET_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index MARKER_RTION_DISTANCE_lwr on MARKER_RELATIVE_LOCATION(lower(DISTANCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_RTION_TYPE_lwr on MARKER_RELATIVE_LOCATION(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3244,7 +3259,11 @@ SQL> create index MARKER_RTION_ORIENTATIO_lwr on MARKER_RELATIVE_LOCATION(lower(
 
 Index created.
 
-SQL> create index MARKER_RTION_TYPE_lwr on MARKER_RELATIVE_LOCATION(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index MARKER_RTION_DISTANCE_lwr on MARKER_RELATIVE_LOCATION(lower(DISTANCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index MARKER_RTION_PROBE_SET__lwr on MARKER_RELATIVE_LOCATION(lower(PROBE_SET_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3252,15 +3271,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/expression_reporter.lower.sql;
 SQL> 
-SQL> create index EXPRESSIRTER_TARGET_DES_lwr on EXPRESSION_REPORTER(lower(TARGET_DESCRIPTION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_TRANSCRIPT_lwr on EXPRESSION_REPORTER(lower(TRANSCRIPT_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXPRESSIRTER_SEQUENCE_S_lwr on EXPRESSION_REPORTER(lower(SEQUENCE_SOURCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPRESSIRTER_NAME_lwr on EXPRESSION_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3268,7 +3279,15 @@ SQL> create index EXPRESSIRTER_SEQUENCE_T_lwr on EXPRESSION_REPORTER(lower(SEQUE
 
 Index created.
 
-SQL> create index EXPRESSIRTER_NAME_lwr on EXPRESSION_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXPRESSIRTER_SEQUENCE_S_lwr on EXPRESSION_REPORTER(lower(SEQUENCE_SOURCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_TRANSCRIPT_lwr on EXPRESSION_REPORTER(lower(TRANSCRIPT_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXPRESSIRTER_TARGET_DES_lwr on EXPRESSION_REPORTER(lower(TARGET_DESCRIPTION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3279,11 +3298,11 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/snp_reporter.lower.sql;
 SQL> 
-SQL> create index SNP_REPORTER_PHAST_CONS_lwr on SNP_REPORTER(lower(PHAST_CONSERVATION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index SNP_REPORTER_NAME_lwr on SNP_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
-SQL> create index SNP_REPORTER_NAME_lwr on SNP_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index SNP_REPORTER_PHAST_CONS_lwr on SNP_REPORTER(lower(PHAST_CONSERVATION)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3294,11 +3313,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon_reporter.lower.sql;
 SQL> 
-SQL> create index EXON_REPRTER_STRAND_lwr on EXON_REPORTER(lower(STRAND)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index EXON_REPRTER_PROBE_COUN_lwr on EXON_REPORTER(lower(PROBE_COUNT)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPRTER_NAME_lwr on EXON_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3306,7 +3321,11 @@ SQL> create index EXON_REPRTER_MANUFACTUR_lwr on EXON_REPORTER(lower(MANUFACTURE
 
 Index created.
 
-SQL> create index EXON_REPRTER_NAME_lwr on EXON_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXON_REPRTER_PROBE_COUN_lwr on EXON_REPORTER(lower(PROBE_COUNT)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index EXON_REPRTER_STRAND_lwr on EXON_REPORTER(lower(STRAND)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3314,11 +3333,11 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon.lower.sql;
 SQL> 
-SQL> create index EXONEXON_SOURCE_lwr on EXON(lower(SOURCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXONEXON_MANUFACTUR_lwr on EXON(lower(MANUFACTURER_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
-SQL> create index EXONEXON_MANUFACTUR_lwr on EXON(lower(MANUFACTURER_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index EXONEXON_SOURCE_lwr on EXON(lower(SOURCE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3329,11 +3348,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/transcript.lower.sql;
 SQL> 
-SQL> create index TRANSCRIRIPT_PROBE_COUN_lwr on TRANSCRIPT(lower(PROBE_COUNT)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
-Index created.
-
-SQL> create index TRANSCRIRIPT_STRAND_lwr on TRANSCRIPT(lower(STRAND)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index TRANSCRIRIPT_MANUFACTUR_lwr on TRANSCRIPT(lower(MANUFACTURER_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -3341,7 +3356,11 @@ SQL> create index TRANSCRIRIPT_SOURCE_lwr on TRANSCRIPT(lower(SOURCE)) PARALLEL 
 
 Index created.
 
-SQL> create index TRANSCRIRIPT_MANUFACTUR_lwr on TRANSCRIPT(lower(MANUFACTURER_ID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+SQL> create index TRANSCRIRIPT_STRAND_lwr on TRANSCRIPT(lower(STRAND)) PARALLEL NOLOGGING tablespace CABIO_FUT;
+
+Index created.
+
+SQL> create index TRANSCRIRIPT_PROBE_COUN_lwr on TRANSCRIPT(lower(PROBE_COUNT)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 
 Index created.
 
@@ -4380,7 +4399,7 @@ SQL> exit;
 Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.4.0 - 64bit Production
 With the Partitioning, Data Mining and Real Application Testing options
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 18 18:04:46 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:02:47 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -4442,15 +4461,7 @@ SQL> drop index ZSTG_PONCY_BIG_ID;
 
 Index dropped.
 
-SQL> drop index ZSTG_POPENCY_TYPE_LWR;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_ETHNICITY_LWR;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_MAJOR_ALLE_LWR;
+SQL> drop index ZSTG_POPENCY_SNP_PROBES_LWR;
 
 Index dropped.
 
@@ -4458,7 +4469,47 @@ SQL> drop index ZSTG_POPENCY_MINOR_ALLE_LWR;
 
 Index dropped.
 
-SQL> drop index ZSTG_POPENCY_SNP_PROBES_LWR;
+SQL> drop index ZSTG_POPENCY_MAJOR_ALLE_LWR;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_ETHNICITY_LWR;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_TYPE_LWR;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_SNP_PROBES;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_MINOR_ALLE;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_MAJOR_ALLE;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_SNP_ID;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_HETEROZYGO;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_MINOR_FREQ;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_MAJOR_FREQ;
+
+Index dropped.
+
+SQL> drop index ZSTG_POPENCY_ETHNICITY;
 
 Index dropped.
 
@@ -4467,38 +4518,6 @@ SQL> drop index ZSTG_POPENCY_ID;
 Index dropped.
 
 SQL> drop index ZSTG_POPENCY_TYPE;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_ETHNICITY;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_MAJOR_FREQ;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_MINOR_FREQ;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_HETEROZYGO;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_SNP_ID;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_MAJOR_ALLE;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_MINOR_ALLE;
-
-Index dropped.
-
-SQL> drop index ZSTG_POPENCY_SNP_PROBES;
 
 Index dropped.
 
@@ -4552,35 +4571,7 @@ PL/SQL procedure successfully completed.
 SQL> 
 SQL> @$LOAD/indexes/zstg_population_frequency.cols.sql
 SQL> 
-SQL> create index ZSTG_POPENCY_SNP_PROBES on ZSTG_POPULATION_FREQUENCY(SNP_PROBESET_AFFY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MINOR_ALLE on ZSTG_POPULATION_FREQUENCY(MINOR_ALLELE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MAJOR_ALLE on ZSTG_POPULATION_FREQUENCY(MAJOR_ALLELE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_SNP_ID on ZSTG_POPULATION_FREQUENCY(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_HETEROZYGO on ZSTG_POPULATION_FREQUENCY(HETEROZYGOUS_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MINOR_FREQ on ZSTG_POPULATION_FREQUENCY(MINOR_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MAJOR_FREQ on ZSTG_POPULATION_FREQUENCY(MAJOR_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_ETHNICITY on ZSTG_POPULATION_FREQUENCY(ETHNICITY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_POPENCY_ID on ZSTG_POPULATION_FREQUENCY(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -4588,7 +4579,35 @@ SQL> create index ZSTG_POPENCY_TYPE on ZSTG_POPULATION_FREQUENCY(TYPE) PARALLEL 
 
 Index created.
 
-SQL> create index ZSTG_POPENCY_ID on ZSTG_POPULATION_FREQUENCY(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_POPENCY_ETHNICITY on ZSTG_POPULATION_FREQUENCY(ETHNICITY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_MAJOR_FREQ on ZSTG_POPULATION_FREQUENCY(MAJOR_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_MINOR_FREQ on ZSTG_POPULATION_FREQUENCY(MINOR_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_HETEROZYGO on ZSTG_POPULATION_FREQUENCY(HETEROZYGOUS_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_SNP_ID on ZSTG_POPULATION_FREQUENCY(SNP_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_MAJOR_ALLE on ZSTG_POPULATION_FREQUENCY(MAJOR_ALLELE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_MINOR_ALLE on ZSTG_POPULATION_FREQUENCY(MINOR_ALLELE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_SNP_PROBES on ZSTG_POPULATION_FREQUENCY(SNP_PROBESET_AFFY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -4596,15 +4615,7 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/zstg_population_frequency.lower.sql
 SQL> 
-SQL> create index ZSTG_POPENCY_SNP_PROBES_lwr on ZSTG_POPULATION_FREQUENCY(lower(SNP_PROBESET_AFFY_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MINOR_ALLE_lwr on ZSTG_POPULATION_FREQUENCY(lower(MINOR_ALLELE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
-Index created.
-
-SQL> create index ZSTG_POPENCY_MAJOR_ALLE_lwr on ZSTG_POPULATION_FREQUENCY(lower(MAJOR_ALLELE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_POPENCY_TYPE_lwr on ZSTG_POPULATION_FREQUENCY(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -4612,7 +4623,15 @@ SQL> create index ZSTG_POPENCY_ETHNICITY_lwr on ZSTG_POPULATION_FREQUENCY(lower(
 
 Index created.
 
-SQL> create index ZSTG_POPENCY_TYPE_lwr on ZSTG_POPULATION_FREQUENCY(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+SQL> create index ZSTG_POPENCY_MAJOR_ALLE_lwr on ZSTG_POPULATION_FREQUENCY(lower(MAJOR_ALLELE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_MINOR_ALLE_lwr on ZSTG_POPULATION_FREQUENCY(lower(MINOR_ALLELE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+
+Index created.
+
+SQL> create index ZSTG_POPENCY_SNP_PROBES_lwr on ZSTG_POPULATION_FREQUENCY(lower(SNP_PROBESET_AFFY_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 Index created.
 
@@ -4664,7 +4683,7 @@ With the Partitioning, Data Mining and Real Application Testing options
 Getting population frequency 
 Finished getting all the relevant data 
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 18 18:27:57 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:12:36 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -4777,15 +4796,7 @@ SQL> drop index POPULATNCY_BIG_ID;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_MAJOR_ALLE_LWR;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_MINOR_ALLE_LWR;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_SNP_PROBES_LWR;
+SQL> drop index POPULATIENCY_ETHNICITY_LWR;
 
 Index dropped.
 
@@ -4793,39 +4804,19 @@ SQL> drop index POPULATIENCY_TYPE_LWR;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_ETHNICITY_LWR;
+SQL> drop index POPULATIENCY_SNP_PROBES_LWR;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_MINOR_FREQ;
+SQL> drop index POPULATIENCY_MINOR_ALLE_LWR;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_HETEROZYGO;
+SQL> drop index POPULATIENCY_MAJOR_ALLE_LWR;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_SNP_ID;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_MAJOR_ALLE;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_MINOR_ALLE;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_SNP_PROBES;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_ID;
-
-Index dropped.
-
-SQL> drop index POPULATIENCY_TYPE;
+SQL> drop index POPULATIENCY_MAJOR_FREQ;
 
 Index dropped.
 
@@ -4833,7 +4824,35 @@ SQL> drop index POPULATIENCY_ETHNICITY;
 
 Index dropped.
 
-SQL> drop index POPULATIENCY_MAJOR_FREQ;
+SQL> drop index POPULATIENCY_TYPE;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_ID;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_SNP_PROBES;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_MINOR_ALLE;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_MAJOR_ALLE;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_SNP_ID;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_HETEROZYGO;
+
+Index dropped.
+
+SQL> drop index POPULATIENCY_MINOR_FREQ;
 
 Index dropped.
 
@@ -4842,12 +4861,10 @@ SQL> --EXIT;
 SQL> exit;
 Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.4.0 - 64bit Production
 With the Partitioning, Data Mining and Real Application Testing options
-SQL*Loader-500: Unable to open file (/cabio_fut/cabio_futdb/cabio_fut_data/temp/population_frequency/popFreq.txt)
-SQL*Loader-553: file not found
-SQL*Loader-509: System error: No such file or directory
-SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 18 18:28:41 2009
+Load completed - logical record count 2341775.
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:13:14 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 

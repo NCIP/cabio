@@ -1,5 +1,5 @@
 
-drop index GO_CHILD_INDEX;
-drop index GO_ANCESTO_INDEX;
+drop index GO_CLOSUSURE_ANCESTOR;
+drop index GO_CLOSUSURE_GO_CODE;
 
 --EXIT;

@@ -57,11 +57,11 @@ my %SUBDIRS = (
 print "Processing Affymetrix array annotation files\n";
 
 my $indir = getFullDataPath("arrays/Affymetrix");
-print "Input directory: $indir\n";
+print "**Input directory: $indir\n";
 
 my %fileVersions = ();
 foreach my $file (glob("$indir/*.csv")) {
-
+    print $file,"\n";
     # parse the affymetrix filename
     my ($prefix,$version,$suffix,$annot) 
         = ($file =~ /\/([^\/]+?)\.na(\d+)\.?([^\/]+)?\.csv/);

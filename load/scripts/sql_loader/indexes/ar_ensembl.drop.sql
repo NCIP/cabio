@@ -1,6 +1,6 @@
 
-drop index AR_ENSEMEMBL_PROBE_SET_;
-drop index AR_ENSEMEMBL_ENSEMBL_ID;
 drop index AR_ENSEMEMBL_GENECHIP_A;
+drop index AR_ENSEMEMBL_ENSEMBL_ID;
+drop index AR_ENSEMEMBL_PROBE_SET_;
 
 --EXIT;

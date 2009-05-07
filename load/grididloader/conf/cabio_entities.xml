@@ -412,7 +412,7 @@
     </logical-key>
   </entity>
   
-  <entity class="Evidence" table="EVIDENCE" parallel="true">
+  <entity class="Evidence" table="EVIDENCE" parallel="false">
     <primary-key>ID</primary-key>
     <logical-key>
       <property>PUBMED_ID</property>
@@ -430,7 +430,7 @@
     </logical-key>
   </entity>
 
- <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="true">
+ <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="false">
     <primary-key>ID</primary-key>
     <logical-key>
       <property entity="Gene" foreign-key="GENE_ID"/>

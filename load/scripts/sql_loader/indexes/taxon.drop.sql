@@ -1,7 +1,16 @@
 
-drop index TAXNODUPS;
 drop index TAXONXON_BIG_ID_LWR;
-drop index TAXON_BIGID_IDX;
-drop index TAXON_PK;
+drop index TAXNODUPS_IDX;
+drop index TAXONAXON_PERFERED;
+drop index TAXONAXON_TAXON_ID;
+drop index TAXONAXON_STRAIN_OR_;
+drop index TAXONAXON_COMMON_NAM;
+drop index TAXONAXON_ABBREVIATI;
+drop index TAXONAXON_SCIENTIFIC;
+drop index TAXONAXON_STRAIN_OR__LWR;
+drop index TAXONAXON_COMMON_NAM_LWR;
+drop index TAXONXON_BIG_ID;
+drop index TAXONAXON_ABBREVIATI_LWR;
+drop index TAXONAXON_SCIENTIFIC_LWR;
 
 --EXIT;

@@ -56,7 +56,7 @@ commit;
 
 -- To populate go_closure
 TODO: Needs to be backgrounded separately or rewritten
---execute Load_Heir.MakeClosure;
+execute Load_Heir.MakeClosure;
 
 @$LOAD/indexes/go_ontology.cols.sql;
 @$LOAD/indexes/go_ontology.lower.sql;

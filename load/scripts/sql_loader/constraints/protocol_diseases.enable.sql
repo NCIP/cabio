@@ -1,5 +1,5 @@
 
-alter table PROTOCOL_DISEASES enable constraint SYS_C0029816;
-alter table PROTOCOL_DISEASES enable constraint SYS_C0029817;
+alter table PROTOCOL_DISEASES enable constraint SYS_C0033664;
+alter table PROTOCOL_DISEASES enable constraint SYS_C0033665;
 
 --EXIT;

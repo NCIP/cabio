@@ -9,7 +9,7 @@ cd $CABIO_DIR/scripts/sql_loader
 time sqlplus $1 @$LOAD/all_ref_constraints.sql 1>refConstraints.log
 time sqlplus $1 @$LOAD/constraints/disable.referential.sql >>refConstraints.log
 
-mail -s "Disabling ref integrity constraints " viswanathl@mail.nih.gov < refConstraints.log 
+mail -s "Disabling ref integrity constraints " $EMAIL < refConstraints.log 
 
 cd $LOAD/arrays
 rm *.log
@@ -17,7 +17,7 @@ rm *.bad
 echo "Loading Array Staging tables"
 time sh sql_ldr_arrays_g.sh $1 1>arrayLoad.log 2>&1 
 
-mail -s "ARRAY Staging Log " viswanathl@mail.nih.gov < $LOAD/arrays/arrayLoad.log 
+mail -s "ARRAY Staging Log " $EMAIL < $LOAD/arrays/arrayLoad.log 
 
 cd $LOAD/snp
 echo "Loading SNP Data"
@@ -71,17 +71,17 @@ rm *.bad *.log
 time sh markerLoad.sh $1 1>marker_load.log 2>&1 &
 
 wait
-mail -s "SNP Load" viswanathl@mail.nih.gov < $LOAD/snp/snp_load.log
-mail -s "Protein Load" viswanathl@mail.nih.gov < $LOAD/protein/protein_load.log
-mail -s "Marker load Log " viswanathl@mail.nih.gov < $LOAD/marker/marker_load.log 
-mail -s "cytoband Log " viswanathl@mail.nih.gov < $LOAD/cytoband/cytoband_load.log 
-mail -s "ctep Log " viswanathl@mail.nih.gov < $LOAD/ctep/ctep_load.log 
-mail -s "est mrna Log " viswanathl@mail.nih.gov < $LOAD/relative_clone/estmrna_load.log 
-mail -s "nas Log " viswanathl@mail.nih.gov < $LOAD/unigene/nas/nas_load.log 
-mail -s "Gene Log " viswanathl@mail.nih.gov < $LOAD/unigene/gene/geneTv_load.log 
-mail -s "Unigene2Gene Log " viswanathl@mail.nih.gov < $LOAD/unigene2gene/unigene2gene_load.log 
-mail -s "Clone Log " viswanathl@mail.nih.gov < $LOAD/unigene/clone/cloneTables_load.log 
-mail -s "Unigene temp Log " viswanathl@mail.nih.gov < $LOAD/unigene/unigeneTempData/unigene_sqlldr.log 
+mail -s "SNP Load" $EMAIL < $LOAD/snp/snp_load.log
+mail -s "Protein Load" $EMAIL < $LOAD/protein/protein_load.log
+mail -s "Marker load Log " $EMAIL < $LOAD/marker/marker_load.log 
+mail -s "cytoband Log " $EMAIL < $LOAD/cytoband/cytoband_load.log 
+mail -s "ctep Log " $EMAIL < $LOAD/ctep/ctep_load.log 
+mail -s "est mrna Log " $EMAIL < $LOAD/relative_clone/estmrna_load.log 
+mail -s "nas Log " $EMAIL < $LOAD/unigene/nas/nas_load.log 
+mail -s "Gene Log " $EMAIL < $LOAD/unigene/gene/geneTv_load.log 
+mail -s "Unigene2Gene Log " $EMAIL < $LOAD/unigene2gene/unigene2gene_load.log 
+mail -s "Clone Log " $EMAIL < $LOAD/unigene/clone/cloneTables_load.log 
+mail -s "Unigene temp Log " $EMAIL < $LOAD/unigene/unigeneTempData/unigene_sqlldr.log 
 
 
 cd $LOAD/dbcrossref
@@ -126,11 +126,11 @@ time sh pidLoader.sh $1 1>pidLoader.log 2>&1 &
 
 wait
 
-mail -s "SQL Log " viswanathl@mail.nih.gov < $LOAD/sql/sqlLoad.log 
-mail -s "GO Load Log " viswanathl@mail.nih.gov < $LOAD/GO/GO.log 
-mail -s "Homologene Log " viswanathl@mail.nih.gov < $LOAD/homologene/homoloGene.log 
-mail -s "DatabaseCrossReference Log " viswanathl@mail.nih.gov < $LOAD/dbcrossref/dbCrossRef.log 
-mail -s "PID (not related to model) Log " viswanathl@mail.nih.gov < $LOAD/pid/pidLoader.log 
+mail -s "SQL Log " $EMAIL < $LOAD/sql/sqlLoad.log 
+mail -s "GO Load Log " $EMAIL < $LOAD/GO/GO.log 
+mail -s "Homologene Log " $EMAIL < $LOAD/homologene/homoloGene.log 
+mail -s "DatabaseCrossReference Log " $EMAIL < $LOAD/dbcrossref/dbCrossRef.log 
+mail -s "PID (not related to model) Log " $EMAIL < $LOAD/pid/pidLoader.log 
 
 cd $LOAD/location
 echo "Loading LOCATION tables"
@@ -156,16 +156,16 @@ cd $LOAD/pid_dump
 echo "Loading PID tables"
 time sh pidLoader.sh $1 1>pidLoader.log 2>&1 
 
-mail -s "Histo Load Log " viswanathl@mail.nih.gov < $LOAD/histopathology/histLoad.log 
-mail -s "Array PLSQL Log " viswanathl@mail.nih.gov < $LOAD/arrays/Array_PLSQL_Ld.log 
-mail -s "CGDC Load Log " viswanathl@mail.nih.gov < $LOAD/cgdc/cgdcLoad.log 
-mail -s "PID (related to model) Log " viswanathl@mail.nih.gov < $LOAD/pid_dump/pidLoader.log 
+mail -s "Histo Load Log " $EMAIL < $LOAD/histopathology/histLoad.log 
+mail -s "Array PLSQL Log " $EMAIL < $LOAD/arrays/Array_PLSQL_Ld.log 
+mail -s "CGDC Load Log " $EMAIL < $LOAD/cgdc/cgdcLoad.log 
+mail -s "PID (related to model) Log " $EMAIL < $LOAD/pid_dump/pidLoader.log 
 
-echo "Finished Load P4 " |  mail -s " Beginning grid id " viswanathl@mail.nih.gov
+echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
 cd $LOAD/provenance
 echo "Loading provenance, source_reference, url_source_reference tables"
 rm *.bad *.log
-time sh provenance_DataLoader.sh $1  1>provenance_load.log 2>&1 &
+time sh provenance_DataLoader.sh $1 1>provenance_load.log 2>&1 &
 
 time sqlplus $1  @$LOAD/keywords/keyword_load.sql
 
@@ -178,13 +178,13 @@ time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log
 
 
 echo "Beginning Grid Id Load"
-echo "Commenting these for the time being"
 
 cd $CABIO_DIR/grididloader/
 rm *.bad *.log
-time ant -Dtarget.env=dev  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
+time ant -Dtarget.env=$TARGET_ENV  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
 
-mail -s " Grid Id Load Log " viswanathl@mail.nih.gov < $CABIO_DIR/gridid/$grididload_LOG 
+mail -s " Finished grid-id part 1 " $EMAIL  
+mail -s " Grid Id Load Log " $EMAIL < $CABIO_DIR/gridid/$grididload_LOG 
 
 time sqlplus $1  @$LOAD/indexes/bigid_cols.sql 
 time sqlplus $1  @$LOAD/indexes/bigid_lower.sql 
@@ -206,18 +206,31 @@ cd $LOAD/compara
 echo "Loading Compara tables"
 time sh load.sh $1 1>compara.log 2>&1 
 
+# indexes for some objects not covered above 
 sqlplus $1 @$LOAD/misc_indexes.sql 
 
-mail -s " Post Big Id Load Log " viswanathl@mail.nih.gov < postbigid.log 
-mail -s " Merged SNP Id Log " viswanathl@mail.nih.gov < mergedIdProcessing.log 
-mail -s " Location Log " viswanathl@mail.nih.gov < locationLoad.log 
+mail -s " Post Big Id Load Log " $EMAIL < postbigid.log 
+mail -s " Merged SNP Id Log " $EMAIL < mergedIdProcessing.log 
+mail -s " Location Log; Starting big id load for remaining objects " $EMAIL < locationLoad.log 
+
+# run the bigid for the other objects
+cd $CABIO_DIR/grididloader/
+time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>>$grididload_LOG 2>&1
 
 cd $LOAD
-
 time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
-#time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
+time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
+
+
+# check which objects don't have big id loaded
+time sqlplus $1 @$LOAD/bigid.notnull.check.sql 1> /dev/null 
+time sqlplus $1 @$LOAD/constraints/bigid.notnullcheck.sql 1> bigid.notnull.check.log 
+
+
+# enable ref constraints
 time sqlplus $1 @$LOAD/constraints/enable.referential.sql 1>>refConstraints.log
 
-echo "Finished Load P8 " |  mail -s " Finished Load P8; finished enabling ref constraints " viswanathl@mail.nih.gov < refConstraints.log
+echo "Not Null Check for Big Id " |  mail -s " Not Null Check Big Id " $EMAIL < bigid.notnull.check.log
+echo "Finished Load P8 " |  mail -s " Finished Load P8; finished enabling ref constraints " $EMAIL < refConstraints.log
 
 exit

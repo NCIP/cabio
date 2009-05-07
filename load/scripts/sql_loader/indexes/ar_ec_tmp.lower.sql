@@ -1,6 +1,6 @@
 
-create index AR_EC_TM_TMP_GENECHIP_A_lwr on AR_EC_TMP(lower(GENECHIP_ARRAY)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-create index AR_EC_TM_TMP_EC_lwr on AR_EC_TMP(lower(EC)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index AR_EC_TM_TMP_PROBE_SET__lwr on AR_EC_TMP(lower(PROBE_SET_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+create index AR_EC_TM_TMP_EC_lwr on AR_EC_TMP(lower(EC)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
+create index AR_EC_TM_TMP_GENECHIP_A_lwr on AR_EC_TMP(lower(GENECHIP_ARRAY)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 
 --EXIT;

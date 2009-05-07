@@ -1,12 +1,12 @@
 LOAD DATA 
  
-INFILE '$CABIO_DATA_DIR/arrays/Affymetrix/U133B/HT-HG_U133B.annot.csv'
+INFILE '$CABIO_DATA_DIR/arrays/Affymetrix/U133B/HT_HG-U133B.annot.csv'
  
 APPEND
  
 INTO TABLE ZSTG_RNA_Probesets_tmp
  
-FELDS TERMINATED BY "," optionally enclosed by '"'
+FIELDS TERMINATED BY "," optionally enclosed by '"'
 TRAILING NULLCOLS 
 (PROBE_SET_ID,
   geneCHIP_ARRAY,

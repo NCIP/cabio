@@ -52,5 +52,6 @@ alter table ZSTG_OLD_PROTOCOL_DISEASES enable constraint SYS_C0020928;
 alter table ZSTG_AGENT_BK enable constraint SYS_C0026163;
 alter table ZSTG_TARGET enable constraint SYS_C0021023;
 alter table PID_ENTITY_ACCESSION enable constraint SYS_C0017726;
+alter table ZSTG_TAXON enable constraint SYS_C0031758;
 
 EXIT;

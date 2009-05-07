@@ -92,7 +92,7 @@ EXIT when disabledConstraints%NOTFOUND;
     if colNames is not null then
 
 	dbms_output.put_line('create unique index '|| indexName||' on '||tableName); 
-	dbms_output.put_line('('||colNames||') tablespace ' || nvl(tablespaceName,'CABIO') ||';'); 
+	dbms_output.put_line('('||colNames||') tablespace ' || nvl(tablespaceName,'CABIO_FUT') ||';'); 
 	dbms_output.put_line('alter table '|| tableName || ' enable constraint '|| constraintName || ' using index ' || indexName ||';'); 
 
 

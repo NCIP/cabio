@@ -1,14 +1,14 @@
 #!/bin/sh
-export CABIO_DIR=/cabio/cabiodb/cabio42
+export CABIO_DIR=/cabio/cabiodb/cabio43_load
 export CABIO_DATA_DIR=/cabio/cabiodb/cabio_data
-export GRIDID_PATH=/cabio/cabiodb/cabio42/gridid
-export LOAD=/cabio/cabiodb/cabio42/scripts/sql_loader
+export GRIDID_PATH=/cabio/cabiodb/cabio43_load/gridid
+export LOAD=/cabio/cabiodb/cabio43_load/scripts/sql_loader
 
 # executables 
 export PERL5LIB=$PERL5LIB:"$CABIO_DIR"/scripts/parse
 export SQLLDR=/app/oracle/product/10gClient/bin/sqlldr
 export SQLPLUS=/app/oracle/product/10gClient/bin/sqlplus
-export PATH="$PATH":"$CABIO_DIR"/bin
+export PATH="$PATH":"$CABIO_DIR"/bin:/usr/bin/perl:/usr/lib/perl
 
 
 # D/B Connection parameters

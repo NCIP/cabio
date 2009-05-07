@@ -1,8 +1,8 @@
 create unique index SYS_C0021037_idx on ARRAY_REPORTER_CH
-(DISCRIMINATOR,MICROARRAY_ID,NAME) tablespace CABIO;
+(DISCRIMINATOR,MICROARRAY_ID,NAME) tablespace CABIO_FUT;
 alter table ARRAY_REPORTER_CH enable constraint SYS_C0021037 using index SYS_C0021037_idx;
 create unique index ARCHPK_idx on ARRAY_REPORTER_CH
-(ID) tablespace CABIO;
+(ID) tablespace CABIO_FUT;
 alter table ARRAY_REPORTER_CH enable constraint ARCHPK using index ARCHPK_idx;
 
 alter table ARRAY_REPORTER_CH enable constraint SYS_C0021037;
