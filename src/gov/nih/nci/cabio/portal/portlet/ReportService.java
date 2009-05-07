@@ -3,10 +3,10 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation;
 import gov.nih.nci.cabio.domain.ExpressionArrayReporter;
 import gov.nih.nci.cabio.domain.Gene;
-import gov.nih.nci.cabio.domain.GeneOntology;
 import gov.nih.nci.cabio.domain.GeneAgentAssociation;
 import gov.nih.nci.cabio.domain.GeneDiseaseAssociation;
 import gov.nih.nci.cabio.domain.GeneFunctionAssociation;
+import gov.nih.nci.cabio.domain.GeneOntology;
 import gov.nih.nci.cabio.domain.GenePhysicalLocation;
 import gov.nih.nci.cabio.domain.MarkerPhysicalLocation;
 import gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation;
@@ -21,8 +21,10 @@ import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,7 +107,7 @@ public class ReportService {
              "lower(gene.symbol) like ?";
 
      private static final String GO_BY_SYMBOL_HQL = 
-             "select geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
+             "select distinct geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
              "left join geneOntology.geneCollection as genes " +
              "left join genes.proteinCollection as proteins " +
              "where "; 
@@ -407,8 +409,15 @@ public class ReportService {
 
         String hql = PATHWAY_BY_SYMBOL_HQL+PATHWAY_BY_SYMBOL_HQL_WHERE;
         List<String> params = getListWithId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(hql,
+        List<Pathway> pathways = appService.query(new HQLCriteria(hql,
             QueryUtils.createCountQuery(hql),params));
+        
+        // eliminate duplicates
+        Map<Long,Pathway> map = new HashMap<Long,Pathway>();
+        for(Pathway p : pathways) {
+            map.put(p.getId(), p);
+        }
+        return new ArrayList<Pathway>(map.values());
     }
      
      /**
