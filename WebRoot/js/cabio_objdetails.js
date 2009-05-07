@@ -37,19 +37,28 @@ var caBioObjectDetails = function() {
                     if (typeof(val) == 'object') {
                         var cdata = val['columnNames'];
                         var rdata = val['rows'];
-                        v = '<table class="nested"><tr>';
-                        for(var ci in cdata) {
-                            v += '<th>'+cdata[ci]+'</th>';
+                        var count = parseInt(val['count']);
+                        if (count > 0) {
+	                        v = '<table class="nested"><tr>';
+	                        for(var ci in cdata) {
+	                            v += '<th>'+cdata[ci]+'</th>';
+	                        }
+	                        v += '</tr>';
+	                        for(var ri in rdata) {
+	                            v += '<tr>';
+	                            for(var ci in cdata) {
+	                                v += '<td>'+rdata[ri][cdata[ci]]+'</td>';
+	                            }
+	                            v += '</tr>';
+	                        }
+	                        v += '</table>';
+	                        if (count > rdata.length) {
+	                            v += "<br/><b>Only the first "+rdata.length+" out of "+
+	                                count+" results are shown here. "+
+	                                "To download the entire result set please use "+ 
+	                                "the caBIO Object Graph Browser linked below.</b>"
+	                        }
                         }
-                        v += '</tr>';
-                        for(var ri in rdata) {
-                            v += '<tr>';
-                            for(var ci in cdata) {
-                                v += '<td>'+rdata[ri][cdata[ci]]+'</td>';
-                            }
-                            v += '</tr>';
-                        }
-                        v += '</table>';
                     }
                     else {
                         v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
