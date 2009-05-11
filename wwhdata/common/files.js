@@ -12,7 +12,6 @@ P.fA("Microarray Annotations","UsingthecaBIOPortlet.2.7.html");
 P.fA("Genomic Annotations","UsingthecaBIOPortlet.2.8.html");
 P.fA("Pathways","UsingthecaBIOPortlet.2.9.html");
 P.fA("Cancer Gene Index","UsingthecaBIOPortlet.2.10.html");
-P.fA("Displaying caBIO Search Results","UsingthecaBIOPortlet.2.11.html");
 P.fA("caBIO Portlet Glossary","caBIO%20Portlet%20Glossary.3.1.html");
 P.fA("Using Application Support","Application%20Support.4.1.html");
 }

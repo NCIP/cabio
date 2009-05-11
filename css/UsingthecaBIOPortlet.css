@@ -2456,21 +2456,23 @@ div.Heading3NOTOC
   font-style: normal;
   font-variant: normal;
   font-weight: bold;
-  margin-bottom: 0.0pt;
-  margin-left: 0pt;
+  margin-bottom: 6.0pt;
+  margin-left: 0px;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-left: 0px;
   text-align: Left;
-  text-indent: 18pt;
+  text-indent: 0pt;
   text-transform: none;
   vertical-align: baseline;
 }
 
 .Heading3NOTOC_outer
 {
-  margin-bottom: 0.0pt;
+  margin-bottom: 6.0pt;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-left: 0px;
 }
 
 .Heading3NOTOC_inner
@@ -2575,6 +2577,52 @@ div.Heading4
   font-style: italic;
   font-variant: normal;
   font-weight: bold;
+  text-align: Left;
+  text-transform: none;
+  vertical-align: baseline;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  padding-left: 0pt;
+  padding-right: 0pt;
+  padding-top: 0pt;
+  padding-bottom: 0pt;
+}
+
+div.Heading4NOTOC
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
+  margin-bottom: 0.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+  text-align: Left;
+  text-indent: 36pt;
+  text-transform: none;
+  vertical-align: baseline;
+}
+
+.Heading4NOTOC_outer
+{
+  margin-bottom: 0.0pt;
+  margin-right: 0pt;
+  margin-top: 12.0pt;
+}
+
+.Heading4NOTOC_inner
+{
+  color: #000000;
+  font-family: "Palatino Linotype";
+  font-size: 12.0pt;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: normal;
   text-align: Left;
   text-transform: none;
   vertical-align: baseline;

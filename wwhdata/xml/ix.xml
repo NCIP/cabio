@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WebWorksHelpIX version="5.0" xmlns="urn:WebWorks-Help-Index-Schema">
   <g t="A" o="002">
-    <i t="advanced search">
-      <j l="6" />
-    </i>
     <i t="agent, definition">
-      <j l="13#1067186" />
+      <j l="12#1067186" />
     </i>
     <i t="annotation, definition">
-      <j l="13#1067177" />
+      <j l="12#1067177" />
     </i>
     <i t="assembly, definition">
-      <j l="13#1067198" />
+      <j l="12#1067198" />
     </i>
   </g>
   <g t="C" o="002">
@@ -23,12 +20,15 @@
         <j l="3#1073173" />
       </i>
     </i>
+    <i t="caBIO Object Graph Browser">
+      <j l="6#1087683" />
+    </i>
     <i t="caBIO Portlet">
-      <i t="advanced search">
-        <j l="6" />
-      </i>
       <i t="simple search">
         <j l="5" />
+      </i>
+      <i t="templated search">
+        <j l="6" />
       </i>
     </i>
     <i t="caBIO Portlet, definition">
@@ -45,105 +45,104 @@
     </i>
     <i t="Cancer Gene Index">
       <j l="11" />
-      <i t="Agent to Genes">
+      <i t="Agent to Genes templated search">
         <j l="11#1076250" />
       </i>
-      <i t="Disease to Genes">
+      <i t="Disease to Genes templated search">
         <j l="11#1076090" />
       </i>
-      <i t="Gene to Diseases/Agents">
+    </i>
+    <i t="Cancer to Gene Index">
+      <i t="Gene to Diseases/Agents templated search">
         <j l="11#1076397" />
       </i>
     </i>
     <i t="CBIIT, definition">
-      <j l="13#1064555" />
-      <j l="13#1064557" />
+      <j l="12#1064555" />
+      <j l="12#1064557" />
     </i>
     <i t="chromosome, definition">
-      <j l="13#1067160" />
+      <j l="12#1067160" />
     </i>
     <i t="clone, definition">
-      <j l="13#1067207" />
+      <j l="12#1067207" />
     </i>
   </g>
   <g t="D" o="002">
     <i t="dbSNP identifier, definition">
-      <j l="13#1060579" />
+      <j l="12#1060579" />
     </i>
     <i t="downstream distance, definition">
-      <j l="13#1067249" />
+      <j l="12#1067249" />
     </i>
   </g>
   <g t="E" o="002">
     <i t="EVS, definition">
-      <j l="13#1064565" />
+      <j l="12#1064565" />
     </i>
   </g>
   <g t="G" o="002">
     <i t="gene, definition">
-      <j l="13#1067151" />
+      <j l="12#1067151" />
     </i>
     <i t="Genome Range Queries">
       <j l="7" />
-      <i t="Absolute Range Query">
+      <i t="Absolute Range Query templated search">
         <j l="7#1078008" />
       </i>
-      <i t="Grid Id Range Query">
+      <i t="Grid Id Range Query templated search">
         <j l="7#1078039" />
       </i>
     </i>
     <i t="genome, definition">
-      <j l="13#1060595" />
+      <j l="12#1060595" />
     </i>
     <i t="Genomic Annotations">
       <j l="9" />
       <i t="Gene Lookup by Symbol">
         <j l="9#1075627" />
       </i>
+      <i t="Gene Ontology templated search">
+        <j l="9#1086047" />
+      </i>
     </i>
     <i t="glossary">
-      <j l="13#1059361" />
+      <j l="12#1059361" />
     </i>
   </g>
   <g t="H" o="002">
-    <i t="Hibernate, definition">
-      <j l="13#1067498" />
-    </i>
     <i t="HUGO gene symbol, definition">
-      <j l="13#1060632" />
+      <j l="12#1060632" />
     </i>
   </g>
   <g t="L" o="002">
     <i t="library, definition">
-      <j l="13#1067216" />
-    </i>
-    <i t="Lucene, definition">
-      <j l="13#1067511" />
+      <j l="12#1067216" />
     </i>
   </g>
   <g t="M" o="002">
     <i t="Microarray Annotations">
       <j l="8" />
-      <i t="Reporter Lookup by Gene">
+      <i t="Reporter Lookup by Gene templated search">
         <j l="8#1075354" />
       </i>
       <i t="Reporter Lookup by Name">
         <j l="8#1075492" />
       </i>
-      <i t="Reporter Lookup by SNP">
+      <i t="Reporter Lookup by SNP templated search">
         <j l="8#1081827" />
       </i>
     </i>
     <i t="microarray, definition">
-      <j l="13#1064584" />
+      <j l="12#1064584" />
     </i>
   </g>
   <g t="N" o="002">
     <i t="NCBI, definition">
-      <j l="13#1067316" />
+      <j l="12#1067316" />
     </i>
     <i t="NCICB Application Support">
-      <j l="14#1069150" />
+      <j l="13#1069150" />
     </i>
   </g>
   <g t="O" o="002">
@@ -164,27 +163,61 @@
   </g>
   <g t="P" o="002">
     <i t="pathway, definition">
-      <j l="13#1067273" />
+      <j l="12#1067273" />
     </i>
     <i t="Pathways">
       <j l="10" />
-      <i t="Pathway By Gene">
+      <i t="Pathway By Gene Symbol templated search">
         <j l="10#1081358" />
       </i>
-      <i t="Pathway By Name">
+      <i t="Pathway By Gene templated search">
+        <j l="10#1085910" />
+      </i>
+      <i t="Pathway By Name templated search">
         <j l="10#1081337" />
+      </i>
+      <i t="Pathway by Protein templated search">
+        <j l="10#1085932" />
       </i>
     </i>
   </g>
   <g t="R" o="002">
     <i t="reporter, definition">
-      <j l="13#1067282" />
+      <j l="12#1067282" />
     </i>
     <i t="reports">
+      <i t="Reporter Lookup by Name">
+        <j l="8#1075492" />
+      </i>
+    </i>
+    <i t="reports, creating">
+      <j l="6#1074446" />
+    </i>
+  </g>
+  <g t="S" o="002">
+    <i t="searching caBIO data">
+      <j l="5" />
+      <j l="6" />
+      <i t="advanced options">
+        <j l="5#1073846" />
+      </i>
+    </i>
+    <i t="sequence, definition">
+      <j l="12#1067303" />
+    </i>
+    <i t="SNP, definition">
+      <j l="12#1060612" />
+    </i>
+    <i t="start position, definition">
+      <j l="12#1067228" />
+    </i>
+  </g>
+  <g t="T" o="002">
+    <i t="templated search">
       <i t="Absolute Range Query">
         <j l="7#1078008" />
       </i>
-      <i t="Agents to Genes">
+      <i t="Agent to Genes">
         <j l="11#1076250" />
       </i>
       <i t="Cancer Gene Index">
@@ -195,6 +228,9 @@
       </i>
       <i t="Gene Lookup by Symbol">
         <j l="9#1075627" />
+      </i>
+      <i t="Gene Ontology">
+        <j l="9#1086047" />
       </i>
       <i t="Gene to Diseases/Agents">
         <j l="11#1076397" />
@@ -212,10 +248,16 @@
         <j l="8" />
       </i>
       <i t="Pathway By Gene">
+        <j l="10#1085910" />
+      </i>
+      <i t="Pathway By Gene Symbol">
         <j l="10#1081358" />
       </i>
       <i t="Pathway By Name">
         <j l="10#1081337" />
+      </i>
+      <i t="Pathway by Protein">
+        <j l="10#1085932" />
       </i>
       <i t="Pathways category">
         <j l="10" />
@@ -223,34 +265,17 @@
       <i t="Reporter Lookup by Gene">
         <j l="8#1075354" />
       </i>
-      <i t="Reporter Lookup by Name">
-        <j l="8#1075492" />
-      </i>
       <i t="Reporter Lookup by SNP">
         <j l="8#1081827" />
       </i>
     </i>
   </g>
-  <g t="S" o="002">
-    <i t="searching caBIO data">
-      <j l="5" />
-      <i t="advanced options">
-        <j l="5#1073846" />
-      </i>
-    </i>
-    <i t="sequence, definition">
-      <j l="13#1067303" />
-    </i>
-    <i t="SNP, definition">
-      <j l="13#1060612" />
-    </i>
-    <i t="start position, definition">
-      <j l="13#1067228" />
-    </i>
-  </g>
   <g t="U" o="002">
+    <i t="UniProt accession number, definition">
+      <j l="12#1067475" />
+    </i>
     <i t="upstream distance, definition">
-      <j l="13#1067261" />
+      <j l="12#1067261" />
     </i>
   </g>
 </WebWorksHelpIX>

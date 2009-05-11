@@ -2503,9 +2503,10 @@ div.Heading3NOTOC
   font-variant: normal;
   font-weight: bold;
   margin-bottom: 0.0pt;
-  margin-left: 0pt;
+  margin-left: 0px;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-left: 0px;
   text-align: Left;
   text-indent: 18pt;
   text-transform: none;
@@ -2517,6 +2518,7 @@ div.Heading3NOTOC
   margin-bottom: 0.0pt;
   margin-right: 0pt;
   margin-top: 12.0pt;
+  padding-left: 0px;
 }
 
 .Heading3NOTOC_inner

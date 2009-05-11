@@ -32,23 +32,6 @@
     <hr align="left" />
     <blockquote>
       <div class="Heading2"><a name="1073270">Performing a Simple Search</a></div>
-      <div class="Body_Text"><a name="1085666">The caBIO Portlet provides a simple search for performing “Google-like” queries in </a>caBIO. Using this search facility, users can search caBIO by entering one or more keywords. Since caBIO provides a model representation and repository of molecular biology data, entities that concern the Central Dogma of Molecular Biology (Genes, Proteins, Nucleic Acid Sequences, Chromosomes) are the core of this model and the primary subject for search terms. The results of the simple search are formatted based on the domain object represented in the caBIO model.  </div>
-      <div class="Tip_Main_Body_outer" style="margin-left: 13px;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1085653">
-          <tr style="vertical-align: baseline;">
-            <td>
-              <div class="Tip_Main_Body_inner" style="width: 15px; white-space: nowrap;">
-                <span style="left: -20px; position: relative; top: 15px;">
-                  <img src="tip_NCI.gif" alt="*" id="bullet1085653" border="0" width="30" height="30" />
-                </span>
-              </div>
-            </td>
-            <td width="100%">
-              <div class="Tip_Main_Body_inner"><a name="1085653">The simple search is based on the caBIO Freestyle Lexical Mine (FreestyleLM) search </a>that builds upon Hibernate and Apache Lucene full text search engines. The FreestyleLM search facilitates a horizontal search across caBIO domain objects. For example, searching for “brca1” will return any object that includes the <span class="Code">brca1</span> gene in its attributes, such as Genes, Proteins, Pathways, and so on.  Hibernate searches are object-based (a "vertical" search). In a vertical search, you must select one caBIO domain object (such as Gene) to search. </div>
-            </td>
-          </tr>
-        </table>
-      </div>
       <div class="Body_Text_Drop_Down_Open"><a name="1073392">To perform a simple search in the caBIO Portlet</a></div>
       <div class="Numbered_List_1_outer" style="margin-left: 18pt;">
         <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073271">
@@ -63,13 +46,13 @@
         </table>
       </div>
       <div class="Numbered_List_outer" style="margin-left: 18pt;">
-        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1085742">
+        <table border="0" cellspacing="0" cellpadding="0" id="SummaryNotRequired_np1073309">
           <tr style="vertical-align: baseline;">
             <td>
               <div class="Numbered_List_inner" style="width: 18pt; white-space: nowrap;">2.	</div>
             </td>
             <td width="100%">
-              <div class="Numbered_List_inner"><a name="1085742">Enter a search term or terms into the text box. Search terms must exist in the </a>caBIO model. </div>
+              <div class="Numbered_List_inner"><a name="1073309">Enter a search term or terms into the text box. Search terms that exist in the </a>caBIO domain are suggested in a list box. Click a term to select it.</div>
             </td>
           </tr>
         </table>
@@ -97,24 +80,8 @@
           </td>
         </tr>
         <tr>
-          <td id="tc1085783" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1085783">View: simple</a></div>
-          </td>
-          <td id="tc1085785" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1085785">Displays only the most relevant annotations in the search </a>results for performance efficiency. Formatting is applied to each result, based on the caBIO domain object type, to show a relevant title and description and class for each result.</div>
-          </td>
-        </tr>
-        <tr>
-          <td id="tc1085798" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1085798">View: objects</a></div>
-          </td>
-          <td id="tc1085800" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1085800">Displays all information associated with each caBIO object in </a>the search results. After performing the simple search, an additional search is performed to retrieve the full object for each result. The query will be slower as more data is returned. </div>
-          </td>
-        </tr>
-        <tr>
           <td id="tc1073854" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1073854">Match Terms: any</a></div>
+            <div class="Table_Text"><a name="1073854">Match: any</a></div>
           </td>
           <td id="tc1073856" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
             <div class="Table_Text"><a name="1073856">Match any of the words in the text box.</a></div>
@@ -122,7 +89,7 @@
         </tr>
         <tr>
           <td id="tc1073858" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
-            <div class="Table_Text"><a name="1073858">Match Terms: all</a></div>
+            <div class="Table_Text"><a name="1073858">Match: all</a></div>
           </td>
           <td id="tc1073860" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
             <div class="Table_Text"><a name="1073860">Match all of the words in the text box.</a></div>
@@ -132,9 +99,32 @@
           <td id="tc1073862" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
             <div class="Table_Text"><a name="1073862">Exclude</a></div>
           </td>
-          <td id="tc1085858" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+          <td id="tc1073864" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
             <div class="Table_Text"><a name="1073864">Enter any terms that should not appear in the search results.</a></div>
-            <div class="Table_Text"><span style="font-weight: bold;"><a name="1085858">Note:</a></span> caBIO data that contain the search term are excluded in the search results; however, caBIO fields in the database named after the excluded term will not be excluded as the fields may contain relevant data.  </div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1073866" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1073866">View: simple</a></div>
+          </td>
+          <td id="tc1073868" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1073868">Shows a title, description, and caBIO class for each result.</a></div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1085514" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1085514">View: objects</a></div>
+          </td>
+          <td id="tc1085516" style="background-color: White; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1085516">Shows the full object for each result. This query is slower but </a>may return more results (for example, Grid IDs).</div>
+          </td>
+        </tr>
+        <tr>
+          <td id="tc1086930" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1086930">Results per page</a></div>
+          </td>
+          <td id="tc1086932" style="background-color: WhiteSmoke; border-bottom-color: #000000; border-bottom-style: none; border-bottom-width: 1px; border-left-color: #000000; border-left-style: none; border-left-width: 1px; border-right-color: #000000; border-right-style: none; border-right-width: 1px; border-top-color: #000000; border-top-style: none; border-top-width: 1px; padding-bottom: 6px; padding-left: 6px; padding-right: 6px; padding-top: 6px; vertical-align: top;">
+            <div class="Table_Text"><a name="1086932">Select 5, 10, or 15 results per page.</a></div>
           </td>
         </tr>
       </table>
