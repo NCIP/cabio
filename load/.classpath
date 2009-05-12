@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="unigeneparser/src"/>
+	<classpathentry kind="src" path="scripts/parse/unigeneparser/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="scripts/parse/unigeneparser/lib/commons-net-1.4.0.jar"/>
 	<classpathentry kind="lib" path="scripts/parse/unigeneparser/lib/jakarta-oro-2.0.8.jar"/>
