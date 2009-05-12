@@ -8,8 +8,12 @@
 #
 
 use strict;
+use LWP::Simple;
 use Data::Dumper;
 use ParseUtils;
+use XML::Twig::XPath;
+
+my $EVSAPI_URL = "http://evsapi.nci.nih.gov/evsapi41";
 
 my ($indir,$outdir) = getFullDataPaths("drugbank");
 
@@ -159,29 +163,40 @@ print OUT "Drug_Id";
 for my $key (@cols_drug) {
     print OUT "\t$key";
 }
-print OUT "\n";
+print OUT "\tEVS_Id\n";
 
 print OUT_ALIAS "Drug_Id\tAlias_Type\tAlias_Name\n";
 
 for my $drugId (@drugs) {
 
+    my %synonyms = ();
+    
     for my $name (split /\n/,$drugs{$drugId}{'Synonyms'}) {
         $name = clean($name);
-        print OUT_ALIAS "$drugId\tSynonym\t$name\n" if $name; 
+        if ($name) {
+            print OUT_ALIAS "$drugId\tSynonym\t$name\n";
+            $synonyms{lc($name)}++; 
+        }
     }
 
     for my $name (split /\n/,$drugs{$drugId}{'Brand_Names'}) {
         $name = clean($name);
-        print OUT_ALIAS "$drugId\tTrade Name\t$name\n" if $name;
+        if ($name) {
+            print OUT_ALIAS "$drugId\tTrade Name\t$name\n";
+            $synonyms{lc($name)}++; 
+        }
     }
 
+    my $evsId = evsLookup($drugs{$drugId}{'Generic_Name'},\%synonyms);
+    print "$drugId -> $evsId\n";
+    
     print OUT $drugId;
     for my $key (@cols_drug) {
         my $val = clean($drugs{$drugId}{$key});
         print "Warning: $key contains large value\n" if (length($val) > 5000);
         print OUT "\t$val";
     }
-    print OUT "\n";
+    print OUT "\t$evsId\n";
 }
 
 close OUT;
@@ -235,4 +250,53 @@ sub clean {
     return $val;
 }
 
+sub evsLookup {
+
+    my ($agentName,$synHash) = @_;
+    $agentName =~ tr|[]/|   |; 
+        
+    my $url = $EVSAPI_URL.'/GetXML?query=DescLogicConcept&DescLogicConcept[@name='.$agentName.']';
+    my $xml = get $url;
+
+    if ($xml =~ /caCORE HTTP Servlet Error/) {
+        print "Error contacting EVS at URL:\n$url\n\nServer returned:\n$xml";
+        return "";
+    }
+    
+    my $twig = XML::Twig::XPath->new(); 
+    $twig->parse($xml);
+    my @classNodes = $twig->findnodes("/xlink:httpQuery/queryResponse/class");
+
+    my @potentials = ();
+
+    for my $classNode (@classNodes) {
+        my $name = $classNode->findvalue('field[@name="Name"]');
+        my $evsId = $classNode->findvalue('field[@name="Code"]');
+         
+        if (lc($name) eq lc($agentName)) {
+            # direct match on name
+            #print "    Direct match for $agentName\n";
+            return $evsId;
+        }
+        
+        if ($synHash->{lc($name)}) {
+            # if this is a synonym, list it as a potential synonym match
+            #print "    Potential match: $name (($evsId)) for $agentName\n";
+            push @potentials, $evsId;
+        }
+    }
+    
+    # no matches 
+    return "" unless @potentials;
+    
+    # more than 1 potential synonym match?
+    if ($#potentials > 0) {
+        print "Warning, more than 1 potential match for $agentName: ".
+            join(", ",@potentials)."\n";
+    }
+    
+    # return first potential synonym match
+    #print "    Returning potential match ".$potentials[0]."\n";
+    return $potentials[0];
+}
 
