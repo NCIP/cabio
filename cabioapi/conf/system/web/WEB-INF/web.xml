@@ -76,6 +76,11 @@
     </servlet>
     
     <servlet>
+        <servlet-name>PathwaySVGService</servlet-name>
+        <servlet-class>gov.nih.nci.system.web.PathwaySVGService</servlet-class>            
+    </servlet>
+    
+    <servlet>
         <servlet-name>AxisServlet</servlet-name>
         <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class> 
     </servlet>
@@ -136,6 +141,11 @@
         <url-pattern>/suggest</url-pattern>
     </servlet-mapping>
     
+     <servlet-mapping>
+        <servlet-name>PathwaySVGService</servlet-name>
+        <url-pattern>/GetPathway</url-pattern>
+    </servlet-mapping>
+    
 	<mime-mapping>
 		<extension>wsdl</extension>
 		<mime-type>text/xml</mime-type>
@@ -149,6 +159,5 @@
 	   	<exception-type>gov.nih.nci.system.dao.impl.search.FreestyleLMException</exception-type>
        	<location>/searchError.jsp</location>
   	</error-page>
-	
-	
+
 </web-app>
