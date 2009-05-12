@@ -112,12 +112,14 @@ public class GridIdDAO implements DAO {
         if (rangeQuery.getChromosome() != null) {
             chromosomeId = rangeQuery.getChromosome().getId();
         }
+
+        String assembly = rangeQuery.getAssembly().toLowerCase().replaceAll("\\*", "%");
         
         log.info("rangeQuery("+lstart+","+lend+") assembly="+
-            rangeQuery.getAssembly()+" partial="+rangeQuery.getAllowPartialMatches());
+            assembly+" partial="+rangeQuery.getAllowPartialMatches());
 
         List<Object> params = new ArrayList<Object>();
-        params.add(rangeQuery.getAssembly());
+        params.add(assembly);
         params.add(chromosomeId);
         params.add(lstart);
         params.add(lend);
@@ -126,7 +128,7 @@ public class GridIdDAO implements DAO {
         // unambiguous column. This way we can avoid the join to Chromosome.
         StringBuffer hql = new StringBuffer(
                 "from "+targetClass.getName()+" as p " +
-                "where p.assembly = ? " +
+                "where lower(p.assembly) like ? " +
                 "and CHROMOSOME_ID = ? ");
         
         if (rangeQuery.getAllowPartialMatches()) {
@@ -187,14 +189,15 @@ public class GridIdDAO implements DAO {
                     "left join f.physicalLocationCollection as p " +
                     "left join p.chromosome as c " +
                     "where f.id = ? " +
-                    "and p.assembly = ? " +
+                    "and lower(p.assembly) like ? " +
                     "group by c.id";
             
             List params = new ArrayList();
             
             try {
+                String assembly = rangeQuery.getAssembly().toLowerCase().replaceAll("\\*", "%");
                 params.add(ReflectionUtils.get(feature, "id"));
-                params.add(rangeQuery.getAssembly());
+                params.add(assembly);
             }
             catch (Exception e) {
                 throw new ApplicationException(e);
@@ -233,6 +236,7 @@ public class GridIdDAO implements DAO {
         absoluteRangeQuery.setChromosomeId(chromosomeId);
         absoluteRangeQuery.setStart(lstart);
         absoluteRangeQuery.setEnd(lend);
+        absoluteRangeQuery.setAssembly(rangeQuery.getAssembly());
         
         return query(targetClass, absoluteRangeQuery);
     }
