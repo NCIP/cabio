@@ -1,4 +1,5 @@
 import gov.nih.nci.cabio.domain.DiseaseOntology;
+import gov.nih.nci.cabio.domain.Evidence;
 import gov.nih.nci.cabio.domain.EvidenceCode;
 import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.GeneAgentAssociation;
@@ -36,8 +37,10 @@ public class TestCancerGeneIndex {
         for(GeneDiseaseAssociation gda : results) {
             System.out.println("  HUGO Symbol: "+gda.getGene().getHugoSymbol());
             System.out.println("    Role: "+gda.getRole());
-            System.out.println("    Pubmed Id: "+gda.getEvidence().getPubmedId());
-            System.out.println("    Sentence: "+gda.getEvidence().getSentence());
+            for(Evidence ev : gda.getEvidenceCollection()) {
+                System.out.println("    Pubmed Id: "+ev.getPubmedId());
+                System.out.println("    Sentence: "+ev.getSentence());
+            }
         }
         
 
@@ -56,8 +59,12 @@ public class TestCancerGeneIndex {
                 GeneAgentAssociation gaa = (GeneAgentAssociation)gfa;
                 System.out.println("  Agent: "+gaa.getAgent().getName());
                 System.out.println("    EVS Id: "+gaa.getAgent().getEVSId());
-                for(EvidenceCode ec : gaa.getEvidence().getEvidenceCodeCollection()) {
-                    System.out.println("    Evidence Code: "+ec.getEvidenceCode());
+                for(Evidence ev : gaa.getEvidenceCollection()) {
+                    System.out.println("    Pubmed Id: "+ev.getPubmedId());
+                    System.out.println("    Sentence: "+ev.getSentence());
+                    for(EvidenceCode ec : ev.getEvidenceCodeCollection()) {
+                        System.out.println("    Evidence Code: "+ec.getEvidenceCode());
+                    }
                 }
             }
         }
