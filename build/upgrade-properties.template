@@ -10,22 +10,37 @@
 #### Remote deployment settings  ###
 ####################################
 ## These properties assume that you only have to deploy to one server, the application server (database scripts run from application server).  If you have to deploy  to multiple application servers then several sets of these properties could exist prepended with application server identifier.  These properties are used by deploy-riles macro and deploy:remote:* targets.
-##ssh.server.username=application server OS user name
-##ssh.server.hostname=application server hostname, recommend leaving ${jboss.server.hostname} to not define it twice
-##ssh.port=application server ssh port number, will probably be 22
-##ssh.key.file=location of key file on the server running the deploy, if it is on your workstation you can change this to the local location, if it is on AHP then it will be some long path.  Failure to specify this correctly will cause the build to fail.
-##ssh.dir.temp=This is the directory where the deploy files will be copied to by default we recommend putting it in the deploy folder of the user's home area.
+ssh.server.username=application server OS user name
+ssh.server.hostname=application server hostname, recommend leaving ${jboss.server.hostname} to not define it twice
+ssh.port=application server ssh port number, will probably be 22
+ssh.key.file=location of key file on the server running the deploy, if it is on your workstation you can change this to the local location, if it is on AHP then it will be some long path.  Failure to specify this correctly will cause the build to fail.
+ssh.dir.temp=This is the directory where the deploy files will be copied to by default we recommend putting it in the deploy folder of the user's home area.
 ##############################
 ###  APPLICATION SETTINGS  ###
 ##############################
 application.base.path=The base path where all files are stored for this application, will be difrerent on different OSes. Example: ${user.home}/apps/cabio-webapp
 application.url=The URL to access the application. Example: http://${jboss.server.hostname}:${jboss.server.port}/cabio-webapp
+authentication.type=db
 ###########################
 ###  DATABASE SETTINGS  ###
 ###########################
 # Required for local installs
 # Require for all installs
 database.type==Type of database current database types supported by BDA Templates are Oracle, MySQL or PostgreSQL. Acceptable values are oracle|mysql|postgresql.
+
+database.re-create=false
+database.server=The database server host name
+database.port=The database server connection port: 1553 for 10g
+database.name=The database schema name such as BIODEV.NCI.NIH.GOV
+database.9i.name=The database schema name for 9i. It is used for remote-indexgen. For DEV, it's BIODEV
+database.user=The database user name: cabiodev
+database.password=The database user password for the tier
+database.url=jdbc:oracle:thin:@${database.server}:${database.port}/${database.name}
+
+database.system.user=root
+database.system.password=${database.password}
+database.system.url=jdbc:oracle:thin:@${database.server}:${database.port}/${database.name}
+
 ########################
 ###  JBOSS SETTINGS  ###
 ########################
@@ -45,6 +60,7 @@ jboss.server.jndi.port=Port used to connect when shutting down jboss.
 #tomcat.port.ajp=
 #tomcat.port.ssl=
 #tomcat.port.shutdown=
+
 ##################################
 #  Grid Service registration URL #
 ##################################
@@ -89,3 +105,13 @@ mail.smtp.server=The SMTP relay host name. Example: mailfwd.nih.gov
 validation.pre.port.list=
 validation.post.http.list=
 validation.post.socket.list=
+
+############################################################
+## Other caBIO settings
+############################################################
+#cabio-webapp.privatekey.dir=${user.home}/properties/ssh-keys
+cabio-webapp.privatekey.dir=The location where the privatekeys are stored on the build server: For DEV AntHillPro server: /usr/local/AnthillPro/work/subversiondriver/common-retrieve-properties .trunk.retrieve-properties/trunk/projects/cabio/cabioapi/properties/ssh-keys
+cabio.propertyservice.cacore.property.name=gov.nih.nci.cacore.cacoreProperties
+cabio-webapp.index_cache_base.dir=The base folder for cache and indexes. By default, use:/local/content/cabioapi
+cabio-webapp.cache_path=${cabio-webapp.index_cache_base.dir}/${cabio-webapp.version}/cache
+cabio-webapp.index_base=${cabio-webapp.index_cache_base.dir}/${cabio-webapp.version}/indexes
