@@ -285,12 +285,39 @@ public class RangeQueryTest extends TestCase {
         assertTrue("Expected at least 3 results in this range",
             results.size()>=3);
     }
+
+    /**
+     * Test the case-insensitivity and wildcards in assembly.
+     */
+    public void testAssembly() throws Exception {
+        
+        SNP snp = new SNP();
+        snp.setDBSNPID("rs6960438");
+        List snps = appService.search(SNP.class, snp);
+        
+        assertNotNull(snps);
+        assertEquals(1, snps.size());
+        snp = (SNP)snps.get(0);
+        
+        FeatureRangeQuery query = new FeatureRangeQuery();
+        query.setFeature(snp);
+        query.setUpstreamDistance(new Long(500));
+        query.setDownstreamDistance(new Long(500));
+        query.setAssembly("cele*");
+        List<? extends PhysicalLocation> results = appService.search(
+            PhysicalLocation.class, query);
+
+        assertFalse("No locations around SNP",results.isEmpty());
+        
+        for(PhysicalLocation l : results) {
+            assertEquals("Celera", l.getAssembly());
+        }
+    }
     
     public static void main(String[] argv) throws Exception {
         RangeQueryTest test = new RangeQueryTest();
         test.setUp();
-        test.testGridQueryWithRelativeSNPs();
-        test.testFeatureVsLocation();
+        test.testAssembly();
     }
 
 }
