@@ -354,6 +354,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		" />
 
        <!-- download the index files from the load server according to which tier it is deploying -->
+       <!-- this option has the most foot prints across the networks. It is currently not used.  -->            
        <target name="build:cabio-webapp:download:indexfiles">
             <if>
                   <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
@@ -457,7 +458,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
        <target name="test:download:indexfiles">
             <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
-            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
+            <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.indexgen.loadserver.key.file}" trust="true" verbose="true" />
        </target>
 
@@ -513,7 +514,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
             <!-- Prepare the load server and clean up old ones -->
             <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.indexgen.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
-                command="rm -r ${cabio.loadserver.indexgen.dir}; mkdir ${cabio.loadserver.indexgen.dir}; mv ${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.name} ${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" />
+                command="rm -r ${cabio.loadserver.indexgen.dir}; mkdir ${cabio.loadserver.indexgen.dir}" />
 
             <!--  zip up the indexgen files for easy transportation -->
             <zip destfile="${cabio-webapp.load.dir}/${cabio.tmp.indexgen.zipfile.name}" basedir="${cabio-webapp.indexgen.dir}" />
@@ -530,7 +531,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
  		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
             <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.indexgen.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
-                command=". .profile;cd ${cabio.loadserver.indexgen.dir};ant -Dindex_location=${cabio.loadserver.indexfile.output.dir} -Duser_name=${database.user} -Dpassword=${database.password} -Dindexes.file.name=${cabio.loadserver.indexfile.name} -Dconnection_url=${database.9i.url} ${cabio-webapp.indexgen.build.target}" />
+                command=". .profile;cd ${cabio.loadserver.indexgen.dir};ant -Dindex_location=${cabio.loadserver.indexfile.output.dir} -Duser_name=${database.user} -Dpassword=${database.password} -Dindexes.file.name=${cabio.loadserver.indexfile.tier.name} -Dconnection_url=${database.9i.url} ${cabio-webapp.indexgen.build.target}" />
+             
+            <!-- copy the index files to the NFS mounted folder for sharing -->
+            <sshexec username="${ssh.loadserver.username}" host="${ssh.loadserver.hostname}" port="${ssh.loadserver.port}" 
+                passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.indexgen.loadserver.key.file}" trust="true" verbose="true" failonerror="false" 
+                command="mkdir ${cabio.loadserver.priv_file_repo.base.dir}/indexes; mkdir ${cabio.loadserver.priv_file_repo.indexfile.dir}; cp ${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name} ${cabio.loadserver.priv_file_repo.indexfile.dir}/.;" />            
 
 	</target>
 
