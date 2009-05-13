@@ -244,7 +244,6 @@ for my $targetId (keys %drugtargets) {
             $c++;
         }
         unless ($c) {
-            print "WARNING! $targetId,".$drug->{'drugId'}."\n";
             print OUT_DT "$targetId\t$drugId\t\n";
         }
     }
