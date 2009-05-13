@@ -13,6 +13,7 @@ use Data::Dumper;
 use ParseUtils;
 use XML::Twig::XPath;
 
+my $DO_EVS_QUERIES = 1;
 my $EVSAPI_URL = "http://evsapi.nci.nih.gov/evsapi41";
 
 my ($indir,$outdir) = getFullDataPaths("drugbank");
@@ -43,7 +44,6 @@ while (<IN>) {
     if (/^#END_DRUGCARD/) {
         push @drugs, $currdrug;
         $texts{$currdrug} = $currtext;
-#        last if ($#drugs > 20);
         next;
     }
 
@@ -112,6 +112,16 @@ for my $drugId (@drugs) {
     for my $targetName (keys %targets) {
     
         my $id = $targets{$targetName}{"ID"};
+        my @drugrefs = split /\n/,$targets{$targetName}{"Drug_References"};
+        
+        # Collect pubmedIds for this drug/target combination
+        my @pubmedIds = ();
+        for my $ref (@drugrefs) {
+            my @refFields = split /\t/,$ref;
+            my $pubmedId = clean($refFields[0]);
+            push @pubmedIds, $pubmedId if $pubmedId;
+        } 
+        
         if (exists $drugtargets{$id}) {
             # check to make sure all the target's attributes are the same
             for my $targetKey (keys %{$targets{$targetName}}) {
@@ -121,8 +131,6 @@ for my $drugId (@drugs) {
                     }
                 }
             }
-            # link drug/target
-            push @{$drugtargets{$id}{'drugs'}}, $drugId;
         }
         else {
             # determine species of the target based on the SwissProt name
@@ -142,8 +150,11 @@ for my $drugId (@drugs) {
             # register the target
             $drugtargets{$id} = $targets{$targetName};
             delete $drugtargets{$id}{"Drug_References"};
-            $drugtargets{$id}{'drugs'} = [$drugId];
+            $drugtargets{$id}{'drugs'} = [];
         }
+        
+        # link drug/target
+        push @{$drugtargets{$id}{'drugs'}}, {drugId=>$drugId, pubmedIds=>\@pubmedIds};
     }
 }
 
@@ -186,9 +197,12 @@ for my $drugId (@drugs) {
             $synonyms{lc($name)}++; 
         }
     }
-
-    my $evsId = evsLookup($drugs{$drugId}{'Generic_Name'},\%synonyms);
-    print "$drugId -> $evsId\n";
+    
+    my $evsId = "";
+    if ($DO_EVS_QUERIES) {
+        $evsId = evsLookup($drugs{$drugId}{'Generic_Name'},\%synonyms);
+        print "$drugId -> $evsId\n";
+    }
     
     print OUT $drugId;
     for my $key (@cols_drug) {
@@ -218,12 +232,21 @@ for my $key (@cols_target) {
 }
 print OUT_T "\n";
 
-print OUT_DT "Target_Id\tDrug_Id\n";
+print OUT_DT "Target_Id\tDrug_Id\tPubMed_Id\n";
 
 for my $targetId (keys %drugtargets) {
 
-    for my $drugId (@{$drugtargets{$targetId}{'drugs'}}) {
-        print OUT_DT "$targetId\t$drugId\n";
+    for my $drug (@{$drugtargets{$targetId}{'drugs'}}) {
+        my $drugId = $drug->{'drugId'};
+        my $c = 0;
+        for my $pubmedId (@{$drug->{'pubmedIds'}}) {
+            print OUT_DT "$targetId\t$drugId\t$pubmedId\n";
+            $c++;
+        }
+        unless ($c) {
+            print "WARNING! $targetId,".$drug->{'drugId'}."\n";
+            print OUT_DT "$targetId\t$drugId\t\n";
+        }
     }
 
     print OUT_T $targetId;
