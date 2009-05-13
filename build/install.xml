@@ -341,21 +341,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<filtersfile file="project.properties"/>
 			</filterset>
 		</copy> 
-            
-            <!-- Copy the index files to working folder for packaging and scp to the deployment server later 
-            <if>
-                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
-            <then>
-                  <echo message="Copying the index files from ${cabio-indexes.dir.src} to ${cabio-indexes.dir.dest}" />
-    		      <copy todir="${cabio-indexes.dir.dest}" filtering="true">
-			     <fileset dir="${cabio-indexes.dir.src}">
-				    <include name="${cabio.loadserver.indexfile.tier.name}"/>
-			     </fileset>
-		      </copy> 
-            </then>
-            </if>
-            -->              
-
+                          
             <!-- make sure the index_base and CACHE_PATH folders exists when installing caBIO Web App -->
             <echo message="make sure the index_base: ${cabio-webapp.index_base} and CACHE_PATH: ${cabio-webapp.cache_path}   folders exists when installing caBIO Web App"/> 
             <if>
@@ -999,8 +985,20 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             <then>
                  <delete dir="${cabio.deploy.tmp.indexes.dir}" />
                  <mkdir dir="${cabio.deploy.tmp.indexes.dir}" />
-                 <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
+                 <if>
+                     <equals arg1="${cabio-webapp.indexfiles.download.use.scp}" arg2="true"/>
+                 <then>
+                     <copy todir="${cabio.deploy.tmp.indexes.dir}">
+                          <fileset dir="${cabio.loadserver.priv_file_repo.indexfile.dir}">
+                                <include name="${cabio.loadserver.indexfile.tier.name}" />
+                          </fileset>
+                     </copy>
+                </then>
+                <else>
+                     <scp file="${ssh.loadserver.username}@${ssh.loadserver.hostname}:${cabio.loadserver.indexfile.output.dir}/${cabio.loadserver.indexfile.tier.name}" todir="${cabio.deploy.tmp.indexes.dir}" port="${ssh.loadserver.port}" 
                 passphrase="${ssh.loadserver.passphrase}" keyfile="${ssh.loadserver.key.file}" trust="true" verbose="true" />
+                </else>
+                </if>   
                  <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
             </then>            
             <else>
