@@ -654,19 +654,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                            </fileset>
                       </copy>                 
                  </then>
-                 <else>
-                      <!-- Prepare the private key for deployment server to download indexfiles from storage/load server -->
-                      <!-- copy the private-key to exploded folder for distribution to deployment machine -->
-                      <echo message="copy the private key to exploded/properties folder"/>
-                      <property name="cabio-webapp.properties.privatekey.dist.dir" value="${dist.exploded.dir}/properties/ssh-keys" />
-                      <delete dir="${cabio-webapp.properties.privatekey.dist.dir}" />
-                      <mkdir dir="${cabio-webapp.properties.privatekey.dist.dir}" /> 
-                      <copy todir="${cabio-webapp.properties.privatekey.dist.dir}" overwrite="true">
-                             <fileset dir="${cabio-webapp.privatekey.dir}">                      
-                                   <include name="**/**" />                       
-                             </fileset>
-                      </copy>                  
-                 </else>
             </if>       
       </target>
 
