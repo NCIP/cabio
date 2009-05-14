@@ -990,8 +990,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                            <include name="${cabio.loadserver.indexfile.tier.name}" />
                       </fileset>
                  </copy>
-            </then>  
-            </if>   
                  <unzip src="${cabio.deploy.tmp.indexes.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio.deploy.tmp.indexes.dir}" />
             </then>            
             <else>
