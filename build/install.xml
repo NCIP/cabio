@@ -90,7 +90,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<property name="jboss-conf.dir.dest" value="${working.dir}/${jboss-conf.dist.relative.dir}" />
 	<property name="cabio-conf.dir.src" value="${basedir}/${cabio-conf.dist.relative.dir}" />
 	<property name="cabio-conf.dir.dest" value="${working.dir}/${cabio-conf.dist.relative.dir}" />
-	<property name="jboss-cabio-conf.dir" value="${jboss.home}/server/${jboss.server.name}/data" />
+	<!-- property name="jboss-cabio-conf.dir" value="${jboss.home}/server/${jboss.server.name}/data" / -->
     	<property name="cabio.propertyservice.cacore.property.value" value="${jboss-cabio-conf.dir}/cacore.properties" />
 	<property name="cabio-indexes.dir.src" value="${basedir}/${cabio-indexes.dist.relative.dir}" />
 	<property name="cabio-indexes.dir.dest" value="${working.dir}/${cabio-indexes.dist.relative.dir}" />
