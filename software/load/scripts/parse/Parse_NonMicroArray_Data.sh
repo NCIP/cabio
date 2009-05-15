@@ -1,6 +1,6 @@
 #!/bin/sh
-ORACLE_HOME=/app/oracle/product/10gClient
-export ORACLE_HOME
+#ORACLE_HOME=/app/oracle/product/10gClient
+#export ORACLE_HOME
 echo "Parsing the NCBI-SNP, Uniprot-Protein and IMAGE-Clone data"
 cd "$CABIO_DIR"/scripts/parse/snp
 rm *.log  

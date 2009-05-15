@@ -1,22 +1,22 @@
 #!/bin/sh
-export CABIO_DIR=/cabio/cabiodb/cabio42
+export CABIO_DIR=/data1/src/trunk/cabio-db-automation/load
 export CABIO_DATA_DIR=/cabio/cabiodb/cabio_data
-export GRIDID_PATH=/cabio/cabiodb/cabio42/gridid
-export LOAD=/cabio/cabiodb/cabio42/scripts/sql_loader
+export GRIDID_PATH=/data1/src/trunk/cabio-db-automation/load/gridid
+export LOAD=/data1/src/trunk/cabio-db-automation/load/scripts/sql_loader
 
 # executables 
 export PERL5LIB=$PERL5LIB:"$CABIO_DIR"/scripts/parse
-export SQLLDR=/app/oracle/product/10gClient/bin/sqlldr
-export SQLPLUS=/app/oracle/product/10gClient/bin/sqlplus
+export SQLLDR=/data/apps/oracle/product/db-10.2/bin/sqlldr
+export SQLPLUS=/data/apps/oracle/product/db-10.2/bin/sqlplus
 export PATH="$PATH":"$CABIO_DIR"/bin
 
 
 # D/B Connection parameters
-export CONNECT_STRING=jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1553:BIODEV
-export DBI_DRIVER='DBI:Oracle:BIODEV'
-export SCHEMA='cabiodev'
-export SCHEMA_PWD='cabiodev506'
-export SCHEMA_DB='BIODEV'
+export CONNECT_STRING=jdbc:oracle:thin:@localhost:1521:CABIO1
+export DBI_DRIVER='DBI:Oracle:CABIO1'
+export SCHEMA='cabiorefresh'
+export SCHEMA_PWD='cabiorefresh'
+export SCHEMA_DB='CABIO1'
 
 export dt=`date '+%m_%d_%y'`
 
