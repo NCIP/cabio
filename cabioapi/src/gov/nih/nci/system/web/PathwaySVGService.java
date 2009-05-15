@@ -1,8 +1,6 @@
 package gov.nih.nci.system.web;
 
 import gov.nih.nci.cabio.domain.Pathway;
-import gov.nih.nci.common.util.SVGManipulator;
-import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.dao.orm.ORMDAOImpl;
 
 import java.io.IOException;
@@ -110,7 +108,7 @@ public class PathwaySVGService extends HttpServlet {
         if (!prefix.endsWith("_")) prefix = "";
         
         String svgString = pathway.getDiagram();
-        if (svgString == null);
+        if (svgString == null) return;
                 
         StringBuffer requestURL = request.getRequestURL();
         String server = requestURL.substring(0, requestURL.indexOf("/cabio"));
