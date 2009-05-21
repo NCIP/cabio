@@ -60,13 +60,17 @@ sh parseAll.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD
 echo `ls -a *.log`
 echo `wc -l *.bad` 
 
-echo "\nParsing  Pathway data"
+echo "\nParsing Pathway data"
 cd $CABIO_DIR/scripts/parse/pid 
 rm *.log
 rm *.bad
 sh pidParser.sh   
 echo `ls -a *.log`
 echo `wc -l *.bad` 
+
+echo "\nParsing Drugbank data"
+cd $CABIO_DIR/scripts/parse/drugbank
+perl drug_parser.pl 
 
 wait
 echo "Finished parsing NCBI SNP, Uniprot, Unigene, EST, MRNA, Cytoband, Pathway and Image Clone Data"
