@@ -82,7 +82,7 @@ commit;
 
 -- enable indexes and constraints
 
-@lch43_bitmap_indexes.sql
+@lch43_indexes.sql
 
 @$LOAD/indexes/taxon.lower.sql
 @$LOAD/indexes/multiple_alignment.lower.sql
