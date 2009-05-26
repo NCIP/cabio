@@ -1,4 +1,4 @@
-@lch_bitmap_indexes.sql
+@lch_indexes.sql
 
 @$LOAD/indexes/location_tv.lower.sql
 @$LOAD/indexes/location_tv.cols.sql
