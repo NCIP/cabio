@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE "c:/dev/cabio_data/temp/drugbank/out_drug_aliases.txt"
+INFILE "$CABIO_DATA_DIR/drugbank/out_drug_aliases.txt"
  
 REPLACE
  
