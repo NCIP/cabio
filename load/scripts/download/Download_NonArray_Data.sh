@@ -29,7 +29,7 @@ sh download_PID.sh
 echo "\nDownloading Illumina Agilent data \n"
 sh download_Illumina_Agilent.sh
 echo "\nDownloading Drugbank data \n"
-sh download_Drugbank.pl
+sh download_Drugbank.sh
 echo "\nDownloading Compara data \n"
 perl download_Compara.pl $CABIO_DATA_DIR/compara
 echo "\n\nFinished downloading Cytoband, Uniprot, Unigene, TSC SNP, NCBI SNP, IMAGE CLONE, EST and CTEP data"
