@@ -107,27 +107,27 @@ ANALYZE TABLE agent_alias COMPUTE STATISTICS;
 
 commit;
 ANALYZE TABLE gene_function_association COMPUTE STATISTICS;
-ANALYZE TABLE gene_function_association_evidence COMPUTE STATISTICS;
+ANALYZE TABLE gene_function_assoc_evidence COMPUTE STATISTICS;
 ANALYZE TABLE evidence COMPUTE STATISTICS;
 
 -- enable indexes and constraints
 
 @$LOAD/indexes/gene_function_association.lower.sql
-@$LOAD/indexes/gene_function_association_evidence.lower.sql
+@$LOAD/indexes/gene_function_assoc_evidence.lower.sql
 @$LOAD/indexes/evidence.lower.sql
 @$LOAD/indexes/agent.lower.sql
 @$LOAD/indexes/agent_agent_alias.lower.sql
 @$LOAD/indexes/agent_alias.lower.sql
 
 @$LOAD/indexes/gene_function_association.cols.sql
-@$LOAD/indexes/gene_function_association_evidence.cols.sql
+@$LOAD/indexes/gene_function_assoc_evidence.cols.sql
 @$LOAD/indexes/evidence.cols.sql
 @$LOAD/indexes/agent.cols.sql
 @$LOAD/indexes/agent_agent_alias.cols.sql
 @$LOAD/indexes/agent_alias.cols.sql
 
 @$LOAD/constraints/gene_function_association.enable.sql
-@$LOAD/constraints/gene_function_association_evidence.enable.sql
+@$LOAD/constraints/gene_function_assoc_evidence.enable.sql
 @$LOAD/constraints/evidence.enable.sql
 @$LOAD/constraints/agent.enable.sql
 @$LOAD/constraints/agent_agent_alias.enable.sql
