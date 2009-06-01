@@ -52,4 +52,76 @@ CREATE TABLE SEQUENCE_STG31C
   LENGTH            NUMBER
 );
 
+DROP TABLE ZSTG_DRUGBANK_DRUGS;
+CREATE TABLE ZSTG_DRUGBANK_DRUGS
+(
+  Drug_Id                   VARCHAR2(20),
+  Generic_Name              VARCHAR2(512),
+  Absorption                VARCHAR2(1000),
+  Biotransformation         VARCHAR2(1000),
+  CAS_Registry_Number       VARCHAR2(32),
+  Chemical_Formula          VARCHAR2(256),
+  Half_Life                 VARCHAR2(1000),
+  Indication                VARCHAR2(2000),
+  Chemical_IUPAC_Name       VARCHAR2(3000),
+  Mechanism_Of_Action       VARCHAR2(4000),
+  Molecular_Weight_Avg      VARCHAR2(32),
+  Pharmacology              VARCHAR2(4000),
+  Protein_Binding           VARCHAR2(1000),
+  PubChem_Compound_ID       VARCHAR2(32),
+  PubChem_Substance_ID      VARCHAR2(32),
+  Smiles_String_canonical   VARCHAR2(2000),
+  Toxicity                  VARCHAR2(2000),
+  EVS_Id                    VARCHAR2(32),
+  CABIO_AGENT_ID            NUMBER
+) TABLESPACE CABIO_MAP_FUT;
+
+ALTER TABLE ZSTG_DRUGBANK_DRUGS ADD (
+    CONSTRAINT ZSTG_DRUGBANK_DRUGS_PK
+    PRIMARY KEY (Drug_Id) 
+    USING INDEX TABLESPACE CABIO_MAP_FUT);
+ 
+DROP TABLE ZSTG_DRUGBANK_TARGETS;
+CREATE TABLE ZSTG_DRUGBANK_TARGETS
+(
+  Target_Id         VARCHAR2(32),
+  Species_Abbr      VARCHAR2(32),
+  Gene_Name         VARCHAR2(32),
+  GenAtlas_ID       VARCHAR2(32),
+  GeneCard_ID       VARCHAR2(32),
+  SwissProt_ID      VARCHAR2(32),
+  HGNC_ID           VARCHAR2(32),
+  CABIO_TAXON_ID    NUMBER
+) TABLESPACE CABIO_MAP_FUT;
+
+ALTER TABLE ZSTG_DRUGBANK_TARGETS ADD (
+    CONSTRAINT ZSTG_DRUGBANK_TARGETS_PK
+    PRIMARY KEY (Target_Id) 
+    USING INDEX TABLESPACE CABIO_MAP_FUT);
+    
+DROP TABLE ZSTG_DRUGBANK_TARGET_GENES;
+CREATE TABLE ZSTG_DRUGBANK_TARGET_GENES
+(
+  Target_Id         VARCHAR2(32),
+  CABIO_GENE_ID     NUMBER
+) TABLESPACE CABIO_MAP_FUT;
+    
+    
+DROP TABLE ZSTG_DRUGBANK_DRUG_TARGETS;
+CREATE TABLE ZSTG_DRUGBANK_DRUG_TARGETS
+(
+  Target_Id         VARCHAR2(32),
+  Drug_Id           VARCHAR2(32),
+  PubMed_Id         VARCHAR2(32),
+  CABIO_ASSOC_ID    NUMBER
+) TABLESPACE CABIO_MAP_FUT;
+
+DROP TABLE ZSTG_DRUGBANK_DRUG_ALIASES;
+CREATE TABLE ZSTG_DRUGBANK_DRUG_ALIASES
+(
+  Drug_Id           VARCHAR2(32),
+  Alias_Type        VARCHAR2(32),
+  Alias_Name        VARCHAR2(512)
+) TABLESPACE CABIO_MAP_FUT;
+
 EXIT;
