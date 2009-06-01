@@ -171,10 +171,10 @@ END;
 
 insert into GENE_FUNCTION_ASSOCIATION_43 
     (ID, AGENT_ID, GENE_ID, ROLE_ID, DISCRIMINATOR, SOURCE)
-select GFA_SEQ.nextVal, cabio_agent_id, cabio_gene_id, 
+select GFA_SEQ.nextVal, agent_id, gene_id, 
     'Chemical_or_Drug_Has_Target_Gene_Product','GeneAgentAssociation','Drugbank'
 from (
-    select distinct a.AGENT_ID, tg.cabio_gene_id
+    select distinct a.AGENT_ID agent_id, tg.cabio_gene_id gene_id
     from AGENT a, ZSTG_DRUGBANK_DRUG_TARGETS_VW dt, 
         ZSTG_DRUGBANK_TARGETS t, ZSTG_DRUGBANK_TARGET_GENES tg
     where a.DRUGBANK_ACCESSION = dt.drug_id
