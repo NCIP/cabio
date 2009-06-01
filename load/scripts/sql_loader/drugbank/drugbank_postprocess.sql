@@ -204,12 +204,12 @@ ANALYZE TABLE EVIDENCE_43 COMPUTE STATISTICS;
 
 -- enable indexes and constraints
 
-@$LOAD/indexes/gene_function_assoc_evidence.lower.sql
-@$LOAD/indexes/agent.lower.sql
-@$LOAD/indexes/agent_agent_alias.lower.sql
-@$LOAD/indexes/agent_alias.lower.sql
-@$LOAD/indexes/gene_function_association_43.lower.sql
-@$LOAD/indexes/evidence_43.lower.sql
+@$LOAD/constraints/gene_function_assoc_evidence.enable.sql
+@$LOAD/constraints/agent.enable.sql
+@$LOAD/constraints/agent_agent_alias.enable.sql
+@$LOAD/constraints/agent_alias.enable.sql
+@$LOAD/constraints/gene_function_association_43.enable.sql
+@$LOAD/constraints/evidence_43.enable.sql
 
 @$LOAD/indexes/gene_function_assoc_evidence.cols.sql
 @$LOAD/indexes/agent.cols.sql
@@ -218,11 +218,11 @@ ANALYZE TABLE EVIDENCE_43 COMPUTE STATISTICS;
 @$LOAD/indexes/gene_function_association_43.cols.sql
 @$LOAD/indexes/evidence_43.cols.sql
 
-@$LOAD/constraints/gene_function_assoc_evidence.enable.sql
-@$LOAD/constraints/agent.enable.sql
-@$LOAD/constraints/agent_agent_alias.enable.sql
-@$LOAD/constraints/agent_alias.enable.sql
-@$LOAD/constraints/gene_function_association_43.enable.sql
-@$LOAD/constraints/evidence_43.enable.sql
+@$LOAD/indexes/gene_function_assoc_evidence.lower.sql
+@$LOAD/indexes/agent.lower.sql
+@$LOAD/indexes/agent_agent_alias.lower.sql
+@$LOAD/indexes/agent_alias.lower.sql
+@$LOAD/indexes/gene_function_association_43.lower.sql
+@$LOAD/indexes/evidence_43.lower.sql
 
 EXIT;
