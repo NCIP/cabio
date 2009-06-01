@@ -34,8 +34,7 @@ END;
 -- Merge new drug data into Agent
 
 merge into AGENT a using ZSTG_DRUGBANK_DRUGS d
-    on (a.DRUGBANK_ACCESSION = d.Drug_id or
-        lower(a.AGENT_NAME) = lower(d.GENERIC_NAME))
+    on (lower(a.AGENT_NAME) = lower(d.GENERIC_NAME))
     when matched then update set
         a.DRUGBANK_ACCESSION = d.Drug_id,
         a.EVS_ID = d.EVS_Id,
