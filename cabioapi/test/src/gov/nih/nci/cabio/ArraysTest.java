@@ -281,7 +281,7 @@ public class ArraysTest extends TestCase {
         Collection<RelativeLocation> rlocations = 
             reporter.getSNP().getRelativeLocationCollection();
         assertNotNull("Locations null",rlocations);
-        assertEquals("Locations",1,rlocations.size());
+        assertFalse("No locations found",rlocations.isEmpty());
         
         GeneRelativeLocation grl = (GeneRelativeLocation)rlocations.iterator().next();
         assertEquals("Orientation","CDS",grl.getOrientation());
