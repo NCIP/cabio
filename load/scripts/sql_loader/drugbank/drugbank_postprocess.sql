@@ -97,9 +97,9 @@ ANALYZE TABLE agent_alias COMPUTE STATISTICS;
 
 insert into GENE_FUNCTION_ASSOCIATION_43 
     (ID, GENE_ID, AGENT_ID, HISTOLOGYCODE_ID, ROLE_ID, 
-     EVIDENCE_ID, DISCRIMINATOR, BIG_ID)
+     EVIDENCE_ID, DISCRIMINATOR, BIG_ID, SOURCE)
 select ID, GENE_ID, AGENT_ID, HISTOLOGYCODE_ID, ROLE_ID, 
-    EVIDENCE_ID, DISCRIMINATOR, BIG_ID 
+    EVIDENCE_ID, DISCRIMINATOR, BIG_ID, 'Cancer Gene Index' 
 from GENE_FUNCTION_ASSOCIATION;
 
 insert into EVIDENCE_43 (ID, PUBMED_ID, NEGATION_STATUS, 
@@ -130,7 +130,7 @@ END;
 /
 
 insert into EVIDENCE_43 (ID, PUBMED_ID, SOURCE)
-select EVIDENCE_SEQ.nextVal, pubmed_id, 'Drugbank' from ( 
+select EVIDENCE_SEQ.nextVal, pubmed_id, 'DrugBank' from ( 
     select distinct to_number(pubmed_id) pubmed_id 
     from ZSTG_DRUGBANK_DRUG_TARGETS where pubmed_id is not null
 );
@@ -172,7 +172,7 @@ END;
 insert into GENE_FUNCTION_ASSOCIATION_43 
     (ID, AGENT_ID, GENE_ID, ROLE_ID, DISCRIMINATOR, SOURCE)
 select GFA_SEQ.nextVal, agent_id, gene_id, 
-    'Chemical_or_Drug_Has_Target_Gene_Product','GeneAgentAssociation','Drugbank'
+    'Chemical_or_Drug_Has_Target_Gene_Product','GeneAgentAssociation','DrugBank'
 from (
     select distinct a.AGENT_ID agent_id, tg.cabio_gene_id gene_id
     from AGENT a, ZSTG_DRUGBANK_DRUG_TARGETS_VW dt, 
@@ -190,11 +190,11 @@ from GENE_FUNCTION_ASSOCIATION_43 gfa, ZSTG_DRUGBANK_TARGET_GENES tg, AGENT a,
      ZSTG_DRUGBANK_DRUG_TARGETS dt, EVIDENCE_43 e
 where gfa.gene_id = tg.cabio_gene_id
 and gfa.agent_id = a.agent_id
-and gfa.source = 'Drugbank'
+and gfa.source = 'DrugBank'
 and dt.drug_id = a.DRUGBANK_ACCESSION
 and dt.target_id = tg.target_id
 and dt.pubmed_id = e.pubmed_id
-and e.source = 'Drugbank';
+and e.source = 'DrugBank';
 
 commit;
 
