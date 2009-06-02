@@ -194,7 +194,7 @@ and gfa.source = 'Drugbank'
 and dt.drug_id = a.DRUGBANK_ACCESSION
 and dt.target_id = tg.target_id
 and dt.pubmed_id = e.pubmed_id
-and e.source = 'Drugbank'
+and e.source = 'Drugbank';
 
 commit;
 
