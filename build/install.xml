@@ -158,7 +158,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<switch value="${database.type}">
 		<case value="oracle">
 			<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
-			<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.3.0.jar"/>
+			<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.4.0.jar"/>
 			<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
 			<property name="db-upgrade.list.file" value="${db-upgrade.oracle.list.file}"/>
 			<property name="db-upgrade.conf.file" value="${db-upgrade.oracle.conf.file}"/>
