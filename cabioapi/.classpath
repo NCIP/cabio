@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="system/src"/>
 	<classpathentry kind="src" path="codegen/core/src"/>
 	<classpathentry kind="src" path="test/src"/>
-	<classpathentry kind="lib" path="output/indexgen/conf"/>
 	<classpathentry kind="src" path="conf/system/package/ws-client/src"/>
 	<classpathentry kind="src" path="conf/system/package/remote-client/src"/>
 	<classpathentry kind="src" path="src"/>
