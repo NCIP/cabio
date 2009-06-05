@@ -137,12 +137,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<!-- taskdef name="xmlconfig" classname="com.xmlconfig.anttask.XmlConfig" classpathref="bda-utils.classpath" / -->
 	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask">
 		<classpath>
-			<pathelement location="${bda-utils.dir}/ant-contrib-1.0b3.jar"/>
+			<pathelement location="${bda-utils.dir}/ant-contrib-1.0nci.jar"/>
 		</classpath>
 	</taskdef>
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
 		<classpath>
-			<pathelement location="${bda-utils.dir}/ant-contrib-1.0b3.jar"/>
+			<pathelement location="${bda-utils.dir}/ant-contrib-1.0nci.jar"/>
 			<pathelement location="${bda-utils.dir}/bcel-5.1.jar"/>
 			<pathelement location="${bda-utils.dir}/commons-httpclient-3.0.1.jar"/>
 			<pathelement location="${bda-utils.dir}/commons-logging-1.0.4.jar"/>
