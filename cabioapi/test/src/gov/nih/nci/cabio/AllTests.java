@@ -48,6 +48,7 @@ public class AllTests {
         suite.addTestSuite(CQLTest.class);
         suite.addTestSuite(DefectTest.class);
         suite.addTestSuite(DevGuideTest.class);
+        suite.addTestSuite(DrugbankTest.class);
         suite.addTestSuite(FreestyleLMTest.class);
         suite.addTestSuite(GridIdTest.class);
         suite.addTestSuite(MarkerTest.class);
