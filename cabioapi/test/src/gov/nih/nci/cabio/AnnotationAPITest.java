@@ -41,7 +41,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.aop.framework.Advised;
 
 /**
  * Unit tests for the Array Annotation API in caBIO.
@@ -732,6 +731,6 @@ public class AnnotationAPITest extends ORMTestCase {
     public static void main(String[] argv) throws Exception {
         AnnotationAPITest test = new AnnotationAPITest();
         test.setUp();
-        test.testGetSnpsNearGene();
+        test.testGetReportersForSnps();
     }
 }
