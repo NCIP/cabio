@@ -114,7 +114,7 @@ public class MarkerTest extends TestCase {
         boolean found1 = false;
         boolean found2 = false;
         for(Marker marker : mrl.getMarkerCollection()) {
-            if ("933197".equals(marker.getGeneticMarkerId()) && 
+            if ("TSC933197".equals(marker.getGeneticMarkerId()) && 
                     "TSC".equalsIgnoreCase(marker.getType())) found1 = true;
             if ("D16S519".equals(marker.getName()) && 
                     "UNISTS".equalsIgnoreCase(marker.getType())) found2 = true;
