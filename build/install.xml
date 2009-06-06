@@ -232,7 +232,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<basename file="${grid.secure.key.location}" property="grid.secure.key.file"/>
 
 	<!-- Start logging --> 
-	<property name="install-logs.dir" location="${user.home}/change-logs"/>
+	<property name="install-logs.dir" location="${log.dir}"/>
 	<mkdir dir="${install-logs.dir}"/>
 	<tstamp>
 		<format property="install.time" pattern="yyyy-MM-dd-HH-mm" />
