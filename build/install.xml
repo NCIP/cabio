@@ -600,7 +600,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<validate-post-install />
+				<validate-post-install propertyfile.backup.location="${log.dir}" />
 			</then>
 		</if>
 	</target>
