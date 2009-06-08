@@ -251,7 +251,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<target name="ivy:clean" description="Cleans up the ivy cache of this project and all sub-projects">
 		<ivy:settings file="${ivy.settings.dir}/${ivy.settings.file}" />
 		<ivy:cleancache />
-		<ant inheritAll="false" inheritRefs="false" antfile="bda-ivy-build.xml" target="ivy-cleancache" dir="${bda-download.dir}">
+		<ant inheritAll="false" inheritRefs="false" antfile="${bda-download.file}" target="ivy-cleancache" dir="${bda-download.dir}">
 			<property name="bda-utils.dir" value="${bda-utils.dir}" />
 			<property name="lib.dir" value="${lib.dir}" />
 			<property name="software.dir" value="${software.dir}" />
@@ -479,7 +479,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 			target="build:installer"
 			dir="${build.dir}/gui-installer"
 			>
-			<property name="compile.jar.dir" value="${target.dir}/izpack-4.0.1"/>
+			<property name="compile.jar.dir" value="${target.dir}/izpack-4.3"/>
 		</ant>
 	</target>
 
@@ -996,19 +996,19 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		<switch value="${database.type}">
 			<case value="oracle">
 				<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
-				<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.3.0.jar"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.4.0.jar"/>
 				<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
 				<property name="database.schema" value="${database.name}"/>
 			</case>
 			<case value="mysql">
 				<property name="database.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-				<property name="database.driver.file" value="${bda-utils.dir}/mysql-connector-java-5.0.5.jar"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/mysql-connector-java-5.0.8.jar"/>
 				<property name="database.driver" value="com.mysql.jdbc.Driver"/>
 				<property name="database.schema" value="${database.name}"/>
 			</case>
 			<case value="postgresql">
 				<property name="database.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-				<property name="database.driver.file" value="${bda-utils.dir}/postgresql-jdbc3-8.3-603.jar"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/postgresql-jdbc3-8.3-604.jar"/>
 				<property name="database.driver" value="org.postgresql.Driver"/>
 				<property name="database.schema" value="public"/>
 			</case>
