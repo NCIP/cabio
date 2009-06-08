@@ -129,29 +129,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		</fileset>
 	</path>
 	<!-- Task definitions -->
-	<taskdef uri="antlib:org.apache.ant.antunit" resource="org/apache/ant/antunit/antlib.xml">
-		<classpath>
-			<pathelement location="${bda-utils.dir}/antunit-1.0.jar" />
-		</classpath>
-	</taskdef>
-	<!-- taskdef name="xmlconfig" classname="com.xmlconfig.anttask.XmlConfig" classpathref="bda-utils.classpath" / -->
-	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask">
-		<classpath>
-			<pathelement location="${bda-utils.dir}/ant-contrib-1.0nci.jar"/>
-		</classpath>
-	</taskdef>
-	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
-		<classpath>
-			<pathelement location="${bda-utils.dir}/ant-contrib-1.0nci.jar"/>
-			<pathelement location="${bda-utils.dir}/bcel-5.1.jar"/>
-			<pathelement location="${bda-utils.dir}/commons-httpclient-3.0.1.jar"/>
-			<pathelement location="${bda-utils.dir}/commons-logging-1.0.4.jar"/>
-			<pathelement location="${bda-utils.dir}/ivy-1.3.1.jar"/>
-		</classpath>
-	</taskdef>
+	<taskdef uri="antlib:org.apache.ant.antunit" resource="org/apache/ant/antunit/antlib.xml" classpathref="bda-utils.classpath" />
+	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask" classpathref="bda-utils.classpath"/>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="bda-utils.classpath"/>
 	<taskdef resource="liquibasetasks.properties" classpathref="bda-utils.classpath"/>
-	<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="bda-utils.classpath"/>
-
+	<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="bda-utils.classpath"/>		
+	
 	<!-- Conditionals -->
 	<available file="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml" property="jboss.exists"/>
 	<!-- cabio-webapp can use either Oracle or MySQL or PostgreSQL as its database platform, this is controled by the database.type property.  Based on the value of this property sent several variables for use during install -->

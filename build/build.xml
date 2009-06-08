@@ -61,8 +61,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 	<!-- Ivy Related props -->
 	<property name="ivy.settings.file" value="ivy-settings.xml" />
-	<property name="ivy.file" value="ivy-2.0.0-beta2.jar" />
-	<property name="ivy-cacore.file" value="ivy-cacore-2.0.0-beta2.jar" />
+	<property name="ivy.jar.file" value="ivy-2.0.0.jar" />
 
 	<!-- Properties that relate to how to call build targets from sub-projects-->
 	<!-- Working directory passed to Ant tasks -->
@@ -137,7 +136,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 
 	<!-- retrive ivy files then retrieve bda files and librarires -->
-	<property name="bda-download.file" value="bda-ivy-build.xml" />
+	<property name="bda-download.file" value="bda-ivy-2.0.0-build.xml" />
       <!-- 
 	<mkdir dir="${bda-download.dir}" />
 	<property name="bda-download.src.url" value="http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-download/${bda-download.file}" />
@@ -168,11 +167,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<!-- Task definitions -->
 	<!-- taskdef name="xmlconfig" classname="com.xmlconfig.anttask.XmlConfig" classpathref="bda-utils.classpath" / -->
 	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.classpath" />
-	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask">
-		<classpath>
-			<pathelement location="${bda-utils.dir}/ant-contrib-1.0nci.jar" />
-		</classpath>
-	</taskdef>
+	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask" classpathref="bda-utils.classpath" />
 
 	<!-- Includes- include BDA marcos -->
 	<import file="${bda-utils.dir}/bda-build-utils-${bda.version}.xml" />
@@ -183,35 +178,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		<format property="install.time" pattern="yyyy-MM-dd-HH-mm" />
 	</tstamp>
 	<record name="${log.dir}/install-${install.time}.log" action="start" />
-	<!-- set some db variables -->
-	<switch value="${database.type}">
-		<case value="oracle">
-			<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
-			<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.3.0.jar"/>
-			<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
-			<property name="database.schema" value="${database.name}"/>
-		</case>
-		<case value="mysql">
-			<property name="database.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-			<property name="database.driver.file" value="${bda-utils.dir}/mysql-connector-java-5.0.5.jar"/>
-			<property name="database.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="database.schema" value="${database.name}"/>
-		</case>
-		<case value="postgresql">
-			<property name="database.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-			<property name="database.driver.file" value="${bda-utils.dir}/postgresql-jdbc3-8.3-603.jar"/>
-			<property name="database.driver" value="org.postgresql.Driver"/>
-			<property name="database.schema" value="public"/>
-		</case>
-		<default>
-			<fail message="Invalid database type ${database.type}"/>
-		</default>
-	</switch>
-
-	<path id="jdbc.driver.classpath">
-		<pathelement location="${database.driver.file}"/>
-	</path>
-
 
 	<!-- Targets -->
 	<target name="diagnostics" description="diagnostics">
@@ -1026,6 +992,35 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	</target>
 
 	<target name="database:prep" description="Copies db files with filtering">
+		<!-- set some db variables -->
+		<switch value="${database.type}">
+			<case value="oracle">
+				<property name="database.dialect" value="org.hibernate.dialect.OracleDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/ojdbc14-10.2.0.3.0.jar"/>
+				<property name="database.driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="database.schema" value="${database.name}"/>
+			</case>
+			<case value="mysql">
+				<property name="database.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/mysql-connector-java-5.0.5.jar"/>
+				<property name="database.driver" value="com.mysql.jdbc.Driver"/>
+				<property name="database.schema" value="${database.name}"/>
+			</case>
+			<case value="postgresql">
+				<property name="database.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+				<property name="database.driver.file" value="${bda-utils.dir}/postgresql-jdbc3-8.3-603.jar"/>
+				<property name="database.driver" value="org.postgresql.Driver"/>
+				<property name="database.schema" value="public"/>
+			</case>
+			<default>
+				<fail message="Invalid database type ${database.type}"/>
+			</default>
+		</switch>
+
+		<path id="jdbc.driver.classpath">
+			<pathelement location="${database.driver.file}"/>
+		</path>
+		
 		<echoproperties prefix="database"/>
 		<copy todir="${working.dir}/" filtering="true"  overwrite="true">
 			<fileset dir="${db.src.dir}">
