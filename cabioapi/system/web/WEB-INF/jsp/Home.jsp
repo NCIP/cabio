@@ -82,15 +82,15 @@
 													caBIO Download site</a> - Contains download packages and
 													release notes</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO
+														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3401">caBIO
 													<s:text name="build.version"/> Release Notes</a> - Latest release notes for caBIO</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO <s:text name="build.version"/>
+														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3401">caBIO <s:text name="build.version"/>
 													Data Refresh Release Notes</a> - Release notes describing
 													the current data content of caBIO</li>
 													<li><a href="docs">caBIO <s:text name="build.version"/> javadocs</a> - Java API
 													documentation</li>
-													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=2695">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
+													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3401">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
 													Guide</li>
 												</ul>
 												
@@ -153,8 +153,9 @@
 													<tr>
 														<td class="sidebarContent">
 														<ul>
-														    <li><a href="http://cagrid-portal.nci.nih.gov/web/guest/community">caBIO portlet</a></li>
-														    <li>Pathway Interaction Database model and data</li>
+														    <li>Enhancements to caBIO agent and associated objects in support of data from the Canada DrugBank</li>
+														    <li>Addition of objects modeling highly conserved regions on the human genome and support for multiple-alignment data from Ensembl Compara</li>
+														    <li>Inclusion of an annotation version field to the Microarray class in order to expose the version of Affymetrix annotations</li>
 														</ul>
 														</td>
 													</tr>
