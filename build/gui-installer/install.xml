@@ -252,7 +252,7 @@
 					    <description>The base files</description>
 					    <file src="@{dist.location}/@{install.zip.file}" targetdir="$SYSTEM_user_home/@{installer.dir}"/>
 					    <file src="@{this.dir}/build.xml" targetdir="$SYSTEM_user_home/@{installer.dir}"/>
-					    <file src="@{this.dir}/property-template" ="yes" targetdir="$SYSTEM_user_home/@{installer.dir}">
+					    <file src="@{this.dir}/property-template" override="true"  targetdir="$SYSTEM_user_home/@{installer.dir}">
 						<excludes>**/.svn/**</excludes>
 					    </file>
 					</pack>
@@ -283,7 +283,9 @@
 				<jar src="@{bda-utils.dir}/ant-1.7.0.jar" stage="both" />
 				<jar src="@{bda-utils.dir}/ant-launcher-1.7.0.jar" stage="both"/>
 				<jar src="@{bda-utils.dir}/ant-nodeps-1.7.0.jar" stage="both"/>
-				<jar src="@{bda-utils.dir}/mysql-connector-java-5.0.5.jar" stage="both"/>
+				<jar src="@{bda-utils.dir}/mysql-connector-java-5.0.8.jar" stage="both"/>
+				<jar src="@{bda-utils.dir}/ojdbc14-10.2.0.4.0.jar" stage="both"/>
+				<jar src="@{bda-utils.dir}/postgresql-jdbc3-8.3-604.jar" stage="both"/>
 			</installation>
 		]]></config>
 		</IzPack>
