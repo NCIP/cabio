@@ -212,8 +212,22 @@
 							
 			}
 			
+            // Escape function from http://simonwillison.net/2006/Jan/20/escape/
+			function escapeRegExp(txt) {
+                if (!arguments.callee.sRE) {
+                  var specials = [
+                    '/', '.', '*', '+', '?', '|',
+                    '(', ')', '[', ']', '{', '}', '\\'
+                  ];
+                  arguments.callee.sRE = new RegExp(
+                    '(\\' + specials.join('|\\') + ')', 'g'
+                  );
+                }
+                return txt.replace(arguments.callee.sRE, '\\$1');
+			}
+			
 			function parseTxt(txt, q) {
-				
+							
 				var items = [];
 				var tokens = txt.split(options.delimiter);
 				
@@ -221,8 +235,9 @@
 				for (var i = 0; i < tokens.length; i++) {
 					var token = $.trim(tokens[i]);
 					if (token) {
+                        var eq = escapeRegExp(q);
 						token = token.replace(
-							new RegExp("(^"+q+")|( "+q+")", 'ig'), 
+							new RegExp("(^"+eq+")|( "+eq+")", 'ig'), 
 							function(q) { return '<span class="' + options.matchClass + '">' + q + '</span>' }
 							);
 						items[items.length] = token;
