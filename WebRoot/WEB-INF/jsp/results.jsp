@@ -69,35 +69,23 @@
 		   	<c:forEach var="attr" items="${classConfig.attributes}">
 				<td>
 				<c:choose>
-	
 				<c:when test="${attr.lastPart == 'pubmedId'}">
-				    <div class="link-extenal" style="text-align: right">
-				        <a href="http://www.ncbi.nlm.nih.gov/pubmed/<c:out value="${item[attr.name]}"/>" target="_blank">
-				             <c:out value="${item[attr.name]}"/></a>
-				    </div>
+                    <script type="text/javascript">
+				    document.write(caBioObjectDetails.pubmedLink(
+				        '<c:out value="${item.displayMap[attr.name]}"/>'));
+                    </script>
 				</c:when>
-					
 				<c:otherwise>
-					
-					<c:set var="objValue" value='${item[attr.name]}' scope="request"/>
-					
-					<% 
-					Object v = request.getAttribute("objValue");
-					request.setAttribute("strValue", (v != null) ? v.toString() : ""); 
-					%>
-					
-		            <c:choose>
-		            <c:when test="${fn:length(strValue) > 90}">
-		                <div title="<c:out value='${strValue}'/>" class="attribute">
-		                    <c:out value="${fn:substring(strValue, 0, 87)}"/>
-		                    <b>...</b>
-		                </div>
-		            </c:when>
-		            <c:otherwise>
-	                    <c:out value="${strValue}"/>
-		            </c:otherwise>
-		            </c:choose>
-				    
+                    <script type="text/javascript">
+                    var v = '<c:out value="${item.displayMap[attr.name]}"/>';
+                    var tv = caBioCommon.trunc(v,90);
+                    if (tv != v) {
+                        document.write('<div title="'+v+'" class="attribute">'+tv+'</div>');
+                    }
+                    else {
+                        document.write(v);
+                    }
+                    </script>
 				</c:otherwise>
 				</c:choose>
 				</td>
