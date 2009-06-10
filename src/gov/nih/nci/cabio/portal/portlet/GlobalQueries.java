@@ -2,9 +2,8 @@ package gov.nih.nci.cabio.portal.portlet;
 
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Microarray;
-import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.cabio.domain.Pathway;
-import gov.nih.nci.system.applicationservice.ApplicationException;
+import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 
@@ -12,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -73,7 +72,7 @@ public class GlobalQueries {
      * @return map of Taxon.abbreviation -> Chromosome list
      */
     public Map<String,List<Chromosome>> getTaxonChromosomes() {
-        if (taxon2chroms == null) loadTaxonChromosomes();
+        if (taxon2chroms == null || taxon2chroms.isEmpty()) loadTaxonChromosomes();
         return taxon2chroms;
     }
 
@@ -84,8 +83,8 @@ public class GlobalQueries {
      * @return list of Taxon objects
      */
     public List<Taxon> getTaxonValues() {
-        if (taxons == null) loadTaxonChromosomes();
-        if (taxons == null) return new ArrayList<Taxon>();
+        if (taxons == null || taxons.isEmpty()) loadTaxonChromosomes();
+        if (taxons == null || taxons.isEmpty()) return new ArrayList<Taxon>();
         return taxons;
     }
 
@@ -94,8 +93,8 @@ public class GlobalQueries {
      * @return list of Microarray objects
      */
     public List<Microarray> getMicroarrays() {
-        if (microarrays == null) loadMicroarrays();
-        if (microarrays == null) return new ArrayList<Microarray>();
+        if (microarrays == null || microarrays.isEmpty()) loadMicroarrays();
+        if (microarrays == null || microarrays.isEmpty()) return new ArrayList<Microarray>();
         return microarrays;
     }
 
@@ -104,8 +103,8 @@ public class GlobalQueries {
      * @return list of String objects
      */
     public List<Pathway> getPathwaySources() {
-        if (pathwaySources == null) loadPathwaySources();
-        if (pathwaySources == null) return new ArrayList<Pathway>();
+        if (pathwaySources == null || pathwaySources.isEmpty()) loadPathwaySources();
+        if (pathwaySources == null || pathwaySources.isEmpty()) return new ArrayList<Pathway>();
         return pathwaySources;
     }
     
@@ -156,7 +155,7 @@ public class GlobalQueries {
             }
             log.info("Done loading taxon and chromosome data.");
         }
-        catch (ApplicationException e) {
+        catch (Exception e) {
             log.error("Error loading taxon and chromosome data.",e);
         }
     }
@@ -168,7 +167,7 @@ public class GlobalQueries {
             microarrays = as.search(Microarray.class, new Microarray());
             log.info("Done loading microarray data.");
         }
-        catch (ApplicationException e) {
+        catch (Exception e) {
             log.error("Error loading microarray data.",e);
         }
     }
@@ -191,7 +190,7 @@ public class GlobalQueries {
                 }                    
             log.info("Done loading pathway data.");
         }
-        catch (ApplicationException e) {
+        catch (Exception e) {
             log.error("Error loading pathway data.",e);
         }
     }
