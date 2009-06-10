@@ -206,6 +206,10 @@ cd $LOAD/compara
 echo "Loading Compara tables"
 time sh load.sh $1 1>compara.log 2>&1 
 
+cd $LOAD/drugbank
+echo "Loading Drugbank tables"
+time sh load.sh $1 1>drugbank.log 2>&1 
+
 # indexes for some objects not covered above 
 sqlplus $1 @$LOAD/misc_indexes.sql 
 
@@ -215,7 +219,7 @@ mail -s " Location Log; Starting big id load for remaining objects " $EMAIL < lo
 
 # run the bigid for the other objects
 cd $CABIO_DIR/grididloader/
-time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>>$grididload_LOG 2>&1
+time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter Evidence GeneFunctionAssociation Agent" 1>>$grididload_LOG 2>&1
 
 cd $LOAD
 time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
