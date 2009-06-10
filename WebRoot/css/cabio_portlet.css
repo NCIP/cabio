@@ -87,6 +87,7 @@ table.properties td {
 
 table.properties div.value {
     max-height: 250px;
+    max-width: 500px;
     overflow: auto;
 }
 
