@@ -27,6 +27,8 @@ my $out_file17 = "$outdir/pathway_file_out.txt";
 my $out_file18 = "$outdir/interpro_file_out.txt";
 my $out_file19 = "$outdir/ensembl_out.txt";
 
+my $genomeVersion;
+
 open (INFILE, "<$input_file") or die "Cannot open \"$input_file\" \n\n";
 open (OUTFILE01, ">$out_file01") or die "Cannot open \"$out_file01\" \n\n";
 open (OUTFILE02, ">$out_file02") or die "Cannot open \"$out_file02\" \n\n";
@@ -49,10 +51,17 @@ open (OUTFILE18, ">$out_file18") or die "Cannot open \"$out_file18\" \n\n";
 open (OUTFILE19, ">$out_file19") or die "Cannot open \"$out_file19\" \n\n";
 
 foreach my $line (<INFILE>) {
+
+  if($line =~/^\#\%genome-version-ncbi=(.*)$/) {
+         $genomeVersion = $1;
+       }
+
+    next unless ($line =~/^\"/);
+	
     chomp $line;
     my @data = split("\"\,\"", $line);
     $data[0] =~ s/\"//;
-    print OUTFILE01 "$data[0]|$data[1]|$data[2]|$data[3]\n";
+    print OUTFILE01 "$data[0]|$data[1]|$data[2]|$data[3]|$genomeVersion\n";
     print OUTFILE02 "$data[0]///$data[8]#$data[1]\n";
     print OUTFILE03 "$data[0]///$data[10]#$data[1]\n";
     print OUTFILE04 "$data[0]///$data[12]#$data[1]\n";

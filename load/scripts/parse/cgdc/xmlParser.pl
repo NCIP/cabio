@@ -9,7 +9,6 @@ my $parser = new XML::Parser::Expat();
 my ($indir, $outdir) = getFullDataPaths('cgdc');
 chomp($ARGV[0]);
 my $inputFileName = "$indir/$ARGV[0]";
-#print $inputFileName;
 
 # Array for holding tags
 my @Tags=();
@@ -21,7 +20,7 @@ my ($tmpAgId, $tmpDisId, $tmpEvId, $geneId, $taxId, $chrId, $geneTvId, $clusterI
 
 my($cnt, $matchedGeneTerm, $NCIGeneConceptCode, $matchedDiseaseTerm, $NCIDiseaseConceptCode, $matchedDrugTerm, $NCIDrugConceptCode);
 
-my($Statement, $PubMedID, $organism, $negationIndicator, $cellineIndicator, $comment, $sentenceStatusFlag, $GeneStatusFlag);
+my($Statement, $role, $PubMedID, $organism, $negationIndicator, $cellineIndicator, $comment, $sentenceStatusFlag, $GeneStatusFlag, $evidenceCodeInFile);
 
 # Hashes to store evidencCode, Gene-Drug and Gene-Disease data
 my(%EvidenceCode, %Evidence, %GeneNCI, %DrugNCI, %DiseaseNCI, %RoleCodes);  
@@ -85,15 +84,18 @@ sub sh
   if($el eq 'GeneEntry') {
   $geneEntry++; 
   }
+  if($el eq 'Roles') {
+  $role = ""; 
+  }
 
 }
 
 sub eh
 {
   my ($p, $el) = @_;
-  $el =~s/^\s+//g;
-  $el =~s/\s+$//g;
-  #print "Ending tag $el comparing with $Tags[$#Tags] \n";
+#  $el =s/^\s+//g;
+#  $el =~s/\s+$//g;
+#  print "Ending tag $el comparing with $Tags[$#Tags] \n";
   if($el eq $Tags[$#Tags]) {
   pop(@Tags);
   }
@@ -106,6 +108,7 @@ sub eh
  $clusterId = "";
  $Statement = "";
  $PubMedID = "";
+ $role = "";	
  $negationIndicator = "";
  $comment = "";
  $cellineIndicator = "";
@@ -203,7 +206,6 @@ sub eh
   if ($el eq 'DrugTerm') {
   $matchedDrugTerm = $element;
   $AgentFlag = 1;
-  #print "Agent id $matchedDrugTerm \n";
   }
   if ($el eq 'NCIDrugConceptCode') {
   my @tmpAgentIdArr;
@@ -213,12 +215,10 @@ sub eh
   $DrugNCI{$matchedDrugTerm} = $AgentId."|".$NCIDrugConceptCode."|".$geneTvId;
   $GeneAgent{$geneId}{$AgentId} = 'XX'; 
   $tmpAgId = $AgentId;
-  #print "Agent id $AgentId gene id is $geneId\n";
   } elsif ($geneId) {
   @tmpAgentIdArr = split(/\|/,$DrugNCI{$matchedDrugTerm});
   $GeneAgent{$geneId}{$tmpAgentIdArr[0]} = 'XX'; 
   $tmpAgId = $tmpAgentIdArr[0];
-  #print "Agent id $tmpAgentIdArr[0] gene id is $geneId\n";
   }
   @tmpAgentIdArr = ();
   $cnt = 0;
@@ -230,11 +230,9 @@ sub eh
   } 
   if ($el eq 'Statement') {
   $Statement = $element;
-  #print "Statement is $Statement \n";
   }
   if ($el eq 'PubMedID') {
   $PubMedID = $element;
-  #print "PubMed Id is $PubMedID \n";
   }
   if ($el eq 'Organism') {
   $organism = $element;
@@ -251,13 +249,12 @@ sub eh
   $comment = substr($comment,0,254);
    }
   }
-  if ($el eq 'SentenceStatusFlag') {
-  $sentenceStatusFlag = $element;
-  }
-  
- # Evidence Code 
   if ($el eq 'EvidenceCode') {
-  my $evidenceCodeInFile = $element;
+   $evidenceCodeInFile = $element;
+   } 
+  
+ if ($el eq 'SentenceStatusFlag') {
+  $sentenceStatusFlag = $element;
   my $tmpEvCodeId;
   $tmpEvId="";
   if($geneId) {
@@ -265,7 +262,6 @@ sub eh
     # check if evidence exists in the Evidence Hash
     # Evidence is a unique combination of Pubmed Id and Sentence
     my $evKey = $PubMedID."|".$Statement."|".$sentenceStatusFlag."|".$comment;
-  #print "$evKey is  \n"; 
  if(!exists($Evidence{$evKey})) {
    $evEntry++;
    $Evidence{$evKey} = $evEntry."|".$geneId."|".$geneTvId."|".$Statement."|".$negationIndicator."|".$cellineIndicator."|".$comment."|".$PubMedID."|".$sentenceStatusFlag; 
@@ -288,44 +284,48 @@ sub eh
    $EvidenceEvidenceCode{$tmpEvId}{$tmpEvCodeId} = 1;
    }
   } 
-  }
+ 
+   $role = "Not assigned" unless $role;	
+ 
+   if ($geneId && $DiseaseFlag) {
+   #print "$tmpEvId is evidence key for sentence $Statement \n"; 
+   #	print "I create an association for GFA Gene Disease \n";
+    $GeneDiseaseEvidence{$geneId}{$tmpDisId}{$tmpEvId}{$role} = 1;
+    }
+    if ($geneId && $AgentFlag) {
+   # print "$tmpEvId is evidence key for sentence $Statement \n"; 
+   #	print "I create an association for GFA Gene Agent \n";
+   #     print "$geneId $tmpAgId $tmpEvId $role \n"; 
+	$GeneAgentEvidence{$geneId}{$tmpAgId}{$tmpEvId}{$role} = 1;
+    }
+
+   }
   
   # NCI and Other Roles
   if ($el eq 'PrimaryNCIRoleCode') {
   my $tmpRoleId;
-   if($geneId && (!exists($RoleCodes{$element}))) {
+  $role = $element;	
+   if($geneId && (!exists($RoleCodes{$role}))) {
      $RoleCodeEntry++;
-     $RoleCodes{$element} = $RoleCodeEntry;
-     $GeneRoleCode{$geneId}{$element} = 1; 
+     $RoleCodes{$role} = $RoleCodeEntry;
+     $GeneRoleCode{$geneId}{$role} = 1; 
   }elsif($geneId) {
-   $tmpRoleId = $RoleCodes{$element};
-   $GeneRoleCode{$geneId}{$element} = 1; 
+   $tmpRoleId = $RoleCodes{$role};
+   $GeneRoleCode{$geneId}{$role} = 1; 
   }
-   if ($geneId && $DiseaseFlag) {
-    $GeneDiseaseEvidence{$geneId}{$tmpDisId}{$tmpEvId}{$element} = 1;
-    }
-    if ($geneId && $AgentFlag) {
-	$GeneAgentEvidence{$geneId}{$tmpAgId}{$tmpEvId}{$element} = 1;
-    }
-
   }
   
   if ($el eq 'OtherRole') {
   my $tmpRoleId;
-  if($geneId && (!exists($RoleCodes{$element}))){
+  $role = $element;
+  if($geneId && (!exists($RoleCodes{$role}))){
   $RoleCodeEntry++;
-  $RoleCodes{$element} = $RoleCodeEntry;
-  $GeneRoleCode{$geneId}{$element} = 1; 
+  $RoleCodes{$role} = $RoleCodeEntry;
+  $GeneRoleCode{$geneId}{$role} = 1; 
   } elsif ($geneId) {
-   $tmpRoleId = $RoleCodes{$element};
-   $GeneRoleCode{$geneId}{$element} = 1; 
+   $tmpRoleId = $RoleCodes{$role};
+   $GeneRoleCode{$geneId}{$role} = 1; 
   }
-   if ($geneId && $DiseaseFlag) {
-    $GeneDiseaseEvidence{$geneId}{$tmpDisId}{$tmpEvId}{$element} = 1;
-    }
-    if ($geneId && $AgentFlag) {
-    $GeneAgentEvidence{$geneId}{$tmpAgId}{$tmpEvId}{$element} = 1;
-    }
  }
 
   if($el eq $Tags[$#Tags]) {
@@ -337,7 +337,6 @@ if($el eq 'GeneEntryCollection') {
  print  AGENT "DRUGTERM|AGENT_ID|EVS_ID|GENE_ID|CHR_ID|TAX_ID\n"; 
  foreach my $drugTerm (sort keys %DrugNCI) {
  print AGENT "$drugTerm|$DrugNCI{$drugTerm}\n";
- #print "$drugTerm|$DrugNCI{$drugTerm}\n";
  }
  close AGENT;
 
@@ -346,7 +345,6 @@ if($el eq 'GeneEntryCollection') {
   foreach my $gId (sort keys %GeneRoleCode) {
   foreach my $RCode (sort keys %{$GeneRoleCode{$gId}}) {
    print GENE_ROLE "$gId|$RCode\n";
-   #print "$gId|$RCode\n";
   }
   }
   close GENE_ROLE; 
@@ -364,7 +362,6 @@ if($el eq 'GeneEntryCollection') {
       foreach my $evid (sort keys %{$GeneEvidenceCode{$gId}}) {
          foreach my $evidCode (sort keys %{$GeneEvidenceCode{$gId}{$evid}}) {
      print GENE_EV "$gId|$evid|$evidCode\n";
-#     print "$gId|$evid|$evidCode\n";
      }
      }
      }
@@ -375,7 +372,6 @@ if($el eq 'GeneEntryCollection') {
   foreach my $gId (sort keys %GeneAgent) {
       foreach my $agId (sort keys %{$GeneAgent{$gId}}) {
    print GENE_AGENT "$gId|$agId|$GeneAgent{$gId}{$agId}\n";
-   #print "$gId|$agId\n";
   }
   }
   close GENE_AGENT;
@@ -385,39 +381,10 @@ if($el eq 'GeneEntryCollection') {
   foreach my $gId (sort keys %GeneDiseaseOntology) {
   foreach my $disTerm (sort keys %{$GeneDiseaseOntology{$gId}}) {
    print GENE_DISEASE "$gId|$disTerm|$GeneDiseaseOntology{$gId}{$disTerm}\n";
-   #print "$gId|$disTerm\n";
   } 
   }
   close GENE_DISEASE;
-=pod
-  foreach my $gId (sort keys %GeneDiseaseOntology) {
-  foreach my $agTerm (keys %{$GeneAgent{$gId}}) {
-  foreach my $rolTerm (keys %{$GeneRoleCode{$gId}}) { 
-  foreach my $evidenceId (sort keys %{$GeneEvidenceCode{$gId}}) {
-  foreach my $disTerm (sort keys %{$GeneDiseaseOntology{$gId}}) {
-	$CGDC{$gId}{$disTerm}{$agTerm}{$rolTerm}{$evidenceId}=1;
-	print "$gId|$disTerm|$agTerm|$rolTerm|$evidenceId\n";
-  } 
-  } 
-  }
-  }
-  }
-
- print  CGDC "GENE_ID|DISEASE_TERM|AGENT_ID|EVIDENCE_CODE|ROLE\n";
- print  "Printing CGDC\n";
-  foreach my $gId (sort keys %CGDC) {
-  foreach my $disTerm (sort keys %{$CGDC{$gId}}) {
-  foreach my $agTerm (keys %{$CGDC{$gId}{$disTerm}}) {
-  foreach my $rolTerm (keys %{$CGDC{$gId}{$disTerm}{$agTerm}}) { 
-  foreach my $evidenceId (sort keys %{$CGDC{$gId}{$disTerm}{$agTerm}{$rolTerm}}) {
-
-	print CGDC "$gId|$disTerm|$agTerm|$rolTerm|$evidenceId\n";
-   }
-   }
-   } 
-   }
-   }
-=cut 
+ 
  close CGDC;
 
  print  GAE "GENE_ID|AGENT_ID|EVIDENCE_ID\n";
@@ -451,7 +418,6 @@ if($el eq 'GeneEntryCollection') {
   foreach my $evId (sort keys %EvidenceEvidenceCode) {
   foreach my $evCodeId (sort keys %{$EvidenceEvidenceCode{$evId}}) {
    print EVEVIDENCECODE "$evId|$evCodeId\n";
-   #print "$evId|$evCodeId\n";
   } 
   }
   close EVEVIDENCECODE;
@@ -460,7 +426,6 @@ if($el eq 'GeneEntryCollection') {
  print DISEASEONTOLOGY "DISEASE_TERM|DIS_ID|EVS_ID|GENE_ID|HIST_ID|PARENT|CONCEPT_CODE\n";
  foreach my $disTerm (sort keys %DiseaseNCI) {
  print DISEASEONTOLOGY "$disTerm|$DiseaseNCI{$disTerm}\n";
- #print "$disTerm|$DiseaseNCI{$disTerm}\n";
  }
  close DISEASEONTOLOGY;
 
@@ -468,14 +433,12 @@ if($el eq 'GeneEntryCollection') {
  print EVIDENCE "ID|STATEMENT|SENTENCE_STATUS_FLAG|COMMENT|NEGATIONINDIC|CELLLINEINDIC|COMMENT|PUBMED|SENTSTATUSFLAG\n";
  foreach my $ev (sort keys %Evidence) {
  print EVIDENCE "$Evidence{$ev}\n";
- #print "$ev|$Evidence{$ev}\n";
  }
  close EVIDENCE;
 
  print "Printing EvidenceCode \n";
  foreach my $evCode (sort keys %EvidenceCode) {
  print EVIDENCECODE "$evCode|$EvidenceCode{$evCode}\n";
- #print "$evCode|$EvidenceCode{$evCode}\n";
  }
  close EVIDENCECODE;
 
@@ -483,7 +446,6 @@ if($el eq 'GeneEntryCollection') {
  foreach my $gId (sort keys %GeneGeneAlias) {
  foreach my $alias (sort keys %{$GeneGeneAlias{$gId}}) {
  print GENEGENEALIAS "$gId|$alias|$GeneGeneAlias{$gId}\n";
- #print "$gId|$alias|$GeneGeneAlias{$gId}{$alias}\n";
  }
 }
  close GENEGENEALIAS;
@@ -501,7 +463,6 @@ sub ch
   $el =~s/\s+$//g;	
   $el =~s/\|//g; 	
   $element.=$el;
-  #print "Getting characters for element *$el* when start Tag is $Tags[$#Tags] \n";
 
 }
 

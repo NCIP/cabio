@@ -18,6 +18,7 @@ my $transcript_infile = "$indir/$prefix.transcript.csv";
 my $probeset_outfile = "$outdir/$prefix.probeset.dat";
 my $transcript_outfile = "$outdir/$prefix.transcript.dat";
 my $gene_outfile = "$outdir/$prefix.genes.dat";
+my $genomeVersion;
 
 removeComments($probeset_infile, $probeset_outfile);
 removeComments($transcript_infile, $transcript_outfile);
@@ -35,6 +36,9 @@ sub removeComments {
 
 	while (<INFILE>) {
 		s/"---"/""/g;
+		if ($_=~/^#%genome-version-ncbi=(.*)$/) {
+		    $genomeVersion =  $1;
+		  }
 		unless (/^#/) {
 			print OUTFILE;
 		}
@@ -65,7 +69,7 @@ sub processGenes {
 		}
 
 		for my $clusterId (sort keys %genes) {
-			print OUTFILE "$transcriptId|$clusterId\n" if ($clusterId);
+			print OUTFILE "$genomeVersion|$transcriptId|$clusterId\n" if ($clusterId);
 		}
 	}
 

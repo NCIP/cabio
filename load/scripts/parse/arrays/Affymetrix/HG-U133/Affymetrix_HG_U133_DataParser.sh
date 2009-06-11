@@ -2,7 +2,7 @@
 echo "Calling Affy HG U133A MicroArray data parsers"
 perl Affy_HG_U133_DataSeparator.pl HG-U133A.annot.csv
 
-echo "Generating SQL Loader specific input data from Affy HG U133  MicroArray data"
+echo "Generating SQL Loader specific input data from Affy HG U133A  MicroArray data"
 perl Affy_HG_U133_DataFormatter.pl representative_public_ID_file_out.txt representative_public_ID_out.txt representative_public_ID_out.log 
 perl Affy_HG_U133_DataFormatter.pl unigene_ID_file_out.txt unigene_ID_out.txt unigene_ID_out.log
 perl Affy_HG_U133_DataFormatter.pl gene_title_file_out.txt gene_title_out.txt gene_title_out.log
@@ -54,7 +54,7 @@ echo "Finished generating SQL Loader input files for Affymetrix HG-U133  MicroAr
 
 perl Affy_HG_U133_DataSeparator_3.pl HT_HG-U133A.annot.csv
 
-echo "Generating SQL Loader specific input data from Affy HT HG U133B MicroArray data"
+echo "Generating SQL Loader specific input data from Affy HT HG U133A MicroArray data"
 perl Affy_HG_U133_DataFormatter.pl representative_public_ID_file_out_3.txt representative_public_ID_out_3.txt representative_public_ID_out_3.log 
 perl Affy_HG_U133_DataFormatter.pl unigene_ID_file_out_3.txt unigene_ID_out_3.txt unigene_ID_out_3.log
 perl Affy_HG_U133_DataFormatter.pl gene_title_file_out_3.txt gene_title_out_3.txt gene_title_out_3.log
@@ -75,4 +75,4 @@ perl Affy_HG_U133_Pathway_DataFormatter.pl pathway_file_out_3.txt pathway_out_3.
 perl Affy_HG_U133_Alignments_DataFormatter.pl alignments_file_out_3.txt alignments_out_3.txt
 perl Affy_HG_U133_Interpro_DataFormatter.pl interpro_file_out.txt interpro_out_3.txt
 
-echo "Finished generating SQL Loader input files for Affymetrix HG-U133  MicroArray Data"
+echo "Finished generating SQL Loader input files for Affymetrix HG-U133 MicroArray Data"

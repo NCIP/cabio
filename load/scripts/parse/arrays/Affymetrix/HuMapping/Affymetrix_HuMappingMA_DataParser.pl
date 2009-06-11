@@ -25,6 +25,9 @@ my $gm_file = "$outdir/genetic_map_$prefix.dat";
 my $ms_file = "$outdir/microsatellite_$prefix.dat";
 my $phylocfile = "$outdir/phyloc_$prefix.dat";
 
+my $genomeVersion;
+my $dbsnpVersion;
+
 open (INFILE, "<$input_file") or die "Cannot open \"$input_file\" \n\n";
 open (PREFILE, ">$pre_file") or die "Cannot open \"$pre_file\" \n\n";
 open (SAGFILE, ">$sag_file") or die "Cannot open \"$sag_file\" \n\n";
@@ -35,6 +38,14 @@ open (PHYLOCFILE, ">$phylocfile") or die "Cannot open \"$phylocfile\" \n\n";
 
 foreach my $line (<INFILE>) {
 
+
+	if($line =~/^\#\%genome-version-ncbi=(.*)$/) {
+	 $genomeVersion = $1;
+	}	
+	if($line =~/^\#\%dbsnp-version=(.*)$/) {
+	 $dbsnpVersion = $1;
+	}	
+
     next unless ($line =~ /^\"?SNP/);
 
     my @data = split("\"\,\"", $line);
@@ -44,7 +55,7 @@ foreach my $line (<INFILE>) {
     
     # create prefixed data file
     $line =~ s/---\,/\,/g;
-    print PREFILE "$prefix,$line";
+    print PREFILE "$genomeVersion,$dbsnpVersion,$prefix,$line";
 #    print "$prefix,$line";
 
 
