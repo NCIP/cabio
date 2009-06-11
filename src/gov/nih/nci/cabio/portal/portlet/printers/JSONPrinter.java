@@ -4,7 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Converts a domain object into a JSON object.
+ * Converts a domain object or collection of domain objects into a JSON string
+ * for display by the caBIO portlet.
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */

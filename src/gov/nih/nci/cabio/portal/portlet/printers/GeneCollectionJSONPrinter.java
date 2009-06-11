@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Prints a gene collection in JSON format. The structure looks like this:
+ * Prints a gene collection in JSON format. The table structure looks like this:
  * 
  * {
  *   "columnNames":["Symbol","Description"]
@@ -22,8 +22,8 @@ import org.json.JSONObject;
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
-public class GeneCollectionJSONPrinter implements JSONPrinter {
-
+public class GeneCollectionJSONPrinter extends TableJSONPrinter {
+    
     public JSONObject objectToJSON(Object obj) 
             throws JSONException {
 
@@ -42,7 +42,7 @@ public class GeneCollectionJSONPrinter implements JSONPrinter {
         
         int c=0;
         for(Gene gene : collection) {
-            if (c >= 200) break;
+            if (c >= MAX_RESULTS) break;
             
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("Cluster Id", gene.getClusterId());

@@ -17,8 +17,8 @@ import org.json.JSONObject;
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
-public class ParentGOCollectionJSONPrinter implements JSONPrinter {
-
+public class ParentGOCollectionJSONPrinter extends TableJSONPrinter {
+    
     protected Collection<GeneOntology> getTerms(Object obj) {
         Collection<GeneOntologyRelationship> collection = 
             (Collection<GeneOntologyRelationship>)obj;
@@ -46,7 +46,7 @@ public class ParentGOCollectionJSONPrinter implements JSONPrinter {
         
         int c=0;
         for(GeneOntology go : collection) {
-            if (c >= 200) break;
+            if (c >= MAX_RESULTS) break;
             JSONObject jsonObj = new JSONObject();
             jsonObj.put("GO Identifier", go.getId());
             jsonObj.put("GO Term", go.getName());
