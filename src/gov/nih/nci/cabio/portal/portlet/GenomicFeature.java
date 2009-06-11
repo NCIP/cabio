@@ -14,7 +14,8 @@ public enum GenomicFeature {
     MarkerPhysicalLocation("Genomic Markers"),
     TranscriptPhysicalLocation("Transcripts"),
     CytobandPhysicalLocation("Cytobands"),
-    ArrayReporterPhysicalLocation("Microarray Reporters");
+    ArrayReporterPhysicalLocation("Microarray Reporters"),
+    ConstrainedRegion("Constrained Regions");
 
     private static final String PACKAGE = "gov.nih.nci.cabio.domain.";
             
