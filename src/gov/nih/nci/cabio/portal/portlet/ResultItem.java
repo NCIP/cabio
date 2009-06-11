@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Allows for dynamic JSTL bracket access to result item properties.
+ * Allows for dynamic JSTL bracket access to SDK bean properties.
  * For example, if you have an instance called item you can write 
  * item["bigid"] to retrieve item.getBigid(). 
  * 
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  * <li>_querystr: returns the query string for the REST URL for accessing the object in caBIO
  * <li>_className: returns the fully-qualified name of the class
  * <li>displayMap: returns a proxy which behaves exactly like the current object
- * except that it formats results for screen display.
+ * except that it formats results as strings for screen display.
  * </ul>
  */
 public class ResultItem extends GetOnlyMap {
@@ -59,7 +59,8 @@ public class ResultItem extends GetOnlyMap {
         if ("displayMap".equals(attributePath)) {
             return new GetOnlyMap() {
                 public Object get(Object key) {
-                    return breakLongLines(ResultItem.this.get(key).toString());
+                    Object value = ResultItem.this.get(key);
+                    return (value == null) ? "" : breakLongLines(value.toString());
                 }
             };
         }
@@ -67,9 +68,17 @@ public class ResultItem extends GetOnlyMap {
         return resolve(obj, attributePath);
     }
     
+    /**
+     * Evaluates the specified path on the given object and returns the end 
+     * point object in the path, if any. This function is called recursively
+     * for each segment of the path.
+     * @param object A Java bean with getters.
+     * @param path An object path as specified in the class docs.
+     * @return The end point object, or null.
+     */
     private Object resolve(Object object, String path) {
 
-        if (object == null) return "";
+        if (object == null) return null;
         
         int d = path.indexOf('.');
         String attr = (d < 0) ? path : path.substring(0,d);
