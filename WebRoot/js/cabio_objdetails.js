@@ -55,7 +55,7 @@ var caBioObjectDetails = function() {
 					                if (cdata[ci] === 'PubMED Id') {
 					                    pv = pubmedLink(pv);
 					                }
-                                    v += '<td>'+pv+'</td>';
+                                    v += '<td>'+(pv||'')+'</td>';
 	                            }
 	                            v += '</tr>';
 	                        }
@@ -63,8 +63,8 @@ var caBioObjectDetails = function() {
 	                        if (count > rdata.length) {
 	                            v += "<br/><b>Only the first "+rdata.length+" out of "+
 	                                count+" results are shown here. "+
-	                                "To download the entire result set please use "+ 
-	                                "the caBIO Object Graph Browser linked below.</b>"
+	                                "To download the entire result set, click on the "+ 
+	                                "<i>caBIO Object Graph Browser</i> link below.</b>"
 	                        }
                         }
                     }
