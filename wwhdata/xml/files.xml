@@ -42,15 +42,14 @@
     <Document title="Using the Online Help" href="Welcome%20to%20caBIO%20Portlet.1.2.html" />
     <Document title="Using the caBIO Portlet" href="UsingthecaBIOPortlet.2.1.html" />
     <Document title="Understanding the caBIO Portlet" href="UsingthecaBIOPortlet.2.2.html" />
-    <Document title="Searching for caBIO Data" href="UsingthecaBIOPortlet.2.3.html" />
+    <Document title="Searching caBIO Data" href="UsingthecaBIOPortlet.2.3.html" />
     <Document title="Performing a Simple Search" href="UsingthecaBIOPortlet.2.4.html" />
-    <Document title="Performing an Advanced Search" href="UsingthecaBIOPortlet.2.5.html" />
-    <Document title="Creating Reports of caBIO Data" href="UsingthecaBIOPortlet.2.6.html" />
-    <Document title="Genome Range Queries" href="UsingthecaBIOPortlet.2.7.html" />
-    <Document title="Microarray Annotations" href="UsingthecaBIOPortlet.2.8.html" />
-    <Document title="Genomic Annotations" href="UsingthecaBIOPortlet.2.9.html" />
-    <Document title="Pathways" href="UsingthecaBIOPortlet.2.10.html" />
-    <Document title="Cancer Gene Index" href="UsingthecaBIOPortlet.2.11.html" />
+    <Document title="Performing a Templated Search" href="UsingthecaBIOPortlet.2.5.html" />
+    <Document title="Genome Range Queries" href="UsingthecaBIOPortlet.2.6.html" />
+    <Document title="Microarray Annotations" href="UsingthecaBIOPortlet.2.7.html" />
+    <Document title="Genomic Annotations" href="UsingthecaBIOPortlet.2.8.html" />
+    <Document title="Pathways" href="UsingthecaBIOPortlet.2.9.html" />
+    <Document title="Cancer Gene Index" href="UsingthecaBIOPortlet.2.10.html" />
     <Document title="caBIO Portlet Glossary" href="caBIO%20Portlet%20Glossary.3.1.html" />
     <Document title="Using Application Support" href="Application%20Support.4.1.html" />
   </DocumentInfo>

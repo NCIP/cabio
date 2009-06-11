@@ -5,18 +5,17 @@
   </i>
   <i t="Using the caBIO Portlet" l="2">
     <i t="Understanding the caBIO Portlet" l="3" />
-    <i t="Searching for caBIO Data" l="4">
+    <i t="Searching caBIO Data" l="4">
       <i t="Performing a Simple Search" l="5" />
-      <i t="Performing an Advanced Search" l="6" />
-    </i>
-    <i t="Creating Reports of caBIO Data" l="7">
-      <i t="Genome Range Queries" l="8" />
-      <i t="Microarray Annotations" l="9" />
-      <i t="Genomic Annotations" l="10" />
-      <i t="Pathways" l="11" />
-      <i t="Cancer Gene Index" l="12" />
+      <i t="Performing a Templated Search" l="6">
+        <i t="Genome Range Queries" l="7" />
+        <i t="Microarray Annotations" l="8" />
+        <i t="Genomic Annotations" l="9" />
+        <i t="Pathways" l="10" />
+        <i t="Cancer Gene Index" l="11" />
+      </i>
     </i>
   </i>
-  <i t="caBIO Portlet Glossary" l="13" />
-  <i t="Using Application Support" l="14" />
+  <i t="caBIO Portlet Glossary" l="12" />
+  <i t="Using Application Support" l="13" />
 </WebWorksHelpTOC>
