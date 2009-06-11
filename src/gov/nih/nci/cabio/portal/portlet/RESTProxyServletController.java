@@ -1,6 +1,5 @@
 package gov.nih.nci.cabio.portal.portlet;
 
-import java.io.InputStream;
 import java.net.URLDecoder;
 
 import javax.servlet.ServletException;

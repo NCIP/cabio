@@ -27,9 +27,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Convenience class for queries in the canned reports portlet. The queries 
- * defined here do some eager-fetching of results. Note that due to SDK defects,
- * it best to never eager-fetch associations with a cardinality greater than 1.
+ * Convenience class for Templated Searches. The queries defined here do 
+ * some eager-fetching of results. Note that due to an SDK limitation, it 
+ * best to never eager-fetch associations with a cardinality greater than 1 
+ * (i.e. any collection).
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
