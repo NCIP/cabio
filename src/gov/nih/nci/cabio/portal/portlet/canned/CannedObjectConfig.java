@@ -70,7 +70,8 @@ public class CannedObjectConfig {
                         printer = (JSONPrinter)Class.forName(v[4]).newInstance();
                     }
                     
-                    classObj.addAttribute(v[1], v[2], "detail".equals(v[3]), printer);
+                    classObj.addAttribute(v[1], v[2], 
+                        v[3].contains("A"), v[3].contains("D"), printer);
                 }
             }
             catch (Exception e) {

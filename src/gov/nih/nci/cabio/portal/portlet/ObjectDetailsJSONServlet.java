@@ -103,7 +103,7 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
                 String name = field.getName();
                 
                 if  (!name.equalsIgnoreCase("id")) 
-                    config.addAttribute(name, name, true, null);
+                    config.addAttribute(name, name, true, true, null);
             }
         }
         
@@ -138,12 +138,7 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
                 jsonObj.put("value", printer.objectToJSON(value));
             }
             else {
-                if ((value == null) || ("".equals(value))) {
-                    jsonObj.put("value", "");
-                }
-                else {
-                    jsonObj.put("value", value.toString());
-                }
+                jsonObj.put("value", (value == null) ? "" : value.toString());
             }
             
             attributes.put(jsonObj);

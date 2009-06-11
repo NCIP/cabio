@@ -25,10 +25,11 @@ public class ClassObject extends LabeledObject {
         return plural;
     }
     
-    public void addAttribute(String name, String label, boolean isDetail, JSONPrinter printerClass) {
+    public void addAttribute(String name, String label,
+            boolean isSummary, boolean isDetail, JSONPrinter printerClass) {
         LabeledObject attr = new LabeledObject(name, label, printerClass);
-        if (!isDetail) attributes.add(attr);
-        detailAttributes.add(attr);
+        if (isSummary) attributes.add(attr);
+        if (isDetail) detailAttributes.add(attr);
     }
     
     public List<LabeledObject> getAttributes() {
