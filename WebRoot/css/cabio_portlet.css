@@ -86,11 +86,13 @@ table.properties td {
 }
 
 table.properties div.value {
-    max-height: 250px;
-    max-width: 500px;
+    height: expression( this.scrollHeight > 249 ? "250px" : "auto" ); /* sets max-height for IE */
+    max-height: 250px; /* sets max-height value for all standards-compliant browsers */
+    /* can't set IE max-width because a scrollbar will obscure a single line... */ 
+    /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
+    max-width: 500px; /* sets max-width value for all standards-compliant browsers */
     overflow: auto;
 }
-
 
 table.nested {
 	width: 95%;
