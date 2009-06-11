@@ -68,26 +68,16 @@
     
 		   	<c:forEach var="attr" items="${classConfig.attributes}">
 				<td>
-				<c:choose>
-				<c:when test="${attr.lastPart == 'pubmedId'}">
-                    <script type="text/javascript">
-				    document.write(caBioObjectDetails.pubmedLink(
-				        '<c:out value="${item.displayMap[attr.name]}"/>'));
-                    </script>
-				</c:when>
-				<c:otherwise>
-                    <script type="text/javascript">
-                    var v = '<c:out value="${item.displayMap[attr.name]}"/>';
-                    var tv = caBioCommon.trunc(v,90);
-                    if (tv != v) {
-                        document.write('<div title="'+v+'" class="attribute">'+tv+'</div>');
-                    }
-                    else {
-                        document.write(v);
-                    }
-                    </script>
-				</c:otherwise>
-				</c:choose>
+                <script type="text/javascript">
+                var v = '<c:out value="${item.displayMap[attr.name]}"/>';
+                var tv = caBioCommon.trunc(v,90);
+                if (tv != v) {
+                    document.write('<div title="'+v+'" class="attribute">'+tv+'</div>');
+                }
+                else {
+                    document.write(v);
+                }
+                </script>
 				</td>
 			</c:forEach>
 		
