@@ -6,8 +6,8 @@ var caBioFormats = function() {
     
     summary : {
 	    "gov.nih.nci.cabio.domain.Agent":{
-	        "title":["EVSId"],
-	        "desc":["name","comment"]
+	        "title":["name"],
+	        "desc":["EVSId","drugbankAccession"]
 	    },
 	    "gov.nih.nci.cabio.domain.Anomaly":{
 	        "title":["description"]
@@ -26,8 +26,8 @@ var caBioFormats = function() {
             "title":["name"]
         },
 	    "gov.nih.nci.cabio.domain.DiseaseOntology":{
-	        "title":["EVSId"],
-	        "desc":["name"]
+	        "title":["name"],
+	        "desc":["EVSId"]
 	    },
         "gov.nih.nci.cabio.pathways.EntityAccession":{
             "title":["accession"],

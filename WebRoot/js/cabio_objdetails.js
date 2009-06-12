@@ -69,7 +69,7 @@ var caBioObjectDetails = function() {
                         }
                     }
                     else {
-                        v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
+                        v = caBioCommon.highlight(val, caBioCommon.searchWords);
                     }
                 }
                 
