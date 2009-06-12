@@ -133,8 +133,10 @@ public class TechGuideExamples {
         try {
             System.out.println("\nExample Five: Detached Criteria Search");
             DetachedCriteria criteria = DetachedCriteria.forClass(PhysicalLocation.class);
-            criteria.add(Restrictions.gt("chromosomalStartPosition", new Long(86851632)));
-            criteria.add(Restrictions.lt("chromosomalEndPosition",   new Long(86861632)));
+            criteria = criteria.add(Restrictions.gt("chromosomalStartPosition", new Long(86851632)));
+            criteria = criteria.add(Restrictions.lt("chromosomalEndPosition",   new Long(86861632)));
+            criteria = criteria.add(Restrictions.ilike("assembly", "reference"));
+            criteria = criteria.createCriteria("chromosome").add(Restrictions.eq("number", "1"));
             List resultList = appService.query(criteria);
             System.out.println("Total # of  records = " + resultList.size());
         }
@@ -144,8 +146,10 @@ public class TechGuideExamples {
 
         try {
             System.out.println("\nExample Six: HQL Search");
-            String hqlString = "FROM gov.nih.nci.cabio.domain.Gene g WHERE g.symbol LIKE 'BRCA%'";
-            HQLCriteria hqlC = new HQLCriteria(hqlString);
+            String hqlString = "FROM gov.nih.nci.cabio.domain.Gene g WHERE g.symbol LIKE ?";
+            List<String> params = new ArrayList<String>();
+            params.add("BRCA%");
+            HQLCriteria hqlC = new HQLCriteria(hqlString, params);
             List resultList = appService.query(hqlC);
             System.out.println("Total # of records = " + resultList.size());
         }
