@@ -42,25 +42,25 @@ sub getFullDataPaths {
     return ($indir,$outdir);
 }
 
-
 sub getChromosomes() {
-my($no, $id, $taxId);
-my %chrHash;
-$taxId = shift || die "Function requires TaxonId\n";
-my $dbh = DBI->connect($ENV{'DBI_DRIVER'}, $ENV{'SCHEMA'}, $ENV{'SCHEMA_PWD'}) || die  "Error ".DBI->errstr;
-my $sql = qq(SELECT chromosome_number, chromosome_id from chromosome where taxon_id = $taxId);
-my $sth = $dbh->prepare($sql);
-$sth->execute();
-$sth->bind_columns(\$no, \$id);
-while($sth->fetch()) {
+    my($no, $id, $taxId);
+    my %chrHash;
+    $taxId = shift || die "Function requires TaxonId\n";
+    my $dbh = DBI->connect($ENV{'DBI_DRIVER'}, $ENV{'SCHEMA'}, $ENV{'SCHEMA_PWD'}) || die  "Error ".DBI->errstr;
+    my $sql = qq(SELECT chromosome_number, chromosome_id from chromosome where taxon_id = $taxId);
+    my $sth = $dbh->prepare($sql);
+    $sth->execute();
+    $sth->bind_columns(\$no, \$id);
+    while($sth->fetch()) {
         $no=~s/\s+//g;
         $id=~s/\s+//g;
         $chrHash{$no} = $id;
-}
-return \%chrHash;
+    }
+    return \%chrHash;
 }
 
 sub testingSomething() {
- return 1;
+    return 1;
 }
+
 1;
