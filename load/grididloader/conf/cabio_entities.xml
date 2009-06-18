@@ -430,15 +430,6 @@
     </logical-key>
   </entity>
 
- <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="false">
-    <primary-key>ID</primary-key>
-    <logical-key>
-      <property entity="Gene" foreign-key="GENE_ID"/>
-	<property>ROLE_ID</property>
-      <property entity="Evidence" foreign-key="EVIDENCE_ID"/>
-    </logical-key>
-  </entity>
-
   <entity class="Agent" table="AGENT">
     <primary-key>AGENT_ID</primary-key>
     <logical-key>
@@ -447,6 +438,17 @@
       <property>EVS_ID</property>
     </logical-key>
    </entity>
+   
+  <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION" parallel="false">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property entity="Gene" foreign-key="GENE_ID"/>
+      <property entity="Agent" foreign-key="AGENT_ID"/>
+      <property entity="DiseaseOntology" foreign-key="HISTOLOGYCODE_ID"/>
+      <property>ROLE_ID</property>
+      <property entity="Evidence" foreign-key="EVIDENCE_ID"/>
+    </logical-key>
+  </entity>
 
   <entity class="NucleicAcidSequence" table="NUCLEIC_ACID_SEQUENCE" parallel="true">
     <primary-key>ID</primary-key>
