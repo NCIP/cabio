@@ -2,7 +2,7 @@
                                   Version 4.3
 
                                  Release Notes
-                                 July, 2009
+                                  July, 2009
 
 
                National Cancer Institute Center for Bioinformatics
@@ -26,25 +26,30 @@
 --------------------------------------------------------------------------------
  1.1 Canada DrugBank Data
 --------------------------------------------------------------------------------
-Enhancements to caBIO agent and associated objects in support of data from the Canada DrugBank
+  The Agent object has been expanded in support of data from the Canada 
+  DrugBank. A new object called AgentAlias was added to support additional drug 
+  names from the DrugBank. Genomic drug target associations from the DrugBank 
+  have been added to the GeneAgentAssociation class. 
 
 --------------------------------------------------------------------------------
- 1.2 Supprt for Ensembl Compara
+ 1.2 Support for Ensembl Compara
 --------------------------------------------------------------------------------
-Addition of objects modeling highly conserved regions on the human genome and support for multiple-alignment data from Ensembl Compara
+  Highly conserved regions from the Compara database have been added to a new 
+  Location subclass called ConstrainedRegion. Details about the related multiple 
+  alignment analyses can be found in the MultipleAlignment class. The Range 
+  Query API will return ConstrainedRegions on the genome.
 
 --------------------------------------------------------------------------------
-1.3  support for the version of Affymetrix annotations
+ 1.3 Support for Affymetrix annotation versions
 --------------------------------------------------------------------------------
-Inclusion of an annotation version field to the Microarray class in order to expose the version of Affymetrix annotations
+  An annotationVersion field has been added to the Microarray class in order to 
+  expose the version of Affymetrix annotations loaded into caBIO.
 
 --------------------------------------------------------------------------------
-1.4 Upgrade to SDK 4.1.1
+ 1.4 Upgrade to SDK 4.1.1
 --------------------------------------------------------------------------------
-For the tag information, refer to the section 4.0 SVG tags
-
---------------------------------------------------------------------------------
-For details, please consult the caBIO Technical Guide.
+  For the tag information, refer to the Section 4.0 SVN Tags.
+  For details, please consult the caBIO Technical Guide.
  
  
 ================================================================================
@@ -52,31 +57,32 @@ For details, please consult the caBIO Technical Guide.
 ================================================================================
 
 API related bugs:
---------------------------------------------------------------------------------
- GF17377 Absolute Range Query - Assembly (case sensitivity) - API/Portlet
 
- GF21110 Allow assembly to be case-insensitive
+  GF17377: Absolute Range Query - Assembly (case sensitivity) - API/Portlet
 
- GF21176 Allow wildcards in assembly name
+  GF21110: Allow assembly to be case-insensitive
 
- GF20806 Pathway By Gene Symbol search on QA Portlet gives java.io.IOException: Did not receive successful HTTP response
+  GF21176: Allow wildcards in assembly name
 
- GF21093 the link for 4.3 related document need to be updated 
+  GF20806: Pathway By Gene Symbol search on QA Portlet gives 
+           java.io.IOException: Did not receive successful HTTP response
 
- GF21573 When typing "[" on Free style search, you will get a runtime Java Script error
+  GF21093: the link for 4.3 related document need to be updated 
 
---------------------------------------------------------------------------------
- Database related bugs:
---------------------------------------------------------------------------------
- GF21427Sentence Status Bug (Duplicate Evidence Objects) 
+  GF21573: When typing "[" on Free style search, you will get a runtime Java 
+           Script error
 
- GF21102 Evidence objects without associated GeneFunctionAssociation 
+Database related bugs:
 
- GF20737 Standardize formatting of Microarray.genomeVersion 
+  GF21427: Sentence Status Bug (Duplicate Evidence Objects) 
 
- GF15004 Incorrect Gene-Agent-Evidence Association
+  GF21102: Evidence objects without associated GeneFunctionAssociation 
 
- GF21575 InternetSource sourceURI incorrect
+  GF20737: Standardize formatting of Microarray.genomeVersion 
+
+  GF15004: Incorrect Gene-Agent-Evidence Association
+
+  GF21575: InternetSource sourceURI incorrect
   
 ================================================================================
                                3.0 Known Issues 
@@ -84,21 +90,22 @@ API related bugs:
 
 The following defects are known to exist in this build:
 
-  GF13669  null big id for GeneRelativeLocation  
+  GF13669: null big id for GeneRelativeLocation  
 
-  GF21600  PID - Issue related to backward compatibility
+  GF21600: PID - Issue related to backward compatibility
  
-  GF15495  FreestyleLM: HIBERNATE_SEARCH does not handle Collection fields correctly
+  GF15495: FreestyleLM: HIBERNATE_SEARCH does not handle Collection fields 
+           correctly
 
-  GF20888  Freestyle search - error when search value has single " attached
+  GF20888: Freestyle search - error when search value has single " attached
   
-  GF21215  AbsoluteRangeQuery in caBIO API returns error
+  GF21215: AbsoluteRangeQuery in caBIO API returns error
 
 ================================================================================
                                  4.0 SVN Tags
 ================================================================================
 
-  The caBIO code base has been migrated to an SVN repository:
+  The caBIO code base is available in SVN:
   
     https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/
 
@@ -106,7 +113,9 @@ The following defects are known to exist in this build:
   
     https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_42_QA_11192008
 
-  The version of the SDK which this release of caBIO was tested with available at
+  The version of the SDK which this release of caBIO was tested with is 
+  available at:
+  
     http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/cacore-sdk/4.1.1/
     caCORE_SDK_411-src.zip
 
@@ -133,4 +142,4 @@ There are multiple ways to get assistance with and provide feedback on caBIO:
 ================================================================================
 
 The release documentation can be found at:
-http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/guide
+https://wiki.nci.nih.gov/display/ICR/caBIO+Documentation+Index+Page
