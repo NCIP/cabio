@@ -2465,11 +2465,12 @@ div.Run-In
   font-variant: normal;
   font-weight: bold;
   margin-bottom: 0.0pt;
-  margin-left: 0pt;
+  margin-left: 28px;
   margin-right: 0pt;
-  margin-top: 3.0pt;
+  margin-top: -5px;
+  padding-bottom: 6px;
   text-align: Left;
-  text-indent: 0pt;
+  text-indent: -15px;
   text-transform: none;
   vertical-align: baseline;
 }
@@ -2478,7 +2479,8 @@ div.Run-In
 {
   margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 3.0pt;
+  margin-top: -5px;
+  padding-bottom: 6px;
 }
 
 .Run-In_inner
