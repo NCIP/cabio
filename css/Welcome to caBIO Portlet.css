@@ -3197,11 +3197,12 @@ div.Run-In
   font-variant: normal;
   font-weight: bold;
   margin-bottom: 0.0pt;
-  margin-left: 0pt;
+  margin-left: 28px;
   margin-right: 0pt;
-  margin-top: 3.0pt;
+  margin-top: -5px;
+  padding-bottom: 6px;
   text-align: Left;
-  text-indent: 0pt;
+  text-indent: -15px;
   text-transform: none;
   vertical-align: baseline;
 }
@@ -3210,7 +3211,8 @@ div.Run-In
 {
   margin-bottom: 0.0pt;
   margin-right: 0pt;
-  margin-top: 3.0pt;
+  margin-top: -5px;
+  padding-bottom: 6px;
 }
 
 .Run-In_inner
@@ -4259,19 +4261,6 @@ span.URL
   vertical-align: baseline;
 }
 
-table.UnstructMasterPageMaps
-{
-  margin-bottom: 6.0pt;
-  margin-left: 0pt;
-  margin-right: 0pt;
-  margin-top: 6.0pt;
-  padding-bottom: 3pt;
-  padding-left: 3pt;
-  padding-right: 3pt;
-  padding-top: 3pt;
-  text-align: left;
-}
-
 table.Table_-_Feature_Description
 {
   margin-bottom: 12.0pt;
@@ -4284,6 +4273,19 @@ table.Table_-_Feature_Description
   padding-top: 4pt;
   text-align: right;
   width: 90%;
+}
+
+table.UnstructMasterPageMaps
+{
+  margin-bottom: 6.0pt;
+  margin-left: 0pt;
+  margin-right: 0pt;
+  margin-top: 6.0pt;
+  padding-bottom: 3pt;
+  padding-left: 3pt;
+  padding-right: 3pt;
+  padding-top: 3pt;
+  text-align: left;
 }
 
 table.Table_-_Single_Cell
