@@ -169,6 +169,7 @@
 		<path id="test.build.classpath">
 			<fileset dir="${test.lib.dir}">
 				<include name="*.jar" />
+                        <include name="*.zip" /> 
 			</fileset>
 			<pathelement location="${build.dest}" />
 			<path refid="test.build.extended.classpath" />
