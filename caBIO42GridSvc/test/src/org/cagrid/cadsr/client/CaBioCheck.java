@@ -15,7 +15,9 @@ public class CaBioCheck {
 	private static String projectName = "caBIO";
 	private static String projectVersion = "4.2";
 	private static String beansFileName = "cabio42-beans.jar";
-
+	//private static String cadsrDataServiceUrl = "http://cadsr-dataservice-sandbox.nci.nih.gov:80/wsrf/services/cagrid/CaDSRDataService";
+	private static String cadsrDataServiceUrl = "http://cadsr-dataservice.nci.nih.gov:80/wsrf/services/cagrid/CaDSRDataService";
+	
     /**
      * @param args
      */
@@ -24,7 +26,7 @@ public class CaBioCheck {
         	CaBioCheck check = new CaBioCheck();
         	Collection<String> classList = check.getClasses();
         	
-            CaDSRUMLModelService client = new CaDSRUMLModelService("http://cadsr-dataservice.nci.nih.gov:80/wsrf/services/cagrid/CaDSRDataService");
+            CaDSRUMLModelService client = new CaDSRUMLModelService(cadsrDataServiceUrl);
             System.out.println("Finding projects");
             Project[] projects = client.findAllProjects();
             Project cabio = null;
@@ -44,12 +46,20 @@ public class CaBioCheck {
                 UMLClassMetadata[] classes = client.findClassesInPackage(cabio, pack.getName());
                 for (UMLClassMetadata clazz : classes) {
                 	fullClassname = String.format("%s.%s", pack.getName(), clazz.getName());
-                    System.out.println("\t" + clazz.getName() + " Found: " + classList.contains(fullClassname));
+                    if ( classList.contains(fullClassname) )
+                    {
+                      System.out.println("\t" + clazz.getName());
+                    }
+                    else 
+                    {
+                    	System.out.println("\t" + clazz.getName() + " ***NOT FOUND***");
+                    }
                     totalClasses++;
                 }
             }
             
-            System.out.println( String.format("Total classes in caDSR: %d, in %s: %d", totalClasses, beansFileName, classList.size()));
+            System.out.println( String.format("Total classes in caDSR: %d", totalClasses));
+            System.out.println( String.format("Total classes in %s: %d", beansFileName, classList.size()));
             
             System.out.println("DONE");
             
