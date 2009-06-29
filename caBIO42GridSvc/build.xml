@@ -75,7 +75,8 @@
 	<!--import developers deploy targets and properties -->
 	<import file="dev-build-deploy.xml" />
 
-
+	<import file="check-cadsr.xml" />
+	
 	<property name="ant.contrib.location" value="${tools.lib.dir}/ant-contrib-1.0b3.jar"/>
 	<!-- using ant contrib for contidionals, looping , and runtarget -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
@@ -169,7 +170,7 @@
 		<path id="test.build.classpath">
 			<fileset dir="${test.lib.dir}">
 				<include name="*.jar" />
-                        <include name="*.zip" /> 
+                <include name="*.zip" /> 
 			</fileset>
 			<pathelement location="${build.dest}" />
 			<path refid="test.build.extended.classpath" />
@@ -180,6 +181,11 @@
 			<path refid="test.run.extended.classpath" />
 			<path refid="test.build.classpath" />
 		</path>
+		<path id="test.run.csdsr.classpath">
+			<pathelement location="${test.build.dest}" />
+			<path refid="test.run.extended.classpath" />
+			<path refid="test.build.classpath" />			
+		</path>		
 		<path id="run.classpath">
 			<pathelement location="${build.dest}" />
 			<path refid="run.extended.classpath" />
