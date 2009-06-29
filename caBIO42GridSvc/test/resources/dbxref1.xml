@@ -6,7 +6,7 @@
 	    <Association
 	        name="gov.nih.nci.cabio.domain.Gene" 
 	        roleName="gene">
-	    	<Attribute name="id" value="4041" predicate="EQUAL_TO"/>
+	    	<Attribute name="id" value="4040" predicate="EQUAL_TO"/>
 	    </Association>		
 	</Target>
 </CQLQuery>
