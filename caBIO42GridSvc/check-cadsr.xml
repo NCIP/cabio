@@ -1,0 +1,13 @@
+<project name="check.cadsr" basedir="." default="check">
+     <target name="check" depends="checkGlobus, defineClasspaths" description="Check caBIO model in caDSR">
+     	<javac srcdir="${test.src.dir}" classpathref="test.build.classpath" includes="**" destdir="${test.build.dest}" debug="${java.debug}" deprecation="${deprecation}" />
+     	
+        <property name="service.url" value="http://cadsr-dataservice.nci.nih.gov:80/wsrf/services/cagrid/CaDSRDataService" />
+        <echo message="Connecting to service: ${service.url}" />
+        <java failonerror="true" classname="gov.nih.nci.cagrid.cabio.client.CaBioCheck" classpathref="test.run.csdsr.classpath" fork="yes">
+            <!-- jvmarg value="-DGLOBUS_LOCATION=${ext.globus.dir}" /  -->
+            <arg value="-url" />
+            <arg value="${service.url}" />
+        </java>
+    </target>
+</project>
