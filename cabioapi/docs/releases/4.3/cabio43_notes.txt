@@ -60,27 +60,27 @@ API related bugs:
 
   GF17377: Absolute Range Query - Assembly (case sensitivity) - API/Portlet
 
-  GF21110: Allow assembly to be case-insensitive
-
-  GF21176: Allow wildcards in assembly name
-
   GF20806: Pathway By Gene Symbol search on QA Portlet gives 
            java.io.IOException: Did not receive successful HTTP response
 
   GF21093: the link for 4.3 related document need to be updated 
+
+  GF21110: Allow assembly to be case-insensitive
+
+  GF21176: Allow wildcards in assembly name
 
   GF21573: When typing "[" on Free style search, you will get a runtime Java 
            Script error
 
 Database related bugs:
 
-  GF21427: Sentence Status Bug (Duplicate Evidence Objects) 
-
-  GF21102: Evidence objects without associated GeneFunctionAssociation 
+  GF15004: Incorrect Gene-Agent-Evidence Association
 
   GF20737: Standardize formatting of Microarray.genomeVersion 
 
-  GF15004: Incorrect Gene-Agent-Evidence Association
+  GF21102: Evidence objects without associated GeneFunctionAssociation 
+
+  GF21427: Sentence Status Bug (Duplicate Evidence Objects) 
 
   GF21575: InternetSource sourceURI incorrect
   
