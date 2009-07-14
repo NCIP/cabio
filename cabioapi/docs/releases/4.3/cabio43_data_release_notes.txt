@@ -381,8 +381,6 @@ http://cabioapi.nci.nih.gov/cabio42/services/caBIOService?wsdl
 
 Grid services 
 
-http://cabiogrid32.nci.nih.gov:80/wsrf/services/cagrid/CaBIO32GridSvc 
-
 http://cabiogrid40.nci.nih.gov:80/wsrf/services/cagrid/CaBIO40GridSvc 
 
  
