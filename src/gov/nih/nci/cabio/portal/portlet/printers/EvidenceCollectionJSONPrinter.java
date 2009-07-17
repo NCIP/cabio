@@ -29,28 +29,30 @@ public class EvidenceCollectionJSONPrinter implements JSONPrinter {
         cols.put("Sentence");
         cols.put("Evidence Codes");
         json.put("columnNames", cols);
-        json.put("count", collection.size());
+        json.put("count", (collection == null) ? "0" : collection.size());
         
         JSONArray rows = new JSONArray();
         
-        int c=0;
-        for(Evidence e : collection) {
-            if (c >= 200) break;
-            
-            StringBuffer sb = new StringBuffer();
-            for (EvidenceCode ec : e.getEvidenceCodeCollection()) {
-                if (sb.length()>0) sb.append(", ");
-                sb.append(ec.getEvidenceCode());
+        if (collection != null) {
+            int c=0;
+            for(Evidence e : collection) {
+                if (c >= 200) break;
+                
+                StringBuffer sb = new StringBuffer();
+                for (EvidenceCode ec : e.getEvidenceCodeCollection()) {
+                    if (sb.length()>0) sb.append(", ");
+                    sb.append(ec.getEvidenceCode());
+                }
+                
+                JSONObject jsonObj = new JSONObject();
+                jsonObj.put("PubMED Id", e.getPubmedId());
+                jsonObj.put("Sentence", e.getSentence());
+                jsonObj.put("Evidence Codes", sb.toString());
+                rows.put(jsonObj);
+                c++;
             }
-            
-            JSONObject jsonObj = new JSONObject();
-            jsonObj.put("PubMED Id", e.getPubmedId());
-            jsonObj.put("Sentence", e.getSentence());
-            jsonObj.put("Evidence Codes", sb.toString());
-            rows.put(jsonObj);
-            c++;
         }
-
+        
         json.put("rows", rows);
         return json;
     }

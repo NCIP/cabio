@@ -16,6 +16,7 @@ import java.util.List;
 public class ChildGOCollectionJSONPrinter extends ParentGOCollectionJSONPrinter {
 
     protected Collection<GeneOntology> getTerms(Object obj) {
+        if (obj == null) return null;
         Collection<GeneOntologyRelationship> collection = 
             (Collection<GeneOntologyRelationship>)obj;
         List<GeneOntology> terms = new ArrayList<GeneOntology>();

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 public class ParentGOCollectionJSONPrinter extends TableJSONPrinter {
     
     protected Collection<GeneOntology> getTerms(Object obj) {
+        if (obj == null) return null;
         Collection<GeneOntologyRelationship> collection = 
             (Collection<GeneOntologyRelationship>)obj;
         List<GeneOntology> terms = new ArrayList<GeneOntology>();
@@ -40,20 +41,22 @@ public class ParentGOCollectionJSONPrinter extends TableJSONPrinter {
         cols.put("GO Identifier");
         cols.put("GO Term");
         json.put("columnNames", cols);
-        json.put("count", collection.size());
+        json.put("count", (collection == null) ? "0" : collection.size());
         
         JSONArray rows = new JSONArray();
-        
-        int c=0;
-        for(GeneOntology go : collection) {
-            if (c >= MAX_RESULTS) break;
-            JSONObject jsonObj = new JSONObject();
-            jsonObj.put("GO Identifier", go.getId());
-            jsonObj.put("GO Term", go.getName());
-            rows.put(jsonObj);
-            c++;
-        }
 
+        if (collection != null) {
+            int c=0;
+            for(GeneOntology go : collection) {
+                if (c >= MAX_RESULTS) break;
+                JSONObject jsonObj = new JSONObject();
+                jsonObj.put("GO Identifier", go.getId());
+                jsonObj.put("GO Term", go.getName());
+                rows.put(jsonObj);
+                c++;
+            }
+        }
+        
         json.put("rows", rows);
         return json;
     }
