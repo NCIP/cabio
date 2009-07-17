@@ -412,7 +412,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
-            <move file="${jboss.home}/server/${jboss.server.name}/logs/server.log" tofile="${jboss.home}/server/${jboss.server.name}/log/server.log-${install.time}"/>
+            <move file="${jboss.home}/server/${jboss.server.name}/log/server.log" tofile="${jboss.home}/server/${jboss.server.name}/log/server.log-${install.time}"/>
 
 		<copy file="${cabio-webapp.dir.dist}/${cabio-webapp.war.file}" todir="${jboss.home}/server/${jboss.server.name}/deploy" overwrite="true" />
 		<!--  Many NCI applications require clm for csm, so you can point this to where you have the version you want to use
