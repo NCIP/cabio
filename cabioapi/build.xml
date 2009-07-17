@@ -137,6 +137,13 @@
             </fileset>
         </copy>
 
+    	<!-- copy mobile web app -->
+        <copy todir="${project.build.dir}/system/web" overwrite="true">
+            <fileset dir="${project.home.dir}/mobile">
+                <include name="**/*" />
+            </fileset>
+        </copy>
+    	
         <replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
             <replacefilter token="@INDEXBASE@" value="${index_base}" />
         </replace>
