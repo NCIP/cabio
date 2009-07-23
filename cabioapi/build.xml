@@ -138,7 +138,7 @@
         </copy>
 
     	 <!-- copy mobile web app -->
-       <if>                 
+       <!-- if>                 
             <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
             <then>
                 <echo message="Include caBIO Mobile Application in the deployment"/>
@@ -149,7 +149,8 @@
                     </fileset>
                 </copy>
             </then>
-        </if>
+        </if -->
+    	<antcall target="copy-mobile-src" />
     	
         <replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
             <replacefilter token="@INDEXBASE@" value="${index_base}" />
@@ -157,6 +158,16 @@
 
     </target>
 
+	<target name="copy-mobile-src" if="cabio-webapp.mobile.included" >
+        <echo message="Include caBIO Mobile Application in the deployment"/>
+         <copy todir="${project.build.dir}/system/web" overwrite="true">
+             <fileset dir="${project.home.dir}/mobile">
+                <include name="**/*" />
+                <exclude name="src/**/*" />
+             </fileset>
+         </copy>
+	</target>
+		
     <target name="tag-build" 
             description="Populates the version.properties for this build">
 

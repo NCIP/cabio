@@ -143,7 +143,8 @@
             <classpath refid="custom.libs"/>
         </javac>
 
-       <if>                 
+    	<antcall  target="Custom.compile.mobile.src" />
+       <!-- if>                 
             <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
             <then>
                 <echo message="Compile caBIO Mobile Application Source code"/>
@@ -152,10 +153,17 @@
                     <classpath refid="custom.libs"/>
                </javac>  
             </then>
-        </if>
+        </if -->
     </target>
 
-
+    <target name="Custom.compile.mobile.src" if="cabio-webapp.mobile.included">
+        <echo message="Compile caBIO Mobile Application Source code"/>
+       <javac srcdir="${mobile.src.dir}" destdir="${custom.classes.dir}"
+       		debug="true" debuglevel="lines,source">
+            <classpath refid="custom.libs"/>
+       </javac>      	
+	</target>
+	
     <target name="Custom.package.src" depends="Custom.build" 
             description="Creates the custom API jar">
 		<jar destfile="${custom.jar.path}" basedir="${custom.classes.dir}">
