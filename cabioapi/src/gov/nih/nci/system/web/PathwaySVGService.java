@@ -111,7 +111,7 @@ public class PathwaySVGService extends HttpServlet {
         if (svgString == null) return;
                 
         StringBuffer requestURL = request.getRequestURL();
-        String server = requestURL.substring(0, requestURL.indexOf("/cabio"));
+        String server = requestURL.substring(0, requestURL.indexOf("/cabio" + apiVersion));
         
         svgString = svgString.replaceAll(
             "/CMAP.*?BCID=(.*?)\"", 
