@@ -65,7 +65,6 @@ var caBioSimpleSearch = function() {
 	    
 	    if (searchString == '') {
 	    	jQuery("#searchResults").empty();
-	    	jQuery("#resultPages").empty();
             jQuery("#cabioNav").hide();
 	        return;
 	    }
@@ -106,7 +105,6 @@ var caBioSimpleSearch = function() {
 	function processResults(xml) {
 		   
 	    jQuery("#searchResults").empty();
-	    jQuery("#resultPages").empty();
 	    
 	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
@@ -187,7 +185,7 @@ var caBioSimpleSearch = function() {
 	
 	        if (numPages > 1) {
 	            caBioCommon.createPager(numPages, currPage, "caBioSimpleSearch");
-	            jQuery("#resultPages").append(pages);
+	            jQuery("#searchResults").append(pages);
 	        }
 	    }
 	    
@@ -249,7 +247,6 @@ var caBioSimpleSearch = function() {
 <div class="results" id="objectDetails"></div>
 <!-- div class="results" id="searchResults" style="width:300;height:500;overflow:auto"></div -->
 <div class="results" id="searchResults"></div>
-<div class="results" id="resultPages"></div>
 </body>
 
 <script language="javascript">
