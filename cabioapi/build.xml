@@ -137,12 +137,19 @@
             </fileset>
         </copy>
 
-    	<!-- copy mobile web app -->
-        <copy todir="${project.build.dir}/system/web" overwrite="true">
-            <fileset dir="${project.home.dir}/mobile">
-                <include name="**/*" />
-            </fileset>
-        </copy>
+    	 <!-- copy mobile web app -->
+       <if>                 
+            <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
+            <then>
+                <echo message="Include caBIO Mobile Application in the deployment"/>
+                <copy todir="${project.build.dir}/system/web" overwrite="true">
+                    <fileset dir="${project.home.dir}/mobile">
+                       <include name="**/*" />
+                       <exclude name="src/**/*" />
+                    </fileset>
+                </copy>
+            </then>
+        </if>
     	
         <replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
             <replacefilter token="@INDEXBASE@" value="${index_base}" />

@@ -25,6 +25,8 @@
 	<property name="custom.jar.path" value="${custom.build.dir}/${custom.jar}" />
 	<property name="system.jar.path" value="${system.dir}/${system.lib.dir}/${custom.jar}" />
 
+      <property name="mobile.src.dir" value="${project.home.dir}/mobile/src" />
+
 	<property name="indexgen.dir" value="${project.output.dir}/indexgen" />	
 	<property name="indexgen.zip.file" value="${PROJECT_NAME}-indexgen.zip" />	
 	
@@ -140,6 +142,17 @@
         		debug="true" debuglevel="lines,source">
             <classpath refid="custom.libs"/>
         </javac>
+
+       <if>                 
+            <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
+            <then>
+                <echo message="Compile caBIO Mobile Application Source code"/>
+               <javac srcdir="${mobile.src.dir}" destdir="${custom.classes.dir}"
+               		debug="true" debuglevel="lines,source">
+                    <classpath refid="custom.libs"/>
+               </javac>  
+            </then>
+        </if>
     </target>
 
 
@@ -178,8 +191,7 @@
             <fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
                 <include name="indexedFields.properties"/>
             </fileset>
-        </copy>  
-        
+        </copy>          
     </target>
     
     
