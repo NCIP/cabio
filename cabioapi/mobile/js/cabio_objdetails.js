@@ -33,7 +33,7 @@ var caBioObjectDetails = function() {
                 var val = r.attributes[i].value || "";
                 var v = '';
                 if (k === 'PubMED Id') {
-                    v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_blank">'+val+'</a></span>';
+                    v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_self">'+val+'</a></span>';
                 }
                 else {
                     v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
@@ -43,7 +43,7 @@ var caBioObjectDetails = function() {
                 h += v+"</div></td></tr>";
 	        }
 	        h += '</table><div class="externalLinks"><h3>External Links</h3><ul>';
-            h += '<li><span class="link-extenal"><a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_blank">';
+            h += '<li><span class="link-extenal"><a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_self">';
             h += 'Open this record in the caBIO Object Graph Browser</a></span></li>';
             h += '</ul></div></div>';
 	        jQuery("#objectDetails").empty().append(h).show();
@@ -78,7 +78,7 @@ var caBioObjectDetails = function() {
                 var val = r.properties[k] || "";
                 var v = '';
                 if (k == 'PubMED Id') {
-                    v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_blank">'+val+'</a></span>';
+                    v = '<span class="link-extenal"><a href="http://www.ncbi.nlm.nih.gov/pubmed/'+val+'" target="_self">'+val+'</a></span>';
                 }
                 else {
                     v = caBioCommon.highlight(caBioCommon.escapeXML(val), caBioCommon.searchWords);
@@ -91,7 +91,7 @@ var caBioObjectDetails = function() {
                 h += v+"</div></td></tr>";
 	        }
 	        h += '</table><div class="externalLinks"><h3>External Links</h3><ul>';
-            h += '<li><span class="link-extenal"><a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_blank">';
+            h += '<li><span class="link-extenal"><a href="'+GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']" target="_self">';
             h += 'Open this record in the caBIO Object Graph Browser</a></span></li>';
             h += '</ul></div></div>';
 	        jQuery("#objectDetails").empty().append(h).show();
