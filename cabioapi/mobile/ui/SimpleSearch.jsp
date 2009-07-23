@@ -12,8 +12,23 @@
 <script type="text/javascript" src="js/cabio_objdetails.js"></script>
 <script type="text/javascript" src="js/jquery.history.js"></script>
         
+<script language="Javascript">
+ function resizeControls(){
+      var clientWidth = document.body.clientWidth;
+      var clientHeight = document.body.offsetHeight;      
+      var searchBtnWidth = document.getElementById("searchButton").offsetWidth;
+      var keywordInput = document.getElementById("searchText");            
+      keywordInput.style.width =  clientWidth - searchBtnWidth -10;
+      
+      //var searchResultsDiv = document.getElementById("searchResults");  
+      //searchResultsDiv.style.width = clientWidth;
+      //searchResultsDiv.style.height = clientHeight - 145;
+      //searchResultsDiv.style.overflow = "auto";
+ }
+</script>
+        
 </head>
-<body>
+<body onResize='resizeControls()' onload='resizeControls()'>
 
 <script>
 var PROXY_URL="GetXML";
@@ -50,6 +65,7 @@ var caBioSimpleSearch = function() {
 	    
 	    if (searchString == '') {
 	    	jQuery("#searchResults").empty();
+	    	jQuery("#resultPages").empty();
             jQuery("#cabioNav").hide();
 	        return;
 	    }
@@ -90,6 +106,7 @@ var caBioSimpleSearch = function() {
 	function processResults(xml) {
 		   
 	    jQuery("#searchResults").empty();
+	    jQuery("#resultPages").empty();
 	    
 	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
@@ -170,7 +187,7 @@ var caBioSimpleSearch = function() {
 	
 	        if (numPages > 1) {
 	            caBioCommon.createPager(numPages, currPage, "caBioSimpleSearch");
-	            jQuery("#searchResults").append(pages);
+	            jQuery("#resultPages").append(pages);
 	        }
 	    }
 	    
@@ -203,7 +220,6 @@ var caBioSimpleSearch = function() {
 <tr><td nowrap>
 <input id="searchText" type="text" value="" size="33"/>
 <input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/></br>
-<!--  a href="javascript:caBioSimpleSearch.loadSearch(1)">Go</a -->
 </td></tr>
 <tr><td>
 <a id="adv_link" href="javascript:caBioCommon.toggleDropBox2('adv_box')">Advanced Options</a>
@@ -231,7 +247,9 @@ var caBioSimpleSearch = function() {
 
 <div id="cabioNav" style="display: none"></div>
 <div class="results" id="objectDetails"></div>
+<!-- div class="results" id="searchResults" style="width:300;height:500;overflow:auto"></div -->
 <div class="results" id="searchResults"></div>
+<div class="results" id="resultPages"></div>
 </body>
 
 <script language="javascript">
