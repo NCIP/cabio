@@ -360,6 +360,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                   <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
                   <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
                   <!-- property name="dist.dir" value="${cabio-webapp.dist.dir}" / -->
+                  <property name="cabio-webapp.mobile.included" value="${cabio-webapp.mobile.included}" />
 		</ant>
 
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
