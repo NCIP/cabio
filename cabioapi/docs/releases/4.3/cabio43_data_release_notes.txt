@@ -90,7 +90,7 @@ Updated as new Protocols are made available
 
 s) Cancer Gene Index  
 
-Data from phases I – V of the Cancer Gene Index are available 
+Data from phases I – IV of the Cancer Gene Index are available 
 
 t) UniSTS 
 
