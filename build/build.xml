@@ -58,7 +58,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	<!-- Properties that relate to how to call build targets from sub-projects-->
 	<!-- Working directory passed to Ant tasks -->
 	<property name="cabiogridsvc-api.base.dir" value="${software.dir}/cabiogridsvc"/>
-	<property name="cabiogridsvc-webapp.base.dir" value="${software.dir}/CaBIO42GridSvc"/>
+	<property name="cabiogridsvc-webapp.base.dir" value="${software.dir}/caBIO42GridSvc"/>
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="cabiogridsvc-webapp.build.file" value="build.xml"/>
 	<property name="cabiogridsvc-api.build.file" value="build.xml"/>
@@ -116,6 +116,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	<property name="cabiogridsvc-webapp.name" value="cabiogridsvc"/>
 	<property name="cabiogridsvc-webapp.file.name" value="${cabiogridsvc-webapp.name}.war"/>
 	<property name="cabiogridsvc-webapp.src.dir" value="${cabiogridsvc-webapp.base.dir}/src/web"/>
+	<property name="service.base.url" value="http://${jboss.server.hostname}:${jboss.server.port}" />
+	<property name="cabio.gridservice.url" value="${service.base.url}/wsrf/services/cagrid/CaBIO42GridSvc"/>	
+	
 	<!-- retrive ivy.jar.files then retrieve bda files and librarires -->
 	<property name="commonlibrary.dir" value=""/>
 	<!-- property name="bda-download.file" value="bda-ivy-2.0.0-build.xml" / -->
@@ -214,10 +217,10 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 							</else>
 						</if>
 					</else>
-				</if>
-				<antcall target="dist:tools:retrieve:cagrid"/>
+				</if>				
 			</then>
 		</if>
+            <antcall target="dist:tools:retrieve:cagrid"/>
 	</target>
 	<target name="ivy:clean" description="Cleans up the ivy cache of this project and all sub-projects">
 		<ivy:settings file="${ivy.settings.dir}/${ivy.settings.file}"/>
@@ -259,6 +262,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			<property name="env.GLOBUS_LOCATION" value="${env.GLOBUS_LOCATION}"/>
 		</ant>
 		
+		<!--
 		<unzip dest="${cabiogridsvc.artifact.dir}/server/default/lib" src="${cagrid-libs.dest.file}"/>
 		<unzip dest="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}" src="${cagrid-base-war.dest.file}"/>
 		<replace dir="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}" token="localhost:8080" value="${jboss.server.hostname}:${jboss.server.port}">
@@ -270,8 +274,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<replace file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/web.xml" token="8080" value="${jboss.server.mapped.port}"/>
 		<replaceregexp file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/cagrid_CaBIO42GridSvc/jndi-config.xml" match="..appservice.url." replace="http://${jboss.server.hostname}:${jboss.server.port}/cabio42/http/applicationService" flags="g"/>
 		<replaceregexp file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/cagrid_CaBIO42GridSvc/CaBIO42GridSvc_registration.xml" match="(\s+.wsa:Address.).*(.\/wsa:Address.)" replace="\1${grid.index.service.url}\2" flags="g"/>
-	     
-	     <zip update="false" destfile="${cabiogridsvc-webapp.dist.dir}/${cabiogridsvc.artifact.file}">
+	     -->
+		
+        <zip update="false" destfile="${cabiogridsvc-webapp.dist.dir}/${cabiogridsvc.artifact.file}">
 			<zipfileset dir="${cabiogridsvc.artifact.dir}/server/default/deploy/wsrf.war/"/>
 		</zip>
 		
@@ -282,10 +287,12 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		 <replace file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd">
 	        <replacetoken><![CDATA[<!-- OPERATION PROVIDERS -->]]></replacetoken>
             <replacevalue><![CDATA[<!-- OPERATION PROVIDERS -->
-	             <parameter name="logicalHost" value="${jboss.server.mapped.hostname}" />
+	             <parameter name="logicalHost" value="@jboss.server.mapped.hostname@" />
                  <parameter name="publishHostName" value="true" />
 	                      ]]></replacevalue>
-		 </replace>			
+		 </replace>
+		 <replace file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/globus_wsrf_core/server-config.wsdd"
+	         token="@jboss.server.mapped.hostname@" value="${jboss.server.mapped.hostname}" />    	 
 	</target>
     	
 	<target name="dist:gui-installer" description="Makes Gui-Installer distribution">
@@ -533,9 +540,10 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	</target>
 	<target name="test:all" description="Runs test target for all sub-projects" depends="
 		clean,
-		init,
+		init,		
 		test:cabiogridsvc-api,
-		test:cabiogridsvc-webapp
+		test:cabiogridsvc-webapp,
+		test:check_registration
 		">
 	</target>
 	<target name="test:cabiogridsvc-api" depends="init" description="Calls test target for sub-project">
@@ -548,10 +556,45 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 	</target>
 	<target name="test:cabiogridsvc-webapp" depends="init" description="Calls test target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${cabiogridsvc-webapp.test.file}" target="test" dir="${cabiogridsvc-webapp.base.dir}">
-			<property name="dist.dir" value="${cabiogridsvc-webapp.dist.dir}"/>
+		<ant inheritAll="false" inheritRefs="false" antfile="${cabiogridsvc-webapp.build.file}" target="test" dir="${cabiogridsvc-webapp.base.dir}">
+			<property name="service.url" value="${cabio.gridservice.url}"/>
 		</ant>
 	</target>
+	
+     <target name="test:retrieveRegistrationInfo" description="check to see whether the index registration is succesful for the target grid">   	
+	    	<echo message="Query the Index Service: ${grid.index.url}"/>
+	    	<echo message="Grid service: ${cabio.gridservice.url}"/>
+		    <condition property="wsrf.query" value="wsrf-query.bat" else="wsrf-query">
+		      <os family="windows" />	
+		    </condition>
+	        <echo message="Operating Systems: ${os.name} and command: ${wsrf.query} " />
+	    	<exec executable="cmd" dir="." output="${grid.index.service.dump}">
+	    		<arg value="/c"/>
+	    		<arg line="${wsrf.query} -a -z none -s" />
+	    		<arg line="${grid.index.url}" />
+	    	</exec>
+
+	    	<delete>
+		    	<fileset dir="." includes="${grid.index.service.dump}">
+		    	    <contains text="${service.base.url}" casesensitive="no"/>
+		    	</fileset>
+	   		</delete>    	
+	    	
+			<condition property="indexsvc.registration.success">
+				<not>
+				     <available file="${grid.index.service.dump}"/>
+				</not>
+			</condition>     	
+	</target>
+
+	<target name="test:check_registration_failure" depends="test:retrieveRegistrationInfo" unless="indexsvc.registration.success">
+	    <echo message="Registration on Index Service failed"/>
+	</target>
+		
+	<target name="test:check_registration" depends="test:retrieveRegistrationInfo,test:check_registration_failure" if="indexsvc.registration.success">
+		    <echo message="Registration Successful"/>
+	</target>
+
 	<target name="static-analysis:all" description="Runs static-analysis target for all sub-projects" depends="
 		clean,
 		init,
@@ -559,6 +602,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		static-analysis:cabiogridsvc-webapp
 		">
 	</target>
+	
 	<target name="static-analysis:cabiogridsvc-api" depends="init" description="Calls static-analysis target for sub-project">
 		<!--
 		<ant inheritAll="false" inheritRefs="false" antfile="${cabiogridsvc-api.build.file}"
