@@ -11,7 +11,7 @@
 	<!-- Place any other properties you will need here                  -->
 	<!-- ============================================================== -->
 
-
+	<property name="service.url" value="http://localhost:30210/wsrf/services/cagrid/CaBIO42GridSvc" />
 
 
 	<!-- ============================================================== -->
@@ -166,7 +166,7 @@
 	<!-- ============================================================== -->
 	<!-- Call any tests.                                                -->
 	<!-- ============================================================== -->
-	<target name="test" depends="checkGlobus" description="Runs the service's tests.">
+	<target name="junit:test" depends="checkGlobus" description="Runs the service's tests.">
 		<echo message="Test results dir: ${junit.results.dir}" />
 		<mkdir dir="${junit.results.dir}" />
 		<junit dir="${basedir}" printsummary="yes" showoutput="true">
@@ -181,5 +181,17 @@
 		</junit>
 	</target>
 
+	<!-- The test script to check whether the grid Service is up and running accordingly -->
+    <target name="test"  depends="checkGlobus" description="Run the test Client">       
+       <echo message="Connecting to service: ${service.url}" />
+       <java failonerror="true" classname="gov.nih.nci.cagrid.cabio.test.CaBIOClientTestCase" fork="yes">  <!-- classpathref="run.classpath" -->                	   
+           <arg value="-url" />
+           <arg value="${service.url}" />
+        <classpath>
+        	<pathelement path="${build.dir}/bin" /> 
+        	<path refid="test.run.classpath" />
+        </classpath>
+       </java>
+   </target>
 
 </project>
