@@ -69,10 +69,17 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	<!-- *-ds.xml and WAR -->
 	<property name="cabiogridsvc-webapp.dir.dist" location="${basedir}/${cabiogridsvc-webapp.dist.relative.dir}" />
 	<property name="cabiogridsvc-webapp.ds.file" value="cabiogridsvc-ds.xml" />
-	<property name="cabiogridsvc-webapp.name" value="cabiogridsvc" />
+	<property name="cabiogridsvc-webapp.name" value="wsrf" />
 	<property name="cabiogridsvc-webapp.war.file" value="${cabiogridsvc-webapp.name}.war" />
 
 	<!-- Grid related properties -->
+	<property name="grid.resource.dir" location="${basedir}/${tools.dist.relative.dir}" />
+	<property name="grid.application.dir" location="${basedir}/${cabiogridsvc-webapp.dist.relative.dir}" />
+	<property name="grid.artifact.file" value="${cabiogridsvc.artifact.file}" />
+	<property name="grid.dir.dest" value="wsrf.war" />
+	<property name="grid.application.name" value="CaBIO42GridSvc" />
+	<property name="resource.file.jboss-globus-lib" value="${cagrid-libs.binaries.file}" />
+	<property name="resource.file.jboss-globus-war" value="${cagrid-base-war.binaries.file}" />
 
 	<!-- Paths -->
 	<path id="bda-utils.classpath">
@@ -142,25 +149,6 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</path>
 	
 		<property name="properties.template.file" value="${basedir}/properties.template" />
-		<!-- figure out whether to use install-properties.template or upgrade-proprties.template based on the name of the properties file
-		<propertyregex property="properties.file.type"
-			input="${properties.file}"
-			regexp=".*(install|upgrade).*"
-			select="\1"     
-			/>              
-		<echo message="Properties file type = ${properties.file.type}"/>
-		<switch value="${properties.file.type}">
-			<case value="install">
-				<property name="properties.template.file" value="install-properties.template" />
-			</case>         
-			<case value="upgrade">
-				<property name="properties.template.file" value="upgrade-properties.template" />
-			</case>         
-			<default>       
-				<fail message="Property file name must include 'install' or 'upgrade' so it can be determined which properties template should be used. If you are not certain include 'upgrade' in the name of your proeprties file."/>
-			</default>      
-		</switch>
-		-->
 		<filterset id="embedded.filterset">
 			<filter token="application.base.path" value="${application.base.path}"/>
 			<filter token="application.url" value="${application.url}"/>
@@ -365,11 +353,10 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 	</target>
 
-	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="init:install,init:common">
-		<!--
+	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="init:install,init:common">		
 		<echo message="Configuring Log4J"/>
-
-		<property name="log4j.file.name" value="jboss-log4j.xml"/>
+        
+		<property name="log4j.file.name" value="log4j.xml"/>
 		<copy file="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}" tofile="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}.pre"/>
 
 		<replaceregexp file="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}"
@@ -377,7 +364,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			match="^(&lt;!DOCTYPE.*)"
 			replace="&lt;!\-\-\1\-\-&gt;"
 			/>
-
+        <!-- 
 		<xmltask source="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}"
 			dest="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}">
 			<xmlcatalog refid="installer.catalog"/>
@@ -406,6 +393,20 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				]]>
 			</insert>
 		</xmltask>
+		-->
+		
+		<xmltask source="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}"
+			dest="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}">
+			<!-- xmlcatalog refid="installer.catalog"/ -->
+			<remove path="/log4j:configuration/category[@name='gov.nih.nci.cagrid.sdkquery4.processor']"/>
+			<insert path="/log4j:configuration/root" position="before">
+				<![CDATA[
+				<category name="gov.nih.nci.cagrid.sdkquery4.processor">
+					<priority value="${log4j.level}"/>
+				</category>
+				]]>
+			</insert>			
+        </xmltask> 
 		<validate-log4j
 			log4j.file="${jboss.home}/server/${jboss.server.name}/conf/${log4j.file.name}"
 			/>                              
@@ -415,7 +416,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			match="^&lt;!\-\-(&lt;!DOCTYPE.*)\-\-&gt;"
 			replace="\1"
 			/>
-		-->
+		
 	</target>
 
 	<target name="install:jboss:configure" description="Configure JBoss (bindings, login-config.xml, ect)" unless="exclude.jboss"
@@ -435,8 +436,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 		<!-- Use below if you are defining all the ports in your install.xml not the NCICB port configuraitons-->
 		<jboss-configure
-			jboss.grid.configure="true"
-                  jboss.server-xml.file="${jboss.home}/server/${jboss.server.name}/deploy/jboss-web.deployer/server.xml"
+			jboss.grid.configure="true"                  
 			/>
 	</target>
 
@@ -509,6 +509,8 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
  		install:jboss:cabiogridsvc-webapp,
  		install:jboss:cabiogridsvc-webapp:configure,
  		install:jboss:configure,
+		install:jboss:grid, 
+		install:jboss:grid:configure,
  		install:post:jboss,
  		install:jboss:start
 		" >
@@ -719,6 +721,23 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<database-rollback/>
 	</target>
 
+	<target name="install:jboss:grid" description="Deploy  to jboss" unless="exclude.jboss" depends="init:install,init:common">
+		<mkdir dir="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}"/>
+		<unzip dest="${jboss.home}/server/${jboss.server.name}/lib" src="${grid.resource.dir}/${resource.file.jboss-globus-lib}" />
+		<unzip dest="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}" src="${grid.resource.dir}/${resource.file.jboss-globus-war}" />
+		<unzip dest="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}" src="${grid.application.dir}/${grid.artifact.file}" />
+		
+	    <!-- CP15 complains about commons-logging in war file? -->       
+	    <delete>      
+	      <fileset dir="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}/WEB-INF/lib"
+	               includes="commons-logging*.jar"/>
+	    </delete>  		
+	</target>
+
+	<target name="install:jboss:grid:configure" description="Configure tomcat-application" unless="exclude.jboss" depends="init:install,init:common">
+		<jboss-configure-grid />
+	</target>
+	
 	<target name="install:post" depends="
 		init:install,
  		init:common,
@@ -891,9 +910,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<!-- Begin JBoss Readers -->
 		<var name="read.properties.list" value=""/>
 		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
-		<jboss-read-dbconfig
+		<!-- jboss-read-dbconfig
 			jboss.ds-xml.file="cabiogridsvc-ds.xml"
-			/>
+			/ -->
 		<jboss-read-ldapconfig
 			/>
 		<jboss-read-bindings-file-location
@@ -938,14 +957,16 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			/>
 		-->
 		<grid-read-poc
-			grid.service.name="Sample"
-			/>                      
+			grid.service.name="${grid.service.name}"
+			/>
+		<!--
 		<read-property-from-properties-service
 			property.name="property1"
 			/>
 		<read-property-from-properties-service
 			property.name="property2"
 			/>
+			-->
 
 
 	</target>
