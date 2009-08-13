@@ -129,6 +129,8 @@ public class CaBIO42GridSvcClient extends CaBIO42GridSvcClientBase implements Ca
 		// Get gene from grid service
 		List gXRefList = new ArrayList();
 		try {
+			System.out.println("============= testGetTaxonByGene =======================================");
+			
 			CQLQuery query = (CQLQuery) Utils.deserializeDocument(
 					"test/resources/TaxonGeneAssoc.xml", CQLQuery.class);
 			CQLQueryResults results = this.query(query);
@@ -150,8 +152,7 @@ public class CaBIO42GridSvcClient extends CaBIO42GridSvcClientBase implements Ca
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-		System.out.println("============= testGetTaxonByGene =======================================");
+		
 		for (Iterator i = gXRefList.iterator(); i.hasNext();) {
 			Taxon x = (Taxon) i.next();
 			System.out.println("testGetTaxonByGene Taxon Id: " + x.getId());
