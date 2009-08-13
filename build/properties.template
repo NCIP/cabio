@@ -24,12 +24,12 @@ authentication.type=Used for setting up the login-config.xml. Acceptable values 
 # Required for local installs
 # Require for all installs
 database.type=Type of database current database types supported by BDA Templates are Oracle, MySQL or PostgreSQL. Acceptable values are oracle|mysql|postgresql.
-database.server=The hostname where the database resides. Example: ncidbhostname.nci.nih.gov.
-database.port=The port the database listens on. Example: 3306.
-database.name=The database name on the database server. Example: cagwasdb.
-database.user=The user the application uses to connect to the database. cagwasuser.
-database.password=The password for the above user. Example: cAgwASpaSS.
-database.url=The JDBC url for that user above, value referes to other properties and should not be changed. Example: jdbc:mysql://${database.server}:${database.port}/${database.name}
+#database.server=The hostname where the database resides. Example: ncidbhostname.nci.nih.gov.
+#database.port=The port the database listens on. Example: 3306.
+#database.name=The database name on the database server. Example: cagwasdb.
+#database.user=The user the application uses to connect to the database. cagwasuser.
+#database.password=The password for the above user. Example: cAgwASpaSS.
+#database.url=The JDBC url for that user above, value referes to other properties and should not be changed. Example: jdbc:mysql://${database.server}:${database.port}/${database.name}
 # Only one of the two properties below can be set at a time.
 #database.drop-schema=This property will drop all the objects under the database.name
 #database.re-create=This property when set will drop and recreate the database.user and database.name
@@ -89,8 +89,9 @@ jboss.server.name=The jboss server instance name, $JBOSS_HOME/server/${jboss.ser
 ##############
 ###  LDAP  ###
 ##############
-ldap.url=The fully qulified url to the ldap instance. Example: ldaps://ncids4a.nci.nih.gov:636
-ldap.basedn=The base DN to search for records. Example: ldap.basedn=ou=nci,o=nih
+#ldap.url=The fully qulified url to the ldap instance. Example: ldaps://ncids4a.nci.nih.gov:636
+#ldap.basedn=The base DN to search for records. Example: ldap.basedn=ou=nci,o=nih
+
 ###############
 ###  Log4J  ###
 ###############
