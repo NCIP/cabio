@@ -318,8 +318,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		clean,
 		init,
 		build:cabio-webapp,
-		build:grid-sample,
-            static-analysis:all
+		build:grid-sample,            
 		" />
 
        <!-- download the index files from the load server according to which tier it is deploying -->
