@@ -72,6 +72,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<!-- Build file names relative working dir above, if the basedir of the sub-project ant script is ".." you should set the *.basdir to and the build file should include the dir and build file name from the *.base.dir -->
 	<property name="cabio-webapp.build.file" value="build.xml" />
 	<property name="cabio-api.build.file" value="build.xml" />      
+      <property name="cabio-webapp.static-analysis.build.file" value="static-analysis-build.xml" />
 
 	<!-- The target name that should be called from the sub-project build file -->
 	<property name="cabio-api.build.target" value="build:all" />
@@ -317,7 +318,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		clean,
 		init,
 		build:cabio-webapp,
-		build:grid-sample
+		build:grid-sample,
+            static-analysis:all
 		" />
 
        <!-- download the index files from the load server according to which tier it is deploying -->
@@ -352,17 +354,29 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 	<target name="build:cabio-webapp" depends="init, build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
-		<!-- ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.build.file}" target="${cabio-webapp.build.target}" dir="${cabio-webapp.base.dir}" -->
-            <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
-			<property name="project.output.dir" value="${dist.exploded.dir}"/>
-                  <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
-                  <property name="index_base" value="${cabio-webapp.index_base}"/>
-                  <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
-                  <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
-                  <!-- property name="dist.dir" value="${cabio-webapp.dist.dir}" / -->
-                  <property name="cabio-webapp.mobile.included" value="${cabio-webapp.mobile.included}" />
-		</ant>
-
+            <if>
+                <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
+                <then>
+                    <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
+			     <property name="project.output.dir" value="${dist.exploded.dir}"/>
+                       <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
+                       <property name="index_base" value="${cabio-webapp.index_base}"/>
+                       <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
+                       <property name="sdk.home.dir" value="${cacore-sdk.dir}" />                  
+                       <property name="cabio-webapp.mobile.included" value="${cabio-webapp.mobile.included}" />
+		         </ant>
+                </then>
+                <else>
+                     <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
+			     <property name="project.output.dir" value="${dist.exploded.dir}"/>
+                       <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
+                       <property name="index_base" value="${cabio-webapp.index_base}"/>
+                       <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
+                       <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
+		          </ant>
+                </else>
+            </if>
+    
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
             <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
             <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.dist.target}">                   
@@ -750,7 +764,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		init,
 		static-analysis:cabio-api,
 		static-analysis:cabio-webapp
-		" />
+		" 
+            if="ci.server"
+            />
 
 	<target name="static-analysis:cabio-api" depends="init" description="Calls static-analysis target for sub-project">
 		<!--
@@ -762,8 +778,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		-->
 	</target>
 
-	<target name="static-analysis:cabio-webapp" depends="init" description="Calls static-analysis target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.build.file}" target="static-analysis" dir="${cabio-webapp.base.dir}">
+	<target name="static-analysis:cabio-webapp" depends="init" description="Calls static-analysis target for sub-project" if="ci.server">
+		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.static-analysis.build.file}" target="static-analysis" dir="${cabio-webapp.base.dir}">
 			<property name="dist.dir" value="${cabio-webapp.dist.dir}" />
 		</ant>
 	</target>
