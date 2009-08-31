@@ -1,5 +1,9 @@
 <project name="check.cadsr" basedir="." default="check">
 	 <property name="cadsr.service.url" value="http://cadsr-dataservice.nci.nih.gov:80/wsrf/services/cagrid/CaDSRDataService" />
+	<property name="cadsr.project.name" value="caBIO" />
+	<property name="cadsr.project.version" value="4.2" />
+	<property name="cadsr.project.beanFileName" value="cabio42-beans.jar" />
+	
      <target name="check" depends="checkGlobus, defineClasspaths" description="Check caBIO model in caDSR">
      	<javac srcdir="${test.src.dir}" classpathref="test.build.classpath" includes="**" destdir="${test.build.dest}" debug="${java.debug}" deprecation="${deprecation}" />
      	        
@@ -8,6 +12,12 @@
             <!-- jvmarg value="-DGLOBUS_LOCATION=${ext.globus.dir}" /  -->
             <arg value="-url" />
             <arg value="${cadsr.service.url}" />
+            <arg value="-n" />
+            <arg value="${cadsr.project.name}" />
+            <arg value="-v" />
+            <arg value="${cadsr.project.version}" />
+            <arg value="-beanfile" />
+            <arg value="${cadsr.project.beanFileName}" />        	
         </java>
     </target>
 </project>
