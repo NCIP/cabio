@@ -114,5 +114,7 @@
 	<classpathentry kind="lib" path="lib/spring.jar"/>
 	<classpathentry kind="lib" path="lib/cabio42-client-framework.jar"/>
 	<classpathentry kind="lib" path="test/lib/cadsrapi40-beans.zip"/>
+	<classpathentry kind="lib" path="test/lib/args4j-tools-2.0.9.jar"/>
+	<classpathentry kind="lib" path="test/lib/args4j-2.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
