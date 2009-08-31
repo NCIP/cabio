@@ -12,6 +12,9 @@ import gov.nih.nci.cadsr.umlproject.domain.UMLClassMetadata;
 import gov.nih.nci.cadsr.umlproject.domain.UMLPackageMetadata;
 import org.cagrid.cadsr.client.CaDSRUMLModelService;
 
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.CmdLineException;
+
 public class CaBioCheck {
 	private static String projectName = "caBIO";
 	private static String projectVersion = "4.2";
@@ -23,20 +26,19 @@ public class CaBioCheck {
      * @param args
      */
     public static void main(String[] args) {
-        try {
-        	if(!(args.length < 2)){
-    			if(args[0].equals("-url")){
-    				cadsrDataServiceUrl = args[1];
-    			}
-    			else
-    			{
-    				usage();    				
-    			}
-        	}
-        	else
+  	    MyOptions bean = new MyOptions();
+ 	    CmdLineParser parser = new CmdLineParser(bean);
+
+    	try { 
+        	parser.parseArgument(args);
+        	if ( bean.caDsrServiceURL !=null)
         	{
-				usage();        		
+        		cadsrDataServiceUrl = bean.caDsrServiceURL;
         	}
+        	 
+        	String projectName = bean.projectName;
+        	String projectVersion = bean.projectVersion;
+        	beansFileName = bean.beanFileName;
         	
         	CaBioCheck check = new CaBioCheck();
         	Collection<String> classList = check.getClasses();
@@ -87,6 +89,10 @@ public class CaBioCheck {
             
             System.out.println("DONE");
             
+        } catch( CmdLineException e ) {
+                System.err.println(e.getMessage());
+                System.err.println("java -jar myprogram.jar [options...] arguments...");
+                parser.printUsage(System.err);
             
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -108,6 +114,19 @@ public class CaBioCheck {
 				count++;
 			}
 		}
+		
+		if ( file == null )
+		{
+			for(File f:new File("test/resources").listFiles())
+			{
+				if(f.getName().equalsIgnoreCase(beansFileName))
+				{
+					file = new JarFile(f);
+					count++;
+				}
+			}			
+		}
+		
 		if(file == null) throw new Exception("Could not locate the bean jar");
 		if(count>1) throw new Exception("Found more than one bean jar");
 		
