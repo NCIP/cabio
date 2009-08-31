@@ -50,10 +50,17 @@ public class CaBioCheck {
             for (Project p : projects) {
                 if (p.getShortName().equals(projectName) && p.getVersion().equals(projectVersion)) {
                     cabio = p;
+                    System.out.println("Found project: " + projectName + projectVersion );
                     break;
                 }
             }
-            
+
+            if ( cabio == null)
+            { 
+                System.out.println("No project found for: " + projectName + projectVersion );
+                return;
+            }
+
             System.out.println("Finding packages");
             UMLPackageMetadata[] packages = client.findPackagesInProject(cabio);
             String fullClassname = "";
