@@ -1,9 +1,6 @@
 package gov.nih.nci.cagrid.cabio.client;
 
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.Argument;
-import java.util.List;
-import java.util.ArrayList;
 
 public class MyOptions {    
     @Option(name="-url",usage="caDSR Data Service URL")
