@@ -40,8 +40,9 @@
 
 %>
 
-<HR COLOR=BLUE>
-<form method=post action="searchService.jsp" name=form1>
+<hr color="blue">
+
+<form method="GET" action="searchService.jsp">
 <table width="100%">
 	<tr valign="top" align="center">
 		<td>
@@ -97,7 +98,8 @@
 </table>
 	
 </form>
-<HR COLOR=BLUE>
+
+<hr color="blue">
 
 <br>
 <hr>
