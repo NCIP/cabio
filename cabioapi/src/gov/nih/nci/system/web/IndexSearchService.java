@@ -21,7 +21,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 /**
  * Servlet for searching FreestyleLM (full text search) from the web interface. 
  * 
- * @author <a href="mailto:muhsins@mail.nih.gov">Shaziya Muhsin</a>
+ * @author Shaziya Muhsin
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
 public class IndexSearchService extends HttpServlet {

@@ -1,109 +1,137 @@
 package gov.nih.nci.system.web.util;
-import gov.nih.nci.search.*;
-import java.util.*;
-/*
+
+import gov.nih.nci.search.SearchQuery;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+/**
  * Created on May 1, 2007
- * ShaziyaMuhsin
- * 
+ * @author Shaziya Muhsin
  */
 public class IndexSearchUtils {
 
-    public IndexSearchUtils() {        
-    }
     SearchQuery searchQuery = new SearchQuery();
     List resultSet = new ArrayList();
     List displayResults = new ArrayList();
     int resultCounter = 0;
-    int startIndex =0;    
+    int startIndex = 0;
     int pageSize = 100;
     boolean newQuery = true;
     String displayText = "";
+
+    public IndexSearchUtils() {
+    }
     
-    public void setSearchQuery(SearchQuery searchQuery){
+    public void setSearchQuery(SearchQuery searchQuery) {
         this.searchQuery = searchQuery;
     }
-    public SearchQuery getSearchQuery(){
+
+    public SearchQuery getSearchQuery() {
         return searchQuery;
     }
-    public void setResultSet(List resultSet){
+
+    public void setResultSet(List resultSet) {
         this.resultSet = resultSet;
     }
-    public List getResultSet(){
+
+    public List getResultSet() {
         return resultSet;
     }
-    public void setDisplayResults(List results){
+
+    public void setDisplayResults(List results) {
         this.displayResults = results;
     }
-    public List getDisplayResults(){
+
+    public List getDisplayResults() {
         return displayResults;
     }
-    public void setResultCounter(int resultCounter){
+
+    public void setResultCounter(int resultCounter) {
         this.resultCounter = resultCounter;
     }
-    public int getResultCounter(){
+
+    public int getResultCounter() {
         return resultCounter;
     }
-    public void setStartIndex(int startIndex){
+
+    public void setStartIndex(int startIndex) {
         this.startIndex = startIndex;
     }
-    public int getStartIndex(){
+
+    public int getStartIndex() {
         return startIndex;
-    }   
-    public void setPageSize(int pageSize){
+    }
+
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    public int getPageSize(){
+
+    public int getPageSize() {
         return pageSize;
     }
-    public void setNewQuery(boolean value){
+
+    public void setNewQuery(boolean value) {
         this.newQuery = value;
     }
-    public boolean isNewQuery(){
+
+    public boolean isNewQuery() {
         return newQuery;
     }
-    public void organizeResults(){
+
+    public void organizeResults() {
         int endIndex = startIndex + pageSize;
         displayResults = new ArrayList();
-        if(startIndex < resultCounter && startIndex >= 0){
-            if(endIndex == 0 || endIndex<startIndex){
+        if (startIndex < resultCounter && startIndex >= 0) {
+            if (endIndex == 0 || endIndex < startIndex) {
                 endIndex = startIndex + pageSize;
             }
-            for(int i = startIndex; i<endIndex && i<resultCounter; i++){
+            for (int i = startIndex; i < endIndex && i < resultCounter; i++) {
                 displayResults.add(resultSet.get(i));
             }
-        }        
+        }
     }
-    public String getKeyText(String keywords, String doc){
+
+    /**
+     * @deprecated This method will be removed in the next release.
+     */
+    public String getKeyText(String keywords, String doc) {
         String keyDescription = null;
         StringTokenizer st = new StringTokenizer(keywords, " ");
         Set keys = new HashSet();
-        while(st.hasMoreTokens()){
+        while (st.hasMoreTokens()) {
             keys.add(st.nextToken());
         }
-        for(StringTokenizer lines = new StringTokenizer(doc, ".");lines.hasMoreTokens();){
+        StringTokenizer lines = new StringTokenizer(doc, ".");
+        while (lines.hasMoreTokens()) {
             String sentence = lines.nextToken();
-            String start = "";   
-            for(Iterator it = keys.iterator(); it.hasNext();){
-                String key = (String)it.next();   
-                if(sentence.indexOf(key)>-1){
-                    //tokenize sentence
-                    if(keyDescription == null){
+            for (Iterator it = keys.iterator(); it.hasNext();) {
+                String key = (String) it.next();
+                if (sentence.indexOf(key) > -1) {
+                    // tokenize sentence
+                    if (keyDescription == null) {
                         keyDescription = sentence;
                     }
                     String newSentence = "";
-                    for(StringTokenizer tokens = new StringTokenizer(keyDescription, " ");tokens.hasMoreTokens();){
+                    StringTokenizer tokens = new StringTokenizer(keyDescription, " "); 
+                    while (tokens.hasMoreTokens()) {
                         String token = tokens.nextToken();
-                        if(key.equalsIgnoreCase(token)){
-                            newSentence += " <b><i> " + token +" </i></b> ";
-                        }else{
-                            newSentence += token +" ";
+                        if (key.equalsIgnoreCase(token)) {
+                            newSentence += " <b><i> " + token + " </i></b> ";
+                        }
+                        else {
+                            newSentence += token + " ";
                         }
                     }
-                    keyDescription = newSentence;                   
+                    keyDescription = newSentence;
                 }
-            }           
+            }
         }
-      return keyDescription;  
+        return keyDescription;
     }
 
 }
