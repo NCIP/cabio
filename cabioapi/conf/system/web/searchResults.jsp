@@ -28,14 +28,12 @@
 
 <%@ page import="gov.nih.nci.search.*,
 		 gov.nih.nci.system.web.util.*,
-		 java.lang.reflect.*,
 		 java.util.*" %>
 <%
 	IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
 	List results = searchUtils.getDisplayResults();
 	String searchString = searchUtils.getSearchQuery().getKeyword();
 	int pageSize = searchUtils.getPageSize();
-	String expand = request.getParameter("expand")!= null?request.getParameter("expand"):"false";
 	String recordNumber = request.getParameter("recordNumber")!= null?request.getParameter("recordNumber"):null;
 	
 	String startIndex = request.getParameter("startIndex")!=null?request.getParameter("startIndex"):null;
