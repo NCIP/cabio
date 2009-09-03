@@ -16,8 +16,6 @@
     <property name="build.properties" value="dev.properties"/>
     <property name="project.home.dir" value="." />
     <property name="test.dir" value="${project.home.dir}/test" />
-
-    <property name="test.dir" value="${project.home.dir}/test" />
     
     <property file="${project.home.dir}/conf/deploy.properties"  />
     
