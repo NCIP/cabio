@@ -2,9 +2,13 @@ package gov.nih.nci.cabio;
 
 import gov.nih.nci.search.SearchQuery;
 import gov.nih.nci.search.SearchResult;
+import gov.nih.nci.search.SummaryQuery;
+import gov.nih.nci.search.SummaryResult;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -54,4 +58,47 @@ public class FreestyleLMTest extends TestCase {
         assertTrue("No Evidence objects returned", evidenceFound);
     }
 
+    /**
+     * Compares the results of a summary query with a full query.
+     * @throws Exception
+     */
+    public void testSummaryQuery() throws Exception {
+        
+        String keyword = "brca1";
+        
+        SearchQuery searchQuery = new SearchQuery();
+        searchQuery.setKeyword(keyword);
+        List fullResults = appService.search(searchQuery);
+        
+        Map<String,Integer> fullCounts = new HashMap<String,Integer>();
+        
+        for(Object o : fullResults) {
+            SearchResult searchResult = (SearchResult)o;
+            String className = searchResult.getClassName();
+            int count = 0;
+            if (fullCounts.containsKey(className)) {
+                count = fullCounts.get(className);
+            }
+            count++;
+            fullCounts.put(className,count);
+        }
+        
+        SummaryQuery summaryQuery = new SummaryQuery();
+        summaryQuery.setKeyword(keyword);
+        List summaryResults = appService.search(summaryQuery);
+        
+        Map<String,Integer> summaryCounts = new HashMap<String,Integer>();
+
+        for(Object o : summaryResults) {
+            SummaryResult summaryResult = (SummaryResult)o;
+            summaryCounts.put(summaryResult.getClassName(), summaryResult.getHits());
+        }
+        
+        for(String className : fullCounts.keySet()) {
+            Integer fullCount = fullCounts.get(className);
+            Integer summaryCount = summaryCounts.get(className);
+            assertEquals("Counts inaccurate for "+className, 
+                fullCount, summaryCount);
+        }
+    }
 }
