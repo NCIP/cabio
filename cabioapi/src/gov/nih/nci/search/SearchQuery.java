@@ -11,24 +11,14 @@ import java.util.HashSet;
 public class SearchQuery implements Serializable {
 
     private static final long serialVersionUID = 1234567890L;
-  
-    //private Integer id;
+
     private String keyword;
-    //private String source;    
+    private String targetClassName;
     private RangeFilter rangeFilter;
     private Boolean fuzzySearch = false;
     private Sort sort;
     private Collection resultCollection = new HashSet();
-    private String queryType = "FULL_TEXT_SEARCH";//HIBERNATE_SEARCH
-
-
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    private String queryType = "FULL_TEXT_SEARCH"; //HIBERNATE_SEARCH
 
     public String getKeyword() {
         return keyword;
@@ -37,15 +27,15 @@ public class SearchQuery implements Serializable {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-
-//    public String getSource() {
-//        return source;
-//    }
-//
-//    public void setSource(String source) {
-//        this.source = source;
-//    }
     
+    public String getTargetClassName() {
+        return targetClassName;
+    }
+
+    public void setTargetClassName(String targetClassName) {
+        this.targetClassName = targetClassName;
+    }
+
     public Collection getResultCollection() {
         return resultCollection;
     }
@@ -81,11 +71,5 @@ public class SearchQuery implements Serializable {
 
     public Sort getSort() {
         return sort;
-    }
-    
-    public int hashCode() {
-        int h = 0;
-        //if (getId() != null) h += getId().hashCode();
-        return h;
     }
 }

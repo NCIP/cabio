@@ -3,6 +3,7 @@ package gov.nih.nci.system.applicationservice;
 import gov.nih.nci.search.GridIdQuery;
 import gov.nih.nci.search.RangeQuery;
 import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.SummaryQuery;
 
 import java.util.List;
 
@@ -38,6 +39,14 @@ public interface CaBioApplicationService extends ApplicationService {
      */
     public abstract List search(SearchQuery searchQuery) throws ApplicationException;
 
+    /**
+     * FreestyleLM summary search method. 
+     * @param summaryQuery FeeestyleLM Summary Query
+     * @return list of SummaryResult objects
+     * @throws ApplicationException
+     */
+    public abstract List search(SummaryQuery summaryQuery) throws ApplicationException;
+    
     /**
      * Location range search which returns PhysicalLocations.
      * @param rangeQuery Location Range Query

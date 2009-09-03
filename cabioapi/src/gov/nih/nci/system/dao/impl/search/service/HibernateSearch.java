@@ -1,6 +1,9 @@
 package gov.nih.nci.system.dao.impl.search.service;
 
 import gov.nih.nci.indexgen.SearchAPIProperties;
+import gov.nih.nci.search.SearchResult;
+import gov.nih.nci.search.SummaryResult;
+import gov.nih.nci.search.Sort;
 import gov.nih.nci.system.dao.DAOException;
 import gov.nih.nci.system.dao.impl.search.FreestyleLMException;
 
@@ -9,7 +12,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
-import org.apache.lucene.search.Sort;
+import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.search.SortField;
 import org.hibernate.JDBCException;
 import org.hibernate.search.FullTextSession;
@@ -24,51 +28,43 @@ import org.hibernate.search.query.FullTextQueryImpl;
 public class HibernateSearch implements Searchable {
     
     private static Logger log = Logger.getLogger(HibernateSearch.class);
-    private SearchAPIProperties properties;
     
-    /**
-     * Default constructor
-     */
-    public HibernateSearch() {
-    	properties = SearchAPIProperties.getInstance();
-    }
-
+    private static SearchAPIProperties prop = SearchAPIProperties.getInstance();
+        
     /**
      * Performs queries on the underlying database
      * @param queryString
      * @return
      * @throws FreestyleLMException
      */
-    public List query(String queryString, gov.nih.nci.search.Sort sort) throws FreestyleLMException{        
-        List resultList = null;
+    public List<SearchResult> query(String queryString, Sort sort) throws FreestyleLMException{        
+        List<SearchResult> resultList = null;
         FullTextSession fullTextSession;
 
         try {
             fullTextSession = org.hibernate.search.Search.createFullTextSession(SearchAPIProperties.getSession());
-            if(fullTextSession == null){
-                log.error("Cannot create full text session......");
+            if(fullTextSession == null) {
+                log.error("Cannot create full text session.");
             }
         }
         catch(Exception e) {
             log.error("Unable to open session " + e);
             throw new FreestyleLMException("Unable to open session  " + e);
         }
-      try{
-          String keyword = queryString;          
-          org.apache.lucene.queryParser.QueryParser parser = new MultiFieldQueryParser(getIndexedFields(), new StandardAnalyzer());
-          org.apache.lucene.search.Query luceneQuery = parser.parse( keyword );
-          FullTextQueryImpl fullTextQuery = (FullTextQueryImpl)fullTextSession.createFullTextQuery(luceneQuery);
+      try {
+          QueryParser parser = new MultiFieldQueryParser(
+              prop.getIndexedFields(), new StandardAnalyzer());
+          
+          Query luceneQuery = parser.parse(queryString);
+          
+          FullTextQueryImpl fullTextQuery = (FullTextQueryImpl)
+              fullTextSession.createFullTextQuery(luceneQuery);
           
           if(sort!=null){
               if(sort.getSortByClassName()){
-                  SortField field = null; 
-                  if(sort.getAscOrder()){
-                      field = new SortField("_hibernate_class", SortField.STRING);  
-                  }else{
-                      field = new SortField("_hibernate_class", SortField.STRING, true);  
-                  }                               
-                  Sort sortByClass = new Sort(field); 
-                  fullTextQuery = (FullTextQueryImpl) fullTextQuery.setSort(sortByClass);
+                  SortField field = new SortField("_hibernate_class", SortField.STRING, !sort.getAscOrder());                      
+                  fullTextQuery = (FullTextQueryImpl)fullTextQuery.setSort(
+                      new org.apache.lucene.search.Sort(field));
               }             
           }
           resultList = fullTextQuery.list();
@@ -106,12 +102,19 @@ public class HibernateSearch implements Searchable {
      * @return returns sorted results
      * @throws DAOException
      */
-    public List query(String searchString) throws FreestyleLMException{       
-        return query(searchString, new gov.nih.nci.search.Sort());
-    }
-    
-    private String[] getIndexedFields() throws Exception {
-        return properties.getIndexedFields();
+    public List<SearchResult> query(String searchString) throws FreestyleLMException{       
+        return query(searchString, new Sort());
     }
 
+    public List<SearchResult> query(String searchString, String className,
+            Sort sort) throws FreestyleLMException {
+        throw new UnsupportedOperationException(
+            "Single class query is not supported with the Hibernate Search. " +
+            "Use the Full Text Search instead.");
+    }
+
+    public List<SearchResult> query(String searchString, String className)
+            throws FreestyleLMException {
+        return query(searchString, className, new Sort());
+    }
 }

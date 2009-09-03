@@ -2,6 +2,8 @@ package gov.nih.nci.system.dao.impl.search;
 
 import gov.nih.nci.search.RangeFilter;
 import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.SearchResult;
+import gov.nih.nci.search.SummaryQuery;
 import gov.nih.nci.system.dao.DAO;
 import gov.nih.nci.system.dao.Request;
 import gov.nih.nci.system.dao.Response;
@@ -28,6 +30,7 @@ public class SearchAPIDAO implements DAO {
     private static final List<String> DAO_CLASSES = new ArrayList<String>();
     static {
         DAO_CLASSES.add(SearchQuery.class.getName());
+        DAO_CLASSES.add(SummaryQuery.class.getName());
     }
     
 	private final String FILTER_AND = " AND ";
@@ -61,22 +64,27 @@ public class SearchAPIDAO implements DAO {
             throw new FreestyleLMException("Invalid query type: "+ searchQuery.getQueryType()+" - should be of "+ QueryType.FULL_TEXT_SEARCH.toString() +" or "+ QueryType.HIBERNATE_SEARCH.toString() );
         }     
 
-        List resultList = new ArrayList();
-        if (searchQuery.getSort() != null){
-            if(searchQuery.getSort().getSortByClassName()){
-                resultList = searchService.query(getQueryString(searchQuery),searchQuery.getSort());
-            }
-            else{
-                resultList = searchService.query(getQueryString(searchQuery));
-            }
+		String qs = getQueryString(searchQuery);
+		
+        List<SearchResult> resultList = new ArrayList<SearchResult>();
+        
+        if (searchQuery.getSort() != null) {
+            resultList = searchService.query(qs,
+                searchQuery.getTargetClassName(),searchQuery.getSort());
         }
         else{
-            resultList = searchService.query(getQueryString(searchQuery));
+            resultList = searchService.query(qs,
+                searchQuery.getTargetClassName());
         }            
 	
 		return resultList;
 	}
 
+    public List query(SummaryQuery summaryQuery) throws FreestyleLMException {
+        FullTextSearch searchService = new FullTextSearch();
+        return searchService.querySummary(summaryQuery.getKeyword());
+    }
+    
 	/**
 	 * Performs queries against the lucene indexes
 	 * 
@@ -86,22 +94,29 @@ public class SearchAPIDAO implements DAO {
 	 * @throws FreestyleLMException
 	 */
 	public Response query(Request request) throws FreestyleLMException {
+
+		List results = null; 
+		
 		Object searchObject = request.getRequest();
-		SearchQuery searchQuery = null;
 		if (searchObject instanceof NestedCriteria) {
-			NestedCriteria criteria = (NestedCriteria) searchObject;                
+			NestedCriteria criteria = (NestedCriteria) searchObject;
             if(criteria.getSourceObjectList()!=null){
-                searchQuery = (SearchQuery)criteria.getSourceObjectList().get(0);
-            }				
-		} 
-        else if (searchObject instanceof SearchQuery) {
-			searchQuery = (SearchQuery)searchObject;
+                searchObject = (SearchQuery)criteria.getSourceObjectList().get(0);
+            }
 		}
+		
+		if (searchObject instanceof SearchQuery) {
+		    results = query((SearchQuery)searchObject);
+		}
+		else if (searchObject instanceof SummaryQuery) {
+            results = query((SummaryQuery)searchObject);
+        }
         else {
             throw new FreestyleLMException(
-                "No query for: "+searchObject.getClass().getName());
+                "Invalid query object: "+searchObject.getClass().getName());
         }
-		return new Response(query(searchQuery));
+		
+		return new Response(results);
 	}
 
 	/**

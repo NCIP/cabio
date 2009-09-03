@@ -3,6 +3,7 @@ package gov.nih.nci.system.applicationservice.impl;
 import gov.nih.nci.search.GridIdQuery;
 import gov.nih.nci.search.RangeQuery;
 import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.SummaryQuery;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.dao.Request;
@@ -62,6 +63,14 @@ public class CaBioApplicationServiceImpl extends ApplicationServiceImpl
         return (List)super.query(request).getResponse();
     }
 
+    public List search(SummaryQuery summaryQuery) throws ApplicationException {
+        if (summaryQuery.getKeyword() == null) throw new ApplicationException(
+            "You must specify a search string (keyword).");
+        Request request = new Request(summaryQuery);
+        request.setDomainObjectName(summaryQuery.getClass().getName());
+        return (List)super.query(request).getResponse();
+    }
+    
     public List search(RangeQuery rangeQuery) throws ApplicationException {
         return search(RangeQuery.class, rangeQuery);
     }
@@ -85,6 +94,9 @@ public class CaBioApplicationServiceImpl extends ApplicationServiceImpl
     public List search(String path, Object criteria) throws ApplicationException {
         if (criteria instanceof SearchQuery) {
             return search((SearchQuery)criteria);
+        }
+        else if (criteria instanceof SummaryQuery) {
+            return search((SummaryQuery)criteria);
         }
         else if (criteria instanceof RangeQuery) {
             log.info("criteria is RangeQuery("+path+")");
