@@ -143,17 +143,8 @@
             <classpath refid="custom.libs"/>
         </javac>
 
+    	
     	<antcall  target="Custom.compile.mobile.src" />
-       <!-- if>                 
-            <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
-            <then>
-                <echo message="Compile caBIO Mobile Application Source code"/>
-               <javac srcdir="${mobile.src.dir}" destdir="${custom.classes.dir}"
-               		debug="true" debuglevel="lines,source">
-                    <classpath refid="custom.libs"/>
-               </javac>  
-            </then>
-        </if -->
     </target>
 
     <target name="Custom.compile.mobile.src" if="cabio-webapp.mobile.included">
@@ -172,9 +163,9 @@
 			</manifest>
 			<fileset dir="${custom.src.dir}" includes="**/*.java" />
 		</jar>
+    	
     </target>
-
-
+	
     <target name="Custom.copy-files" depends="Custom.package.src"
             description="Copy built jars into the SDK">
 
