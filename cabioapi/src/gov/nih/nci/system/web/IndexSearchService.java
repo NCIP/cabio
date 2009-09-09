@@ -1,11 +1,13 @@
 package gov.nih.nci.system.web;
 
 import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.Sort;
 import gov.nih.nci.system.dao.impl.search.SearchAPIDAO;
 import gov.nih.nci.system.web.util.IndexSearchUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,10 +29,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class IndexSearchService extends HttpServlet {
 
     private static Logger log = Logger.getLogger(IndexSearchService.class);
+    
     private SearchAPIDAO searchAPI;
-
-    public IndexSearchService() {
-    }
     
     @Override
 	public void init() throws ServletException {
@@ -42,6 +42,7 @@ public class IndexSearchService extends HttpServlet {
     /**
      * Handles Post requests
      */
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	
@@ -49,34 +50,119 @@ public class IndexSearchService extends HttpServlet {
         HttpSession session = request.getSession();
         
         try {
-            IndexSearchUtils searchUtils = 
-            	(IndexSearchUtils)session.getAttribute("indexSearchUtils");
+            // parameters
+            String searchString = request.getParameter("searchString")!= null?request.getParameter("searchString"):"";
+            String startIndex = request.getParameter("startIndex")!= null?request.getParameter("startIndex"):"";
+            String targetClass = request.getParameter("targetClass")!= null?request.getParameter("targetClass"):"";
+            String pageSize = request.getParameter("PAGE_SIZE")!= null?request.getParameter("PAGE_SIZE"):"";
+            String queryType = request.getParameter("FULL_TEXT_SEARCH")!= null?request.getParameter("FULL_TEXT_SEARCH"):"";
+            boolean fuzzySearch = request.getParameter("FUZZY_SEARCH")!= null;
+            String words = request.getParameter("WORDS")!= null?request.getParameter("WORDS"):"";
+            String exclude = request.getParameter("EXCLUDE_TEXT")!= null?request.getParameter("EXCLUDE_TEXT"):"";
+            String excludeReplacement = null;
+            if (exclude != null) {   
+                excludeReplacement = exclude.trim().replaceAll("[ \t,]+", " -");
+            } 
             
-            if(searchUtils != null) {
-                if(!session.isNew() && !searchUtils.isNewQuery() 
-                		&& searchUtils.getResultCounter()>0){
+            // Handle bigids by redirecting to a GridIdQuery
+            if (searchString.startsWith("hdl://")){
+                String url = request.getContextPath()+"/GetHTML?query=gov.nih.nci.search.GridIdQuery&gov.nih.nci.search.GridIdQuery[@bigId="+
+                  searchString+"]&pageSize="+pageSize;
+                response.sendRedirect(url);
+                return;
+            }
+            
+            // Establish a new search utils, or get one from the session
+            IndexSearchUtils searchUtils = null;
+            
+            if (searchString.equals("")){
+                // check if session is valid
+                if(session.getAttribute("indexSearchUtils")!=null){
+                    // Already have results in the session, 
+                    // but reorganize them because the user may have paged
+                    searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
+                    searchUtils.setStartIndex("".equals(startIndex) ? 0 : Integer.parseInt(startIndex));
+                    searchUtils.setTargetClass(targetClass);
                     searchUtils.organizeResults();
                 }
-                else {
-                    try {
-                        SearchQuery searchQuery = searchUtils.getSearchQuery();
-//                        log.info("Searching for: "+ searchQuery.getKeyword());
-                        List results = query(searchQuery);
-//                        log.info("Number of records found: "+ results.size());
-                        searchUtils.setResultSet(results);
-                        searchUtils.setResultCounter(results.size());
-                        searchUtils.setNewQuery(false);
-                        searchUtils.organizeResults();
-                    }
-                    catch(Exception ex) {
-                        log.error("Error",ex);
-                        throw new ServletException(ex);
+                else{
+                    dispatcher = request.getRequestDispatcher("indexSearch.jsp"); 
+                    dispatcher.forward(request,response);
+                    return;
+                }
+            }
+            else {
+                searchUtils = new IndexSearchUtils();
+                SearchQuery searchQuery = new SearchQuery();
+                
+                searchQuery.setQueryType(queryType);
+                
+                if (fuzzySearch)searchQuery.setFuzzySearch(true);
+
+                if (pageSize.length()>0){                
+                   searchUtils.setPageSize(Integer.parseInt(pageSize));
+                }
+                
+                Sort sorter = new Sort();
+                sorter.setSortByClassName(new Boolean(true));
+                searchQuery.setSort(sorter);
+                
+                String query = "";
+                if (!words.equals("")){
+                    for (StringTokenizer st = new StringTokenizer(searchString," ");st.hasMoreTokens();) {
+                        String token = st.nextToken();
+                        if (words.equals("WITH_ALL") && exclude.equals("")) {
+                            query+= "+" + token +" ";
+                        }
+                        else if(words.equals("WITH_ALL") && exclude.length()>0){
+                            if (token.equalsIgnoreCase(exclude)) {
+                                query += "-"+token +" "; 
+                            }
+                            else {
+                                query += "+"+token +" ";
+                            }
+                        }
+                        else if(words.equals("WITH_ANY") && exclude.length()>0){
+                            if (token.equalsIgnoreCase(exclude)) {
+                                query += "-"+token +" "; 
+                            }
+                            else{
+                                query += token +" ";
+                            }
+                        }
                     }
                 }
-                session.setAttribute("indexSearchUtils",searchUtils);
-            }
-            else {                
-                dispatcher = request.getRequestDispatcher("indexSearch.jsp");
+              
+                if (query.equals("")){
+                    query = searchString;
+                    if (!exclude.equals("")) {
+                        if (query.toLowerCase().indexOf(exclude.toLowerCase())<0){
+                            query = "-"+ searchString;
+                        }
+                        else {
+                            query += " -"+ excludeReplacement;
+                        }               
+                    }
+                    searchQuery.setKeyword(query);
+                }
+                else{
+                    if(!exclude.equals("")){
+                        if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
+                            query += "-"+ excludeReplacement;
+                        }
+                    }
+                    searchQuery.setKeyword(query);          
+                }
+                
+                List results = searchAPI.query(searchQuery);
+                
+                searchUtils.setSearchQuery(searchQuery);
+                searchUtils.setResultSet(results);
+                if(!startIndex.equals("")) 
+                    searchUtils.setStartIndex(Integer.parseInt(startIndex));
+                searchUtils.organizeResults();
+                
+                session.setAttribute("indexSearchUtils", searchUtils);
             }
      
         }
@@ -88,21 +174,11 @@ public class IndexSearchService extends HttpServlet {
         }
         dispatcher.forward(request,response);
     }
-    
-    private List query(SearchQuery searchQuery) throws Exception {
-        return searchAPI.query(searchQuery);
-    }
-    
-    /**
-     * Unload servlet
-     */
-    public void destroy() {
-        super.destroy();
-    }
 
     /**
      * Handles Get requests by calling doPost.
      */
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException{
         doPost(request, response);

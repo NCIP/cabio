@@ -42,7 +42,7 @@
 
 <hr color="blue">
 
-<form method="GET" action="searchService.jsp">
+<form method="post" action="IndexService">
 <table width="100%">
 	<tr valign="top" align="center">
 		<td>

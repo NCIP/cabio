@@ -176,11 +176,11 @@
 													</tr>
 													<tr>
 														<td class="sidebarContent" valign="top"><!-- freestyle search -->
-														<form method=post action="searchService.jsp" name=form1>
+														<form method=post action="IndexService" name=form1>
 														<table width="100%">
 															<tr valign="top" align="center">
 																<td colspan="2"><img src="images/smallsearchlogo.jpg"
-																	name="caCORE Search API" border="0" align=middle></td>
+																	name="FreestyleLM Search" border="0" align=middle></td>
 															</tr>
 															<tr>
 																<td colspan="2" align=center nowrap><INPUT TYPE=TEXT SIZE=60
@@ -190,7 +190,7 @@
 																<td width="60%" align="right"><INPUT TYPE=SUBMIT
 																	NAME="search" VALUE="Search"> <INPUT TYPE=HIDDEN
 																	NAME="FULL_TEXT_SEARCH" VALUE="FULL_TEXT_SEARCH" /></td>
-																<td class="welcomeContent" align="right"><a href="search">more options ...</a></td>
+																<td class="welcomeContent" align="right"><a href="IndexSearch">more options ...</a></td>
 															<tr>
 														</table>
 														</form>

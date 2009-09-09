@@ -1,32 +1,67 @@
 package gov.nih.nci.system.web.util;
 
 import gov.nih.nci.search.SearchQuery;
+import gov.nih.nci.search.SearchResult;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.Map;
 
 /**
- * Created on May 1, 2007
+ * This object is stored in the user session and contains the user's most
+ * recent FreestyleLM search.
+ * 
  * @author Shaziya Muhsin
+ * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
 public class IndexSearchUtils {
 
-    SearchQuery searchQuery = new SearchQuery();
-    List resultSet = new ArrayList();
-    List displayResults = new ArrayList();
-    int resultCounter = 0;
-    int startIndex = 0;
-    int pageSize = 100;
-    boolean newQuery = true;
-    String displayText = "";
+    private SearchQuery searchQuery = new SearchQuery();
+    private List<SearchResult> resultSet = new ArrayList<SearchResult>();
+    private List<SearchResult> filteredResults = new ArrayList<SearchResult>();
+    private List<SearchResult> displayResults = new ArrayList<SearchResult>();
+    private Map<String,Integer> counts = new HashMap<String,Integer>();
+    private List<String> classes = new ArrayList<String>();
+    private int startIndex = 0;
+    private int pageSize = 100;
+    private String targetClass = "";
 
-    public IndexSearchUtils() {
+    /**
+     * Set the resultSet and calculate summary data.
+     * @param resultSet
+     */
+    public void setResultSet(List<SearchResult> resultSet) {
+        this.resultSet = resultSet;
+        
+        for(SearchResult searchResult : resultSet) {
+            String className = searchResult.getClassName();
+            int count = 0;
+            if (counts.containsKey(className)) {
+                count = counts.get(className);
+            }
+            count++;
+            counts.put(className,count);
+        }
+        
+        classes.clear();
+        classes.addAll(counts.keySet());
+        
+        Collections.sort(classes, new Comparator<String>() {
+            public int compare(String c1, String c2) {
+                String d1 = c1.substring(c1.lastIndexOf("."));
+                String d2 = c2.substring(c2.lastIndexOf("."));
+                return d1.compareTo(d2);
+            }
+        });
     }
-    
+
+    public List<SearchResult> getResultSet() {
+        return resultSet;
+    }
+
     public void setSearchQuery(SearchQuery searchQuery) {
         this.searchQuery = searchQuery;
     }
@@ -34,31 +69,31 @@ public class IndexSearchUtils {
     public SearchQuery getSearchQuery() {
         return searchQuery;
     }
-
-    public void setResultSet(List resultSet) {
-        this.resultSet = resultSet;
-    }
-
-    public List getResultSet() {
-        return resultSet;
-    }
-
-    public void setDisplayResults(List results) {
+    
+    public void setDisplayResults(List<SearchResult> results) {
         this.displayResults = results;
     }
 
-    public List getDisplayResults() {
+    public List<SearchResult> getDisplayResults() {
         return displayResults;
     }
-
-    public void setResultCounter(int resultCounter) {
-        this.resultCounter = resultCounter;
+    
+    public Map<String, Integer> getCounts() {
+        return counts;
     }
 
-    public int getResultCounter() {
-        return resultCounter;
+    public List<String> getClasses() {
+        return classes;
     }
 
+    public int getResultCount() {
+        return filteredResults.size();
+    }
+
+    public int getTotalResultCount() {
+        return resultSet.size();
+    }
+    
     public void setStartIndex(int startIndex) {
         this.startIndex = startIndex;
     }
@@ -75,63 +110,43 @@ public class IndexSearchUtils {
         return pageSize;
     }
 
-    public void setNewQuery(boolean value) {
-        this.newQuery = value;
+    public String getTargetClass() {
+        return targetClass;
     }
 
-    public boolean isNewQuery() {
-        return newQuery;
-    }
-
-    public void organizeResults() {
-        int endIndex = startIndex + pageSize;
-        displayResults = new ArrayList();
-        if (startIndex < resultCounter && startIndex >= 0) {
-            if (endIndex == 0 || endIndex < startIndex) {
-                endIndex = startIndex + pageSize;
-            }
-            for (int i = startIndex; i < endIndex && i < resultCounter; i++) {
-                displayResults.add(resultSet.get(i));
-            }
-        }
+    public void setTargetClass(String targetClass) {
+        this.targetClass = targetClass;
     }
 
     /**
-     * @deprecated This method will be removed in the next release.
+     * Update the displayResults variable with any changes which were made to 
+     * the resultSet, targetClass, or startIndex.
      */
-    public String getKeyText(String keywords, String doc) {
-        String keyDescription = null;
-        StringTokenizer st = new StringTokenizer(keywords, " ");
-        Set keys = new HashSet();
-        while (st.hasMoreTokens()) {
-            keys.add(st.nextToken());
+    public void organizeResults() {
+
+        // reset computed result lists
+        filteredResults.clear();
+        displayResults.clear();
+        
+        // filter by target class
+        if ("".equals(targetClass)) {
+            filteredResults.addAll(resultSet);
         }
-        StringTokenizer lines = new StringTokenizer(doc, ".");
-        while (lines.hasMoreTokens()) {
-            String sentence = lines.nextToken();
-            for (Iterator it = keys.iterator(); it.hasNext();) {
-                String key = (String) it.next();
-                if (sentence.indexOf(key) > -1) {
-                    // tokenize sentence
-                    if (keyDescription == null) {
-                        keyDescription = sentence;
-                    }
-                    String newSentence = "";
-                    StringTokenizer tokens = new StringTokenizer(keyDescription, " "); 
-                    while (tokens.hasMoreTokens()) {
-                        String token = tokens.nextToken();
-                        if (key.equalsIgnoreCase(token)) {
-                            newSentence += " <b><i> " + token + " </i></b> ";
-                        }
-                        else {
-                            newSentence += token + " ";
-                        }
-                    }
-                    keyDescription = newSentence;
+        else {
+            for(SearchResult result : resultSet) {
+                if (result.getClassName().equals(targetClass)) {
+                    filteredResults.add(result);
                 }
             }
         }
-        return keyDescription;
+        
+        // filter by startIndex
+        int resultCounter = filteredResults.size();
+        int endIndex = startIndex + pageSize;
+        if (startIndex < resultCounter && startIndex >= 0) {
+            for (int i = startIndex; i < endIndex && i < resultCounter; i++) {
+                displayResults.add(filteredResults.get(i));
+            }
+        }
     }
-
 }

@@ -8,8 +8,22 @@
 <script src="js/jquery.bgiframe.js" type="text/javascript"></script>
 <script src="js/jquery.dimensions.min.js" type="text/javascript"></script>
 <script src="js/jquery.suggest.js" type="text/javascript"></script>
+
+<style>
+#extraSummary {
+  display: none;
+}
+</style>
+
 </HEAD>
 <BODY>
+
+<script>
+function showExtraSummary() {
+    jQuery("#extraSummary").show();
+    jQuery("#extraSummaryButton").hide();
+}
+</script>
 
 <!-- nci hdr begins -->
       <table width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG">
@@ -33,50 +47,79 @@
 	IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
 	List results = searchUtils.getDisplayResults();
 	String searchString = searchUtils.getSearchQuery().getKeyword();
+    String targetClass = searchUtils.getTargetClass();
 	int pageSize = searchUtils.getPageSize();
-	String recordNumber = request.getParameter("recordNumber")!= null?request.getParameter("recordNumber"):null;
-	
-	String startIndex = request.getParameter("startIndex")!=null?request.getParameter("startIndex"):null;
 	
 %>
-<form method=post action="searchService.jsp" name=form1>
 <table width="100%">
-	<tr valign="top" align="left">
-	<%
-	String adrs = request.getContextPath()+"/indexSearch.jsp";
-	%>
-		<td><a href="<%=adrs%>">
- 			<img src="images/smallsearchlogo.jpg" name="caCORE Search API" border="0" align=middle>
- 			</a>
- 		</td>
- 		
- 		<td align=left valign=top>
-                <table>
-                  <tr><td>
- 			<INPUT TYPE=TEXT SIZE=60 id="freestyleLM" name="searchString" value="<%=searchString%>">
- 			<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
-			<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
-			<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
-                  </td></tr>
-                </table>
- 		</td>
- 	</tr>
-    <script type="text/javascript">
-    jQuery(function() {
-        jQuery("#freestyleLM").suggest("suggest",{minchars:1});
-    });
-    </script>
-<tr bgColor="#FAF8CC"><td align=left width=25%><%=searchUtils.getResultCounter()%> records found</td><td align=right>
+<tr>
+	<td valign="top" align="left">
+	   <a href="indexSearch.jsp">
+	       <img src="images/smallsearchlogo.jpg" name="FreestyleLM Search" border="0" align=middle>
+	   </a>
+	</td>
+		
+	<td valign="top" align="left">
+        <form method="post" action="IndexService">
+		<INPUT TYPE=TEXT SIZE=60 id="freestyleLM" name="searchString" value="<%=searchString%>">
+		<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a>					
+		<INPUT TYPE=SUBMIT NAME="submit" VALUE="Search">
+		<INPUT TYPE=HIDDEN NAME="FULL_TEXT_SEARCH" value="FULL_TEXT_SEARCH">
+		</form>
+	</td>
+</tr>
+</table>
+
+<script type="text/javascript">
+	jQuery(function() {
+	    jQuery("#freestyleLM").suggest("suggest",{minchars:1});
+	});
+</script>
+ 
+<table width="100%">
+<tr bgColor="#FAF8CC">
+
+<td>
+<div class="summary">
+<%=searchUtils.getTotalResultCount()%> 
+
 <%
-if(startIndex != null){
-	searchUtils.setStartIndex(Integer.parseInt(startIndex));
-	results = searchUtils.getDisplayResults();
+if ("".equals(targetClass)) {
+    %>Total<%
+} else {
+    %><a href="IndexService?startIndex=0">Total</a><%
 }
 
-if(searchUtils.getResultCounter() >= pageSize){
+Map counts = searchUtils.getCounts();
+List classes = searchUtils.getClasses();
+for(int i=0; i<classes.size(); i++) {
+    String className = (String)classes.get(i);
+    Integer count = (Integer)counts.get(className);
+    String classDisplayName = className.substring(className.lastIndexOf(".")+1);
+    
+    if (i == 9) {
+        %><span id="extraSummaryButton">, <a href="#" onclick="showExtraSummary()">more...</a></span><span id="extraSummary"><%
+    }
+    
+    %>, <nobr><%=count%> <%
+    
+    if (className.equals(targetClass)) {
+        %><%=classDisplayName%></nobr><%
+    } else {
+        %><a href="IndexService?targetClass=<%=className%>&startIndex=0"><%=classDisplayName%></a></nobr><%
+    }
+}
+
+%>
+</span></div>
+</td>
+
+<td align="right" valign="top"><nobr>
+<%
+if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex()>= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%><a href="searchService.jsp?startIndex=<%=preStartIndex%>"> previous </a><%
+		%><a href="IndexService?targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>"> previous </a><%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -84,70 +127,62 @@ if(searchUtils.getResultCounter() >= pageSize){
 	%>
 	<%=sindex%> to <%=eindex%> 
 	<%
-	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCounter()){
+	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %><a href="searchService.jsp?startIndex=<%=nextStartIndex%>"> next </a><%
+	    %><a href="IndexService?targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>"> next </a><%
 	}
 }
+%>
+</nobr></td>
 
-%></td><tr>
+<tr>
 </table>
-</form>
 
 <table>
 <%
 
 String queryUrl = request.getContextPath()+"/GetHTML?query=";
-int recordCounter = 0;
-if(recordNumber != null){
-	recordCounter = Integer.parseInt(recordNumber);
-}
+
 if(searchUtils.getSearchQuery().getQueryType().equals("FULL_TEXT_SEARCH")){
-String preClassName = "";
+    String preClassName = "";
+
+    List props = null;
 
 	for(int i=0; i<results.size(); i++){	
 		SearchResult result = (SearchResult)results.get(i);	
 		String className = result.getClassName();
 		Integer hit = result.getHit();
 		String id = result.getId()!=null?result.getId():null;
-		String queryString = queryUrl + className +"[id="+id+"]";		
-		String[] propString = new String[result.getProperties().size()];
+		String queryString = queryUrl + className +"[id="+id+"]";	
 		if(preClassName.equals("") || !preClassName.equals(className)){	
-		
+		  
 			%><table><tr><td><br><div class="formTitle">Class: <%=className%></div></td></tr></table><%
 				//display heading
 				%><table border=1 style="word-break:break-all;table-layout:fixed"><%
 				%><tr><th bgcolor="#FAF8CC" width="325" cellpadding=2><div class="para"><i><b>Class</b></i></div></th><%
-				int propCount = result.getProperties().size();				
-				int pCount = 0;
+                props = new ArrayList();
 				for(Iterator it=result.getProperties().keySet().iterator();it.hasNext();){
 					String key = (String) it.next();					
 					if(!key.equalsIgnoreCase("_hibernate_class")){
 						%>						
 						<th bgcolor="#FAF8CC" width="325" cellpadding=2 ><div class="para"><i><b><%=key%></b></i></div></th>						
 						<%
-						propString[pCount] = new String(key);
-						pCount++;
+						props.add(key);
 					}
 				}
-				session.setAttribute("keyProperties",propString);
 				%></tr><%
-			
-		
 		}
 		%><tr><%			
 		//display data
 		%>
 		<td><font color=blue><a href="<%=queryString%> target='_BLANK'"><div class="heading"><%=hit%>.<%=className%></div></a></font></td>			
 		<%
-		propString = (String[])session.getAttribute("keyProperties");
-		for(int x=0; x<propString.length; x++){
-			String key = propString[x];
+		for(int x=0; x<props.size(); x++){
+			String key = (String)props.get(x);
 			String value = " - ";
 			if(result.getProperties().get(key)!=null){
 				value = (String)result.getProperties().get(key);
 			}		
-			
 			
 				%>
 				<td cellpadding=2><div class="para"><%=value%></div></td>						
@@ -159,10 +194,10 @@ String preClassName = "";
 	}
 %></table><%		
 }
-if(searchUtils.getResultCounter() >= pageSize){
+if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex()>= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%><a href="searchService.jsp?startIndex=<%=preStartIndex%>"> previous </a><%
+		%><a href="IndexService?targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>"> previous </a><%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -170,9 +205,9 @@ if(searchUtils.getResultCounter() >= pageSize){
 	%>
 	<%=sindex%> to <%=eindex%> 
 	<%
-	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCounter()){
+	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %><a href="searchService.jsp?startIndex=<%=nextStartIndex%>"> next </a><%
+	    %><a href="IndexService?targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>"> next </a><%
 	}
 }
 	%>
