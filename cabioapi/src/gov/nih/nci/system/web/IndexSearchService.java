@@ -3,6 +3,7 @@ package gov.nih.nci.system.web;
 import gov.nih.nci.search.SearchQuery;
 import gov.nih.nci.search.Sort;
 import gov.nih.nci.system.dao.impl.search.SearchAPIDAO;
+import gov.nih.nci.system.dao.impl.search.SearchAPIDAO.QueryType;
 import gov.nih.nci.system.web.util.IndexSearchUtils;
 
 import java.io.IOException;
@@ -43,26 +44,37 @@ public class IndexSearchService extends HttpServlet {
      * Handles Post requests
      */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	
         RequestDispatcher dispatcher = request.getRequestDispatcher("searchResults.jsp");
         HttpSession session = request.getSession();
         
         try {
-            // parameters
-            String searchString = request.getParameter("searchString")!= null?request.getParameter("searchString"):"";
+            // normalize search URL so we can check if the query is already in the session
+            String searchURL = IndexSearchUtils.createSearchURL(request);
+            
+            // display parameters
             String startIndex = request.getParameter("startIndex")!= null?request.getParameter("startIndex"):"";
             String targetClass = request.getParameter("targetClass")!= null?request.getParameter("targetClass"):"";
-            String pageSize = request.getParameter("PAGE_SIZE")!= null?request.getParameter("PAGE_SIZE"):"";
-            String queryType = request.getParameter("FULL_TEXT_SEARCH")!= null?request.getParameter("FULL_TEXT_SEARCH"):"";
-            boolean fuzzySearch = request.getParameter("FUZZY_SEARCH")!= null;
-            String words = request.getParameter("WORDS")!= null?request.getParameter("WORDS"):"";
-            String exclude = request.getParameter("EXCLUDE_TEXT")!= null?request.getParameter("EXCLUDE_TEXT"):"";
+
+            // search parameters
+            String searchString = request.getParameter("searchString")!= null?request.getParameter("searchString"):"";
+            String pageSize = request.getParameter("pageSize")!= null?request.getParameter("pageSize"):"";
+            String queryType = "objects".equals(request.getParameter("viewType")) ? QueryType.HIBERNATE_SEARCH.toString() : QueryType.FULL_TEXT_SEARCH.toString();
+            boolean fuzzySearch = "1".equals(request.getParameter("fuzzy"));
+            String words = request.getParameter("words")!= null?request.getParameter("words"):"any";
+            String exclude = request.getParameter("excludeText")!= null?request.getParameter("excludeText"):"";
             String excludeReplacement = null;
             if (exclude != null) {   
                 excludeReplacement = exclude.trim().replaceAll("[ \t,]+", " -");
             } 
+
+            // No search
+            if ("".equals(searchString)) {
+                request.getRequestDispatcher("searchIndex.jsp").forward(request,response);
+                return;
+            }
             
             // Handle bigids by redirecting to a GridIdQuery
             if (searchString.startsWith("hdl://")){
@@ -71,100 +83,106 @@ public class IndexSearchService extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
-            
-            // Establish a new search utils, or get one from the session
-            IndexSearchUtils searchUtils = null;
-            
-            if (searchString.equals("")){
-                // check if session is valid
-                if(session.getAttribute("indexSearchUtils")!=null){
-                    // Already have results in the session, 
-                    // but reorganize them because the user may have paged
-                    searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
+                        
+            // check if session is valid
+            if(session.getAttribute("indexSearchUtils") != null) {
+                // Already have results in the session, are they relevant?
+                IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
+                
+                if (searchUtils.getSearchURL().equals(searchURL)) {
+                    // Yes, but Display parameters may have changed, so reorganize the results.
                     searchUtils.setStartIndex("".equals(startIndex) ? 0 : Integer.parseInt(startIndex));
                     searchUtils.setTargetClass(targetClass);
                     searchUtils.organizeResults();
-                }
-                else{
-                    dispatcher = request.getRequestDispatcher("indexSearch.jsp"); 
                     dispatcher.forward(request,response);
                     return;
                 }
             }
-            else {
-                searchUtils = new IndexSearchUtils();
-                SearchQuery searchQuery = new SearchQuery();
-                
-                searchQuery.setQueryType(queryType);
-                
-                if (fuzzySearch)searchQuery.setFuzzySearch(true);
+            
+            IndexSearchUtils searchUtils = new IndexSearchUtils();
+            searchUtils.setSearchURL(searchURL);
+            searchUtils.setTargetClass(targetClass);
+            
+            SearchQuery searchQuery = new SearchQuery();
+            searchQuery.setQueryType(queryType);
+            
+            if (fuzzySearch) searchQuery.setFuzzySearch(true);
 
-                if (pageSize.length()>0){                
-                   searchUtils.setPageSize(Integer.parseInt(pageSize));
-                }
-                
-                Sort sorter = new Sort();
-                sorter.setSortByClassName(new Boolean(true));
-                searchQuery.setSort(sorter);
-                
-                String query = "";
-                if (!words.equals("")){
-                    for (StringTokenizer st = new StringTokenizer(searchString," ");st.hasMoreTokens();) {
-                        String token = st.nextToken();
-                        if (words.equals("WITH_ALL") && exclude.equals("")) {
-                            query+= "+" + token +" ";
-                        }
-                        else if(words.equals("WITH_ALL") && exclude.length()>0){
-                            if (token.equalsIgnoreCase(exclude)) {
-                                query += "-"+token +" "; 
-                            }
-                            else {
-                                query += "+"+token +" ";
-                            }
-                        }
-                        else if(words.equals("WITH_ANY") && exclude.length()>0){
-                            if (token.equalsIgnoreCase(exclude)) {
-                                query += "-"+token +" "; 
-                            }
-                            else{
-                                query += token +" ";
-                            }
-                        }
+            if (pageSize.length()>0){                
+               searchUtils.setPageSize(Integer.parseInt(pageSize));
+            }
+            
+            Sort sorter = new Sort();
+            sorter.setSortByClassName(new Boolean(true));
+            searchQuery.setSort(sorter);
+            
+            String query = "";
+            if (!words.equals("")){
+                for (StringTokenizer st = new StringTokenizer(searchString," ");st.hasMoreTokens();) {
+                    String token = st.nextToken();
+                    if (words.equals("all") && exclude.equals("")) {
+                        query+= "+" + token +" ";
                     }
-                }
-              
-                if (query.equals("")){
-                    query = searchString;
-                    if (!exclude.equals("")) {
-                        if (query.toLowerCase().indexOf(exclude.toLowerCase())<0){
-                            query = "-"+ searchString;
+                    else if(words.equals("all") && exclude.length()>0){
+                        if (token.equalsIgnoreCase(exclude)) {
+                            query += "-"+token +" "; 
                         }
                         else {
-                            query += " -"+ excludeReplacement;
-                        }               
-                    }
-                    searchQuery.setKeyword(query);
-                }
-                else{
-                    if(!exclude.equals("")){
-                        if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
-                            query += "-"+ excludeReplacement;
+                            query += "+"+token +" ";
                         }
                     }
-                    searchQuery.setKeyword(query);          
+                    else if(words.equals("any") && exclude.length()>0){
+                        if (token.equalsIgnoreCase(exclude)) {
+                            query += "-"+token +" "; 
+                        }
+                        else{
+                            query += token +" ";
+                        }
+                    }
                 }
-                
-                List results = searchAPI.query(searchQuery);
-                
-                searchUtils.setSearchQuery(searchQuery);
-                searchUtils.setResultSet(results);
-                if(!startIndex.equals("")) 
-                    searchUtils.setStartIndex(Integer.parseInt(startIndex));
-                searchUtils.organizeResults();
-                
-                session.setAttribute("indexSearchUtils", searchUtils);
             }
-     
+          
+            if (query.equals("")){
+                query = searchString;
+                if (!exclude.equals("")) {
+                    if (query.toLowerCase().indexOf(exclude.toLowerCase())<0){
+                        query = "-"+ searchString;
+                    }
+                    else {
+                        query += " -"+ excludeReplacement;
+                    }               
+                }
+                searchQuery.setKeyword(query);
+            }
+            else{
+                if(!exclude.equals("")){
+                    if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
+                        query += "-"+ excludeReplacement;
+                    }
+                }
+                searchQuery.setKeyword(query);          
+            }
+            
+            log.info("Compiled query: "+query);
+
+            if (queryType.equals(QueryType.HIBERNATE_SEARCH.toString())){
+                String postfix = fuzzySearch? "%7E" : "";
+                String url = request.getContextPath()+"/GetHTML?query=gov.nih.nci.search.SearchQuery&gov.nih.nci.search.SearchQuery[@keyword="+
+                    query+postfix+"][@queryType="+queryType+"]&pageSize="+pageSize;
+                response.sendRedirect(url);
+                return;
+            }  
+            
+            List results = searchAPI.query(searchQuery);
+            
+            searchUtils.setSearchQuery(searchQuery);
+            searchUtils.setResultSet(results);
+            if(!startIndex.equals("")) 
+                searchUtils.setStartIndex(Integer.parseInt(startIndex));
+            searchUtils.organizeResults();
+            
+            session.setAttribute("indexSearchUtils", searchUtils);
+            
         }
         catch (Exception ex) {   
             log.error("Error",ex);
@@ -176,12 +194,25 @@ public class IndexSearchService extends HttpServlet {
     }
 
     /**
-     * Handles Get requests by calling doPost.
+     * Handles Post requests by calling doGet. POST is only called from the 
+     * full FreestyleLM form. The request is normalized into a GET here and
+     * forwarded onwards.
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) 
-    		throws ServletException, IOException{
-        doPost(request, response);
+    public void doPost(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+
+        try {
+            String viewType = request.getParameter("viewType")==null?"":request.getParameter("viewType");
+            String searchURL = IndexSearchUtils.createSearchURL(request);
+            response.sendRedirect(request.getContextPath()+"/"+searchURL+
+                "&viewType="+viewType);
+        }
+        catch (Exception ex) {   
+            log.error("Error",ex);
+            request.setAttribute("javax.servlet.jsp.jspException", ex);
+            request.getRequestDispatcher("/searchError.jsp").forward(request,response);
+        }
     }
 
 }

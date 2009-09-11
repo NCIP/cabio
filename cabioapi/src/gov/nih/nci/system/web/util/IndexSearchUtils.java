@@ -2,13 +2,20 @@ package gov.nih.nci.system.web.util;
 
 import gov.nih.nci.search.SearchQuery;
 import gov.nih.nci.search.SearchResult;
+import gov.nih.nci.system.web.IndexSearchService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 
 /**
  * This object is stored in the user session and contains the user's most
@@ -19,6 +26,8 @@ import java.util.Map;
  */
 public class IndexSearchUtils {
 
+    private static Logger log = Logger.getLogger(IndexSearchUtils.class);
+    
     private SearchQuery searchQuery = new SearchQuery();
     private List<SearchResult> resultSet = new ArrayList<SearchResult>();
     private List<SearchResult> filteredResults = new ArrayList<SearchResult>();
@@ -28,6 +37,55 @@ public class IndexSearchUtils {
     private int startIndex = 0;
     private int pageSize = 100;
     private String targetClass = "";
+    private String searchURL;
+
+    /**
+     * Returns a normalized representation of the query parameters.
+     * @param request
+     * @return
+     */
+    public static String createSearchURL(HttpServletRequest request) {
+
+        try {
+            StringBuffer searchURL = new StringBuffer("IndexService?searchString=");
+
+            String searchString = request.getParameter("searchString");
+            if (searchString!=null) {
+                searchURL.append(URLEncoder.encode(searchString, "UTF-8"));
+            }
+
+            String fuzzy = request.getParameter("fuzzy");
+            if (fuzzy!=null && !"".equals(fuzzy)) {
+                searchURL.append("&fuzzy=");
+                searchURL.append(URLEncoder.encode(fuzzy, "UTF-8"));
+            }
+
+            String words = request.getParameter("words");
+            if (words!=null && !"".equals(words) && !"any".equals(words)) {
+                searchURL.append("&words=");
+                searchURL.append(URLEncoder.encode(words, "UTF-8"));
+            }
+
+            String excludeText = request.getParameter("excludeText");
+            if (excludeText!=null && !"".equals(excludeText)) {
+                searchURL.append("&excludeText=");
+                searchURL.append(URLEncoder.encode(excludeText, "UTF-8"));
+            }
+
+            String pageSize = request.getParameter("pageSize");
+            if (pageSize!=null && !"".equals(pageSize)) {
+                searchURL.append("&pageSize=");
+                searchURL.append(URLEncoder.encode(pageSize, "UTF-8"));
+            }
+            
+            return searchURL.toString();
+        }
+        catch (UnsupportedEncodingException e) {
+            log.error("Attempting to use an unsupported encoding",e);
+        }
+        
+        return "";
+    }
 
     /**
      * Set the resultSet and calculate summary data.
@@ -51,9 +109,12 @@ public class IndexSearchUtils {
         
         Collections.sort(classes, new Comparator<String>() {
             public int compare(String c1, String c2) {
-                String d1 = c1.substring(c1.lastIndexOf("."));
-                String d2 = c2.substring(c2.lastIndexOf("."));
-                return d1.compareTo(d2);
+                // Alphabetical ordering
+//                String d1 = c1.substring(c1.lastIndexOf("."));
+//                String d2 = c2.substring(c2.lastIndexOf("."));
+//                return d1.compareTo(d2);
+                // Classes with the most results come first
+                return counts.get(c2).compareTo(counts.get(c1));
             }
         });
     }
@@ -118,6 +179,14 @@ public class IndexSearchUtils {
         this.targetClass = targetClass;
     }
 
+    public String getSearchURL() {
+        return searchURL;
+    }
+
+    public void setSearchURL(String searchURL) {
+        this.searchURL = searchURL;
+    }
+    
     /**
      * Update the displayResults variable with any changes which were made to 
      * the resultSet, targetClass, or startIndex.
@@ -129,7 +198,7 @@ public class IndexSearchUtils {
         displayResults.clear();
         
         // filter by target class
-        if ("".equals(targetClass)) {
+        if ("".equals(targetClass) || targetClass == null) {
             filteredResults.addAll(resultSet);
         }
         else {

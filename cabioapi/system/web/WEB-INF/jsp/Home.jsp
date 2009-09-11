@@ -176,20 +176,19 @@
 													</tr>
 													<tr>
 														<td class="sidebarContent" valign="top"><!-- freestyle search -->
-														<form method=post action="IndexService" name=form1>
+														<form method="GET" action="IndexService">
 														<table width="100%">
 															<tr valign="top" align="center">
 																<td colspan="2"><img src="images/smallsearchlogo.jpg"
 																	name="FreestyleLM Search" border="0" align=middle></td>
 															</tr>
 															<tr>
-																<td colspan="2" align=center nowrap><INPUT TYPE=TEXT SIZE=60
-																	name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																<td colspan="2" align=center nowrap>
+																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
-																<td width="60%" align="right"><INPUT TYPE=SUBMIT
-																	NAME="search" VALUE="Search"> <INPUT TYPE=HIDDEN
-																	NAME="FULL_TEXT_SEARCH" VALUE="FULL_TEXT_SEARCH" /></td>
+																<td width="60%" align="right">
+																    <input type="submit" name="search" value="Search"></td>
 																<td class="welcomeContent" align="right"><a href="IndexSearch">more options ...</a></td>
 															<tr>
 														</table>
