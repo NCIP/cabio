@@ -123,6 +123,7 @@
     </bean>
     
     <bean name="SearchAPIDAO" class="gov.nih.nci.system.dao.impl.search.SearchAPIDAO">
+        <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     
 </beans>
