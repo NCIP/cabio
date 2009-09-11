@@ -151,7 +151,7 @@
     	<antcall target="copy-mobile-src" />
     	
         <replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
-            <replacefilter token="@INDEXBASE@" value="${index_base}" />
+            <replacefilter token="@INDEXBASE@" value="${INDEXBASE}" />
         </replace>
 
     </target>

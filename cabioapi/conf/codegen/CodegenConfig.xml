@@ -209,6 +209,10 @@
                         
                         <entry key="show_sql" value="@HIBERNATE_SHOW_SQL@"/>
                         <entry key="dialect" value="@DB_DIALECT@"/>
+                        <entry key="hibernate.search.worker.batch_size" value="200"/>
+                        <entry key="hibernate.search.default.batch.max_buffered_docs" value="200"/>
+                        <entry key="hibernate.search.default.directory_provider" value="org.hibernate.search.store.FSDirectoryProvider"/>
+                        <entry key="hibernate.search.default.indexBase" value="@INDEXBASE@"/>
                         <entry key="max_fetch_depth" value="1"/>
                         <entry key="bytecode.use_reflection_optimizer" value="false"/>
                         <entry key="jdbc.batch_versioned_data" value="true"/>

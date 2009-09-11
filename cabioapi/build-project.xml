@@ -25,7 +25,7 @@
 	<property name="custom.jar.path" value="${custom.build.dir}/${custom.jar}" />
 	<property name="system.jar.path" value="${system.dir}/${system.lib.dir}/${custom.jar}" />
 
-      <property name="mobile.src.dir" value="${project.home.dir}/mobile/src" />
+    <property name="mobile.src.dir" value="${project.home.dir}/mobile/src" />
 
 	<property name="indexgen.dir" value="${project.output.dir}/indexgen" />	
 	<property name="indexgen.zip.file" value="${PROJECT_NAME}-indexgen.zip" />	
@@ -89,11 +89,25 @@
     		<include name="*.jar" />
     	</fileset>
     </path>
-
+    
+    <!-- Override default SDK behavior to replace more tokens in the config files -->
+        
+    <target name="init">
+    
+        <antcall target="caCORESDK.init"></antcall>
+    
+        <SDKecho message="${ant.project.name}: Performing custom substitutions"/>
+        <replace dir="${output.conf.dir}">
+            <replacefilter token="@INDEXBASE@" value="${INDEXBASE}" />
+        </replace>
+    
+    </target>
+    
 	<!-- Override default SDK behavior so that hibernate is included in the 
 		classpath for our custom hibernate annotations -->
 		
 	<target name="compile-beans" depends="codegen" description="Compiles the generated beans" >
+	
 		<SDKecho message="${ant.project.name}: Compiling the generated beans"/>
 		<javac srcdir="${output.src.dir}" destdir="${build.classes.dir}" debug="true">
             <classpath refid="custom.libs"/>
