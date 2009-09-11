@@ -1,7 +1,6 @@
 package gov.nih.nci.system.dao.impl.search.service;
 
 import gov.nih.nci.search.SearchResult;
-import gov.nih.nci.search.SummaryResult;
 import gov.nih.nci.search.Sort;
 import gov.nih.nci.system.dao.impl.search.FreestyleLMException;
 

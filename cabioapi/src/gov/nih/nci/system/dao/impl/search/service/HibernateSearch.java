@@ -2,7 +2,6 @@ package gov.nih.nci.system.dao.impl.search.service;
 
 import gov.nih.nci.indexgen.SearchAPIProperties;
 import gov.nih.nci.search.SearchResult;
-import gov.nih.nci.search.SummaryResult;
 import gov.nih.nci.search.Sort;
 import gov.nih.nci.system.dao.DAOException;
 import gov.nih.nci.system.dao.impl.search.FreestyleLMException;
@@ -16,6 +15,7 @@ import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.SortField;
 import org.hibernate.JDBCException;
+import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.query.FullTextQueryImpl;
 
@@ -31,6 +31,12 @@ public class HibernateSearch implements Searchable {
     
     private static SearchAPIProperties prop = SearchAPIProperties.getInstance();
         
+    private SessionFactory sessionFactory;
+    
+    public HibernateSearch(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     /**
      * Performs queries on the underlying database
      * @param queryString
@@ -42,7 +48,7 @@ public class HibernateSearch implements Searchable {
         FullTextSession fullTextSession;
 
         try {
-            fullTextSession = org.hibernate.search.Search.createFullTextSession(SearchAPIProperties.getSession());
+            fullTextSession = org.hibernate.search.Search.createFullTextSession(sessionFactory.openSession());
             if(fullTextSession == null) {
                 log.error("Cannot create full text session.");
             }

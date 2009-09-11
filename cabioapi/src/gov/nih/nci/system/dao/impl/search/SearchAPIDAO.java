@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
  * Provides DAO functionality to perform SDK searches on a Lucene-based index.
@@ -23,7 +24,7 @@ import org.apache.log4j.Logger;
  * @author <a href="mailto:muhsins@mail.nih.gov">Shaziya Muhsin</a>
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
-public class SearchAPIDAO implements DAO {
+public class SearchAPIDAO extends HibernateDaoSupport implements DAO {
     
 	private static final Logger log = Logger.getLogger(SearchAPIDAO.class);
     
@@ -55,7 +56,7 @@ public class SearchAPIDAO implements DAO {
             searchQuery.setQueryType(QueryType.FULL_TEXT_SEARCH.toString());
         }
 		if (searchQuery.getQueryType().equals(QueryType.HIBERNATE_SEARCH.toString())) {
-            searchService = new HibernateSearch();
+            searchService = new HibernateSearch(getSessionFactory());
 		}
         else if(searchQuery.getQueryType().equals(QueryType.FULL_TEXT_SEARCH.toString())){
             searchService = new FullTextSearch();
@@ -69,12 +70,22 @@ public class SearchAPIDAO implements DAO {
         List<SearchResult> resultList = new ArrayList<SearchResult>();
         
         if (searchQuery.getSort() != null) {
-            resultList = searchService.query(qs,
-                searchQuery.getTargetClassName(),searchQuery.getSort());
+            if (searchQuery.getTargetClassName() != null) {
+                resultList = searchService.query(qs,
+                    searchQuery.getTargetClassName(),searchQuery.getSort());
+            }
+            else {
+                resultList = searchService.query(qs,searchQuery.getSort());
+            }
         }
-        else{
-            resultList = searchService.query(qs,
-                searchQuery.getTargetClassName());
+        else {
+            if (searchQuery.getTargetClassName() != null) {
+                resultList = searchService.query(qs,
+                    searchQuery.getTargetClassName());
+            }
+            else {
+                resultList = searchService.query(qs);
+            }
         }            
 	
 		return resultList;
