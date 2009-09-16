@@ -1,14 +1,17 @@
 #!/bin/sh
 cd $CABIO_DIR/scripts/parse/cgdc
 
+echo "Combining two dumps"
 # combines all diseases and agents
 sh combine_data.sh
 
+echo "Converting this to well formed xml for parsing"
 # converts this combined to wellFormed.xml
 perl xmlCorrecter.pl combined.xml wellFormed.xml
 
 # parse this clean file  
 perl xmlParser.pl wellFormed.xml 
+
 cd $LOAD/cgdc
 sqlplus $1 @cgdc_preprocess.sql;
 $SQLLDR $1 readsize=1000000  rows=100000 control=Agent.ctl log=Agent.log bad=Agent.bad direct=true  errors=5000 skip=1 

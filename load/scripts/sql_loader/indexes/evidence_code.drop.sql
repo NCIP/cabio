@@ -1,8 +1,6 @@
 
-drop index EVIDENCODE_BIG_ID_LWR;
-drop index EVIDENCODE_BIG_ID;
 drop index EVIDENCECODE_EVIDENCE_C_LWR;
-drop index EVIDENCECODE_ID;
 drop index EVIDENCECODE_EVIDENCE_C;
+drop index EVIDENCECODE_ID;
 
 --EXIT;

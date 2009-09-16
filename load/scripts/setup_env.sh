@@ -5,7 +5,7 @@ export GRIDID_PATH=/cabio/cabiodb/cabio43_load/gridid
 export LOAD=/cabio/cabiodb/cabio43_load/scripts/sql_loader
 
 # executables 
-export PERL5LIB=$PERL5LIB:"$CABIO_DIR"/scripts/parse
+export PERL5LIB=$PERL5LIB:"$CABIO_DIR"/scripts/parse:/cabio/cabiodb/lib/perl5/site_perl/5.8.5
 export SQLLDR=/app/oracle/product/10gClient/bin/sqlldr
 export SQLPLUS=/app/oracle/product/10gClient/bin/sqlplus
 export PATH="$PATH":"$CABIO_DIR"/bin:/usr/bin/perl:/usr/lib/perl

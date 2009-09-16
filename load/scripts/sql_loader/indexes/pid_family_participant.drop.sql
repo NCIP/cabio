@@ -1,6 +1,6 @@
 
+drop index SYS_C0016504_IDX;
 drop index PID_FAMIPANT_PHYSICAL_E;
 drop index PID_FAMIPANT_PARTICIPAN;
-drop index SYS_C0016504_IDX;
 
 --EXIT;

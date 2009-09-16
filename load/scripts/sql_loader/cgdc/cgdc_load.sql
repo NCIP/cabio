@@ -11,7 +11,7 @@ HISTOLOGYcode_ID, DISCRIMINATOR) SELECT DISTINCT ROWNUM, A.gene_ID,
 A.evidence_ID, A.role_ID, D.histology_code, 'GeneDiseaseOntologyAssociation' AS 
 DISCRIMINATOR FROM zstg_gene_disease_evid_cgid A, zstg_diseaseontology_cgid C, 
 histology_code D
-           WHERE A.disease_ID = C.ID AND C.DISEASEontology = D.HISTOLOGY_NAME; 
+           WHERE A.disease_ID = C.ID AND lower(trim(C.DISEASEontology)) = lower(trim(D.HISTOLOGY_NAME)); 
 COMMIT;
 SELECT MAX(ID) + 1 AS V_MAXROW FROM gene_function_association;
 INSERT
@@ -19,7 +19,7 @@ INSERT
 DISCRIMINATOR) SELECT DISTINCT ROWNUM + &V_MAXROW, A.gene_ID, A.evidence_ID, 
 A.role_ID, D.agent_ID, 'GeneAgentAssociation' AS DISCRIMINATOR FROM 
 zstg_gene_agent_evidence_cgid A, zstg_agent_cgid C, AGENT D
-                WHERE A.agent_ID = C.ID AND C.DRUG = D.AGENT_NAME;
+                WHERE A.agent_ID = C.ID AND lower(trim(C.DRUG)) = lower(trim(D.AGENT_NAME));
 COMMIT;
 @$LOAD/indexes/gene_function_association.lower.sql
 @$LOAD/indexes/gene_function_association.cols.sql

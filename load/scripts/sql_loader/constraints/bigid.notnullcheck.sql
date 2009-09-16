@@ -17,7 +17,6 @@ select count(*) from PID_PARTICIPANT where BIG_ID is NULL;
 select count(*) from PID_INTERACTION where BIG_ID is NULL;
 select count(*) from PID_ENTITY_NAME where BIG_ID is NULL;
 select count(*) from PID_ENTITY_ACCESSION where BIG_ID is NULL;
-select count(*) from MUTATION where BIG_ID is NULL;
 select count(*) from VOCABULARY where BIG_ID is NULL;
 select count(*) from TRANSCRIPT_ARRAY_REPORTER where BIG_ID is NULL;
 select count(*) from TRANSCRIPT where BIG_ID is NULL;

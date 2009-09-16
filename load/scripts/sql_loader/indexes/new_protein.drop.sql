@@ -1,5 +1,4 @@
 
-drop index NEW_PROTTEIN_NAME;
 drop index NEW_PROTTEIN_COPYRIGHTS;
 drop index NEW_PROTTEIN_KEYWORD;
 drop index NEW_PROTTEIN_UNIPROTCOD;
@@ -15,5 +14,6 @@ drop index NEW_PROTTEIN_PRIMARY_AC_LWR;
 drop index NEW_PROEIN_BIG_ID_LWR;
 drop index NEW_PROEIN_BIG_ID;
 drop index SYS_C0021126_IDX;
+drop index NEW_PROTTEIN_NAME;
 
 --EXIT;

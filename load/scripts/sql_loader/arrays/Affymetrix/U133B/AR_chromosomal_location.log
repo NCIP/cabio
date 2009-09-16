@@ -1,11 +1,18 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed May 6 12:13:41 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Wed Jun 3 12:52:29 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
 Control File:   AR_chromosomal_location.ctl
-Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/chromosomal_location_out_2.txt
+
+There are 2 data files:
+Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/chromosomal_location_out_1.txt
   Bad File:     AR_chromosomal_location.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/chromosomal_location_out_2.txt
+  Bad File:     chromosomal_location_out_2.bad
   Discard File:  none specified
  
  (Allow all discards)
@@ -36,7 +43,7 @@ CHROMOSOME_ID                        NEXT     *   ,       CHARACTER
 
 
 Table AR_CHROMOSOMAL_LOCATION_TMP:
-  14600 Rows successfully loaded.
+  29342 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -47,14 +54,14 @@ Stream buffer bytes:  256000
 Read   buffer bytes: 1000000
 
 Total logical records skipped:          0
-Total logical records read:         14600
+Total logical records read:         29342
 Total logical records rejected:         0
 Total logical records discarded:        0
-Total stream buffers loaded by SQL*Loader main thread:        4
-Total stream buffers loaded by SQL*Loader load thread:        2
+Total stream buffers loaded by SQL*Loader main thread:        8
+Total stream buffers loaded by SQL*Loader load thread:        4
 
-Run began on Wed May 06 12:13:41 2009
-Run ended on Wed May 06 12:13:41 2009
+Run began on Wed Jun 03 12:52:29 2009
+Run ended on Wed Jun 03 12:52:29 2009
 
-Elapsed time was:     00:00:00.73
-CPU time was:         00:00:00.11
+Elapsed time was:     00:00:00.41
+CPU time was:         00:00:00.16

@@ -1,11 +1,18 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed May 6 12:13:39 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Wed Jun 3 12:52:27 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
 Control File:   AR_RNA_Probesets_Affy.ctl
-Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/RNA_probesets_out_2.txt
+
+There are 2 data files:
+Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/RNA_probesets_out_1.txt
   Bad File:     AR_RNA_Probesets_Affy.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+Data File:      /cabio/cabiodb/cabio_data/temp/arrays/Affymetrix/U133B/RNA_probesets_out_2.txt
+  Bad File:     RNA_probesets_out_2.bad
   Discard File:  none specified
  
  (Allow all discards)
@@ -27,10 +34,11 @@ PROBE_SET_ID                        FIRST     *   |       CHARACTER
 GENECHIP_ARRAY_NAME                  NEXT     *   |       CHARACTER            
 SPECIES_SCIENTIFIC_NAME              NEXT     *   |       CHARACTER            
 ANNOTATION_DATA                      NEXT     *   |       CHARACTER            
+GENOME_VERSION                       NEXT     *   |       CHARACTER            
 
 
 Table AR_RNA_PROBESETS_AFFY_TMP:
-  22657 Rows successfully loaded.
+  45311 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -41,14 +49,14 @@ Stream buffer bytes:  256000
 Read   buffer bytes: 1000000
 
 Total logical records skipped:          1
-Total logical records read:         22657
+Total logical records read:         45311
 Total logical records rejected:         0
 Total logical records discarded:        0
-Total stream buffers loaded by SQL*Loader main thread:        6
-Total stream buffers loaded by SQL*Loader load thread:        4
+Total stream buffers loaded by SQL*Loader main thread:       10
+Total stream buffers loaded by SQL*Loader load thread:        9
 
-Run began on Wed May 06 12:13:39 2009
-Run ended on Wed May 06 12:13:39 2009
+Run began on Wed Jun 03 12:52:27 2009
+Run ended on Wed Jun 03 12:52:28 2009
 
-Elapsed time was:     00:00:00.57
-CPU time was:         00:00:00.11
+Elapsed time was:     00:00:00.71
+CPU time was:         00:00:00.23

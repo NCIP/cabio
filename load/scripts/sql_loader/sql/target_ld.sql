@@ -40,7 +40,8 @@ COLUMN V_MAXROW NEW_VALUE V_MAXROW;
 @$LOAD/triggers/gene_target.disable.sql
 @$LOAD/triggers/target_agent.disable.sql
 
-insert into agent select * from zstg_agent;
+insert into agent(agent_id, agent_type, agent_name, agent_source, agent_comment, cmap_agent, nsc_number, evs_id, big_id) select agent_id, agent_type, agent_name, agent_source, agent_comment, cmap_agent, nsc_number, evs_id, big_id from zstg_agent;
+
 commit; 
 
 drop sequence target_id;

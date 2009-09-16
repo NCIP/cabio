@@ -55,7 +55,6 @@ INSERT INTO go_genes(gene_id,go_id,taxon_id)SELECT gene_id,go_id,organism FROM  
 commit;
 
 -- To populate go_closure
-TODO: Needs to be backgrounded separately or rewritten
 execute Load_Heir.MakeClosure;
 
 @$LOAD/indexes/go_ontology.cols.sql;
@@ -72,6 +71,7 @@ execute Load_Heir.MakeClosure;
 @$LOAD/constraints/go_genes.enable.sql;
 @$LOAD/constraints/go_relationship.enable.sql;
 @$LOAD/constraints/zstg_gene_ontology.enable.sql;
+@$LOAD/constraints/go_closure.enable.sql;
 
 @$LOAD/triggers/go_ontology.enable.sql;
 @$LOAD/triggers/go_relationship.enable.sql;

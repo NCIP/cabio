@@ -189,6 +189,12 @@ END;
 insert into pid_participant(condition_name, discriminator, pid_interaction_id) select distinct conditionname,'Condition' as discriminator, interaction_id from zstg_pid_interactioncondition;
 commit;
 
+-- Added on the basis of the May 09 dump
+update pid_participant p set p.CONDITION_NAME = (select distinct conditionname from zstg_pid_interactioncondition x 
+where p.PID_PHYSICALENTITY_ID = x.INTERACTION_ID) where condition_name is null and p.discriminator = 'Condition';
+commit;
+
+
 VAR V_MAXROW NUMBER;
 COLUMN V_MAXROW NEW_VALUE V_MAXROW;
 SELECT MAX(ID) + 1 AS V_MAXROW FROM evidence; 
@@ -502,7 +508,6 @@ commit;
 
 
 COMMIT;
-EXIT;
   
 @$LOAD/triggers.sql bio_pathways_tv 
 @$LOAD/triggers/bio_pathways_tv.disable.sql 

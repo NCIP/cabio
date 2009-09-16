@@ -45,7 +45,7 @@ INTO microarray (ID, ARRAY_NAME, ANNOTATION_DATE, GENOME_VERSION, PLATFORM, TYPE
 ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT 
 DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133 Plus 2.0 Array',
 'HG-U133_Plus_2') AS geneCHIP_ARRAY, TO_DATE(ANNOTATION_DATE, 'MON DD, YYYY') AS 
-ANNO_DATE, GENOME_VERSION AS GEN_VER, 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE,
+ANNO_DATE, replace(substr(genome_version, instr(genome_version, '(')+1), ')') AS GEN_VER, 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE,
 'Human Genome U133 Plus 2.0 Array' AS DESCRIPTION, 'GPL570' AS ACCESSION,
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133_Plus_2' AS LSID FROM 
 zstg_rna_probesets Z
@@ -63,8 +63,11 @@ INTO microarray (ID, ARRAY_NAME, ANNOTATION_DATE, GENOME_VERSION, PLATFORM, TYPE
   DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, geneCHIP_ARRAY,
 ANNO_DATE, GEN_VER, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID FROM (SELECT 
 DISTINCT DECODE(geneCHIP_ARRAY, 'Human Genome U133A Array', 'HG-U133A',
-'Human Genome U133A 2.0 Array', 'HG-U133A_2', 'HT Human Genome U133A', 'HT_HG-U133A', 'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG_U95Av2', 'Human Genome U95B Array', 'HG_U95B') AS GENECHIP_ARRAY, TO_DATE(
-ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
+'Human Genome U133A 2.0 Array', 'HG-U133A_2', 
+'HT Human Genome U133A', 'HT_HG-U133A', 
+'HT Human Genome U133B', 'HT_HG-U133B', 
+'Human Genome U133B Array', 'HG-U133B', 'Human Genome U95Av2 Array', 'HG_U95Av2', 'Human Genome U95B Array', 'HG_U95B') AS GENECHIP_ARRAY, TO_DATE(
+ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, replace(substr(genome_version, instr(genome_version, '(')+1), ')') AS GEN_VER,
 'Affymetrix' AS PLATFORM, 'oligo' AS TYPE, geneCHIP_ARRAY AS DESCRIPTION, DECODE
 (geneCHIP_ARRAY, 'Human Genome U133A Array', 'GPL96',
 'Human Genome U133A 2.0 Array', 'GPL571', 'HT Human Genome U133A', 'GPL96', 'Human Genome U133B', 'GPL97') AS ACCESSION, DECODE(geneCHIP_ARRAY,
@@ -74,6 +77,8 @@ ANNOTATION_DATE, 'MON DD, YYYY') AS ANNO_DATE, GENOME_VERSION AS GEN_VER,
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133A_2',
 'HT Human Genome U133A',
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133A',
+'HT Human Genome U133B',
+'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HT_HG-U133B',
 'Human Genome U133B Array',
 'URN:LSID:Affymetrix.com:PhysicalArrayDesign:HG-U133B',
 'Human Genome U95B Array',
@@ -152,8 +157,8 @@ COMMIT;
 INSERT
  INTO microarray (ID, ARRAY_NAME, GENOME_VERSION, DBSNP_VERSION, PLATFORM, TYPE,
 DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, ARRAY_NAME,
-GENOME_VERSION, DB_SNP_VERSION, 'Affymetrix', 'snp', DESCRIPTION, ACCESSION, LSID FROM 
-(SELECT DISTINCT ARRAY_NAME, GENOME_VERSION, DB_SNP_VERSION, DECODE(ARRAY_NAME,
+'NCBI Build '||GENOME_VERSION, DB_SNP_VERSION, 'Affymetrix', 'snp', DESCRIPTION, ACCESSION, LSID FROM 
+(SELECT DISTINCT ARRAY_NAME, 'NCBI Build '||GENOME_VERSION, DB_SNP_VERSION, DECODE(ARRAY_NAME,
 'Mapping250K_Nsp', 'Human Mapping 250K Nsp Array', 'Mapping250K_Sty',
 'Human Mapping 250K Sty Array', 'Mapping50K_Hind240',
 'Human Mapping 50K Array Hind 240', 'Mapping50K_Xba240',
@@ -341,7 +346,7 @@ COMMIT;
 
 INSERT
   INTO microarray (ID, ARRAY_NAME, GENOME_VERSION, PLATFORM, TYPE, DESCRIPTION,
-ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, 'HumanHap550Kv3', GENOME_BUILD,
+ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, 'HumanHap550Kv3', 'NCBI Build '||GENOME_BUILD,
 'Illumina', 'snp', 'HumanHap550 Genotyping BeadChip' AS DESCRIPTION, '' AS ACCESSION, 'URN:LSID:illumina.com:PhysicalArrayDesign:HumanHap550v3_A' as LSID FROM zstg_snp_illumina Z
             WHERE ROWNUM = 1;
 COMMIT;
@@ -387,6 +392,11 @@ INSERT
  INTO microarray (ID, ARRAY_NAME, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID) SELECT 
 microarray_SEQ.NEXTVAL, 'HuEx-1_0-st-v2', 'Affymetrix', 'exon',
 'Human Exon 1.0 ST Array', 'GPL5188','URN:LSID:Affymetrix.com:PhysicalArrayDesign:HuEx-1_0-st-v2'  FROM DUAL;
+
+commit;
+
+update microarray set genome_version = (select distinct 'NCBI Build '||genome_version from zstg_exon_trans_genes) where ARRAY_NAME = 'HuEx-1_0-st-v2';
+commit;
 
 SELECT microarray_SEQ.CURRVAL
   INTO :microarray_ID FROM DUAL;
@@ -538,6 +548,10 @@ COMMIT;
 
 UPDATE microarray m SET annotation_version = 
     (select annotation_version from zstg_microarray_versions v where v.array_name = m.array_name); 
+commit;
+UPDATE microarray m SET  genome_version = 
+    (select genome_version from ar_rna_probesets_tmp v where v.array_name = m.array_name) where genome_version is null; 
+commit;
 
 -- create indexes on user tables
 

@@ -14,5 +14,6 @@ TRAILING NULLCOLS
 Probe_Set_ID,
 GeneChip_Array_name,
 Species_Scientific_Name,
-annotation_data
+annotation_data,
+genome_version
 )

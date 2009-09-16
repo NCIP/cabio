@@ -33,8 +33,8 @@ commit;
   
 COMMIT;
 
-truncate table zstg_agent;
-insert into zstg_agent select * from agent;
-commit;
+--truncate table zstg_agent;
+--insert into zstg_agent(agent_id, agent_type, agent_name, agent_source, agent_comment, cmap_agent, nsc_number, evs_id, big_id) select agent_id, agent_type, agent_name, agent_source, agent_comment, cmap_agent, nsc_number, evs_id, big_id from agent;
+--commit;
 EXIT;
   

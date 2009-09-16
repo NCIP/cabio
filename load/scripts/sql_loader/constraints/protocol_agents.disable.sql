@@ -1,5 +1,5 @@
 
-alter table PROTOCOL_AGENTS disable constraint SYS_C0033662;
-alter table PROTOCOL_AGENTS disable constraint SYS_C0033663;
+alter table PROTOCOL_AGENTS disable constraint SYS_C0034948;
+alter table PROTOCOL_AGENTS disable constraint SYS_C0034949;
 
 --EXIT;

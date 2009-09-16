@@ -1,4 +1,5 @@
 @$LOAD/indexes/zstg_gene.cols.sql;
+@$LOAD/indexes/zstg_entrez_gene.cols.sql;
 @$LOAD/indexes/zstg_gene_markers.cols.sql;
 @$LOAD/indexes/zstg_hsmm_seq.cols.sql;
 @$LOAD/indexes/zstg_gene_identifiers.cols.sql;

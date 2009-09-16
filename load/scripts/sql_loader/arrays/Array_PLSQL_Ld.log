@@ -1,5 +1,5 @@
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 15:02:23 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue May 19 19:09:45 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -1521,6 +1521,10 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon_reporter.drop.sql;
 SQL> 
+SQL> drop index EXON_RETER_BIG_ID_LWR;
+
+Index dropped.
+
 SQL> drop index EXON_RETER_BIG_ID;
 
 Index dropped.
@@ -1574,10 +1578,6 @@ SQL> drop index EXON_REPRTER_ID;
 Index dropped.
 
 SQL> drop index ER_TI_INDEX;
-
-Index dropped.
-
-SQL> drop index EXON_RETER_BIG_ID_LWR;
 
 Index dropped.
 
@@ -1641,10 +1641,6 @@ SQL>
 SQL> --EXIT;
 SQL> @$LOAD/indexes/exon.drop.sql;
 SQL> 
-SQL> drop index EXONXON_BIG_ID;
-
-Index dropped.
-
 SQL> drop index SYS_C0021091_IDX;
 
 Index dropped.
@@ -1674,6 +1670,10 @@ SQL> drop index EXON_MI_INDEX;
 Index dropped.
 
 SQL> drop index EXONXON_BIG_ID_LWR;
+
+Index dropped.
+
+SQL> drop index EXONXON_BIG_ID;
 
 Index dropped.
 
@@ -2031,7 +2031,7 @@ SQL> INSERT
  34  Z.geneCHIP_ARRAY = AL.GENECHIP_ARRAY(+) AND Z.GENECHIP_ARRAY =
  35  AC.geneCHIP_ARRAY(+));
 
-239879 rows created.
+239335 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2057,7 +2057,7 @@ SQL> INSERT
   7  WHERE ACCESSION_NUMBER = Z.ACCESSION_NUMBER AND ROWNUM = 1), 'InterPro' FROM (
   8  SELECT DISTINCT ACCESSION_NUMBER FROM zstg_interpro_tmp where description is not null) Z;
 
-1272 rows created.
+1258 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2123,7 +2123,7 @@ SQL> INSERT
  23  'Human Mapping 50K Array Hind 240', 'Mapping50K_Xba240',
  24  'Human Mapping 50K Array Xba 240'));
 
-1231389 rows created.
+1231359 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2170,7 +2170,7 @@ SQL> INSERT
  22  	  WHERE Z.gene_SYMBOL = G.SYMBOL AND G.taxon_ID = 5 AND Z.DBSNP_RS_ID =
  23  S.DB_SNP_ID);
 
-1232652 rows created.
+1228439 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2182,7 +2182,7 @@ SQL> -- eliminate duplicates
 SQL>  delete from gene_relative_location where ROWID NOT IN
   2   (select MIN(ROWID) from gene_relative_location GROUP BY GENE_ID, SNP_ID, DISTANCE, ORIENTATION);
 
-50945 rows deleted.
+50659 rows deleted.
 
 SQL> 
 SQL>  commit;
@@ -2254,7 +2254,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (
   4  )
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-59174 rows updated.
+59281 rows updated.
 
 SQL> COMMIT;
 
@@ -2267,7 +2267,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM
   4  )
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-56255 rows updated.
+56378 rows updated.
 
 SQL> 
 SQL> COMMIT;
@@ -2346,7 +2346,7 @@ SQL> UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM
   4  = 1)
   5   WHERE E.microarray_ID = MICROARRAY_ID AND E.nas_ID IS NULL;
 
-229922 rows updated.
+230211 rows updated.
 
 SQL> 
 SQL> COMMIT;
@@ -2511,7 +2511,7 @@ SQL> INSERT
   4  	  WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.transcript_CLUSTER_ID =
   5  T.MANUFACTURER_ID;
 
-41425 rows created.
+41647 rows created.
 
 SQL> COMMIT;
 
@@ -2532,7 +2532,7 @@ SQL> INSERT
   3  T, transcript_gene TG
   4  			  WHERE E.transcript_ID = T.ID AND T.ID = TG.TRANSCRIPT_ID;
 
-1149514 rows created.
+1153931 rows created.
 
 SQL> COMMIT;
 
@@ -2562,7 +2562,7 @@ SQL> INSERT
   7  expression_reporter ER
   8    WHERE Z.PROBE_SET_ID = ER.NAME AND Z.ACCESSION_NUMBER = PD.ACCESSION_NUMBER;
 
-28290 rows created.
+28040 rows created.
 
 SQL> COMMIT;
 
@@ -2573,7 +2573,7 @@ SQL> INSERT
   2    INTO snp_reporter(NAME, SNP_ID, microarray_ID) SELECT DISTINCT NAME, SNP_ID,
   3  microarray_ID FROM zstg_snp_reporter;
 
-1177971 rows created.
+1177956 rows created.
 
 SQL> COMMIT;
 
@@ -2591,7 +2591,7 @@ SQL> INSERT
   9  					  FROM zstg_microsatellite Z, snp_reporter SR
  10  			  WHERE Z.PROBE_SET_ID = SR.NAME AND SR.SNP_ID IS NOT NULL);
 
-3065513 rows created.
+3065404 rows created.
 
 SQL> COMMIT;
 
@@ -2602,7 +2602,7 @@ SQL> -- fix for GF12202
 SQL>  delete from marker_relative_location where ROWID NOT IN
   2   (select MIN(ROWID) from marker_relative_location GROUP BY SNP_ID, TYPE, ORIENTATION);
 
-136250 rows deleted.
+136240 rows deleted.
 
 SQL>  commit;
 
@@ -2624,7 +2624,7 @@ SQL> INSERT
   5   WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.FIRST_SNP_TSC_ID = M.marker_ID
   6  AND MRL.TYPE = 'SLM1' AND M.TYPE = 'TSC';
 
-391290 rows created.
+391286 rows created.
 
 SQL> 
 SQL> COMMIT;
@@ -2640,7 +2640,7 @@ SQL> INSERT
   5   WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.SECOND_SNP_TSC_ID = M.marker_ID
   6  AND MRL.TYPE = 'SLM1' AND M.TYPE = 'TSC';
 
-402330 rows created.
+402311 rows created.
 
 SQL> COMMIT;
 
@@ -2655,7 +2655,7 @@ SQL> INSERT
   6  		  WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.TYPE = MRL.TYPE AND
   7  Z.FIRST_marker_ID = M.NAME AND M.taxon_ID = 5);
 
-1656565 rows created.
+1656551 rows created.
 
 SQL> COMMIT;
 
@@ -2675,7 +2675,7 @@ SQL> INSERT
   6  		  WHERE Z.PROBE_SET_ID = MRL.PROBE_SET_ID AND Z.TYPE = MRL.TYPE AND
   7  Z.SECOND_marker_ID = M.NAME AND M.taxon_ID = 5) ;
 
-1665236 rows created.
+1665193 rows created.
 
 SQL> COMMIT;
 
@@ -2693,7 +2693,7 @@ SQL> INSERT
   7  MRL.ORIENTATION, 'downstream', 'upstream', 'upstream', 'downstream') AND M.NAME
   8  = Z.marker AND M.ID = MRK.ID AND MRK.TYPE = 'UNISTS' AND M.taxon_ID = 5;
 
-1264714 rows created.
+1264688 rows created.
 
 SQL> COMMIT;
 
@@ -4399,7 +4399,7 @@ SQL> exit;
 Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.4.0 - 64bit Production
 With the Partitioning, Data Mining and Real Application Testing options
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:02:47 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue May 19 20:11:37 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -4683,7 +4683,7 @@ With the Partitioning, Data Mining and Real Application Testing options
 Getting population frequency 
 Finished getting all the relevant data 
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:12:36 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue May 19 20:29:57 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -4862,9 +4862,9 @@ SQL> exit;
 Disconnected from Oracle Database 10g Enterprise Edition Release 10.2.0.4.0 - 64bit Production
 With the Partitioning, Data Mining and Real Application Testing options
 
-Load completed - logical record count 2341775.
+Load completed - logical record count 2341690.
 
-SQL*Plus: Release 10.2.0.1.0 - Production on Wed May 6 16:13:14 2009
+SQL*Plus: Release 10.2.0.1.0 - Production on Tue May 19 20:31:04 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 

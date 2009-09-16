@@ -23,7 +23,6 @@ create index homo_geneid_lwr_idx on HOMOLOGOUS_ASSOCIATION(lower(HOMOLOGOUS_GENE
 create index orgontorel on ORGANONTOLOGYRELATIONSHIP(CHILD_ID_2) tablespace cabio_fut;
 create index orgontorel_lwr on ORGANONTOLOGYRELATIONSHIP(lower(CHILD_ID_2)) tablespace cabio_fut;
 
-
 create index protocols_idx on PROTOCOLS(CURRENT_STATUS_DATE) tablespace cabio_fut;
 create index protocols_idx_lwr on PROTOCOLS(lower(CURRENT_STATUS_DATE)) tablespace cabio_fut;
 
@@ -36,3 +35,11 @@ create index taxon_abbr_lwr_idx on TAXOn(lower(ABBREVIATION)) tablespace cabio_f
 create index taxon_commname on TAXON(COMMON_NAME) tablespace cabio_fut;
 create index taxon_commname_lwr on TAXON(lower(COMMON_NAME)) tablespace cabio_fut;
 
+@$LOAD/indexer_new.sql chromosome
+@$LOAD/indexes/chromosome.cols.sql
+@$LOAD/indexes/chromosome.lower.sql
+@$LOAD/constraints.sql chromosome
+@$LOAD/constraints/chromosome.enable.sql
+
+@$LOAD/constraints/taxon.enable.sql
+@$LOAD/constraints/bio_pathways_tv.enable.sql

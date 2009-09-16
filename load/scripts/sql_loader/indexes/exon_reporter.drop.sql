@@ -1,4 +1,5 @@
 
+drop index EXON_RETER_BIG_ID_LWR;
 drop index EXON_RETER_BIG_ID;
 drop index SYS_C0021092_IDX;
 drop index EXON_REPRTER_STRAND_LWR;
@@ -13,6 +14,5 @@ drop index EXON_REPRTER_MICROARRAY;
 drop index EXON_REPRTER_NAME;
 drop index EXON_REPRTER_ID;
 drop index ER_TI_INDEX;
-drop index EXON_RETER_BIG_ID_LWR;
 
 --EXIT;

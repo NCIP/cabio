@@ -1,5 +1,5 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed May 6 16:12:56 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Tue May 19 20:30:23 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -44,7 +44,7 @@ ID                                                        SEQUENCE (MAX, 1)
 
 
 Table POPULATION_FREQUENCY:
-  2341775 Rows successfully loaded.
+  2341690 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -55,14 +55,14 @@ Stream buffer bytes:  256000
 Read   buffer bytes: 1000000
 
 Total logical records skipped:          0
-Total logical records read:       2341775
+Total logical records read:       2341690
 Total logical records rejected:         0
 Total logical records discarded:        0
-Total stream buffers loaded by SQL*Loader main thread:      677
-Total stream buffers loaded by SQL*Loader load thread:      451
+Total stream buffers loaded by SQL*Loader main thread:      679
+Total stream buffers loaded by SQL*Loader load thread:      452
 
-Run began on Wed May 06 16:12:56 2009
-Run ended on Wed May 06 16:13:14 2009
+Run began on Tue May 19 20:30:23 2009
+Run ended on Tue May 19 20:31:04 2009
 
-Elapsed time was:     00:00:18.27
-CPU time was:         00:00:11.58
+Elapsed time was:     00:00:40.77
+CPU time was:         00:00:16.61

@@ -12,7 +12,10 @@ INTO TABLE ZSTG_SNP_AFFY
 REENABLE DISABLED_CONSTRAINTS 
 FIELDS TERMINATED BY "," optionally enclosed by '"'
  
-(array_name,
+(
+genome_version,
+db_snp_version,
+array_name,
 Probe_Set_ID,
 Affy_SNP_ID,
 dbSNP_RS_ID,

@@ -7,14 +7,16 @@
 -- Revert to static taxons 
 
 insert into TAXON select * from ZSTG_TAXON;
+commit;
 
+DROP SEQUENCE TAXON_SEQ;
 -- Create taxon id sequence
 
 DECLARE
     N NUMBER(10);
 BEGIN
     SELECT MAX(TAXON_ID)+1 INTO N FROM TAXON;
-    Execute immediate ('DROP SEQUENCE TAXON_SEQ');
+--    Execute immediate ('DROP SEQUENCE TAXON_SEQ');
     Execute immediate ('CREATE SEQUENCE TAXON_SEQ START WITH '||N);
 END;
 /
@@ -55,7 +57,10 @@ commit;
 -- we can't add them into LOCATION_CH because the older APIs will not know 
 -- how to handle instances with the 'ConstrainedRegion' discriminator.
 
-insert into LOCATION_CH_43 select * from LOCATION_CH;
+insert into LOCATION_CH_43(ID, GENE_ID, NUCLEIC_ACID_ID, SNP_ID, CHROMOSOME_ID, CHROMOSOMAL_START_POSITION, CHROMOSOMAL_END_POSITION, TRANSCRIPT_ID, EXON_REPORTER_ID, CYTOBAND_ID, START_CYTOBAND_LOC_ID, END_CYTOBAND_LOC_ID, DISCRIMINATOR, CYTO_GENE_ID, CYTO_SNP_ID, MARKER_ID, ARRAY_REPORTER_ID, CYTO_REPORTER_ID, FEATURE_TYPE, ASSEMBLY, BIG_ID) select * from LOCATION_CH;
+commit;
+
+DROP SEQUENCE LOCATION43_SEQ;
 
 -- Insert constrained regions
 
@@ -63,7 +68,7 @@ DECLARE
     N NUMBER(10);
 BEGIN
     SELECT MAX(ID)+1 INTO N FROM LOCATION_CH_43;
-    Execute immediate ('DROP SEQUENCE LOCATION43_SEQ');
+--    Execute immediate ('DROP SEQUENCE LOCATION43_SEQ');
     Execute immediate ('CREATE SEQUENCE LOCATION43_SEQ START WITH '||N);
 END;
 /

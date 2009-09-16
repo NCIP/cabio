@@ -1,7 +1,7 @@
 
-drop index ZSTG_PIDTION_XREF_LWR;
 drop index ZSTG_PIDTION_CONDITIONN_LWR;
-drop index ZSTG_PIDTION_XREF;
+drop index ZSTG_PIDTION_XREF_LWR;
 drop index ZSTG_PIDTION_CONDITIONN;
+drop index ZSTG_PIDTION_XREF;
 
 --EXIT;
