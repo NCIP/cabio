@@ -14,7 +14,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	<property file="local.properties"/>
 	<property file="project.properties"/>
 	<property name="properties.file" value="install.properties"/>
-	<property name="upgrade.properties.file" value="upgrade.properties"/>
+	<!-- property name="upgrade.properties.file" value="upgrade.properties"/ -->
 	<echo message="Using properties file of ${properties.file}."/>
 	<available file="${properties.file}" property="properties.file.exists"/>
 	<fail unless="properties.file.exists" message="The properties.file ${properties.file} does not exist, please make sure that you pass in an accurate file name with the 'ant -Dproperties.file=somepath/somefile', otherwise the build will fail."/>
@@ -274,7 +274,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<replace file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/web.xml" token="8080" value="${jboss.server.mapped.port}"/>
 		<replaceregexp file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/cagrid_CaBIO42GridSvc/jndi-config.xml" match="..appservice.url." replace="http://${jboss.server.hostname}:${jboss.server.port}/cabio42/http/applicationService" flags="g"/>
 		<replaceregexp file="${cabiogridsvc.artifact.dir}/server/default/deploy/${cabiogridsvc.dir.target}/WEB-INF/etc/cagrid_CaBIO42GridSvc/CaBIO42GridSvc_registration.xml" match="(\s+.wsa:Address.).*(.\/wsa:Address.)" replace="\1${grid.index.service.url}\2" flags="g"/>
-	     -->
+	    -->
 		
         <zip update="false" destfile="${cabiogridsvc-webapp.dist.dir}/${cabiogridsvc.artifact.file}">
 			<zipfileset dir="${cabiogridsvc.artifact.dir}/server/default/deploy/wsrf.war/"/>
@@ -488,7 +488,8 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		  * This target will use differnt properties based on linux (linux-upgrade.properties) or windows (windows-upgrade.properties) installs.
 		  * It only supports using those properties files for now, so if you want to change install time properites edit these files.
 		-->
-		<deploy-local target.name="${upgrade.target}" properties.file="${upgrade.properties.file}"/>
+		<!-- deploy-local target.name="${upgrade.target}" properties.file="${upgrade.properties.file}"/ -->
+		<deploy-local target.name="${upgrade.target}"/>
 	</target>
 	<target name="deploy:remote:install" description="Installs and configures the application and required binaries and re-creates the datbase  on a remote machine. Used for NCI tiers (dev, qa, stg, prod)" depends="
 		build:all,
