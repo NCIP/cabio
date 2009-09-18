@@ -53,7 +53,7 @@ public class IndexSearchUtils {
             if (searchString!=null) {
                 searchURL.append(URLEncoder.encode(searchString, "UTF-8"));
             }
-
+            
             String fuzzy = request.getParameter("fuzzy");
             if (fuzzy!=null && !"".equals(fuzzy)) {
                 searchURL.append("&fuzzy=");
@@ -109,12 +109,15 @@ public class IndexSearchUtils {
         
         Collections.sort(classes, new Comparator<String>() {
             public int compare(String c1, String c2) {
-                // Alphabetical ordering
-//                String d1 = c1.substring(c1.lastIndexOf("."));
-//                String d2 = c2.substring(c2.lastIndexOf("."));
-//                return d1.compareTo(d2);
                 // Classes with the most results come first
-                return counts.get(c2).compareTo(counts.get(c1));
+                int c = counts.get(c2).compareTo(counts.get(c1));
+                if (c == 0) {
+                    // Alphabetical ordering
+                    String d1 = c1.substring(c1.lastIndexOf("."));
+                    String d2 = c2.substring(c2.lastIndexOf("."));
+                    return d1.compareTo(d2);
+                }
+                else return c;
             }
         });
     }

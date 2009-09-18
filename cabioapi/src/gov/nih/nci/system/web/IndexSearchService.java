@@ -205,8 +205,9 @@ public class IndexSearchService extends HttpServlet {
         try {
             String viewType = request.getParameter("viewType")==null?"":request.getParameter("viewType");
             String searchURL = IndexSearchUtils.createSearchURL(request);
-            response.sendRedirect(request.getContextPath()+"/"+searchURL+
-                "&viewType="+viewType);
+            String url = request.getContextPath()+"/"+searchURL;
+            if (!"".equals(viewType)) url += "&viewType="+viewType;
+            response.sendRedirect(url);
         }
         catch (Exception ex) {   
             log.error("Error",ex);

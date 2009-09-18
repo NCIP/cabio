@@ -48,7 +48,7 @@ table.fsResults td a {
 }
 
 table.fsResults td a:visited {
-    color: #274E7D;
+    color: #5C5C5C;
 }
 
 div.topPager {
@@ -72,7 +72,7 @@ div.classHeader {
 /* Tabbed Menu */
 
 #foldertab {
-    border-bottom: 1px solid #274e7d; /* Main background color */
+    border-bottom: 1px solid #5C5C5C; /* Main background color */
     font: bold 11px Verdana, sans-serif;
     margin-left: 0;
     margin-top: 20px;
@@ -89,15 +89,15 @@ div.classHeader {
 #foldertab li a  {
     padding: 3px 0.5em;
     margin-left: 3px;
-    border: 1px solid #274e7d; /* Main background color */
+    border: 1px solid #5C5C5C; /* Main background color */
     border-bottom: none;
     text-decoration: none;
-    background-color: #274e7d; /* Main background color */
+    background-color: #5C5C5C; /* Main background color */
     color: white;
 }
 
 #foldertab li a.current {
-    background: white;
+    background: white; /* Selected tab color */
     border-bottom: 1px solid white;
     color: black;
 }
@@ -106,12 +106,12 @@ div.classHeader {
     color: black;
 }
 #foldertab li a.current:hover {
-    background: white;
+    background: white; /* Selected tab color */
     border-bottom: 1px solid white;
     color: black;
 }
 #foldertab li a:hover {
-    background: #04346C; /* Hover background color */
+    background: #797C9C; /* Hover background color */
     color: white;
 }
 
@@ -120,11 +120,11 @@ div.classHeader {
 .dropmenu {
     position:absolute;
     top: 0;
-    border: 1px solid #042B59; /* Hover background color */
+    border: 1px solid #797C9C; /* Hover background color */
     border-width: 0 1px;
     line-height:18px;
     z-index:100;
-    background-color: #274e7d; /* Main background color */
+    background-color: #5C5C5C; /* Main background color */
     width: 200px;
     visibility: hidden;
 }
@@ -134,7 +134,7 @@ div.classHeader {
     width: auto;
     display: block;
     text-indent: 5px;
-    border: 0 solid #042B59; /* Hover background color */
+    border: 0 solid #797C9C; /* Hover background color */
     border-bottom-width: 1px;
     padding: 4px 0;
     text-decoration: none;
@@ -142,7 +142,7 @@ div.classHeader {
 }
 
 .dropmenu a:hover { 
-    background-color: #042B59; /* Hover background color */
+    background-color: #797C9C; /* Hover background color */
     color: white;
 }
 
@@ -171,11 +171,23 @@ div.classHeader {
 <%
 	IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
 	List results = searchUtils.getDisplayResults();
+	
 	String searchString = request.getParameter("searchString");
+	
+    String openTabString = request.getParameter("openTabs") == null ? "" : request.getParameter("openTabs");
+    Set openTabs = new HashSet();
+    String[] tabs = openTabString.split(",");
+    openTabs.addAll(Arrays.asList(tabs));
+    
     String targetClass = searchUtils.getTargetClass();
 	int pageSize = searchUtils.getPageSize();
 	String searchURL = searchUtils.getSearchURL();
 	
+    String statefulURL = searchURL;
+    if (!"".equals(openTabString)) {
+        statefulURL += "&openTabs=";
+        statefulURL += openTabString;
+    }
 %>
 <table width="100%">
 <tr>
@@ -186,7 +198,7 @@ div.classHeader {
 	</td>
 		
 	<td valign="middle">
-        <form method="GET" action="IndexService">
+        <form method="POST" action="IndexService">
 		<input type="TEXT" size="60" id="freestyleLM" name="searchString" value="<%=searchString%>">
 		<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search" target="_BLANK"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align="middle"></a>					
 		<input type="submit" name="submit" value="Search">
@@ -200,7 +212,7 @@ div.classHeader {
 <%
 	String allCssClass = "".equals(targetClass) ? "current":"";
 	%>
-	<li><a href="<%=searchURL%>&startIndex=0" class="<%=allCssClass%>">All (<%=searchUtils.getTotalResultCount()%>)</a></li>
+	<li><a href="<%=statefulURL%>&startIndex=0" class="<%=allCssClass%>">All (<%=searchUtils.getTotalResultCount()%>)</a></li>
 	<%
 	// Maximum number of items to display as tabs, 
 	// not including the "All" and "More..." tabs
@@ -212,7 +224,7 @@ div.classHeader {
 	List menuClasses = new ArrayList();
 	for(int i=0; i<classes.size(); i++) {
 	    String className = (String)classes.get(i);
-	    if (i<MAX_TABS || className.equals(targetClass)) {
+	    if (i<MAX_TABS || className.equals(targetClass) || openTabs.contains(className)) {
 	        tabClasses.add(className);
 	    }
 	    else {
@@ -227,7 +239,7 @@ div.classHeader {
 	    menuClasses.clear();
 	    tabClasses = classes;
 	}
-	
+    
 	// Print the tabs 
 	
 	for(int i=0; i<tabClasses.size(); i++) {
@@ -236,7 +248,7 @@ div.classHeader {
 	    String classDisplayName = FormatUtils.formatCamelCaseAsLabel(className.substring(className.lastIndexOf(".")+1));
 	    String cssClass = className.equals(targetClass) ? "current" : "";
 	    
-	    %><li><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0" class="<%=cssClass%>"><%=classDisplayName%> (<%=count%>)</a></nobr></li>
+	    %><li><nobr><a href="<%=statefulURL%>&targetClass=<%=className%>&startIndex=0" class="<%=cssClass%>"><%=classDisplayName%> (<%=count%>)</a></nobr></li>
 	    <%
 	}
 	
@@ -258,7 +270,11 @@ if (!menuClasses.isEmpty()) {
         Integer count = (Integer)counts.get(className);
         String classDisplayName = FormatUtils.formatCamelCaseAsLabel(className.substring(className.lastIndexOf(".")+1));
         
-        %><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0"><%=classDisplayName%> (<%=count%>)</a></nobr>
+        String openTabParam = "&openTabs="+openTabString;
+        if (!"".equals(openTabString)) openTabParam += ",";
+        openTabParam += className;
+        
+        %><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0<%=openTabParam%>"><%=classDisplayName%> (<%=count%>)</a></nobr>
         <%
     }
     %></div><%
@@ -278,7 +294,7 @@ tabdropdown.init("bluemenu", 3);
 if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex()>= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
+		%> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -288,7 +304,7 @@ if(searchUtils.getResultCount() >= pageSize){
 	<%
 	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
+	    %> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
 	}
 }
 %>
@@ -349,7 +365,7 @@ for(int i=0; i<results.size(); i++){
 if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex() >= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
+		%> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -359,7 +375,7 @@ if(searchUtils.getResultCount() >= pageSize){
 	<%
 	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
+	    %> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
 	}
 }
 	%>

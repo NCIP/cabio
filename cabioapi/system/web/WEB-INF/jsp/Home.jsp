@@ -176,7 +176,7 @@
 													</tr>
 													<tr>
 														<td class="sidebarContent" valign="top"><!-- freestyle search -->
-														<form method="GET" action="IndexService">
+														<form method="POST" action="IndexService">
 														<table width="100%">
 															<tr valign="top" align="center">
 																<td colspan="2"><img src="images/smallsearchlogo.jpg"
