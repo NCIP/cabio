@@ -72,7 +72,7 @@ public class IndexSearchService extends HttpServlet {
 
             // No search
             if ("".equals(searchString)) {
-                request.getRequestDispatcher("searchIndex.jsp").forward(request,response);
+                request.getRequestDispatcher("indexSearch.jsp").forward(request,response);
                 return;
             }
             

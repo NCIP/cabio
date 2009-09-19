@@ -193,7 +193,7 @@ div.classHeader {
 <tr>
 	<td valign="top" width="200">
 	   <a href="indexSearch.jsp">
-	       <img src="images/smallsearchlogo.jpg" name="FreestyleLM Search" border="0" align=middle>
+	       <img src="images/smallsearchlogo.png" name="FreestyleLM Search" border="0" align=middle>
 	   </a>
 	</td>
 		

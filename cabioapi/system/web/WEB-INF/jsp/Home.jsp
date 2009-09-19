@@ -179,7 +179,7 @@
 														<form method="POST" action="IndexService">
 														<table width="100%">
 															<tr valign="top" align="center">
-																<td colspan="2"><img src="images/smallsearchlogo.jpg"
+																<td colspan="2"><img src="images/smallsearchlogo.png"
 																	name="FreestyleLM Search" border="0" align=middle></td>
 															</tr>
 															<tr>
@@ -189,7 +189,7 @@
 															<tr>
 																<td width="60%" align="right">
 																    <input type="submit" name="search" value="Search"></td>
-																<td class="welcomeContent" align="right"><a href="IndexSearch">more options ...</a></td>
+																<td class="welcomeContent" align="right"><a href="IndexService">more options ...</a></td>
 															<tr>
 														</table>
 														</form>

@@ -41,7 +41,7 @@
 <table width="100%">
 	<tr valign="top" align="center">
 		<td>
- 			<img src="images/largesearchlogo.jpg" name="caCORE Search API" border="0" align="middle">
+ 			<img src="images/largesearchlogo.png" name="caCORE Search API" border="0" align="middle">
  		</td>
 	</tr>
  		
