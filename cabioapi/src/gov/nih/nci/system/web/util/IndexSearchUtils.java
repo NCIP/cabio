@@ -2,7 +2,6 @@ package gov.nih.nci.system.web.util;
 
 import gov.nih.nci.search.SearchQuery;
 import gov.nih.nci.search.SearchResult;
-import gov.nih.nci.system.web.IndexSearchService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -10,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,6 +35,7 @@ public class IndexSearchUtils {
     private List<SearchResult> displayResults = new ArrayList<SearchResult>();
     private Map<String,Integer> counts = new HashMap<String,Integer>();
     private List<String> classes = new ArrayList<String>();
+    private Set<String> openedTabs = new HashSet<String>();
     private int startIndex = 0;
     private int pageSize = 100;
     private String targetClass = "";
@@ -180,6 +182,9 @@ public class IndexSearchUtils {
 
     public void setTargetClass(String targetClass) {
         this.targetClass = targetClass;
+        if (targetClass != null && !"".equals(targetClass)) {
+            openedTabs.add(targetClass);
+        }
     }
 
     public String getSearchURL() {
@@ -190,6 +195,10 @@ public class IndexSearchUtils {
         this.searchURL = searchURL;
     }
     
+    public Set<String> getOpenedTabs() {
+        return openedTabs;
+    }
+
     /**
      * Update the displayResults variable with any changes which were made to 
      * the resultSet, targetClass, or startIndex.

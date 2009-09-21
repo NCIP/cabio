@@ -173,21 +173,11 @@ div.classHeader {
 	List results = searchUtils.getDisplayResults();
 	
 	String searchString = request.getParameter("searchString");
-	
-    String openTabString = request.getParameter("openTabs") == null ? "" : request.getParameter("openTabs");
-    Set openTabs = new HashSet();
-    String[] tabs = openTabString.split(",");
-    openTabs.addAll(Arrays.asList(tabs));
     
     String targetClass = searchUtils.getTargetClass();
 	int pageSize = searchUtils.getPageSize();
 	String searchURL = searchUtils.getSearchURL();
-	
-    String statefulURL = searchURL;
-    if (!"".equals(openTabString)) {
-        statefulURL += "&openTabs=";
-        statefulURL += openTabString;
-    }
+    Set openTabs = searchUtils.getOpenedTabs();
 %>
 <table width="100%">
 <tr>
@@ -212,7 +202,7 @@ div.classHeader {
 <%
 	String allCssClass = "".equals(targetClass) ? "current":"";
 	%>
-	<li><a href="<%=statefulURL%>&startIndex=0" class="<%=allCssClass%>">All (<%=searchUtils.getTotalResultCount()%>)</a></li>
+	<li><a href="<%=searchURL%>&startIndex=0" class="<%=allCssClass%>">All (<%=searchUtils.getTotalResultCount()%>)</a></li>
 	<%
 	// Maximum number of items to display as tabs, 
 	// not including the "All" and "More..." tabs
@@ -248,7 +238,7 @@ div.classHeader {
 	    String classDisplayName = FormatUtils.formatCamelCaseAsLabel(className.substring(className.lastIndexOf(".")+1));
 	    String cssClass = className.equals(targetClass) ? "current" : "";
 	    
-	    %><li><nobr><a href="<%=statefulURL%>&targetClass=<%=className%>&startIndex=0" class="<%=cssClass%>"><%=classDisplayName%> (<%=count%>)</a></nobr></li>
+	    %><li><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0" class="<%=cssClass%>"><%=classDisplayName%> (<%=count%>)</a></nobr></li>
 	    <%
 	}
 	
@@ -269,12 +259,8 @@ if (!menuClasses.isEmpty()) {
         String className = (String)menuClasses.get(i);
         Integer count = (Integer)counts.get(className);
         String classDisplayName = FormatUtils.formatCamelCaseAsLabel(className.substring(className.lastIndexOf(".")+1));
-        
-        String openTabParam = "&openTabs="+openTabString;
-        if (!"".equals(openTabString)) openTabParam += ",";
-        openTabParam += className;
-        
-        %><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0<%=openTabParam%>"><%=classDisplayName%> (<%=count%>)</a></nobr>
+                
+        %><nobr><a href="<%=searchURL%>&targetClass=<%=className%>&startIndex=0"><%=classDisplayName%> (<%=count%>)</a></nobr>
         <%
     }
     %></div><%
@@ -294,7 +280,7 @@ tabdropdown.init("bluemenu", 3);
 if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex()>= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
+		%> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -304,7 +290,7 @@ if(searchUtils.getResultCount() >= pageSize){
 	<%
 	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
+	    %> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
 	}
 }
 %>
@@ -365,7 +351,7 @@ for(int i=0; i<results.size(); i++){
 if(searchUtils.getResultCount() >= pageSize){
 	if(searchUtils.getStartIndex() > 0 && searchUtils.getStartIndex() >= pageSize){
 	    int preStartIndex = searchUtils.getStartIndex() - pageSize;
-		%> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
+		%> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=preStartIndex%>">previous</a> <%
 	}
 	int end = searchUtils.getStartIndex() + pageSize -1;	
 	int sindex = searchUtils.getStartIndex() + 1;
@@ -375,7 +361,7 @@ if(searchUtils.getResultCount() >= pageSize){
 	<%
 	if((searchUtils.getStartIndex()+ pageSize) < searchUtils.getResultCount()){
 	    int nextStartIndex = searchUtils.getStartIndex() + pageSize;
-	    %> <a href="<%=statefulURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
+	    %> <a href="<%=searchURL%>&targetClass=<%=targetClass%>&startIndex=<%=nextStartIndex%>">next</a> <%
 	}
 }
 	%>
