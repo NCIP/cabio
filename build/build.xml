@@ -359,23 +359,27 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                     <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
 			     <property name="project.output.dir" value="${dist.exploded.dir}"/>
                        <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
-                       <property name="index_base" value="${cabio-webapp.index_base}"/>
+                       <property name="INDEXBASE" value="${cabio-webapp.index_base}"/>
                        <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
                        <property name="sdk.home.dir" value="${cacore-sdk.dir}" />                  
                        <property name="cabio-webapp.mobile.included" value="${cabio-webapp.mobile.included}" />
 		         </ant>
                 </then>
                 <else>
-                     <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
-			     <property name="project.output.dir" value="${dist.exploded.dir}"/>
+                  <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.build.target}">                   
+			           <property name="project.output.dir" value="${dist.exploded.dir}"/>
                        <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/> 
-                       <property name="index_base" value="${cabio-webapp.index_base}"/>
+                       <property name="INDEXBASE" value="${cabio-webapp.index_base}"/>
                        <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
                        <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
-		          </ant>
+		           </ant>
                 </else>
             </if>
     
+		    <!--  Instrument the caBIO custom Java code 
+		    in the cabio??-client-framework.jar in the WAR file -->
+		    <antcall target="static-analysis:cabio-webapp:instrument" />
+		
             <!-- make the distribution zip files by calling dist-zips target of caBIO -->
             <echo message="make the distribution zip files by calling dist-zips target of caBIO"/>
             <ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.base.dir}/${cabio-webapp.build.file}" target="${cabio-webapp.dist.target}">                   
@@ -437,6 +441,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
             </if>       
 	</target>
 
+	<!-- To run the indexgen on load server from CI server, execute the target below with parameter
+	     -Dproperties.file=/usr/local/hudsonuser/properties/qa-upgrade.properties ( for QA database)
+	 -->
 	<target name="build:database:indexgen:remote" depends="init" description="Push the indexgen codes to the Load server and call indexgen remotely to generate index files">
             <property name="cabio-webapp.load.dir" value="${software.dir}/load" />
             <property name="cabio-webapp.indexgen.dir" value="${cabio-webapp.load.dir}/indexgen" />
@@ -753,9 +760,13 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	</target>
 
 	<target name="test:cabio-webapp" depends="init" description="Calls test target for sub-project">
+		<!-- 
 		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.test.file}" target="test" dir="${cabio-webapp.base.dir}">
 			<property name="dist.dir" value="${cabio-webapp.dist.dir}" />
 		</ant>
+		-->
+		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.static-analysis.build.file}" target="static-analysis:junit" dir="${cabio-webapp.base.dir}">
+		</ant>		
 	</target>
 
 	<target name="static-analysis:all" description="Runs static-analysis target for all sub-projects" depends="
@@ -783,6 +794,21 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		</ant>
 	</target>
 
+	<target name="static-analysis:cabio-webapp:cobertura-report" depends="init" description="Calls static-analysis target for sub-project" if="ci.server">
+		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.static-analysis.build.file}" target="static-analysis:cobertura-report" dir="${cabio-webapp.base.dir}">
+			<property name="cobertura.instrumented.dir" value="${dist.exploded.dir}/instrumented/cabioapi"/>
+		</ant>
+	</target>
+	
+	<!-- No 'init' is required since it is supposed to be used with build:cabio-webapp target -->
+	<target name="static-analysis:cabio-webapp:instrument" description="Calls static-analysis target for sub-project" if="ci.server">
+		<ant inheritAll="false" inheritRefs="false" antfile="${cabio-webapp.static-analysis.build.file}" target="static-analysis:cobertura-instrument" dir="${cabio-webapp.base.dir}">
+		     <property name="project.output.dir" value="${dist.exploded.dir}"/>
+             <property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/>
+			 <property name="cobertura.instrumented.dir" value="${dist.exploded.dir}/instrumented/cabioapi"/>
+		</ant>
+	</target>
+	
 	<target name="continuous-integration" description="calls wrapper targets for continuous integration build" depends="
 		build:all,
 		static-analysis:all
