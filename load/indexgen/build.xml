@@ -15,6 +15,7 @@
     <property name="cabio41.index.dir" value="${index_location}/41/indexes"/>
     <property name="cabio42.index.dir" value="${index_location}/42/indexes"/>
     <property name="cabio43.index.dir" value="${index_location}/43/indexes"/>
+	<property name="cabio44.index.dir" value="${index_location}/44/indexes"/>
 
     <target name="clean" description="Removes generated files">
         <delete dir="${build.dir}" quiet="true"/>
@@ -43,6 +44,7 @@
         <mkdir dir="${cabio41.index.dir}"/>
         <mkdir dir="${cabio42.index.dir}"/>
         <mkdir dir="${cabio43.index.dir}"/>
+    	<mkdir dir="${cabio44.index.dir}"/>
     	
         <replace dir="${build.dir}/4.0" includes="**/*.properties">
             <replacefilter token="@INDEXBASE@" value="${cabio40.index.dir}" />
@@ -55,6 +57,9 @@
         </replace>
         <replace dir="${build.dir}/4.3" includes="**/*.properties">
             <replacefilter token="@INDEXBASE@" value="${cabio43.index.dir}" />
+        </replace>
+        <replace dir="${build.dir}/4.4" includes="**/*.properties">
+            <replacefilter token="@INDEXBASE@" value="${cabio44.index.dir}" />
         </replace>
     	
     </target>
@@ -76,7 +81,11 @@
         <echo message="Running caBIO 4.3 index generator"/>
         <ant antfile="${build.dir}/4.3/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.3/log/output.log" tofile="${log.dir}/output_4.3.log" overwrite="true"/>
-          
+
+        <echo message="Running caBIO 4.4 index generator"/>
+        <ant antfile="${build.dir}/4.4/build.xml" target="runindex" inheritAll="false"/>
+        <copy file="${build.dir}/4.4/log/output.log" tofile="${log.dir}/output_4.4.log" overwrite="true"/>
+		
     </target>
 
     <target name="zip-indexes" depends="runindex">
@@ -86,12 +95,14 @@
                 <include name="41/**" />
                 <include name="42/**" />  
                 <include name="43/**" />  
+            	<include name="44/**" />
             </fileset>
         </zip>         
         <delete dir="${index_location}/40" />
         <delete dir="${index_location}/41" />
         <delete dir="${index_location}/42" />
         <delete dir="${index_location}/43" />
+        <delete dir="${index_location}/44" />    	
     </target>
 	
 </project>
