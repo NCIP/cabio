@@ -91,10 +91,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 	<property name="cabio-conf.dir.src" value="${basedir}/${cabio-conf.dist.relative.dir}" />
 	<property name="cabio-conf.dir.dest" value="${working.dir}/${cabio-conf.dist.relative.dir}" />
 	<!-- property name="jboss-cabio-conf.dir" value="${jboss.home}/server/${jboss.server.name}/data" / -->
-    	<property name="cabio.propertyservice.cacore.property.value" value="${jboss-cabio-conf.dir}/cacore.properties" />
+    <property name="cabio.propertyservice.cacore.property.value" value="${jboss-cabio-conf.dir}/cacore.properties" />
 	<property name="cabio-indexes.dir.src" value="${basedir}/${cabio-indexes.dist.relative.dir}" />
 	<property name="cabio-indexes.dir.dest" value="${working.dir}/${cabio-indexes.dist.relative.dir}" />
-    
+    <property name="cabio-conf.cobertura-instrumented.dir" value="${basedir}/instrumented/cabioapi" />
 
 	<!-- Jboss binding configurtion related properties -->
 	<property name="jboss.binding.template.location" value="${bda-utils.dir}/resource/${jboss.template.relative.dir}/bindings.xml"/>
@@ -440,8 +440,25 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                       <include name="**/*" />
                  </fileset>
             </copy>
+		
+		    <antcall target="install:jboss:cabio-webapp:copy:cobertura.ser" />
 	</target>
 
+	<target name="install:jboss:cabio-webapp:copy:cobertura.ser" if="ci.server" 
+	                   description="Copy the Cobertura.ser file into JBoss bin folder">
+        <copy todir="${jboss.home}/bin" overwrite="true">
+             <fileset dir="${cabio-conf.cobertura-instrumented.dir}">
+                  <include name="cobertura.ser" />
+             </fileset>
+        </copy>		
+	</target>
+
+	<target name="install:jboss:cabio-webapp:update:cobertura.ser" if="ci.server" 
+	                   description="Copy the Cobertura.ser file back into instrumented folder for report purpose">
+        <copy file="${jboss.home}/bin/cobertura.ser" tofile="${cabio-conf.cobertura-instrumented.dir}/cobertura.updated.ser" 
+        	 overwrite="true"/>
+	</target>
+	
 	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss" >
 		<echo message="Configuring Log4J"/>
 		<!-- Insert an appender -->
@@ -552,6 +569,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<jboss-stop-jboss jboss.server.jndi.port="${jboss.server.jndi.port}"/>
 			</then>
 		</if>
+		<antcall target="install:jboss:cabio-webapp:update:cobertura.ser" />
 	</target>
 
 	<target name="install:jboss:start" description="Starts jboss" unless="exclude.jboss">
@@ -941,6 +959,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                       <include name="41/**" />
                       <include name="42/**" /> 
                       <include name="43/**" />
+                	  <include name="44/**" />
                 </fileset>
             </delete>                         
             <copy todir="${cabio-webapp.index_cache_base.dir}">
@@ -951,14 +970,21 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                       <include name="41/**" />
                       <include name="42/**" />
                       <include name="43/**" />
-                 </fileset>  
-            </copy>          
-
+                 </fileset>
+            </copy> 
+      	    <!-- copy the 43 indexes to 4.4 for now before 4.4 database is ready for indexgen -->
+            <copy todir="${cabio-webapp.index_cache_base.dir}/44">
+                <fileset dir="${cabio-webapp.indexes.dist.dir}/43">
+                     <include name="**/**" />
+                </fileset>            	
+            </copy>
+      	
             <!-- create the CACHE folder for each version -->
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/cache" />
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/41/cache" />
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/42/cache" />  
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/43/cache" />            
+      	    <mkdir dir="${cabio-webapp.index_cache_base.dir}/44/cache" />
       </target>
 
        <!-- download the index files from the load server according to which tier it is deploying -->
