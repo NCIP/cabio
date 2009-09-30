@@ -8,13 +8,13 @@
 #
 
 use strict;
-use LWP::Simple;
-use Data::Dumper;
 use ParseUtils;
-use XML::Twig::XPath;
 
 my $DO_EVS_QUERIES = 1;
-my $EVSAPI_URL = "http://evsapi.nci.nih.gov/evsapi41";
+
+if ($DO_EVS_QUERIES) {
+    use LexEVSUtils;
+}
 
 my ($indir,$outdir) = getFullDataPaths("drugbank");
 
@@ -177,8 +177,14 @@ for my $key (@cols_drug) {
 print OUT "\tEVS_Id\n";
 
 print OUT_ALIAS "Drug_Id\tAlias_Type\tAlias_Name\n";
+    
+my $count = 0;
+my $evsCount = 0;
 
 for my $drugId (@drugs) {
+
+    print "-------------------------------------------\n";
+    print "$drugId\n";
 
     my %synonyms = ();
     
@@ -186,7 +192,13 @@ for my $drugId (@drugs) {
         $name = clean($name);
         if ($name) {
             print OUT_ALIAS "$drugId\tSynonym\t$name\n";
-            $synonyms{lc($name)}++; 
+            if ($DO_EVS_QUERIES) {
+                my $oldName = $name;
+                # Remove anything in parenthesis at the end (usually a company name)
+                $name =~ s/ \(.*?\)$//;
+                #print "  Transformed '$oldName' to '$name'\n" if ($name ne $oldName);
+                $synonyms{$name}++; 
+            }
         }
     }
 
@@ -194,14 +206,24 @@ for my $drugId (@drugs) {
         $name = clean($name);
         if ($name) {
             print OUT_ALIAS "$drugId\tTrade Name\t$name\n";
-            $synonyms{lc($name)}++; 
+            if ($DO_EVS_QUERIES) {
+                my $oldName = $name;
+                # Remove anything in parenthesis at the end (usually a company name)
+                $name =~ s/ \(.*?\)$//;
+                #print "  Transformed '$oldName' to '$name'\n" if ($name ne $oldName);
+                $synonyms{$name}++;
+            } 
         }
     }
+    $count++;
     
     my $evsId = "";
     if ($DO_EVS_QUERIES) {
-        $evsId = evsLookup($drugs{$drugId}{'Generic_Name'},\%synonyms);
-        print "$drugId -> $evsId\n";
+        my $agentName = $drugs{$drugId}{'Generic_Name'};
+        print "Searching for $agentName in EVS...\n";
+        $evsId = evsLookup($agentName,\%synonyms," "x4);
+        $evsCount++ if ($evsId);
+        print "$drugId -> $evsId (".int(($evsCount/$count)*100)."%)\n";
     }
     
     print OUT $drugId;
@@ -270,55 +292,5 @@ sub clean {
     $val =~ s/\s+/ /;
     $val = "" if ($val eq "Not Available");
     return $val;
-}
-
-sub evsLookup {
-
-    my ($agentName,$synHash) = @_;
-    $agentName =~ tr|[]/|   |; 
-        
-    my $url = $EVSAPI_URL.'/GetXML?query=DescLogicConcept&DescLogicConcept[@name='.$agentName.']';
-    my $xml = get $url;
-
-    if ($xml =~ /caCORE HTTP Servlet Error/) {
-        print "Error contacting EVS at URL:\n$url\n\nServer returned:\n$xml";
-        return "";
-    }
-    
-    my $twig = XML::Twig::XPath->new(); 
-    $twig->parse($xml);
-    my @classNodes = $twig->findnodes("/xlink:httpQuery/queryResponse/class");
-
-    my @potentials = ();
-
-    for my $classNode (@classNodes) {
-        my $name = $classNode->findvalue('field[@name="Name"]');
-        my $evsId = $classNode->findvalue('field[@name="Code"]');
-         
-        if (lc($name) eq lc($agentName)) {
-            # direct match on name
-            #print "    Direct match for $agentName\n";
-            return $evsId;
-        }
-        
-        if ($synHash->{lc($name)}) {
-            # if this is a synonym, list it as a potential synonym match
-            #print "    Potential match: $name (($evsId)) for $agentName\n";
-            push @potentials, $evsId;
-        }
-    }
-    
-    # no matches 
-    return "" unless @potentials;
-    
-    # more than 1 potential synonym match?
-    if ($#potentials > 0) {
-        print "Warning, more than 1 potential match for $agentName: ".
-            join(", ",@potentials)."\n";
-    }
-    
-    # return first potential synonym match
-    #print "    Returning potential match ".$potentials[0]."\n";
-    return $potentials[0];
 }
 
