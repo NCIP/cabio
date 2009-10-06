@@ -66,14 +66,16 @@ sub getNcitVersion {
 }
 
 #
-#
+# Parses EVS synonyms (presentations with type "FULL_SYN") and returns a 
+# hash of them (the hash values are counts of the number of time each synonym
+# appears). 
 #
 sub parseSynonyms {
 
-    my ($synClassNodes) = @_;
+    my @synClassNodes = @_;
     my %synonyms = ();
     
-    for my $classNode ($synClassNodes) {
+    for my $classNode (@synClassNodes) {
         my $propertyName = $classNode->findvalue('field[@name="_propertyName"]');
         my $name = $classNode->findvalue('field[@name="_value"]/class[1]/field[@name="_content"]');
         if ($propertyName eq "FULL_SYN") {
@@ -85,7 +87,18 @@ sub parseSynonyms {
 }
 
 #
-# Lookup an agent in the NCI Thesaurus and return a matching EVS concept code.
+# Lookup a term in the NCI Thesaurus and return a matching EVS concept code.
+#
+# The matching algorithm proceeds as follows:
+# 1) Search for term in EVS across all presentations (i.e. synonyms in EVS)
+# 2) If there are no matches and MATCH_ON_ALIASES is true then this method is
+#    called recursively for each alias in synHash until an EVS Id is returned.
+# 3) If there is a match on preferred name, return that.
+# 4) If there are other matches then we need to choose the best one:
+#    a) Matches with preferred names in the synHash are considered "reciprocal" 
+#       matches and are immediately returned without checking other matches.
+#    b) All other matches are added to a list in a prioritized order and 
+#       a "best match" is chosen from the list to return.
 #
 # Arguments:
 # @term the search term to find a matching concept for
@@ -121,6 +134,7 @@ sub evsLookup {
                 }
             }
         }
+        return "";
     }
     
     # EVS concepts which have the term as a synonym
@@ -135,17 +149,13 @@ sub evsLookup {
             return $evsId;
         }
         
-        #my @pnodes = $classNode->findnodes('field[@name="_presentationList"]');
-        #my $synTwigRoot = queryEVS($pnodes[0]->att("xlink:href"));
-        #my $synTwig = $synTwigRoot->findnodes("/xlink:httpQuery/queryResponse/class");
-        
         my @propnodes = $classNode->findnodes('field[@name="_propertyList"]//field[@name="_propertyName"]');
         my %props = ();
         for my $propnode (@propnodes) {
             $props{$propnode->text}++;
         }
         
-        my @synClassNodes = $classNode->findnodes('field[@name="_presentationList"]');
+        my @synClassNodes = $classNode->findnodes('field[@name="_presentationList"]/class');
         my @synonyms = parseSynonyms(@synClassNodes);
         
         for my $synonym (@synonyms) {
