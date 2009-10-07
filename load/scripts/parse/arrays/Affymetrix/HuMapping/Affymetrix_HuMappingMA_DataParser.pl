@@ -61,11 +61,11 @@ foreach my $line (<INFILE>) {
 
 # Extract fields 3,4,7 for Chromosome, PhysicalPostion, Cytoband
 
-    print PHYLOCFILE "$prefix,$probeId,$data[3],$data[4],$data[7]\n";
+    print PHYLOCFILE "$prefix,$probeId,$data[2],$data[3],$data[6]\n";
     # process gene associations
-	$data[11] =~ s/---//g;
-    if ($data[11]) {
-	    my @associations = split("\/\/\/", $data[11]);
+	$data[10] =~ s/---//g;
+    if ($data[10]) {
+	    my @associations = split("\/\/\/", $data[10]);
 	    foreach my $association (@associations) {
 	        my @fields = trim(split("\/\/", $association));
 	        my ($accession, $relationship, $distance, $unigeneId, 
@@ -76,8 +76,8 @@ foreach my $line (<INFILE>) {
 	}
 	
     # process population frequency
-    my %freq = processFreq($data[15]);
-    my %hzyg = processHzyg($data[16]);
+    my %freq = processFreq($data[14]);
+    my %hzyg = processHzyg($data[15]);
     my %eths = map { $_ => 1 } keys %freq, keys %hzyg;
     
     foreach my $eth (keys %eths) {
@@ -85,9 +85,9 @@ foreach my $line (<INFILE>) {
     }
 
 	# process genetic map
-	$data[12] =~ s/---//g;
-	if ($data[12]) {
-	    my @geneticmap = trim(split("\/\/\/", $data[12]));
+	$data[11] =~ s/---//g;
+	if ($data[11]) {
+	    my @geneticmap = trim(split("\/\/\/", $data[11]));
 		
 		# deCODE
 	    my ($distance, $markerId1, $markerId2, $markerName1, $markerName2) 
@@ -106,9 +106,9 @@ foreach my $line (<INFILE>) {
 	}
 	
 	# process microsatellite
-	$data[13] =~ s/---//g;
-	if ($data[13]) {
-	    my @microsatellite = trim(split("\/\/\/", $data[13]));
+	$data[12] =~ s/---//g;
+	if ($data[12]) {
+	    my @microsatellite = trim(split("\/\/\/", $data[12]));
 		for my $ms (@microsatellite) {
 	    	my ($marker, $position, $msdist) = trim(split("\/\/", $ms));
 	        if ($marker && $position) {

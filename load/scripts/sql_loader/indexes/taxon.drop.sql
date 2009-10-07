@@ -1,4 +1,6 @@
 
+drop index TAXONXON_BIG_ID_LWR;
+drop index TAXONXON_BIG_ID;
 drop index TAXNODUPS_IDX;
 drop index TAXONAXON_SCIENTIFIC;
 drop index TAXONAXON_ABBREVIATI;

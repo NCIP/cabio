@@ -1,5 +1,5 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed Jun 3 12:52:46 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Tue Oct 6 13:21:35 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -67,7 +67,7 @@ ANNOTATION_NOTES                     NEXT 30000   ,  O(") CHARACTER
 SQL*Loader-292: ROWS parameter ignored when an XML, LOB or VARRAY column is loaded
 
 Table ZSTG_RNA_PROBESETS_TMP:
-  22665 Rows successfully loaded.
+  22679 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -78,14 +78,14 @@ Stream buffer bytes:  256000
 Read   buffer bytes: 1000000
 
 Total logical records skipped:         13
-Total logical records read:         22665
+Total logical records read:         22679
 Total logical records rejected:         0
 Total logical records discarded:        0
 Total stream buffers loaded by SQL*Loader main thread:       47
-Total stream buffers loaded by SQL*Loader load thread:      139
+Total stream buffers loaded by SQL*Loader load thread:      140
 
-Run began on Wed Jun 03 12:52:46 2009
-Run ended on Wed Jun 03 12:52:54 2009
+Run began on Tue Oct 06 13:21:35 2009
+Run ended on Tue Oct 06 13:21:42 2009
 
-Elapsed time was:     00:00:08.15
-CPU time was:         00:00:04.61
+Elapsed time was:     00:00:07.06
+CPU time was:         00:00:03.55

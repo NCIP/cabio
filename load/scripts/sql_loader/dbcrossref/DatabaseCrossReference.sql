@@ -71,6 +71,10 @@ new_protein P, ar_swissprot_tmp S, ar_refseq_protein_tmp R
 WHERE S.SWISSPROT_ID = P.PRIMARY_ACCESSION AND S.PROBE_SET_ID = R.PROBE_SET_ID
 ;
 
+insert into database_cross_reference(CROSS_REFERENCE_ID, TYPE, source_NAME, source_TYPE) 
+select entrez_id, 'gov.nih.nci.cabio.domain.Gene', 'Entrez', 'Entrez' from zstg_entrez_gene where to_char(entrez_id) in ( select distinct to_char(entrez_id) from zstg_entrez_gene minus select distinct cross_reference_id from database_cross_reference where source_name = 'LOCUS_LINK_ID');
+commit;
+
 DROP INDEX AR_REFSEQ_IDX;
 DROP INDEX AR_REFSEQ_IDX_2;
 COMMIT;

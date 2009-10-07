@@ -38,6 +38,15 @@ INSERT INTO gene_protein_tv select distinct a.GENE_ID, b.PROTEIN_ID from gene_tv
 DROP TABLE ZSTG_GPID;
 COMMIT;
 
+delete from gene_protein_tv where gene_id not in (select distinct gene_id from gene_tv);
+commit;
+
+--creates 833 rows now
+insert into gene_protein_tv(gene_id, protein_id) select distinct
+g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where g.SOURCE='Entrez' and g.ENTREZ_ID=x.GENEID andsubstr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6);
+commit;
+
+
 
 @$LOAD/indexes/gene_protein_tv.cols.sql
 @$LOAD/indexes/gene_protein_tv.lower.sql

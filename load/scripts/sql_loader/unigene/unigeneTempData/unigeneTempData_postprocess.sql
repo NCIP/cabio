@@ -22,6 +22,7 @@
 --ANALYZE TABLE zstg_gene_identifiers COMPUTE STATISTICS;
 --ANALYZE TABLE gene_nucleic_acid_sequence COMPUTE STATISTICS;
 
+
 EXIT;
 
 

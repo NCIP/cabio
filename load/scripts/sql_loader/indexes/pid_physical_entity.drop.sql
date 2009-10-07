@@ -1,4 +1,6 @@
 
+drop index PID_PHYITY_BIG_ID_LWR;
+drop index PID_PHYITY_BIG_ID;
 drop index SYS_C0021157_IDX;
 drop index PID_PHYSTITY_DISCRIMINA_LWR;
 drop index PID_PHYSTITY_ORDER_OF_C;

@@ -5,7 +5,6 @@ alter table GENE_GENEALIAS enable constraint SYS_C0020834 using index SYS_C00208
 alter table GENE_GENEALIAS enable constraint SYS_C0016566;
 alter table GENE_GENEALIAS enable constraint SYS_C0020834;
 alter table GENE_GENEALIAS enable constraint SYS_C0020834;
-alter table GENE_GENEALIAS enable constraint SYS_C004469;
 alter table GENE_GENEALIAS enable constraint SYS_C004470;
 
 alter table GENE_GENEALIAS enable primary key;

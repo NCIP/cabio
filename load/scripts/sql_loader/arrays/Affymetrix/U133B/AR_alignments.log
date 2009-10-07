@@ -1,5 +1,5 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed Jun 3 12:52:33 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Tue Oct 6 13:21:25 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -58,8 +58,8 @@ Total logical records discarded:        0
 Total stream buffers loaded by SQL*Loader main thread:       12
 Total stream buffers loaded by SQL*Loader load thread:       10
 
-Run began on Wed Jun 03 12:52:33 2009
-Run ended on Wed Jun 03 12:52:34 2009
+Run began on Tue Oct 06 13:21:25 2009
+Run ended on Tue Oct 06 13:21:26 2009
 
-Elapsed time was:     00:00:00.54
-CPU time was:         00:00:00.24
+Elapsed time was:     00:00:00.46
+CPU time was:         00:00:00.10

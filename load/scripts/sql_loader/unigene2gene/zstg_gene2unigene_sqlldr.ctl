@@ -11,4 +11,5 @@ FIELDS TERMINATED BY "	"
  
 TRAILING NULLCOLS
 (GeneID,	
-UniGene_cluster)
+UniGene_cluster
+)

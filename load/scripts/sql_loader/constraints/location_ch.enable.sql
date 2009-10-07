@@ -1,12 +1,12 @@
-create unique index NLTV_BK_idx on LOCATION_CH
+create unique index LCH_PK_idx on LOCATION_CH
 (ID) tablespace CABIO_FUT;
-alter table LOCATION_CH enable constraint NLTV_BK using index NLTV_BK_idx;
+alter table LOCATION_CH enable constraint LCH_PK using index LCH_PK_idx;
 
-alter table LOCATION_CH enable constraint SYS_C0021116;
-alter table LOCATION_CH enable constraint SYS_C004570;
-alter table LOCATION_CH enable constraint SYS_C004571;
-alter table LOCATION_CH enable constraint SYS_C004572;
-alter table LOCATION_CH enable constraint NLTV_BK;
+alter table LOCATION_CH enable constraint SYS_C0035927;
+alter table LOCATION_CH enable constraint SYS_C0035926;
+alter table LOCATION_CH enable constraint SYS_C0035928;
+alter table LOCATION_CH enable constraint SYS_C0035929;
+alter table LOCATION_CH enable constraint LCH_PK;
 
 alter table LOCATION_CH enable primary key;
 

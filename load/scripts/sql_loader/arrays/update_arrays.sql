@@ -157,8 +157,8 @@ COMMIT;
 INSERT
  INTO microarray (ID, ARRAY_NAME, GENOME_VERSION, DBSNP_VERSION, PLATFORM, TYPE,
 DESCRIPTION, ACCESSION, LSID) SELECT microarray_SEQ.NEXTVAL, ARRAY_NAME,
-'NCBI Build '||GENOME_VERSION, DB_SNP_VERSION, 'Affymetrix', 'snp', DESCRIPTION, ACCESSION, LSID FROM 
-(SELECT DISTINCT ARRAY_NAME, 'NCBI Build '||GENOME_VERSION, DB_SNP_VERSION, DECODE(ARRAY_NAME,
+GENOME_VERSION, DB_SNP_VERSION, 'Affymetrix', 'snp', DESCRIPTION, ACCESSION, LSID FROM 
+(SELECT DISTINCT ARRAY_NAME, 'NCBI Build '||GENOME_VERSION as GENOME_VERSION, DB_SNP_VERSION, DECODE(ARRAY_NAME,
 'Mapping250K_Nsp', 'Human Mapping 250K Nsp Array', 'Mapping250K_Sty',
 'Human Mapping 250K Sty Array', 'Mapping50K_Hind240',
 'Human Mapping 50K Array Hind 240', 'Mapping50K_Xba240',
@@ -550,7 +550,7 @@ UPDATE microarray m SET annotation_version =
     (select annotation_version from zstg_microarray_versions v where v.array_name = m.array_name); 
 commit;
 UPDATE microarray m SET  genome_version = 
-    (select genome_version from ar_rna_probesets_tmp v where v.array_name = m.array_name) where genome_version is null; 
+    (select genome_version from ar_rna_probesets_affy_tmp v where v.array_name = m.array_name) where genome_version is null; 
 commit;
 
 -- create indexes on user tables

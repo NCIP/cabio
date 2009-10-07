@@ -1,5 +1,5 @@
 
-SQL*Loader: Release 10.2.0.1.0 - Production on Wed Jun 3 12:52:34 2009
+SQL*Loader: Release 10.2.0.1.0 - Production on Tue Oct 6 13:21:26 2009
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
 
@@ -35,7 +35,7 @@ GENECHIP_ARRAY                       NEXT     *   |       CHARACTER
 
 
 Table AR_REFSEQ_TRANSCRIPTS_TMP:
-  51293 Rows successfully loaded.
+  54219 Rows successfully loaded.
   0 Rows not loaded due to data errors.
   0 Rows not loaded because all WHEN clauses were failed.
   0 Rows not loaded because all fields were null.
@@ -46,14 +46,14 @@ Stream buffer bytes:  256000
 Read   buffer bytes: 1000000
 
 Total logical records skipped:          1
-Total logical records read:         51293
+Total logical records read:         54219
 Total logical records rejected:         0
 Total logical records discarded:        0
-Total stream buffers loaded by SQL*Loader main thread:       12
+Total stream buffers loaded by SQL*Loader main thread:       13
 Total stream buffers loaded by SQL*Loader load thread:        0
 
-Run began on Wed Jun 03 12:52:34 2009
-Run ended on Wed Jun 03 12:52:35 2009
+Run began on Tue Oct 06 13:21:26 2009
+Run ended on Tue Oct 06 13:21:27 2009
 
-Elapsed time was:     00:00:00.43
-CPU time was:         00:00:00.15
+Elapsed time was:     00:00:00.37
+CPU time was:         00:00:00.07

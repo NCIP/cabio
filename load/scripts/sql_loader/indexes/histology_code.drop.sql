@@ -1,6 +1,7 @@
 
-drop index HISTOLOODE_BIG_ID;
 drop index PK_HISTOLOGY_CODE;
+drop index HISTOLOODE_BIG_ID_LWR;
+drop index HISTOLOODE_BIG_ID;
 drop index HISTOLOGCODE_HISTOLOGY__LWR;
 drop index HISTOLOGCODE_CONCEPT_ID_LWR;
 drop index SYS_C0021110;

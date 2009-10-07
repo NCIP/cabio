@@ -1,4 +1,6 @@
 
+drop index PID_PARANT_BIG_ID_LWR;
+drop index PID_PARANT_BIG_ID;
 drop index PID_PARTPANT_LOCATION_LWR;
 drop index PID_PARTPANT_PTM_LWR;
 drop index PID_PARTPANT_ACTIVITY_S_LWR;

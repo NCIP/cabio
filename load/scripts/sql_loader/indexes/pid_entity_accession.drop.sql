@@ -1,4 +1,6 @@
 
+drop index PID_ENTION_BIG_ID_LWR;
+drop index PID_ENTION_BIG_ID;
 drop index SYS_C0021149_IDX;
 drop index SYS_C0017725_IDX;
 drop index PID_ENTISION_ACCESSION_LWR;

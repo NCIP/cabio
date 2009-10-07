@@ -1,4 +1,4 @@
 
-alter table PROTOCOLS disable constraint SYS_C0034947;
+alter table PROTOCOLS disable constraint SYS_C0043578;
 
 --EXIT;

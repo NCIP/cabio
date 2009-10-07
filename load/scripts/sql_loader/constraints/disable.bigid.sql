@@ -1,6 +1,7 @@
 
 alter table ARRAY_REPORTER_CH disable constraint ARREPBIGID;
 alter table BIO_PATHWAYS_TV disable constraint BPTBIGID;
+alter table CHROMOSOME disable constraint SYS_C0016534;
 alter table CHROMOSOME disable constraint CHRBIGID;
 alter table CLONE_TV disable constraint CTVBIGID;
 alter table CYTOBAND disable constraint CYTOBIGID;
@@ -32,20 +33,19 @@ alter table PROTEIN_SEQUENCE disable constraint PROTSEQ;
 alter table PROTOCOL disable constraint PROBIGIDUN;
 alter table RELATIVE_LOCATION disable constraint RCHBIGID;
 alter table SNP_REPORTER disable constraint SNPREPBIGID;
-alter table TARGET disable constraint SYS_C004768;
 alter table TARGET disable constraint TARGETBIGID;
-alter table TAXON disable constraint SYS_C004778;
+alter table TARGET disable constraint SYS_C004768;
 alter table TAXON disable constraint TAXBIGID;
-alter table TISSUE_CODE disable constraint SYS_C004788;
+alter table TAXON disable constraint SYS_C004778;
 alter table TISSUE_CODE disable constraint TCBIGID;
+alter table TISSUE_CODE disable constraint SYS_C004788;
 alter table TISSUE_SAMPLE disable constraint TISSSAMP;
-alter table TRANSCRIPT disable constraint SYS_C004802;
 alter table TRANSCRIPT disable constraint XSCRIPTBIGID;
-alter table TRANSCRIPT_ARRAY_REPORTER disable constraint SYS_C004808;
+alter table TRANSCRIPT disable constraint SYS_C004802;
 alter table TRANSCRIPT_ARRAY_REPORTER disable constraint XSCRIPTARRREP;
-alter table VOCABULARY disable constraint SYS_C004820;
+alter table TRANSCRIPT_ARRAY_REPORTER disable constraint SYS_C004808;
 alter table VOCABULARY disable constraint BIGID;
+alter table VOCABULARY disable constraint SYS_C004820;
 alter table PID_ENTITY_ACCESSION disable constraint SYS_C0017726;
-alter table CHROMOSOME disable constraint SYS_C0016534;
 
 EXIT;

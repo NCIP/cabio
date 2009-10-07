@@ -44,6 +44,11 @@ TRUNCATE TABLE go_closure REUSE STORAGE;
 INSERT INTO go_ontology(go_id,go_name,hs_genes,mm_genes) SELECT a.go_id, a.go_name, hs_count, mm_count FROM (SELECT g.go_id, g.go_name, NVL (COUNT(UNIQUE c.cluster_number), 0) hs_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.hs_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) a, (SELECT g.go_id, g.go_name, NVL (COUNT (UNIQUE c.cluster_number), 0) MM_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.MM_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) b WHERE a.go_id = b.go_id;
 COMMIT;
 
+-- add data from entrez
+insert into go_ontology(go_id, go_name, taxon_id) select go_id_trimmed, go_term, tax_id from zstg_gene2go where go_id_trimmed NOT in (select distinct go_id from go_ontology);
+commit;
+
+
 INSERT INTO go_relationship (id, child_id, parent_id,relationship)SELECT rownum, go_id,go_parent_ID,PARENT_TYPE FROM CGAP.GO_PARENT@WEB.NCI.NIH.GOV;
 COMMIT;
 -- Not needed since ID is populated with rownum
@@ -51,8 +56,23 @@ COMMIT;
 
 INSERT INTO zstg_gene_ontology(GO_ID, organISM,LOCUS_ID)SELECT   TO_NUMBER(GO_ID) GO_ID, DECODE(organism, 'Hs', 5, 'Mm', 6) ORGANISM,LL_ID FROM  CGAP.LL_GO@WEB.NCI.NIH.GOV;
 
-INSERT INTO go_genes(gene_id,go_id,taxon_id)SELECT gene_id,go_id,organism FROM  zstg_gene_ontology GOT, zstg_gene_identifiers GI WHERE  GI.IDENTIFIER = GOT.LOCUS_ID AND  GI.data_source = 2union select distinct g.gene_id, go.go_id, g.taxon_id from gene_tv g, go_ontology go, zstg_gene2go z, zstg_gene2unigene u where substr(z.GO_ID,4)=go.go_id and z.ENTREZ_GENEID = u.GENEID and substr(u.UNIGENE_CLUSTER,1,2) in ('Hs', 'Mm') and substr(u.unigene_cluster, instr(u.unigene_cluster,'.')+1) = g.CLUSTER_ID;
+@$LOAD/indexes/go_ontology.cols.sql;
+@$LOAD/indexes/go_ontology.lower.sql;
+
+create index zstg_gene2unigene_ucluster1 on zstg_gene2unigene(substr(UNIGENE_CLUSTER,1,2)) tablespace cabio_map_fut;
+
+create index zstg_gene2unigene_ucluster2 on zstg_gene2unigene(substr(unigene_cluster, instr(unigene_cluster,'.')+1)) tablespace cabio_map_fut;
+
+create index zstg_gene2go_go on zstg_gene2go(substr(go_id, 4)) tablespace cabio_map_fut;
+ 
+INSERT INTO go_genes(gene_id,go_id,taxon_id)SELECT gene_id,go_id,organism FROM  zstg_gene_ontology GOT, zstg_gene_identifiers GI WHERE  GI.IDENTIFIER = GOT.LOCUS_ID AND  GI.data_source = 2;
+
 commit;
+
+insert into go_Genes(gene_id, go_id, taxon_id) select distinct g.gene_id, go.go_id, g.taxon_id from go_ontology go, zstg_gene2go z, gene_Tv g where go.go_id=z.go_id_trimmed and z.ENTREZ_GENEID = g.ENTREZ_ID and z.tax_id=g.taxon_id and go.taxon_id=z.tax_id;
+
+commit;
+
 
 -- To populate go_closure
 execute Load_Heir.MakeClosure;

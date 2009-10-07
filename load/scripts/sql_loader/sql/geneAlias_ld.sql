@@ -28,6 +28,7 @@ INSERT INTO cgap_gene_alias(gene_id, alias) SELECT * FROM (SELECT distinct (SELE
 @$LOAD/constraints/cgap_gene_alias.enable.sql;
 @$LOAD/indexes/cgap_gene_alias.cols.sql;
 @$LOAD/indexes/cgap_gene_alias.lower.sql;
+
 -- Before this add a trigger that starts updating gene_alias_id --
 
 DROP SEQUENCE gene_ALIAS_ID_SEQ;
@@ -39,10 +40,18 @@ TRUNCATE TABLE gene_alias_object_tv REUSE STORAGE;
 INSERT INTO gene_alias_object_tv(GENE_ALIAS_ID,ALIAS_TYPE, NAME, GENE_ID) SELECT GENE_ALIAS_ID_SEQ.nextval, ALIAS_TYPE,NAME,GENE_ID from GENE_ALIAS_OBJECT;
 
 -- Add new aliases from Entrez  and HUGO --
-INSERT INTO gene_alias_object_tv(ALIAS_TYPE, NAME) SELECT distinct TYPE, trim(SYNONYMS) from zstg_geneALIAS a, zstg_gene2unigene b, gene_tv c where a.locuslinkid = b.geneid and substr(b.UNIGENE_CLUSTER, instr(b.unigene_cluster,'.')+1)=c.CLUSTER_ID and SYNONYMS not like '%-%' and SYNONYMS is NOT NULL and decode(substr(b.unigene_cluster,0,2),'Hs',5, 'Mm',6) = c.taxon_id;
+INSERT INTO gene_alias_object_tv(ALIAS_TYPE, NAME) SELECT distinct TYPE, trim(SYNONYMS) from zstg_geneALIAS a, zstg_gene2unigene b, gene_tv c where a.locuslinkid = b.geneid and b.UCLUSTER=c.CLUSTER_ID and SYNONYMS not like '%-%' and SYNONYMS is NOT NULL and b.taxon=c.taxon_id;
+commit;
+
+INSERT INTO gene_alias_object_tv(ALIAS_TYPE, NAME) SELECT distinct TYPE, trim(SYNONYMS) from zstg_geneALIAS a, zstg_gene2unigene b, gene_tv c where a.locuslinkid = b.geneid and b.geneid=c.ENTREZ_ID and SYNONYMS not like '%-%' and SYNONYMS is NOT NULL and b.taxon=c.taxon_id and c.cluster_id is null;
+commit;
 
 TRUNCATE TABLE gene_genealias REUSE STORAGE;
-INSERT INTO gene_genealias(GENE_ID, GENE_ALIAS_ID) select distinct b.GENE_ID,a.GENE_ALIAS_ID from gene_alias_object_tv a, gene_tv b, zstg_geneALIAS c,zstg_gene2unigene d where lower(trim(a.NAME)) = lower(trim(c.SYNONYMS)) and c.locuslinkid = d.geneid and substr(d.UNIGENE_CLUSTER, instr(d.unigene_cluster,'.')+1)=b.CLUSTER_ID and b.GENE_ID is not null and a.GENE_ALIAS_ID is not null;
+INSERT INTO gene_genealias(GENE_ID, GENE_ALIAS_ID) select distinct b.GENE_ID,a.GENE_ALIAS_ID from gene_alias_object_tv a, gene_tv b, zstg_geneALIAS c,zstg_gene2unigene d where lower(trim(a.NAME)) = lower(trim(c.SYNONYMS)) and c.locuslinkid = d.geneid and d.UCLUSTER=b.CLUSTER_ID and b.GENE_ID is not null and a.GENE_ALIAS_ID is not null;
+commit;
+
+INSERT INTO gene_genealias(GENE_ID, GENE_ALIAS_ID) select distinct b.GENE_ID,a.GENE_ALIAS_ID from gene_alias_object_tv a, gene_tv b, zstg_geneALIAS c,zstg_gene2unigene d where lower(trim(a.NAME)) = lower(trim(c.SYNONYMS)) and c.locuslinkid = d.geneid and d.geneid=b.ENTREZ_ID and b.GENE_ID is not null and a.GENE_ALIAS_ID is not null and b.cluster_id is null minus select distinct gene_id, gene_alias_id from gene_genealias;
+commit;
 
 @$LOAD/indexes/gene_alias_object_tv.cols.sql;
 @$LOAD/indexes/gene_alias_object_tv.lower.sql;

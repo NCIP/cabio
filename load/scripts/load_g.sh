@@ -25,6 +25,10 @@ wait
 
 echo "Done download " | mail -s "Finished download and library-load " viswanathl@mail.nih.gov
 
+# start parse of drug bank data
+#cd $CABIO_DIR/scripts/parse/drugbank
+#perl drug_parser.pl &
+
 # Parse data
 echo "Starting parse of non-array data"
 cd $CABIO_DIR/scripts/parse

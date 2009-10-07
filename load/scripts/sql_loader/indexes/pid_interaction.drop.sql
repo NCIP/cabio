@@ -1,4 +1,6 @@
 
+drop index PID_INTION_BIG_ID_LWR;
+drop index PID_INTION_BIG_ID;
 drop index SYS_C0021154_IDX;
 drop index PID_INTETION_SOURCE_LWR;
 drop index PID_INTETION_MACRO_NAME_LWR;

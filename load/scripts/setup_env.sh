@@ -12,7 +12,7 @@ export PATH="$PATH":"$CABIO_DIR"/bin:/usr/bin/perl:/usr/lib/perl
 
 
 # D/B Connection parameters
-export CONNECT_STRING=jdbc:oracle:thin:@cbdb-d1001.nci.nih.gov:1553:BIODEV
+export CONNECT_STRING=jdbc:oracle:thin:@ncidb-bio-d.nci.nih.gov:1553:BIODEV
 export DBI_DRIVER='DBI:Oracle:BIODEV'
 export SCHEMA='cabiodev'
 export SCHEMA_PWD='cabiodev506'

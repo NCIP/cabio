@@ -82,8 +82,12 @@ commit;
 INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT bc_id, locus_id, taxon_id, gene_id FROM zstg_biogenes bt, zstg_gene_identifiers gi WHERE bt.locus_id = gi.IDENTIFIER(+) AND gi.data_source(+) = 2;
 commit;
 
---INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT bc_id, locus_id, g.taxon_id, g.gene_id FROM zstg_biogenes bt, zstg_gene2unigene gi, gene_tv g WHERE bt.locus_id = gi.geneid AND decode(substr(gi.UNIGENE_CLUSTER,0,2),'Hs',5,'Mm',6) = g.taxon_id 	and substr(gi.unigene_cluster,instr(gi.unigene_cluster,'.')+1) = g.CLUSTER_ID;
---commit;
+INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT to_char(bc_id), to_number(locus_id), to_number(g.taxon_id), to_number(g.gene_id) FROM zstg_biogenes bt, zstg_gene2unigene gi, gene_tv g WHERE bt.locus_id = gi.geneid AND decode(substr(gi.UNIGENE_CLUSTER,0,2),'Hs',5,'Mm',6) = g.taxon_id 	and substr(gi.unigene_cluster,instr(gi.unigene_cluster,'.')+1) = g.CLUSTER_ID minus select distinct to_char(bc_id), to_number(locus_id), to_number(organism), to_number(gene_id) from biogenes;
+
+-- add data from Entrez
+INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT to_char(bc_id), to_number(locus_id), to_number(g.taxon_id), to_number(g.gene_id) FROM zstg_biogenes bt, zstg_gene2unigene gi, gene_tv g WHERE bt.locus_id = gi.geneid and gi.geneid=g.entrez_id and gi. taxon=g.taxon_id minus select distinct to_char(bc_id), to_number(locus_id), to_number(organism), to_number(gene_id) from biogenes;
+
+commit;
 
 INSERT INTO gene_pathway (pathway_id, bc_id) SELECT DISTINCT pathway_id, bc_id FROM bio_pathways bp, zstg_biogenes bg WHERE bp.pathway_name = bg.pathway_name AND bp.taxon = bg.taxon_id AND bg.pathway_name IS NOT NULL;
 commit;
