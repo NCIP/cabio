@@ -44,7 +44,7 @@
         <mkdir dir="${cabio41.index.dir}"/>
         <mkdir dir="${cabio42.index.dir}"/>
         <mkdir dir="${cabio43.index.dir}"/>
-    	<mkdir dir="${cabio44.index.dir}"/>
+    	<!-- mkdir dir="${cabio44.index.dir}"/  -->
     	
         <replace dir="${build.dir}/4.0" includes="**/*.properties">
             <replacefilter token="@INDEXBASE@" value="${cabio40.index.dir}" />
@@ -82,9 +82,11 @@
         <ant antfile="${build.dir}/4.3/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.3/log/output.log" tofile="${log.dir}/output_4.3.log" overwrite="true"/>
 
+		<!-- 
         <echo message="Running caBIO 4.4 index generator"/>
         <ant antfile="${build.dir}/4.4/build.xml" target="runindex" inheritAll="false"/>
         <copy file="${build.dir}/4.4/log/output.log" tofile="${log.dir}/output_4.4.log" overwrite="true"/>
+		-->
 		
     </target>
 
