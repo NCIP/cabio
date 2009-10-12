@@ -942,8 +942,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                          cabioapi/indexes,
                          cabioapi/41/indexes,
                          cabioapi/42/indexes,
-                         cabioapi/43/indexes,
-                         cabioapi/44/indexes
+                         cabioapi/43/indexes                         
       -->
       <condition property="cabio-webapp.indexes.dist.dir" value="${basedir}/indexes" >
             <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="true"/>
@@ -959,8 +958,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                       <include name="40/**" />
                       <include name="41/**" />
                       <include name="42/**" /> 
-                      <include name="43/**" />
-                	  <include name="44/**" />
+                      <include name="43/**" />                	  
                 </fileset>
             </delete>                         
             <copy todir="${cabio-webapp.index_cache_base.dir}">
@@ -970,8 +968,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                  <fileset dir="${cabio-webapp.indexes.dist.dir}">
                       <include name="41/**" />
                       <include name="42/**" />
-                      <include name="43/**" />
-                 	  <include name="44/**" />
+                      <include name="43/**" />                 	  
                  </fileset>
             </copy> 
       	
@@ -980,7 +977,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/41/cache" />
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/42/cache" />  
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/43/cache" />            
-      	    <mkdir dir="${cabio-webapp.index_cache_base.dir}/44/cache" />
       </target>
 
        <!-- download the index files from the load server according to which tier it is deploying -->
