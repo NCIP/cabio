@@ -3,6 +3,7 @@ package gov.nih.nci.cagrid.cabio.test;
 import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.Protein;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.cabio.domain.NucleicAcidSequence;
 import gov.nih.nci.cabio.pathways.PhysicalEntity;
 import gov.nih.nci.cabio.pathways.ProteinEntity;
 import gov.nih.nci.cabio.pathways.FamilyMember;
@@ -155,6 +156,29 @@ public class CaBIOClientTestCase extends TestCase {
 		//assertTrue("Different xrefs retrieved", map.size() == 0);
 	}
 
+	public void testNASAsBaseClass() {
+		System.out.println("============= testNASAsBaseClass =======================================");
+		// Get gene from grid service
+		List nasList = new ArrayList();
+		try {
+			CQLQuery query = (CQLQuery) Utils.deserializeDocument(
+					"test/resources/nas.xml", CQLQuery.class);
+			CQLQueryResults results = gridSvcClient.query(query);									
+			CQLQueryResultsIterator iterator = getIterator(results, null);
+			
+			while (iterator.hasNext()) {
+				nasList.add(iterator.next());
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		for (Iterator i = nasList.iterator(); i.hasNext();) {
+			NucleicAcidSequence x = (NucleicAcidSequence) i.next();
+			System.out.println("testNASAsBaseClass NucleicAcidSequence Id: " + x.getId());
+		}
+	}
+	
 	public void testValidXml() {
 		try {
 			CQLQuery query = (CQLQuery) Utils.deserializeDocument(
@@ -391,6 +415,7 @@ public class CaBIOClientTestCase extends TestCase {
 	    suite.addTest(new CaBIOClientTestCase("testGetPhysicalEntities"));
 	    suite.addTest(new CaBIOClientTestCase("testGetFamilyMembers"));
 	    
+	    //suite.addTest(new CaBIOClientTestCase("testNASAsBaseClass"));
     	//suite.addTest(new CaBIOClientTestCase("testGetGenesByDBXRef"));
 		//suite.addTest(new CaBIOClientTestCase("testValidXml"));	    
 		return suite;
