@@ -544,7 +544,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		depends="
 		common:init
 		">
-		<validate-post-common />
+		<validate-post-common 
+			propertyfile.backup.location="${log.dir}"
+			/>
 	</target>
 	<target name="install:jboss:validation:post-install" description="Run post-install checks from bda-utils"
 		depends="
@@ -983,6 +985,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</if>
 		<!-- Begin JBoss Readers -->
 		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
+		<!--
 		<jboss-read-dbconfig
 			jboss.home="${read.jboss.home}"
 			jboss.ds-xml.file="cabiogridsvcs-ds.xml"
@@ -990,6 +993,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<jboss-read-ldapconfig
 			jboss.home="${read.jboss.home}"
 			/>
+		-->
 		<jboss-read-bindings-file-location
 			jboss.home="${read.jboss.home}"
 			/>
@@ -1044,6 +1048,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
 			grid.service.name="Sample"
 			/>
+		<!--
 		<read-property-from-properties-service
 			jboss.home="${read.jboss.home}"
 			property.name="property1"
@@ -1052,6 +1057,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			jboss.home="${read.jboss.home}"
 			property.name="property2"
 			/>
+		-->
 	</target>
 
 	<target name="upgrade:post:jboss">
