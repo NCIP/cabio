@@ -490,7 +490,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<validate-post-install />
+				<validate-post-install propertyfile.backup.location="${log.dir}" />
 			</then>
 		</if>
 	</target>
