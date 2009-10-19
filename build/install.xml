@@ -111,14 +111,71 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	<record name="${install-logs.dir}/install-${install.time}.log" action="start"/>
 
 	<!-- Targets begin -->
+	<target name="common:init:pre">
+		<!-- Set application.base.path based on platform -->
+		<condition property="application.base.path" value="${application.base.path.linux}">
+			<or>
+				<os family="unix" />
+				<os family="mac" />
+			</or>
+		</condition>
 
+		<condition property="application.base.path" value="${application.base.path.windows}">
+			<os family="windows" />
+		</condition>
+		<echo message="application.base.path=${application.base.path}"/>
+		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
+		<property name="tomcat.home" value="${application.base.path}/${tomcat.relative.path}"/>
+	</target>
+	<!-- Targets begin -->
+	<target name="install:jboss:init" depends="common:init:pre" >
+		<!-- determine if port configurations or port lists are being called -->
+		<if>
+			<isset property="jboss.ncicb-standard.port-config"/>
+			<then>
+				<!-- Read some port properties from standard bindings file -->
+				<echo message="Using JBoss NCICB Standard port configurations"/>
+				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
+				<jboss-read-ports
+					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
+					/>
+				<echo message="http -${jboss.server.port} "/>
+				<echo message="http -${jboss.server.jndi.port} "/>
+				<properties-exist
+					properties.list="jboss.server.jndi.port,jboss.server.port,jboss.server.ports.name"
+					/>
+				<!-- Make sure there are not unexpanded tokens and that the jboss.server.ports.name is a configuration in the bindings file. -->
+				<jboss-bindings-validate
+					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
+					/>
 
-
-	<target name="init:common">
-		<property name="application.url" value="http://${jboss.server.hostname}:${jboss.server.port}/${cabiogridsvc-webapp.name}"/>
-		<!-- Conditionals -->
+			</then>
+			<else>
+				<!-- else ensure that all ports are set, since these will be removed from install-properties.template we will verify here.  They have to be removed so the validator works with or without the properties or we have to change the format of the file. -->
+				<echo message="Using custom JBoss port configurations"/>
+				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
+				<properties-exist
+					properties.list="jboss.server.jndi.port,jboss.server.port,jboss.cobraorb.port,jboss.ejbinvoker.port,jboss.hajndi.port,jboss.hajrmi.port,jboss.jms.port,jboss.jmx-rmi.port,jboss.messaging.port,jboss.pooledha.port,jboss.remoting.port,jboss.server.bind.port,jboss.server.rmi.port,jboss.service.rmiobject.port,jboss.snmp.port,jboss.snmp-trapd.port,jboss.web.service.port"
+					/>
+			</else>
+		</if>
+	</target>
+	<target name="common:jboss:init" depends="common:init:pre" unless="exclude.jboss">
+		<math result="jboss.ssl.port" operand1="${jboss.server.port}" operation="+" operand2="363" datatype="int"/>
+		<property name="jboss.ssl.enable" value="false"/>
+		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
+		<property name="jboss.application.url" value="http://${jboss.server.hostname}:${jboss.server.port}/${cabiogridsvcs-webapp.name}"/>
 		<available file="${jboss.home}/server/${jboss.server.name}/conf/jboss-service.xml" property="jboss.exists"/>
-		<!-- cabiogridsvc-webapp can use either Oracle or MySQL or PostgreSQL as its database platform, this is controled by the database.type property.  Based on the value of this property sent several variables for use during install -->
+		<basename file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.file"/>
+		<dirname file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.dir"/>
+		<basename file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.cert.file"/>
+		<dirname file="${jboss.grid.secure.cert.location}" property="jboss.grid.secure.dir"/>
+		<basename file="${jboss.grid.secure.key.location}" property="jboss.grid.secure.key.file"/>
+		<property name="jboss.socket.ports" value="${jboss.server.port},${jboss.server.rmi.port},${jboss.server.jndi.port},${jboss.service.rmiobject.port},${jboss.jms.port},${jboss.web.service.port}"/>
+	</target>
+	<target name="common:init" depends="common:init:pre">
+		<property name="install.running" value="true"/>
+		<!-- cabiogridsvcs-webapp can use either Oracle or MySQL or PostgreSQL as its database platform, this is controled by the database.type property.  Based on the value of this property sent several variables for use during install -->
 		<echoproperties prefix="database"/>
 		<switch value="${database.type}">
 			<case value="oracle">
@@ -143,11 +200,11 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<fail message="Invalid database type ${database.type}"/>
 			</default>
 		</switch>
-	
+
 		<path id="jdbc.driver.classpath">
 			<pathelement location="${database.driver.file}"/>
 		</path>
-	
+
 		<property name="properties.template.file" value="${basedir}/properties.template" />
 		<filterset id="embedded.filterset">
 			<filter token="application.base.path" value="${application.base.path}"/>
@@ -161,6 +218,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			<!-- added for liquibase -->
 			<filter token="db-upgrade.run.dir" value="${db-upgrade.dir.dest}/${database.type}"/>
 			<filter token="jboss.home" value="${jboss.home}"/>
+			<filter token="tomcat.home" value="${tomcat.home}"/>
 			<filter token="database.dialect" value="${database.dialect}"/>
 			<filter token="hibernate.cfg.file.path" value="${hibernate.cfg.file.path}"/>
 			<filter token="env.LOGNAME" value="${env.LOGNAME}"/>
@@ -169,9 +227,6 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			<filter token="" value=""/>
 		</filterset>
 
-		<!-- Added to convert location to file and path -->
-		<basename file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.file"/>
-		<dirname file="${jboss.ssl.keystore.location}" property="jboss.ssl.keystore.dir"/>
 		<!--OS Temp dir -->
 		<condition property="os.temp.dir" value="/tmp">
 			<or>
@@ -179,54 +234,10 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<os family="mac" />
 			</or>
 		</condition>
-	
+
 		<condition property="os.temp.dir" value="c:/temp">
 			<os family="windows" />
 		</condition>
-
-	</target>
-
-	<target name="diag">
-		<echoproperties/>
-	</target>
-
-	<target name="install:clean" description="Removes all files from the local filesystem" depends="
-		init:install,
- 		init:common,
- 		install:clean:jboss
-		">
-	</target>
-
-	<target name="install:clean:jboss" unless="exclude.jboss" depends="init:install,init:common">
-		<sleep seconds="5" />
-		<property name="backup.count" value="5"/>
-
-		<if>
-			<not>
-				<equals arg1="${exclude.jboss.backup}" arg2="true"/>
-			</not>
-			<then>
-				<!-- Jboss backup, do not compress until install is finished -->
-				<property name="backup.jboss.base.dir" location="${application.base.path}/backup/jboss"/>
-		
-				<!-- So these directories won't be included in the backup, they are not needed to use jboss -->
-				<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
-				<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
-		
-				<backup-dir
-					src.dir="${jboss.home}"
-					backup.base.dir="${backup.jboss.base.dir}"
-					backup.count="${backup.count}"
-					/>
-			</then>
-		</if>
-		<delete dir="${jboss.home}"/>
-	</target>
-
-	<target name="install:init" description="Does directory management to initialize install" depends="init:install,init:common">
-		<math result="jboss.ssl.port" operand1="${jboss.server.port}" operation="+" operand2="363" datatype="int"/>
-		<!-- Default to false, properties can override -->
-		<property name="jboss.ssl.enable" value="false"/>
 		<!-- Copy files to ensure values containing variables are expanded, such properties are stored in embedded.filterset and then copy with filter files -->
 		<copy todir="${common.dir.dest}" filtering="true">
 			<fileset dir="${common.dir.src}">
@@ -237,10 +248,44 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<filtersfile file="${properties.file}"/>
 				<filtersfile file="project.properties"/>
 			</filterset>
-		</copy> 
+		</copy>
 	</target>
 
-	<target name="install:database:prep" description="Copies db files with filtering" unless="exclude.database" depends="init:install,init:common">
+
+	<target name="diag">
+		<echoproperties/>
+	</target>
+
+	<target name="install:common:clean" description="Removes all files from the local filesystem" depends="common:init,install:jboss:clean">
+	</target>
+
+	<target name="install:jboss:clean" unless="exclude.jboss" depends="common:jboss:init,common:init">
+		<sleep seconds="5" />
+		<property name="backup.count" value="5"/>
+
+		<if>
+			<not>
+				<equals arg1="${exclude.jboss.backup}" arg2="true"/>
+			</not>
+			<then>
+				<!-- Jboss backup, do not compress until install is finished -->
+				<property name="backup.jboss.base.dir" location="${application.base.path}/backup/jboss"/>
+
+				<!-- So these directories won't be included in the backup, they are not needed to use jboss -->
+				<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
+				<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
+
+				<backup-dir
+					src.dir="${jboss.home}"
+					backup.base.dir="${backup.jboss.base.dir}"
+					backup.count="${backup.count}"
+					/>
+			</then>
+		</if>
+		<delete dir="${jboss.home}"/>
+	</target>
+
+	<target name="install:database:prep" description="Copies db files with filtering" unless="exclude.database" depends="common:init">
 		<property name="db.prop.list" value="database.url,database.user,database.password,database.name"/>
 		<echo  message="Checking if database properties exist: ${db.prop.list}"/>
 		<properties-exist properties.list="${db.prop.list}"/>
@@ -265,9 +310,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 
 	<target name="install:database" description="Runs datbase creation scripts then calls uprade database." unless="exclude.database"
 		depends="
-		init:install,
-		init:common,
-		install:database:prep
+		common:init,
+		install:database:prep,
+		install:database:validation:pre-install
 		">
 		<!-- Drop all schema objects or re-create the db -->
 		<database-clean/>
@@ -299,7 +344,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<database-tag/>
 	</target>
 
-	<target name="install:jboss:binaries" description="Install JBoss binaries" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:binaries" description="Install JBoss binaries" unless="exclude.jboss" depends="common:jboss:init, common:init">
 		<jboss-install-binaries
 			/>
 		<if>            
@@ -321,7 +366,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 
 	</target>
 
-	<target name="install:jboss:cabiogridsvc-webapp:filesystem-data"  depends="init:install,init:common">
+	<target name="install:jboss:cabiogridsvc-webapp:filesystem-data"  depends="common:init">
 		<!-- This target is a place holder for creating a file-system data repository.  If you do not use one you can remove this target and all targets that refer to it. If you require a certain directory structure be sure to create it here.  If you need to copy in files, make sure to check them into svn, copy them into the distribution and then copy them to thier ultimate directory.  If your data needs to be refreshed with each install make sure to delete the base directory, then create the structure and copy in data.  Also you can use an archive file with relative pathing inside to build out the structure if you like, using an archive like zip may shrink the footprint in svn.
 		<mkdir dir="${fs-data.base.dir}"/>
 		<mkdir dir="${fs-data.base.dir}/scratch"/>
@@ -329,7 +374,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 	</target>
 
-	<target name="install:jboss:cabiogridsvc-webapp" description="Deploy cabiogridsvc-webapp and common libraries to jboss installation" unless="exclude.jboss" depends="init:install,init:common,install:jboss:cabiogridsvc-webapp:filesystem-data">
+	<target name="install:jboss:cabiogridsvc-webapp" description="Deploy cabiogridsvc-webapp and common libraries to jboss installation" unless="exclude.jboss" depends="common:jboss:init,install:jboss:cabiogridsvc-webapp:filesystem-data">
 		<!-- added to ensure working.dirs are fresh for our install -->
 		<delete dir="${jboss.home}/server/${jboss.server.name}/tmp"/>
 		<delete dir="${jboss.home}/server/${jboss.server.name}/work"/>
@@ -344,7 +389,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
             -->
 	</target>
 
-	<target name="install:jboss:cabiogridsvc-webapp:configure" description="Configure cabiogridsvc-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:cabiogridsvc-webapp:configure" description="Configure cabiogridsvc-webapp application, copies over externalized properties or configurations that are not part of the jboss configuration" unless="exclude.jboss" depends="common:jboss:init, common:init">
 		<!-- copy over any other files you may need to configure your application -->
 		
 		<!-- copy JBoss-web.xml file -->
@@ -353,7 +398,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 	</target>
 
-	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="init:install,init:common">		
+	<target name="install:jboss:configure:log4j" description="Configure custom entries in system wide log4j" unless="exclude.jboss"  depends="common:init">		
 		<echo message="Configuring Log4J"/>
         
 		<property name="log4j.file.name" value="log4j.xml"/>
@@ -421,9 +466,9 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 
 	<target name="install:jboss:configure" description="Configure JBoss (bindings, login-config.xml, ect)" unless="exclude.jboss"
 		depends="
-		init:install,
-		init:common,
-		install:jboss:configure:log4j	
+		common:jboss:init,
+		common:init,
+		install:jboss:configure:log4j
 			">
 		<!-- Calls the following macros
 			jboss-bindings - configures ports for jboss
@@ -440,17 +485,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			/>
 	</target>
 
-	<target name="-install:jboss:configure:jbossmq-dest" description="Configure MQ settings based on contents of software/common/resource/jboss-conf/jbossmq-destinations-service.block.xml" unless="exclude.jboss" depends="init:install,init:common">
-		<!-- Provide template to change jboss mq configurations 
-		<property name="jboss-mq.block.file" value="${resource.dir.target}/jbossmq-destinations-service.block.xml"/>
-		<xmlconfig in="${jboss.home}/server/${jboss.server.name}/deploy/jms/jbossmq-destinations-service.xml" verbose="false">
-			<insertbranch path="//server" srcxmlfile="${jboss-mq.block.file}" srcpath="//mbean[1]" />
-			<insertbranch path="//server" srcxmlfile="${jboss-mq.block.file}" srcpath="//mbean[2]" />
-		</xmlconfig>
-		-->
-	</target>
-
-	<target name="install:jboss:stop" description="Stops jboss" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:stop" description="Stops jboss" unless="exclude.jboss" depends="common:init">
 		<if>
 			<isset property="jboss.exists"/>
 			<then>
@@ -459,7 +494,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</if>
 	</target>
 
-	<target name="install:jboss:start" description="Starts jboss" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:start" description="Starts jboss" unless="exclude.jboss" depends="common:init">
 		<if>
 			<not>
 				<isset property="exclude.start.servers"/>
@@ -471,69 +506,106 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</if>
 	</target>
 
-	<target name="install:validation:pre-install" description="Runs pre-install validation checks bda-utils" depends="init:install,init:common">
-		<validate-pre-install
+	<target name="install:common:validation:pre-install" description="Runs pre-install validation checks bda-utils" depends="common:init">
+		<validate-pre-install-common
 			ant.check.version="${ant.minimum.version}"
 			java.check.version.major="${java.major.version}"
 			java.check.version.minor="${java.minor.version}"
+			/>
+	</target>
+	<target name="install:jboss:validation:pre-install" description="Runs pre-install validation checks bda-utils" 
+		depends="
+		common:jboss:init,common:init,
+		install:common:validation:pre-install
+		">
+		<validate-pre-install-jboss
+			/>
+	</target>
+	<target name="install:database:validation:pre-install" description="Runs pre-install validation checks bda-utils" 
+		depends="
+		common:init,
+		install:common:validation:pre-install
+		">
+		<validate-pre-install-database
 			database.version="${mysql.minimum.version}"
 			/>
 	</target>
 
-	<target name="install:validation:pre-install:ports" description="Checks to see if configured ports are listenting and fails buld, meant to be run after jboss:stop" depends="init:install,init:common">
-		<validate-ports-preinstall />
-	</target>
 
-	<target name="install:validation:post-install" description="Run post-install checks from bda-utils" depends="init:install,init:common">
+	<target name="install:jboss:validation:pre-install:ports" description="Checks to see if configured ports are listenting and fails buld, meant to be run after jboss:stop"
+		depends="
+		common:init,
+		install:jboss:stop
+		">
+		<validate-pre-jboss-ports
+			/>
+	</target>
+	<target name="install:common:validation:post-install" description="Run post-install checks from bda-utils"
+		depends="
+		common:init
+		">
+		<validate-post-common propertyfile.backup.location="${log.dir}" />
+	</target>
+	<target name="install:jboss:validation:post-install" description="Run post-install checks from bda-utils"
+		depends="
+		common:jboss:init,
+		common:init,
+		install:jboss:start
+		">
 		<if>
 			<not>
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<validate-post-install propertyfile.backup.location="${log.dir}" />
+				<validate-post-jboss />
 			</then>
 		</if>
 	</target>
 
+
 	<target name="install:jboss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.jboss"
 		depends="
-		init:install,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:validation:pre-install:ports,
- 		install:clean:jboss,
- 		install:init,
- 		install:jboss:binaries,
+		common:jboss:init,
+		common:init,
+		install:jboss:init,
+		install:jboss:validation:pre-install,
+		install:common:validation:pre-install,
+		install:jboss:stop,
+		install:jboss:validation:pre-install:ports,
+		install:jboss:clean,
+		install:jboss:binaries,
+		install:jboss:configure,
+		install:jboss:grid,
+		install:jboss:grid:configure,
  		install:jboss:cabiogridsvc-webapp:re-configure,
  		install:jboss:cabiogridsvc-webapp,
  		install:jboss:cabiogridsvc-webapp:configure,
- 		install:jboss:configure,
-		install:jboss:grid, 
-		install:jboss:grid:configure,
- 		install:post:jboss,
- 		install:jboss:start
+		install:post:jboss,
+		install:jboss:start,
+		install:jboss:validation:post-install
 		" >
 	</target>
 
 	<target name="install" description="Installs and configures JBOSS, creates database, and deploys application" 
 		depends="
-		init:install,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:validation:pre-install:ports,
- 		install:clean,
- 		install:init,
- 		install:database,
- 		install:jboss,
- 		install:post,
- 		install:jboss:start,
- 		install:validation:post-install
+		common:jboss:init,
+		common:init,
+		install:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		install:jboss:validation:pre-install:ports,
+		install:common:clean,
+		install:database,
+		install:jboss,
+		install:common:post,
+		install:jboss:start,
+		install:common:validation:post-install
 		">
 	</target>
 
-	<target name="install:jboss:cabiogridsvc-webapp:re-configure" description="Update contents of artifacts if not all properties have been externalized, by extracting artifact, modify it as needed and re-archive it." unless="exclude.jboss"  depends="init:install,init:common">
+	<target name="install:jboss:cabiogridsvc-webapp:re-configure" description="Update contents of artifacts if not all properties have been externalized, by extracting artifact, modify it as needed and re-archive it." unless="exclude.jboss"  depends="common:init">
 		<!-- This is only required if configuration files are not externalized, below is a sample of what you may do.
 		<delete dir="${working.dir}/cabiogridsvc-webapp"/>
 		<unzip src="${cabiogridsvc-webapp.dir.dist}/${cabiogridsvc-webapp.war.file}" dest="${working.dir}/cabiogridsvc-webapp"/>
@@ -548,152 +620,179 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		-->
 	</target>
 
-	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" depends="init:upgrade:jboss,init:common,upgrade-ncm:jboss">
+	<target name="upgrade:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss" depends="upgrade:jboss:init,common:init,upgrade-ncm:jboss">
 	</target>
 
-	<target name="upgrade" description="Upgrades JBoss and Database" depends="init:upgrade,init:common,upgrade-ncm">
+	<target name="upgrade" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-ncm">
 	</target>
 
-	<target name="upgrade-with-dbinstall" description="Upgrades JBoss and Database" depends="init:upgrade,init:common,upgrade-ncm:with-dbinstall">
+	<target name="upgrade-with-dbinstall" description="Upgrades JBoss and Database" depends="upgrade:common:init,common:init,upgrade-ncm:with-dbinstall">
 	</target>
+
 
 	<target name="upgrade-dac:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
-		init:upgrade:jboss,
-		init:common,
-		install:validation:pre-install,
+		upgrade:jboss:init,
+		common:init,
+		common:jboss:init,
+		install:jboss:validation:pre-install,
+		install:common:validation:pre-install,
 		install:jboss:stop,
-		install:validation:pre-install:ports,
-		install:clean:jboss,
-		install:init,
+		install:jboss:validation:pre-install:ports,
+		install:jboss:clean,
 		install:jboss:binaries,
 		install:jboss:configure,
+		install:jboss:grid,
+		install:jboss:grid:configure,
 		install:jboss:cabiogridsvc-webapp:re-configure,
 		install:jboss:cabiogridsvc-webapp,
 		install:jboss:cabiogridsvc-webapp:configure,
 		upgrade:post:jboss,
 		install:post:jboss,
-		install:jboss:start
+		install:jboss:start,
+		install:jboss:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-dac" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		upgrade:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		upgrade:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-dac:with-dbinstall" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		install:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		install:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-cm:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
-		init:upgrade:jboss,
-		init:common,
-		install:validation:pre-install,
+		upgrade:jboss:init,
+		common:init,
+		common:jboss:init,
+		install:jboss:validation:pre-install,
+		install:common:validation:pre-install,
 		install:jboss:stop,
-		install:validation:pre-install:ports,
-		install:init,
+		install:jboss:validation:pre-install:ports,
 		install:jboss:configure,
+		install:jboss:grid,
+		install:jboss:grid:configure,
 		install:jboss:cabiogridsvc-webapp:re-configure,
 		install:jboss:cabiogridsvc-webapp,
 		install:jboss:cabiogridsvc-webapp:configure,
 		upgrade:post:jboss,
 		install:post:jboss,
-		install:jboss:start
+		install:jboss:start,
+		install:jboss:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-cm" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		upgrade:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		upgrade:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-cm:with-dbinstall" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		install:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		install:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-ncm:jboss" description="Wrapper target to call all targets required to upgrade jboss container." unless="exclude.jboss"
 		depends="
-		init:upgrade:jboss,
-		init:common,
-		install:validation:pre-install,
+		upgrade:jboss:init,
+		common:init,
+		common:jboss:init,
+		install:jboss:validation:pre-install,
+		install:common:validation:pre-install,
 		install:jboss:stop,
-		install:validation:pre-install:ports,
-		install:init,
+		install:jboss:grid,
+		install:jboss:grid:configure,
+		install:jboss:validation:pre-install:ports,
 		install:jboss:cabiogridsvc-webapp:re-configure,
 		install:jboss:cabiogridsvc-webapp,
 		install:jboss:cabiogridsvc-webapp:configure,
+		upgrade:post:jboss,
 		install:post:jboss,
-		install:jboss:start
+		install:jboss:start,
+		install:jboss:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-ncm" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		upgrade:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		upgrade:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade-ncm:with-dbinstall" description="Upgrades JBoss and Database"
 		depends="
-		init:upgrade,
- 		init:common,
- 		install:validation:pre-install,
- 		install:jboss:stop,
- 		install:init,
- 		install:database,
- 		upgrade:jboss,
- 		install:validation:post-install
+		upgrade:common:init,
+		common:init,
+		common:jboss:init,
+		install:common:validation:pre-install,
+		install:jboss:validation:pre-install,
+		install:database:validation:pre-install,
+		install:jboss:stop,
+		install:database,
+		upgrade:jboss,
+		install:common:validation:post-install
 		">
 	</target>
 
 	<target name="upgrade:database" description="Upgrades database using BDA Datbase Upgrade process." unless="exclude.database"
 		depends="
-		init:upgrade,
-		init:common,
-		install:database:prep
+		upgrade:database:init,
+		common:init,
+		install:database:prep,
+		install:database:validation:pre-install
 		">
 		<database-upgrade
 			database.changelog.file="${os.temp.dir}/${project.name}/db-upgrade.xml"
@@ -703,9 +802,8 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 
 	<target name="upgrade:database:tag" description="Tags current state of database with a tag to allow for rollback of database to previous versions." unless="exclude.database"
 		depends="
-		init:upgrade,
-		init:common,
-		install:init,
+		upgrade:database:init,
+		common:init,
 		install:database:prep
 		">
 		<database-tag/>
@@ -713,15 +811,14 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 
 	<target name="upgrade:database:rollback" description="Rolls back database to previous tagged version using rollback scripts." unless="exclude.database"
 		depends="
-		init:upgrade,
-		init:common,
-		install:init,
+		upgrade:database:init,
+		common:init,
 		install:database:prep
 		">
 		<database-rollback/>
 	</target>
 
-	<target name="install:jboss:grid" description="Deploy  to jboss" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:grid" description="Deploy  to jboss" unless="exclude.jboss" depends="common:init">
 		<mkdir dir="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}"/>
 		<unzip dest="${jboss.home}/server/${jboss.server.name}/lib" src="${grid.resource.dir}/${resource.file.jboss-globus-lib}" />
 		<unzip dest="${jboss.home}/server/${jboss.server.name}/deploy/${grid.dir.dest}" src="${grid.resource.dir}/${resource.file.jboss-globus-war}" />
@@ -734,30 +831,23 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	    </delete>  		
 	</target>
 
-	<target name="install:jboss:grid:configure" description="Configure tomcat-application" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:jboss:grid:configure" description="Configure tomcat-application" unless="exclude.jboss" depends="common:init">
 		<jboss-configure-grid />
 	</target>
 	
-	<target name="install:post" depends="
-		init:install,
- 		init:common,
- 		install:post:jboss
-		">
+	<target name="install:common:post" depends="common:init,install:post:jboss">
 	</target>
 
-	<target name="install:post:jboss" unless="exclude.jboss" depends="init:install,init:common">
+	<target name="install:post:jboss" unless="exclude.jboss" depends="common:init">
 		<if>
 			<not>
 				<equals arg1="${exclude.jboss.backup}" arg2="true"/>
 			</not>
 			<then>
-				<property name="changelogFile" location="${install-logs.dir}/chagneLog-${install.time}.txt"/>
-				<property name="compare1.dir" location="${backup.jboss.base.dir}/backup/${jboss.binaries.relative.dir}"/>
-				<property name="compare2.dir" location="${jboss.home}"/>
 				<report-dir-diff
-					dir1="${compare1.dir}"
-					dir2="${compare2.dir}"
-					reportFile="${changelogFile}"
+					dir1="${backup.jboss.base.dir}/backup/${jboss.binaries.relative.dir}"
+					dir2="${jboss.home}"
+					reportFile="${install-logs.dir}/chagneLog-jboss-${install.time}.diff"
 					/>
 				<!-- Copy app server logs -->
 				<mkdir dir="${jboss.home}/server/${jboss.server.name}/log"/>
@@ -768,7 +858,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 						<include name="*"/>
 					</fileset>
 				</move>
-		
+
 				<!-- Compress backup and cleanup -->
 				<mkdir dir="${backup.jboss.base.dir}/backup1"/>
 				<zip destfile="${backup.jboss.base.dir}/backup1/${jboss.binaries.relative.dir}.zip" basedir="${backup.jboss.base.dir}/backup" />
@@ -777,72 +867,33 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</if>
 	</target>
 
-	<target name="init:install" unless="upgrade.running">
-		<property name="install.running" value="true"/>
-		<!-- Set application.base.path based on platform -->
-		<condition property="application.base.path" value="${application.base.path.linux}">
-			<or>
-				<os family="unix" />
-				<os family="mac" />
-			</or>
-		</condition>
-	
-		<condition property="application.base.path" value="${application.base.path.windows}">
-			<os family="windows" />
-		</condition>
-		<echo message="application.base.path=${application.base.path}"/>
-		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
-
-		<!-- determine if port configurations or port lists are being called -->
-		<if>
-			<isset property="jboss.ncicb-standard.port-config"/>
-			<then>
-				<!-- Read some port properties from standard bindings file -->
-				<echo message="Using JBoss NCICB Standard port configurations"/>
-				<property name="jboss.server.binding.template.location" value="${basedir}/${jboss-bindings.file}"/>
-				<jboss-read-ports
-					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
-					/>
-				<echo message="http -${jboss.server.port} "/>
-				<echo message="http -${jboss.server.jndi.port} "/>
-				<properties-exist
-					properties.list="jboss.server.jndi.port,jboss.server.port,jboss.server.ports.name"
-					/>
-				<!-- Make sure there are not unexpanded tokens and that the jboss.server.ports.name is a configuration in the bindings file. -->
-				<jboss-bindings-validate
-					jboss.server.bindingfile.location="${jboss.server.binding.template.location}"
-					/>
-
-			</then>
-			<else>
-				<!-- else ensure that all ports are set, since these will be removed from install-properties.template we will verify here.  They have to be removed so the validator works with or without the properties or we have to change the format of the file. -->
-				<echo message="Using custom JBoss port configurations"/>
-				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
-				<properties-exist
-					properties.list="jboss.server.jndi.port,jboss.server.port,jboss.cobraorb.port,jboss.ejbinvoker.port,jboss.hajndi.port,jboss.hajrmi.port,jboss.jms.port,jboss.jmx-rmi.port,jboss.messaging.port,jboss.pooledha.port,jboss.remoting.port,jboss.server.bind.port,jboss.server.rmi.port,jboss.service.rmiobject.port,jboss.snmp.port,jboss.snmp-trapd.port,jboss.web.service.port"
-					/>
-			</else>
-		</if>
+	<target name="upgrade:common:init" depends="upgrade:jboss:init">
 	</target>
-
-	<target name="init:upgrade" depends="
-		init:upgrade:jboss
-		" unless="install.running">
-	</target>
-
-	<target name="init:upgrade:jboss" unless="install.running"
+	<target name="upgrade:jboss:init" 
 		depends="
-		init:upgrade:prep,
-		init:readers:bda:jboss,
-		init:readers:custom:jboss
+		upgrade:jboss:init:prep,
+		upgrade:jboss:readers:bda,
+		upgrade:jboss:readers:custom
 		">
-	</target>
-
-	<target name="init:upgrade:prep">
-	
 		<properties-print
-			properties.list="application.base.path,jboss.home,tomcat.home,jboss.server.name"
+			properties.list="${read.properties.list}"
 			/>
+		<properties-exist
+			properties.list="${read.properties.list}"
+			/>
+		<properties-write
+			properties.list="${read.properties.list}"
+			/>
+	</target>
+	<target name="upgrade:database:init" 
+		depends="
+		upgrade:jboss:init:prep,
+		upgrade:database:readers:bda,
+		upgrade:database:readers:custom
+		">
+		<!-- You need to either depend on jboss or tomcat so that you can read the db properties from it's configs.  BDA only has macros to read database properties from jboss. -->
+	</target>
+	<target name="upgrade:common:init:prep" >
 		<if>
 			<not>
 				<isset property="application.base.path"/>
@@ -855,15 +906,21 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 						<os family="mac" />
 					</or>
 				</condition>
-			
+
 				<condition property="application.base.path" value="${application.base.path.windows}">
 					<os family="windows" />
 				</condition>
 				<echo message="application.base.path=${application.base.path}"/>
-				<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 			</then>
 		</if>
-			
+		<properties-print
+			properties.list="application.base.path,jboss.home,tomcat.home,jboss.server.name"
+			/>
+		<var name="read.properties.list" value=""/>
+		<property name="upgrade.running" value="true"/>
+	</target>
+	<target name="upgrade:jboss:init:prep" depends="upgrade:common:init:prep" >
+		<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 		<if>
 			<equals arg1="${jboss.ncicb-standard.port-config}" arg2="true"/>
 			<then>
@@ -873,18 +930,37 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<property name="jboss.server.binding.template.location" value="${bda-utils.dir}/resource/${jboss.binaries.relative.dir}/bindings.xml"/>
 			</else>
 		</if>
-						
+
 		<property name="upgrade.running" value="true"/>
 		<!-- Upgrades always use port configs -->
 		<property name="jboss.ncicb-standard.port-config" value="true"/>
 		<available file="${jboss.home}" property="jboss.exists"/>
-	</target>
+		<property name="read.jboss.home" value="${jboss.home}"/>
 
-	<target name="init:readers:custom:jboss" unless="install.running">
+	</target>
+	<target name="upgrade:jboss:readers:custom" >
 		<!-- call your custom readers here, two properties included in these scripts that don't have readers are "fs-data.base.dir, mail.smtp.server" -->
 	</target>
 
-	<target name="init:readers:bda:jboss" if="jboss.exists">
+
+	<target name="upgrade:database:readers:custom" >
+		<!-- call your custom readers here, two properties included in these scripts that don't have readers are "fs-data.base.dir, mail.smtp.server" -->
+	</target>
+	<target name="upgrade:database:readers:bda" depends="upgrade:jboss:init:prep" if="jboss.exists">
+
+		<!-- Make sure the ${properties.file} has at least the following props -->
+		<properties-exist
+			properties.list="application.base.path,jboss.home,jboss.server.name"
+			/>
+		<!-- 
+		<jboss-read-dbconfig
+			jboss.home="${read.jboss.home}"
+			jboss.ds-xml.file="cabiogridsvcs-ds.xml"
+			/>
+			-->
+	</target>
+
+	<target name="upgrade:jboss:readers:bda" if="jboss.exists">
 
 		<!-- Make sure the ${properties.file} has at least the following props -->
 		<properties-exist
@@ -908,20 +984,25 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 			</then>
 		</if>
 		<!-- Begin JBoss Readers -->
-		<var name="read.properties.list" value=""/>
 		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
-		<!-- jboss-read-dbconfig
-			jboss.ds-xml.file="cabiogridsvc-ds.xml"
-			/ -->
+		<!--
+		<jboss-read-dbconfig
+			jboss.home="${read.jboss.home}"
+			jboss.ds-xml.file="cabiogridsvcs-ds.xml"
+			/>			
 		<jboss-read-ldapconfig
+			jboss.home="${read.jboss.home}"
 			/>
+			-->
 		<jboss-read-bindings-file-location
+			jboss.home="${read.jboss.home}"
 			/>
 		<jboss-read-ports
 			/>
 		<!-- Setting this variable will cause install to copy it into place if using CM/DAC, not modified in NCM -->
 		<var name="jboss.ssl.keystore.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-ssl
+			jboss.home="${read.jboss.home}"
 			copied.keystore.dir="${jboss.ssl.keystore.dir}"
 			/>
 		<!-- No longer needed now reading all the ports
@@ -933,42 +1014,50 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<var name="jboss.server.binding.template.location" value="${working.dir}/copied-bindings/${copied.jboss.bindings.file}"/>
 		-->
 		<jboss-read-external-hostname
+			jboss.home="${read.jboss.home}"
 			/>
 		<!-- for tier installs, should be done first, since it is set first it will be the one used if it exists -->
 		<jboss-read-java_opts
-			jboss.bin.dir="${jboss.home}/server/${jboss.server.name}/bin"
-			/>              
+			jboss.bin.dir="${read.jboss.home}/server/${jboss.server.name}/bin"
+			/>
 		<jboss-read-java_opts
+			jboss.home="${read.jboss.home}"
 			/>
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<property name="copied.jboss.log4j.dir" value="${working.dir}/copied-log4j"/>
 		<jboss-copy-log4j
+			jboss.home="${read.jboss.home}"
 			copied.jboss.log4j.dir="${copied.jboss.log4j.dir}"
 			/>
 		<grid-read-index-url
-			/>              
+			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
+			/>
+		<var name="jboss.grid.secure.dir" value="${working.dir}/keys/jboss"/>
 		<jboss-read-grid-secure
+			jboss.home="${read.jboss.home}"
 			copied.keystore.dir="${jboss.grid.secure.dir}"
 			/>
 		<!-- will have to add code to install:post:jboss to copy this back if exists -->
 		<!-- no longer needed 
+		<property name="copied.jboss.service-metadata.dir" value="${working.dir}/jboss-grid"/>
 		<grid-copy-service-metadata
 			copied.service-metadata.dir="${copied.service-metadata.dir}"
 			/>
 		-->
 		<grid-read-poc
-			grid.service.name="${grid.service.name}"
+			grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf"
+			grid.service.name="Sample"
 			/>
 		<!--
 		<read-property-from-properties-service
+			jboss.home="${read.jboss.home}"
 			property.name="property1"
 			/>
 		<read-property-from-properties-service
+			jboss.home="${read.jboss.home}"
 			property.name="property2"
 			/>
-			-->
-
-
+		-->
 	</target>
 
 	<target name="upgrade:post:jboss">
