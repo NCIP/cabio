@@ -155,9 +155,8 @@
 													<tr>
 														<td class="sidebarContent">
 														<ul>
-														    <li>Enhancements to caBIO agent and associated objects in support of data from the Canada DrugBank</li>
-														    <li>Addition of objects modeling highly conserved regions on the human genome and support for multiple-alignment data from Ensembl Compara</li>
-														    <li>Inclusion of an annotation version field to the Microarray class in order to expose the version of Affymetrix annotations</li>
+														    <li>Introduce Entrez Genes that are not in Unigene</li>
+														    <li>Enhancement on the display for the search results for FreestyleLM search</li>
 														</ul>
 														</td>
 													</tr>
