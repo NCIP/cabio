@@ -159,6 +159,11 @@ public class GridIdDAO implements DAO {
             FeatureRangeQuery rangeQuery) throws ApplicationException {
 
         final Object feature = rangeQuery.getFeature();
+        
+        if (feature == null) {
+            throw new IllegalArgumentException("RangeQuery.getFeature() is null");
+        }
+        
         // retrieve the location of the feature
         PhysicalLocation location = null;
         Long chromosomeId = null;
