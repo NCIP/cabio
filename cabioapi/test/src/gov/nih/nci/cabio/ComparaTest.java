@@ -58,6 +58,8 @@ public class ComparaTest extends TestCase {
             }
         }
         
+        assertNotNull("Gene has no reference location",location);
+        
         FeatureRangeQuery query = new FeatureRangeQuery();
         query.setFeature(location);
         query.setUpstreamDistance(new Long(0));
