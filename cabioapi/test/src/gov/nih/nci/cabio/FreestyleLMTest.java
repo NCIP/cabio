@@ -65,16 +65,18 @@ public class FreestyleLMTest extends TestCase {
     public void testSummaryQuery() throws Exception {
         
         String keyword = "brca1";
+
+        Map<String,Integer> fullCounts = new HashMap<String,Integer>();
+        Map<String,Integer> summaryCounts = new HashMap<String,Integer>();
+        
+        // do a full search
         
         SearchQuery searchQuery = new SearchQuery();
         searchQuery.setKeyword(keyword);
-        List fullResults = appService.search(searchQuery);
+        List<SearchResult> fullResults = appService.search(searchQuery);
         
-        Map<String,Integer> fullCounts = new HashMap<String,Integer>();
-        
-        for(Object o : fullResults) {
-            SearchResult searchResult = (SearchResult)o;
-            String className = searchResult.getClassName();
+        for(SearchResult sr : fullResults) {
+            String className = sr.getClassName();
             int count = 0;
             if (fullCounts.containsKey(className)) {
                 count = fullCounts.get(className);
@@ -83,16 +85,17 @@ public class FreestyleLMTest extends TestCase {
             fullCounts.put(className,count);
         }
         
+        // do a summary search
+        
         SummaryQuery summaryQuery = new SummaryQuery();
         summaryQuery.setKeyword(keyword);
-        List summaryResults = appService.search(summaryQuery);
+        List<SummaryResult> summaryResults = appService.search(summaryQuery);
         
-        Map<String,Integer> summaryCounts = new HashMap<String,Integer>();
-
-        for(Object o : summaryResults) {
-            SummaryResult summaryResult = (SummaryResult)o;
-            summaryCounts.put(summaryResult.getClassName(), summaryResult.getHits());
+        for(SummaryResult sr : summaryResults) {
+            summaryCounts.put(sr.getClassName(), sr.getHits());
         }
+        
+        // compare full results with summary results
         
         for(String className : fullCounts.keySet()) {
             Integer fullCount = fullCounts.get(className);
@@ -100,5 +103,7 @@ public class FreestyleLMTest extends TestCase {
             assertEquals("Counts inaccurate for "+className, 
                 fullCount, summaryCount);
         }
+        
+        
     }
 }
