@@ -179,7 +179,7 @@
 														<table width="100%">
 															<tr valign="top" align="center">
 																<td colspan="2"><img src="images/smallsearchlogo.png"
-																	name="FreestyleLM Search" border="0" align=middle></td>
+																	name="FreestyleLM Search" border="0" align=middle ALT=""></td>
 															</tr>
 															<tr>
 																<td colspan="2" align=center nowrap>
