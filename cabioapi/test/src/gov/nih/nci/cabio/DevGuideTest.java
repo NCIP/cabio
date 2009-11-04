@@ -4,7 +4,9 @@ import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.ProteinSequence;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.system.applicationservice.ApplicationService;
+import gov.nih.nci.system.client.ApplicationServiceProvider;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +27,7 @@ public class DevGuideTest extends TestCase {
     private final ApplicationService appService = AllTests.getService();
     
     /**
-     * Scenario 1: Using basic search. 
+     * Scenario 1: Query By Example (Single Criteria Object)
      * Retrieving Genes based on symbol and using Gene class as the Target.
      * @throws Exception
      */
@@ -45,9 +47,29 @@ public class DevGuideTest extends TestCase {
             assertNotNull(g.getFullName());
         }
     }
-
+    
     /**
-     * Scenario 2: Building compound criteria.
+     * Scenario 2: Query By Example (Associated Criteria Object)
+     * Tests search for a Gene by its Entrez gene id
+     */
+    public void testCrossReferenceSearch() throws Exception {
+
+        DatabaseCrossReference dcr = new DatabaseCrossReference();
+        dcr.setDataSourceName("LOCUS_LINK_ID"); 
+        dcr.setCrossReferenceId("672");
+        
+        List<Gene> results = appService.search("gov.nih.nci.cabio.domain.Gene",dcr);
+
+        assertNotNull(results);
+        assertEquals(1,results.size());
+        
+        Gene gene = results.get(0);
+        
+        assertEquals("BRCA1",gene.getHugoSymbol());
+    }
+    
+    /**
+     * Scenario 3: Building compound criteria.
      * Retrieving a List of Pathway objects for a particular Taxon and a Gene.
      * @throws Exception
      */
@@ -81,7 +103,7 @@ public class DevGuideTest extends TestCase {
     }
 
     /**
-     * Scenario 3: Building a Nested search.
+     * Scenario 4: Building a Nested search.
      * @throws Exception
      */
     public void testNestedSearch() throws Exception {
@@ -104,7 +126,7 @@ public class DevGuideTest extends TestCase {
     }
     
     /**
-     * Scenario 4: Detached Criteria.
+     * Scenario 5: Detached Criteria.
      * Creating an Hibernate's Detached Criteria by directly using Hibernate API.
      * @throws Exception
      */
@@ -123,5 +145,4 @@ public class DevGuideTest extends TestCase {
             assertNotNull(pathway.getDisplayValue());
         }
     }
-    
 }
