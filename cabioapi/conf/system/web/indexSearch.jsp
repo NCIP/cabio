@@ -46,9 +46,10 @@
 	</tr>
  		
 	<tr>
- 		<td align=center>
+ 		<td align=center><LABEL for="freestyleLM">&nbsp;</LABEL>
  			<input type="text" size="60" id="freestyleLM" name="searchString" value="<%=searchString%>">					
-			<input type="submit" name="search" value="Search">
+ 			<LABEL for="search">&nbsp;</LABEL>
+			<input type="submit" name="search" value="Search" id="search">
  		</td>
  	<tr>
  	</table>
@@ -56,21 +57,21 @@
 	<tr>
 		<td> 
 		    Match Terms: 
-		    <input type="radio" value="any" name="words" checked="checked"/> any
-		    <input type="radio" value="all" name="words"/> all 
+		    <input type="radio" value="any" name="words" checked="checked" id="any"/> <LABEL for="any">any</LABEL>
+		    <input type="radio" value="all" name="words" id="all"/> <LABEL for="all">all</LABEL> 
 		    <br>
-		    Exclude: <input type="text" name="excludeText" value=""/>
+		    <LABEL for="exclude">Exclude: </LABEL><input type="text" name="excludeText" value="" id="exclude"/>
 		</td>
 	</tr>
 	<tr>
 	<td>View: 
-	     <input type="radio" name="viewType" value="simple" checked="checked"/> simple
-	     <input type="radio" name="viewType" value="objects"/> objects
+	     <input type="radio" name="viewType" value="simple" checked="checked" id="simple"/><LABEL for="simple"> simple</LABEL>
+	     <input type="radio" name="viewType" value="objects" id="objects"/> <LABEL for="objects"> objects</LABEL>
 	</td>
 	</tr>
 		<tr>
 		<td >
-			<input type="checkbox" NAME="fuzzy" VALUE="1"/> Fuzzy Search
+			<input type="checkbox" NAME="fuzzy" VALUE="1" id="fuzzy"/><LABEL for="fuzzy"> Fuzzy Search</LABEL>
 		</td>
 	</tr>
 	<tr>
