@@ -182,12 +182,12 @@
 																	name="FreestyleLM Search" border="0" align=middle ALT=""></td>
 															</tr>
 															<tr>
-																<td colspan="2" align=center nowrap>
+																<td colspan="2" align=center nowrap><LABEL for="freestyleLM">&nbsp;</LABEL>
 																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
-																<td width="60%" align="right">
-																    <input type="submit" name="search" value="Search"></td>
+																<td width="60%" align="right"><LABEL for="search">&nbsp;</LABEL>
+																    <input type="submit" name="search" value="Search" id="search"></td>
 																<td class="welcomeContent" align="right"><a href="IndexService">more options ...</a></td>
 															<tr>
 														</table>
