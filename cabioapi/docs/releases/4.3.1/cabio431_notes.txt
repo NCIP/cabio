@@ -23,37 +23,44 @@
                            1.0 New Features and Updates
 ================================================================================
 
---------------------------------------------------------------------------------
- 1.1 Canada DrugBank Data
---------------------------------------------------------------------------------
-Enhancements to caBIO agent and associated objects in support of data from the Canada DrugBank
+The following are additional features and updates for 4.3.1:
 
 --------------------------------------------------------------------------------
- 1.2 Supprt for Ensembl Compara
+ 1.1 Introduce Entrez Genes that are not in Unigene 
 --------------------------------------------------------------------------------
-Addition of objects modeling highly conserved regions on the human genome and support for multiple-alignment data from Ensembl Compara
+The inclusion of Entrez genes which are not in Unigene allows caBIO to 
+provide annotation services by exposing Entrez Gene Ids that can be used to 
+integrate with peseudo-gene datasets like miRBASE.
 
 --------------------------------------------------------------------------------
-1.3  support for the version of Affymetrix annotations
+ 1.2 Enhancement on FreestyleLM search 
 --------------------------------------------------------------------------------
-Inclusion of an annotation version field to the Microarray class in order to expose the version of Affymetrix annotations
-
---------------------------------------------------------------------------------
-1.4 Upgrade to SDK 4.1.1
---------------------------------------------------------------------------------
-For the tag information, refer to the section 4.0 SVN tags
+Enhancement on the display for the search results for FreestyleLM search.
 
 
-The following are additional features and updates for 4.3.1
+The following are the existing features and updates for 4.3
 --------------------------------------------------------------------------------
-1.5 Introduce Entrez Genes that are not in Unigene 
+ 1.3 Canada DrugBank Data
 --------------------------------------------------------------------------------
-The inclusion of Entrez gene makes the caBIO Entrez Gene centric, allow caBIO to provide annotation service by exposing Entrez Gene Ids that can be used to integrate peseudo-gene datasets like miRBASE.
+Enhancements to caBIO agent and associated objects in support of data from the 
+Canada DrugBank.
 
 --------------------------------------------------------------------------------
-1.6 Enhancement on FreestyleLM search 
+ 1.4 Support for Ensembl Compara
 --------------------------------------------------------------------------------
-Enhancement on the display for the search results for FreestyleLM search
+Addition of objects modeling highly conserved regions on the human genome and 
+support for multiple-alignment data from Ensembl Compara.
+
+--------------------------------------------------------------------------------
+ 1.5 Support for the version of Affymetrix annotations
+--------------------------------------------------------------------------------
+Inclusion of an annotation version field to the Microarray class in order to 
+expose the NetAffx version of Affymetrix annotations.
+
+--------------------------------------------------------------------------------
+ 1.6 Upgrade to SDK 4.1.1
+--------------------------------------------------------------------------------
+For the tag information, refer to the section 4.0 SVN tags.
 
 
 --------------------------------------------------------------------------------
@@ -66,30 +73,32 @@ For details, please consult the caBIO Technical Guide.
 
 API related bugs:
 --------------------------------------------------------------------------------
- GF17377 Absolute Range Query - Assembly (case sensitivity) - API/Portlet
+  GF17377 Absolute Range Query - Assembly (case sensitivity) - API/Portlet
 
- GF21110 Allow assembly to be case-insensitive
+  GF21110 Allow assembly to be case-insensitive
 
- GF21176 Allow wildcards in assembly name
+  GF21176 Allow wildcards in assembly name
 
- GF20806 Pathway By Gene Symbol search on QA Portlet gives java.io.IOException: Did not receive successful HTTP response
+  GF20806 Pathway By Gene Symbol search on QA Portlet gives java.io.IOException: 
+          Did not receive successful HTTP response
 
- GF21093 the link for 4.3 related document need to be updated 
+  GF21093 the link for 4.3 related document need to be updated 
 
- GF21573 When typing "[" on Free style search, you will get a runtime Java Script error
+  GF21573 When typing "[" on Free style search, you will get a runtime 
+          Javascript error
 
---------------------------------------------------------------------------------
+
  Database related bugs:
 --------------------------------------------------------------------------------
- GF21427Sentence Status Bug (Duplicate Evidence Objects) 
+  GF21427 Sentence Status Bug (Duplicate Evidence Objects) 
 
- GF21102 Evidence objects without associated GeneFunctionAssociation 
+  GF21102 Evidence objects without associated GeneFunctionAssociation 
 
- GF20737 Standardize formatting of Microarray.genomeVersion 
+  GF20737 Standardize formatting of Microarray.genomeVersion 
 
- GF15004 Incorrect Gene-Agent-Evidence Association
+  GF15004 Incorrect Gene-Agent-Evidence Association
 
- GF21575 InternetSource sourceURI incorrect
+  GF21575 InternetSource sourceURI incorrect
   
 ================================================================================
                                3.0 Known Issues 
@@ -97,15 +106,16 @@ API related bugs:
 
 The following defects are known to exist in this build:
 
-  GF13669  null big id for GeneRelativeLocation  
+  GF13669 null big id for GeneRelativeLocation  
 
-  GF21600  PID - Issue related to backward compatibility
+  GF21600 PID - Issue related to backward compatibility
  
-  GF15495  FreestyleLM: HIBERNATE_SEARCH does not handle Collection fields correctly
+  GF15495 FreestyleLM: HIBERNATE_SEARCH does not handle Collection fields 
+          correctly
 
-  GF20888  Freestyle search - error when search value has single " attached
+  GF20888 Freestyle search - error when search value has single " attached
   
-  GF21215  AbsoluteRangeQuery in caBIO API returns error
+  GF21215 AbsoluteRangeQuery in caBIO API returns error
 
 ================================================================================
                                  4.0 SVN Tags
@@ -119,9 +129,10 @@ The following defects are known to exist in this build:
   
     https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_43_PROD_20091130
 
-  The version of the SDK which this release of caBIO was tested with is available at
-    http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/cacore-sdk/4.1.1/
-    caCORE_SDK_411-src.zip
+  The version of the SDK which this release of caBIO was tested with is 
+  available at:
+
+    http://gforge.nci.nih.gov/svnroot/commonlibrary/trunk/cacore-sdk/4.1.1/caCORE_SDK_411-src.zip
 
 
 ================================================================================
