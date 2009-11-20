@@ -20,7 +20,7 @@ a) Unigene (Human and Mouse)
  
 
 Human Build 219 (Release Date: 8 May 2009) 
-Mouse Build 178 (Release Date: 30 Apr 2009) 
+Mouse Build 180 (Release Date: 3 Sep 2009) 
  
 
 b) UCSC mRNA Annotations, Cytoband Annotations  
@@ -41,7 +41,7 @@ Consortium
 
 d) SNP annotations from NCBI (Human and Mouse) Build 130 
 
-e) Uniprot  (Release 15.2 May 5 2009 from Uniprot)  
+e) Uniprot  (Release 15.8 Sep 22 2009 from Uniprot)  
 
 f) GO Ontology Annotations 
 
@@ -62,25 +62,20 @@ Updated occasionally
 j) NCI-Nature Curated Pathways 
 
 Update monthly 
-
-New pathways in this release are 
-
-1. Regulation of glucocorticoid receptor
-2. N-cadherin signaling events
  
-k) Affymetrix Human U133 Plus 2 (HG_U133_Plus_2) Array Annotations Release 28  
+k) Affymetrix Human U133 Plus 2 (HG_U133_Plus_2) Array Annotations Release 29  
 
-l) Affymetrix Human Mapping250K_Nsp Array Annotations Release 28  
+l) Affymetrix Human Mapping250K_Nsp Array Annotations Release 29
 
-m) Affymetrix Human Mapping250K_Sty Array Annotations Release 28 
+m) Affymetrix Human Mapping250K_Sty Array Annotations Release 29
 
-n) Affymetrix Human Mapping50K_Hind240 Array Annotations Release 28  
+n) Affymetrix Human Mapping50K_Hind240 Array Annotations Release 29
 
-o) Affymetrix Human Mapping50K_Xba240 Array Annotations Release 28  
+o) Affymetrix Human Mapping50K_Xba240 Array Annotations Release 29 
 
-p) Affymetrix Human HuEx-1_0-st-v2 Array Annotations Release 28 
+p) Affymetrix Human HuEx-1_0-st-v2 Array Annotations Release 29
 
-q) Affymetrix Human HG-U133A_2 Array Annotations Release 28 
+q) Affymetrix Human HG-U133A_2 Array Annotations Release 29
 
 r) CTEP Protocols 
 
@@ -90,7 +85,7 @@ Updated as new Protocols are made available
 
 s) Cancer Gene Index  
 
-Data from phases I – IV of the Cancer Gene Index are available 
+Data from phases I – VI of the Cancer Gene Index are available 
 
 t) UniSTS 
 
@@ -99,7 +94,7 @@ Updated monthly
 
 u) MapView  
 
-Homo sapiens (human): NCBI Build 36 Version 3 (Release: 24 Mar 2008) 
+Homo sapiens (human): NCBI Build 37 Version 1 
 
 Mus musculus (mouse): NCBI Build 37 Version 1  
 
