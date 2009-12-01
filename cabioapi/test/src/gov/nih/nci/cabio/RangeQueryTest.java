@@ -222,6 +222,7 @@ public class RangeQueryTest extends TestCase {
         GridIdRangeQuery query = new GridIdRangeQuery();
         // Gene SP3 (366 > 341 sequence locations)
         query.setBigId("hdl://2500.1.PMEUQUCCL5/WJDTXHO2CS");
+        query.setAssembly("Primary_Assembly");
         List<PhysicalLocation> containedResults = appService.search(
             NucleicAcidPhysicalLocation.class, query);
 

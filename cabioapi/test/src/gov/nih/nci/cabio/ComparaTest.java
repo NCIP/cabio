@@ -52,13 +52,13 @@ public class ComparaTest extends TestCase {
         
         GenePhysicalLocation location = null;
         for(GenePhysicalLocation gpl : gene.getPhysicalLocationCollection()) {
-            if ("GENE".equals(gpl.getFeatureType()) && "reference".equals(gpl.getAssembly())) {
+            if ("GENE".equals(gpl.getFeatureType()) && "Primary_Assembly".equals(gpl.getAssembly())) {
                 location = gpl;
                 break;
             }
         }
         
-        assertNotNull("Gene has no reference location",location);
+        assertNotNull("Gene has no Primary_Assembly location",location);
         
         FeatureRangeQuery query = new FeatureRangeQuery();
         query.setFeature(location);

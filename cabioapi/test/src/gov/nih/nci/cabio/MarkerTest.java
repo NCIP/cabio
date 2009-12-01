@@ -60,11 +60,11 @@ public class MarkerTest extends TestCase {
         boolean celera = false;
         
         for(PhysicalLocation pl : marker.getPhysicalLocationCollection()) {
-            if ("reference".equals(pl.getAssembly())) reference = true;
+            if ("Primary_Assembly".equals(pl.getAssembly())) reference = true;
             if ("Celera".equals(pl.getAssembly())) celera = true;
         }
         
-        assertTrue("Expected reference location",reference);
+        assertTrue("Expected Primary_Assembly location",reference);
         assertTrue("Expected Celera location",celera);
     }
     
