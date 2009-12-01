@@ -13,6 +13,7 @@ import gov.nih.nci.cabio.domain.Protein;
 import gov.nih.nci.cabio.domain.ProteinAlias;
 import gov.nih.nci.cabio.domain.Target;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.common.domain.DatabaseCrossReference;
 import gov.nih.nci.common.provenance.domain.InternetSource;
 import gov.nih.nci.common.provenance.domain.Provenance;
 import gov.nih.nci.common.provenance.domain.URLSourceReference;
@@ -53,6 +54,25 @@ public class QueryTest extends TestCase {
             assertNotNull(g.getSymbol());
         }
         
+    }
+
+    /**
+     * Tests search for a Gene by its Entrez gene id
+     */
+    public void testCrossReferenceSearch() throws Exception {
+
+        DatabaseCrossReference dcr = new DatabaseCrossReference();
+        dcr.setDataSourceName("LOCUS_LINK_ID"); 
+        dcr.setCrossReferenceId("672");
+        
+        List<Gene> results = appService.search("gov.nih.nci.cabio.domain.Gene",dcr);
+
+        assertNotNull(results);
+        assertEquals(1,results.size());
+        
+        Gene gene = results.get(0);
+        
+        assertEquals("BRCA1",gene.getHugoSymbol());
     }
     
     /**
