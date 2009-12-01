@@ -60,7 +60,7 @@ public class IndexSearchService extends HttpServlet {
 
             // search parameters
             String searchString = request.getParameter("searchString")!= null?request.getParameter("searchString"):"";
-            String pageSize = request.getParameter("pageSize")!= null?request.getParameter("pageSize"):"";
+            String pageSize = request.getParameter("pageSize")!= null?request.getParameter("pageSize"):"200";
             String queryType = "objects".equals(request.getParameter("viewType")) ? QueryType.HIBERNATE_SEARCH.toString() : QueryType.FULL_TEXT_SEARCH.toString();
             boolean fuzzySearch = "1".equals(request.getParameter("fuzzy"));
             String words = request.getParameter("words")!= null?request.getParameter("words"):"any";
