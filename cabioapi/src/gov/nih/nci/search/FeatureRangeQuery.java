@@ -22,6 +22,7 @@ public class FeatureRangeQuery extends RelativeRangeQuery {
      * @param relativeRangeQuery query to copy parameters from
      */
     public FeatureRangeQuery(RelativeRangeQuery relativeRangeQuery) {
+        setAssembly(relativeRangeQuery.getAssembly());
         setAllowPartialMatches(relativeRangeQuery.getAllowPartialMatches());
         setDownstreamDistance(relativeRangeQuery.getDownstreamDistance());
         setUpstreamDistance(relativeRangeQuery.getUpstreamDistance());
