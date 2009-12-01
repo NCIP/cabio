@@ -69,7 +69,7 @@ public class IndexSearchService extends HttpServlet {
             if (exclude != null) {   
                 excludeReplacement = exclude.trim().replaceAll("[ \t,]+", " -");
             } 
-
+            
             // No search
             if ("".equals(searchString)) {
                 request.getRequestDispatcher("indexSearch.jsp").forward(request,response);
@@ -83,39 +83,8 @@ public class IndexSearchService extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }
-                        
-            // check if session is valid
-            if(session.getAttribute("indexSearchUtils") != null) {
-                // Already have results in the session, are they relevant?
-                IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
-                
-                if (searchUtils.getSearchURL().equals(searchURL)) {
-                    // Yes, but Display parameters may have changed, so reorganize the results.
-                    searchUtils.setStartIndex("".equals(startIndex) ? 0 : Integer.parseInt(startIndex));
-                    searchUtils.setTargetClass(targetClass);
-                    searchUtils.organizeResults();
-                    dispatcher.forward(request,response);
-                    return;
-                }
-            }
             
-            IndexSearchUtils searchUtils = new IndexSearchUtils();
-            searchUtils.setSearchURL(searchURL);
-            searchUtils.setTargetClass(targetClass);
-            
-            SearchQuery searchQuery = new SearchQuery();
-            searchQuery.setQueryType(queryType);
-            
-            if (fuzzySearch) searchQuery.setFuzzySearch(true);
-
-            if (pageSize.length()>0){                
-               searchUtils.setPageSize(Integer.parseInt(pageSize));
-            }
-            
-            Sort sorter = new Sort();
-            sorter.setSortByClassName(new Boolean(true));
-            searchQuery.setSort(sorter);
-            
+            // Create query string
             String query = "";
             if (!words.equals("")){
                 for (StringTokenizer st = new StringTokenizer(searchString," ");st.hasMoreTokens();) {
@@ -152,19 +121,18 @@ public class IndexSearchService extends HttpServlet {
                         query += " -"+ excludeReplacement;
                     }               
                 }
-                searchQuery.setKeyword(query);
             }
             else{
                 if(!exclude.equals("")){
                     if(query.toLowerCase().indexOf(exclude.toLowerCase())<0){
                         query += "-"+ excludeReplacement;
                     }
-                }
-                searchQuery.setKeyword(query);          
+                }        
             }
             
             log.info("Compiled query: "+query);
-
+            
+            // Redirect to SDK-based view for "object" search
             if (queryType.equals(QueryType.HIBERNATE_SEARCH.toString())){
                 String postfix = fuzzySearch? "%7E" : "";
                 String url = request.getContextPath()+"/GetHTML?query=gov.nih.nci.search.SearchQuery&gov.nih.nci.search.SearchQuery[@keyword="+
@@ -172,6 +140,39 @@ public class IndexSearchService extends HttpServlet {
                 response.sendRedirect(url);
                 return;
             }  
+            
+            // Check if session is valid
+            if(session.getAttribute("indexSearchUtils") != null) {
+                // Already have results in the session, are they relevant?
+                IndexSearchUtils searchUtils = (IndexSearchUtils)session.getAttribute("indexSearchUtils");
+                
+                if (searchUtils.getSearchURL().equals(searchURL)) {
+                    // Yes, but Display parameters may have changed, so reorganize the results.
+                    searchUtils.setStartIndex("".equals(startIndex) ? 0 : Integer.parseInt(startIndex));
+                    searchUtils.setTargetClass(targetClass);
+                    searchUtils.organizeResults();
+                    dispatcher.forward(request,response);
+                    return;
+                }
+            }
+            
+            IndexSearchUtils searchUtils = new IndexSearchUtils();
+            searchUtils.setSearchURL(searchURL);
+            searchUtils.setTargetClass(targetClass);
+            
+            SearchQuery searchQuery = new SearchQuery();
+            searchQuery.setKeyword(query);
+            searchQuery.setQueryType(queryType);
+            
+            if (fuzzySearch) searchQuery.setFuzzySearch(true);
+
+            if (pageSize.length()>0){                
+               searchUtils.setPageSize(Integer.parseInt(pageSize));
+            }
+            
+            Sort sorter = new Sort();
+            sorter.setSortByClassName(new Boolean(true));
+            searchQuery.setSort(sorter);
             
             List results = searchAPI.query(searchQuery);
             
