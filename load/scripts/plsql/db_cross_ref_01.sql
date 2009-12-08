@@ -18,7 +18,7 @@ BEGIN
       	CROSS_REFERENCE_ID, TYPE, SOURCE_NAME, SOURCE_TYPE)
       VALUES
         (aRec.ROWNUM, aRec.GENE_ID, aRec.identifier,
-      	'gov.nih.nci.cabio_fut.domain.Gene','LOCUS_LINK_ID','UNIGENE');
+      	'gov.nih.nci.domain.Gene','LOCUS_LINK_ID','UNIGENE');
 		
       IF MOD(aID, 500) = 0 THEN
          COMMIT;

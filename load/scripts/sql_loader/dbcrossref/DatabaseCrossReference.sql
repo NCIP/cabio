@@ -11,7 +11,7 @@ ALTER TRIGGER SET_DBCROSSREF_ID ENABLE;
 INSERT
   INTO database_cross_reference(SNP_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
 source_TYPE) SELECT DISTINCT A.ID ID, B.TSC_ID TSC_ID, 
-'gov.nih.nci.cabio_fut.domain.SNP', 'SNP', 'SNP Consortium' FROM snp_tv A, 
+'gov.nih.nci.domain.SNP', 'SNP', 'SNP Consortium' FROM snp_tv A, 
 zstg_snp_tsc B
               WHERE A.DB_SNP_ID = B.DBSNP_RS_ID;
 
@@ -21,7 +21,7 @@ CREATE UNIQUE INDEX G2G_TMP ON zstg_omim2gene(OMIM_NUMBER) NOLOGGING PARALLEL ta
 INSERT
   INTO database_cross_reference(gene_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
 source_TYPE)SELECT DISTINCT C.gene_ID GENE_ID, B.OMIM_NUMBER OMIM_ID, 
-'gov.nih.nci.cabio_fut.domain.Gene', 'OMIM', 'Unigene' FROM zstg_gene2UNIGENE A, 
+'gov.nih.nci.domain.Gene', 'OMIM', 'Unigene' FROM zstg_gene2UNIGENE A, 
 zstg_omim2gene B, gene_tv C
 WHERE A.geneID = B.GENEID AND SUBSTR(A.UNIGENE_CLUSTER, INSTR(A.UNIGENE_CLUSTER
 , '.') + 1) = C.CLUSTER_ID AND C.taxon_ID = 5;
@@ -31,11 +31,11 @@ CREATE INDEX GTV_TMP_IDX2 ON gene_tv('Hs' || CLUSTER_ID) tablespace cabio_fut;
 -- see if other EC and Ensembl Ids can be used
 INSERT
   INTO database_cross_reference(gene_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
-source_TYPE) SELECT DISTINCT G.gene_ID, E.EC, 'gov.nih.nci.cabio_fut.domain.Gene', 
+source_TYPE) SELECT DISTINCT G.gene_ID, E.EC, 'gov.nih.nci.domain.Gene', 
 'EC_ID', 'Enzyme Commission' FROM gene_tv G, zstg_rna_probesets Z, ar_ec E
 WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.PROBE_SET_ID = E.PROBE_SET_ID 
 AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY UNION SELECT DISTINCT G.GENE_ID, E.EC, 
-'gov.nih.nci.cabio_fut.domain.Gene', 'EC_ID', 'Enzyme Commission' FROM gene_tv G, 
+'gov.nih.nci.domain.Gene', 'EC_ID', 'Enzyme Commission' FROM gene_tv G, 
 zstg_rna_probesets_tmp Z, ar_ec_tmp E
 WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.PROBE_SET_ID = E.PROBE_SET_ID 
 AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY;
@@ -43,11 +43,11 @@ AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY;
 INSERT
   INTO database_cross_reference(gene_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
 source_TYPE)SELECT DISTINCT G.gene_ID, E.ENSEMBL_ID, 
-'gov.nih.nci.cabio_fut.domain.Gene', 'ENSEMBL_ID', 'Ensembl' FROM gene_tv G, 
+'gov.nih.nci.domain.Gene', 'ENSEMBL_ID', 'Ensembl' FROM gene_tv G, 
 zstg_rna_probesets Z, ar_ensembl E
 WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.PROBE_SET_ID = E.PROBE_SET_ID 
 AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY UNION SELECT DISTINCT G.GENE_ID, 
-E.ENSEMBL_ID, 'gov.nih.nci.cabio_fut.domain.Gene', 'ENSEMBL_ID', 'Ensembl' FROM 
+E.ENSEMBL_ID, 'gov.nih.nci.domain.Gene', 'ENSEMBL_ID', 'Ensembl' FROM 
 gene_tv G, zstg_rna_probesets_tmp Z, ar_ensembl_tmp E
 WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.PROBE_SET_ID = E.PROBE_SET_ID 
 AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY;
@@ -62,11 +62,11 @@ CREATE INDEX AR_REFSEQ_IDX_2 ON ar_refseq_protein(REFSEQ_PROTEIN_ID) tablespace 
 INSERT
 INTO database_cross_reference(PROTEIN_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
 source_TYPE) SELECT DISTINCT P.PROTEIN_ID ID, R.REFSEQ_PROTEIN_ID, 
-'gov.nih.nci.cabio_fut.domain.Protein', 'REFSEQ_PROTEIN_ID', 'RefSeq' FROM 
+'gov.nih.nci.domain.Protein', 'REFSEQ_PROTEIN_ID', 'RefSeq' FROM 
 new_protein P, ar_swissprot S, ar_refseq_protein R
 WHERE S.SWISSPROT_ID = P.PRIMARY_ACCESSION AND S.PROBE_SET_ID = R.PROBE_SET_ID 
 UNION SELECT DISTINCT P.PROTEIN_ID ID, R.REFSEQ_PROTEIN_ID, 
-'gov.nih.nci.cabio_fut.domain.Protein', 'REFSEQ_PROTEIN_ID', 'RefSeq' FROM 
+'gov.nih.nci.domain.Protein', 'REFSEQ_PROTEIN_ID', 'RefSeq' FROM 
 new_protein P, ar_swissprot_tmp S, ar_refseq_protein_tmp R
 WHERE S.SWISSPROT_ID = P.PRIMARY_ACCESSION AND S.PROBE_SET_ID = R.PROBE_SET_ID
 ;

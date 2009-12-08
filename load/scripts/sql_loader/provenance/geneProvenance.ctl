@@ -47,7 +47,7 @@ TRAILING NULLCOLS
   IMMEDIATE_source_ID CONSTANT "3",
   SUPPLYING_source_ID CONSTANT "2",
   ORIGINAL_source_ID CONSTANT "3",
-  FULLY_QUALIFIED_CLASS_NAME CONSTANT "gov.nih.nci.cabio_fut.domain.gene", 
+  FULLY_QUALIFIED_CLASS_NAME CONSTANT "gov.nih.nci.domain.gene", 
   OBJECT_IDENTIFIER POSITION(1),
   SYMBOL filler,
   FULL_NAME filler char(2000),
