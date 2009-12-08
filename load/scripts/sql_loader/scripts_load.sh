@@ -221,6 +221,8 @@ cd $LOAD/drugbank
 echo "Loading drugbank tables (Canada Drug Bank)"
 time sh load.sh $1 1>drugbank.log 2>&1 
 
+sqlplus $1 @$LOAD/unigene/unigeneTempData/coalse_unigene.sql 1>@$LOAD/unigene/unigeneTempData/coalse_unigene.log
+
 # indexes for some objects not covered above 
 sqlplus $1 @$LOAD/misc_indexes.sql 
 
