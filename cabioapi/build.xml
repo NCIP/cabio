@@ -44,7 +44,7 @@
     <property name="project.wsclientdist" value="${PROJECT_NAME}_ws_client" />
     <property name="project.javadoc" value="${PROJECT_NAME}_javadocs" />
     <property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
-   
+   	
     <condition property="project.ready">
         <available file="${project.build.dir}/build.xml"/>
     </condition>
@@ -167,15 +167,9 @@
 	</target>
 		
     <target name="tag-build" 
-            description="Populates the version.properties for this build">
-
-        <exec executable="svn" output="${project.build.dir}/svninfo.xml">
-            <arg value="info"/>
-            <arg value="--xml"/>
-        </exec>
-    	
-        <xmlproperty file="${project.build.dir}/svninfo.xml" collapseattributes="true"/>
-    	
+            description="Populates the version.properties for this build"
+    	    depends="svn-info-xml" >  
+            	    	
     	<tstamp>
     	   <format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
     	</tstamp>
@@ -196,7 +190,15 @@
             message="build.date=${timestamp}"/>
     	
     </target>
-        	
+    
+	<target name="svn-info-xml" unless="${cabio.use.svn.task}">
+        <exec executable="svn" output="${project.build.dir}/svninfo.xml">
+            <arg value="info"/>
+            <arg value="--xml"/>
+        </exec>
+		<xmlproperty file="${project.build.dir}/svninfo.xml" collapseattributes="true"/>
+	</target>
+		
     <target name="dist-source" 
             description="Create a source distribution ready to be zipped">
       
