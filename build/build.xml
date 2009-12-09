@@ -351,8 +351,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		</copy -->
 	</target>
 
-	<target name="build:cabio-webapp" depends="init, build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">
+	<target name="build:cabio-webapp" depends="init, build:cabio-api" description="Call webapp sub-projects build target to produce artifiacts">		
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
+		    <svn javahl="false" svnkit="true">
+		         <status path="${basedir}" revisionProperty="svn.revision" urlProperty="svn.url"/>
+		    </svn>
+
             <if>
                 <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
                 <then>
@@ -363,6 +367,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                        <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
                        <property name="sdk.home.dir" value="${cacore-sdk.dir}" />                  
                        <property name="cabio-webapp.mobile.included" value="${cabio-webapp.mobile.included}" />
+                       <property name="cabio.use.svn.task" value="true" />
+                       <property name="info.entry.url" value="${svn.url}" />
+                       <property name="info.entry.revision" value="${svn.revision}" />
 		         </ant>
                 </then>
                 <else>
@@ -372,6 +379,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                        <property name="INDEXBASE" value="${cabio-webapp.index_base}"/>
                        <property name="CACHE_PATH" value="${cabio-webapp.cache_path}"/>                 
                        <property name="sdk.home.dir" value="${cacore-sdk.dir}" />
+                  	   <property name="cabio.use.svn.task" value="true" />
+                       <property name="info.entry.url" value="${svn.url}" />
+	                   <property name="info.entry.revision" value="${svn.revision}" />
 		           </ant>
                 </else>
             </if>
