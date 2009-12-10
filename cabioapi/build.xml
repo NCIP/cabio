@@ -16,9 +16,17 @@
     <property name="build.properties" value="dev.properties"/>
     <property name="project.home.dir" value="." />
     <property name="test.dir" value="${project.home.dir}/test" />
-    
+    	
     <property file="${project.home.dir}/conf/deploy.properties"  />
     
+	<path id="svntask.classpath">
+		<fileset dir="${basedir}/lib">
+			<include name="ganymed*.jar" />
+			<include name="svn*.jar" />
+		</fileset>
+	</path>
+    <taskdef name="svn" classpathref="svntask.classpath" classname="org.tigris.subversion.svnant.SvnTask" />
+	
     <target name="help" 
             description="Lists commonly used targets">
         <echo>========================</echo>
@@ -167,8 +175,11 @@
 	</target>
 		
     <target name="tag-build" 
-            description="Populates the version.properties for this build"
-    	    depends="svn-info-xml" >  
+            description="Populates the version.properties for this build">  
+        <svn javahl="false" svnkit="true">
+             <status path="${basedir}" revisionProperty="info.entry.revision" urlProperty="info.entry.url"/>
+        </svn>
+    	<echo message="Tag Build: Revision: ${info.entry.revision}, url: ${info.entry.url}" />
             	    	
     	<tstamp>
     	   <format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -190,15 +201,7 @@
             message="build.date=${timestamp}"/>
     	
     </target>
-    
-	<target name="svn-info-xml" unless="${cabio.use.svn.task}">
-        <exec executable="svn" output="${project.build.dir}/svninfo.xml">
-            <arg value="info"/>
-            <arg value="--xml"/>
-        </exec>
-		<xmlproperty file="${project.build.dir}/svninfo.xml" collapseattributes="true"/>
-	</target>
-		
+    	
     <target name="dist-source" 
             description="Create a source distribution ready to be zipped">
       
