@@ -24,16 +24,18 @@
 ================================================================================
 
 --------------------------------------------------------------------------------
- 1.1 Introduce Entrez Genes that are not in Unigene 
+ 1.1 Enhanced Display of FreestyleLM Search Results
 --------------------------------------------------------------------------------
-The inclusion of Entrez genes which are not in Unigene allows caBIO to 
-provide annotation services by exposing Entrez Gene Ids that can be used to 
-integrate with peseudo-gene datasets like miRBASE.
+To allow users to more readily find data of interest, the results for a 
+FreestyleLM search from the Home Page are now organized into categories based 
+on domain objects.  
 
 --------------------------------------------------------------------------------
- 1.2 Enhancement on FreestyleLM search 
+ 1.2 Inclusion of all Entrez Genes.  
 --------------------------------------------------------------------------------
-Enhancement on the display for the search results for FreestyleLM search.
+caBIO now provides all human and mouse genes from Entrez Gene
+(http://www.ncbi.nlm.nih.gov/gene). For details, please see the caBIO Data Release 
+Notes (http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3646).  
 
 
 The following are the existing features and updates for 4.3
@@ -114,6 +116,13 @@ The following defects are known to exist in this build:
   GF20888 Freestyle search - error when search value has single " attached
   
   GF21215 AbsoluteRangeQuery in caBIO API returns error
+
+  GF24430 caCORE HTTP Servlet error with special characters in gene full name
+          Contacted the caCORE SDK team and submitted defect
+
+  GF24095 Primary_Assembly vs. Reference
+
+
 
 ================================================================================
                                  4.0 SVN Tags
