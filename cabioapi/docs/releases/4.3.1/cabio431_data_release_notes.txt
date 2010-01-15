@@ -1,6 +1,6 @@
         Data Release notes for caBIO 4.3.1 Database   
 
-               November, 2009 
+               January, 2010 
 
  
 
@@ -39,7 +39,7 @@ Mouse: Based on February 2006 assembly of mouse genome (mm9) from Mouse Genome S
 Consortium 
 
 
-d) SNP annotations from NCBI (Human and Mouse) Build 130 
+d) SNP annotations from NCBI (Human and Mouse) dbSNP Build 130 
 
 e) Uniprot  (Release 15.8 Sep 22 2009 from Uniprot)  
 
@@ -61,7 +61,7 @@ Updated occasionally
 
 j) NCI-Nature Curated Pathways 
 
-Update monthly 
+Update with each caBIO data refresh  
  
 k) Affymetrix Human U133 Plus 2 (HG_U133_Plus_2) Array Annotations Release 29  
 
@@ -89,7 +89,7 @@ Data from phases I – VI of the Cancer Gene Index are available
 
 t) UniSTS 
 
-Updated monthly 
+Updated with each caBIO data refresh  
 
 
 u) MapView  
@@ -112,7 +112,7 @@ c) Agilent 44K Human Genome Array Release 07Feb07
 
 ============================= 
 
-Refer to caBIO 4.3 Software Release Notes 
+Refer to caBIO 4.3.1 Software Release Notes 
 
 4 Known Issues 
 
@@ -185,15 +185,7 @@ On the other hand, Gene -> ExpressionReporter association is made on the basis o
 
 Thus the results of the Gene-ExpressionReporter associations may differ from those obtained by 
 traversing the path Gene->NucleicAcidSequence->ExpressionReporter  
-
-
-5) High Frequency Cancer Index Genes : Certain High Frequency Genes are to be curated in the next 
-phase of the Cancer Gene Index Project.  For now, these uncurated gene-disease and disease-agent 
-associations are available at  
-
-https://gforge.nci.nih.gov/docman/index.php?group_id=51&selected_doc_group_id=3387&language
-_id=1 
-
+ 
 
 6) GF17865: Missing NCI-Nature pathway interaction links. These missing links will be addressed in 
 the next data refresh for caBIO. 
@@ -336,7 +328,7 @@ TranscriptPhysicalLocation)
 
 a) Unigene (Human and Mouse)  
 
-b) UCSC Human and Mouse EST and MRNA data 
+b) UCSC Human and Mouse EST and mRNA data 
 
 c) NCBI dbSNP  
 
@@ -357,7 +349,6 @@ http://cabioapi.nci.nih.gov/cabio40
 http://cabioapi.nci.nih.gov/cabio41 
 http://cabioapi.nci.nih.gov/cabio42 
 http://cabioapi.nci.nih.gov/cabio43 
-
  
 
 Web Services 
@@ -372,13 +363,17 @@ Grid services
 http://cabiogrid40.nci.nih.gov:80/wsrf/services/cagrid/CaBIO40GridSvc 
 http://cabiogrid42.nci.nih.gov:80/wsrf/services/cagrid/CaBIO42GridSvc 
  
+caBIO Portlet
+http://cagrid-portal.nci.nih.gov/web/guest/community
+
+caBIO Home Page
+http://cabioapi.nci.nih.gov/cabio43
+
 
 Thank you for your interest in caBIO! 
 
   
-
  
-
 The caBIO Team 
 
  

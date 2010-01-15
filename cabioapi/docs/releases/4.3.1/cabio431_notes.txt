@@ -2,7 +2,7 @@
                                   Version 4.3.1
 
                                  Release Notes
-                                 November 30, 2009
+                                 January, 2010
 
 
                National Cancer Institute Center for Bioinformatics
@@ -71,6 +71,8 @@ For details, please consult the caBIO Technical Guide.
                               2.0 Resolved Issues
 ================================================================================
 
+The following are the issues resolved in 4.3
+-------------------------------------------------------------
 API related bugs:
 --------------------------------------------------------------------------------
   GF17377 Absolute Range Query - Assembly (case sensitivity) - API/Portlet
@@ -134,7 +136,7 @@ The following defects are known to exist in this build:
 
   The 4.3.1 release tag is available here:
   
-    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_43_PROD_20091130
+    https://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/tags/CABIO_431_PROD_20091229
 
   The version of the SDK which this release of caBIO was tested with is 
   available at:
