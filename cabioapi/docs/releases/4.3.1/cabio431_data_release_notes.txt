@@ -190,6 +190,7 @@ traversing the path Gene->NucleicAcidSequence->ExpressionReporter
 6) GF17865: Missing NCI-Nature pathway interaction links. These missing links will be addressed in 
 the next data refresh for caBIO. 
 
+7) GF25744: Possible missing association between a gene and pathways
 
 5. Objects to which new data was added 
 
