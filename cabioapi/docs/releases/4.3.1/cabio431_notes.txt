@@ -168,4 +168,4 @@ There are multiple ways to get assistance with and provide feedback on caBIO:
 ================================================================================
 
 The release documentation can be found at:
-http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/guide
+http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3646
