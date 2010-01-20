@@ -76,7 +76,7 @@ commit;
 UPDATE bio_pathways a SET a.pathway_desc = (SELECT pathway_descr FROM zstg_biopathway_descr b WHERE b.path_id = a.pathway_name);
 COMMIT;
 
-INSERT INTO zstg_biogenes SELECT DISTINCT pathway_name, DECODE (biog.organism, 'Hs', biog.bc_id, 'Mm', 'Mm.' || biog.bc_id), locus_id, DECODE (biog.organism, 'Hs', 5, 'Mm', 6) taxon_id FROM cgap.biopaths@web.nci.nih.gov biop, cgap.biogenes@web.nci.nih.gov biog WHERE biog.bc_id = biop.bc_id(+) AND biog.organism = biop.organism;
+INSERT INTO zstg_biogenes SELECT DISTINCT pathway_name, DECODE (biog.organism, 'Hs', biog.bc_id, 'Mm', 'Mm.' || biog.bc_id), locus_id, DECODE (biog.organism, 'Hs', 5, 'Mm', 6) taxon_id FROM cgap.biopaths@web.nci.nih.gov biop, cgap.biogenes@web.nci.nih.gov biog WHERE lower(biog.bc_id) = lower(biop.bc_id) AND biog.organism = biop.organism;
 commit;
 
 INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT bc_id, locus_id, taxon_id, gene_id FROM zstg_biogenes bt, zstg_gene_identifiers gi WHERE bt.locus_id = gi.IDENTIFIER(+) AND gi.data_source(+) = 2;
@@ -115,8 +115,7 @@ commit;
 -- Moved to loadGO
 --execute load_goevsmod.getgo_rela;
 
--- Code moved to this file
---execute load_goevsmod.load_pathways;
+
 
 execute load_goevsmod.getevs;
 
