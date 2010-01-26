@@ -213,7 +213,7 @@ BEGIN
 END;
 /
 
-insert into evidence(pubmed_id, sentence) select distinct pubmed_id, 'Pathway publication' from zstg_pid_interactionreference minus select distinct pubmed_id, to_char(sentence) from evidence;
+insert into evidence(pubmed_id, sentence) select distinct pubmed_id, 'Pathway publication' from zstg_pid_interactionreference minus select distinct pubmed_id, to_char(dbms_lob.substr(sentence, 1, 4000)) from evidence;
 commit;
 
 SELECT MAX(ID) + 1 AS V_MAXROW
@@ -242,10 +242,10 @@ commit;
 -- NO NEW EVIDENCE CODES are added with the new combined.dat dump
 
 
-insert into pid_interaction_ec(interaction_id, evidence_code_id) select distinct i.id, e.id from pid_interaction i, evidence_code e, zstg_pid_interactionevidence z, zstg_pid_evidencecode pe where z.interaction_id = i.pid_interaction_id and z.evidence_code=pe.pid_evidencecodeid and pe.evidencekind = e.evidence_code;
+insert into pid_interaction_ec(interaction_id, evidence_code_id) 
 commit;
  
-insert into pid_interaction_evidence(interaction_id, evidence_id) select distinct i.id, e.id from pid_interaction i, evidence e, zstg_pid_interactionreference z where z.interaction_id = i.pid_interaction_id and z.pubmed_id=e.pubmed_id and to_char(e.sentence) = 'Pathway publication';
+insert into pid_interaction_evidence(interaction_id, evidence_id) select distinct i.id, e.id from pid_interaction i, evidence e, zstg_pid_interactionreference z where z.interaction_id = i.pid_interaction_id and z.pubmed_id=e.pubmed_id and to_char(substr(e.sentence, 1, 4000))='Pathway publication';
 commit;
 
 -- load into pid_entityName and pid_entityAccession
