@@ -14,6 +14,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 	<property file="local.properties" />
 	<property file="project.properties" />
 	<property name="properties.file" value="install.properties"/>
+	<property name="upgrade.properties.file" value="upgrade.properties"/>
 	<echo message="Using properties file of ${properties.file}." />
 	<available file="${properties.file}" property="properties.file.exists" />
 	<fail unless="properties.file.exists" message="The properties.file ${properties.file} does not exist, please make sure that you pass in an accurate file name with the 'ant -Dproperties.file=somepath/somefile', otherwise the build will fail." />
@@ -137,6 +138,18 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 
 
 	<!-- retrive ivy files then retrieve bda files and librarires -->
+	<condition property="commonlibrary.dir" value="">
+		<or>            
+			<os family="unix" />
+			<os family="mac" />     
+		</or>           
+	</condition>
+
+	<condition property="commonlibrary.dir" value="c:/">
+		<os family="windows" />
+	</condition>
+
+
 	<property name="bda-download.file" value="bda-ivy-2.0.0-build.xml" />
       <!-- 
 	<mkdir dir="${bda-download.dir}" />
@@ -149,6 +162,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		<property name="bda-utils.dir" location="${bda-utils.dir}" />
 		<property name="lib.dir" location="${lib.dir}" />
 		<property name="software.dir" location="${software.dir}" />
+		<property name="commonlibrary.dir" location="${commonlibrary.dir}" />
+		<property name="target.dir" location="${target.dir}"/>
 	</ant>
 
 
@@ -211,6 +226,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		<mkdir dir="${pt.dir}" />
 
 		<available file="${jboss.dest.file}" property="jboss.tools.exists" />
+		<available file="${jbosscp.dest.file}" property="jbosscp.tools.exists" />
 		<available file="${tomcat.dest.file}" property="tomcat.tools.exists" />
 		<!-- If jboss is required to build, then check for jboss in jboss.home, then check for in jboss in working directory, if not found then download it into this that directory.  If found at any point set local.jboss.home to where it is found.  This can be passed to sub-projects so then can compile code against distribution.  This is especially important on AntHillPro server which will not have jboss present, thus will have to use a copy in the working area.  This also makes it easier to start the project, if the developer does not yet have jboss installed, build will download it and install it so build can proceed. -->
 		<if>
@@ -262,7 +278,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		-->
 	</target>
 
-	<!-- Wrapper build target, call appropriate builds for sub-projects -->
+	<target name="validate:pre:build">
+		<validate-pre-build
+			/>
+	</target>
+
+	<!--
        <target name="build:retrieve:cacore-sdk">                                 
                 <if>
                         <not>
@@ -312,6 +333,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
                 build:extract:cacore-sdk
                 ">
         </target>
+	-->
 
 	<target name="build:all" description="Builds all the sub projects, putting artifacts in the project level target directory, used by distribution targets to make distributions" depends="
 		validate:pre:build,
@@ -691,6 +713,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/generic/trunk/software/build.xml $
 		-->
 		<deploy-local
 			target.name="${upgrade.target}"
+			properties.file="${upgrade.properties.file}"
 			/>
 	</target>
 
