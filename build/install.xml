@@ -750,7 +750,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 
       <target name="install:database:indexes" description="Install the index files for FreeStyle Search into the System based on the index and cache paths provided"  depends="install:jboss:init,install:cabio-webapp:download:indexfiles" unless="indexfiles.ready">
             <!-- property name="cabio-webapp.indexes.dist.dir" value="${cabio.deploy.tmp.indexes.dir}" / -->
-	    <!--
             <delete includeemptydirs="true">
                 <fileset dir="${cabio-webapp.index_cache_base.dir}">
                       <include name="40/**" />
@@ -774,13 +773,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/41/cache" />
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/42/cache" />
             <mkdir dir="${cabio-webapp.index_cache_base.dir}/43/cache" />
-	    -->
       </target>
 
        <!-- download the index files from the load server according to which tier it is deploying -->
        <!-- only download it directly from the storage server if configured so -->
        <target name="install:cabio-webapp:download:indexfiles">
-	       <!--
             <if>
                  <equals arg1="${cabio-webapp.indexfiles.download.during.build}" arg2="false"/>
             <then>
@@ -797,7 +794,6 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
                  <unzip src="${cabio-webapp.indexes.dist.dir}/${cabio.loadserver.indexfile.tier.name}" dest="${cabio-webapp.indexes.dist.dir}" />
             </else>
             </if>
-	    -->
        </target>
 
       <!-- bda-utils-1.0.0 changes -->
