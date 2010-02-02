@@ -88,31 +88,31 @@ jboss.ssl.enable=A flag to determine where JBoss is configured with SSL, see htt
 ##############
 ### TOMCAT ###
 ##############
-#tomcat.home will be generated as ${application.base.path}/${tomcat.relative.path}.
-#tomcat.relative.path=This is the part of the path after applicatoin.base.path which will form the tomcat.home. Example: ${tomcat.binaries.relative.dir}
-tomcat.home=Home dir or tomcat
-tomcat.hostname=The server name where tomcat will be running. Example: localhost
-# Ports used by JBoss. Must not conflict with other LSD applications. Check with BDA or Systems teamsf for acceptable values.
-tomcat.port.http=The port used to connect to the tomcat instance via http.
-tomcat.port.ajp=
-tomcat.port.ssl=
-tomcat.port.shutdown=
-tomcat.ssl.enable=A flag to determine where Tomcat is configured with SSL, see https://wiki.nci.nih.gov/x/7xWy
-#tomcat.ssl.keystore.location=The keystore file location, dir/filename recommend projectroot/software/common/security
-#tomcat.ssl.keystore.pass=The password for that keystore file
-#tomcat.ssl.keystore.alias=The alias for that keystore file
-#tomcat.ssl.fullyqualified.hostname=The fully qualified hostname (www.nci.nih.gov) that the cert is for.  This url is verified within the cert.
-#tomcat.external.http.host=Set this if you are using external hostnames for http, see https://wiki.nci.nih.gov/x/8hWy
-#tomcat.external.http.port=Set this if you are using a different port with the external hostname above for http
-#tomcat.external.ssl.host=Set this if you are using external hostnames for ssl, see https://wiki.nci.nih.gov/x/8hWy
-#tomcat.external.ssl.port=Set this if you are using a different port with the external hostname above for ssl
-#tomcat.external.grid.secure.host=Set this if you are using external hostnames for grid ssl, see https://wiki.nci.nih.gov/x/8hWy
-#tomcat.external.grid.secure.port=Set this if you are using a different port with the external hostname above for grid ssl
+##tomcat.home will be generated as ${application.base.path}/${tomcat.relative.path}.
+##tomcat.relative.path=This is the part of the path after applicatoin.base.path which will form the tomcat.home. Example: ${tomcat.binaries.relative.dir}
+#tomcat.home=Home dir or tomcat
+#tomcat.hostname=The server name where tomcat will be running. Example: localhost
+## Ports used by JBoss. Must not conflict with other LSD applications. Check with BDA or Systems teamsf for acceptable values.
+#tomcat.port.http=The port used to connect to the tomcat instance via http.
+#tomcat.port.ajp=
+#tomcat.port.ssl=
+#tomcat.port.shutdown=
+##tomcat.ssl.enable=A flag to determine where Tomcat is configured with SSL, see https://wiki.nci.nih.gov/x/7xWy
+##tomcat.ssl.keystore.location=The keystore file location, dir/filename recommend projectroot/software/common/security
+##tomcat.ssl.keystore.pass=The password for that keystore file
+##tomcat.ssl.keystore.alias=The alias for that keystore file
+##tomcat.ssl.fullyqualified.hostname=The fully qualified hostname (www.nci.nih.gov) that the cert is for.  This url is verified within the cert.
+##tomcat.external.http.host=Set this if you are using external hostnames for http, see https://wiki.nci.nih.gov/x/8hWy
+##tomcat.external.http.port=Set this if you are using a different port with the external hostname above for http
+##tomcat.external.ssl.host=Set this if you are using external hostnames for ssl, see https://wiki.nci.nih.gov/x/8hWy
+##tomcat.external.ssl.port=Set this if you are using a different port with the external hostname above for ssl
+##tomcat.external.grid.secure.host=Set this if you are using external hostnames for grid ssl, see https://wiki.nci.nih.gov/x/8hWy
+##tomcat.external.grid.secure.port=Set this if you are using a different port with the external hostname above for grid ssl
 tomcat.grid.secure.enable=Flag to use grid ssl port
-#tomcat.grid.secure.port=Port for grid ssl 
-#tomcat.grid.secure.cert.location=location of grid generated cert file for grid ssl
-#tomcat.grid.secure.key.location=location of grid generated key file for grid ssl
-#
+##tomcat.grid.secure.port=Port for grid ssl 
+##tomcat.grid.secure.cert.location=location of grid generated cert file for grid ssl
+##tomcat.grid.secure.key.location=location of grid generated key file for grid ssl
+##
 ##############
 
 ##############
