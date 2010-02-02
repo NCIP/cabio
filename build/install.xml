@@ -524,7 +524,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 		depends="
 		common:init
 		">
-		<validate-post-common />
+		<validate-post-common propertyfile.backup.location="${log.dir}"/>
 	</target>
 	<target name="install:jboss:validation:post-install" description="Run post-install checks from bda-utils"
 		depends="
@@ -537,7 +537,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/buil
 				<isset property="exclude.start.servers"/>
 			</not>
 			<then>
-				<validate-post-jboss propertyfile.backup.location="${log.dir}" />
+				<validate-post-jboss />
 			</then>
 		</if>
 	</target>
