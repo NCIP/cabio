@@ -18,8 +18,7 @@ var caBioObjectDetails = function() {
         savedNav = jQuery("#cabioNav").html();
         var navback = '<div id="navback"><a href="javascript:caBioObjectDetails.restoreResults()">&#171; Return to results</a></div>';
         jQuery("#cabioNav").empty().append(navback);
-    
-        var searchText = jQuery("#searchText").val();
+        jQuery("#cabioSummary").hide();
         jQuery("#searchResults").hide();
 
         var h = '<div>'
@@ -107,8 +106,9 @@ var caBioObjectDetails = function() {
      */
     restore : function () {
         jQuery("#cabioNav").empty().append(savedNav);
-        jQuery("#objectDetails").empty();
+        jQuery("#cabioSummary").show();
         jQuery("#searchResults").show();
+        jQuery("#objectDetails").empty();
     },
     
     loadDetails : function (className, id) {

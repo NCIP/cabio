@@ -9,6 +9,7 @@ var caBioCommon = function() {
     // Drop down arrows
     var downBlueImg = "/cabioportlets/images/down_arrow_blue.png";
     var downGreyImg = "/cabioportlets/images/down_arrow_grey.png";
+    var loadingImg = "/cabioportlets/images/ajax-loader.gif";
 
     /**
      * Process a SearchResult <class> node.
@@ -79,10 +80,18 @@ var caBioCommon = function() {
     /**
      * Called when the page is loaded to add an image to a dropdown box.
      */
-    createDropBox : function (boxLinkId) {
-        h = jQuery(boxLinkId);
+    createDropBox : function (elementId) {
+        h = jQuery(elementId);
         h.css('text-decoration','none');
-        h.html('<img src="'+downBlueImg+'" border="0"/> '+h.html());
+        h.html('<img src="'+downBlueImg+'" border="0" /> '+h.html());
+    },
+
+    /**
+     * Called when the page is loaded to add an image to a dropdown box.
+     */
+    createLoadingImage : function (elementId) {
+    	h = jQuery(elementId);
+    	h.html('<div style="width:100%; text-align:center;"><img src="'+loadingImg+'" border="0" /></div>');
     },
     
     /**
@@ -165,6 +174,17 @@ var caBioCommon = function() {
         }
         if (curr) a[a.length] = curr;
         return a;
+    },
+    
+    /**
+     * Convert class name for display, i.e.
+     * "gov.nih.nci.cabio.domain.ClinicalTrialProtocol" to
+     * "Clinical Trial Protocol"
+     */
+    formatClassName : function(cn) {
+    	if (!cn) return "";
+        return cn.substring(cn.lastIndexOf('.')+1).replace(
+        		new RegExp("([A-Z])","g")," $1").substring(1);
     },
     
     /**

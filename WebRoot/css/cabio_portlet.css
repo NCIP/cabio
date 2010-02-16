@@ -26,12 +26,20 @@ div#cabioNav {
     background: #ddf;
     width: 100%;
     margin-top: 15px;
+}
+
+div#cabioSummary {
+    border: 1px solid #99d;
+    border-top: none;
+    background: #fafadd;
+    width: 100%;
+    margin-top: 0px;
     margin-bottom: 10px;
 }
 
 div#navback {
-    padding: 2px;
     border-top: 1px solid #99b;
+    padding: 3px;
 }
 
 div#navback a {
@@ -42,9 +50,13 @@ div#navback a:hover {
     text-decoration: underline;
 }
 
-div#summary {
-    padding: 2px;
+div#cabioNumResults {
     border-top: 1px solid #99b;
+    padding: 3px;
+}
+
+div#summaryInner {
+    padding: 3px;
 }
 
 div.pages {
