@@ -109,8 +109,8 @@ var caBioResults = function() {
 	return {
 	
 	loadSearch : function (page) {
-        jQuery(".query #page").val(page-1)
-		jQuery(".query form").submit()
+        jQuery(".query #page").val(page-1);
+		jQuery(".query form").submit();
 	},
 	
     changeStyle : function (obj, newClass) {
