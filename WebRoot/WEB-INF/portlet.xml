@@ -19,13 +19,7 @@
         </init-param>
         <supports>
             <mime-type>text/html</mime-type>
-        </supports>        
-        <security-role-ref>
-            <role-name>power-user</role-name>
-        </security-role-ref>
-        <security-role-ref>
-            <role-name>user</role-name>
-        </security-role-ref>
+        </supports>
         <portlet-info>
             <title>caBIO Portlet</title>
             <short-title>caBIO Porlet</short-title>
