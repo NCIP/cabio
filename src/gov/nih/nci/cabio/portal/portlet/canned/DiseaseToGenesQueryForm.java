@@ -4,7 +4,7 @@ package gov.nih.nci.cabio.portal.portlet.canned;
 /**
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
-public class DiseaseToGenesQueryForm extends PaginatedForm {
+public class DiseaseToGenesQueryForm extends CGIBaseQueryForm {
 
     private String disease = "fibroadenoma";
 
