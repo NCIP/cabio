@@ -11,9 +11,9 @@ import java.util.Set;
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
-public abstract class GetOnlyMap implements Map<String,Object> {
+public abstract class GetOnlyMap<T> implements Map<String,T> {
 
-    public abstract Object get(Object key);
+    public abstract T get(Object key);
     
     public boolean containsKey(Object key) {
         return true;
@@ -27,7 +27,7 @@ public abstract class GetOnlyMap implements Map<String,Object> {
         throw new UnsupportedOperationException();
     }
 
-    public Set<Entry<String, Object>> entrySet() {
+    public Set<Entry<String, T>> entrySet() {
         throw new UnsupportedOperationException();
     }
     
@@ -39,15 +39,15 @@ public abstract class GetOnlyMap implements Map<String,Object> {
         throw new UnsupportedOperationException();
     }
 
-    public Object put(String key, Object value) {
+    public T put(String key, Object value) {
         throw new UnsupportedOperationException();
     }
 
-    public void putAll(Map<? extends String, ? extends Object> t) {
+    public void putAll(Map<? extends String, ? extends T> t) {
         throw new UnsupportedOperationException();
     }
 
-    public Object remove(Object key) {
+    public T remove(Object key) {
         throw new UnsupportedOperationException();
     }
     
@@ -55,7 +55,7 @@ public abstract class GetOnlyMap implements Map<String,Object> {
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Object> values() {
+    public Collection<T> values() {
         throw new UnsupportedOperationException();
     }
     

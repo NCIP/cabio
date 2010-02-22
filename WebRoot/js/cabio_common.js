@@ -5,12 +5,18 @@ var caBioCommon = function() {
     
     // Pager: max number of pages to show in each direction from the current page
     var NUM_PAGES_SHOWN = 8;
+    var uiEnabled = true;
     
     // Drop down arrows
-    var downBlueImg = "/cabioportlets/images/down_arrow_blue.png";
-    var downGreyImg = "/cabioportlets/images/down_arrow_grey.png";
-    var loadingImg = "/cabioportlets/images/ajax-loader.gif";
+    var downBlueImg = '/cabioportlets/images/down_arrow_blue.png';
+    var downGreyImg = '/cabioportlets/images/down_arrow_grey.png';
+    var expandImg = '/cabioportlets/images/expand.gif';
+    var collapseImg = '/cabioportlets/images/collapse.gif';
+    var loadingImg = '/cabioportlets/images/ajax-loader.gif';
 
+    // Cached HTML
+    var loadingImgHtml = '<div style="width:100%; text-align:center;"><img src="'+loadingImg+'" border="0" /></div>';
+    
     /**
      * Process a SearchResult <class> node.
      */
@@ -68,7 +74,12 @@ var caBioCommon = function() {
     
     searchWords : [],
     
+    isUIEnabled : function () {
+    	return uiEnabled;
+    },
+    
     enabledUI : function (enabled) {
+    	uiEnabled = enabled;
         if (enabled) {
             document.body.style.cursor = "default";
         }
@@ -76,36 +87,38 @@ var caBioCommon = function() {
             document.body.style.cursor = "wait";
         }
     },
-    
-    /**
-     * Called when the page is loaded to add an image to a dropdown box.
-     */
-    createDropBox : function (elementId) {
-        h = jQuery(elementId);
-        h.css('text-decoration','none');
-        h.html('<img src="'+downBlueImg+'" border="0" /> '+h.html());
-    },
 
     /**
      * Called when the page is loaded to add an image to a dropdown box.
      */
-    createLoadingImage : function (elementId) {
-    	h = jQuery(elementId);
-    	h.html('<div style="width:100%; text-align:center;"><img src="'+loadingImg+'" border="0" /></div>');
+    getLoadingImage : function () {
+    	return loadingImgHtml;
+    },
+    
+    /**
+     * Called when the page is loaded to add an image to a dropdown box.
+     */
+    createDropBox : function (linkId, boxId) {
+        var ab = jQuery(boxId);
+        var img = ab.is(":hidden") ? expandImg : collapseImg;
+        var h = jQuery(linkId);
+        h.css('text-decoration','none');
+        h.attr('href','javascript:caBioCommon.toggleDropBox("'+linkId+'","'+boxId+'")')
+        h.html('<img src="'+img+'" border="0" /> '+h.html());
     },
     
     /**
      * Toggle a drop down box.
      */
-    toggleDropBox : function (boxId) {
-        ab = jQuery(boxId);
+    toggleDropBox : function (linkId, boxId) {
+        var ab = jQuery(boxId);
         if (ab.is(":hidden")) {
             ab.css("display","block");
-            jQuery(boxId+">img").attr('src',downGreyImg);
+            jQuery(linkId+">img").attr('src',collapseImg);
         }
         else {
             ab.css("display","none");
-            jQuery(boxId+">img").attr('src',downBlueImg);
+            jQuery(linkId+">img").attr('src',expandImg);
         }
     },
     

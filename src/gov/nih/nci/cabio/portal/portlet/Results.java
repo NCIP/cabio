@@ -40,7 +40,7 @@ public class Results {
             List<ResultItem> objs = items.get(className);
             if (objs == null) objs = new ArrayList<ResultItem>();
             items.put(className, objs);
-            objs.add(new ResultItem(className, o));
+            objs.add(new ResultItem(o));
         }
 
         log.info("done grouping "+results.size()+" items into "+items.size()+" classes");

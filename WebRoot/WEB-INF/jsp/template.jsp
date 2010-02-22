@@ -68,12 +68,11 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
 	<tiles:useAttribute id="queryName" 
 	    name="query_name" classname="java.lang.String" ignore="true" />
     
-    <a href="javascript:caBioCommon.toggleDropBox('.query')" id="query_link">
-        <c:out value="${queryName}"/></a>
+    <a id="query_link"><c:out value="${queryName}"/></a>
         
     <script>    
     jQuery(document).ready(function(){
-        caBioCommon.createDropBox('#query_link');
+        caBioCommon.createDropBox('#query_link','.query');
         jQuery("#page").val("0");
     });
     </script>

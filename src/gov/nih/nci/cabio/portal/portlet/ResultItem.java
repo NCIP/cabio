@@ -1,7 +1,9 @@
 package gov.nih.nci.cabio.portal.portlet;
 
+import gov.nih.nci.cabio.domain.GeneFunctionAssociation;
 import gov.nih.nci.common.util.ReflectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -26,21 +28,58 @@ import org.apache.commons.logging.LogFactory;
  * except that it formats results as strings for screen display.
  * </ul>
  */
-public class ResultItem extends GetOnlyMap {
+public class ResultItem extends GetOnlyMap<Object> {
 
     private static Log log = LogFactory.getLog(ResultItem.class);
     
     private String className;
     private Object obj;
     
-    public ResultItem(String className, Object obj) {
-        this.className = className;
+    public ResultItem(Object obj) {
+
+        String cn = obj.getClass().getName();
+        this.className = cn.split("\\$\\$")[0];
+        
         this.obj = obj;
+    }
+    
+    public GetOnlyMap<String> getDisplayMap() {
+        return new GetOnlyMap<String>() {
+            public String get(Object key) {
+                Object value = ResultItem.this.get(key);
+                StringBuffer sb = new StringBuffer();
+                // Convert List to comma delimited list 
+                if (value instanceof List) {
+                    for(Object o : (List)value) {
+                        if (sb.length() > 0) sb.append(", ");
+                        sb.append(o);
+                    }
+                    value = sb.toString();
+                }
+                
+                // Special Case: CGI role names have underscores instead of 
+                // spaces, which make them difficult to display.   
+                if ((obj instanceof GeneFunctionAssociation) 
+                        && ((String)key).endsWith(".role") || ((String)key).equals("role")) {
+                    return value.toString().replaceAll("_", " ");
+                }
+                
+                return (value == null) ? "" : value.toString();
+            }
+        };
+    }
+
+    public Object getObject() {
+        return obj;
+    }
+    
+    public String getClassName() {
+        return className;
     }
     
     public Object get(Object key) {
         String attributePath = (String)key;
-        
+
         if ("_className".equals(attributePath)) return className;
         
         if ("_obj".equals(attributePath)) return obj;
@@ -57,12 +96,7 @@ public class ResultItem extends GetOnlyMap {
         }
         
         if ("displayMap".equals(attributePath)) {
-            return new GetOnlyMap() {
-                public Object get(Object key) {
-                    Object value = ResultItem.this.get(key);
-                    return (value == null) ? "" : breakLongLines(value.toString());
-                }
-            };
+            return getDisplayMap();
         }
 
         return resolve(obj, attributePath);
@@ -79,16 +113,31 @@ public class ResultItem extends GetOnlyMap {
     private Object resolve(Object object, String path) {
 
         if (object == null) return null;
+        if (path == null) return object;
+
+        if ("class".equals(path)) {
+            String cn = object.getClass().getName();
+            return cn.substring(cn.lastIndexOf('.')+1).split("\\$\\$")[0];
+        }
         
         int d = path.indexOf('.');
         String attr = (d < 0) ? path : path.substring(0,d);
 
-        int a = attr.indexOf('[');
-        int b = attr.indexOf(']');
+        String constraint = getConstraint(attr);
+        String constrainAttr = null;
+        String constrainValue = null;
         int index = -1;
-        if (a > 0) {
-            index = Integer.parseInt(attr.substring(a+1,b));
-            attr = attr.substring(0,a);
+        
+        if (constraint != null) {
+            try {
+                index = Integer.parseInt(constraint);
+            }
+            catch (NumberFormatException e) {
+                String[] cvs = constraint.split("=");
+                constrainAttr = cvs[0];
+                constrainValue = cvs[1];
+            }
+            attr = attr.substring(0,attr.indexOf('['));
         }
         
         Object nextObj;
@@ -100,70 +149,124 @@ public class ResultItem extends GetOnlyMap {
             return "ERROR";
         }
 
-        if (d < 0) {
-            // this is the target attribute
-            return nextObj;
-        }
-        else {
-            String nextPath = path.substring(d+1);
-            if (nextObj instanceof List) {
-                List nextList = (List)nextObj;
-                
-                // just need one element from the list
-                if (index >= 0) {
-                    try {
-                        nextObj = nextList.get(index);
-                    }
-                    catch (IndexOutOfBoundsException e) {
-                        return "";
-                    }
-                    return resolve(nextObj, nextPath);
+        String nextPath = d < 0 ? null : path.substring(d+1);
+        if (nextObj instanceof List) {
+            List nextList = (List)nextObj;
+            
+            // just need one element from the list
+            if (index >= 0) {
+                try {
+                    nextObj = nextList.get(index);
                 }
-                
-                // aggregate all the elements in the list
-                StringBuffer buf = new StringBuffer();
-                int c = 0;
-                for(Object e : (List)nextObj) {
-                    if (c++ > 0) buf.append(", ");
-                    buf.append(resolve(e, nextPath));
+                catch (IndexOutOfBoundsException e) {
+                    return "";
                 }
-                return buf.toString();
-            }
-            else {
                 return resolve(nextObj, nextPath);
             }
+
+            // aggregate all the resolved elements in the list
+            List resolved = new ArrayList();
+            for(Object e : nextList) {
+                // constrain by an attribute if one was provided
+                if (constrainAttr == null 
+                        || resolve(e, constrainAttr).equals(constrainValue)) {
+                    Object o = resolve(e, nextPath);
+                    resolved.add(o);
+                }
+            }
+            return resolved;
+        }
+        else {
+            return resolve(nextObj, nextPath);
         }
     }
-    
+
     /**
-     * Just a little utility function to add spaces when there are very long 
-     * character strings, so that they don't break the layout. Pathway names
-     * from Reactome are a good example.
-     * @param value
+     * Returns all the object classes in the given path starting with the 
+     * class of the current object.
+     * @param path
      * @return
      */
-    private String breakLongLines(String value) {
+    public List<Class> getClasses(String path) {
 
-        StringBuffer sb = new StringBuffer();
-        int charsSinceWhitespace = 0;
-        for(int i=0; i<value.length(); i++) {
+        List<Class> classes = new ArrayList<Class>();
+        
+        Class prevClass = obj.getClass();
+        classes.add(prevClass);
 
-            char c = value.charAt(i);
-            if (Character.isWhitespace(c)) {
-                charsSinceWhitespace = 0;
-            }
-            else {
-                charsSinceWhitespace++;
-            }
+        String[] segments = path.split("\\.");
+        for(int i=0; i<segments.length; i++) {
+            String segment = segments[i].replaceAll("\\[.*?\\]$","");
+            prevClass = ClassUtils.getAssociationType(prevClass, segment);
             
-            if (charsSinceWhitespace > 50) {
-                charsSinceWhitespace = 0;
-                sb.append(" ");
+            // What if we're constraining the class to a specific subclass?
+            String constraint = getConstraint(segments[i]);
+            if (constraint != null) {
+                String[] cvs = constraint.split("=");
+                if ("class".equals(cvs[0])) {
+                    String superclass = prevClass.getName();
+                    String packageName = superclass.substring(0,superclass.lastIndexOf('.'));
+                    String subclass = cvs[1];
+                    // Infer the same package. We can't specify packages with the path syntax.
+                    String fqSubclass = packageName+"."+subclass;
+                    try {
+                        prevClass = Class.forName(fqSubclass);
+                    }
+                    catch (ClassNotFoundException e) {
+                        log.error("Cannot find inferred subclass",e);
+                    }
+                }
             }
-            sb.append(c);
+            classes.add(prevClass);
         }
-
-        return sb.toString();
+        
+        return classes;
     }
+
+    /**
+     * Get anything that appears in brackets at the end of the string. For 
+     * example, in "gene[id=12]" return "id=12"
+     * @param attr
+     * @return
+     */
+    private String getConstraint(String attr) {
+        int a = attr.indexOf('[');
+        int b = attr.indexOf(']');
+        if (a > 0) {
+            return attr.substring(a+1,b);
+        }
+        return null;
+    }
+    
+//    /**
+//     * Just a little utility function to add spaces when there are very long 
+//     * character strings, so that they don't break the layout. Pathway names
+//     * from Reactome are a good example.
+//     * @param value
+//     * @return
+//     */
+//    private String breakLongLines(String value) {
+//
+//        StringBuffer sb = new StringBuffer();
+//        int charsSinceWhitespace = 0;
+//        for(int i=0; i<value.length(); i++) {
+//
+//            char c = value.charAt(i);
+//            if (Character.isWhitespace(c)) {
+//                charsSinceWhitespace = 0;
+//            }
+//            else {
+//                charsSinceWhitespace++;
+//            }
+//            
+//            if (charsSinceWhitespace > 40) {
+//                charsSinceWhitespace = 0;
+//                sb.append(" ");
+//            }
+//            sb.append(c);
+//        }
+//
+//        return sb.toString();
+//    }
     
 }

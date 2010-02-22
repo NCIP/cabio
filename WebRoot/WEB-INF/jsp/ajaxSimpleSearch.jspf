@@ -45,7 +45,7 @@ var caBioSimpleSearch = function() {
     function updateSummary() {
     
         // Print the list as a result summary, and replace the loading gif
-        var cabioSummary = '';
+        var caBioSummary = '';
         for (i in classes) {
         
             var ch = classes[i];
@@ -55,12 +55,12 @@ var caBioSimpleSearch = function() {
             var classHtml = (c == currClass) ? '<b>'+cf+'</b>' :
                 '<a href="javascript:caBioSimpleSearch.loadSearch(\''+c+'\')">'+cf+'</a>';
                 
-            if (cabioSummary != '') cabioSummary += ', ';
-            cabioSummary += '<nobr>'+classHtml+' ('+ch['hits']+')</nobr>';
+            if (caBioSummary != '') caBioSummary += ', ';
+            caBioSummary += '<nobr>'+classHtml+' ('+ch['hits']+')</nobr>';
             
         }
-        summaryHtml = '<div id="summaryInner">'+cabioSummary+'</div>';
-        jQuery("#cabioSummary").empty().append(summaryHtml);
+        summaryHtml = '<div class="summaryInner">'+caBioSummary+'</div>';
+        jQuery("#caBioSearch>.caBioSummary").empty().append(summaryHtml);
     } 
     
 	function doSearch(targetClass,page) {
@@ -79,9 +79,7 @@ var caBioSimpleSearch = function() {
 	    
 	    // Handle empty search
 	    if (searchString == '') {
-	    	jQuery("#searchResults").empty();
-            jQuery("#cabioNav").hide();
-            jQuery("#cabioSummary").hide();
+            jQuery("#caBioSearch").hide();
 	        return;
 	    }
 	    
@@ -126,16 +124,16 @@ var caBioSimpleSearch = function() {
 	    
 	    qr = jQuery("queryResponse",xml);
 	    if (qr.length == 0) {
-	        var cabioNumResults = '<div id="cabioNumResults">No results found for <b>'+searchString+'</b></div>';
-	        jQuery("#cabioNav").empty().append(cabioNumResults).show();
-            jQuery("#cabioSummary").hide();
+	        var caBioNumResults = '<div class="caBioNumResults">No results found for <b>'+searchString+'</b></div>';
+	        jQuery("#caBioSearch>.caBioNav").empty().append(caBioNumResults);
+	        jQuery("#caBioSearch>.caBioSummary").hide();
+	        jQuery("#searchResults").hide();
 	    }
 	    else {
 	    
 	        if (classes.length == 0) {
 	            // Load summary while we're processing results 
-	            caBioCommon.createLoadingImage("#cabioSummary");
-	            jQuery("#cabioSummary").show();
+	            h = jQuery("#caBioSearch>.caBioSummary").html(caBioCommon.getLoadingImage());
 	            
 		        var data = 'relativeURL=GetXML&query=SummaryQuery&SummaryQuery[@keyword='+searchString+']';
 		        jQuery.ajax({ 
@@ -156,10 +154,12 @@ var caBioSimpleSearch = function() {
             numPages = Math.ceil(numRecords / pageSize);
             
             var inHtml = (currClass == 'All') ? '':'in <b>'+caBioCommon.formatClassName(currClass)+'</b>';
-	        var cabioNumResults = '<div id="cabioNumResults">Results <b>'+startRecord+'</b> - <b>'
+	        var caBioNumResults = '<div class="caBioNumResults">Results <b>'+startRecord+'</b> - <b>'
 	                +endRecord+'</b> of <b>'+numRecords+'</b> result for <b>'+searchString+'</b> '+inHtml+'</div>';
 	                
-	        jQuery("#cabioNav").empty().append(cabioNumResults).show();
+	        jQuery("#caBioSearch>.caBioNav").empty().append(caBioNumResults);
+	        jQuery("#caBioSearch>.caBioSummary").show();
+            jQuery("#searchResults").show();
 	
 	        // Attempt to show enough text to fill the current portlet width
 	        var width = jQuery("#cabio")[0].offsetWidth;
@@ -213,8 +213,8 @@ var caBioSimpleSearch = function() {
 	        }
 	    }
 	    
-        jQuery("#objectDetails").hide();
-        jQuery("#searchResults").show();
+        jQuery("#caBioDetails").hide();
+        jQuery("#caBioSearch").show();
 	    caBioCommon.enabledUI(true);
 	}
 	
@@ -229,7 +229,7 @@ var caBioSimpleSearch = function() {
         if (qr.length == 0) {
             // This should never happen. Presumably, we just got results for 
             // this search term a moment ago, so we should be able to get a summary. 
-            jQuery("#cabioSummary").empty().append('Could not retrieve result summary at this time.');
+            jQuery("#caBioSearch>.caBioSummary").empty().append('Could not retrieve result summary at this time.');
         }
         else {
             // Create a list of result classes sorted by number of results per class
@@ -283,8 +283,8 @@ var caBioSimpleSearch = function() {
 <input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/>
 <br/>
 
-<a id="adv_link" href="javascript:caBioCommon.toggleDropBox('#adv_box')">Advanced Options</a>
-<div id="adv_box">
+<a id="adv_link">Advanced Options</a>
+<div id="adv_box" class="advancedOptions">
 	Match Terms:
 	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
 	<input type="radio" name="matchMode" id="matchAll"> all 
@@ -303,10 +303,16 @@ var caBioSimpleSearch = function() {
 	</select>
 </div>
 
-<div id="cabioNav" style="display: none"></div>
-<div id="cabioSummary" style="display: none"></div>
-<div class="results" id="objectDetails"></div>
-<div class="results" id="searchResults"></div>
+<div id="caBioSearch" style="display: none">
+	<div class="caBioNav"></div>
+	<div class="caBioSummary"></div>
+	<div id="searchResults"></div>
+</div>
+
+<div id="caBioDetails" style="display: none">
+    <div class="caBioNav"></div>
+    <div id="objectDetails"></div>
+</div>
 
 <script language="javascript">
 
@@ -314,7 +320,7 @@ jQuery(document).ajaxError(caBioCommon.restError);
 
 jQuery(document).ready(function(){
 
-    caBioCommon.createDropBox("#adv_link");
+    caBioCommon.createDropBox("#adv_link","#adv_box");
     
     jQuery.historyInit(caBioCommon.loadFromHash);
     

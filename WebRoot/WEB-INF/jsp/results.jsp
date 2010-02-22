@@ -2,26 +2,27 @@
 
 <script type="text/javascript" src="<c:url value="/js/jquery.history.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/cabio_objdetails.js"/>"></script>
-
 <script type="text/javascript"  src="<c:url value="/js/jquery.bgiframe.js"/>"></script>
 <script type="text/javascript"  src="<c:url value="/js/jquery.dimensions.min.js"/>"></script>
 <script type="text/javascript"  src="<c:url value="/js/jquery.tooltip.js"/>"></script>
 
+<div id="caBioSearch">
+
 <c:choose>
 <c:when test="${results.numRecords == 0}">
 
-    <div id="cabioNav">
-	   <div id="summary">No results found</div>
+    <div class="caBioNav">
+	   <div class="caBioNumResults">No results found</div>
     </div>
 	
 </c:when>
 <c:otherwise>
 
-    <div id="cabioNav">
-	    <div id="navback">
+    <div class="caBioNav">
+	    <div class="caBioNavBack">
 	        <a href="<%= session.getAttribute("portletURL") %>">&#171; Return to templates</a>
 	    </div>
-		<div id="summary">Results <b><c:out value="${results.startRecord}"/></b> - <b>
+		<div class="caBioNumResults">Results <b><c:out value="${results.startRecord}"/></b> - <b>
 		  <c:out value="${results.endRecord}"/></b> of <b><c:out value="${results.numRecords}"/></b> 
 		  (click on a row to view details)
 		</div>
@@ -32,21 +33,19 @@
 
 <c:if test="${results.numRecords > 0}">
 
-<div class="results" id="objectDetails"></div>
-<div class="results" id="searchResults">
-<div class="cannedResults">
+<div id="searchResults" class="cannedResults">
 
   	<c:forEach var="element" items="${results.items}">
 	<c:set var="classConfig" value="${objectConfig.classes[element.key]}"/>
    
-    <h3><c:out value="${classConfig.label}" default="${element.key}"/></h3>
+    <h3><c:out value="${classConfig.plural}" default="${element.key}"/></h3>
     <table>
     
 	<tr>
 	
     <c:choose>
     <c:when test="${classConfig != null}">
-	    <c:forEach var="attr" items="${classConfig.attributes}">
+	    <c:forEach var="attr" items="${classConfig.summaryAttributes}">
 	        <th><c:out value="${attr.label}"/></th>
 	    </c:forEach>
     </c:when>
@@ -66,7 +65,7 @@
 	    <c:choose>
 	    <c:when test="${classConfig != null}">
     
-		   	<c:forEach var="attr" items="${classConfig.attributes}">
+		   	<c:forEach var="attr" items="${classConfig.summaryAttributes}">
 				<td>
                 <script type="text/javascript">
                 var v = '<c:out value="${item.displayMap[attr.name]}"/>';
@@ -114,6 +113,7 @@ var caBioResults = function() {
 	},
 	
     changeStyle : function (obj, newClass) {
+        if (!caBioCommon.isUIEnabled()) return;
         obj.className = newClass;
     },
     
@@ -137,6 +137,11 @@ jQuery(document).ready(function(){
 </script>
 
 </div>
+</div>
+
+<div id="caBioDetails" style="display: none">
+    <div class="caBioNav"></div>
+    <div id="objectDetails"></div>
 </div>
 
 </c:if>

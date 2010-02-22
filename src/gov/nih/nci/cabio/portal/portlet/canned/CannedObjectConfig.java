@@ -1,11 +1,12 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.portal.portlet.printers.JSONPrinter;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,11 +45,14 @@ public class CannedObjectConfig {
     public CannedObjectConfig() throws Exception {
         
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-            getClass().getResourceAsStream("/cannedObject.conf")));
+            getClass().getResourceAsStream("/cannedObject.txt")));
         
-        String line = null;
+        String line = reader.readLine(); // discard header
+        
         while((line = reader.readLine()) != null) {
-            if ("".equals(line.trim())) continue;
+            
+            if ("".equals(line.trim())) continue; // discard empty lines
+            
             String[] v = line.split("\t");
 
             if (v.length < 4) {
@@ -56,7 +60,7 @@ public class CannedObjectConfig {
             }
             
             try {
-                if ("class".equals(v[3])) {
+                if ("CLASS".equals(v[3])) {
                     classes.put(v[0], new ClassObject(v[0], v[1], v[2]));
                 }
                 else {
@@ -65,13 +69,10 @@ public class CannedObjectConfig {
                         throw new Exception("Class not defined before use: "+v[0]);
                     }
                     
-                    JSONPrinter printer = null;
-                    if (v.length > 4) {
-                        printer = (JSONPrinter)Class.forName(v[4]).newInstance();
-                    }
-                    
-                    classObj.addAttribute(v[1], v[2], 
-                        v[3].contains("A"), v[3].contains("D"), printer);
+                    Set<String> roles = new HashSet(Arrays.asList(v[3].split(" ")));
+                    String externalLink = v.length > 4 ? v[4] : null;
+                    String internalLink = v.length > 5 ? v[5] : null;
+                    classObj.addAttribute(v[1], v[2], externalLink, internalLink, roles);
                 }
             }
             catch (Exception e) {
@@ -95,7 +96,7 @@ public class CannedObjectConfig {
         for(String className : classes.keySet()) {
             ClassObject config = classes.get(className);
             System.out.println(className+": "+config.getLabel());
-            for(LabeledObject attr : config.getDetailAttributes()) {
+            for(LabeledObject attr : config.getAttributesForRole("SUMMARY")) {
                 System.out.println("\t"+attr.getName()+": "+attr.getLabel());
             }
         }

@@ -1,6 +1,6 @@
 package gov.nih.nci.cabio.portal.portlet.canned;
 
-import gov.nih.nci.cabio.portal.portlet.printers.JSONPrinter;
+import java.util.Set;
 
 /**
  * A path in the object model that will be printed.
@@ -12,22 +12,23 @@ import gov.nih.nci.cabio.portal.portlet.printers.JSONPrinter;
  * This would print the first location's assembly under the heading "Assembly".
  * The path expression syntax is defined by the CannedObjectConfig class.
  * 
- * This class also allows for the configuration of a special "printer" for 
- * non-standard representations. For example, a collection of genes might 
- * be printed as a table, instead of the standard comma-delimited list.
- * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
  */
 public class LabeledObject {
 
     private String name;
     private String label;
-    private JSONPrinter printer;
+    private String externalLink;
+    private String internalLink;
+    private Set<String> roles;
     
-    public LabeledObject(String name, String label, JSONPrinter printer) {
+    public LabeledObject(String name, String label, String externalLink, 
+            String internalLink, Set<String> roles) {
         this.name = name;
         this.label = label;
-        this.printer = printer;
+        this.externalLink = externalLink;
+        this.internalLink = internalLink;
+        this.roles = roles;
     }
 
     public String getName() {
@@ -38,8 +39,16 @@ public class LabeledObject {
         return label;
     }
     
-    public JSONPrinter getPrinter() {
-        return printer;
+    public String getExternalLink() {
+        return externalLink;
+    }
+    
+    public String getInternalLink() {
+        return internalLink;
+    }
+    
+    public boolean isDisplayedForRole(String role) {
+        return roles.contains(role);
     }
 
     /**

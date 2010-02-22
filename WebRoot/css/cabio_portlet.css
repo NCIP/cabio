@@ -1,3 +1,64 @@
+/** Errors */
+
+div.error {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+
+/** Navigation Bars */
+
+div.caBioNav {
+    border: 1px solid #99d;
+    border-top: none;
+    background: #ddf;
+    width: 100%;
+    margin-top: 15px;
+}
+
+div.caBioNav div.caBioNavBack {
+    border-top: 1px solid #99b;
+    padding: 3px;
+}
+
+div.caBioNav div.caBioNavBack a {
+    text-decoration: none;
+}
+
+div.caBioNav div.caBioNavBack a:hover {
+    text-decoration: underline;
+}
+
+div.caBioNav div.caBioNumResults {
+    border-top: 1px solid #99b;
+    padding: 3px;
+}
+
+div.caBioSummary {
+    border: 1px solid #99d;
+    border-top: none;
+    background: #fafadd;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+div.caBioSummary div.summaryInner {
+    padding: 3px;
+}
+
+/** Pager */
+
+div.pages {
+    width: 100%;
+    padding: 2px;
+    margin-top: 20px;
+}
+
+
+/** Simple Search Results */
+
 div.result {
     margin-top: 10px;
 }
@@ -20,115 +81,76 @@ div.result span.className {
 }
 
 
-div#cabioNav {
-    border: 1px solid #99d;
-    border-top: none;
-    background: #ddf;
-    width: 100%;
-    margin-top: 15px;
-}
+/** Advanced Options */
 
-div#cabioSummary {
-    border: 1px solid #99d;
-    border-top: none;
-    background: #fafadd;
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
-
-div#navback {
-    border-top: 1px solid #99b;
+div.advancedOptions {
+    margin-left: 10px;
+    margin-top: 2px;
     padding: 3px;
+    display: none;
 }
 
-div#navback a {
-    text-decoration: none;
-}
 
-div#navback a:hover {
-    text-decoration: underline;
-}
-
-div#cabioNumResults {
-    border-top: 1px solid #99b;
-    padding: 3px;
-}
-
-div#summaryInner {
-    padding: 3px;
-}
-
-div.pages {
-    width: 100%;
-    padding: 2px;
-    margin-top: 20px;
-}
-
-div.error {
-    margin-top: 10px;
-    color: red;
-    font-weight: bold;
-}
+/** Object Details */
 
 table.properties {
-    margin-top: 5px;
     border-collapse: collapse;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 40em; 
 }
 
 table.properties th {
-    font-weight: normal;
+    font-weight: bold;
     text-align: left;
     vertical-align: top;
-    width: 30%;
     border: 1px solid #aaa;
     padding: 2px;
     background-color: #eeeeee;
 }
 
-table.properties th.header {
-    font-size: 1.1em;
-    font-weight: bold;
+table.properties .propertyName {
+    width: 30%;
 }
 
 table.properties td {
     font-weight: normal;
     border: 1px solid #aaa;
     padding: 2px;
+    vertical-align: top;
 }
 
-table.properties div.value {
-    height: expression( this.scrollHeight > 249 ? "250px" : "auto" ); /* sets max-height for IE */
-    max-height: 250px; /* sets max-height value for all standards-compliant browsers */
+div.height-limited {
+    height: expression( this.scrollHeight > 139 ? "140px" : "auto" ); /* sets max-height for IE */
+    max-height: 140px; /* sets max-height value for all standards-compliant browsers */
     /* can't set IE max-width because a scrollbar will obscure a single line... */ 
     /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
     max-width: 500px; /* sets max-width value for all standards-compliant browsers */
     overflow: auto;
 }
 
-table.nested {
-	width: 95%;
-    border-collapse: collapse;
+#objectAttributes h3 {
+    margin-top: 5px;
+    font: 1.2em Verdana, sans-serif; 
+    font-weight: bold; 
+    color: #882200;
 }
 
-table.nested th {
-    width: auto;
-    border: 1px solid #aaa;
-    background-color: #eeeeee;
+#objectAssociations div.assoc h3 {
+    margin-top: 5px;
+}
+
+#objectAssociations div.assoc h3 a {
+    font: 1.0em Verdana, sans-serif; 
     font-weight: bold;
-    padding: 2px;
-}
-	
-table.nested td {
-    border: 1px solid #aaa;
-    font-weight: normal;
-    padding: 2px;
+    text-decoration: none;
 }
 
-div.externalLinks h3 {
-	margin-top: 10px;
-	font-weight: bold;
-	font-size: 1.1em;
+#objectLinks h3 {
+    margin-top: 5px;
+    font: 1.0em Verdana, sans-serif; 
+    font-weight: bold; 
+    color: #882200;
 }
 
 div.externalLinks ul {
@@ -136,16 +158,8 @@ div.externalLinks ul {
     list-style-position: inside;
 }
 
-div#adv_box {
-    margin-left: 10px;
-    margin-top: 2px;
-    padding: 3px;
-    display: none;
-}
 
-div.pathwayDiagram {
-    display: none;
-}
+/** Modal overlay */
 
 #modalOverlay {
     background-color: #000;
@@ -158,6 +172,8 @@ div.pathwayDiagram {
     margin-left: -300px;
     background-color:#000;
 }
+
+/** Tooltips */
 
 #tooltip {
     position: absolute;
@@ -172,6 +188,9 @@ div.pathwayDiagram {
 	font-size: 1.1em;
 	font-weight: normal;
 }
+
+
+/** Templated Searches */
 
 div.category {
     display: block;
@@ -204,6 +223,8 @@ div.query table tr td {
     padding: 3px;
 }
 
+
+/** Templated Searches Results */
 
 div.cannedResults h3 {
     margin-top: 10px;
@@ -242,6 +263,9 @@ div.cannedResults table tr.highlight td {
     cursor:pointer;
     cursor:hand;
 }
+
+
+/** Auto-Complete */
     
 .ac_results {
     border: 1px solid gray;

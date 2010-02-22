@@ -15,6 +15,7 @@ import gov.nih.nci.cabio.domain.SNPArrayReporter;
 import gov.nih.nci.cabio.domain.SNPPhysicalLocation;
 import gov.nih.nci.cabio.domain.TranscriptPhysicalLocation;
 import gov.nih.nci.common.util.QueryUtils;
+import gov.nih.nci.common.util.ReflectionUtils;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
@@ -39,13 +40,13 @@ public class ReportService {
 
     private static final String PHYSICAL_LOCATION_HQL = 
              "select loc from gov.nih.nci.cabio.domain.PhysicalLocation loc " +
-             "left join fetch loc.chromosome as chrom " +
+             "left outer join fetch loc.chromosome as chrom " +
              "where ";
     
     private static final String GENES_BY_AGENT_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneAgentAssociation assoc " +
-             "left join fetch assoc.gene as gene " +
-             "left join fetch assoc.agent as agent " +
+             "left outer join fetch assoc.gene as gene " +
+             "left outer join fetch assoc.agent as agent " +
              "where ";
 
     private static final String GENES_BY_AGENT_EVIDENCE_HQL = 
@@ -63,8 +64,8 @@ public class ReportService {
      
     private static final String GENES_BY_DISEASE_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneDiseaseAssociation assoc " +
-             "left join fetch assoc.gene as gene " +
-             "left join fetch assoc.diseaseOntology as disease " +
+             "left outer join fetch assoc.gene as gene " +
+             "left outer join fetch assoc.diseaseOntology as disease " +
              "where ";
 
     private static final String GENES_BY_DISEASE_EVIDENCE_HQL = 
@@ -83,7 +84,7 @@ public class ReportService {
     
     private static final String GENE_ASSOCIATIONS_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
-             "left join fetch assoc.gene as gene " +
+             "left outer join fetch assoc.gene as gene " +
              "where ";
 
     private static final String GENE_ASSOCIATIONS_EVIDENCE_HQL = 
@@ -104,8 +105,8 @@ public class ReportService {
     
     private static final String REPORTERS_BY_GENE_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.ExpressionArrayReporter reporter " +
-             "left join fetch reporter.gene as gene " +
-             "left join fetch reporter.microarray " +
+             "left outer join fetch reporter.gene as gene " +
+             "left outer join fetch reporter.microarray " +
              "where ";
     
     private static final String REPORTERS_BY_GENE_HQL_WHERE = 
@@ -113,8 +114,8 @@ public class ReportService {
 
     private static final String REPORTERS_BY_SNP_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.SNPArrayReporter reporter " +
-             "left join fetch reporter.SNP as SNP " +
-             "left join fetch reporter.microarray " +
+             "left outer join fetch reporter.SNP as SNP " +
+             "left outer join fetch reporter.microarray " +
              "where ";
     
     private static final String REPORTERS_BY_SNP_HQL_WHERE = 
@@ -122,19 +123,17 @@ public class ReportService {
 
     private static final String GENES_BY_SYMBOL_HQL = 
              "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-             "left join fetch gene.databaseCrossReferenceCollection as dbxr " +
-             "left join fetch gene.chromosome " +
-             "left join fetch gene.taxon as taxon " +
-             "where dbxr.dataSourceName = 'LOCUS_LINK_ID' " +
-             "and ";
+             "left outer join fetch gene.chromosome " +
+             "left outer join fetch gene.taxon as taxon " +
+             "where ";
              
     private static final String GENES_BY_SYMBOL_HQL_WHERE = 
              "lower(gene.symbol) like ?";
 
      private static final String GO_BY_SYMBOL_HQL = 
              "select distinct geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
-             "left join geneOntology.geneCollection as genes " +
-             "left join genes.proteinCollection as proteins " +
+             "left outer join geneOntology.geneCollection as genes " +
+             "left outer join genes.proteinCollection as proteins " +
              "where "; 
 
     private static final String GO_BY_PROTEIN_NAME_HQL_WHERE = 
@@ -196,6 +195,28 @@ public class ReportService {
         detailObjectHQL.put(Pathway.class, PATHWAY_BY_SYMBOL_HQL);
     }
     
+    /**
+     * Returns the Collection association for the specified object and rolename.
+     * @param clazz A caBIO bean class 
+     * @param id Internal caBIO id of the object
+     * @param targetAssoc rolename of the association to follow 
+     * @return Object with certain associations preloaded
+     * @throws ApplicationException
+     */
+    public List getDetailObjects(Class clazz, Long id, String targetAssoc) 
+            throws Exception {
+
+        if (!clazz.getPackage().getName().startsWith("gov.nih.nci.cabio.")) {
+            throw new ApplicationException("Invalid class specified.");
+        }
+        
+        Object criteria = clazz.newInstance();
+        ReflectionUtils.set(criteria, "id", id);
+        List results = appService.getAssociation(criteria, targetAssoc);
+                
+        if (results.isEmpty()) return null;
+        return results;
+    }
 
     /**
      * Returns the detail object graph for the specified class/id combination.
@@ -206,15 +227,11 @@ public class ReportService {
      */
     public Object getDetailObject(Class clazz, Long id) 
             throws ApplicationException {
-
-        if (!clazz.getPackage().getName().startsWith("gov.nih.nci.cabio.")) {
-            throw new ApplicationException("Invalid class specified.");
-        }
         
-        String hql = detailObjectHQL.get(clazz);
+        String hql =detailObjectHQL.get(clazz);
 
         if (hql == null) {
-            hql = "select o from "+clazz.getName()+" o where o.id = ?";
+            hql = "from "+clazz.getName()+" o where o.id = ?";
         }
         else {
             Matcher m = Pattern.compile("^select (\\w+?) from.*").matcher(hql);
@@ -230,7 +247,6 @@ public class ReportService {
         if (results.isEmpty()) return null;
         return results.iterator().next();
     }
-    
     
     /**
      * Returns all gene associations for a given agent.  
