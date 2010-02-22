@@ -51,5 +51,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sdk-grid-remoting.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sdk-security.jar"/>
+	<classpathentry kind="lib" path="conf"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
