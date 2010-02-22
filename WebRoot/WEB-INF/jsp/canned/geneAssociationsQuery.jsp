@@ -10,9 +10,9 @@
     <tr><td title="Unigene or HUGO gene symbol">Gene Symbol</td><td>
     <html:text property="geneSymbol" size="30"/>
     </td></tr>
-
+    <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>
     </table>
-
+    
     <html:submit>Search</html:submit>
     <html:reset>Reset</html:reset>
 

@@ -10,7 +10,7 @@
     <tr><td title="Agent name or EVS concept code">Agent (name or concept code)</td><td>
     <html:text property="agent" size="30"/>
     </td></tr>
-
+    <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>    
     </table>
 
     <html:submit>Search</html:submit>

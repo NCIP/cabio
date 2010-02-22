@@ -10,7 +10,7 @@
     <tr><td title="Disease Name or EVS concept code Id">Disease (name or concept code)</td><td>
     <html:text property="disease" size="30"/>
     </td></tr>
-
+    <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>
     </table>
 
     <html:submit>Search</html:submit>
