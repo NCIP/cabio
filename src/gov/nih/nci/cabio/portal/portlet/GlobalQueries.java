@@ -2,20 +2,19 @@ package gov.nih.nci.cabio.portal.portlet;
 
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Microarray;
-import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.Taxon;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -40,7 +39,7 @@ public class GlobalQueries {
     
     private List<Microarray> microarrays;
     
-    private List<Pathway> pathwaySources;
+    private List<NameValuePair> pathwaySources;
     
     /**
      * Create a new instance of GlobalQueries and attempt to preload all the 
@@ -102,9 +101,9 @@ public class GlobalQueries {
      * Returns a list of Pathway providers in caBIO.
      * @return list of String objects
      */
-    public List<Pathway> getPathwaySources() {
+    public List<NameValuePair> getPathwaySources() {
         if (pathwaySources == null || pathwaySources.isEmpty()) loadPathwaySources();
-        if (pathwaySources == null || pathwaySources.isEmpty()) return new ArrayList<Pathway>();
+        if (pathwaySources == null || pathwaySources.isEmpty()) return new ArrayList<NameValuePair>();
         return pathwaySources;
     }
     
@@ -176,18 +175,14 @@ public class GlobalQueries {
         
         try {
             log.info("Loading pathway data...");
-            pathwaySources = new ArrayList<Pathway>();
-            List<Pathway> pathways = as.search(Pathway.class, new Pathway());
-            Set<String> pathwaySourceNames = new HashSet<String>(); 
-            
-            for (Pathway p : pathways) {
-            	String source = p.getSource();            	
-            	 if (source.length() > 0 && (!(pathwaySourceNames.contains(source)))) {
-            		 
-            		pathwaySourceNames.add(source);
-            		pathwaySources.add(p);
-                	}
-                }                    
+            pathwaySources = new ArrayList<NameValuePair>();
+            String hql = "select distinct source from gov.nih.nci.cabio.domain.Pathway";
+            List<String> sources = as.query(new HQLCriteria(hql));
+            for(String source : sources) {
+                NameValuePair nv = new NameValuePair(source,source);
+                pathwaySources.add(nv);
+            }
+              
             log.info("Done loading pathway data.");
         }
         catch (Exception e) {

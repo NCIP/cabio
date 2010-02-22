@@ -10,7 +10,7 @@
     <tr><td title="Pathway Source">Pathway Source</td><td>
     <html:select property="pathwaySource">
     <html:option value="">Select...</html:option>
-    <html:optionsCollection name="globalQueries" property="pathwaySources" value="source" label="source"/>
+    <html:optionsCollection name="globalQueries" property="pathwaySources" label="name"/>
     </html:select>
     </td></tr>
     
