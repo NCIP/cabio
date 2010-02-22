@@ -39,7 +39,7 @@ public abstract class GetOnlyMap<T> implements Map<String,T> {
         throw new UnsupportedOperationException();
     }
 
-    public T put(String key, Object value) {
+    public T put(String key, T value) {
         throw new UnsupportedOperationException();
     }
 
