@@ -20,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ * @author <a href="mailto:sunj2@mail.nih.gov">Jim Sun</a>
  */
 public class AgentToGenesQueryAction extends Action {
 
@@ -41,11 +42,17 @@ public class AgentToGenesQueryAction extends Action {
 	    try {
 	        AgentToGenesQueryForm f = (AgentToGenesQueryForm)form;
             String agentInput = f.getAgent();
+	        String negationStatus = f.getSentenceType();
+	        String finishedSentence = f.getFinishedSentence();
+	        String celllineStatus = f.getCellline();
 	        
             log.info("agent: "+agentInput);
             log.info("page: "+f.getPage());
 
-            List<GeneAgentAssociation> results =  rs.getGenesByAgent(agentInput);
+            List<GeneAgentAssociation> results =  
+            	   rs.getGenesByAgentWithEvidenceProperties(
+            			   agentInput, negationStatus, finishedSentence, celllineStatus);
+            
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
             return mapping.findForward("cabioportlet.agentToGenesQuery.results");
 	    }
