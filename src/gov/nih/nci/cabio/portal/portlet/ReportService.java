@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
  * (i.e. any collection).
  * 
  * @author <a href="mailto:rokickik@mail.nih.gov">Konrad Rokicki</a>
+ * @author <a href="mailto:sunj2@mail.nih.gov">Jim Sun</a>
  */
 public class ReportService {
 
@@ -46,6 +47,13 @@ public class ReportService {
              "left join fetch assoc.gene as gene " +
              "left join fetch assoc.agent as agent " +
              "where ";
+
+    private static final String GENES_BY_AGENT_EVIDENCE_HQL = 
+        "select assoc from gov.nih.nci.cabio.domain.GeneAgentAssociation assoc " +
+        "left join fetch assoc.gene as gene " +
+        "left join fetch assoc.agent as agent " +
+        "left join fetch assoc.evidenceCollection as evidence " +
+        "where ";
     
     private static final String GENES_BY_AGENT_HQL_WHERE_NAME = 
              "lower(agent.name) like ?";
@@ -58,6 +66,14 @@ public class ReportService {
              "left join fetch assoc.gene as gene " +
              "left join fetch assoc.diseaseOntology as disease " +
              "where ";
+
+    private static final String GENES_BY_DISEASE_EVIDENCE_HQL = 
+        "select assoc from gov.nih.nci.cabio.domain.GeneDiseaseAssociation assoc " +
+        "left join fetch assoc.gene as gene " +
+        "left join fetch assoc.diseaseOntology as disease " +
+        "left join fetch assoc.evidenceCollection as evidence " +
+        "where ";
+
     
     private static final String GENES_BY_DISEASE_HQL_WHERE_NAME = 
              "lower(disease.name) like ?";
@@ -69,10 +85,23 @@ public class ReportService {
              "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
              "left join fetch assoc.gene as gene " +
              "where ";
+
+    private static final String GENE_ASSOCIATIONS_EVIDENCE_HQL = 
+        "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
+        "left join fetch assoc.gene as gene " +
+        "left join fetch assoc.evidenceCollection as evidence " +
+        "where ";
     
     private static final String GENE_ASSOCIATIONS_HQL_WHERE = 
              "lower(gene.symbol) like ?";
 
+    private static final String EVIDENCE_NEGATION_STATUS_WHERE = 
+                                       "evidence.negationStatus=?";
+    private static final String EVIDENCE_CELLLINE_STATUS_WHERE = 
+                              "evidence.celllineStatus=?";
+    private static final String EVIDENCE_SENTENCE_STATUS_WHERE = 
+        "evidence.sentenceStatus=?";
+    
     private static final String REPORTERS_BY_GENE_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.ExpressionArrayReporter reporter " +
              "left join fetch reporter.gene as gene " +
@@ -140,6 +169,9 @@ public class ReportService {
     private final CaBioApplicationService appService;
     
     private Map<Class, String> detailObjectHQL = new HashMap<Class, String>();
+    
+    static public String EVIDENCE_SENTENCE_STATUS_FINISHED = "finished";    
+    static public String EVIDENCE_CELLLINE_DATA = "yes";
     
     /**
      * Constructor 
@@ -224,7 +256,39 @@ public class ReportService {
             QueryUtils.createCountQuery(hql),params));
     }
 
-    
+
+    /**
+     * Returns all gene associations for a given agent.  
+     * @param agentNameOrCui Agent.name or Agent.EVSId
+     * @param negationStatus   Evidence.negationStatus
+     * @param finishedSentence Evidence.finishedSentence
+     * @param celllineStatus   Evidence.celllineStatus          
+     * @return List of GeneAgentAssociation, with preloaded genes and agents
+     * @throws ApplicationException
+     */
+    public List<GeneAgentAssociation> getGenesByAgentWithEvidenceProperties(
+    		String agentNameOrCui, String negationStatus, 
+            String finishedSentence, String celllineStatus) 
+            throws ApplicationException {
+
+        String nameOrCui = convertInput(agentNameOrCui);
+        List<String> params = getListWithId(nameOrCui);
+        
+        String hql = GENES_BY_AGENT_EVIDENCE_HQL;
+        if (nameOrCui.matches("^c(\\d+)%?$")) {
+            hql += GENES_BY_AGENT_HQL_WHERE_CUI;
+        }
+        else {
+            hql += GENES_BY_AGENT_HQL_WHERE_NAME;
+        }
+
+        hql += composeEvidencePropertiesWhereClause(negationStatus, 
+	            finishedSentence, celllineStatus, params);
+        
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+    }
+        
     /**
      * Returns all gene associations for a given disease.  
      * @param diseaseNameOrCui Disease.name or Disease.EVSId
@@ -249,7 +313,95 @@ public class ReportService {
             QueryUtils.createCountQuery(hql),params));
     }
     
+    /**
+     * Returns all gene associations for a given disease
+     * @param diseaseNameOrCui Disease.name or Disease.EVSId
+     * @param negationStatus   Evidence.negationStatus
+     * @param finishedSentence Evidence.finishedSentence
+     * @param celllineStatus   Evidence.celllineStatus     
+     * @return List of GeneDiseaseAssociation, with preloaded genes and diseases
+     * @throws ApplicationException
+     */
+    public List<GeneDiseaseAssociation> getGenesByDiseaseWithEvidenceProperties(
+                    String diseaseNameOrCui, String negationStatus, 
+                    String finishedSentence, String celllineStatus) throws ApplicationException {
 
+        String nameOrCui = convertInput(diseaseNameOrCui);
+        List<String> params = getListWithId(nameOrCui);
+
+        String hql = GENES_BY_DISEASE_EVIDENCE_HQL;
+        if (nameOrCui.matches("^c(\\d+)%?$")) {
+            hql += GENES_BY_DISEASE_HQL_WHERE_CUI;
+        }
+        else {
+            hql += GENES_BY_DISEASE_HQL_WHERE_NAME;
+        }
+
+        hql += composeEvidencePropertiesWhereClause(negationStatus, 
+	            finishedSentence, celllineStatus, params);
+        
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+    }
+
+    
+    /**
+     * Returns all gene associations for a given gene symbol.  
+     * @param geneSymbol Gene.symbol or Gene.hugoSymbol
+     * @param negationStatus   Evidence.negationStatus
+     * @param finishedSentence Evidence.finishedSentence
+     * @param celllineStatus   Evidence.celllineStatus     
+     * @return List of GeneDiseaseAssociation, with preloaded genes 
+     * @throws ApplicationException
+     */
+    public List<GeneFunctionAssociation> getGeneAssociationsWithEvidenceProperties(
+            String geneSymbol, String negationStatus, String finishedSentence, String celllineStatus) throws ApplicationException {
+         
+        String hql = GENE_ASSOCIATIONS_EVIDENCE_HQL                      
+                     + GENE_ASSOCIATIONS_HQL_WHERE;        
+        List<String> params = getListWithId(convertInput(geneSymbol));
+        
+        hql += composeEvidencePropertiesWhereClause(negationStatus, 
+        		            finishedSentence, celllineStatus, params);
+        
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+    }
+    
+    /**
+     * @param negationStatus   Evidence.negationStatus
+     * @param finishedSentence Evidence.finishedSentence
+     * @param celllineStatus   Evidence.celllineStatus
+     * @param params the parameters for HQL query
+     * @return where clause for the Evidence properties 
+     */
+    private String composeEvidencePropertiesWhereClause(String negationStatus, 
+    		                       String finishedSentence, String celllineStatus,
+    		                       List<String> params)
+    {
+    	StringBuffer evWhere = new StringBuffer();
+    	
+        if ( "yes".equalsIgnoreCase( negationStatus) || "no".equalsIgnoreCase(negationStatus))
+        {
+        	evWhere.append(" and " +  EVIDENCE_NEGATION_STATUS_WHERE);
+	        params.add(negationStatus);          	
+        } // otherwise, query for all the negationStatus
+        
+        if ( "on".equalsIgnoreCase(finishedSentence))
+        {
+        	evWhere.append(" and " + EVIDENCE_SENTENCE_STATUS_WHERE);
+	        params.add(EVIDENCE_SENTENCE_STATUS_FINISHED);
+        } 
+        
+        if ( "on".equalsIgnoreCase(celllineStatus))
+        {
+        	evWhere.append(" and " + EVIDENCE_CELLLINE_STATUS_WHERE);
+	        params.add(EVIDENCE_CELLLINE_DATA);
+        }
+
+    	return evWhere.toString();
+    }
+    
     /**
      * Returns all gene associations for a given gene symbol.  
      * @param geneSymbol Gene.symbol or Gene.hugoSymbol
@@ -264,8 +416,8 @@ public class ReportService {
         return appService.query(new HQLCriteria(hql,
             QueryUtils.createCountQuery(hql),params));
     }
-    
 
+    
     /**
      * Returns all reporters for a given gene symbol.  
      * @param geneSymbol Gene.symbol or Gene.hugoSymbol
