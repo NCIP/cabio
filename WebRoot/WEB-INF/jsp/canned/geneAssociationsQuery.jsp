@@ -7,7 +7,7 @@
 
     <table>
     
-    <tr><td title="Unigene or HUGO gene symbol">Gene Symbol</td><td>
+    <tr><td title="Gene symbol or alias">Gene Symbol or Alias</td><td>
     <html:text property="geneSymbol" size="30"/>
     </td></tr>
     <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>

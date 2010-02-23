@@ -22,10 +22,14 @@ import gov.nih.nci.system.query.hibernate.HQLCriteria;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Convenience class for Templated Searches. The queries defined here do 
@@ -38,6 +42,8 @@ import java.util.regex.Pattern;
  */
 public class ReportService {
 
+    private static Log log = LogFactory.getLog(ReportService.class);
+    
     private static final String PHYSICAL_LOCATION_HQL = 
              "select loc from gov.nih.nci.cabio.domain.PhysicalLocation loc " +
              "left outer join fetch loc.chromosome as chrom " +
@@ -75,7 +81,6 @@ public class ReportService {
         "left join fetch assoc.evidenceCollection as evidence " +
         "where ";
 
-    
     private static final String GENES_BY_DISEASE_HQL_WHERE_NAME = 
              "lower(disease.name) like ?";
 
@@ -85,32 +90,35 @@ public class ReportService {
     private static final String GENE_ASSOCIATIONS_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
              "left outer join fetch assoc.gene as gene " +
+             "left outer join gene.geneAliasCollection alias " +
              "where ";
 
     private static final String GENE_ASSOCIATIONS_EVIDENCE_HQL = 
-        "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
-        "left join fetch assoc.gene as gene " +
-        "left join fetch assoc.evidenceCollection as evidence " +
-        "where ";
+            "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
+            "left join fetch assoc.evidenceCollection as evidence " +
+            "left join fetch assoc.gene as gene " +
+            "left outer join gene.geneAliasCollection alias " +
+            "where ";
     
     private static final String GENE_ASSOCIATIONS_HQL_WHERE = 
-             "lower(gene.symbol) like ?";
+            "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
 
     private static final String EVIDENCE_NEGATION_STATUS_WHERE = 
                                        "evidence.negationStatus=?";
     private static final String EVIDENCE_CELLLINE_STATUS_WHERE = 
                               "evidence.celllineStatus=?";
     private static final String EVIDENCE_SENTENCE_STATUS_WHERE = 
-        "evidence.sentenceStatus=?";
+            "evidence.sentenceStatus=?";
     
     private static final String REPORTERS_BY_GENE_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.ExpressionArrayReporter reporter " +
-             "left outer join fetch reporter.gene as gene " +
              "left outer join fetch reporter.microarray " +
+             "left outer join fetch reporter.gene as gene " +
+             "left outer join gene.geneAliasCollection alias " +
              "where ";
     
     private static final String REPORTERS_BY_GENE_HQL_WHERE = 
-             "lower(gene.symbol) like ?";
+             "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
 
     private static final String REPORTERS_BY_SNP_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.SNPArrayReporter reporter " +
@@ -123,12 +131,13 @@ public class ReportService {
 
     private static final String GENES_BY_SYMBOL_HQL = 
              "select gene from gov.nih.nci.cabio.domain.Gene gene " +
+             "left outer join gene.geneAliasCollection alias " +
              "left outer join fetch gene.chromosome " +
              "left outer join fetch gene.taxon as taxon " +
              "where ";
              
     private static final String GENES_BY_SYMBOL_HQL_WHERE = 
-             "lower(gene.symbol) like ?";
+            "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
 
      private static final String GO_BY_SYMBOL_HQL = 
              "select distinct geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
@@ -146,10 +155,11 @@ public class ReportService {
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
             "left join fetch pathway.taxon as taxon " +
             "left join pathway.geneCollection as genes " +
+            "left outer join genes.geneAliasCollection alias " +
             "where ";
 
     private static final String PATHWAY_BY_SYMBOL_HQL_WHERE = 
-            "lower(genes.symbol) like ?";
+            "(lower(genes.symbol) like ? or lower(alias.name) like ?)";
     
     private static final String PATHWAY_BY_PROTEIN_HQL = 
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
@@ -374,14 +384,16 @@ public class ReportService {
             String geneSymbol, String negationStatus, String finishedSentence, String celllineStatus) throws ApplicationException {
          
         String hql = GENE_ASSOCIATIONS_EVIDENCE_HQL                      
-                     + GENE_ASSOCIATIONS_HQL_WHERE;        
-        List<String> params = getListWithId(convertInput(geneSymbol));
+                     + GENE_ASSOCIATIONS_HQL_WHERE;
+        String symbol = convertInput(geneSymbol);
+        List<String> params = getListWithId(symbol);
+        params.add(symbol);
         
         hql += composeEvidencePropertiesWhereClause(negationStatus, 
         		            finishedSentence, celllineStatus, params);
         
-        return appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params));
+        return filterDuplicates(appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params)));
     }
     
     /**
@@ -428,9 +440,11 @@ public class ReportService {
             String geneSymbol) throws ApplicationException {
          
         String hql = GENE_ASSOCIATIONS_HQL+GENE_ASSOCIATIONS_HQL_WHERE;
-        List<String> params = getListWithId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params));
+        String symbol = convertInput(geneSymbol);
+        List<String> params = getListWithId(symbol);
+        params.add(symbol);
+        return filterDuplicates(appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params)));
     }
 
     
@@ -444,9 +458,11 @@ public class ReportService {
             String geneSymbol) throws ApplicationException {
 
         String hql = REPORTERS_BY_GENE_HQL+REPORTERS_BY_GENE_HQL_WHERE;
-        List<String> params = getListWithId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params));
+        String symbol = convertInput(geneSymbol);
+        List<String> params = getListWithId(symbol);
+        params.add(symbol);
+        return filterDuplicates(appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params)));
     }
     
     
@@ -478,12 +494,14 @@ public class ReportService {
             String geneSymbol) throws ApplicationException {
 
         String hql = GENES_BY_SYMBOL_HQL+GENES_BY_SYMBOL_HQL_WHERE;
-        List<String> params = getListWithId(convertInput(geneSymbol));
-        return appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params));
+        String symbol = convertInput(geneSymbol);
+        List<String> params = getListWithId(symbol);
+        params.add(symbol);
+        return filterDuplicates(appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params)));
     }
-    
-        /**
+   
+    /**
      * Returns all gene ontology associations for a given protein name or accession.  
      * @param proteinNameAccession
      * @return List of GeneOntologies. 
@@ -553,9 +571,7 @@ public class ReportService {
         if ("".equals(inputSource)) return new ArrayList<Pathway>();
         
         Pathway pathway = new Pathway();
-        
-            pathway.setSource(inputSource);
-        
+        pathway.setSource(inputSource);
         
         return appService.search(Pathway.class, pathway);
     }
@@ -570,17 +586,31 @@ public class ReportService {
             String geneSymbol) throws ApplicationException {
 
         String hql = PATHWAY_BY_SYMBOL_HQL+PATHWAY_BY_SYMBOL_HQL_WHERE;
-        List<String> params = getListWithId(convertInput(geneSymbol));
-        List<Pathway> pathways = appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params));
-        
-        // eliminate duplicates
-        Map<Long,Pathway> map = new HashMap<Long,Pathway>();
-        for(Pathway p : pathways) {
-            map.put(p.getId(), p);
-        }
-        return new ArrayList<Pathway>(map.values());
-    }
+        String symbol = convertInput(geneSymbol);
+        List<String> params = getListWithId(symbol);
+        params.add(symbol);
+        return filterDuplicates(appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params)));
+     }
+
+     /**
+      * Filters duplicate objects based on id. The objects must all have a 
+      * getId() method.
+      * @param objects
+      * @return
+      */
+     private List filterDuplicates(List<Object> objects) throws ApplicationException {
+         Map map = new LinkedHashMap();
+         try {
+             for(Object o : objects) {
+                 map.put(ReflectionUtils.get(o, "id"), o);
+             }
+         }
+         catch (Exception e) {
+             throw new ApplicationException(e);
+         }
+         return new ArrayList(map.values());
+     }
      
      /**
       * Converts input for use in HQL. Converts to lower case and replaces
