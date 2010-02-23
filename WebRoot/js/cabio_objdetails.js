@@ -15,6 +15,9 @@ var caBioObjectDetails = function() {
     // Id of the current object
     var objectId = '';
     
+    // Currently executing queries
+    var queries = {};
+    
     // Previous object details screens (accumulated through drill downs)
     var history = [];
     
@@ -37,6 +40,19 @@ var caBioObjectDetails = function() {
     }
     
     /**
+     * Aborts all current running requests and nulls them out.
+     */
+    function abortAllRequests () {
+        for (i in queries) {
+        	var query = queries[i];
+        	if (query['request']) {
+        		query['request'].abort();
+        		query['request'] = null;
+        	}
+        }
+    }
+    
+    /**
      * Callback for the JSON that comes back for an object detail request.
      */
     function processObjectDetails (r) {
@@ -46,7 +62,8 @@ var caBioObjectDetails = function() {
             jQuery("#caBioSearch").hide();
     	}
     	else {
-    		history.push(jQuery("#caBioDetails").html());
+    		history.push({'queries':queries,'html':jQuery("#caBioDetails").html()});
+    		queries = {};
     	}
     	
         var caBioNavBack = '<div class="caBioNavBack"><a href="javascript:caBioObjectDetails.restoreResults()">&#171; Back</a></div>';
@@ -75,19 +92,18 @@ var caBioObjectDetails = function() {
                 
                 	var anchor = name.replace(new RegExp("\\s","g"), '_');
                 	var linkAnchor = anchor+'_link';
-                	var boxAnchor = anchor+'_box';
                 	
-                	var future = jQuery('<div id="'+boxAnchor+'" class="height-limited">'+caBioCommon.getLoadingImage()+'</div>');
+                	var future = jQuery('<div id="'+anchor+'" class="height-limited">'+caBioCommon.getLoadingImage()+'</div>');
                     var assoc = jQuery('<div class="assoc"><h3><a id="'+linkAnchor+'">'+name+'</a></h3></div>');
                     future.appendTo(assoc);
                     assoc.appendTo("#objectAssociations");
 
-                    caBioCommon.createDropBox('#'+linkAnchor,'#'+boxAnchor);
+                    caBioCommon.createDropBox('#'+linkAnchor,'#'+anchor);
                     
                     // Uses a closure so that we have access to the div
                     // where the result should be placed in the future when 
                     // this function is actually called.
-                    var processAssociation = (function(future) {
+                    var processAssociation = (function(anchor) {
                     	return function(a) {
 	
 	                        var cdata = a['columnNames'];
@@ -122,14 +138,24 @@ var caBioObjectDetails = function() {
 	                        	v = 'No data';
 	                        }
 	                        
-	                        future.empty().append(v);
+	                        queries[anchor]['data'] = null;
+	                        queries[anchor]['success'] = null;
+	                        queries[anchor]['request'] = null;
+	                        
+	                        jQuery('#'+anchor).empty().append(v);
                     	}
-                    })(future);
-
-                    jQuery.ajax({ 
+                    })(anchor);
+                    
+                    var data = 'className='+className+'&id='+objectId+
+         		   			   '&path='+assocPath+'&assocClass='+assocClass;
+                    
+                    // Save for later
+                    queries[anchor] = {};
+                    queries[anchor]['data'] = data;
+                    queries[anchor]['success'] = processAssociation;
+                    queries[anchor]['request'] =jQuery.ajax({ 
                         type: "GET", dataType: "json", url: DETAILS_URL,
-                        data: 'className='+className+'&id='+objectId+
-                              '&path='+assocPath+'&assocClass='+assocClass,
+                        data: data,
                         success: processAssociation
                     });
                 }
@@ -161,6 +187,11 @@ var caBioObjectDetails = function() {
     	className = cn;
     	objectId = id;
         caBioCommon.enabledUI(false);
+        
+        // Abort all pending requests
+        abortAllRequests();
+        
+        // Issue the new request
         jQuery.ajax({ 
             type: "GET", dataType: "json", url: DETAILS_URL,
             data: 'className='+className+'&id='+objectId,
@@ -173,14 +204,35 @@ var caBioObjectDetails = function() {
         caBioObjectDetails.doObjectDetails(h[0],parseInt(h[1]));
     },
     
+    getQueries : function() {
+    	return queries;
+    },
+    
     /** 
      * Go back to the search results. Called from an object details screen.
      */
     restore : function () {
+    	
+        // Abort all pending requests
+        abortAllRequests();
+        
     	if (history.length > 0) {
     		// Go back to the previous object details screen
-    		html = history.pop();
-            jQuery("#caBioDetails").html(html);
+    		var prev = history.pop();
+    		// Restore display
+            jQuery("#caBioDetails").html(prev.html);
+            // Restart any unfinished queries
+            queries = prev.queries;
+            for(i in queries) {
+            	var query = queries[i];
+                if (query.data && query.success) {
+                    query['request'] = jQuery.ajax({ 
+	                    type: "GET", dataType: "json", url: DETAILS_URL,
+	                    data: query.data,
+	                    success: query.success
+	                });
+                }
+            }
     	}
     	else {
     		// No object details history left, so hide object details and restore the search
