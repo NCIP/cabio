@@ -207,6 +207,12 @@ var caBioObjectDetails = function() {
     getQueries : function() {
     	return queries;
     },
+
+    resetHistory : function() {
+        abortAllRequests();
+    	queries = {};
+    	history = [];
+    },
     
     /** 
      * Go back to the search results. Called from an object details screen.

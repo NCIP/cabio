@@ -213,7 +213,11 @@ var caBioSimpleSearch = function() {
 	        }
 	    }
 	    
+        // Clear any object details state and hide it
+        caBioObjectDetails.resetHistory();
         jQuery("#caBioDetails").hide();
+        
+        // Show the results
         jQuery("#caBioSearch").show();
 	    caBioCommon.enabledUI(true);
 	}
