@@ -44,14 +44,14 @@ public class GeneAssociationsQueryAction extends Action {
 	        
 	        String geneInput = f.getGeneSymbol();
 	        String negationStatus = f.getSentenceType();
-	        String finishedSentence = f.getFinishedSentence();
+	        String unfinishedSentence = f.getUnfinishedSentence();
 	        String celllineStatus = f.getCellline();
 	        
             log.info("gene: "+f.getGeneSymbol());
             log.info("page: "+f.getPage());
 
             List<GeneFunctionAssociation> results =  rs.getGeneAssociationsWithEvidenceProperties(
-            		geneInput, negationStatus, finishedSentence, celllineStatus);
+            		geneInput, negationStatus, unfinishedSentence, celllineStatus);
                                                            
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
             return mapping.findForward("cabioportlet.geneAssociationsQuery.results");

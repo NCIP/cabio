@@ -43,7 +43,7 @@ public class AgentToGenesQueryAction extends Action {
 	        AgentToGenesQueryForm f = (AgentToGenesQueryForm)form;
             String agentInput = f.getAgent();
 	        String negationStatus = f.getSentenceType();
-	        String finishedSentence = f.getFinishedSentence();
+	        String unfinishedSentence = f.getUnfinishedSentence();
 	        String celllineStatus = f.getCellline();
 	        
             log.info("agent: "+agentInput);
@@ -51,7 +51,7 @@ public class AgentToGenesQueryAction extends Action {
 
             List<GeneAgentAssociation> results =  
             	   rs.getGenesByAgentWithEvidenceProperties(
-            			   agentInput, negationStatus, finishedSentence, celllineStatus);
+            			   agentInput, negationStatus, unfinishedSentence, celllineStatus);
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
             return mapping.findForward("cabioportlet.agentToGenesQuery.results");

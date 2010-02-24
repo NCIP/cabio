@@ -43,13 +43,13 @@ public class DiseaseToGenesQueryAction extends Action {
 	        DiseaseToGenesQueryForm f = (DiseaseToGenesQueryForm)form;
             String diseaseInput = f.getDisease();
 	        String negationStatus = f.getSentenceType();
-	        String finishedSentence = f.getFinishedSentence();
+	        String unfinishedSentence = f.getUnfinishedSentence();
 	        String celllineStatus = f.getCellline();
 	        
             log.info("disease: "+diseaseInput);
             log.info("page: "+f.getPage());
             List<GeneDiseaseAssociation> results = rs.getGenesByDiseaseWithEvidenceProperties(
-            		diseaseInput, negationStatus, finishedSentence, celllineStatus);
+            		diseaseInput, negationStatus, unfinishedSentence, celllineStatus);
                              
             
 	        req.setAttribute("results", new Results(results, f.getPageNumber()));
