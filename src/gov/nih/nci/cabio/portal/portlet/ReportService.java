@@ -179,6 +179,7 @@ public class ReportService {
     
     private Map<Class, String> detailObjectHQL = new HashMap<Class, String>();
     
+    static public String EVIDENCE_NEGATION_STATUS_YES = "yes";
     static public String EVIDENCE_SENTENCE_STATUS_FINISHED = "finished";    
     static public String EVIDENCE_CELLLINE_DATA = "yes";
     
@@ -404,18 +405,19 @@ public class ReportService {
      * @return where clause for the Evidence properties 
      */
     private String composeEvidencePropertiesWhereClause(String negationStatus, 
-    		                       String finishedSentence, String celllineStatus,
+    		                       String unfinishedSentence, String celllineStatus,
     		                       List<String> params)
     {
     	StringBuffer evWhere = new StringBuffer();
     	
-        if ( "yes".equalsIgnoreCase( negationStatus) || "no".equalsIgnoreCase(negationStatus))
+        if ( "on".equalsIgnoreCase( negationStatus))
         {
         	evWhere.append(" and " +  EVIDENCE_NEGATION_STATUS_WHERE);
-	        params.add(negationStatus);          	
+	        params.add(EVIDENCE_NEGATION_STATUS_YES);          	
         } // otherwise, query for all the negationStatus
         
-        if ( "on".equalsIgnoreCase(finishedSentence))
+        // by default, search only finished sentence. If selected, returns all
+        if ( !"on".equalsIgnoreCase(unfinishedSentence))
         {
         	evWhere.append(" and " + EVIDENCE_SENTENCE_STATUS_WHERE);
 	        params.add(EVIDENCE_SENTENCE_STATUS_FINISHED);
