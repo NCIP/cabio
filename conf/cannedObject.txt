@@ -1,5 +1,37 @@
 Class	Attribute Path	Display Name	Roles	External Link	Internal Link
 					
+gov.nih.nci.cabio.domain.Agent	Agent	Agents	CLASS		
+gov.nih.nci.cabio.domain.Agent	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Agent	agentAliasCollection.name	Synonyms	DETAIL		
+gov.nih.nci.cabio.domain.Agent	drugbankAccession	Drugbank Accession	SUMMARY DETAIL	http://www.drugbank.ca/drugs/%%	
+gov.nih.nci.cabio.domain.Agent	EVSId	EVS Id	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Agent	NSCNumber	NSC Number	DETAIL		
+gov.nih.nci.cabio.domain.Agent	pubchemCompoundId	PubChem Compound Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=%%	
+gov.nih.nci.cabio.domain.Agent	pubchemSubstanceId	PubChem Substance Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?sid=%%	
+gov.nih.nci.cabio.domain.Agent	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Agent	IUPACName	Chemical IUPAC Name	DETAIL		
+gov.nih.nci.cabio.domain.Agent	chemicalFormula	Chemical Formula	DETAIL		
+gov.nih.nci.cabio.domain.Agent	casNumber	CAS Registry Number	DETAIL		
+gov.nih.nci.cabio.domain.Agent	molecularWeight	Average Molecular Weight	DETAIL		
+gov.nih.nci.cabio.domain.Agent	SMILESCode	Canonical SMILES	DETAIL		
+gov.nih.nci.cabio.domain.Agent	indication	Indication	DETAIL		
+gov.nih.nci.cabio.domain.Agent	pharmacology	Pharmacology	DETAIL		
+gov.nih.nci.cabio.domain.Agent	mechanismOfAction	Mechanism of Action	DETAIL		
+gov.nih.nci.cabio.domain.Agent	absorption	Absorption	DETAIL		
+gov.nih.nci.cabio.domain.Agent	toxicity	Toxicity	DETAIL		
+gov.nih.nci.cabio.domain.Agent	percentProteinBinding	Protein Binding	DETAIL		
+gov.nih.nci.cabio.domain.Agent	biotransformation	Biotransformation	DETAIL		
+gov.nih.nci.cabio.domain.Agent	halfLife	Half Life	DETAIL		
+gov.nih.nci.cabio.domain.Agent	comment	Comment	DETAIL		
+gov.nih.nci.cabio.domain.Agent	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.Agent	isCMAPAgent	Is CMAP agent	DETAIL		
+gov.nih.nci.cabio.domain.Agent	geneFunctionAssociationCollection	Gene Associations	DETAIL		
+					
+gov.nih.nci.cabio.domain.AgentAlias	Agent Alias	Agent Aliases	CLASS		
+gov.nih.nci.cabio.domain.AgentAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.AgentAlias	type	Type	DETAIL		
+gov.nih.nci.cabio.domain.AgentAlias	agentCollection	Agents	DETAIL		
+					
 gov.nih.nci.cabio.domain.GenePhysicalLocation	Gene Feature Location	Gene Feature Locations	CLASS		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	featureType	Feature Type	SUMMARY DETAIL		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.symbol	Gene Symbol	SUMMARY DETAIL		gene
@@ -123,11 +155,6 @@ gov.nih.nci.cabio.domain.ExonArrayReporter	physicalLocationCollection[0].chromos
 gov.nih.nci.cabio.domain.ExonArrayReporter	strand	Strand	DETAIL		
 gov.nih.nci.cabio.domain.ExonArrayReporter	cytogeneticLocationCollection[0].startCytoband.name	Cytoband	DETAIL		
 					
-gov.nih.nci.common.domain.DatabaseCrossReference	Database Cross Reference	Database Cross References	CLASS		
-gov.nih.nci.common.domain.DatabaseCrossReference	sourceType	Source	SUMMARY DETAIL NESTED		
-gov.nih.nci.common.domain.DatabaseCrossReference	dataSourceName	Type	SUMMARY DETAIL NESTED		
-gov.nih.nci.common.domain.DatabaseCrossReference	crossReferenceId	Identifier	SUMMARY DETAIL NESTED		
-					
 gov.nih.nci.cabio.domain.Gene	Gene	Genes	CLASS		
 gov.nih.nci.cabio.domain.Gene	symbol	Symbol	SUMMARY DETAIL NESTED		
 gov.nih.nci.cabio.domain.Gene	hugoSymbol	HUGO Symbol	DETAIL		
@@ -140,6 +167,11 @@ gov.nih.nci.cabio.domain.Gene	databaseCrossReferenceCollection	Cross References	
 gov.nih.nci.cabio.domain.Gene	physicalLocationCollection[featureType=GENE]	Physical Locations	DETAIL		
 gov.nih.nci.cabio.domain.Gene	geneFunctionAssociationCollection[class=GeneDiseaseAssociation]	Disease Associations	DETAIL		
 gov.nih.nci.cabio.domain.Gene	geneFunctionAssociationCollection[class=GeneAgentAssociation]	Agent Associations	DETAIL		
+					
+gov.nih.nci.cabio.domain.GeneAlias	Gene Alias	Gene Aliases	CLASS		
+gov.nih.nci.cabio.domain.GeneAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	type	Source	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	geneCollection	Genes	DETAIL		
 					
 gov.nih.nci.cabio.domain.GeneDiseaseAssociation	Gene/Disease Association	Gene/Disease Associations	CLASS		
 gov.nih.nci.cabio.domain.GeneDiseaseAssociation	gene.symbol	Gene Symbol	SUMMARY DETAIL NESTED		gene
@@ -182,6 +214,22 @@ gov.nih.nci.cabio.domain.Pathway	source	Source	SUMMARY DETAIL
 gov.nih.nci.cabio.domain.Pathway	bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.Pathway	geneCollection	Genes	DETAIL		
 					
+gov.nih.nci.cabio.domain.Protein	Protein	Proteins	CLASS		
+gov.nih.nci.cabio.domain.Protein	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Protein	proteinAliasCollection.name	Aliases	DETAIL		
+gov.nih.nci.cabio.domain.Protein	primaryAccession	Primary Accession	SUMMARY DETAIL	http://www.uniprot.org/uniprot/%%	
+gov.nih.nci.cabio.domain.Protein	secondaryAccession	Secondary Accessions	DETAIL		
+gov.nih.nci.cabio.domain.Protein	uniProtCode	UniProt Code	DETAIL	http://www.uniprot.org/uniprot/%%	
+gov.nih.nci.cabio.domain.Protein	keywords	Keywords	DETAIL		
+gov.nih.nci.cabio.domain.Protein	copyrightStatement	Copyright	DETAIL		
+gov.nih.nci.cabio.domain.Protein	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Protein	geneCollection	Genes	DETAIL		
+					
+gov.nih.nci.cabio.domain.ProteinAlias	Protein Alias	Protein Aliases	CLASS		
+gov.nih.nci.cabio.domain.ProteinAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.ProteinAlias	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ProteinAlias	proteinCollection	Proteins	DETAIL		
+					
 gov.nih.nci.cabio.domain.GeneOntology	GO Term	GO Terms	CLASS		
 gov.nih.nci.cabio.domain.GeneOntology	id	GO Identifier	SUMMARY DETAIL NESTED		
 gov.nih.nci.cabio.domain.GeneOntology	name	Term	SUMMARY DETAIL NESTED		
@@ -190,36 +238,14 @@ gov.nih.nci.cabio.domain.GeneOntology	parentGeneOntologyRelationshipCollection.p
 gov.nih.nci.cabio.domain.GeneOntology	childGeneOntologyRelationshipCollection.childGeneOntology	Child Terms	DETAIL		
 gov.nih.nci.cabio.domain.GeneOntology	geneCollection	Genes	DETAIL		
 					
-gov.nih.nci.cabio.domain.Agent	Agent	Agents	CLASS		
-gov.nih.nci.cabio.domain.Agent	name	Name	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.Agent	agentAliasCollection.name	Synonyms	DETAIL		
-gov.nih.nci.cabio.domain.Agent	drugbankAccession	Drugbank Accession	SUMMARY DETAIL	http://www.drugbank.ca/drugs/%%	
-gov.nih.nci.cabio.domain.Agent	EVSId	EVS Id	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.Agent	NSCNumber	NSC Number	DETAIL		
-gov.nih.nci.cabio.domain.Agent	pubchemCompoundId	PubChem Compound Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=%%	
-gov.nih.nci.cabio.domain.Agent	pubchemSubstanceId	PubChem Substance Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?sid=%%	
-gov.nih.nci.cabio.domain.Agent	bigid	Grid Id	DETAIL		
-gov.nih.nci.cabio.domain.Agent	IUPACName	Chemical IUPAC Name	DETAIL		
-gov.nih.nci.cabio.domain.Agent	chemicalFormula	Chemical Formula	DETAIL		
-gov.nih.nci.cabio.domain.Agent	casNumber	CAS Registry Number	DETAIL		
-gov.nih.nci.cabio.domain.Agent	molecularWeight	Average Molecular Weight	DETAIL		
-gov.nih.nci.cabio.domain.Agent	SMILESCode	Canonical SMILES	DETAIL		
-gov.nih.nci.cabio.domain.Agent	indication	Indication	DETAIL		
-gov.nih.nci.cabio.domain.Agent	pharmacology	Pharmacology	DETAIL		
-gov.nih.nci.cabio.domain.Agent	mechanismOfAction	Mechanism of Action	DETAIL		
-gov.nih.nci.cabio.domain.Agent	absorption	Absorption	DETAIL		
-gov.nih.nci.cabio.domain.Agent	toxicity	Toxicity	DETAIL		
-gov.nih.nci.cabio.domain.Agent	percentProteinBinding	Protein Binding	DETAIL		
-gov.nih.nci.cabio.domain.Agent	biotransformation	Biotransformation	DETAIL		
-gov.nih.nci.cabio.domain.Agent	halfLife	Half Life	DETAIL		
-gov.nih.nci.cabio.domain.Agent	comment	Comment	DETAIL		
-gov.nih.nci.cabio.domain.Agent	source	Source	DETAIL		
-gov.nih.nci.cabio.domain.Agent	isCMAPAgent	Is CMAP agent	DETAIL		
-gov.nih.nci.cabio.domain.Agent	geneFunctionAssociationCollection	Gene Associations	DETAIL		
-					
 gov.nih.nci.cabio.domain.Taxon	Taxon	Taxons	CLASS		
 gov.nih.nci.cabio.domain.Taxon	abbreviation	Abbreviation	DETAIL		
 gov.nih.nci.cabio.domain.Taxon	scientificName	Scientific Name	DETAIL		
 gov.nih.nci.cabio.domain.Taxon	commonName	Common Name	DETAIL		
 gov.nih.nci.cabio.domain.Taxon	ethnicityStrain	Ethnicity/Strain	DETAIL		
 gov.nih.nci.cabio.domain.Taxon	bigid	Grid Id	DETAIL		
+					
+gov.nih.nci.common.domain.DatabaseCrossReference	Database Cross Reference	Database Cross References	CLASS		
+gov.nih.nci.common.domain.DatabaseCrossReference	sourceType	Source	SUMMARY DETAIL NESTED		
+gov.nih.nci.common.domain.DatabaseCrossReference	dataSourceName	Type	SUMMARY DETAIL NESTED		
+gov.nih.nci.common.domain.DatabaseCrossReference	crossReferenceId	Identifier	SUMMARY DETAIL NESTED		
