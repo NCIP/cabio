@@ -284,7 +284,7 @@ var caBioSimpleSearch = function() {
 </script>
 
 <input id="searchText" type="text" value="" size="40"/>
-<input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch(1)"/>
+<input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch('All')"/>
 <br/>
 
 <a id="adv_link">Advanced Options</a>
