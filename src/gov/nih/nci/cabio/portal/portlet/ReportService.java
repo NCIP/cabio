@@ -90,18 +90,20 @@ public class ReportService {
     private static final String GENE_ASSOCIATIONS_HQL = 
              "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
              "left outer join fetch assoc.gene as gene " +
-             "left outer join gene.geneAliasCollection alias " +
              "where ";
 
     private static final String GENE_ASSOCIATIONS_EVIDENCE_HQL = 
             "select assoc from gov.nih.nci.cabio.domain.GeneFunctionAssociation assoc " +
             "left join fetch assoc.evidenceCollection as evidence " +
             "left join fetch assoc.gene as gene " +
-            "left outer join gene.geneAliasCollection alias " +
             "where ";
     
-    private static final String GENE_ASSOCIATIONS_HQL_WHERE = 
-            "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
+    private static final String GENE_OR_ALIAS_HQL_WHERE = 
+            "gene.id in (" +
+            "   select g.id from gov.nih.nci.cabio.domain.Gene g " +
+            "   left join g.geneAliasCollection alias " +
+            "   where lower(g.symbol) like ? or lower(alias.name) like ? " +
+            ") ";
 
     private static final String EVIDENCE_NEGATION_STATUS_WHERE = 
                                        "evidence.negationStatus=?";
@@ -114,12 +116,8 @@ public class ReportService {
              "select reporter from gov.nih.nci.cabio.domain.ExpressionArrayReporter reporter " +
              "left outer join fetch reporter.microarray " +
              "left outer join fetch reporter.gene as gene " +
-             "left outer join gene.geneAliasCollection alias " +
              "where ";
-    
-    private static final String REPORTERS_BY_GENE_HQL_WHERE = 
-             "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
-
+   
     private static final String REPORTERS_BY_SNP_HQL = 
              "select reporter from gov.nih.nci.cabio.domain.SNPArrayReporter reporter " +
              "left outer join fetch reporter.SNP as SNP " +
@@ -131,13 +129,9 @@ public class ReportService {
 
     private static final String GENES_BY_SYMBOL_HQL = 
              "select gene from gov.nih.nci.cabio.domain.Gene gene " +
-             "left outer join gene.geneAliasCollection alias " +
              "left outer join fetch gene.chromosome " +
              "left outer join fetch gene.taxon as taxon " +
              "where ";
-             
-    private static final String GENES_BY_SYMBOL_HQL_WHERE = 
-            "(lower(gene.symbol) like ? or lower(alias.name) like ?)";
 
      private static final String GO_BY_SYMBOL_HQL = 
              "select distinct geneOntology from gov.nih.nci.cabio.domain.GeneOntology geneOntology " +
@@ -154,18 +148,14 @@ public class ReportService {
     private static final String PATHWAY_BY_SYMBOL_HQL = 
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
             "left join fetch pathway.taxon as taxon " +
-            "left join pathway.geneCollection as genes " +
-            "left outer join genes.geneAliasCollection alias " +
+            "left join pathway.geneCollection as gene " +
             "where ";
 
-    private static final String PATHWAY_BY_SYMBOL_HQL_WHERE = 
-            "(lower(genes.symbol) like ? or lower(alias.name) like ?)";
-    
     private static final String PATHWAY_BY_PROTEIN_HQL = 
             "select pathway from gov.nih.nci.cabio.domain.Pathway pathway " +
             "left join fetch pathway.taxon as taxon " +
-            "left join pathway.geneCollection as genes " +
-            "left join genes.proteinCollection as proteins " +
+            "left join pathway.geneCollection as gene " +
+            "left join gene.proteinCollection as proteins " +
             "where ";
     
     private static final String PATHWAY_BY_PROTEIN_NAME_HQL = 
@@ -220,6 +210,9 @@ public class ReportService {
         if (!clazz.getPackage().getName().startsWith("gov.nih.nci.cabio.")) {
             throw new ApplicationException("Invalid class specified.");
         }
+        
+        // TODO: this should eager load all many-to-1 associations needed for 
+        // display of the class. That can be determined from the ClassConfig
         
         Object criteria = clazz.newInstance();
         ReflectionUtils.set(criteria, "id", id);
@@ -385,16 +378,16 @@ public class ReportService {
             String geneSymbol, String negationStatus, String finishedSentence, String celllineStatus) throws ApplicationException {
          
         String hql = GENE_ASSOCIATIONS_EVIDENCE_HQL                      
-                     + GENE_ASSOCIATIONS_HQL_WHERE;
+                     + GENE_OR_ALIAS_HQL_WHERE;
         String symbol = convertInput(geneSymbol);
         List<String> params = getListWithId(symbol);
         params.add(symbol);
         
         hql += composeEvidencePropertiesWhereClause(negationStatus, 
         		            finishedSentence, celllineStatus, params);
-        
-        return filterDuplicates(appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params)));
+
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
     /**
@@ -441,12 +434,12 @@ public class ReportService {
     public List<GeneFunctionAssociation> getGeneAssociations(
             String geneSymbol) throws ApplicationException {
          
-        String hql = GENE_ASSOCIATIONS_HQL+GENE_ASSOCIATIONS_HQL_WHERE;
+        String hql = GENE_ASSOCIATIONS_HQL+GENE_OR_ALIAS_HQL_WHERE;
         String symbol = convertInput(geneSymbol);
         List<String> params = getListWithId(symbol);
         params.add(symbol);
-        return filterDuplicates(appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params)));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
 
     
@@ -459,12 +452,12 @@ public class ReportService {
     public List<ExpressionArrayReporter> getReportersByGene(
             String geneSymbol) throws ApplicationException {
 
-        String hql = REPORTERS_BY_GENE_HQL+REPORTERS_BY_GENE_HQL_WHERE;
+        String hql = REPORTERS_BY_GENE_HQL+GENE_OR_ALIAS_HQL_WHERE;
         String symbol = convertInput(geneSymbol);
         List<String> params = getListWithId(symbol);
         params.add(symbol);
-        return filterDuplicates(appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params)));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
     
     
@@ -495,12 +488,12 @@ public class ReportService {
     public List<Gene> getGenesBySymbol(
             String geneSymbol) throws ApplicationException {
 
-        String hql = GENES_BY_SYMBOL_HQL+GENES_BY_SYMBOL_HQL_WHERE;
+        String hql = GENES_BY_SYMBOL_HQL+GENE_OR_ALIAS_HQL_WHERE;
         String symbol = convertInput(geneSymbol);
         List<String> params = getListWithId(symbol);
         params.add(symbol);
-        return filterDuplicates(appService.query(new HQLCriteria(hql,
-            QueryUtils.createCountQuery(hql),params)));
+        return appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
     }
    
     /**
@@ -587,7 +580,7 @@ public class ReportService {
      public List<Pathway> getPathwaysByGeneSymbol(
             String geneSymbol) throws ApplicationException {
 
-        String hql = PATHWAY_BY_SYMBOL_HQL+PATHWAY_BY_SYMBOL_HQL_WHERE;
+        String hql = PATHWAY_BY_SYMBOL_HQL+GENE_OR_ALIAS_HQL_WHERE;
         String symbol = convertInput(geneSymbol);
         List<String> params = getListWithId(symbol);
         params.add(symbol);
@@ -601,7 +594,7 @@ public class ReportService {
       * @param objects
       * @return
       */
-     private List filterDuplicates(List<Object> objects) throws ApplicationException {
+     private List filterDuplicates(List<? extends Object> objects) throws ApplicationException {
          Map map = new LinkedHashMap();
          try {
              for(Object o : objects) {
