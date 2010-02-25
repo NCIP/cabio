@@ -90,7 +90,7 @@ var caBioObjectDetails = function() {
                 
                 if (assocClass) {
                 
-                	var anchor = name.replace(new RegExp("\\s","g"), '_');
+                	var anchor = name.replace(new RegExp("\\W","g"), '_');
                 	var linkAnchor = anchor+'_link';
                 	
                 	var future = jQuery('<div id="'+anchor+'" class="height-limited">'+caBioCommon.getLoadingImage()+'</div>');
