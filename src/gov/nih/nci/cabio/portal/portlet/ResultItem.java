@@ -238,35 +238,4 @@ public class ResultItem extends GetOnlyMap<Object> {
         return null;
     }
     
-//    /**
-//     * Just a little utility function to add spaces when there are very long 
-//     * character strings, so that they don't break the layout. Pathway names
-//     * from Reactome are a good example.
-//     * @param value
-//     * @return
-//     */
-//    private String breakLongLines(String value) {
-//
-//        StringBuffer sb = new StringBuffer();
-//        int charsSinceWhitespace = 0;
-//        for(int i=0; i<value.length(); i++) {
-//
-//            char c = value.charAt(i);
-//            if (Character.isWhitespace(c)) {
-//                charsSinceWhitespace = 0;
-//            }
-//            else {
-//                charsSinceWhitespace++;
-//            }
-//            
-//            if (charsSinceWhitespace > 40) {
-//                charsSinceWhitespace = 0;
-//                sb.append(" ");
-//            }
-//            sb.append(c);
-//        }
-//
-//        return sb.toString();
-//    }
-    
 }
