@@ -169,9 +169,9 @@ public class ReportService {
     
     private Map<Class, String> detailObjectHQL = new HashMap<Class, String>();
     
-    static public String EVIDENCE_NEGATION_STATUS_YES = "yes";
+    static public String EVIDENCE_NEGATION_STATUS_NO = "no";
     static public String EVIDENCE_SENTENCE_STATUS_FINISHED = "finished";    
-    static public String EVIDENCE_CELLLINE_DATA = "yes";
+    static public String EVIDENCE_CELLLINE_DATA = "no";
     
     /**
      * Constructor 
@@ -403,10 +403,10 @@ public class ReportService {
     {
     	StringBuffer evWhere = new StringBuffer();
     	
-        if ( "on".equalsIgnoreCase( negationStatus))
+        if ( !"on".equalsIgnoreCase( negationStatus))
         {
         	evWhere.append(" and " +  EVIDENCE_NEGATION_STATUS_WHERE);
-	        params.add(EVIDENCE_NEGATION_STATUS_YES);          	
+	        params.add(EVIDENCE_NEGATION_STATUS_NO);          	
         } // otherwise, query for all the negationStatus
         
         // by default, search only finished sentence. If selected, returns all
@@ -416,7 +416,8 @@ public class ReportService {
 	        params.add(EVIDENCE_SENTENCE_STATUS_FINISHED);
         } 
         
-        if ( "on".equalsIgnoreCase(celllineStatus))
+        // by default, search only "no" cellline status. Otherwise, return all 
+        if ( !"on".equalsIgnoreCase(celllineStatus))
         {
         	evWhere.append(" and " + EVIDENCE_CELLLINE_STATUS_WHERE);
 	        params.add(EVIDENCE_CELLLINE_DATA);
