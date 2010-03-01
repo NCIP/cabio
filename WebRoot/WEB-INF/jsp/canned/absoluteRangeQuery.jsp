@@ -8,7 +8,7 @@
     <bean:define id="absoluteRangeQueryForm" name="AbsoluteRangeQueryForm" 
             type="gov.nih.nci.cabio.portal.portlet.canned.AbsoluteRangeQueryForm"/>
 
-    <script language="javascript">
+    <script type="text/javascript">
     var taxonChromosomes = {
     <c:forEach var="taxon" varStatus="status"
         items="${globalQueries.taxonValues}">

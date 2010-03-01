@@ -95,14 +95,12 @@
 
 <div id="pager"></div>
 
+<script type="text/javascript">
+
 <c:if test="${results.numPages > 1}">
-<script language="javascript">
     var pager = caBioCommon.createPager(<c:out value="${results.numPages}"/>, <c:out value="${results.page+1}"/>, "caBioResults");
     jQuery("#pager").append(pager);
-</script>
 </c:if>
-
-<script language="javascript">
 
 var caBioResults = function() {
 	return {

@@ -6,7 +6,7 @@
 <script type="text/javascript" src="<c:url value="/js/cabio_formats.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/cabio_objdetails.js"/>"></script>
 
-<script language="javascript">
+<script type="text/javascript">
 
 var caBioSimpleSearch = function() {
 
@@ -318,7 +318,7 @@ var caBioSimpleSearch = function() {
     <div id="objectDetails"></div>
 </div>
 
-<script language="javascript">
+<script type="text/javascript">
 
 jQuery(document).ajaxError(caBioCommon.restError);
 

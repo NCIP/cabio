@@ -46,7 +46,7 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
     session.setAttribute("portletURL",portletURL);
 %>
 
-<script language="javascript">
+<script type="text/javascript">
     var PROXY_URL = "/cabioportlets/proxy";
     var GETHTML_URL = '<bean:message key="cabio.restapi.url"/>GetHTML?query=';
     var DETAILS_URL = '<c:url value="/objectDetails"/>';
@@ -70,7 +70,7 @@ The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>
     
     <a id="query_link"><c:out value="${queryName}"/></a>
         
-    <script>    
+    <script type="text/javascript">    
     jQuery(document).ready(function(){
         caBioCommon.createDropBox('#query_link','.query');
         jQuery("#page").val("0");

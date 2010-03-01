@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/init.jsp" %>
 
-<script language="javascript">
+<script type="text/javascript">
 
 var expandImg = "<c:url value='/images/expand.gif'/>";
 var collapseImg = "<c:url value='/images/collapse.gif'/>";

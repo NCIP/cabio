@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jsp/init.jsp" %>
 
-<script>
+<script type="text/javascript">
     jQuery(document).ready(function(){
       caBioCommon.createDropBox("#evidence_link2","#evidenceproperties_box2");
     });
