@@ -3,6 +3,8 @@ function FileData_Pairs(x)
 x.t("searching","cabio");
 x.t("description","gene");
 x.t("description","protein");
+x.t("alias","want");
+x.t("alias","enter");
 x.t("hugo","symbol");
 x.t("uniprot","accession");
 x.t("want","include");
@@ -48,8 +50,7 @@ x.t("ontology","lookup");
 x.t("using","cabio");
 x.t("lookup","protein");
 x.t("lookup","symbol");
-x.t("symbol","want");
-x.t("symbol","enter");
+x.t("symbol","alias");
 x.t("symbol","query");
 x.t("symbol","returns");
 x.t("returns","gene");

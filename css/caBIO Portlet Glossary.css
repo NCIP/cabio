@@ -272,14 +272,12 @@ div.Body_Text
 
 div.Body_Text_Drop_Down
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 8.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -299,14 +297,12 @@ div.Body_Text_Drop_Down
 
 .Body_Text_Drop_Down_inner
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
-  font-weight: normal;
+  font-weight: bold;
   text-align: Left;
   text-transform: none;
   vertical-align: baseline;
@@ -322,14 +318,12 @@ div.Body_Text_Drop_Down
 
 div.Body_Text_Drop_Down_Open
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 8.0pt;
   margin-left: 0pt;
   margin-right: 0pt;
@@ -349,14 +343,12 @@ div.Body_Text_Drop_Down_Open
 
 .Body_Text_Drop_Down_Open_inner
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
   font-variant: normal;
-  font-weight: normal;
+  font-weight: bold;
   text-align: Left;
   text-transform: none;
   vertical-align: baseline;
@@ -3241,8 +3233,8 @@ div.Popup_Next
 div.Popup_Text
 {
   color: #000000;
-  font-family: Sans-Serif;
-  font-size: 9pt;
+  font-family: Arial;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
@@ -3250,7 +3242,7 @@ div.Popup_Text
   margin-left: 0pt;
   margin-right: 0pt;
   margin-top: 0.0pt;
-  text-align: left;
+  text-align: Left;
   text-indent: 0pt;
   text-transform: none;
   vertical-align: baseline;
@@ -3266,12 +3258,12 @@ div.Popup_Text
 .Popup_Text_inner
 {
   color: #000000;
-  font-family: Sans-Serif;
-  font-size: 9pt;
+  font-family: Arial;
+  font-size: 10.0pt;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
-  text-align: left;
+  text-align: Left;
   text-transform: none;
   vertical-align: baseline;
   margin-left: 0pt;
@@ -3608,9 +3600,7 @@ div.Table_Bullet
 
 div.Table_Caption_Indent_Drop_Down
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
@@ -3635,9 +3625,7 @@ div.Table_Caption_Indent_Drop_Down
 
 .Table_Caption_Indent_Drop_Down_inner
 {
-  color: #516186;
-  cursor: pointer;
-  cursor: hand;
+  color: #000000;
   font-family: Arial;
   font-size: 11.0pt;
   font-style: normal;
@@ -4309,12 +4297,9 @@ span.Note
 
 span.Popup
 {
-  border-bottom-color: Maroon;
-  border-bottom-style: dashed;
-  border-bottom-width: thin;
-  color: Maroon;
+  color: #0000ff;
   font-family: Arial;
-  font-style: normal;
+  font-style: italic;
   font-variant: normal;
   font-weight: normal;
   text-transform: none;
