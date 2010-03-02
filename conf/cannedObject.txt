@@ -112,9 +112,9 @@ gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.name	Analysis Name	
 gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.type	Analysis Type	DETAIL		
 					
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	Expression Array Reporter	Expression Array Reporters	CLASS		
-gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.manufacturer	Manufacturer	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.name	Microarray	SUMMARY DETAIL		microarray
-gov.nih.nci.cabio.domain.ExpressionArrayReporter	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.manufacturer	Manufacturer	NESTED SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.name	Microarray	NESTED SUMMARY DETAIL		microarray
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	name	Name	NESTED SUMMARY DETAIL		
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	gene.symbol	Gene Symbol	SUMMARY DETAIL		gene
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	physicalLocationCollection[0].assembly	Assembly	DETAIL		
@@ -215,9 +215,9 @@ gov.nih.nci.cabio.domain.Pathway	bigid	Grid Id	DETAIL
 gov.nih.nci.cabio.domain.Pathway	geneCollection	Genes	DETAIL		
 					
 gov.nih.nci.cabio.domain.Protein	Protein	Proteins	CLASS		
-gov.nih.nci.cabio.domain.Protein	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Protein	name	Name	NESTED DETAIL		
 gov.nih.nci.cabio.domain.Protein	proteinAliasCollection.name	Aliases	DETAIL		
-gov.nih.nci.cabio.domain.Protein	primaryAccession	Primary Accession	SUMMARY DETAIL	http://www.uniprot.org/uniprot/%%	
+gov.nih.nci.cabio.domain.Protein	primaryAccession	Primary Accession	NESTED DETAIL	http://www.uniprot.org/uniprot/%%	
 gov.nih.nci.cabio.domain.Protein	secondaryAccession	Secondary Accessions	DETAIL		
 gov.nih.nci.cabio.domain.Protein	uniProtCode	UniProt Code	DETAIL	http://www.uniprot.org/uniprot/%%	
 gov.nih.nci.cabio.domain.Protein	keywords	Keywords	DETAIL		
@@ -249,3 +249,15 @@ gov.nih.nci.common.domain.DatabaseCrossReference	Database Cross Reference	Databa
 gov.nih.nci.common.domain.DatabaseCrossReference	sourceType	Source	SUMMARY DETAIL NESTED		
 gov.nih.nci.common.domain.DatabaseCrossReference	dataSourceName	Type	SUMMARY DETAIL NESTED		
 gov.nih.nci.common.domain.DatabaseCrossReference	crossReferenceId	Identifier	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.DiseaseOntology	Disease	Diseases	CLASS		
+gov.nih.nci.cabio.domain.DiseaseOntology	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.DiseaseOntology	EVSId	EVS Id	DETAIL		
+gov.nih.nci.cabio.domain.DiseaseOntology	bigid	Grid Id	DETAIL		
+					
+gov.nih.nci.cabio.domain.ProteinDomain	Protein Domain	Protein Domains	CLASS		
+gov.nih.nci.cabio.domain.ProteinDomain	description	Description	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	accessionNumber	Accession Number	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	expressionArrayReporterCollection	Microarray Reporters	DETAIL		
