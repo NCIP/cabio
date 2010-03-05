@@ -10,7 +10,8 @@ TRUNCATE TABLE zstg_array_reporter_ch REUSE STORAGE;
 @$LOAD/indexes/array_reporter_ch.drop.sql
 
 @createCytoArrayTables.sql
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
 INSERT
   INTO zstg_array_reporter_ch (ID, NAME, microarray_ID, MANUFACTURER_PSR_ID,
 PROBE_COUNT, STRAND, transcript_ID, exon_ID, DISCRIMINATOR, BIG_ID,
@@ -72,9 +73,9 @@ A.target_DESCRIPTION, A.PHAST_CONSERVATION, A.MANUFACTURER_PSR_ID, A.PROBE_COUNT
    A.STRAND, A.SNP_ID, A.nas_ID, A.gene_ID, A.transcript_ID, A.exon_ID, A.BIG_ID
                      FROM zstg_array_reporter_ch A; 
 COMMIT;
-CREATE INDEX AR_REP_CH_BIGID ON array_reporter_ch(BIG_ID) TABLESPace cabio_fut;
+CREATE INDEX AR_REP_CH_BIGID ON array_reporter_ch(BIG_ID) TABLESPace &prod_tablspc;
 CREATE INDEX AR_REP_CH_BIGID_LWR ON array_reporter_ch(LOWER(BIG_ID)) TABLESPace 
-cabio_fut;
+&prod_tablspc;
 @$LOAD/indexes/array_reporter_ch.cols.sql
 @$LOAD/indexes/array_reporter_ch.lower.sql
 @$LOAD/constraints/zstg_array_reporter_ch.enable.sql
