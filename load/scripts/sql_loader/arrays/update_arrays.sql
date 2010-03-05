@@ -32,7 +32,10 @@ ALTER TRIGGER SET_EXPR_REP_ID ENABLE;
 ALTER TRIGGER SET_SNP_REP_ID ENABLE;
 ALTER TRIGGER SET_marker_REL_LOC_ID ENABLE; 
 ALTER TRIGGER SET_gene_REL_LOC_ID ENABLE; 
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
+column columnload new_value load_tablspc;
+select globals.get_load_tablespace as columnload from dual;
 -- create indexes on staging tables
 -- done with array sql loader load
 -- if you add an index here, remember to drop it in truncate_table_arrays.sql
@@ -332,7 +335,7 @@ gene_ID FROM gene_tv
 A.ACCESSION = N.ACCESSION_NUMBER(+));
 
 COMMIT; 
-CREATE INDEX ER_NAME_INDEX ON zstg_expression_reporter(NAME) tablespace cabio_map_fut;
+CREATE INDEX ER_NAME_INDEX ON zstg_expression_reporter(NAME) tablespace &load_tablspc;
 
 UPDATE zstg_expression_reporter E SET nas_ID = (SELECT N.ID FROM 
 zstg_cgh_accessions A, nucleic_acid_sequence N
@@ -378,7 +381,7 @@ zstg_exon_trans_affy;
 COMMIT;
 ANALYZE TABLE transcript COMPUTE STATISTICS;
 
-CREATE INDEX transcript_MI_INDEX ON TRANSCRIPT(MANUFACTURER_ID) tablespace cabio_fut;
+CREATE INDEX transcript_MI_INDEX ON TRANSCRIPT(MANUFACTURER_ID) tablespace &prod_tablspc;
 
 INSERT
   INTO exon (MANUFACTURER_ID, transcript_ID, source) SELECT EXON_ID, ID,
@@ -386,7 +389,7 @@ INSERT
 transcript T
                     WHERE Z.transcript_CLUSTER_ID = T.MANUFACTURER_ID);
 COMMIT;
-CREATE INDEX exon_MI_INDEX ON EXON(MANUFACTURER_ID) tablespace cabio_fut;
+CREATE INDEX exon_MI_INDEX ON EXON(MANUFACTURER_ID) tablespace &prod_tablspc;
 
 INSERT
  INTO microarray (ID, ARRAY_NAME, PLATFORM, TYPE, DESCRIPTION, ACCESSION, LSID) SELECT 
@@ -426,7 +429,7 @@ MANUFACTURER_PSR_ID, PROBE_COUNT, STRAND, transcript_ID, exon_ID FROM
 zstg_exon_reporter;
 COMMIT;
 
-CREATE INDEX ER_TI_INDEX ON exon_reporter(transcript_ID) tablespace cabio_fut;
+CREATE INDEX ER_TI_INDEX ON exon_reporter(transcript_ID) tablespace &prod_tablspc;
 ANALYZE TABLE exon_reporter COMPUTE STATISTICS;
 
 
@@ -436,7 +439,7 @@ transcript T, gene_tv G
      WHERE Z.UNIgene_ID = 'Hs.' || G.CLUSTER_ID AND Z.transcript_CLUSTER_ID =
 T.MANUFACTURER_ID;
 COMMIT;
-CREATE INDEX TG_TI_INDEX ON transcript_gene(TRANSCRIPT_ID) tablespace cabio_fut;
+CREATE INDEX TG_TI_INDEX ON transcript_gene(TRANSCRIPT_ID) tablespace &prod_tablspc;
 ANALYZE TABLE transcript_gene COMPUTE STATISTICS;
 
 
@@ -550,7 +553,7 @@ UPDATE microarray m SET annotation_version =
     (select annotation_version from zstg_microarray_versions v where v.array_name = m.array_name); 
 commit;
 UPDATE microarray m SET  genome_version = 
-    (select genome_version from ar_rna_probesets_affy_tmp v where v.array_name = m.array_name) where genome_version is null; 
+    (select genome_version from ar_rna_probesets_affy_tmp v where v.GENECHIP_ARRAY_NAME = m.array_name) where genome_version is null; 
 commit;
 
 -- create indexes on user tables
