@@ -4,7 +4,10 @@ DROP INDEX g2a_pa_idx;
 DROP index np_pa_idx;
 DROP INDEX np_pi_idx;
 DROP index g2u_uc_idx;
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
+column columnload new_value load_tablspc;
+select globals.get_load_tablespace as columnload from dual;
 CREATE INDEX G2A_GID_IDX on zstg_gene2ACCESSION(GENEID);
 CREATE INDEX G2U_GID_IDX on zstg_gene2UNIGENE(GENEID);
 CREATE INDEX g2a_pa_idx on zstg_gene2accession(protein_accession);
@@ -13,16 +16,16 @@ CREATE INDEX np_pi_idx on new_protein(protein_id);
 CREATE INDEX g2u_uc_idx on zstg_gene2UNIGENE(UNIGENE_CLUSTER);
 drop table zstg_gpid;
 
-CREATE TABLE ZSTG_GPID tablespace cabio_map_fut as SELECT distinct g2u.geneID, g2u.UNIGENE_CLUSTER, np.PROTEIN_ID from zstg_gene2UNIGENE g2u, zstg_gene2accession g2a, new_protein np WHERE g2u.GENEID = g2a.GENEID and substr(g2a.protein_accession,0,decode(instr(g2a.protein_accession,'.'),0,length(g2a.protein_accession), instr(g2a.protein_accession,'.')-1)) = rtrim(np.PRIMARY_ACCESSION);
+CREATE TABLE ZSTG_GPID tablespace &load_tablspc as SELECT distinct g2u.geneID, g2u.UNIGENE_CLUSTER, np.PROTEIN_ID from zstg_gene2UNIGENE g2u, zstg_gene2accession g2a, new_protein np WHERE g2u.GENEID = g2a.GENEID and substr(g2a.protein_accession,0,decode(instr(g2a.protein_accession,'.'),0,length(g2a.protein_accession), instr(g2a.protein_accession,'.')-1)) = rtrim(np.PRIMARY_ACCESSION);
 
 DROP INDEX gtv_tid_idx;
 DROP INDEX gtv_cid_idx;
 
-CREATE INDEX tmp_pid_idx on zstg_gpid(protein_id);
-CREATE INDEX tmp_pid_gid_idx on zstg_gpid(protein_id, geneid);
-CREATE INDEX gtv_tid_idx on gene_tv(taxon_id);
-CREATE INDEX gtv_cid_idx on gene_tv(cluster_id);
-CREATE INDEX tmp_ucid_idx on zstg_GPID(substr(unigene_cluster, 4));
+CREATE INDEX tmp_pid_idx on zstg_gpid(protein_id) tablespace &load_tablspc;
+CREATE INDEX tmp_pid_gid_idx on zstg_gpid(protein_id, geneid) tablespace &load_tablspc;
+CREATE INDEX gtv_tid_idx on gene_tv(taxon_id) tablespace &prod_tablspc;
+CREATE INDEX gtv_cid_idx on gene_tv(cluster_id) tablespace &prod_tablspc;
+CREATE INDEX tmp_ucid_idx on zstg_GPID(substr(unigene_cluster, 4)) tablespace &load_tablspc;
 
 TRUNCATE TABLE gene_protein_tv REUSE STORAGE;
 @$LOAD/indexer_new.sql gene_protein_tv
@@ -43,7 +46,7 @@ commit;
 
 --creates 833 rows now
 insert into gene_protein_tv(gene_id, protein_id) select distinct
-g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where g.SOURCE='Entrez' and g.ENTREZ_ID=x.GENEID andsubstr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6);
+g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where g.SOURCE='Entrez' and g.ENTREZ_ID=x.GENEID and substr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6);
 commit;
 
 

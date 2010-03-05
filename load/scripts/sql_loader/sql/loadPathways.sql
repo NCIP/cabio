@@ -48,7 +48,7 @@ TRUNCATE TABLE ZSTG_BIOPATHWAY_DESCR REUSE STORAGE;
 VAR V_MAXROW NUMBER;
 COLUMN V_MAXROW NEW_VALUE V_MAXROW;
 
-SELECT MAX(pathway_ID) + 1 AS V_MAXROW FROM bio_pathways;
+SELECT MAX(pathway_ID) + 1 AS V_MAXROW FROM bio_pathways_tv;
 
 DROP SEQUENCE bio_pathway_ID_SEQ;
 CREATE SEQUENCE bio_pathway_ID_SEQ START WITH &V_MAXROW INCREMENT BY 1;
@@ -64,16 +64,16 @@ BEGIN
 END;
 /
 
-UPDATE bio_pathways a SET a.pathway_display = (select distinct x.pathway_display from cgap.biopaths@web.nci.nih.gov x WHERE a.pathway_name = x.pathway_name AND a.taxon = decode(x.organism, 'Hs',5,'Mm',6));
+UPDATE bio_pathways_tv a SET a.pathway_display = (select distinct x.pathway_display from cgap.biopaths@web.nci.nih.gov x WHERE a.pathway_name = x.pathway_name AND a.taxon = decode(x.organism, 'Hs',5,'Mm',6));
 commit;
 
-INSERT INTO bio_pathways (pathway_name, pathway_display, taxon) SELECT distinct pathway_name, pathway_display, DECODE (organism, 'Hs', 5, 'Mm', 6) taxon_id FROM cgap.biopaths@web.nci.nih.gov minus select distinct pathway_name, pathway_display, taxon from bio_pathways;
+INSERT INTO bio_pathways_tv (pathway_name, pathway_display, taxon) SELECT distinct pathway_name, pathway_display, DECODE (organism, 'Hs', 5, 'Mm', 6) taxon_id FROM cgap.biopaths@web.nci.nih.gov minus select distinct pathway_name, pathway_display, taxon from bio_pathways_tv;
 commit;
 
 INSERT INTO zstg_biopathway_descr SELECT * FROM cgap.biopathway_descr@web;
 commit;
 
-UPDATE bio_pathways a SET a.pathway_desc = (SELECT pathway_descr FROM zstg_biopathway_descr b WHERE b.path_id = a.pathway_name);
+UPDATE bio_pathways_tv a SET a.pathway_desc = (SELECT pathway_descr FROM zstg_biopathway_descr b WHERE b.path_id = a.pathway_name);
 COMMIT;
 
 INSERT INTO zstg_biogenes SELECT DISTINCT pathway_name, DECODE (biog.organism, 'Hs', biog.bc_id, 'Mm', 'Mm.' || biog.bc_id), locus_id, DECODE (biog.organism, 'Hs', 5, 'Mm', 6) taxon_id FROM cgap.biopaths@web.nci.nih.gov biop, cgap.biogenes@web.nci.nih.gov biog WHERE lower(biog.bc_id) = lower(biop.bc_id) AND biog.organism = biop.organism;
@@ -89,7 +89,7 @@ INSERT INTO biogenes (bc_id, locus_id, organism, gene_id) SELECT DISTINCT to_cha
 
 commit;
 
-INSERT INTO gene_pathway (pathway_id, bc_id) SELECT DISTINCT pathway_id, bc_id FROM bio_pathways bp, zstg_biogenes bg WHERE bp.pathway_name = bg.pathway_name AND bp.taxon = bg.taxon_id AND bg.pathway_name IS NOT NULL;
+INSERT INTO gene_pathway (pathway_id, bc_id) SELECT DISTINCT pathway_id, bc_id FROM bio_pathways_tv bp, zstg_biogenes bg WHERE bp.pathway_name = bg.pathway_name AND bp.taxon = bg.taxon_id AND bg.pathway_name IS NOT NULL;
 commit;
 
 @$LOAD/indexes/zstg_biogenes.cols.sql
@@ -115,7 +115,8 @@ commit;
 -- Moved to loadGO
 --execute load_goevsmod.getgo_rela;
 
-
+-- Code moved to this file
+--execute load_goevsmod.load_pathways;
 
 execute load_goevsmod.getevs;
 
