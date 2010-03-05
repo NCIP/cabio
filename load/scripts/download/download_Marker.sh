@@ -5,7 +5,8 @@ mkpath.pl $CABIO_DATA_DIR/marker
 cd $CABIO_DATA_DIR/marker/human
 rm -rf *
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/repository/UniSTS/UniSTS_human.sts
-wget -nv ftp://ftp.ncbi.nlm.nih.gov/genomes/H_sapiens/mapview/seq_sts.md.gz
+#wget -nv ftp://ftp.ncbi.nlm.nih.gov/genomes/H_sapiens/mapview/seq_sts.md.gz
+wget -nv ftp://ftp.ncbi.nlm.nih.gov/genomes/H_sapiens/ARCHIVE/BUILD.36.3/mapview/seq_sts.md.gz
 gunzip *
 
 cd $CABIO_DATA_DIR/marker/mouse

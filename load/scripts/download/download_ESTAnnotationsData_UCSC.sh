@@ -30,7 +30,8 @@ wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/chr21_est.txt.gz
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/chr22_est.txt.gz 
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/chrX_est.txt.gz 
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg18/database/chrY_est.txt.gz 
-wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Homo_sapiens/sequence/current/initial_release/seq_gene.md.gz 
+#wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Homo_sapiens/sequence/current/initial_release/seq_gene.md.gz
+wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Homo_sapiens/sequence/BUILD.36.3/initial_release/seq_gene.md.gz 
 echo "Unzipping downloaded files"
 gunzip -f chr1_est.txt.gz &
 gunzip -f chr2_est.txt.gz &

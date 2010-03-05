@@ -53,6 +53,6 @@ wget -nv ftp://ftp.ncbi.nlm.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.rna.fna.gz
 gunzip mouse.rna.fna.gz
 gunzip human.rna.fna.gz
 
-sed -e -i '/^gi/ s/\$/|5|/g' human.rna.fna
-awk '{if(substr($0,length)=="|")print "\n",$0; else printf("%s",$0);}' human.rna.fna.1
+#sed -e -i '/^gi/ s/\$/|5|/g' human.rna.fna
+#awk '{if(substr($0,length)=="|")print "\n",$0; else printf("%s",$0);}' human.rna.fna.1
 
