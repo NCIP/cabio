@@ -62,9 +62,11 @@ rm *.bad *.log
 time sh ctep.sh $1 1>ctep_load.log 2>&1 &
 
 wait
-
+cd $LOAD/unigene/unigeneTempData/
 #Add Entrez data in Gene, NucleicAcidSequence and update HUGO Symbol
-sqlplus $1 @$LOAD/unigene/unigeneTempData/entrez.sql 1>@$LOAD/unigene/unigeneTempData/entrez.log
+echo "loading entrez)"
+rm *.bad *.log
+time sh entrez_load.sh $1 1>entrez.log 2>&1 &
 
 cd $LOAD/cytoband
 echo "Loading cytobands (UCSC)"
@@ -108,10 +110,6 @@ time sqlplus $1 @loadGo.sql 1>GO.log 2>&1 &
 cd $LOAD/sql
 echo "Loading gene_protein_tv association"
 time sqlplus $1 @Gene_Protein_TV_LD.sql 1>sqlLoad.log 2>&1 &
-
-cd $LOAD/sql
-echo "Loading generic_reporter-related tables"
-time sqlplus $1 @GenericReporter_ld.sql 1>>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading target-related tables"
@@ -221,7 +219,7 @@ cd $LOAD/drugbank
 echo "Loading drugbank tables (Canada Drug Bank)"
 time sh load.sh $1 1>drugbank.log 2>&1 
 
-sqlplus $1 @$LOAD/unigene/unigeneTempData/coalse_unigene.sql 1>@$LOAD/unigene/unigeneTempData/coalse_unigene.log
+sqlplus $1 @$LOAD/unigene/unigeneTempData/coalse_unigene.sql >@$LOAD/unigene/unigeneTempData/coalse_unigene.log
 
 # indexes for some objects not covered above 
 sqlplus $1 @$LOAD/misc_indexes.sql 

@@ -24,7 +24,8 @@ col command     format a10 wrap word;
 
 VAR tabName VARCHAR2(50);
 COLUMN tabName NEW_VALUE tabName;
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
 spool $LOAD/indexes/drop.sql
 SELECT 'drop index ' || B.INDEX_NAME || ';' FROM USER_IND_COLUMNS B WHERE  B.COLUMN_NAME = 'BIG_ID';
 
@@ -39,7 +40,7 @@ SELECT 'create index ' || SUBSTR(A.TABLE_NAME, 1, 7) || SUBSTR(A.TABLE_NAME, -3)
        '(lower(' 
        || A.COLUMN_NAME || ')) PARALLEL NOLOGGING tablespace ' || NVL(
 B.TABLESPace_NAME,
-  'cabio_fut') || ';'
+  &prod_tablspc) || ';'
   FROM USER_TAB_COLUMNS A, USER_TABLES B
  WHERE LOWER(A.TABLE_NAME) = LOWER(B.TABLE_NAME) AND A.TABLE_NAME =
      B.TABLE_NAME AND A.DATA_TYPE <> 'CLOB' AND A.DATA_TYPE LIKE 'VARCHAR2' AND 
