@@ -4,9 +4,12 @@
 @$LOAD/indexes/zstg_merged_snp_rsids_mapping.drop.sql
 @$LOAD/indexes/zstg_merged_snp_rsids_mapping.cols.sql
 @$LOAD/indexes/zstg_merged_snp_rsids_mapping.lower.sql
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
+column columnload new_value load_tablspc;
+select globals.get_load_tablespace as columnload from dual;
 -- Add primary key constraint on ZSTG_MERGED SNP Rs Ids table on OLD_RS_ID
-ALTER TABLE zstg_merged_snp_rsids_mapping add constraint ZSTG_MERGED_SNP_RSIDS_MAP_PK primary key("OLD_RS_ID") using index tablespace cabio_map_fut; 
+ALTER TABLE zstg_merged_snp_rsids_mapping add constraint ZSTG_MERGED_SNP_RSIDS_MAP_PK primary key("OLD_RS_ID") using index tablespace &load_tablspc; 
 
 
 -- Create temporary table zstg_snprep_sntv_ids_mpng that maps the DBSNPRSIds and SNPTVIds 
@@ -16,7 +19,7 @@ Analyze table zstg_snp_affy compute statistics;
 Analyze table snp_reporter compute statistics;
 Analyze table zstg_snp_illumina compute statistics;
 DROP TABLE ZSTG_TMP_MERGEDIDS;
-CREATE TABLE ZSTG_TMP_MERGEDIDS tablespace cabio_map_fut AS SELECT DISTINCT A.ID, CURRENT_RS_ID
+CREATE TABLE ZSTG_TMP_MERGEDIDS tablespace &load_tablspc AS SELECT DISTINCT A.ID, CURRENT_RS_ID
       FROM array_reporter_ch A, zstg_snp_affy C, zstg_merged_snp_rsids_mapping D
    WHERE A.SNP_ID IS NULL AND LOWER(TRIM(A.NAME)) = LOWER(TRIM(C.PROBE_SET_ID)) 
                      AND LOWER(TRIM(C.DBSNP_RS_ID)) = LOWER(TRIM(D.OLD_RS_ID)); 
