@@ -10,14 +10,16 @@
 @$LOAD/constraints/location_tv.enable.sql
 @$LOAD/constraints/physical_location.enable.sql
 @$LOAD/constraints/location_ch.enable.sql
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
 CREATE INDEX PHYLOC_CHRSTOP ON physical_location(CHROMOSOMAL_END_POSITION) 
-TABLESPace cabio_fut;
+TABLESPace &prod_tablspc;
 CREATE INDEX PHYSICALTION_CHROMOSOMA ON physical_location(
-              CHROMOSOMAL_END_POSITION) PARALLEL NOLOGGING TABLESPace cabio_fut;
-CREATE INDEX LOCHCHENDPOS ON location_ch (CHROMOSOMAL_END_POSITION) tablespace cabio_fut;
-CREATE INDEX LOCCHBIGID ON location_ch(BIG_ID) tablespace cabio_fut;
+              CHROMOSOMAL_END_POSITION) PARALLEL NOLOGGING TABLESPace &prod_tablspc;
+CREATE INDEX LOCHCHENDPOS ON location_ch (CHROMOSOMAL_END_POSITION) tablespace &prod_tablspc;
+CREATE INDEX LOCCHBIGID ON location_ch(BIG_ID) tablespace &prod_tablspc;
 ANALYZE TABLE physical_location COMPUTE STATISTICS;
 ANALYZE TABLE location_tv COMPUTE STATISTICS;
 ANALYZE TABLE location_ch ESTIMATE STATISTICS;
+
 EXIT;
