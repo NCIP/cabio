@@ -78,6 +78,8 @@ BEGIN
         
         sql_statement:='update generic_reporter set gene_id ='||gene_id_save||' where gene_id='||unicur.gene_id||' and cluster_id not in (select cluster_id from generic_reporter where gene_id='||gene_id_save||')';
         EXECUTE IMMEDIATE(sql_statement);
+        sql_statement:='delete from generic_array_generic_reporter where generic_reporter_id in (select id from generic_reporter where gene_id='||unicur.gene_id||')';
+        EXECUTE IMMEDIATE(sql_statement);        
         sql_statement:='delete from generic_reporter where gene_id='||unicur.gene_id;
         EXECUTE IMMEDIATE(sql_statement);
         sql_statement:='update generic_reporter set gene_id ='||gene_id_save||' where gene_id='||unicur.gene_id;
@@ -147,14 +149,14 @@ BEGIN
 
     
         sql_statement:='delete from gene_tv where gene_id='||unicur.gene_id;
-    EXECUTE IMMEDIATE(sql_statement);
+        EXECUTE IMMEDIATE(sql_statement);
       END IF;
     END LOOP;
   END LOOP;
   
-  UPDATE DATABASE_CROSS_REFERENCE SET source_name='LOCUS_LINK_ID' where source_name='Entrez'
+  UPDATE DATABASE_CROSS_REFERENCE SET source_name='LOCUS_LINK_ID' where source_name='Entrez';
 
-  UPDATE DATABASE_CROSS_REFERENCE SET SOURCE_TYPE='Entrez gene' WHERE source_type = 'Entrez'
+  UPDATE DATABASE_CROSS_REFERENCE SET SOURCE_TYPE='Entrez gene' WHERE source_type = 'Entrez';
 
-  UPDATE DATABASE_CROSS_REFERENCE SET SOURCE_NAME='CLUSTER_ID' WHERE source_type = 'Unigene' AND source_name='Unigene'
+  UPDATE DATABASE_CROSS_REFERENCE SET SOURCE_NAME='CLUSTER_ID' WHERE source_type = 'Unigene' AND source_name='Unigene';
 END;

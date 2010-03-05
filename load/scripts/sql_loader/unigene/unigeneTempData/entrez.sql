@@ -1,6 +1,8 @@
+set echo on
 delete from gene_tv where source='Entrez';
 update gene_tv set entrez_id=null where source='Unigene';
-
+commit;
+update zstg_entrez_gene x set x.cabio_chr_id = (select c.CHROMOSOME_ID from chromosome c where c.CHROMOSOME_NUMBER = x.CHR and c.TAXON_ID = x.TAX_ID);
 commit;
 
 update gene_tv g set g.ENTREZ_ID = 
@@ -16,8 +18,7 @@ delete from gene_nucleic_acid_sequence where gene_id not in (select distinct gen
 commit;
 update zstg_entrez_gene x set x.chr = x.chr_map_location where x.chr is null;
 commit;
-update zstg_entrez_gene x set x.cabio_chr_id = (select c.CHROMOSOME_ID from chromosome c where c.CHROMOSOME_NUMBER = x.CHR and c.TAXON_ID = x.TAX_ID);
-commit;
+
 
 VAR V_MAXROW NUMBER;
 COLUMN V_MAXROW NEW_VALUE V_MAXROW;
@@ -40,7 +41,7 @@ ALTER TRIGGER nas_ID_trigger ENABLE;
 --insert into nucleic_acid_sequence
 -- around 30,000 rows
 insert into nucleic_acid_sequence(accession_number, version, sequence_type, value, length, description, discriminator) select substr(refseq_accession, 0, instr(refseq_accession,'.')-1), substr(refseq_accession, instr(refseq_accession,'.')+1), '1', seq, length(seq), description,
- 'MessengerRNA' from zstg_refseq_mrna where refseq_accession in (select substr(refseq_accession, 0, instr(refseq_accession,'.')-1) from zstg_refseq_mrna minus select distinct accession_number from nucleic_acid_sequence);
+'MessengerRNA' from zstg_refseq_mrna where substr(refseq_accession, 0, instr(refseq_accession,'.')-1) in (select substr(refseq_accession, 0, instr(refseq_accession,'.')-1) from zstg_refseq_mrna minus select distinct accession_number from nucleic_acid_sequence);
 
 commit;
 
@@ -48,5 +49,8 @@ commit;
 insert into gene_nucleic_acid_sequence(gene_id, gene_sequence_id)
 select distinct g.GENE_ID, n.ID from gene_tv g, nucleic_acid_sequence n, zstg_gene2refseq z where g.ENTREZ_ID = z.GENEID and g.taxon_id=decode(z.tax_id,9606,5,10090,6) and substr(z.RNA_NUCLEOTIDE_ACC, 0, instr(z.RNA_NUCLEOTIDE_ACC,'.')-1) = n.ACCESSION_NUMBER minus select distinct gene_id, gene_sequence_id from gene_nucleic_acid_sequence;
 commit;  
+
+insert into database_cross_reference(type, cross_reference_id, source_type, source_name, gene_id)
+select  'gov.nih.nci.cabio.domain.Gene', cluster_id, 'Unigene', 'Unigene', gene_id from gene_tv where cluster_id is not null
 
 exit;
