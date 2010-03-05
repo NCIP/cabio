@@ -42,4 +42,10 @@ UPDATE gene_tv G SET HUGO_SYMBOL = (SELECT DISTINCT SYMBOL
                                            B.gene_ID AND A.TYPE = 'HUGO');
 
 COMMIT;
+-- update 
+update zstg_gene2unigene set taxon=DECODE(substr(unigene_cluster,0,instr(unigene_cluster, '.')-1), 'Hs', 5, 'Mm', 6)
+where unigene_cluster like 'Mm%' or unigene_cluster like 'Hs%';
+update zstg_gene2unigene set ucluster=substr(unigene_cluster,instr(unigene_cluster, '.')+1);
+commit;
+
 EXIT;
