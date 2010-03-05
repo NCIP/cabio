@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Calling Affy HG U95A MicroArray data parsers"
 perl Affy_HG_DataSeparator.pl HG_U95A.annot.csv 1 HG-U95
+perl ../Affy_RemoveComments.pl  HG_U95A.annot.csv HG_U95A.annot_out.csv HG-U95
 
 
 echo "Generating SQL Loader specific input data from Affy HG U95  MicroArray data"
@@ -29,6 +30,7 @@ perl Affy_HG_Interpro_DataFormatter.pl interpro_file_out_1.txt interpro_out_1.tx
 # Generate for second type of array
 
 perl Affy_HG_DataSeparator.pl HG_U95Av2.annot.csv 2 HG-U95
+perl ../Affy_RemoveComments.pl  HG_U95Av2.annot.csv HG_U95Av2.annot_out.csv HG-U95
 
 echo "Generating SQL Loader specific input data from Affy HG U95A_2 MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_2.txt representative_public_ID_out_2.txt representative_public_ID_out_2.log  HG-U95
@@ -56,6 +58,7 @@ echo "Finished generating SQL Loader input files for Affymetrix HG_U95  MicroArr
 # Generate for third type of array
 
 perl Affy_HG_DataSeparator.pl HG_U95B.annot.csv 3 HG-U95
+perl ../Affy_RemoveComments.pl  HG_U95B.annot.csv HG_U95B.annot_out.csv HG-U95
 
 echo "Generating SQL Loader specific input data from Affy HT HG U95B MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_3.txt representative_public_ID_out_3.txt representative_public_ID_out_3.log  HG-U95
@@ -82,6 +85,7 @@ perl Affy_HG_Interpro_DataFormatter.pl interpro_file_out_3.txt interpro_out_3.tx
 # Generate for third type of array
 
 perl Affy_HG_DataSeparator.pl HG_U95C.annot.csv 4 HG-U95
+perl ../Affy_RemoveComments.pl  HG_U95C.annot.csv HG_U95C.annot_out.csv HG-U95
 
 echo "Generating SQL Loader specific input data from Affy HT HG U95C MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_4.txt representative_public_ID_out_4.txt representative_public_ID_out_4.log  HG-U95
@@ -109,6 +113,7 @@ perl Affy_HG_Interpro_DataFormatter.pl interpro_file_out_4.txt interpro_out_4.tx
 # Generate for third type of array
 
 perl Affy_HG_DataSeparator.pl HG_U95D.annot.csv 5 HG-U95
+perl ../Affy_RemoveComments.pl  HG_U95D.annot.csv HG_U95D.annot_out.csv HG-U95
 
 echo "Generating SQL Loader specific input data from Affy HT HG U95D MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_5.txt representative_public_ID_out_5.txt representative_public_ID_out_5.log  HG-U95

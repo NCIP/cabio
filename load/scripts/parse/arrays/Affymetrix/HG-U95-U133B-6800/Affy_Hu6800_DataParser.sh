@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Calling Affy  Hu6800A MicroArray data parsers"
 perl Affy_HG_DataSeparator.pl Hu6800.annot.csv 1 Hu6800
+perl ../Affy_RemoveComments.pl  Hu6800.annot.csv Hu6800.annot_out.csv Hu6800
 
 echo "Generating SQL Loader specific input data from Affy  Hu6800  MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_1.txt representative_public_ID_out_1.txt representative_public_ID_out_1.log Hu6800 

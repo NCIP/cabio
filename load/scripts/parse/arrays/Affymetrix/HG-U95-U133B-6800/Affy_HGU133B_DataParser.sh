@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Calling Affy HG U133BA MicroArray data parsers"
 perl Affy_HG_DataSeparator.pl HT_HG-U133B.annot.csv 1 U133B
+perl ../Affy_RemoveComments.pl  HT_HG-U133B.annot.csv HT_HG-U133B.annot_out.csv U133B
 
 echo "Generating SQL Loader specific input data from Affy HG U133B  MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_1.txt representative_public_ID_out_1.txt representative_public_ID_out_1.log U133B 
@@ -27,6 +28,7 @@ perl Affy_HG_Interpro_DataFormatter.pl interpro_file_out_1.txt interpro_out_1.tx
 # Generate for second type of array
 
 perl Affy_HG_DataSeparator.pl HG-U133B.annot.csv 2 U133B
+perl ../Affy_RemoveComments.pl  HG-U133B.annot.csv HG-U133B.annot_out.csv U133B
 
 echo "Generating SQL Loader specific input data from Affy HG U133B_2 MicroArray data"
 perl Affy_HG_DataFormatter.pl representative_public_ID_file_out_2.txt representative_public_ID_out_2.txt representative_public_ID_out_2.log  U133B

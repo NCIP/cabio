@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "Calling Affy HG U133 Plus2 MicroArray data parsers"
 perl Affy_HG_U133_Plus2_DataSeparator.pl HG-U133_Plus_2.annot.csv
+perl ../Affy_RemoveComments.pl  HG-U133_Plus_2.annot.csv HG-U133_Plus_2.annot_out.csv HG-U133_Plus2
 
 echo "Generating SQL Loader specific input data from Affy HG U133 Plus2 MicroArray data"
 perl Affy_HG_U133_Plus2_DataFormatter.pl representative_public_ID_file_out.txt representative_public_ID_out.txt representative_public_ID_out.log 
