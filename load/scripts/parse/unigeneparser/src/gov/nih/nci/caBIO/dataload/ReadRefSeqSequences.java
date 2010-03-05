@@ -9,9 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Date;
 
 /**
- * The ReadFile is responsible for reading some of the unigene datafiles it
- * outputs the items of concern to delimited text files which are then loaded to
- * the database
+ * Converts the refseq fasta file to a one line format that can be loaded by sql*loader
  * 
  * @author CORE Team
  * @version 1.0
@@ -35,10 +33,12 @@ public class ReadRefSeqSequences {
 
 		String filePath;
 		String fileToProcess;
+		String processFile;
 
 		try {
 			filePath = arguments[0];
 			fileToProcess = arguments[1];
+			processFile = arguments[2];
 
 		} catch (Exception e) {
 			printUsage();
@@ -67,7 +67,7 @@ public class ReadRefSeqSequences {
 			long number = 0;
 			System.out.println("Starting parse of " + fileToProcess + " at "
 					+ new Date());
-			File processFile1 = new File(filePath, "refseq.dat");
+			File processFile1 = new File(filePath, processFile);
 
 			BufferedWriter tmpWriter1 = new BufferedWriter(new FileWriter(
 					processFile1, true), BUFFER_SIZE);
@@ -160,6 +160,7 @@ public class ReadRefSeqSequences {
 		System.out.println("Usage:");
 		System.out.println("arguments[0]=working directory");
 		System.out.println("arguments[1]=name of sequence file to process");
+		System.out.println("arguments[1]=name of dat file to create");
 
 	}
 
