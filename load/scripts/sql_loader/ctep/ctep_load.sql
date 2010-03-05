@@ -5,7 +5,8 @@ DROP DATABASE LINK cmap;
 CREATE DATABASE LINK cmap
 CONNECT TO cmap IDENTIFIED BY "qa!cmap1234"
 USING 'BIOQA';
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
 -- drop indexes
 DROP INDEX protocol_DOCUMENT_IND;
 DROP INDEX protocol_agents_AGENT_IND;
@@ -34,12 +35,12 @@ CREATE TABLE protocols (
   REVIEWER_NAME              VARCHAR2 (85), 
   PDQ_protocol_CODE          VARCHAR2 (50),
   BIG_ID                     VARCHAR2(200)
-) tablespace cabio_fut;
+) tablespace &prod_tablspc;
 
 CREATE TABLE protocol_agents ( 
   PRO_ID    NUMBER (10)   NOT NULL, 
   agent_ID  NUMBER        NOT NULL
-) tablespace cabio_fut;
+) tablespace &prod_tablspc;
 
 CREATE TABLE protocol_diseases ( 
   ID                    NUMBER (10)   NOT NULL, 
@@ -51,12 +52,11 @@ CREATE TABLE protocol_diseases (
   histology_code        NUMBER, 
   concept_ID            VARCHAR2 (10),
   BIG_ID                VARCHAR2(200)
-) tablespace cabio_fut;
+) tablespace &prod_tablspc;
  
 @$LOAD/indexer_new.sql protocols
 @$LOAD/indexer_new.sql protocol_agents
-@$LOAD/indexer_new.sql protocol_diseases
-
+@$LOAD/constraints.sql protocol_diseases
 @$LOAD/constraints.sql protocols
 @$LOAD/constraints.sql protocol_agents
 @$LOAD/constraints.sql protocol_diseases

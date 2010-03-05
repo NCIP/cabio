@@ -40,7 +40,10 @@ TRUNCATE TABLE go_closure REUSE STORAGE;
 @$LOAD/indexes/zstg_gene_ontology.drop.sql;
 @$LOAD/indexes/go_genes.drop.sql;
 @$LOAD/indexes/go_closure.drop.sql;
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
+column columnload new_value load_tablspc;
+select globals.get_load_tablespace as columnload from dual;
 INSERT INTO go_ontology(go_id,go_name,hs_genes,mm_genes) SELECT a.go_id, a.go_name, hs_count, mm_count FROM (SELECT g.go_id, g.go_name, NVL (COUNT(UNIQUE c.cluster_number), 0) hs_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.hs_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) a, (SELECT g.go_id, g.go_name, NVL (COUNT (UNIQUE c.cluster_number), 0) MM_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.MM_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) b WHERE a.go_id = b.go_id;
 COMMIT;
 
@@ -59,11 +62,11 @@ INSERT INTO zstg_gene_ontology(GO_ID, organISM,LOCUS_ID)SELECT   TO_NUMBER(GO_ID
 @$LOAD/indexes/go_ontology.cols.sql;
 @$LOAD/indexes/go_ontology.lower.sql;
 
-create index zstg_gene2unigene_ucluster1 on zstg_gene2unigene(substr(UNIGENE_CLUSTER,1,2)) tablespace cabio_map_fut;
+create index zstg_gene2unigene_ucluster1 on zstg_gene2unigene(substr(UNIGENE_CLUSTER,1,2)) tablespace &load_tablspc;
 
-create index zstg_gene2unigene_ucluster2 on zstg_gene2unigene(substr(unigene_cluster, instr(unigene_cluster,'.')+1)) tablespace cabio_map_fut;
+create index zstg_gene2unigene_ucluster2 on zstg_gene2unigene(substr(unigene_cluster, instr(unigene_cluster,'.')+1)) tablespace &load_tablspc;
 
-create index zstg_gene2go_go on zstg_gene2go(substr(go_id, 4)) tablespace cabio_map_fut;
+create index zstg_gene2go_go on zstg_gene2go(substr(go_id, 4)) tablespace &load_tablspc;
  
 INSERT INTO go_genes(gene_id,go_id,taxon_id)SELECT gene_id,go_id,organism FROM  zstg_gene_ontology GOT, zstg_gene_identifiers GI WHERE  GI.IDENTIFIER = GOT.LOCUS_ID AND  GI.data_source = 2;
 

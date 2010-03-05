@@ -136,11 +136,12 @@ select EVIDENCE_SEQ.nextVal, pubmed_id, 'DrugBank' from (
 );
 
 commit;
-
-CREATE INDEX CABIODEV.EVIDENCE43_INDEX ON CABIODEV.EVIDENCE_43
+column columnload new_value load_tablspc;
+select globals.get_load_tablespace as columnload from dual;
+CREATE INDEX EVIDENCE43_INDEX ON EVIDENCE_43
 (PUBMED_ID, SOURCE)
 NOLOGGING
-TABLESPACE CABIO_FUT
+TABLESPACE &load_tablspc
 PCTFREE    10
 INITRANS   2
 MAXTRANS   255

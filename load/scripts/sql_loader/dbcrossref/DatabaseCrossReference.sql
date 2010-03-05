@@ -1,6 +1,7 @@
 VAR V_MAXROW NUMBER;
 COLUMN V_MAXROW NEW_VALUE V_MAXROW;
-
+column columnprod new_value prod_tablspc;
+select globals.get_production_tablespace as columnprod from dual;
 SELECT MAX(ID) + 1 AS V_MAXROW
   FROM database_cross_reference;
 
@@ -15,8 +16,8 @@ source_TYPE) SELECT DISTINCT A.ID ID, B.TSC_ID TSC_ID,
 zstg_snp_tsc B
               WHERE A.DB_SNP_ID = B.DBSNP_RS_ID;
 
-CREATE UNIQUE INDEX GTV_TMP ON gene_tv(CLUSTER_ID, taxon_ID)  NOLOGGING PARALLEL tablespace cabio_fut;
-CREATE UNIQUE INDEX G2G_TMP ON zstg_omim2gene(OMIM_NUMBER) NOLOGGING PARALLEL tablespace cabio_fut;
+CREATE UNIQUE INDEX GTV_TMP ON gene_tv(CLUSTER_ID, taxon_ID)  NOLOGGING PARALLEL tablespace &prod_tablspc;
+CREATE UNIQUE INDEX G2G_TMP ON zstg_omim2gene(OMIM_NUMBER) NOLOGGING PARALLEL tablespace &prod_tablspc;
 
 INSERT
   INTO database_cross_reference(gene_ID, CROSS_REFERENCE_ID, TYPE, source_NAME, 
@@ -26,7 +27,7 @@ zstg_omim2gene B, gene_tv C
 WHERE A.geneID = B.GENEID AND SUBSTR(A.UNIGENE_CLUSTER, INSTR(A.UNIGENE_CLUSTER
 , '.') + 1) = C.CLUSTER_ID AND C.taxon_ID = 5;
 
-CREATE INDEX GTV_TMP_IDX2 ON gene_tv('Hs' || CLUSTER_ID) tablespace cabio_fut;
+CREATE INDEX GTV_TMP_IDX2 ON gene_tv('Hs' || CLUSTER_ID) tablespace &prod_tablspc;
 
 -- see if other EC and Ensembl Ids can be used
 INSERT
@@ -55,8 +56,8 @@ AND Z.geneCHIP_ARRAY = E.GENECHIP_ARRAY;
 DROP INDEX GTV_TMP_IDX2;
 
 CREATE INDEX AR_REFSEQ_IDX ON ar_refseq_protein(PROBE_SET_ID) PARALLEL
-NOLOGGING tablespace cabio_fut;
-CREATE INDEX AR_REFSEQ_IDX_2 ON ar_refseq_protein(REFSEQ_PROTEIN_ID) tablespace cabio_fut;
+NOLOGGING tablespace &prod_tablspc;
+CREATE INDEX AR_REFSEQ_IDX_2 ON ar_refseq_protein(REFSEQ_PROTEIN_ID) tablespace &prod_tablspc;
 
 # CHANGE THIS TO USING THE OTHER REFSEQ TABLE
 INSERT
