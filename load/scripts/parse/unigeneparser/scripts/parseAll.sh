@@ -24,6 +24,8 @@ sh generateNas.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD
 
 sh generateCRL.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD 
 
+sh readmRefSeqHs.sh
+sh readmRefSeqMm.sh
 
 echo `ls *EST*.log`
 echo `wc -l *EST*.bad`
