@@ -277,8 +277,8 @@ var caBioCommon = function() {
      */
     loadFromHash : function (hash) {
         if (hash) {
-            re = /^(\w+?)_(\w+?)_(.*)/;
-            h = hash.match(re);
+            var re = /^(\w+?)_(\w+?)_(.*)/;
+            var h = hash.match(re);
             if (h.length < 4) {
                 console.error("[loadFromHash] invalid hash: "+hash);
                 return;
@@ -288,7 +288,13 @@ var caBioCommon = function() {
     },
     
     restError : function(e, req, settings){
-    
+    	
+    	var url = settings.url;
+    	
+    	// Make sure the error was intended for us
+    	var re = /\/cabioportlets\//;
+    	if (!url.match(re)) return;
+    	
 	    caBioCommon.enabledUI(true);
 	    
 	    r = req.responseText;
@@ -308,7 +314,7 @@ var caBioCommon = function() {
 	    // log the error if possible
 	    if (window.console && window.console.error) {
 	        document.body.style.cursor = "default";
-	        console.error(arguments);
+	        console.error("Error retrieving URL: "+url);
 	    }
 	}
 
