@@ -37,12 +37,12 @@ gov.nih.nci.cabio.domain.GenePhysicalLocation	featureType	Feature Type	SUMMARY D
 gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.symbol	Gene Symbol	SUMMARY DETAIL		gene
 gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.fullName	Description	DETAIL		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.taxon.abbreviation	Taxon	DETAIL		
-gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.geneAliasCollection.name	Aliases	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.geneAliasCollection.name	Aliases	DETAIL		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.bigid	Gene Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	Microarray Reporter Location	Microarray Reporter Locations	CLASS		
 gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.microarray.manufacturer	Manufacturer	SUMMARY DETAIL		
@@ -51,8 +51,8 @@ gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.name	Report
 gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	Nucleic Acid Sequence Location	Nucleic Acid Sequence Locations	CLASS		
 gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.accessionNumber	Accession Number	SUMMARY DETAIL		nucleicAcidSequence
@@ -62,8 +62,8 @@ gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.length	
 gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP Location	SNP Locations	CLASS		
 gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.DBSNPID	dbSNP Id	SUMMARY DETAIL	http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=%%	SNP
@@ -77,19 +77,18 @@ gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.validationStatus	Validated	DETA
 gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.SNPPhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosomalStartPosition	Location	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	Marker Location	Genomic Marker Locations	CLASS		
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.name	Name	SUMMARY DETAIL		marker
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.type	Source	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.geneticMarkerId	Identifier	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.markerAliasCollection.name	Aliases	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.geneticMarkerId	Identifier 	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.markerAliasCollection.name	Aliases	DETAIL		
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	Transcript Location	Transcript Locations	CLASS		
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.source	Source	SUMMARY DETAIL		
@@ -97,19 +96,19 @@ gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.sourceId	Identifi
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	assembly	Assembly	DETAIL NESTED		
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalEndPosition	End	DETAIL NESTED		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.ConstrainedRegion	Constrained Region	Constrained Regions	CLASS		
 gov.nih.nci.cabio.domain.ConstrainedRegion	score	Score	SUMMARY DETAIL		
 gov.nih.nci.cabio.domain.ConstrainedRegion	pvalue	P-value	SUMMARY DETAIL		
-gov.nih.nci.cabio.domain.ConstrainedRegion	assembly	Assembly	DETAIL NESTED		
-gov.nih.nci.cabio.domain.ConstrainedRegion	chromosome.number	Chromosome	DETAIL NESTED		
-gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalStartPosition	Start	DETAIL NESTED		
-gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalEndPosition	End	DETAIL NESTED		
 gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.source	Source	DETAIL		
 gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.name	Analysis Name	SUMMARY DETAIL		multipleAlignment
 gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.type	Analysis Type	DETAIL		
+gov.nih.nci.cabio.domain.ConstrainedRegion	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	Expression Array Reporter	Expression Array Reporters	CLASS		
 gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.manufacturer	Manufacturer	NESTED SUMMARY DETAIL		
