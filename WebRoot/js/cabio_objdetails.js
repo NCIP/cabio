@@ -80,7 +80,7 @@ var caBioObjectDetails = function() {
 	        var h = '<h3>'+r.label+'</h3><table class="properties">';
 	        h += '<tr><th class="propertyName">Property</th><th>Value</th><th width="9"></th></tr>';
 	        
-	        for(i in r.attributes) {
+            for(var i=0; i<r.attributes.length; i++) {
 	        	var attr = r.attributes[i];
                 var name = attr.name || "";
                 var value = attr.value || "";
@@ -113,13 +113,13 @@ var caBioObjectDetails = function() {
 	                    	
 	                        if (count > 0) {
 	                        	v = '<table class="properties"><tr>';
-	                            for(var ci in cdata) {
+	                            for(var ci=0; ci<cdata.length; ci++) {
 	                            	v += '<th>'+cdata[ci].value+'</th>';
 	                            }
 	                            v += '<th width="9"></th></tr>';
-	                            for(var ri in rdata) {
+		                        for(var ri=0; ri<rdata.length; ri++) {
 	                            	v += '<tr>';
-	                                for(var ci in cdata) {
+		                            for(var ci=0; ci<cdata.length; ci++) {
 	                                    var pv = rdata[ri][cdata[ci].value];
 	    				                v += '<td>'+makeExternalLink(pv,cdata[ci].link)+'</td>';
 	                                }
