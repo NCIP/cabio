@@ -11,6 +11,10 @@
     <html:text property="gridId" size="40"/>
     </td></tr>
 
+    <tr><td title="Genome assembly">Assembly</td><td>
+    <html:text property="assembly" size="20"/>
+    </td></tr>
+    
     <tr><td title="Distance downstream from the feature to search">Downstream Distance</td><td>
     <html:text property="downstreamPad" size="10"/>
     </td></tr>

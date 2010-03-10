@@ -11,6 +11,7 @@ public class GridRangeQueryForm extends PaginatedForm {
     private static Log log = LogFactory.getLog(GridRangeQueryForm.class);
     
     private String gridId = "hdl://2500.1.PMEUQUCCL5/DXZ7ZIOFOE";
+    private String assembly = "Primary_Assembly";
     private String downstreamPad = "100";
     private String upstreamPad = "100";
     private String classFilter = "";
@@ -24,6 +25,12 @@ public class GridRangeQueryForm extends PaginatedForm {
     }
     public void setGridId(String gridId) {
         this.gridId = gridId;
+    }
+    public String getAssembly() {
+        return assembly;
+    }
+    public void setAssembly(String assembly) {
+        this.assembly = assembly;
     }
     public String getDownstreamPad() {
         return downstreamPad;
@@ -44,5 +51,4 @@ public class GridRangeQueryForm extends PaginatedForm {
         this.classFilter = classFilter;
     }
 
-    
 }

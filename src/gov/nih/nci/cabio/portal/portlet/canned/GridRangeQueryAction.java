@@ -41,6 +41,7 @@ public class GridRangeQueryAction extends Action {
 	        
 	        GridIdRangeQuery q = new GridIdRangeQuery();
 	        q.setBigId(f.getGridId());
+            q.setAssembly(f.getAssembly());
 	        q.setDownstreamDistance(new Long(f.getDownstreamPad()));
 	        q.setUpstreamDistance(new Long(f.getUpstreamPad()));
 
@@ -50,6 +51,7 @@ public class GridRangeQueryAction extends Action {
 	        }
 
             log.info("gridId: "+q.getBigId());
+            log.info("assembly: "+q.getAssembly());
             log.info("upstream: "+q.getUpstreamDistance());
             log.info("downstream: "+q.getDownstreamDistance());
             log.info("page: "+f.getPage());
