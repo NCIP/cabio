@@ -14,6 +14,8 @@ import gov.nih.nci.cabio.domain.Pathway;
 import gov.nih.nci.cabio.domain.SNPArrayReporter;
 import gov.nih.nci.cabio.domain.SNPPhysicalLocation;
 import gov.nih.nci.cabio.domain.TranscriptPhysicalLocation;
+import gov.nih.nci.cabio.portal.portlet.canned.ClassObject;
+import gov.nih.nci.cabio.portal.portlet.canned.LabeledObject;
 import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.common.util.ReflectionUtils;
 import gov.nih.nci.system.applicationservice.ApplicationException;
@@ -204,19 +206,42 @@ public class ReportService {
      * @return Object with certain associations preloaded
      * @throws ApplicationException
      */
-    public List getDetailObjects(Class clazz, Long id, String targetAssoc) 
-            throws Exception {
+    public List getDetailObjects(Class clazz, Long id, String targetAssoc, 
+            ClassObject config) throws Exception {
 
         if (!clazz.getPackage().getName().startsWith("gov.nih.nci.cabio.")) {
             throw new ApplicationException("Invalid class specified.");
         }
-        
-        // TODO: this should eager load all many-to-1 associations needed for 
-        // display of the class. That can be determined from the ClassConfig
-        
+
         Object criteria = clazz.newInstance();
+        Class target = Class.forName(config.getName());
         ReflectionUtils.set(criteria, "id", id);
-        List results = appService.getAssociation(criteria, targetAssoc);
+       
+        // Construct HQL for getting the associated objects
+        StringBuffer sb = new StringBuffer(
+            "select dest from "+config.getName()+" as dest ");
+        
+        // Eager fetch all the needed associations
+        for(LabeledObject attr : config.getNestedAttributes()) {
+            String first = attr.getFirstPart();
+            if (ClassUtils.isSingular(target, first)) {
+                sb.append("left join fetch dest."+first+" ");
+            }
+        }
+
+        sb.append(", "+clazz.getName()+" as src ");
+        sb.append("where src."+targetAssoc+".id=dest.id and src=? ");
+
+        String hql = sb.toString();
+        List params = new ArrayList();
+        params.add(criteria);
+        List results = appService.query(new HQLCriteria(hql,
+            QueryUtils.createCountQuery(hql),params));
+        
+        // The above eager loads all many-to-1 associations needed for 
+        // display of the class. The simpler (less efficient but more 
+        // foolproof) way is this:
+        //List results = appService.getAssociation(criteria, targetAssoc);
                 
         if (results.isEmpty()) return null;
         return results;

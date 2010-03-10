@@ -16,6 +16,36 @@ import java.util.Set;
 public class ClassUtils {
 
     /**
+     * Returns true if the given association is a non-collection type.
+     * @param clazz
+     * @param assocName
+     * @return
+     */
+    public static boolean isSingular(Class clazz, String assocName) {
+        
+        Class checkClass = clazz;
+        
+        while (checkClass != null) {
+            Field[] classFields = checkClass.getDeclaredFields();
+            if(classFields!=null) {
+                for(int i=0;i<classFields.length;i++) {
+                    if (classFields[i].getName().equals(assocName)) {
+                        Class type = classFields[i].getType();
+                        String typeName = type.getName();
+                        return (!type.isPrimitive() && 
+                                !typeName.startsWith("java") && 
+                                !"java.util.Collection".equals(typeName));
+                    }
+                }
+            }
+            checkClass = checkClass.getSuperclass();
+        }
+        
+        throw new IllegalArgumentException(
+            "Association "+assocName+" not found in "+clazz);
+    }
+    
+    /**
      * Returns the type at the end of the given association. If the association 
      * is 1-to-1 or many-to-1 then there is only one object at the end of the
      * association, and this just returns its type. But if the association is 
