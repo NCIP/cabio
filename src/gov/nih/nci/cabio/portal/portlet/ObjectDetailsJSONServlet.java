@@ -108,8 +108,8 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
             // Get the attribute configuration
             ClassObject config = objectConfig.getClasses().get(className);
             if (config == null) {
-                String label = className.substring(className.lastIndexOf('.')+1);
-                config = new ClassObject(className, label, label+"s");
+                String classLabel = getFormattedClassName(className);
+                config = new ClassObject(className, classLabel, classLabel+"s");
                 for(Field field : ClassUtils.getFields(clazz)) {
                     String name = field.getName();
                     if  (!name.equalsIgnoreCase("id")) 
@@ -127,8 +127,8 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
             ClassObject config = objectConfig.getClasses().get(assocClass);
             if (config == null) {
                 log.warn("No configuration for associated class "+assocClass);
-                String label = className.substring(className.lastIndexOf('.')+1);
-                config = new ClassObject(className, label, label+"s");
+                String classLabel = getFormattedClassName(assocClass);
+                config = new ClassObject(assocClass, classLabel, classLabel+"s");
                 Class assocClazz = Class.forName(assocClass); 
                 for(Field field : ClassUtils.getFields(assocClazz)) {
                     String name = field.getName();
@@ -152,7 +152,7 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
             }
             
             // Query for the associated objects
-            Collection list = rs.getDetailObjects(clazz, longId, rolename);
+            Collection list = rs.getDetailObjects(clazz, longId, rolename, config);
             
             // Apply constraints
             if (constraint != null) {
@@ -285,6 +285,18 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
         return json;
     }
 
+    /**
+     * Convert class name for display, i.e.
+     * "gov.nih.nci.cabio.domain.ClinicalTrialProtocol" to
+     * "Clinical Trial Protocol"
+     * @param className
+     * @return
+     */
+    private String getFormattedClassName(String className) {
+        return className.substring(className.lastIndexOf('.')+1).replaceAll(
+                "([A-Z])"," $1").substring(1);
+    }
+    
     /**
      * Test harness.
      */
