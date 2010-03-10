@@ -52,7 +52,19 @@ public class LabeledObject {
     }
 
     /**
-     * Returns the last part of the path, i.e. every after the last comma. 
+     * Returns the first part of the path. 
+     * For example, we will return "arrayReporter" for the following path:
+     * arrayReporter.microarray.manufacturer
+     * @return
+     */
+    public String getFirstPart() {
+        int firstDot = name.indexOf('.');
+        if (firstDot < 0) return name;
+        return name.substring(0,firstDot);
+    }
+    
+    /**
+     * Returns the last part of the path.
      * For example, we will return "manufacturer" for the following path:
      * arrayReporter.microarray.manufacturer
      * @return
