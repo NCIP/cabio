@@ -46,7 +46,7 @@ var caBioSimpleSearch = function() {
     
         // Print the list as a result summary, and replace the loading gif
         var caBioSummary = '';
-        for (i in classes) {
+        for (var i=0; i<classes.length; i++) {
         
             var ch = classes[i];
             var c = ch['name'];
