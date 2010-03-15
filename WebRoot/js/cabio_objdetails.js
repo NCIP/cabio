@@ -105,39 +105,45 @@ var caBioObjectDetails = function() {
                     // this function is actually called.
                     var processAssociation = (function(anchor) {
                     	return function(a) {
-	
-	                        var cdata = a['columnNames'];
-	                        var rdata = a['rows'];
-	                        var count = parseInt(a['count']);
+
 	                    	var v = '';
-	                    	
-	                        if (count > 0) {
-	                        	v = '<table class="properties"><tr>';
-	                            for(var ci=0; ci<cdata.length; ci++) {
-	                            	v += '<th>'+cdata[ci].value+'</th>';
-	                            }
-	                            v += '<th width="9"></th></tr>';
-		                        for(var ri=0; ri<rdata.length; ri++) {
-	                            	v += '<tr>';
+                            if (a.exceptionClass) {
+                                v += '<div class="error">'+a.exceptionClass+': '+a.exceptionMessage+'</div>';
+                            }
+                            else {
+		                        var cdata = a['columnNames'];
+		                        var rdata = a['rows'];
+		                        var count = parseInt(a['count']);
+		                    	
+		                        if (count > 0) {
+		                        	v += '<table class="properties"><tr>';
 		                            for(var ci=0; ci<cdata.length; ci++) {
-	                                    var pv = rdata[ri][cdata[ci].value];
-	    				                v += '<td>'+makeExternalLink(pv,cdata[ci].link)+'</td>';
-	                                }
-	                                v += '<td>'+makeDetailLink(a.className, rdata[ri].id)+'</td>';
-	                                v += '</tr>';
-	                            }
-	                            v += '</table>';
-	                            if (count > rdata.length) {
-	                            	v += "<br/><b>Only the first "+rdata.length+" out of "+
-	                                    count+" results are shown here. "+
-	                                    "To download the entire result set, click on the "+ 
-	                                    "<i>caBIO Object Graph Browser</i> link below.</b>"
-	                            }
-	                        }
-	                        else {
-	                        	v = 'No data';
-	                        }
-	                        
+		                            	v += '<th>'+cdata[ci].value+'</th>';
+		                            }
+		                            v += '<th width="9"></th></tr>';
+			                        for(var ri=0; ri<rdata.length; ri++) {
+		                            	v += '<tr>';
+			                            for(var ci=0; ci<cdata.length; ci++) {
+		                                    var pv = rdata[ri][cdata[ci].value];
+		    				                v += '<td>'+makeExternalLink(pv,cdata[ci].link)+'</td>';
+		                                }
+		                                v += '<td>'+makeDetailLink(a.className, rdata[ri].id)+'</td>';
+		                                v += '</tr>';
+		                            }
+		                            v += '</table>';
+		                            if (count > rdata.length) {
+		                            	v += "<br/><b>Only the first "+rdata.length+" out of "+
+		                                    count+" results are shown here. "+
+		                                    "To download the entire result set, click on the "+ 
+		                                    "<i>caBIO Object Graph Browser</i> link below.</b>"
+		                            }
+		                        }
+		                        else {
+		                        	v = 'No data';
+		                        }
+		                        
+                            }
+
 	                        queries[anchor]['data'] = null;
 	                        queries[anchor]['success'] = null;
 	                        queries[anchor]['request'] = null;
