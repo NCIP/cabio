@@ -4,6 +4,7 @@ import gov.nih.nci.cabio.domain.Gene;
 import gov.nih.nci.cabio.portal.portlet.canned.CannedObjectConfig;
 import gov.nih.nci.cabio.portal.portlet.canned.ClassObject;
 import gov.nih.nci.cabio.portal.portlet.canned.LabeledObject;
+import gov.nih.nci.common.util.ReflectionUtils;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 
@@ -90,6 +91,7 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
         }
     }
 
+    
     protected String processRequest(String className, String id, String path, 
             String assocClass) throws Exception {
 
@@ -97,69 +99,65 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
             throw new Exception("Invalid class specified.");
         }
         
+        log.info("Object details ("+className+","+id+","+path+","+assocClass+")");
+        
         Class clazz = Class.forName(className); 
         Long longId = Long.parseLong(id);
-        
+                
         String role = path==null ? "DETAIL" : "NESTED";
-        Set<String> roles = new HashSet<String>();
-        roles.add(role);
 
         if (path == null) {
-            // Get the attribute configuration
+            // The object configuration
             ClassObject config = objectConfig.getClasses().get(className);
-            if (config == null) {
-                String classLabel = getFormattedClassName(className);
-                config = new ClassObject(className, classLabel, classLabel+"s");
-                for(Field field : ClassUtils.getFields(clazz)) {
-                    String name = field.getName();
-                    if  (!name.equalsIgnoreCase("id")) 
-                        config.addAttribute(name, name, null, null, roles);
-                }
-            }
+            if (config == null) config = createAdhocConfig(className, role);
+            
+            // Query for the object
             Object obj = rs.getDetailObject(clazz, longId);
             if (obj == null) {
                 throw new Exception("Cannot find "+className+" with id "+id+".");
             }
+            
             return objectToJSON(new ResultItem(obj), config);
         }
         else {
-            // Need the class name of the association
+            // The object configuration
             ClassObject config = objectConfig.getClasses().get(assocClass);
-            if (config == null) {
-                log.warn("No configuration for associated class "+assocClass);
-                String classLabel = getFormattedClassName(assocClass);
-                config = new ClassObject(assocClass, classLabel, classLabel+"s");
-                Class assocClazz = Class.forName(assocClass); 
-                for(Field field : ClassUtils.getFields(assocClazz)) {
-                    String name = field.getName();
-                    if  (!name.equalsIgnoreCase("id")) 
-                        config.addAttribute(name, name, null, null, roles);
-                }
-            }
-
+            if (config == null) config = createAdhocConfig(assocClass, role);
+            
             // Are there any constraints? pull them out so we can apply them later
             String rolename = path;
-            String constraint = null;
+            String extraPath = null;
             int a = path.indexOf('.');
             int b = path.indexOf('[');
             if (a > 0) {
                 rolename = path.substring(0, a);
-                constraint = path.substring(a);
+                extraPath = path.substring(a);
             }
             else if (b > 0) {
                 rolename = path.substring(0, b);
-                constraint = path.substring(b);
+                extraPath = path.substring(b);
             }
             
             // Query for the associated objects
             Collection list = rs.getDetailObjects(clazz, longId, rolename, config);
             
-            // Apply constraints
-            if (constraint != null) {
-                CollectionHolder holder = new CollectionHolder(list);
-                list = (Collection)new ResultItem(holder).get("list"+constraint);
+            // Apply further path constraints
+            if (extraPath != null) {
+                
+                // Create a dummy root object
+                Object root = clazz.newInstance();
+                ReflectionUtils.setFieldValue(root, rolename, list);
+                
+                ResultItem item = new ResultItem(root);
+                list = (Collection)item.get(path);
+                
+                // Configure display according to the last class in the path
+                List<Class> pathClasses = item.getClasses(path);
+                
+                String lastClassName = pathClasses.get(pathClasses.size()-1).getName();
+                config = objectConfig.getClasses().get(lastClassName);
             }
-            
+                        
             return objectsToJSON(list, config).toString();
         }
     }
@@ -202,13 +200,14 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
                 if (attr.getInternalLink() != null) {
                     List<Class> linkClasses = item.getClasses(attr.getInternalLink());
                     String linkClassName = linkClasses.get(linkClasses.size()-1).getName();
-                    jsonObj.put("drillClassName", linkClassName);
+                    jsonObj.put("drillClassName", ClassUtils.removeEnchancer(linkClassName));
                     jsonObj.put("drillId", item.get(attr.getInternalLink()+".id"));
                 }
             }
             else {
                 // Case 3) Association
                 List<Class> classes = item.getClasses(attr.getName());
+                // The class we will display (the last one)
                 String className = classes.get(classes.size()-1).getName();
                 
                 if (className.startsWith("java.lang") 
@@ -221,7 +220,9 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
                     }
                 }
                 else {
-                    jsonObj.put("className", className);
+                    // The class we will fetch (the first one)
+                    jsonObj.put("className", 
+                        ClassUtils.removeEnchancer(classes.get(1).getName()));
                 }
             }
             
@@ -295,6 +296,32 @@ public class ObjectDetailsJSONServlet extends HttpServlet {
     private String getFormattedClassName(String className) {
         return className.substring(className.lastIndexOf('.')+1).replaceAll(
                 "([A-Z])"," $1").substring(1);
+    }
+
+    /**
+     * Create an Ad Hoc configuration for what to display for a class that
+     * is not explicitly configured. 
+     * @param className
+     * @param role
+     * @return
+     * @throws ClassNotFoundException
+     */
+    private ClassObject createAdhocConfig(String className, String role) 
+            throws ClassNotFoundException {
+
+        log.warn("No configuration for associated class "+className);
+        Set<String> roles = new HashSet<String>();
+        roles.add(role);
+        String classLabel = getFormattedClassName(className);
+        ClassObject config = new ClassObject(className, classLabel, classLabel+"s");
+        Class assocClazz = Class.forName(className); 
+        for(Field field : ClassUtils.getFields(assocClazz)) {
+            String name = field.getName();
+            if  (!name.equalsIgnoreCase("id")) 
+                config.addAttribute(name, name, null, null, roles);
+        }
+        
+        return config;
     }
     
     /**
