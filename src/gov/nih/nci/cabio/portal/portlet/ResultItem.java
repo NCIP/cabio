@@ -38,7 +38,7 @@ public class ResultItem extends GetOnlyMap<Object> {
     public ResultItem(Object obj) {
 
         String cn = obj.getClass().getName();
-        this.className = cn.split("\\$\\$")[0];
+        this.className = ClassUtils.removeEnchancer(cn);
         
         this.obj = obj;
     }

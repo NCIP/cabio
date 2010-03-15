@@ -36,7 +36,7 @@ public class Results {
         
         for(int i=page*PAGE_SIZE; i<page*PAGE_SIZE+PAGE_SIZE && i<resultList.size(); i++) {
             Object o = resultList.get(i);
-            String className = o.getClass().getName().split("\\$\\$")[0];
+            String className = ClassUtils.removeEnchancer(o.getClass().getName());
             List<ResultItem> objs = items.get(className);
             if (objs == null) objs = new ArrayList<ResultItem>();
             items.put(className, objs);

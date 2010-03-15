@@ -16,6 +16,18 @@ import java.util.Set;
 public class ClassUtils {
 
     /**
+     * Given a Hibernate class name like 
+     * "gov.nih.nci.cabio.domain.GeneOntology$$EnhancerByCGLIB$$3582c014"
+     * this will remove the enchancer portion and return just
+     * "gov.nih.nci.cabio.domain.GeneOntology"
+     * @param className
+     * @return
+     */
+    public static String removeEnchancer(String className) {
+        return className.split("\\$\\$")[0];
+    }
+    
+    /**
      * Returns true if the given association is a non-collection type.
      * @param clazz
      * @param assocName
