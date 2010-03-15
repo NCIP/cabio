@@ -2,13 +2,13 @@
            
 	    <table>
 	       <tr><td>
-	         <html:checkbox property="sentenceType">Include negative associations</html:checkbox>
+	         <html:checkbox property="sentenceType">&nbsp;Include negative associations</html:checkbox>
 	       </td></tr>
 	       <tr><td>
-	         <html:checkbox property="unfinishedSentence">Include unfinished curation status</html:checkbox>
+	         <html:checkbox property="unfinishedSentence">&nbsp;Include unfinished curation status</html:checkbox>
 	       </td></tr>
 	       <tr><td>
-	         <html:checkbox property="cellline">Include data collected from cell lines</html:checkbox>
+	         <html:checkbox property="cellline">&nbsp;Include data collected from cell lines</html:checkbox>
 	       </td></tr>	           
 	    </table>	    	    	  
     

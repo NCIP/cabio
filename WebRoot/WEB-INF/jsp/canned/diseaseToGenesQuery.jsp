@@ -19,7 +19,7 @@
     </td></tr>
     <tr><td colspan=2>
         <a id="evidence_link2">Advanced search criteria</a>
-		<div id="evidenceproperties_box2">
+		<div id="evidenceproperties_box2" class="advancedOptions">
          <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>
         </div>
     </td></tr>    
