@@ -170,6 +170,7 @@ gov.nih.nci.cabio.domain.Gene	geneFunctionAssociationCollection[class=GeneAgentA
 gov.nih.nci.cabio.domain.GeneAlias	Gene Alias	Gene Aliases	CLASS		
 gov.nih.nci.cabio.domain.GeneAlias	name	Name	DETAIL		
 gov.nih.nci.cabio.domain.GeneAlias	type	Source	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	bigid	Grid Id	DETAIL		
 gov.nih.nci.cabio.domain.GeneAlias	geneCollection	Genes	DETAIL		
 					
 gov.nih.nci.cabio.domain.GeneDiseaseAssociation	Gene/Disease Association	Gene/Disease Associations	CLASS		
