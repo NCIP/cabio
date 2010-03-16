@@ -128,6 +128,16 @@ table.properties td {
     vertical-align: top;
 }
 
+table.properties td div.height-limited {
+    height: expression( this.scrollHeight > 139 ? "140px" : "auto" ); /* sets max-height for IE */
+    max-height: 140px; /* sets max-height value for all standards-compliant browsers */
+    /* can't set IE max-width because a scrollbar will obscure a single line... */ 
+    /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
+    /*max-width: 500px;  sets max-width value for all standards-compliant browsers */
+    overflow: auto;
+    max-width: 30em;
+}
+
 div.height-limited {
     height: expression( this.scrollHeight > 139 ? "140px" : "auto" ); /* sets max-height for IE */
     max-height: 140px; /* sets max-height value for all standards-compliant browsers */
@@ -135,6 +145,7 @@ div.height-limited {
     /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
     /*max-width: 500px;  sets max-width value for all standards-compliant browsers */
     overflow: auto;
+    max-width: auto;
 }
 
 #objectAttributes h3 {
