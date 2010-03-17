@@ -55,7 +55,6 @@ B=A.fA("NCICB Application Support",new Array("13#1069150"));
 A=P.fA("O",null,null,"002");
 B=A.fA("online help");
 C=B.fA("locating topics of interest",new Array("1#1089918"));
-C=B.fA("pop-up glossary definitions",new Array("1#1089717"));
 C=B.fA("printing",new Array("1#1089797"));
 C=B.fA("using",new Array("1"));
 A=P.fA("P",null,null,"002");
