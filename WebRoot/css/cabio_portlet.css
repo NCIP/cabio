@@ -15,6 +15,12 @@ div.error {
     font-weight: bold;
 }
 
+/** Work-around for IE6 bug with the Portal's CSS. 
+    It defines this as "absolute", here we revert it to "static". */
+
+img,.png{
+    position:static;
+}
 
 /** Navigation Bars */
 
