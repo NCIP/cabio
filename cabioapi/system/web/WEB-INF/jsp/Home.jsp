@@ -74,7 +74,7 @@
 
 												<ul>
 													<li><a
-														href="http://cabio.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO">
+														href="https://wiki.nci.nih.gov/x/4Q9y">
 													caBIO Overview</a> - High-level overview of caBIO</li>
 													<li><a href="https://gforge.nci.nih.gov/projects/cabiodb/">
 													caBIO GForge site</a> - Contains news, information,
@@ -183,7 +183,7 @@
 															</tr>
 															<tr>
 																<td colspan="2" align=center nowrap><LABEL for="freestyleLM">&nbsp;</LABEL>
-																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/x/NbSl"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right"><LABEL for="search">&nbsp;</LABEL>
