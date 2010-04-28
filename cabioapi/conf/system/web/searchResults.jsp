@@ -190,7 +190,7 @@ div.classHeader {
 	<td valign="middle">
         <form method="POST" action="IndexService">
 		<input type="TEXT" size="60" id="freestyleLM" name="searchString" value="<%=searchString%>">
-		<a href="https://wiki.nci.nih.gov/display/ICR/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search" target="_BLANK"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align="middle"></a>					
+		<a href="https://wiki.nci.nih.gov/x/NbSl" target="_BLANK"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align="middle"></a>					
 		<input type="submit" name="submit" value="Search">
 		</form>
 	</td>
