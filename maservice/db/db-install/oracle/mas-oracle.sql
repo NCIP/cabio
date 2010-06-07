@@ -105,7 +105,7 @@ CREATE TABLE ma_physical_location
                               chromosome_id NUMBER,
                               start_coordinate NUMBER, 
                               end_coordinate NUMBER,                               
-                              orientation VARCHAR2(5), 
+                              orientation VARCHAR2(10), 
                               array_reporter_id NUMBER, 
                               primary key (id)
                               ) TABLESPACE CABIO_FUT;
