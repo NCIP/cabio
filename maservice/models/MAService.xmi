@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE XMI SYSTEM "UML_EA.dtd">
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2010-06-09 11:37:10">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2010-06-09 15:11:27">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -15489,7 +15488,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_5320F651_8167_468a_A02A_B38EC59978A1"/>
 																				<UML:TaggedValue tag="date_created" value="2010-04-13 14:40:50"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-04-13 14:41:40"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:28:11"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\errors\MAException.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="errors"/>
@@ -15677,7 +15677,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_262D6C9D_0B5D_4c23_B321_D0B5860E02BD"/>
 																				<UML:TaggedValue tag="date_created" value="2010-06-04 11:04:41"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-06-04 11:04:41"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:21:46"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\util\OrganismCriteria.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="util"/>
@@ -15832,7 +15833,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_262D6C9D_0B5D_4c23_B321_D0B5860E02BD"/>
 																				<UML:TaggedValue tag="date_created" value="2010-06-04 11:04:13"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-06-04 11:04:13"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:21:44"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\util\MicroarrayCriteria.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="util"/>
@@ -16097,7 +16099,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_262D6C9D_0B5D_4c23_B321_D0B5860E02BD"/>
 																				<UML:TaggedValue tag="date_created" value="2010-04-16 13:40:52"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-04-16 13:40:52"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:21:37"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\util\GeneSearchCriteria.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="util"/>
@@ -16186,7 +16189,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_262D6C9D_0B5D_4c23_B321_D0B5860E02BD"/>
 																				<UML:TaggedValue tag="date_created" value="2010-04-16 13:46:13"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-04-16 13:46:13"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:21:47"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\util\ReporterSearchCriteria.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="util"/>
@@ -16275,7 +16279,8 @@
 																				<UML:TaggedValue tag="version" value="1.0"/>
 																				<UML:TaggedValue tag="package" value="EAPK_262D6C9D_0B5D_4c23_B321_D0B5860E02BD"/>
 																				<UML:TaggedValue tag="date_created" value="2010-06-02 11:44:34"/>
-																				<UML:TaggedValue tag="date_modified" value="2010-06-02 11:44:34"/>
+																				<UML:TaggedValue tag="date_modified" value="2010-06-09 14:21:47"/>
+																				<UML:TaggedValue tag="genfile" value="C:\work\MAService\software\maservice\src\gov\nih\nci\maservice\util\SearchCriteria.java"/>
 																				<UML:TaggedValue tag="gentype" value="Java"/>
 																				<UML:TaggedValue tag="tagged" value="0"/>
 																				<UML:TaggedValue tag="package_name" value="util"/>
