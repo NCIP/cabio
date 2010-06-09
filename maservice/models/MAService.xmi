@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE XMI SYSTEM "UML_EA.dtd">
-<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2010-06-07 16:52:39">
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2010-06-09 11:37:10">
 	<XMI.header>
 		<XMI.documentation>
 			<XMI.exporter>Enterprise Architect</XMI.exporter>
@@ -15805,6 +15805,7 @@
 																				<UML:TaggedValue tag="$ea_dst_xref_property" value="$XREFPROP=$XID={BC07465F-693B-47b7-A652-8D38C8A32964}$XID;$NAM=CustomProperties$NAM;$TYP=connectorDestEnd property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isDerivedUnion@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isDerived@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=default@ENDNAME;@TYPE=String@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isReadOnly@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isComposite@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=aggregation@ENDNAME;@TYPE=AggregationKind@ENDTYPE;@VALU=none@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={CD3F5D39-960A-4bff-A14A-8C06A2A64C38}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																				<UML:TaggedValue tag="virtualInheritance" value="0"/>
 																				<UML:TaggedValue tag="rb" value="0..1"/>
+																				<UML:TaggedValue tag="rt" value="+organismCriteria"/>
 																			</UML:ModelElement.taggedValue>
 																			<UML:Association.connection>
 																				<UML:AssociationEnd visibility="public" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="false" type="EAID_8BE04D2B_A029_4cca_BDC0_5D6D4E52E31B">
@@ -15814,7 +15815,7 @@
 																						<UML:TaggedValue tag="ea_end" value="source"/>
 																					</UML:ModelElement.taggedValue>
 																				</UML:AssociationEnd>
-																				<UML:AssociationEnd visibility="public" multiplicity="0..1" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="true" type="EAID_413453A1_A2D9_4c53_9AE9_E63B1096644F">
+																				<UML:AssociationEnd visibility="public" multiplicity="0..1" name="organismCriteria" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="true" type="EAID_413453A1_A2D9_4c53_9AE9_E63B1096644F">
 																					<UML:ModelElement.taggedValue>
 																						<UML:TaggedValue tag="containment" value="Unspecified"/>
 																						<UML:TaggedValue tag="deststyle" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
@@ -16069,6 +16070,7 @@
 																				<UML:TaggedValue tag="$ea_dst_xref_property" value="$XREFPROP=$XID={1E4BD53B-0C04-41fd-A7C7-C2C2467D2761}$XID;$NAM=CustomProperties$NAM;$TYP=connectorDestEnd property$TYP;$VIS=Public$VIS;$DES=@PROP=@NAME=isDerivedUnion@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isDerived@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=default@ENDNAME;@TYPE=String@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isReadOnly@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=false@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=isComposite@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=aggregation@ENDNAME;@TYPE=AggregationKind@ENDTYPE;@VALU=none@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={B9C35713-C605-4948-BA8F-B1D9E8903E12}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 																				<UML:TaggedValue tag="virtualInheritance" value="0"/>
 																				<UML:TaggedValue tag="rb" value="0..1"/>
+																				<UML:TaggedValue tag="rt" value="+microarrayCriteria"/>
 																			</UML:ModelElement.taggedValue>
 																			<UML:Association.connection>
 																				<UML:AssociationEnd visibility="public" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="false" type="EAID_B0C32BDF_D1FC_40c5_A7EB_AB68FFCB8DE4">
@@ -16078,7 +16080,7 @@
 																						<UML:TaggedValue tag="ea_end" value="source"/>
 																					</UML:ModelElement.taggedValue>
 																				</UML:AssociationEnd>
-																				<UML:AssociationEnd visibility="public" multiplicity="0..1" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="true" type="EAID_550F5A1F_7CED_42be_A752_969E8F35F526">
+																				<UML:AssociationEnd visibility="public" multiplicity="0..1" name="microarrayCriteria" aggregation="none" isOrdered="false" targetScope="instance" changeable="none" isNavigable="true" type="EAID_550F5A1F_7CED_42be_A752_969E8F35F526">
 																					<UML:ModelElement.taggedValue>
 																						<UML:TaggedValue tag="containment" value="Unspecified"/>
 																						<UML:TaggedValue tag="deststyle" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
