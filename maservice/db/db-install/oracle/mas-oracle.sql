@@ -13,7 +13,7 @@ DROP TABLE ma_feature;
 DROP TABLE ma_organism;
 DROP TABLE ma_chromosome;
 DROP TABLE ma_genome;
-
+DROP TABLE ma_homologous_association;
 
 
 DROP sequence ma_genome_pk;
@@ -27,7 +27,7 @@ DROP sequence ma_therapeutic_agent_pk;
 DROP sequence ma_disease_pk;
 DROP sequence ma_molecular_seq_annotation_pk;
 DROP sequence ma_database_cross_reference_pk;
-
+DROP sequence ma_homologous_association_pk;
 
    
 CREATE TABLE ma_genome (
@@ -184,6 +184,14 @@ CREATE TABLE ma_database_cross_reference
                                     ) TABLESPACE CABIO_FUT;
 
 
+CREATE TABLE ma_homologous_association
+                                (
+	                                id  NUMBER NOT NULL,
+	                                similarity_percentage  float,
+	                                gene_id NUMBER,
+	                                homologous_gene_id NUMBER,
+	                                 primary key (id)
+                                ) TABLESPACE CABIO_FUT;
 
 
 ALTER TABLE ma_database_cross_reference ADD foreign key(therapeutic_agent_id) references ma_therapeutic_agent (ID) ON DELETE cascade;
@@ -227,6 +235,8 @@ ALTER TABLE ma_feature ADD foreign key(organism_id) references ma_organism(ID) O
 
 ALTER TABLE ma_chromosome ADD foreign key(genome_id) references ma_genome(ID) ON DELETE cascade; 
 
+ALTER TABLE ma_homologous_association ADD foreign key(gene_id) references ma_gene(ID) ON DELETE cascade;
+ALTER TABLE ma_homologous_association ADD foreign key(homologous_gene_id) references ma_gene(ID) ON DELETE cascade;
 
 
 CREATE sequence ma_genome_pk;
@@ -240,4 +250,4 @@ CREATE sequence ma_therapeutic_agent_pk;
 CREATE sequence ma_disease_pk;
 CREATE sequence ma_molecular_seq_annotation_pk;
 CREATE sequence ma_database_cross_reference_pk;
-
+CREATE sequence ma_homologous_association_pk;
