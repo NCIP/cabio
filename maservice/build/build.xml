@@ -24,6 +24,28 @@
 	<property name="db.src.dir" value="${project.home}/db"/>
 	<property name="MODEL_FILE_PATH" value="${project.home}/models/${MODEL_FILE}"/>
 
+	<!-- MA service specific properties -->
+	<property name="ma.src.dir" value="${project.home}/src" />
+	<property name="ma.custom.file" value="maservice-custom.jar"  />
+	<property name="ma.conf.dir"  value="${project.home}/conf" />
+	<property name="ma.conf.system.web"  value="${ma.conf.dir}/system/web" />	
+	<property name="ma.conf.system.web.classes.dir"  value="${ma.conf.system.web}/WEB-INF/classes" />
+	<property name="output.deploy.dir"  value="${output.dir}/${PROJECT_NAME}/package/server/jboss/server/default/deploy" />
+		
+	
+	<path id="ma.build.classpath">
+		<fileset dir="${output.dir}/${PROJECT_NAME}/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${output.dir}/${PROJECT_NAME}/lib/runtime">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${output.dir}/${PROJECT_NAME}/codegen/target">
+				<include name="*.jar" />
+		</fileset>		
+	</path>
+
+	
 	<property name="properties.file" value="${project.build.home}/install.properties" />
 	<property name="upgrade.properties.file" value="${project.build.home}/install.properties" />
 	<echo message="Using properties file of ${properties.file}." />
@@ -48,8 +70,54 @@
 
 	<target name="clean:all" description="cleans everything" depends="clean:project"/>
 
+
+	<target name="maservice-pre-clean">
+		<delete dir="${build.classes.dir}" quiet="false" />
+		<delete file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}"  />
+    </target>	
+	
+	<target name="build:maservice-src-code" description="Build the source files for MA services" depends="init" >
+		<property name="build.classes.dir" value="${output.classes.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<javac srcdir="${ma.src.dir}" destdir="${build.classes.dir}" debug="true">
+			<classpath refid="ma.build.classpath" />
+		</javac>
+	</target>
+	
+	<target name="package-maservice-jar" depends="build:maservice-src-code" description="Prepares MA service class distribution files">
+		<jar destfile="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}" basedir="${build.classes.dir}">
+			<manifest>
+				<attribute name="Generated-By" value="MA Service build scripts" />
+				<attribute name="Version" value="${VERSION}" />
+			</manifest>
+			<fileset dir="${ma.src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${build.classes.dir}">
+				<include name="**/*.class" />
+			</fileset>			
+		</jar>
+	</target>
+
+	<target name="maservice-post-clean">
+		<delete dir="${build.classes.dir}" quiet="false" />
+    </target>	
+	
+	<target name="maservice-repackage-war" >
+		<war destfile="${output.deploy.dir}/${PROJECT_NAME}.war" webxml="${system.config.client.webapp.dir}/WEB-INF/web.xml"  update="true">		  
+		  	      <lib dir="${output.dir}/${PROJECT_NAME}/codegen/target">
+		  	      	      <include name="${ma.custom.file}" />
+		  	      </lib>
+   		  </war>		  
+	</target>
+		
+	<target name="build:maservice-custom" depends="package-maservice-jar,maservice-post-clean" />
+	
 	<target name="build:SDK" description="Builds the entire system. This is used mostly by development team or BDA certification team">
 		<ant antfile="${master.build.file}" dir="${build.dir}" inheritall="false" inheritrefs="false" target="build:all" />
+		<antcall target="build:maservice-custom" />		
 		<antcall target="build-system" />
 	</target>
+	
+	<target name="build:maservice" depends="build:SDK, maservice-repackage-war" />
 </project>
