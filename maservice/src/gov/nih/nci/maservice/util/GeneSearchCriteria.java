@@ -1,5 +1,6 @@
 package gov.nih.nci.maservice.util;
 
+import gov.nih.nci.maservice.domain.Organism;
 import gov.nih.nci.iso21090.St;
 
 /**
@@ -10,7 +11,7 @@ import gov.nih.nci.iso21090.St;
 public class GeneSearchCriteria extends SearchCriteria {
 
 	private St symbolOrAlias;
-	public OrganismCriteria organismCriteria;
+	private Organism organism;
 
 	public GeneSearchCriteria(){
 
@@ -22,6 +23,14 @@ public class GeneSearchCriteria extends SearchCriteria {
 
 	public void setSymbolOrAlias(St symbolOrAlias) {
 		this.symbolOrAlias = symbolOrAlias;
+	}
+
+	public Organism getOrganism() {
+		return organism;
+	}
+
+	public void setOrganism(Organism organism) {
+		this.organism = organism;
 	}
 
 }

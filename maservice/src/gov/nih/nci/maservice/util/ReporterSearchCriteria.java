@@ -1,5 +1,6 @@
 package gov.nih.nci.maservice.util;
 
+import gov.nih.nci.maservice.domain.Microarray;
 import gov.nih.nci.iso21090.St;
 
 /**
@@ -10,7 +11,7 @@ import gov.nih.nci.iso21090.St;
 public class ReporterSearchCriteria extends SearchCriteria {
 
 	private St reporterName;
-	public MicroarrayCriteria microarrayCriteria;
+	private Microarray microarray;
 
 	public ReporterSearchCriteria(){
 
@@ -24,13 +25,11 @@ public class ReporterSearchCriteria extends SearchCriteria {
 		this.reporterName = reporterName;
 	}
 
-	public MicroarrayCriteria getMicroarrayCriteria() {
-		return microarrayCriteria;
+	public Microarray getMicroarray() {
+		return microarray;
 	}
 
-	public void setMicroarrayCriteria(MicroarrayCriteria microarrayCriteria) {
-		this.microarrayCriteria = microarrayCriteria;
+	public void setMicroarray(Microarray microarray) {
+		this.microarray = microarray;
 	}
-
-
 }
