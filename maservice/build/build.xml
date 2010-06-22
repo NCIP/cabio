@@ -31,7 +31,7 @@
 	<property name="ma.conf.system.web"  value="${ma.conf.dir}/system/web" />	
 	<property name="ma.conf.system.web.classes.dir"  value="${ma.conf.system.web}/WEB-INF/classes" />
 	<property name="output.deploy.dir"  value="${output.dir}/${PROJECT_NAME}/package/server/jboss/server/default/deploy" />
-		
+	<property name="ma.system.web"  value="${project.home}/system/web" />
 	
 	<path id="ma.build.classpath">
 		<fileset dir="${output.dir}/${PROJECT_NAME}/lib">
@@ -90,9 +90,9 @@
 				<attribute name="Generated-By" value="MA Service build scripts" />
 				<attribute name="Version" value="${VERSION}" />
 			</manifest>
-			<fileset dir="${ma.src.dir}">
+			<!-- fileset dir="${ma.src.dir}">
 				<include name="**/*.java" />
-			</fileset>
+			</fileset -->
 			<fileset dir="${build.classes.dir}">
 				<include name="**/*.class" />
 			</fileset>			
@@ -104,19 +104,26 @@
     </target>	
 	
 	<target name="maservice-repackage-war" >
-		<war destfile="${output.deploy.dir}/${PROJECT_NAME}.war" webxml="${system.config.client.webapp.dir}/WEB-INF/web.xml"  update="true">		  
-		  	      <lib dir="${output.dir}/${PROJECT_NAME}/codegen/target">
-		  	      	      <include name="${ma.custom.file}" />
-		  	      </lib>
-   		  </war>		  
+		<unzip src="${output.deploy.dir}/${PROJECT_NAME}.war" dest="${output.deploy.dir}/tmp" />
+		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}" todir="${output.deploy.dir}/tmp/WEB-INF/lib" />
+		<copy todir="${output.deploy.dir}/tmp" overwrite="true" >
+			  <fileset dir="${ma.conf.system.web}" />
+			  <fileset dir="${ma.system.web}" />
+		</copy>	
+		<war destfile="${output.deploy.dir}/${PROJECT_NAME}.war" webxml="${system.config.client.webapp.dir}/WEB-INF/web.xml"  update="true">
+			       <fileset dir="${output.deploy.dir}/tmp">
+			       	       <include name="*/**" />
+			       </fileset>
+   		  </war>
+		  <delete dir="${output.deploy.dir}/tmp" />
 	</target>
 		
 	<target name="build:maservice-custom" depends="package-maservice-jar,maservice-post-clean" />
 	
 	<target name="build:SDK" description="Builds the entire system. This is used mostly by development team or BDA certification team">
-		<ant antfile="${master.build.file}" dir="${build.dir}" inheritall="false" inheritrefs="false" target="build:all" />
-		<antcall target="build:maservice-custom" />		
-		<antcall target="build-system" />
+		<ant antfile="${master.build.file}" dir="${build.dir}" inheritall="false" inheritrefs="false" target="build:all" />		
+		<antcall target="build-system" />		
+		<antcall target="build:maservice-custom" />
 	</target>
 	
 	<target name="build:maservice" depends="build:SDK, maservice-repackage-war" />
