@@ -10,6 +10,26 @@ public class MAException extends ApplicationException {
 	private St message;
 	private Cd severity;
 	private Cd type;
+	
+	public  MAException()
+	{
+		super();
+	}
+	
+	public  MAException(Cd code, Cd severity, Cd type, Throwable cause)
+	{
+		this(cause);
+		this.code = code;
+		this.severity = severity;
+		this.type = type;
+	}
+
+	public  MAException(Throwable cause)
+	{		
+	    super(cause);
+	    this.message.setValue(cause.getMessage());
+	}
+	
 	public Cd getCode() {
 		return code;
 	}
