@@ -212,7 +212,7 @@ public class GridIdDAO implements DAO {
 
             if (results.isEmpty()) {
                 throw new IllegalStateException(
-                "The specified feature has no PhysicalLocation data.");
+                "The specified feature has no PhysicalLocation data on the given assembly.");
             }
 
             if (results.size() > 1) {
