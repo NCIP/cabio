@@ -1,3 +1,4 @@
+DROP TABLE ma_allele;
 DROP TABLE ma_database_cross_reference;
 DROP TABLE ma_rel_feature_ms_annotation;
 DROP TABLE ma_molecular_seq_annotation;
@@ -28,6 +29,7 @@ DROP sequence ma_disease_pk;
 DROP sequence ma_molecular_seq_annotation_pk;
 DROP sequence ma_database_cross_reference_pk;
 DROP sequence ma_homologous_association_pk;
+DROP sequence ma_allele_pk;
 
    
 CREATE TABLE ma_genome (
@@ -68,8 +70,7 @@ CREATE TABLE ma_feature
                           flank VARCHAR2(55), 
                           validation_status VARCHAR2(50),
                           organism_id NUMBER, 
-                          discriminator VARCHAR2(50), 
-                          alleles VARCHAR2(50), 
+                          discriminator VARCHAR2(50),  
                           primary key (id)
 
                         ) TABLESPACE CABIO_FUT;
@@ -193,6 +194,15 @@ CREATE TABLE ma_homologous_association
 	                                 primary key (id)
                                 ) TABLESPACE CABIO_FUT;
 
+CREATE TABLE ma_allele
+(
+	id        NUMBER NOT NULL,
+	sequence  VARCHAR2(50),
+	snp_id    NUMBER,
+   primary key (id)
+) TABLESPACE CABIO_FUT;
+
+
 
 ALTER TABLE ma_database_cross_reference ADD foreign key(therapeutic_agent_id) references ma_therapeutic_agent (ID) ON DELETE cascade;
 ALTER TABLE ma_database_cross_reference ADD foreign key(variation_id) references ma_feature (ID) ON DELETE cascade;
@@ -235,8 +245,11 @@ ALTER TABLE ma_feature ADD foreign key(organism_id) references ma_organism(ID) O
 
 ALTER TABLE ma_chromosome ADD foreign key(genome_id) references ma_genome(ID) ON DELETE cascade; 
 
-ALTER TABLE ma_homologous_association ADD foreign key(gene_id) references ma_gene(ID) ON DELETE cascade;
-ALTER TABLE ma_homologous_association ADD foreign key(homologous_gene_id) references ma_gene(ID) ON DELETE cascade;
+ALTER TABLE ma_homologous_association ADD foreign key(gene_id) references ma_feature(ID) ON DELETE cascade;
+ALTER TABLE ma_homologous_association ADD foreign key(homologous_gene_id) references ma_feature(ID) ON DELETE cascade;
+           
+
+ALTER TABLE ma_allele ADD foreign key(snp_id) references ma_feature(ID) ON DELETE cascade;
 
 
 CREATE sequence ma_genome_pk;
@@ -251,3 +264,4 @@ CREATE sequence ma_disease_pk;
 CREATE sequence ma_molecular_seq_annotation_pk;
 CREATE sequence ma_database_cross_reference_pk;
 CREATE sequence ma_homologous_association_pk;
+CREATE sequence ma_allele_pk;
