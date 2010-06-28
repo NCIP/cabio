@@ -16,7 +16,7 @@
 
 <div style="color: #444;">
 <img src="<c:url value="/images/sdkLogoSmall.gif"/>" style="float: left; margin-right: 8px;"/>
-The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>" target="_blank">caBIO portlet</a></span>
+The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>" target="_blank">caBIO Portlet</a></span>
 &nbsp;is a portal user interface built on top of the caBIO APIs. 
 <span class="link-extenal"><a href="<bean:message key="link.cabio.api"/>" target="_blank">caBIO</a></span> 
 &nbsp;is a repository of data useful in biomedical research, compiled from multiple primary sources. 
