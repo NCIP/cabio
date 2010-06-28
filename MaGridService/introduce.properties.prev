@@ -1,0 +1,11 @@
+#Introduce Properties
+#Mon Jun 28 11:33:19 EDT 2010
+introduce.skeleton.services.list=MaGridService
+introduce.skeleton.extensions=cagrid_metadata,data
+introduce.skeleton.timestamp=1277738697281
+introduce.skeleton.service.name=MaGridService
+introduce.skeleton.resource.options=main,singleton,identifiable,resourcePropertyManagement
+introduce.skeleton.destination.dir=C\:\\work\\MAGridService\\software\\MaGridService
+introduce.skeleton.namespace.domain=http\://maservice.nci.nih.gov/MaGridService
+introduce.ns.excludes=\ -x gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service -x gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata -x http\://gov.nih.nci.cagrid.data/DataServiceExceptions -x uri\:iso.org\:21090 -x gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security -x gme\://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common -x gme\://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain
+introduce.soap.binding.excludes=\ uri\:iso.org\:21090 gme\://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain
