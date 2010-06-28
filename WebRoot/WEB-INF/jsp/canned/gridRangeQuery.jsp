@@ -12,7 +12,9 @@
     </td></tr>
 
     <tr><td title="Genome assembly">Assembly</td><td>
-    <html:text property="assembly" size="20"/>
+    <html:select property="assembly">
+    <html:optionsCollection name="globalQueries" property="assemblies" value="value" label="name"/>
+    </html:select>
     </td></tr>
     
     <tr><td title="Distance downstream from the feature to search">Downstream Distance</td><td>

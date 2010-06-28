@@ -10,8 +10,8 @@ public class GridRangeQueryForm extends PaginatedForm {
 
     private static Log log = LogFactory.getLog(GridRangeQueryForm.class);
     
-    private String gridId = "hdl://2500.1.PMEUQUCCL5/DXZ7ZIOFOE";
-    private String assembly = "Primary_Assembly";
+    private String gridId = "hdl://2500.1.PMEUQUCCL5/APH54Q7IXS";
+    private String assembly = "";
     private String downstreamPad = "100";
     private String upstreamPad = "100";
     private String classFilter = "";

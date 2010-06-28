@@ -17,9 +17,9 @@ public class AbsoluteRangeQueryForm extends PaginatedForm {
         
     private String taxon = "Hs";
     private String chromosomeNumber = "1";
-    private String assembly = "reference";
-    private String start = "109433764";
-    private String end = "109433982";
+    private String assembly = "";
+    private String start = "1";
+    private String end = "100000";
     private String classFilter = "";
 
     public Long getChromosomeId() {

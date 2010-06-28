@@ -3,6 +3,7 @@ package gov.nih.nci.cabio.portal.portlet;
 import gov.nih.nci.cabio.domain.Chromosome;
 import gov.nih.nci.cabio.domain.Microarray;
 import gov.nih.nci.cabio.domain.Taxon;
+import gov.nih.nci.common.util.QueryUtils;
 import gov.nih.nci.system.applicationservice.CaBioApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 import gov.nih.nci.system.query.hibernate.HQLCriteria;
@@ -17,6 +18,8 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.SQLCriterion;
 
 /**
  * Any global data that must be queried from caBIO is available in this class.
@@ -30,7 +33,9 @@ import org.apache.commons.logging.LogFactory;
 public class GlobalQueries {
 
     private static Log log = LogFactory.getLog(GlobalQueries.class);
-        
+
+    private static final int MIN_ASSEMBLY_COUNT = 0;
+    
     private CaBioApplicationService as; 
         
     private Map<String,List<Chromosome>> taxon2chroms = new HashMap<String,List<Chromosome>>();
@@ -40,6 +45,8 @@ public class GlobalQueries {
     private List<Microarray> microarrays;
     
     private List<NameValuePair> pathwaySources;
+    
+    private List<NameValuePair> assemblies;
     
     /**
      * Create a new instance of GlobalQueries and attempt to preload all the 
@@ -54,6 +61,7 @@ public class GlobalQueries {
             loadTaxonChromosomes();
             loadMicroarrays();
             loadPathwaySources();
+            loadAssemblies();
             log.info("Completed preloading global data.");
             
         }
@@ -106,7 +114,17 @@ public class GlobalQueries {
         if (pathwaySources == null || pathwaySources.isEmpty()) return new ArrayList<NameValuePair>();
         return pathwaySources;
     }
-    
+
+    /**
+     * Returns a list of assemblies in caBIO.
+     * @return list of assemblies
+     */
+    public List<NameValuePair> getAssemblies() {
+        if (assemblies == null || assemblies.isEmpty()) loadAssemblies();
+        if (assemblies == null || assemblies.isEmpty()) return new ArrayList<NameValuePair>();
+        return assemblies;
+    }
+
     /**
      * Returns the list of possible GenomicFeature enumeration values.
      * @return Array of GenomicFeature values
@@ -187,6 +205,38 @@ public class GlobalQueries {
         }
         catch (Exception e) {
             log.error("Error loading pathway data.",e);
+        }
+    }
+    
+    private void loadAssemblies() {
+        
+        try {
+            log.info("Loading assembly data...");
+
+            String hql = "select assembly, count(*) " +
+                    "from gov.nih.nci.cabio.domain.Location " +
+                    "group by assembly " +
+                    "order by count(*) desc ";
+            
+            List<Object[]> results = as.query(new HQLCriteria(hql,
+                QueryUtils.createCountQuery(hql),null));
+            
+            assemblies = new ArrayList<NameValuePair>();
+            
+            for(Object[] row : results) {
+                String assembly = (String)row[0];
+                Long count = (Long)row[1];
+                if (count > MIN_ASSEMBLY_COUNT) {
+                    NameValuePair nv = new NameValuePair(
+                        assembly+" ("+count.toString()+" objects)",assembly);
+                    assemblies.add(nv);
+                }
+            }
+            
+            log.info("Done loading assembly data.");
+        }
+        catch (Exception e) {
+            log.error("Error loading assembly data.",e);
         }
     }
 }
