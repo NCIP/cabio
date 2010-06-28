@@ -4,16 +4,17 @@
 <property file="build.properties"/>
 	
 <property name="project.dir" value="." />
+<property name="project.build.dir" value="build" />
 <property name="ant.project.name" value="caBIO Portlets" />
 <property name="dist.dir" value="dist" />
-<property name="server.dir.name" value="default" />
 <property name="src.dir" value="src" />
 <property name="conf.dir" value="conf" />
 <property name="lib.dir" value="lib" />
-<property name="webroot.dir" value="${project.dir}/WebRoot" />
-<property name="project.build.dir" value="${webroot.dir}/WEB-INF/classes" />
+<property name="webroot.dir" value="WebRoot" />
+<property name="classes.build.dir" value="${project.build.dir}/WEB-INF/classes" />
 <property name="war.file" value="cabioportlets.war" />
 	
+<property name="server.dir.name" value="default" />
 <property name="app.server.dir" value="/usr/local/portal-liferay/jboss-4.0.5.GA" />	
 <property name="app.server.deploy.dir" value="${app.server.dir}/server/${server.dir.name}/deploy" />
 <property name="app.server.type" value="jboss-tomcat" />
@@ -36,13 +37,25 @@
 	
 	<delete dir="${dist.dir}" quiet="true"/>
     <delete dir="${project.build.dir}" quiet="true"/>
-    <mkdir dir="${project.build.dir}"/>
 	
 </target>
 
-<target name="compile" description="Compiles the Java source files" >
+<target name="create-build">
+
+    <mkdir dir="${project.build.dir}"/>
+    <mkdir dir="${classes.build.dir}"/>
+    
+    <copy todir="${project.build.dir}">
+        <fileset dir="${webroot.dir}">
+            <include name="**/*" />
+        </fileset>
+    </copy>
+
+</target>
+    
+<target name="compile" depends="create-build" description="Compiles the Java source files" >
 	
-	<javac srcdir="${src.dir}" destdir="${project.build.dir}" debug="true">
+	<javac srcdir="${src.dir}" destdir="${classes.build.dir}" debug="true">
         <classpath refid="project.classpath"/>
 		<include name="**/*.java"/>
 	</javac>
@@ -52,12 +65,12 @@
 <target name="tag-build" 
         description="Populates the version.properties for this build">
 
-    <exec executable="svn" output="${project.build.dir}/svninfo.xml">
+    <exec executable="svn" output="${classes.build.dir}/svninfo.xml">
         <arg value="info"/>
         <arg value="--xml"/>
     </exec>
     
-    <xmlproperty file="${project.build.dir}/svninfo.xml" collapseattributes="true"/>
+    <xmlproperty file="${classes.build.dir}/svninfo.xml" collapseattributes="true"/>
     
     <tstamp>
        <format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -71,13 +84,13 @@
 
 <target name="copy-resources" depends="tag-build" description="Copy resource files">
 	
-    <copy todir="${project.build.dir}" overwrite="true">
+    <copy todir="${classes.build.dir}" overwrite="true">
         <fileset dir="${conf.dir}">
             <include name="**/*" />
         </fileset>
     </copy>
     
-	<replace dir="${project.build.dir}">
+	<replace dir="${classes.build.dir}">
         <include name="application-config-client*.xml"/>
         <include name="cabioportlet.properties"/>
         <replacefilter token="CABIO_URL" value="${remote.api.url}" />
