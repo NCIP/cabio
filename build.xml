@@ -110,8 +110,7 @@
 	<echo message="${ant.project.name}: Creates portlet WAR file distribution"/>
 	<mkdir dir="${dist.dir}"/>
 	<zip destfile="${dist.dir}/${war.file}" whenempty="skip">
-		<zipfileset dir="${webroot.dir}" prefix="">
-		</zipfileset>
+		<zipfileset dir="${project.build.dir}" prefix=""/>
 	</zip>
 	
 </target>
