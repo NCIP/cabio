@@ -27,11 +27,39 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(GeneAgentAssociation o : results) {
-            assertEquals(agent, o.getAgent().getName().toLowerCase());
+                        
+            assertNotNull(o.getGene());
             assertPreloaded(o,"gene");
+            
+            assertNotNull(o.getAgent());
             assertPreloaded(o,"agent");
-            assertPreloaded(o,"evidence");
+            assertEquals(agent, o.getAgent().getName().toLowerCase());
         }
+    }
+    
+    public void testAgentToGenesEvidence() throws Exception {
+
+        String agent = "albumin";
+        List<GeneAgentAssociation> results1 = 
+            rs.getGenesByAgentWithEvidenceProperties(agent, "", "", "");
+        assertNotNull(results1);
+        assertFalse(results1.isEmpty());
+        
+        List<GeneAgentAssociation> results2 = 
+            rs.getGenesByAgentWithEvidenceProperties(agent, "on", "", "");
+        assertNotNull(results2);
+
+        List<GeneAgentAssociation> results3 = 
+            rs.getGenesByAgentWithEvidenceProperties(agent, "", "on", "");
+        assertNotNull(results2);
+        
+        List<GeneAgentAssociation> results4 = 
+            rs.getGenesByAgentWithEvidenceProperties(agent, "", "", "on");
+        assertNotNull(results2);
+        
+        assertTrue(results2.size() > results1.size());
+        assertTrue(results3.size() > results1.size());
+        assertTrue(results4.size() > results1.size());
     }
 
     public void testAgentCuiToGenes() throws Exception {
@@ -41,10 +69,13 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(GeneAgentAssociation o : results) {
-            assertEquals(agentCui, o.getAgent().getEVSId());
+            
+            assertNotNull(o.getGene());
             assertPreloaded(o,"gene");
+            
+            assertNotNull(o.getAgent());
             assertPreloaded(o,"agent");
-            assertPreloaded(o,"evidence");
+            assertEquals(agentCui, o.getAgent().getEVSId());
         }
     }
     
@@ -55,11 +86,13 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(GeneDiseaseAssociation o : results) {
+            
             assertNotNull(o.getGene());
-            assertEquals(disease, o.getDiseaseOntology().getName().toLowerCase());
             assertPreloaded(o,"gene");
+            
+            assertNotNull(o.getDiseaseOntology());
             assertPreloaded(o,"diseaseOntology");
-            assertPreloaded(o,"evidence");
+            assertEquals(disease, o.getDiseaseOntology().getName().toLowerCase());
         }
     }
 
@@ -70,11 +103,13 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(GeneDiseaseAssociation o : results) {
+            
             assertNotNull(o.getGene());
-            assertEquals(diseaseCui, o.getDiseaseOntology().getEVSId());
             assertPreloaded(o,"gene");
+
+            assertNotNull(o.getDiseaseOntology());
+            assertEquals(diseaseCui, o.getDiseaseOntology().getEVSId());
             assertPreloaded(o,"diseaseOntology");
-            assertPreloaded(o,"evidence");
         }
     }
     
@@ -85,11 +120,11 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(GeneFunctionAssociation o : results) {
+            
             assertNotNull(o.getGene());
+            assertPreloaded(o,"gene");
             assertTrue(geneSymbol.equalsIgnoreCase(o.getGene().getSymbol())
                 ||geneSymbol.equalsIgnoreCase(o.getGene().getHugoSymbol()));
-            assertPreloaded(o,"gene");
-            assertPreloaded(o,"evidence");
         }
     }
     
@@ -100,9 +135,13 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(ExpressionArrayReporter o : results) {
+            
+            assertNotNull(o.getGene());
+            assertPreloaded(o,"gene");
             assertTrue((geneSymbol.equalsIgnoreCase(o.getGene().getSymbol())
                 ||geneSymbol.equalsIgnoreCase(o.getGene().getHugoSymbol())));
-            assertPreloaded(o,"gene");
+            
+            assertNotNull(o.getMicroarray());
             assertPreloaded(o,"microarray");
         }
     }
@@ -114,8 +153,12 @@ public class ReportTest extends ORMTestCase {
         assertNotNull(results);
         assertFalse(results.isEmpty());
         for(SNPArrayReporter o : results) {
-            assertEquals(dbSNPId, o.getSNP().getDBSNPID());
+
+            assertNotNull(o.getSNP());
             assertPreloaded(o,"SNP");
+            assertEquals(dbSNPId, o.getSNP().getDBSNPID());
+            
+            assertNotNull(o.getMicroarray());
             assertPreloaded(o,"microarray");
         }
     }
@@ -145,10 +188,5 @@ public class ReportTest extends ORMTestCase {
         assertEquals(p.getDisplayValue(), pathway.getDisplayValue());
         assertPreloaded(p, "taxon");
     }
-    
-    public void testGeneDiseaseAssociation() throws Exception {
 
-        Object o = rs.getDetailObject(GeneDiseaseAssociation.class, 138674L);
-        assertNotNull(o);
-    }
 }
