@@ -99,6 +99,12 @@ gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosome.number	Chromosome
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
 gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
 					
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	Cytoband	Cytobands	CLASS		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
 gov.nih.nci.cabio.domain.ConstrainedRegion	Constrained Region	Constrained Regions	CLASS		
 gov.nih.nci.cabio.domain.ConstrainedRegion	score	Score	SUMMARY DETAIL		
 gov.nih.nci.cabio.domain.ConstrainedRegion	pvalue	P-value	SUMMARY DETAIL		
