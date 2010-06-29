@@ -18,8 +18,6 @@ import java.util.Map;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.SQLCriterion;
 
 /**
  * Any global data that must be queried from caBIO is available in this class.
@@ -34,7 +32,7 @@ public class GlobalQueries {
 
     private static Log log = LogFactory.getLog(GlobalQueries.class);
 
-    private static final int MIN_ASSEMBLY_COUNT = 0;
+    private static final int MIN_ASSEMBLY_COUNT = 100000;
     
     private CaBioApplicationService as; 
         
@@ -226,7 +224,7 @@ public class GlobalQueries {
             for(Object[] row : results) {
                 String assembly = (String)row[0];
                 Long count = (Long)row[1];
-                if (count > MIN_ASSEMBLY_COUNT) {
+                if (count >= MIN_ASSEMBLY_COUNT) {
                     NameValuePair nv = new NameValuePair(
                         assembly+" ("+count.toString()+" locations)",assembly);
                     assemblies.add(nv);
