@@ -228,7 +228,7 @@ public class GlobalQueries {
                 Long count = (Long)row[1];
                 if (count > MIN_ASSEMBLY_COUNT) {
                     NameValuePair nv = new NameValuePair(
-                        assembly+" ("+count.toString()+" objects)",assembly);
+                        assembly+" ("+count.toString()+" locations)",assembly);
                     assemblies.add(nv);
                 }
             }
