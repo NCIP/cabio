@@ -1,16 +1,34 @@
 package gov.nih.nci.maservice.junit;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import gov.nih.nci.system.applicationservice.MaApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 import junit.framework.TestCase;
 
 public abstract class MaTestBase extends TestCase {
 	private MaApplicationService appService;
+	private String MASERVICE_URL= "http://localhost:8080/maservice";
 	private MaApplicationService appServiceFromUrl;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		appService = (MaApplicationService)ApplicationServiceProvider.getApplicationService();
+	    
+		try
+		{
+		// attempt to get the right URL from the Java client configuration
+        ApplicationContext ctx = 
+            new ClassPathXmlApplicationContext("application-config-client.xml");
+            MASERVICE_URL = (String) ctx.getBean("RemoteServerURL");
+            
+		} 
+		catch ( Exception e )
+		{
+			
+		}
+		
+		appService = (MaApplicationService)this.getApplicationServiceFromUrl();
 	}
 
 
@@ -27,18 +45,11 @@ public abstract class MaTestBase extends TestCase {
 	
 	
 	protected MaApplicationService getApplicationServiceFromUrl() throws Exception
-	{
-		String url = "http://localhost:8080/maservice";
-		appServiceFromUrl = (MaApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(url);
+	{		
+		appServiceFromUrl = (MaApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(MASERVICE_URL);
 		return appServiceFromUrl;
 	}
 	
-	protected MaApplicationService getBadApplicationServiceFromUrl() throws Exception
-	{
-		String url = "http://badhost:8080/badcontext";
-		appServiceFromUrl = (MaApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(url);
-		return appServiceFromUrl;
-	}
 	
 	public static String getTestCaseName()
 	{
