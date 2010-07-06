@@ -2,6 +2,7 @@ package gov.nih.nci.maservice.junit;
 
 import gov.nih.nci.maservice.util.*;
 import gov.nih.nci.maservice.domain.Gene;
+import gov.nih.nci.maservice.domain.AgentAssociation;
 import gov.nih.nci.iso21090.St;
 import java.util.List;
 
@@ -24,8 +25,15 @@ public class MaServiceTest extends MaTestBase {
 	}
 
 	@Test
-	public void testGetAgentAssociations() {
-		fail("Not yet implemented");
+	public void testGetAgentAssociations() throws Exception {
+		GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
+		St symbolOrAlias = new St();
+		symbolOrAlias.setValue("BRCA1");
+		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
+		
+		List<AgentAssociation> aas = this.getApplicationService().getAgentAssociations(geneSearchCriteria);
+		
+        assertNotNull(aas);		
 	}
 
 	@Test
