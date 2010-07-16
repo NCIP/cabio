@@ -43,7 +43,8 @@ var caBioObjectDetails = function() {
      * Aborts all current running requests and nulls them out.
      */
     function abortAllRequests () {
-        for (i in queries) {
+	    if (!queries) return;
+        for (var i=0; i<queries.length; i++) {
         	var query = queries[i];
         	if (query['request']) {
         		query['request'].abort();
@@ -235,7 +236,8 @@ var caBioObjectDetails = function() {
             jQuery("#caBioDetails").html(prev.html);
             // Restart any unfinished queries
             queries = prev.queries;
-            for(i in queries) {
+            if (!queries) return;
+            for(var i=0; i<queries.length; i++) {
             	var query = queries[i];
                 if (query.data && query.success) {
                     query['request'] = jQuery.ajax({ 

@@ -30,7 +30,8 @@ var caBioSimpleSearch = function() {
 	function concatFields(p, f) { 
 	    var r = '';
 	    var i = 0;
-	    for(k in f) {
+	    if (!f) return r;
+	    for(var k=0; k<f.length; k++) {
 	        if (p[f[k]] != undefined) {
 	            if (i++>0) r+=", ";
 	            r += p[f[k]];
@@ -94,7 +95,7 @@ var caBioSimpleSearch = function() {
 	    // add AND if the query string is not already a quoted phrase
 	    if (jQuery("#matchAll").is(":checked")) {
 	        var a = caBioCommon.tokenize(searchString);
-	        for (i in a) if (a[i].match(" ")) a[i] = '"'+a[i]+'"';
+	        for (var i=0; i<a.length; i++) if (a[i].match(" ")) a[i] = '"'+a[i]+'"';
 	        searchString = a.join(' AND ');
 	    }
 	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
@@ -188,9 +189,11 @@ var caBioSimpleSearch = function() {
 	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), maxDescLen), caBioCommon.searchWords);
 	            }
 	            else {
-	                for(k in r.properties) {
-	                    if ((k.substring(0,1) != '_') && (k != 'id')) {
-	                        desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), caBioCommon.searchWords)+"<br/>";
+		            if (r.properties) {
+	                    for(var k=0; k<r.properties.length; k++) {
+	                        if ((k.substring(0,1) != '_') && (k != 'id')) {
+	                            desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), caBioCommon.searchWords)+"<br/>";
+	                        }
 	                    }
 	                }
 	            }

@@ -31,7 +31,7 @@ var caBioCommon = function() {
         re = /,(?=( \w+\=))/;
         ar = props.split(re);
         re = /(\w+)\=(.*)/;
-        for(i=0; i<ar.length; i++) {
+        for(var i=0; i<ar.length; i++) {
             vals = re.exec(ar[i]);
             key = vals[1];
             value = vals[2];
@@ -164,7 +164,7 @@ var caBioCommon = function() {
         var a = [];
         var curr = "";
         var open = false;
-        for(i=0; i<s.length; i++) {
+        for(var i=0; i<s.length; i++) {
             if (s.charAt(i) == '"') {
                if (open) {
                    a[a.length] = curr;
@@ -213,7 +213,7 @@ var caBioCommon = function() {
 	    var leftpadded = false; 
 	    var rightpadded = false;
 	    
-	    for(i=1; i<=numPages; i++) {
+	    for(var i=1; i<=numPages; i++) {
 	        if (i == currPage) {
 	            rp += ' '+i;
 	        }
