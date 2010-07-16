@@ -16,24 +16,43 @@ public class MaServiceTest extends MaTestBase {
 	public void testGetGeneBySymbol() throws Exception {
 		GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
 		St symbolOrAlias = new St();
-		symbolOrAlias.setValue("BRCA1");
+		symbolOrAlias.setValue("Brca1");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
 		
 		List<Gene> genes = this.getApplicationService().getGeneBySymbol(geneSearchCriteria);
 		
-        assertNotNull(genes);		
+        assertNotNull(genes);
+        
+        if ( genes.size() > 0)
+        {
+        	System.out.println("Total genes found: " + genes.size());
+        	System.out.println("Gene Full Name:" + genes.get(0).getFullName().getValue() 
+        			           + " id:" + genes.get(0).getId().getExtension());
+        }
 	}
 
 	@Test
 	public void testGetAgentAssociations() throws Exception {
 		GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
 		St symbolOrAlias = new St();
-		symbolOrAlias.setValue("BRCA1");
+		symbolOrAlias.setValue("Brca1");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
 		
 		List<AgentAssociation> aas = this.getApplicationService().getAgentAssociations(geneSearchCriteria);
 		
-        assertNotNull(aas);		
+        assertNotNull(aas);	
+        
+        if ( aas.size() > 0)
+        {
+        	System.out.println("Total AgentAssociationFound: " + aas.size());
+        	System.out.println("AgentAssociation[0]: Source: " + aas.get(0).getSource().getValue()
+        			           + ", Role.code: " + aas.get(0).getRole().getCode()
+        			           + ", Role.codeSystem: " + aas.get(0).getRole().getCodeSystem()
+        			           + ", Role.codeSystemName: " + aas.get(0).getRole().getCodeSystemName()
+        			           + ", Role.codeSystemVersion: " + aas.get(0).getRole().getCodeSystemVersion()
+        			           + ", Role.originalText: " + aas.get(0).getRole().getOriginalText().getValue()
+        			           );
+        }
 	}
 
 	@Test
