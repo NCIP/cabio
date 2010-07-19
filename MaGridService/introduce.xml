@@ -1,0 +1,804 @@
+<ns1:ServiceDescription introduceVersion="1.3" xmlns:ns1="gme://gov.nih.nci.cagrid/1/Introduce">
+ <ns2:Namespaces xsi:type="ns2:NamespacesType" xmlns:ns2="gme://gov.nih.nci.cagrid.introduce/1/Namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ns2:Namespace generateStubs="false" namespace="http://www.w3.org/2001/XMLSchema" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="anySimpleType" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="anyType" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="anyURI" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="base64Binary" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="boolean" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="byte" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="date" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="dateTime" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="decimal" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="double" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="duration" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ENTITIES" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ENTITY" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="float" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="gDay" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="gMonth" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="gMonthDay" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="gYear" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="gYearMonth" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="hexBinary" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ID" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="IDREF" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="IDREFS" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="int" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="integer" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="language" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="long" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Name" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="NCName" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="negativeInteger" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="NMTOKEN" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="NMTOKENS" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="nonNegativeInteger" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="nonPositiveInteger" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="normalizedString" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="NOTATION" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="positiveInteger" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="QName" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="short" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="string" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="time" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="token" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="unsignedByte" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="unsignedInt" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="unsignedLong" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="unsignedShort" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="./MaGridServiceTypes.xsd" namespace="http://maservice.nci.nih.gov/MaGridService/types" packageName="gov.nih.nci.maservice.stubs.types" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="MaGridServiceReference" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./xsd/cagrid/types/security/security.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security" packageName="gov.nih.nci.cagrid.metadata.security" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="CommunicationMechanism" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="CommunicationStyle" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="GSISecureConversation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="GSISecureMessage" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="GSITransport" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="None" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Operation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ServiceSecurityMetadata" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="gov.nih.nci.maservice.domain.xsd" namespace="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" packageName="gov.nih.nci.maservice.domain" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement className="AgentAssociation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="AgentAssociation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Allele" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Allele" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="ArrayReporter" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="ArrayReporter" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="BiologicalProcess" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="BiologicalProcess" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="CellularComponent" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="CellularComponent" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Chromosome" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Chromosome" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DatabaseCrossReference" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DatabaseCrossReference" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Disease" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Disease" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DiseaseAssociation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DiseaseAssociation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="FunctionalAssociation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="FunctionalAssociation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Gene" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Gene" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="GeneIdentifier" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="GeneIdentifier" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Genome" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Genome" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="HomologousAssociation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="HomologousAssociation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Microarray" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Microarray" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="MolecularFunction" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="MolecularFunction" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="MolecularSequenceAnnotation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="MolecularSequenceAnnotation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="NucleicAcidPhysicalLocation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="NucleicAcidPhysicalLocation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="NucleicAcidSequenceFeature" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="NucleicAcidSequenceFeature" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="NucleicAcidSequenceVariation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="NucleicAcidSequenceVariation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="OntologyAnnotation" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="OntologyAnnotation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Organism" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Organism" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="SingleNucleotidePolymorphism" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="SingleNucleotidePolymorphism" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TherapeuticAgent" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TherapeuticAgent" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TherapeuticAgentIdentifier" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TherapeuticAgentIdentifier" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="VariationIdentifier" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.domain" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="VariationIdentifier" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="gov.nih.nci.maservice.util.xsd" namespace="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util" packageName="gov.nih.nci.maservice.util" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement className="GeneSearchCriteria" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.util" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="GeneSearchCriteria" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="ReporterSearchCriteria" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.util" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="ReporterSearchCriteria" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="SearchCriteria" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" packageName="gov.nih.nci.maservice.util" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="SearchCriteria" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./ISO_extensions.xsd" namespace="uri:iso.org:21090" packageName="gov.nih.nci.iso21090" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement className="Ad" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Ad" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Bl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Bl" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="BlNonNull" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="BlNonNull" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Cd" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Cd" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DSet" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DSetAd" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DSet" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DSetCd" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DSet" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DSetII" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="DSet" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="DSetTel" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ed" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Ed" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="EdText" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="EdText" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="En" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="En" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="EnOn" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="EnOn" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="EnPn" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="EnPn" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ii" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Ii" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Int" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Int" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ivl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="IvlInt" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ivl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="IvlPq" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ivl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="IvlReal" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ivl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="IvlTs" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Pq" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Pq" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Real" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Real" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Sc" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Sc" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="St" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="St" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="StNt" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="StNt" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Tel" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Tel" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TelEmail" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TelEmail" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TelPerson" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TelPerson" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TelPhone" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TelPhone" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="TelUrl" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="TelUrl" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement className="Ts" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" type="Ts" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./xsd/cagrid/types/caGridMetadata.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata" packageName="gov.nih.nci.cagrid.metadata" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="ServiceMetadata" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./xsd/cagrid/types/service/servicemodel.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.service" packageName="gov.nih.nci.cagrid.metadata.service" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="CaDSRRegistration" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ContextProperty" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Fault" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="InputParameter" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Operation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Output" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Service" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ServiceContext" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./xsd/cagrid/types/common/common.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common" packageName="gov.nih.nci.cagrid.metadata.common" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="Address" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="Enumeration" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="PointOfContact" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ResearchCenter" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ResearchCenterDescription" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="SemanticMetadata" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLAttribute" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLClass" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="ValueDomain" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="./1_gov.nih.nci.cagrid.CQLQuery.xsd" namespace="http://CQL.caBIG/1/gov.nih.nci.cagrid.CQLQuery" packageName="gov.nih.nci.cagrid.cqlquery" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="CQLQuery" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="./1_gov.nih.nci.cagrid.CQLResultSet.xsd" namespace="http://CQL.caBIG/1/gov.nih.nci.cagrid.CQLResultSet" packageName="gov.nih.nci.cagrid.cqlresultset" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="CQLQueryResultCollection" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace location="./MaGridService_CQLResultTypes.xsd" namespace="http://maservice.nci.nih.gov/MaGridService/CQLResultTypes" packageName="gov.nih.nci.maservice.cqlresulttypes" xsi:type="ns2:NamespaceType"/>
+  <ns2:Namespace location="./xsd/cagrid/types/data/data.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.dataservice" packageName="gov.nih.nci.cagrid.metadata.dataservice" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="DomainModel" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLAssociation" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLAssociationEdge" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLClass" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLClassReference" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="UMLGeneralization" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./DataServiceExceptions.xsd" namespace="http://gov.nih.nci.cagrid.data/DataServiceExceptions" packageName="gov.nih.nci.cagrid.data.faults" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="MalformedQueryException" xsi:type="ns2:SchemaElementType"/>
+   <ns2:SchemaElement type="QueryProcessingException" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+  <ns2:Namespace generateStubs="false" location="./xsd/cagrid/types/caGridMetadata.xsd" namespace="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata" packageName="gov.nih.nci.cagrid.metadata" xsi:type="ns2:NamespaceType">
+   <ns2:SchemaElement type="ServiceMetadata" xsi:type="ns2:SchemaElementType"/>
+  </ns2:Namespace>
+ </ns2:Namespaces>
+ <ns3:Services xsi:type="ns3:ServicesType" xmlns:ns3="gme://gov.nih.nci.cagrid.introduce/1/Services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ns3:Service name="MaGridService" namespace="http://maservice.nci.nih.gov/MaGridService" packageName="gov.nih.nci.maservice" xsi:type="ns3:ServiceType">
+   <ns4:Methods xsi:type="ns4:MethodsType" xmlns:ns4="gme://gov.nih.nci.cagrid.introduce/1/Methods">
+    <ns4:Method isImported="true" isProvided="true" name="GetMultipleResourceProperties" xsi:type="ns4:MethodType">
+     <ns4:Output qName="void" isArray="false"/>
+     <ns5:MethodSecurity xsi:type="ns5:MethodSecurity" xmlns:ns5="gme://gov.nih.nci.cagrid.introduce/1/Security">
+      <ns5:SecuritySetting xsi:type="ns5:SecuritySetting">None</ns5:SecuritySetting>
+     </ns5:MethodSecurity>
+     <ns4:ImportInformation fromIntroduce="false" inputMessage="ns6:GetMultipleResourcePropertiesRequest" namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" outputMessage="ns6:GetMultipleResourcePropertiesResponse" packageName="org.oasis.wsrf.properties" portTypeName="GetMultipleResourceProperties" wsdlFile="../wsrf/properties/WS-ResourceProperties.wsdl" xmlns:ns6="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"/>
+     <ns4:ProviderInformation providerClass="GetMRPProvider"/>
+    </ns4:Method>
+    <ns4:Method isImported="true" isProvided="true" name="GetResourceProperty" xsi:type="ns4:MethodType">
+     <ns4:Output qName="void" isArray="false"/>
+     <ns7:MethodSecurity xsi:type="ns7:MethodSecurity" xmlns:ns7="gme://gov.nih.nci.cagrid.introduce/1/Security">
+      <ns7:SecuritySetting xsi:type="ns7:SecuritySetting">None</ns7:SecuritySetting>
+     </ns7:MethodSecurity>
+     <ns4:ImportInformation fromIntroduce="false" inputMessage="ns8:GetResourcePropertyRequest" namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" outputMessage="ns8:GetResourcePropertyResponse" packageName="org.oasis.wsrf.properties" portTypeName="GetResourceProperty" wsdlFile="../wsrf/properties/WS-ResourceProperties.wsdl" xmlns:ns8="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"/>
+     <ns4:ProviderInformation providerClass="GetRPProvider"/>
+    </ns4:Method>
+    <ns4:Method isImported="true" isProvided="true" name="QueryResourceProperties" xsi:type="ns4:MethodType">
+     <ns4:Output qName="void" isArray="false"/>
+     <ns9:MethodSecurity xsi:type="ns9:MethodSecurity" xmlns:ns9="gme://gov.nih.nci.cagrid.introduce/1/Security">
+      <ns9:SecuritySetting xsi:type="ns9:SecuritySetting">None</ns9:SecuritySetting>
+     </ns9:MethodSecurity>
+     <ns4:ImportInformation fromIntroduce="false" inputMessage="ns10:QueryResourcePropertiesRequest" namespace="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl" outputMessage="ns10:QueryResourcePropertiesResponse" packageName="org.oasis.wsrf.properties" portTypeName="QueryResourceProperties" wsdlFile="../wsrf/properties/WS-ResourceProperties.wsdl" xmlns:ns10="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties-1.2-draft-01.wsdl"/>
+     <ns4:ProviderInformation providerClass="QueryRPProvider"/>
+    </ns4:Method>
+    <ns4:Method isImported="true" isProvided="true" name="getServiceSecurityMetadata" xsi:type="ns4:MethodType">
+     <ns4:Output qName="ns11:ServiceSecurityMetadata" isArray="false" isClientHandle="false" xmlns:ns11="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security"/>
+     <ns12:MethodSecurity xsi:type="ns12:MethodSecurity" xmlns:ns12="gme://gov.nih.nci.cagrid.introduce/1/Security">
+      <ns12:SecuritySetting xsi:type="ns12:SecuritySetting">None</ns12:SecuritySetting>
+      <ns12:MethodAuthorization xsi:type="ns12:MethodAuthorization">
+       <ns12:NoAuthorization xsi:type="ns12:NoAuthorization"/>
+      </ns12:MethodAuthorization>
+     </ns12:MethodSecurity>
+     <ns4:ImportInformation namespace="http://security.introduce.cagrid.nci.nih.gov/ServiceSecurity" packageName="gov.nih.nci.cagrid.introduce.security.stubs" portTypeName="ServiceSecurityPortType" wsdlFile="ServiceSecurity.wsdl"/>
+     <ns4:ProviderInformation providerClass="gov.nih.nci.cagrid.introduce.security.service.globus.ServiceSecurityProviderImpl"/>
+    </ns4:Method>
+    <ns4:Method description="The standard caGrid Data Service query method." isImported="true" isProvided="true" name="query" xsi:type="ns4:MethodType">
+     <ns4:Inputs>
+      <ns4:Input qName="ns13:CQLQuery" description="The CQL query to be executed against the data source." isArray="false" name="cqlQuery" xmlns:ns13="http://CQL.caBIG/1/gov.nih.nci.cagrid.CQLQuery"/>
+     </ns4:Inputs>
+     <ns4:Output qName="ns14:CQLQueryResultCollection" description="The result of executing the CQL query against the data source." isArray="false" xmlns:ns14="http://CQL.caBIG/1/gov.nih.nci.cagrid.CQLResultSet"/>
+     <ns4:Exceptions>
+      <ns4:Exception description="Thrown when an error occurs in processing a CQL query" name="QueryProcessingException" qname="ns15:QueryProcessingException" xmlns:ns15="http://gov.nih.nci.cagrid.data/DataServiceExceptions"/>
+      <ns4:Exception description="Thrown when a query is found to be improperly formed" name="MalformedQueryException" qname="ns16:MalformedQueryException" xmlns:ns16="http://gov.nih.nci.cagrid.data/DataServiceExceptions"/>
+     </ns4:Exceptions>
+     <ns4:ImportInformation inputMessage="ns17:QueryRequest" namespace="http://gov.nih.nci.cagrid.data/DataService" outputMessage="ns17:QueryResponse" packageName="gov.nih.nci.cagrid.data" portTypeName="DataServicePortType" wsdlFile="DataService.wsdl" xmlns:ns17="http://gov.nih.nci.cagrid.data/DataService"/>
+     <ns4:ProviderInformation providerClass="gov.nih.nci.cagrid.data.service.globus.DataServiceProviderImpl"/>
+    </ns4:Method>
+    <ns4:Method description="Get the Gene(s) for a given symbol or organism" isImported="false" isProvided="false" name="getGeneBySymbol" xsi:type="ns4:MethodType">
+     <ns4:Inputs>
+      <ns4:Input qName="ns18:GeneSearchCriteria" description="" isArray="false" name="geneSearchCriteria" xmlns:ns18="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
+     </ns4:Inputs>
+     <ns4:Output qName="ns19:Gene" description="" isArray="true" xmlns:ns19="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
+     <ns4:Exceptions/>
+    </ns4:Method>
+    <ns4:Method description="Get the Agent Associations for a given gene or organism" isImported="false" isProvided="false" name="getAgentAssociation" xsi:type="ns4:MethodType">
+     <ns4:Inputs>
+      <ns4:Input qName="ns20:GeneSearchCriteria" description="" isArray="false" name="geneSearchCriteria" xmlns:ns20="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
+     </ns4:Inputs>
+     <ns4:Output qName="ns21:AgentAssociation" description="" isArray="true" xmlns:ns21="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
+     <ns4:Exceptions/>
+    </ns4:Method>
+   </ns4:Methods>
+   <ns22:ResourcePropertiesList xsi:type="ns22:ResourcePropertiesListType" xmlns:ns22="gme://gov.nih.nci.cagrid.introduce/1/Resources">
+    <ns22:ResourceProperty qName="ns23:DomainModel" fileLocation="maservice_domainModel.xml" populateFromFile="true" register="true" xsi:type="ns22:ResourcePropertyType" xmlns:ns23="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.dataservice"/>
+    <ns22:ResourceProperty qName="ns24:ServiceMetadata" fileLocation="serviceMetadata.xml" populateFromFile="true" register="true" xsi:type="ns22:ResourcePropertyType" xmlns:ns24="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata"/>
+   </ns22:ResourcePropertiesList>
+   <ns3:ResourceFrameworkOptions xsi:type="ns3:ResourceFrameworkOptions">
+    <ns3:Main xsi:type="ns3:Main"/>
+    <ns3:Singleton xsi:type="ns3:Singleton"/>
+    <ns3:Identifiable xsi:type="ns3:Identifiable"/>
+    <ns3:ResourcePropertyManagement xsi:type="ns3:ResourcePropertyManagement"/>
+   </ns3:ResourceFrameworkOptions>
+  </ns3:Service>
+ </ns3:Services>
+ <ns25:Extensions xsi:type="ns25:ExtensionsType" xmlns:ns25="gme://gov.nih.nci.cagrid.introduce/1/Extension" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ns25:Extension name="cagrid_metadata" version="1.3" xsi:type="ns25:ExtensionType"/>
+  <ns25:Extension name="data" version="1.3" xsi:type="ns25:ExtensionType">
+   <ns25:ExtensionData>
+    <ns16:Data xsi:type="ns16:Data" xmlns:ns16="http://CQL.caBIG/1/gov.nih.nci.cagrid.data.extension">
+                     <ns16:ServiceFeatures serviceStyle="caCORE SDK v 4.3" useBdt="false" useGridIdeitifiers="false" useWsEnumeration="false" xsi:type="ns16:ServiceFeatures"/>
+
+
+
+
+                     <ns16:ModelInformation source="preBuilt" xsi:type="ns16:ModelInformation">
+                      <ns17:UMLProjectIdentifer identifier="maservice" version="1.0" xsi:type="ns17:UMLProjectIdentifer" xmlns:ns17="gme://caGrid.caBIG/1.0/org.cagrid.mms.domain"/>
+
+
+
+
+                      <ns16:ModelPackage packageName="gov.nih.nci.iso21090" xsi:type="ns16:ModelPackage">
+                       <ns16:ModelClass selected="true" shortClassName="AdxpAdl" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDinsta" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpZip" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="St" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ed" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDinst" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpStb" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Uid" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Xml" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="StNt" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpBns" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Sc" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="EdText" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Real" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Adxp" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDel" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpSttyp" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="BlNonNull" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Any" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpSal" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpCen" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ii" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Coll" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Pq" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TelPhone" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDmod" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDir" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Enxp" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Int" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Uri" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Bl" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ivl&lt;Real&gt;" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ivl&lt;Pq&gt;" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="String" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpCty" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpBr" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ivl&lt;Ts&gt;" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpCpa" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TelPerson" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TelEmail" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpUnid" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpCar" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Cd" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ad" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpInt" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TelUrl" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpPob" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDinstq" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ivl&lt;Int&gt;" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpCnt" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Ts" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="DSet" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Qset" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="EnOn" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="En" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDmodid" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Tel" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpUnit" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpBnr" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpAl" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpSta" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpPre" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="EnPn" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpStr" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Code" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Qty" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpDal" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Pqv" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AdxpBnn" targetable="false" xsi:type="ns16:ModelClass"/>
+
+
+
+
+      </ns16:ModelPackage>
+
+
+
+
+                      <ns16:ModelPackage packageName="gov.nih.nci.maservice.util" xsi:type="ns16:ModelPackage">
+                       <ns16:ModelClass selected="true" shortClassName="SearchCriteria" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="ReporterSearchCriteria" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="GeneSearchCriteria" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+      </ns16:ModelPackage>
+
+
+
+
+                      <ns16:ModelPackage packageName="gov.nih.nci.maservice.domain" xsi:type="ns16:ModelPackage">
+                       <ns16:ModelClass selected="true" shortClassName="Gene" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="NucleicAcidSequenceFeature" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="MolecularFunction" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="FunctionalAssociation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="ArrayReporter" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="BiologicalProcess" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="SingleNucleotidePolymorphism" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="VariationIdentifier" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="MolecularSequenceAnnotation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Allele" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Genome" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="CellularComponent" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="DatabaseCrossReference" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="DiseaseAssociation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="NucleicAcidSequenceVariation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Organism" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Microarray" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Chromosome" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TherapeuticAgent" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="HomologousAssociation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="NucleicAcidPhysicalLocation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="TherapeuticAgentIdentifier" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="Disease" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="OntologyAnnotation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="AgentAssociation" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+                       <ns16:ModelClass selected="true" shortClassName="GeneIdentifier" targetable="true" xsi:type="ns16:ModelClass"/>
+
+
+
+
+      </ns16:ModelPackage>
+
+
+
+
+     </ns16:ModelInformation>
+
+
+
+
+    </ns16:Data>
+   </ns25:ExtensionData>
+  </ns25:Extension>
+ </ns25:Extensions>
+ <ns26:ServiceProperties xmlns:ns26="gme://gov.nih.nci.cagrid.introduce/1/Property">
+  <ns26:Property description="" isFromETC="false" key="queryProcessorClass" value="org.cagrid.iso21090.sdkquery.processor.SDK43QueryProcessor"/>
+  <ns26:Property description="" isFromETC="false" key="dataService_domainModelValidatorClass" value="org.cagrid.iso21090.model.validator.ISODomainModelValidator"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_applicationName" value="maservice"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_useLocalApiFlag" value="false"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_applicationHostName" value="http://cbiovdev5051.nci.nih.gov"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_applicationHostPort" value="19080"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_useHttpsUrl" value="false"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_useStaticLogin" value="false"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_useGridIdentityLogin" value="false"/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_staticLoginPass" value=""/>
+  <ns26:Property description="" isFromETC="false" key="cqlQueryProcessorConfig_staticLoginUser" value=""/>
+  <ns26:Property description="The location of the server-config.wsdd file" isFromETC="true" key="serverConfigLocation" value="server-config.wsdd"/>
+  <ns26:Property description="The name of the class to use for CQL query structure validation" isFromETC="false" key="dataService_cqlValidatorClass" value="gov.nih.nci.cagrid.data.cql.validation.ObjectWalkingCQLValidator"/>
+  <ns26:Property description="" isFromETC="false" key="dataService_validateCqlFlag" value="true"/>
+  <ns26:Property description="" isFromETC="false" key="dataService_validateDomainModelFlag" value="true"/>
+  <ns26:Property description="The name of the file containing the class name to QName mapping" isFromETC="true" key="dataService_classMappingsFilename" value="classToQname.xml"/>
+ </ns26:ServiceProperties>
+</ns1:ServiceDescription>
