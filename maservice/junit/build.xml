@@ -82,7 +82,7 @@
 		<junit printsummary="yes" fork="yes" dir="${basedir}">
 	      <classpath refid="libs" />
 		  <formatter type="plain"/>
-		  <test name="gov.nih.nci.cabio.${test}"/>
+		  <test name="gov.nih.nci.maservice.junit.${test}"/>
 		</junit>
 	</target>	
 </project>
