@@ -46,7 +46,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
     /**
      * getGeneBySymbol method.
      * @param geneSearchCriteria The criteria containing gene symbol or alias and an Organism to search within
-     * @return Return the gene(s) named by the specified gene symbol or gene alias and the gene’s organism.
+     * @return Return the gene(s) named by the specified gene symbol or gene alias and the genes organism.
      * @throws MAException
      */
     public List<Gene> getGeneBySymbol(GeneSearchCriteria geneSearchCriteria)
@@ -283,7 +283,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	}
 
     /**
-     * getHomologousGene method which returns gene’s homologous gene in a specified organism
+     * getHomologousGene method which returns genes homologous gene in a specified organism
      * @param geneSearchCriteria The criteria containing gene symbol or alias and an Organism to search within
      * @return Return Fully-populated instance(s) of Gene class.
      * @throws MAException
@@ -335,7 +335,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<SingleNucleotidePolymorphism>();
             for (Gene g: genes)
             {
-	           Collection<NucleicAcidSequenceVariation> msac = g.getNucleicAcidSequencevariationCollection();
+	           Collection<NucleicAcidSequenceVariation> msac = g.getNucleicAcidSequenceVariationCollection();
 	           for (NucleicAcidSequenceVariation msa: msac)
 	           {
 		           if ( msa instanceof SingleNucleotidePolymorphism) {
