@@ -51,8 +51,9 @@ public class MaDataTest extends MaTestBase {
             // "If the root is not a complete unique identifier, and the 
             // extension is not known, then the II shall have a nullFlavor 
             // even if the root is populated."
-            assertNotNull("LSID must have extension or NullFlavor",
-                microarray.getLSID().getExtension());
+            assertTrue("LSID must have extension or NullFlavor",
+                microarray.getLSID().getNullFlavor() != null ||
+                microarray.getLSID().getExtension() != null);
             ISOAssert.assertConsistent(microarray.getManufacturer());
             ISOAssert.assertConsistent(microarray.getName());
             ISOAssert.assertConsistent(microarray.getType());
@@ -167,7 +168,8 @@ public class MaDataTest extends MaTestBase {
         Collection<NucleicAcidSequenceFeature> children = 
             gene.getChildFeatureCollection();
         
-        assertFalse("Test gene has no child features",children.isEmpty());
+        // TODO: initial release will not have child features
+        //assertFalse("Test gene has no child features",children.isEmpty());
         
         for(NucleicAcidSequenceFeature child : children) {
             ISOAssert.assertConsistent(child.getFeatureType());
