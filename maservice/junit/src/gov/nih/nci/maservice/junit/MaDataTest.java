@@ -7,6 +7,7 @@ import gov.nih.nci.iso21090.St;
 import gov.nih.nci.iso21090.junit.ISOAssert;
 import gov.nih.nci.maservice.domain.AgentAssociation;
 import gov.nih.nci.maservice.domain.Allele;
+import gov.nih.nci.maservice.domain.ArrayReporter;
 import gov.nih.nci.maservice.domain.Chromosome;
 import gov.nih.nci.maservice.domain.Disease;
 import gov.nih.nci.maservice.domain.DiseaseAssociation;
@@ -63,7 +64,7 @@ public class MaDataTest extends MaTestBase {
             // "Failed to write element to disk" SDK problem
 //            int i=0;
 //            for(ArrayReporter reporter : microarray.getArrayReporterCollection()) {
-//                assertConsistent(reporter.getName());
+//                ISOAssert.assertConsistent(reporter.getName());
 //                if (++i > 10) break;
 //            }
             
@@ -75,8 +76,6 @@ public class MaDataTest extends MaTestBase {
 
         Gene gene = getHumanGene("BRCA1");
 
-        // TODO: This query doesn't work because validation status isn't mapped correctly
-        // and causes a SQLException: "Fail to convert to internal representation"
         Collection<NucleicAcidSequenceVariation> variations = 
             gene.getNucleicAcidSequenceVariationCollection();
       
