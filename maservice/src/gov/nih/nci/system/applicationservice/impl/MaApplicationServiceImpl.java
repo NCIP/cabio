@@ -1,46 +1,43 @@
 package gov.nih.nci.system.applicationservice.impl;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
-
 import gov.nih.nci.maservice.domain.AgentAssociation;
+import gov.nih.nci.maservice.domain.ArrayReporter;
 import gov.nih.nci.maservice.domain.BiologicalProcess;
 import gov.nih.nci.maservice.domain.CellularComponent;
 import gov.nih.nci.maservice.domain.DiseaseAssociation;
-import gov.nih.nci.maservice.domain.MolecularSequenceAnnotation;
 import gov.nih.nci.maservice.domain.Gene;
-import gov.nih.nci.maservice.domain.MolecularFunction;
-import gov.nih.nci.maservice.domain.Organism;
 import gov.nih.nci.maservice.domain.HomologousAssociation;
+import gov.nih.nci.maservice.domain.MolecularFunction;
+import gov.nih.nci.maservice.domain.MolecularSequenceAnnotation;
 import gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation;
+import gov.nih.nci.maservice.domain.Organism;
 import gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism;
-import gov.nih.nci.maservice.domain.ArrayReporter;
 import gov.nih.nci.maservice.errors.MAException;
 import gov.nih.nci.maservice.util.GeneSearchCriteria;
 import gov.nih.nci.maservice.util.ReporterSearchCriteria;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.MaApplicationService;
-import gov.nih.nci.system.dao.Request;
 import gov.nih.nci.system.util.ClassCache;
 
-import gov.nih.nci.iso21090.St;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 
 /**
- * The Molecular Annotation(MA) Service extension of the ApplicationService, providing additional 
- * methods for MA Service based on its functional profiles.
+ * The Molecular Annotation(MA) Service extension of the ApplicationService, 
+ * providing additional methods for MA Service based on its functional profiles.
  * 
  * @author <a href="mailto:sunj2@mail.nih.gov">Jim Sun</a>
  */
 public class MaApplicationServiceImpl extends ApplicationServiceImpl 
                            implements MaApplicationService {
-	private final ClassCache classCache;
     
+    private static Logger log = Logger.getLogger(MaApplicationServiceImpl.class);
+   
     public MaApplicationServiceImpl(ClassCache classCache) {
         super(classCache);
-        
-        // hold onto this so that we can do our own DAO queries
-        this.classCache = classCache;
     }
 
     /**
@@ -80,11 +77,11 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
-	        
 	        list = new ArrayList<AgentAssociation>();
             for (Gene g: genes)
             {
-	           Collection<MolecularSequenceAnnotation> msac = g.getMolecularSequenceAnnotationCollection();
+               Collection<MolecularSequenceAnnotation> msac = 
+                   getAssociation(g, "molecularSequenceAnnotationCollection");
 	           for (MolecularSequenceAnnotation msa: msac)
 	           {
 		           if ( msa instanceof AgentAssociation) {
@@ -122,7 +119,8 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<BiologicalProcess>();
             for (Gene g: genes)
             {
-	           Collection<MolecularSequenceAnnotation> msac = g.getMolecularSequenceAnnotationCollection();
+               Collection<MolecularSequenceAnnotation> msac = 
+                   getAssociation(g, "molecularSequenceAnnotationCollection");
 	           for (MolecularSequenceAnnotation msa: msac)
 	           {
 		           if ( msa instanceof BiologicalProcess) {
@@ -158,7 +156,8 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<CellularComponent>();
             for (Gene g: genes)
             {
-	           Collection<MolecularSequenceAnnotation> msac = g.getMolecularSequenceAnnotationCollection();
+                Collection<MolecularSequenceAnnotation> msac = 
+                    getAssociation(g, "molecularSequenceAnnotationCollection");
 	           for (MolecularSequenceAnnotation msa: msac)
 	           {
 		           if ( msa instanceof CellularComponent) {
@@ -195,7 +194,8 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<DiseaseAssociation>();
             for (Gene g: genes)
             {
-	           Collection<MolecularSequenceAnnotation> msac = g.getMolecularSequenceAnnotationCollection();
+                Collection<MolecularSequenceAnnotation> msac = 
+                    getAssociation(g, "molecularSequenceAnnotationCollection");
 	           for (MolecularSequenceAnnotation msa: msac)
 	           {
 		           if ( msa instanceof DiseaseAssociation) {
@@ -232,7 +232,8 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<MolecularFunction>();
             for (Gene g: genes)
             {
-	           Collection<MolecularSequenceAnnotation> msac = g.getMolecularSequenceAnnotationCollection();
+                Collection<MolecularSequenceAnnotation> msac = 
+                    getAssociation(g, "molecularSequenceAnnotationCollection");
 	           for (MolecularSequenceAnnotation msa: msac)
 	           {
 		           if ( msa instanceof MolecularFunction) {
@@ -269,9 +270,9 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        genes = new ArrayList<Gene>();
             for (ArrayReporter ar: reporters)
             {
-	           Collection<Gene> gs = ar.getGeneCollection();
-	           genes.addAll(gs);
-            }  // end of reporters loop	        
+                Collection<Gene> gs = getAssociation(ar, "geneCollection");
+                genes.addAll(gs);
+            }  // end of reporters loop
 		} 
 		catch ( ApplicationException e)
 		{
@@ -300,10 +301,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        homologousGenes = new ArrayList<Gene>();
             for (Gene g: genes)
             {
-	           Collection<HomologousAssociation> hac = g.getHomologousAssociationCollection();
+               Collection<HomologousAssociation> hac = getAssociation(g, "homologousAssociationCollection");
 	           for ( HomologousAssociation ha: hac)
 	           {
-	                homologousGenes.add( ha.getHomologousGene());
+	                Collection<Gene> hg = getAssociation(ha, "homologousGene");
+	                if (hg.size()==1)
+	                    homologousGenes.add(hg.iterator().next());
 	           }
             }  // end of genes loop
 	        
@@ -335,7 +338,8 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        list = new ArrayList<SingleNucleotidePolymorphism>();
             for (Gene g: genes)
             {
-	           Collection<NucleicAcidSequenceVariation> msac = g.getNucleicAcidSequenceVariationCollection();
+                Collection<NucleicAcidSequenceVariation> msac = 
+                    getAssociation(g, "nucleicAcidSequenceVariationCollection");
 	           for (NucleicAcidSequenceVariation msa: msac)
 	           {
 		           if ( msa instanceof SingleNucleotidePolymorphism) {
