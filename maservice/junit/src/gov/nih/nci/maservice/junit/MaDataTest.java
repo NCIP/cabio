@@ -7,7 +7,6 @@ import gov.nih.nci.iso21090.St;
 import gov.nih.nci.iso21090.junit.ISOAssert;
 import gov.nih.nci.maservice.domain.AgentAssociation;
 import gov.nih.nci.maservice.domain.Allele;
-import gov.nih.nci.maservice.domain.ArrayReporter;
 import gov.nih.nci.maservice.domain.Chromosome;
 import gov.nih.nci.maservice.domain.Disease;
 import gov.nih.nci.maservice.domain.DiseaseAssociation;
