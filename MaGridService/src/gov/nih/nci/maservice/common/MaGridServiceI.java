@@ -12,20 +12,6 @@ import java.rmi.RemoteException;
  */
 public interface MaGridServiceI {
 
-  /**
-   * Get the Gene(s) for a given symbol or organism
-   *
-   * @param geneSearchCriteria
-   */
-  public gov.nih.nci.maservice.domain.Gene[] getGeneBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
-
-  /**
-   * Get the Agent Associations for a given gene or organism
-   *
-   * @param geneSearchCriteria
-   */
-  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociation(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
-
   public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException ;
 
   public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException ;
@@ -44,6 +30,70 @@ public interface MaGridServiceI {
    *	Thrown when a query is found to be improperly formed
    */
   public gov.nih.nci.cagrid.cqlresultset.CQLQueryResults query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery) throws RemoteException, gov.nih.nci.cagrid.data.faults.QueryProcessingExceptionType, gov.nih.nci.cagrid.data.faults.MalformedQueryExceptionType ;
+
+  /**
+   * Get the Gene(s) for a given symbol or organism
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getGeneBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Get the Agent Associations for a given gene or organism
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociation(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns annotations describing a gene’s role in biological processes
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns annotations describing a gene’s location within a cell
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns findings about a gene’s role in diseases
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns annotations describing a gene’s molecular function 
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns variations which are located on a given gene
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns a gene’s homologous gene in a specified organism
+   *
+   * @param organism
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGene(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns the gene associated with the specified microarray reporter
+   *
+   * @param reporterSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getGeneByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException ;
 
 }
 
