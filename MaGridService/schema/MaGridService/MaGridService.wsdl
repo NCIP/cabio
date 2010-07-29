@@ -67,6 +67,153 @@
           </sequence>
         </complexType>
       </element>
+      <element name="GetBiologicalProcessesRequest">
+        <complexType>
+          <sequence>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetBiologicalProcessesResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:BiologicalProcess" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCellularLocationsRequest">
+        <complexType>
+          <sequence>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetCellularLocationsResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:CellularComponent" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDiseaseAssociationsRequest">
+        <complexType>
+          <sequence>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDiseaseAssociationsResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:DiseaseAssociation" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFunctionalAssociationsRequest">
+        <complexType>
+          <sequence>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFunctionalAssociationsResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:MolecularFunction" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetStructuralVariationsRequest">
+        <complexType>
+          <sequence>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetStructuralVariationsResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:SingleNucleotidePolymorphism" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetHomologousGeneRequest">
+        <complexType>
+          <sequence>
+            <element name="organism">
+              <complexType>
+                <sequence>
+                  <element ref="ns2:Organism" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+            <element name="geneSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:GeneSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetHomologousGeneResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:Gene" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetGeneByMicroarrayReporterRequest">
+        <complexType>
+          <sequence>
+            <element name="reporterSearchCriteria">
+              <complexType>
+                <sequence>
+                  <element ref="ns3:ReporterSearchCriteria" minOccurs="1" maxOccurs="1" />
+                </sequence>
+              </complexType>
+            </element>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetGeneByMicroarrayReporterResponse">
+        <complexType>
+          <sequence>
+            <element ref="ns2:Gene" minOccurs="1" maxOccurs="unbounded" />
+          </sequence>
+        </complexType>
+      </element>
       <element name="MaGridServiceResourceProperties">
         <complexType>
           <sequence>
@@ -90,6 +237,48 @@
   <message name="GetAgentAssociationResponse">
     <part name="parameters" element="tns:GetAgentAssociationResponse" />
   </message>
+  <message name="GetBiologicalProcessesRequest">
+    <part name="parameters" element="tns:GetBiologicalProcessesRequest" />
+  </message>
+  <message name="GetBiologicalProcessesResponse">
+    <part name="parameters" element="tns:GetBiologicalProcessesResponse" />
+  </message>
+  <message name="GetCellularLocationsRequest">
+    <part name="parameters" element="tns:GetCellularLocationsRequest" />
+  </message>
+  <message name="GetCellularLocationsResponse">
+    <part name="parameters" element="tns:GetCellularLocationsResponse" />
+  </message>
+  <message name="GetDiseaseAssociationsRequest">
+    <part name="parameters" element="tns:GetDiseaseAssociationsRequest" />
+  </message>
+  <message name="GetDiseaseAssociationsResponse">
+    <part name="parameters" element="tns:GetDiseaseAssociationsResponse" />
+  </message>
+  <message name="GetFunctionalAssociationsRequest">
+    <part name="parameters" element="tns:GetFunctionalAssociationsRequest" />
+  </message>
+  <message name="GetFunctionalAssociationsResponse">
+    <part name="parameters" element="tns:GetFunctionalAssociationsResponse" />
+  </message>
+  <message name="GetStructuralVariationsRequest">
+    <part name="parameters" element="tns:GetStructuralVariationsRequest" />
+  </message>
+  <message name="GetStructuralVariationsResponse">
+    <part name="parameters" element="tns:GetStructuralVariationsResponse" />
+  </message>
+  <message name="GetHomologousGeneRequest">
+    <part name="parameters" element="tns:GetHomologousGeneRequest" />
+  </message>
+  <message name="GetHomologousGeneResponse">
+    <part name="parameters" element="tns:GetHomologousGeneResponse" />
+  </message>
+  <message name="GetGeneByMicroarrayReporterRequest">
+    <part name="parameters" element="tns:GetGeneByMicroarrayReporterRequest" />
+  </message>
+  <message name="GetGeneByMicroarrayReporterResponse">
+    <part name="parameters" element="tns:GetGeneByMicroarrayReporterResponse" />
+  </message>
   <!--============================================================
 
                        P O R T T Y P E
@@ -103,6 +292,34 @@
     <operation name="getAgentAssociation">
       <input message="tns:GetAgentAssociationRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationRequest" />
       <output message="tns:GetAgentAssociationResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationResponse" />
+    </operation>
+    <operation name="getBiologicalProcesses">
+      <input message="tns:GetBiologicalProcessesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesRequest" />
+      <output message="tns:GetBiologicalProcessesResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesResponse" />
+    </operation>
+    <operation name="getCellularLocations">
+      <input message="tns:GetCellularLocationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetCellularLocationsRequest" />
+      <output message="tns:GetCellularLocationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetCellularLocationsResponse" />
+    </operation>
+    <operation name="getDiseaseAssociations">
+      <input message="tns:GetDiseaseAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetDiseaseAssociationsRequest" />
+      <output message="tns:GetDiseaseAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetDiseaseAssociationsResponse" />
+    </operation>
+    <operation name="getFunctionalAssociations">
+      <input message="tns:GetFunctionalAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetFunctionalAssociationsRequest" />
+      <output message="tns:GetFunctionalAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetFunctionalAssociationsResponse" />
+    </operation>
+    <operation name="getStructuralVariations">
+      <input message="tns:GetStructuralVariationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsRequest" />
+      <output message="tns:GetStructuralVariationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsResponse" />
+    </operation>
+    <operation name="getHomologousGene">
+      <input message="tns:GetHomologousGeneRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGeneRequest" />
+      <output message="tns:GetHomologousGeneResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGeneResponse" />
+    </operation>
+    <operation name="getGeneByMicroarrayReporter">
+      <input message="tns:GetGeneByMicroarrayReporterRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneByMicroarrayReporterRequest" />
+      <output message="tns:GetGeneByMicroarrayReporterResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneByMicroarrayReporterResponse" />
     </operation>
     <wsdl:operation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="GetMultipleResourceProperties">
       <wsdl:input name="GetMultipleResourcePropertiesRequest" message="wsrpw:GetMultipleResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourceProperties" />
