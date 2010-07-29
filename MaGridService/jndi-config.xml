@@ -103,6 +103,10 @@
           <name>dataService_classMappingsFilename</name>
           <value>ETC-PATH/@dataService_classMappingsFilename@</value>
         </parameter>
+        <parameter>
+          <name>cqlQueryProcessorConfig_queryCaseInsensitive</name>
+          <value>@cqlQueryProcessorConfig_queryCaseInsensitive@</value>
+        </parameter>
       </resourceParams>
     </resource>
     <resource name="home" type="gov.nih.nci.maservice.service.globus.resource.MaGridServiceResourceHome">
