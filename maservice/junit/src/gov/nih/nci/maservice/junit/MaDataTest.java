@@ -21,8 +21,10 @@ import gov.nih.nci.maservice.domain.NucleicAcidSequenceFeature;
 import gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation;
 import gov.nih.nci.maservice.domain.OntologyAnnotation;
 import gov.nih.nci.maservice.domain.Organism;
+import gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism;
 import gov.nih.nci.maservice.domain.TherapeuticAgent;
 import gov.nih.nci.maservice.domain.TherapeuticAgentIdentifier;
+import gov.nih.nci.maservice.domain.VariationIdentifier;
 
 import java.util.Collection;
 import java.util.List;
@@ -92,6 +94,17 @@ public class MaDataTest extends MaTestBase {
                 ISOAssert.assertConsistent(allele.getSequence());
             }
             
+            if (variation instanceof SingleNucleotidePolymorphism) {
+                // Other variation types may also have dbSNP identifiers, but
+                // lets just ensure at least the SNPs do.
+                boolean dbSNPIdExists = false;
+                for(VariationIdentifier id : variation.getVariationIdentifierCollection()) {
+                    if ("2.16.840.1.113883.6.284".equals(id.getIdentifier().getRoot())) {
+                        dbSNPIdExists = true;
+                    }
+                }
+                assertTrue("SNP has no dbSNP identifier",dbSNPIdExists);
+            }
         }
     }
     
