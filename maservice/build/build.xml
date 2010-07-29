@@ -26,7 +26,7 @@
 
 	<!-- MA service specific properties -->
 	<property name="ma.src.dir" value="${project.home}/src" />	
-	<property name="ma.custom.file" value="${PROJECT_NAME}-custom.jar"  />
+	<property name="ma.custom.file" value="${PROJECT_NAME}-custom.jar"  />	
 	<property name="ma.beans.file" value="${PROJECT_NAME}-beans.jar"  />
 	<property name="ma.schema.file" value="${PROJECT_NAME}-schema.jar"  />
 	<property name="ma.output.javadocs.dir" value="${output.dir}/${PROJECT_NAME}/docs" />
@@ -41,6 +41,7 @@
 	<property name="manual.generated.src.dir" value="${ma.conf.dir}/resource" />
 	<property name="maservice.util.schema.file" value="gov.nih.nci.maservice.util.xsd" />
 	<property name="build.classes.dir" value="${output.classes.dir}" />
+	<property name="ma.cacoresdk.iso.jar.file" value="iso-datatypes-hibernate-2.1.jar"  />	
 	
 	<path id="ma.build.classpath">
 		<fileset dir="${output.dir}/${PROJECT_NAME}/lib">
@@ -162,9 +163,11 @@
 	</target>
 	
 	<target name="maservice-repackage-war">
+		<property name="codegen.src.dir" value="${output.dir}/${PROJECT_NAME}/codegen/src/" />
 		<unzip src="${output.deploy.dir}/${PROJECT_NAME}.war" dest="${output.deploy.dir}/tmp" />
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}" todir="${output.deploy.dir}/tmp/WEB-INF/lib" />
-		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.beans.file}" todir="${output.deploy.dir}/tmp/WEB-INF/lib" />
+		<echo message="caCORE SDK ISO patch file @ ${manual.generated.src.dir}/${ma.cacoresdk.iso.jar.file} " />
+		<copy file="${manual.generated.src.dir}/${ma.cacoresdk.iso.jar.file}" todir="${output.deploy.dir}/tmp/WEB-INF/lib"  overwrite="true"/>		
 		<copy todir="${output.deploy.dir}/tmp" overwrite="true" >
 			  <fileset dir="${ma.conf.system.web}" />
 			  <fileset dir="${ma.system.web}" />
@@ -172,6 +175,9 @@
 			  	    <include name="docs/**/*" />
 			  </fileset>	
 		</copy>	
+		<!-- xmltask source="${codegen.src.dir}/isoConstants.xml" dest="${output.deploy.dir}/tmp/WEB-INF/classes/isoConstants.xml"> 
+		     <remove path="/beans/bean[@id='gov.nih.nci.maservice.domain.GeneIdentifier.databaseName']/Property[@name='innerNodes']/list/bean/constructor-arg[@value = 'CodeSystem']"/> 
+		</xmltask --> 
 		<war destfile="${output.deploy.dir}/${PROJECT_NAME}.war" webxml="${system.config.client.webapp.dir}/WEB-INF/web.xml"  update="true">
 			       <fileset dir="${output.deploy.dir}/tmp">
 			       	       <include name="*/**" />
@@ -181,6 +187,9 @@
 	</target>
 		
 	<target name="build:maservice-custom" depends="package-maservice-jar, maservice-post-clean">
+		<copy file="${manual.generated.src.dir}/${ma.cacoresdk.iso.jar.file}" todir="${output.remote.client.dir}/lib" />		
+		<copy file="${manual.generated.src.dir}/${ma.cacoresdk.iso.jar.file}" todir="${output.local.client.dir}/lib" />	
+		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}" todir="${output.remote.client.dir}/lib" />
 	</target>
 
 	<target name="build:maservice-custom2" depends="package-maservice-jar,maservice-repackage-beans.jar,maservice-repackage-schema.jar, maservice-post-clean"
@@ -191,6 +200,14 @@
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.custom.file}" todir="${output.local.client.dir}/lib" />
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.beans.file}" todir="${output.local.client.dir}/lib" />	
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.schema.file}" todir="${output.local.client.dir}/lib" />
+	</target>
+	
+	<!-- The following target won't work without caCORE SDK checked out first. It will be moved to BDA scripts in the future -->
+	<target name="checkout:SDK" description="Checkout the caCORE SDK source code for MA Service">
+		      <mkdir dir="${SDK_INSTALL_DIR}" />
+		      <svn javahl="false">
+		      	    <checkout srcPath="${SDK_SVN_PATH}" destUrl="${SDK_INSTALL_DIR}" description="Checkout the caCORE SDK source code" />
+		      </svn>
 	</target>
 	
 	<target name="build:SDK" description="Builds the entire system. This is used mostly by development team or BDA certification team">
