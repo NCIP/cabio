@@ -63,6 +63,10 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
   private String getRemoteApplicationUrl() throws Exception {
       String hostname = getConfiguration().getCqlQueryProcessorConfig_applicationHostName();
       String port = getConfiguration().getCqlQueryProcessorConfig_applicationHostPort();
+
+      if (!hostname.startsWith("http://") || !hostname.startsWith("https://")) {
+          hostname = "http://" + hostname;
+      }
       
       while (hostname.endsWith("/")) {
           hostname = hostname.substring(0, hostname.length() - 1);
@@ -95,6 +99,181 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }	    
 		 
 		 return agentAssocs;
+  }
+  
+  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	     BiologicalProcess[] results = null; 
+		  
+		 try
+		 {
+	          List<BiologicalProcess> list = maservice.getBiologicalProcesses(geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new BiologicalProcess[ list.size()];
+		          int i=0;
+		          for ( BiologicalProcess g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results;
+  }
+
+  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	     CellularComponent[] results = null; 
+		  
+		 try
+		 {
+	          List<CellularComponent> list = maservice.getCellularLocations(geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new CellularComponent[ list.size()];
+		          int i=0;
+		          for ( CellularComponent g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results;
+  }
+
+  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	  DiseaseAssociation[] results = null; 
+		  
+		 try
+		 {
+	          List<DiseaseAssociation> list = maservice.getDiseaseAssociations(geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new DiseaseAssociation[ list.size()];
+		          int i=0;
+		          for ( DiseaseAssociation g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results;
+  }
+
+  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	  MolecularFunction[] results = null; 
+		  
+	   try
+		 {
+	          List<MolecularFunction> list = maservice.getFunctionalAssociations(geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new MolecularFunction[ list.size()];
+		          int i=0;
+		          for ( MolecularFunction g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results; 
+  }
+
+  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	  SingleNucleotidePolymorphism[] results = null; 
+		  
+	   try
+		 {
+	          List<SingleNucleotidePolymorphism> list = maservice.getStructuralVariations(geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new SingleNucleotidePolymorphism[ list.size()];
+		          int i=0;
+		          for ( SingleNucleotidePolymorphism g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results;
+  }
+
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGene(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+	  Gene[] results = null; 
+       		  
+	   try
+		 {
+	          List<Gene> list = maservice.getHomologousGene(organism, geneSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new Gene[ list.size()];
+		          int i=0;
+		          for ( Gene g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results;
+  }
+
+  public gov.nih.nci.maservice.domain.Gene[] getGeneByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException {
+	   Gene[] results = null; 
+		  
+	   try
+		 {
+	          List<Gene> list = maservice.getGeneByMicroarrayReporter(reporterSearchCriteria);
+	          
+	          if ( list!=null )
+	          {
+	        	  results = new Gene[ list.size()];
+		          int i=0;
+		          for ( Gene g: results)
+		          {
+		        	  results[i++] = g;
+		          }
+	          }
+		 }
+		 catch ( MAException e)
+		 {
+			 throw new RemoteException(e.getMessage()); 
+		 }	    
+		 
+		 return results; 
   }
 
 }

@@ -77,6 +77,8 @@ public class MaGridServiceConfiguration implements ServiceConfiguration {
 	
 	private String dataService_classMappingsFilename;
 	
+	private String cqlQueryProcessorConfig_queryCaseInsensitive;
+	
 	
     public String getEtcDirectoryPath() {
 		return ContainerConfig.getBaseDirectory() + File.separator + etcDirectoryPath;
@@ -245,6 +247,16 @@ public class MaGridServiceConfiguration implements ServiceConfiguration {
 	
 	public void setDataService_classMappingsFilename(String dataService_classMappingsFilename) {
 		this.dataService_classMappingsFilename = dataService_classMappingsFilename;
+	}
+
+	
+	public String getCqlQueryProcessorConfig_queryCaseInsensitive() {
+		return cqlQueryProcessorConfig_queryCaseInsensitive;
+	}
+	
+	
+	public void setCqlQueryProcessorConfig_queryCaseInsensitive(String cqlQueryProcessorConfig_queryCaseInsensitive) {
+		this.cqlQueryProcessorConfig_queryCaseInsensitive = cqlQueryProcessorConfig_queryCaseInsensitive;
 	}
 
 	
