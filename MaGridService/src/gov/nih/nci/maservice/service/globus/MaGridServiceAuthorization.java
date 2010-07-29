@@ -82,6 +82,34 @@ public class MaGridServiceAuthorization implements PDP {
 	public void authorizeGetAgentAssociation(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
+	   				
+	public void authorizeGetBiologicalProcesses(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetCellularLocations(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetDiseaseAssociations(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetFunctionalAssociations(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetStructuralVariations(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetHomologousGene(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
+	   				
+	public void authorizeGetGeneByMicroarrayReporter(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+		
+	}
 	   
 	
 	public boolean isPermitted(Subject peerSubject, MessageContext context, QName operation)
@@ -110,6 +138,27 @@ public class MaGridServiceAuthorization implements PDP {
 			return true;
 		} else if(operation.getLocalPart().equals("getAgentAssociation")){
 			authorizeGetAgentAssociation(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getBiologicalProcesses")){
+			authorizeGetBiologicalProcesses(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getCellularLocations")){
+			authorizeGetCellularLocations(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getDiseaseAssociations")){
+			authorizeGetDiseaseAssociations(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getFunctionalAssociations")){
+			authorizeGetFunctionalAssociations(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getStructuralVariations")){
+			authorizeGetStructuralVariations(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getHomologousGene")){
+			authorizeGetHomologousGene(peerSubject, context, operation);
+			return true;
+		} else if(operation.getLocalPart().equals("getGeneByMicroarrayReporter")){
+			authorizeGetGeneByMicroarrayReporter(peerSubject, context, operation);
 			return true;
 		} 		
 		return false;
