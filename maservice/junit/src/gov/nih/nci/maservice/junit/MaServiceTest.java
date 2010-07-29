@@ -273,8 +273,7 @@ public class MaServiceTest extends MaTestBase {
         Gene gene = genes.get(0);
 	    
         assertTrue("BRCA1".equalsIgnoreCase(gene.getSymbol().getValue()));
-        assertTrue("human".equalsIgnoreCase(gene.getOrganism().getCommonName().getValue()));
-	    
+        assertTrue("human".equalsIgnoreCase(gene.getOrganism().getCommonName().getValue()));	    
 	}
 
 	@Test
@@ -369,45 +368,7 @@ public class MaServiceTest extends MaTestBase {
             assertTrue(set1.contains(o));
         }
     }
-    
-    /**
-     * Get a GeneSearchCriteria for a given symbol and taxon.
-     * @param symbol
-     * @param taxon
-     * @return
-     */
-    private GeneSearchCriteria getCriteria(String symbol, String taxon) {
-        GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
-        St symbolOrAlias = new St();
-        symbolOrAlias.setValue(symbol);
-        St commonName = new St();
-        commonName.setValue(taxon);
-        Organism organism = new Organism();
-        organism.setCommonName(commonName);
-        geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
-        geneSearchCriteria.setOrganism(organism);
-        return geneSearchCriteria;
-    }
-
-    /**
-     * Get a ReporterSearchCriteria for a given reporter and microarray name.
-     * @param symbol
-     * @param taxon
-     * @return
-     */
-    private ReporterSearchCriteria getReporterSearchCriteria(String reporterName, String microarrayName) {
-        ReporterSearchCriteria reporterSearchCriteria = new ReporterSearchCriteria();
-        St reporterNameSt = new St();
-        reporterNameSt.setValue(reporterName);
-        St microarrayNameSt = new St();
-        microarrayNameSt.setValue(microarrayName);
-        Microarray microarray = new Microarray();
-        microarray.setName(microarrayNameSt);
-        reporterSearchCriteria.setReporterName(reporterNameSt);
-        reporterSearchCriteria.setMicroarray(microarray);
-        return reporterSearchCriteria;
-    }
-    
+        
     /**
      * Get all the internal ids for annotations of a specific class for a list
      * of genes. 
