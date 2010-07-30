@@ -874,9 +874,6 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		install:common:validation:pre-install,
 		install:jboss:stop,
 		install:jboss:validation:pre-install:ports,
-		install:jboss:magridsvc-webapp:re-configure,
-		install:jboss:magridsvc-webapp,
-		install:jboss:magridsvc-webapp:configure,
 		install:jboss:grid,
 		install:jboss:grid:configure,
 		install:post:jboss,
@@ -892,9 +889,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
  		common:jboss:init,
  		install:common:validation:pre-install,
  		install:jboss:validation:pre-install,
- 		install:database:validation:pre-install,
- 		install:jboss:stop,
- 		upgrade:database,
+ 		install:jboss:stop, 		
  		upgrade:jboss,
  		install:common:validation:post-install
 		">
@@ -1267,7 +1262,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				-->
 				<grid-read-poc
 					grid.wsrf.dir="${read.jboss.home}/server/${jboss.server.name}/deploy/wsrf.war"
-					grid.service.name="Sample"
+					grid.service.name="${grid.service.name}"
 					/>
 			</then>
 		</if>
