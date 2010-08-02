@@ -272,7 +272,10 @@ public class MaServiceTest extends MaTestBase {
         assertEquals(1, genes.size());
         Gene gene = genes.get(0);
 	    
-        assertTrue("BRCA1".equalsIgnoreCase(gene.getSymbol().getValue()));
+        assertNotNull(gene);
+        assertNotNull(gene.getSymbol());
+        assertNotNull(gene.getSymbol().getValue());
+        assertTrue("BRCA2".equalsIgnoreCase(gene.getSymbol().getValue()));
         assertTrue("human".equalsIgnoreCase(gene.getOrganism().getCommonName().getValue()));	    
 	}
 
