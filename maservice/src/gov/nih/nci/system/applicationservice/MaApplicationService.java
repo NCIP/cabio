@@ -28,7 +28,7 @@ public interface MaApplicationService extends ApplicationService {
     public List<CellularComponent> getCellularLocations(GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<DiseaseAssociation> getDiseaseAssociations(GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<MolecularFunction> getFunctionalAssociations(GeneSearchCriteria geneSearchCriteria) throws MAException;
-    public List<Gene> getHomologousGene(Organism organism, GeneSearchCriteria geneSearchCriteria) throws MAException;
+    public List<Gene> getHomologousGenes(Organism organism, GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<SingleNucleotidePolymorphism> getStructuralVariations(GeneSearchCriteria geneSearchCriteria) throws MAException;
-    public List<Gene> getGeneByMicroarrayReporter(ReporterSearchCriteria reporterSearchCriteria) throws MAException;    
+    public List<Gene> getGenesByMicroarrayReporter(ReporterSearchCriteria reporterSearchCriteria) throws MAException;    
 }
