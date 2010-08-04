@@ -266,7 +266,7 @@ public class MaServiceTest extends MaTestBase {
 	    ReporterSearchCriteria reporterSearchCriteria = getReporterSearchCriteria("214727_at", "HG-U133_Plus_2");
 	    
 	    List<Gene> genes = 
-	        getApplicationService().getGeneByMicroarrayReporter(reporterSearchCriteria);
+	        getApplicationService().getGenesByMicroarrayReporter(reporterSearchCriteria);
 
         assertNotNull(genes);
         assertEquals(1, genes.size());
@@ -299,7 +299,7 @@ public class MaServiceTest extends MaTestBase {
 		commonName.setValue("mouse");
 		organism.setCommonName(commonName);
 		List<Gene> genes2 = 
-		    getApplicationService().getHomologousGene(organism, geneSearchCriteria);
+		    getApplicationService().getHomologousGenes(organism, geneSearchCriteria);
 
         assertNotNull(genes2);
         assertEquals(1, genes2.size());
