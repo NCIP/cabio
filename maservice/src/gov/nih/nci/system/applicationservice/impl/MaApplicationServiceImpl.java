@@ -6,6 +6,7 @@ import gov.nih.nci.maservice.domain.BiologicalProcess;
 import gov.nih.nci.maservice.domain.CellularComponent;
 import gov.nih.nci.maservice.domain.DiseaseAssociation;
 import gov.nih.nci.maservice.domain.Gene;
+import gov.nih.nci.maservice.domain.GeneAlias;
 import gov.nih.nci.maservice.domain.HomologousAssociation;
 import gov.nih.nci.maservice.domain.MolecularFunction;
 import gov.nih.nci.maservice.domain.MolecularSequenceAnnotation;
@@ -18,6 +19,8 @@ import gov.nih.nci.maservice.util.ReporterSearchCriteria;
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.system.applicationservice.MaApplicationService;
 import gov.nih.nci.system.util.ClassCache;
+
+import gov.nih.nci.iso21090.Ii;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -258,7 +261,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
      * @return Return Fully-populated instance(s) of Gene class.
      * @throws MAException
      */
-	public List<Gene> getGeneByMicroarrayReporter(
+	public List<Gene> getGenesByMicroarrayReporter(
 			ReporterSearchCriteria reporterSearchCriteria) throws MAException {
 		List<ArrayReporter> reporters = null;		
 		List<Gene> genes = null; 
@@ -289,7 +292,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
      * @return Return Fully-populated instance(s) of Gene class.
      * @throws MAException
      */		
-	public List<Gene> getHomologousGene(Organism organism,
+	public List<Gene> getHomologousGenes(Organism organism,
 			GeneSearchCriteria geneSearchCriteria) throws MAException {
 		List<Gene> genes = null;
 		List<Gene> homologousGenes = null; 
@@ -361,8 +364,18 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	private Gene composeGeneCriteria(GeneSearchCriteria geneSearchCriteria)
 	{
         Gene gene = new Gene();
-        gene.setSymbol(geneSearchCriteria.getSymbolOrAlias());
+        //gene.setSymbol(geneSearchCriteria.getSymbolOrAlias());
         gene.setOrganism(geneSearchCriteria.getOrganism());
+        
+        // try all the Symbol as GeneAlias 
+        GeneAlias alias = new GeneAlias();
+        Ii  gid = new Ii();
+        gid.setExtension(geneSearchCriteria.getSymbolOrAlias().getValue());        
+        alias.setIdentifier(gid);
+        Collection<GeneAlias> gac = new ArrayList<GeneAlias>();
+        gac.add(alias);
+        
+        gene.setGeneAliasCollection(gac);
         
 	    return gene;
 	}	
