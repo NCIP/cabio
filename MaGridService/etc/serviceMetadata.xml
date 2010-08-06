@@ -34,7 +34,7 @@
         <ns2:Fault description="Thrown when a query is found to be improperly formed" name="MalformedQueryException"/>
        </ns2:faultCollection>
       </ns2:Operation>
-      <ns2:Operation description="Get the Gene(s) for a given symbol or organism" name="getGeneBySymbol">
+      <ns2:Operation description="Get the Gene(s) for a given symbol or organism" name="getGenesBySymbol">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns7:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns7="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
@@ -83,7 +83,7 @@
        <ns2:Output qName="ns20:SingleNucleotidePolymorphism" dimensionality="1" isArray="true" xmlns:ns20="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
        <ns2:faultCollection/>
       </ns2:Operation>
-      <ns2:Operation description="Returns a gene&#x2019;s homologous gene in a specified organism" name="getHomologousGene">
+      <ns2:Operation description="Returns a gene&#x2019;s homologous gene in a specified organism" name="getHomologousGenes">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns21:Organism" dimensionality="1" index="0" isArray="false" isRequired="false" name="organism" xmlns:ns21="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
         <ns2:InputParameter qName="ns22:GeneSearchCriteria" dimensionality="1" index="1" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns22="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
@@ -91,7 +91,7 @@
        <ns2:Output qName="ns23:Gene" dimensionality="1" isArray="true" xmlns:ns23="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
        <ns2:faultCollection/>
       </ns2:Operation>
-      <ns2:Operation description="Returns the gene associated with the specified microarray reporter" name="getGeneByMicroarrayReporter">
+      <ns2:Operation description="Returns the gene associated with the specified microarray reporter" name="getGenesByMicroarrayReporter">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns24:ReporterSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="reporterSearchCriteria" xmlns:ns24="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
