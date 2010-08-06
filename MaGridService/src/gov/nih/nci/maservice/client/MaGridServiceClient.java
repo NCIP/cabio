@@ -131,7 +131,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
 		St symbolOrAlias = new St();
 		symbolOrAlias.setValue("BRCA1");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
-		Gene[] genes = this.getGeneBySymbol(geneSearchCriteria);
+		Gene[] genes = this.getGenesBySymbol(geneSearchCriteria);
 		
 		if ( genes!=null && genes.length > 0)
 		{
@@ -165,7 +165,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
 			  
 			  client.testGetGeneBySymbol();
 			  //client.testGetAgentAssociation();
-			  client.testQuery();
+			  //client.testQuery();
 			} else {
 				usage();
 				System.exit(1);
@@ -179,6 +179,45 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
 			System.exit(1);
 		}
 	}
+
+  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getGenesBySymbol");
+    gov.nih.nci.maservice.stubs.GetGenesBySymbolRequest params = new gov.nih.nci.maservice.stubs.GetGenesBySymbolRequest();
+    gov.nih.nci.maservice.stubs.GetGenesBySymbolRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetGenesBySymbolRequestGeneSearchCriteria();
+    geneSearchCriteriaContainer.setGeneSearchCriteria(geneSearchCriteria);
+    params.setGeneSearchCriteria(geneSearchCriteriaContainer);
+    gov.nih.nci.maservice.stubs.GetGenesBySymbolResponse boxedResult = portType.getGenesBySymbol(params);
+    return boxedResult.getGene();
+    }
+  }
+
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getHomologousGenes");
+    gov.nih.nci.maservice.stubs.GetHomologousGenesRequest params = new gov.nih.nci.maservice.stubs.GetHomologousGenesRequest();
+    gov.nih.nci.maservice.stubs.GetHomologousGenesRequestOrganism organismContainer = new gov.nih.nci.maservice.stubs.GetHomologousGenesRequestOrganism();
+    organismContainer.setOrganism(organism);
+    params.setOrganism(organismContainer);
+    gov.nih.nci.maservice.stubs.GetHomologousGenesRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetHomologousGenesRequestGeneSearchCriteria();
+    geneSearchCriteriaContainer.setGeneSearchCriteria(geneSearchCriteria);
+    params.setGeneSearchCriteria(geneSearchCriteriaContainer);
+    gov.nih.nci.maservice.stubs.GetHomologousGenesResponse boxedResult = portType.getHomologousGenes(params);
+    return boxedResult.getGene();
+    }
+  }
+
+  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException {
+    synchronized(portTypeMutex){
+      configureStubSecurity((Stub)portType,"getGenesByMicroarrayReporter");
+    gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest params = new gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest();
+    gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequestReporterSearchCriteria reporterSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequestReporterSearchCriteria();
+    reporterSearchCriteriaContainer.setReporterSearchCriteria(reporterSearchCriteria);
+    params.setReporterSearchCriteria(reporterSearchCriteriaContainer);
+    gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterResponse boxedResult = portType.getGenesByMicroarrayReporter(params);
+    return boxedResult.getGene();
+    }
+  }
 
   public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException {
     synchronized(portTypeMutex){
@@ -210,18 +249,6 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     params.setCqlQuery(cqlQueryContainer);
     gov.nih.nci.cagrid.data.QueryResponse boxedResult = portType.query(params);
     return boxedResult.getCQLQueryResultCollection();
-    }
-  }
-
-  public gov.nih.nci.maservice.domain.Gene[] getGeneBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"getGeneBySymbol");
-    gov.nih.nci.maservice.stubs.GetGeneBySymbolRequest params = new gov.nih.nci.maservice.stubs.GetGeneBySymbolRequest();
-    gov.nih.nci.maservice.stubs.GetGeneBySymbolRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetGeneBySymbolRequestGeneSearchCriteria();
-    geneSearchCriteriaContainer.setGeneSearchCriteria(geneSearchCriteria);
-    params.setGeneSearchCriteria(geneSearchCriteriaContainer);
-    gov.nih.nci.maservice.stubs.GetGeneBySymbolResponse boxedResult = portType.getGeneBySymbol(params);
-    return boxedResult.getGene();
     }
   }
 
@@ -294,33 +321,6 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     params.setGeneSearchCriteria(geneSearchCriteriaContainer);
     gov.nih.nci.maservice.stubs.GetStructuralVariationsResponse boxedResult = portType.getStructuralVariations(params);
     return boxedResult.getSingleNucleotidePolymorphism();
-    }
-  }
-
-  public gov.nih.nci.maservice.domain.Gene[] getHomologousGene(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"getHomologousGene");
-    gov.nih.nci.maservice.stubs.GetHomologousGeneRequest params = new gov.nih.nci.maservice.stubs.GetHomologousGeneRequest();
-    gov.nih.nci.maservice.stubs.GetHomologousGeneRequestOrganism organismContainer = new gov.nih.nci.maservice.stubs.GetHomologousGeneRequestOrganism();
-    organismContainer.setOrganism(organism);
-    params.setOrganism(organismContainer);
-    gov.nih.nci.maservice.stubs.GetHomologousGeneRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetHomologousGeneRequestGeneSearchCriteria();
-    geneSearchCriteriaContainer.setGeneSearchCriteria(geneSearchCriteria);
-    params.setGeneSearchCriteria(geneSearchCriteriaContainer);
-    gov.nih.nci.maservice.stubs.GetHomologousGeneResponse boxedResult = portType.getHomologousGene(params);
-    return boxedResult.getGene();
-    }
-  }
-
-  public gov.nih.nci.maservice.domain.Gene[] getGeneByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException {
-    synchronized(portTypeMutex){
-      configureStubSecurity((Stub)portType,"getGeneByMicroarrayReporter");
-    gov.nih.nci.maservice.stubs.GetGeneByMicroarrayReporterRequest params = new gov.nih.nci.maservice.stubs.GetGeneByMicroarrayReporterRequest();
-    gov.nih.nci.maservice.stubs.GetGeneByMicroarrayReporterRequestReporterSearchCriteria reporterSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetGeneByMicroarrayReporterRequestReporterSearchCriteria();
-    reporterSearchCriteriaContainer.setReporterSearchCriteria(reporterSearchCriteria);
-    params.setReporterSearchCriteria(reporterSearchCriteriaContainer);
-    gov.nih.nci.maservice.stubs.GetGeneByMicroarrayReporterResponse boxedResult = portType.getGeneByMicroarrayReporter(params);
-    return boxedResult.getGene();
     }
   }
 
