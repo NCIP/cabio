@@ -223,7 +223,7 @@
      <ns4:ImportInformation inputMessage="ns17:QueryRequest" namespace="http://gov.nih.nci.cagrid.data/DataService" outputMessage="ns17:QueryResponse" packageName="gov.nih.nci.cagrid.data" portTypeName="DataServicePortType" wsdlFile="DataService.wsdl" xmlns:ns17="http://gov.nih.nci.cagrid.data/DataService"/>
      <ns4:ProviderInformation providerClass="gov.nih.nci.cagrid.data.service.globus.DataServiceProviderImpl"/>
     </ns4:Method>
-    <ns4:Method description="Get the Gene(s) for a given symbol or organism" isImported="false" isProvided="false" name="getGeneBySymbol" xsi:type="ns4:MethodType">
+    <ns4:Method description="Get the Gene(s) for a given symbol or organism" isImported="false" isProvided="false" name="getGenesBySymbol" xsi:type="ns4:MethodType">
      <ns4:Inputs>
       <ns4:Input qName="ns18:GeneSearchCriteria" description="" isArray="false" name="geneSearchCriteria" xmlns:ns18="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
      </ns4:Inputs>
@@ -272,7 +272,7 @@
      <ns4:Output qName="ns31:SingleNucleotidePolymorphism" description="" isArray="true" xmlns:ns31="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
      <ns4:Exceptions/>
     </ns4:Method>
-    <ns4:Method description="Returns a gene&#x2019;s homologous gene in a specified organism" isImported="false" isProvided="false" name="getHomologousGene" xsi:type="ns4:MethodType">
+    <ns4:Method description="Returns a gene&#x2019;s homologous gene in a specified organism" isImported="false" isProvided="false" name="getHomologousGenes" xsi:type="ns4:MethodType">
      <ns4:Inputs>
       <ns4:Input qName="ns32:Organism" description="" isArray="false" name="organism" xmlns:ns32="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
       <ns4:Input qName="ns33:GeneSearchCriteria" description="" isArray="false" name="geneSearchCriteria" xmlns:ns33="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
@@ -280,7 +280,7 @@
      <ns4:Output qName="ns34:Gene" description="" isArray="true" xmlns:ns34="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
      <ns4:Exceptions/>
     </ns4:Method>
-    <ns4:Method description="Returns the gene associated with the specified microarray reporter" isImported="false" isProvided="false" name="getGeneByMicroarrayReporter" xsi:type="ns4:MethodType">
+    <ns4:Method description="Returns the gene associated with the specified microarray reporter" isImported="false" isProvided="false" name="getGenesByMicroarrayReporter" xsi:type="ns4:MethodType">
      <ns4:Inputs>
       <ns4:Input qName="ns35:ReporterSearchCriteria" description="" isArray="false" name="reporterSearchCriteria" xmlns:ns35="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
      </ns4:Inputs>
@@ -305,435 +305,579 @@
   <ns40:Extension name="data" version="1.3" xsi:type="ns40:ExtensionType">
    <ns40:ExtensionData>
     <ns26:Data xsi:type="ns26:Data" xmlns:ns26="http://CQL.caBIG/1/gov.nih.nci.cagrid.data.extension">
-                         <ns26:ServiceFeatures serviceStyle="caCORE SDK v 4.3" useBdt="false" useGridIdeitifiers="false" useWsEnumeration="false" xsi:type="ns26:ServiceFeatures"/>
+                                 <ns26:ServiceFeatures serviceStyle="caCORE SDK v 4.3" useBdt="false" useGridIdeitifiers="false" useWsEnumeration="false" xsi:type="ns26:ServiceFeatures"/>
 
 
 
 
 
-                         <ns27:DataServiceAuditors xsi:type="ns27:DataServiceAuditors" xmlns:ns27="http://gov.nih.nci.cagrid.data/Auditing"/>
 
 
+                                 <ns27:DataServiceAuditors xsi:type="ns27:DataServiceAuditors" xmlns:ns27="http://gov.nih.nci.cagrid.data/Auditing"/>
 
 
 
-                         <ns26:ModelInformation source="preBuilt" xsi:type="ns26:ModelInformation">
-                          <ns28:UMLProjectIdentifer identifier="maservice" version="1.0" xsi:type="ns28:UMLProjectIdentifer" xmlns:ns28="gme://caGrid.caBIG/1.0/org.cagrid.mms.domain"/>
 
 
 
 
+                                 <ns26:ModelInformation source="preBuilt" xsi:type="ns26:ModelInformation">
+                                  <ns28:UMLProjectIdentifer identifier="maservice" version="1.0" xsi:type="ns28:UMLProjectIdentifer" xmlns:ns28="gme://caGrid.caBIG/1.0/org.cagrid.mms.domain"/>
 
-                          <ns26:ModelPackage packageName="gov.nih.nci.iso21090" xsi:type="ns26:ModelPackage">
-                           <ns26:ModelClass selected="true" shortClassName="AdxpAdl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDinsta" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                  <ns26:ModelPackage packageName="gov.nih.nci.iso21090" xsi:type="ns26:ModelPackage">
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpAdl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpZip" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDinsta" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="St" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ed" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpZip" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDinst" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="St" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpStb" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Ed" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Uid" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Xml" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDinst" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="StNt" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpStb" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpBns" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Sc" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Uid" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="EdText" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Xml" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Real" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="StNt" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Adxp" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDel" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpBns" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpSttyp" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Sc" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="BlNonNull" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Any" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="EdText" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpSal" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Real" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpCen" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Adxp" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Ii" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Coll" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDel" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Pq" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpSttyp" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TelPhone" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDmod" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="BlNonNull" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDir" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Any" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Enxp" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpSal" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Int" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Uri" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpCen" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Bl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Ii" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Real&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Pq&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Coll" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="String" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Pq" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpCty" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="TelPhone" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpBr" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Ts&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDmod" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpCpa" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDir" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TelPerson" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TelEmail" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Enxp" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpUnid" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Int" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpCar" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Uri" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Cd" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ad" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="Bl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpInt" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Real&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TelUrl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpPob" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Pq&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDinstq" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="String" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Int&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpCty" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpCnt" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Ts" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpBr" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="DSet" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Ts&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Qset" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="EnOn" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpCpa" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="En" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="TelPerson" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDmodid" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="TelEmail" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Tel" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpUnit" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpUnid" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpBnr" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpCar" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpAl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpSta" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Cd" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpPre" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Ad" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="EnPn" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpInt" targetable="false" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpStr" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Code" targetable="false" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="TelUrl" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Qty" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpPob" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpDal" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Pqv" targetable="false" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDinstq" targetable="false" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AdxpBnn" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Ivl&lt;Int&gt;" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpCnt" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Ts" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="DSet" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Qset" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="EnOn" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="En" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDmodid" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Tel" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpUnit" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpBnr" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpAl" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpSta" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpPre" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="EnPn" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpStr" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Code" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Qty" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpDal" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Pqv" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AdxpBnn" targetable="false" xsi:type="ns26:ModelClass"/>
+
+
 
 
 
@@ -745,20 +889,28 @@
 
 
 
-                          <ns26:ModelPackage packageName="gov.nih.nci.maservice.util" xsi:type="ns26:ModelPackage">
-                           <ns26:ModelClass selected="true" shortClassName="SearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+                                  <ns26:ModelPackage packageName="gov.nih.nci.maservice.util" xsi:type="ns26:ModelPackage">
+                                   <ns26:ModelClass selected="true" shortClassName="SearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="ReporterSearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="ReporterSearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="GeneSearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="GeneSearchCriteria" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
 
 
 
@@ -770,170 +922,228 @@
 
 
 
-                          <ns26:ModelPackage packageName="gov.nih.nci.maservice.domain" xsi:type="ns26:ModelPackage">
-                           <ns26:ModelClass selected="true" shortClassName="Gene" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
+                                  <ns26:ModelPackage packageName="gov.nih.nci.maservice.domain" xsi:type="ns26:ModelPackage">
+                                   <ns26:ModelClass selected="true" shortClassName="Gene" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="NucleicAcidSequenceFeature" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="NucleicAcidSequenceFeature" targetable="true" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="MolecularFunction" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="FunctionalAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="MolecularFunction" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="ArrayReporter" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="FunctionalAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="BiologicalProcess" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="SingleNucleotidePolymorphism" targetable="true" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="ArrayReporter" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="VariationIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="BiologicalProcess" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="MolecularSequenceAnnotation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="SingleNucleotidePolymorphism" targetable="true" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Allele" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Genome" targetable="true" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="VariationIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="CellularComponent" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="MolecularSequenceAnnotation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="DatabaseCrossReference" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="DiseaseAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="Allele" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="NucleicAcidSequenceVariation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Genome" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Organism" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="CellularComponent" targetable="true" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="Microarray" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Chromosome" targetable="true" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="DatabaseCrossReference" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TherapeuticAgent" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="DiseaseAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
-                           <ns26:ModelClass selected="true" shortClassName="HomologousAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="NucleicAcidPhysicalLocation" targetable="true" xsi:type="ns26:ModelClass"/>
+                                   <ns26:ModelClass selected="true" shortClassName="NucleicAcidSequenceVariation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="TherapeuticAgentIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Organism" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="Disease" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
+                                   <ns26:ModelClass selected="true" shortClassName="Microarray" targetable="true" xsi:type="ns26:ModelClass"/>
 
-                           <ns26:ModelClass selected="true" shortClassName="OntologyAnnotation" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="AgentAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
 
+                                   <ns26:ModelClass selected="true" shortClassName="Chromosome" targetable="true" xsi:type="ns26:ModelClass"/>
 
 
 
 
-                           <ns26:ModelClass selected="true" shortClassName="GeneIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="TherapeuticAgent" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="HomologousAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="NucleicAcidPhysicalLocation" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="TherapeuticAgentIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="Disease" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="OntologyAnnotation" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="AgentAssociation" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
+
+
+
+
+
+                                   <ns26:ModelClass selected="true" shortClassName="GeneIdentifier" targetable="true" xsi:type="ns26:ModelClass"/>
+
+
 
 
 
 
 
       </ns26:ModelPackage>
+
+
 
 
 
 
 
      </ns26:ModelInformation>
+
+
 
 
 
