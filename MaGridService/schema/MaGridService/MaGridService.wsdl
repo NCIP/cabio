@@ -27,7 +27,7 @@
       <import namespace="http://CQL.caBIG/1/gov.nih.nci.cagrid.CQLResultSet" schemaLocation="./1_gov.nih.nci.cagrid.CQLResultSet.xsd" />
       <import namespace="http://maservice.nci.nih.gov/MaGridService/CQLResultTypes" schemaLocation="./MaGridService_CQLResultTypes.xsd" />
       <import namespace="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" schemaLocation="gov.nih.nci.maservice.domain.xsd" />
-      <element name="GetGeneBySymbolRequest">
+      <element name="GetGenesBySymbolRequest">
         <complexType>
           <sequence>
             <element name="geneSearchCriteria">
@@ -40,7 +40,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetGeneBySymbolResponse">
+      <element name="GetGenesBySymbolResponse">
         <complexType>
           <sequence>
             <element ref="ns2:Gene" minOccurs="1" maxOccurs="unbounded" />
@@ -167,7 +167,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetHomologousGeneRequest">
+      <element name="GetHomologousGenesRequest">
         <complexType>
           <sequence>
             <element name="organism">
@@ -187,14 +187,14 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetHomologousGeneResponse">
+      <element name="GetHomologousGenesResponse">
         <complexType>
           <sequence>
             <element ref="ns2:Gene" minOccurs="1" maxOccurs="unbounded" />
           </sequence>
         </complexType>
       </element>
-      <element name="GetGeneByMicroarrayReporterRequest">
+      <element name="GetGenesByMicroarrayReporterRequest">
         <complexType>
           <sequence>
             <element name="reporterSearchCriteria">
@@ -207,7 +207,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetGeneByMicroarrayReporterResponse">
+      <element name="GetGenesByMicroarrayReporterResponse">
         <complexType>
           <sequence>
             <element ref="ns2:Gene" minOccurs="1" maxOccurs="unbounded" />
@@ -225,11 +225,11 @@
     </schema>
   </types>
   <!--  place service messages here -->
-  <message name="GetGeneBySymbolRequest">
-    <part name="parameters" element="tns:GetGeneBySymbolRequest" />
+  <message name="GetGenesBySymbolRequest">
+    <part name="parameters" element="tns:GetGenesBySymbolRequest" />
   </message>
-  <message name="GetGeneBySymbolResponse">
-    <part name="parameters" element="tns:GetGeneBySymbolResponse" />
+  <message name="GetGenesBySymbolResponse">
+    <part name="parameters" element="tns:GetGenesBySymbolResponse" />
   </message>
   <message name="GetAgentAssociationRequest">
     <part name="parameters" element="tns:GetAgentAssociationRequest" />
@@ -267,17 +267,17 @@
   <message name="GetStructuralVariationsResponse">
     <part name="parameters" element="tns:GetStructuralVariationsResponse" />
   </message>
-  <message name="GetHomologousGeneRequest">
-    <part name="parameters" element="tns:GetHomologousGeneRequest" />
+  <message name="GetHomologousGenesRequest">
+    <part name="parameters" element="tns:GetHomologousGenesRequest" />
   </message>
-  <message name="GetHomologousGeneResponse">
-    <part name="parameters" element="tns:GetHomologousGeneResponse" />
+  <message name="GetHomologousGenesResponse">
+    <part name="parameters" element="tns:GetHomologousGenesResponse" />
   </message>
-  <message name="GetGeneByMicroarrayReporterRequest">
-    <part name="parameters" element="tns:GetGeneByMicroarrayReporterRequest" />
+  <message name="GetGenesByMicroarrayReporterRequest">
+    <part name="parameters" element="tns:GetGenesByMicroarrayReporterRequest" />
   </message>
-  <message name="GetGeneByMicroarrayReporterResponse">
-    <part name="parameters" element="tns:GetGeneByMicroarrayReporterResponse" />
+  <message name="GetGenesByMicroarrayReporterResponse">
+    <part name="parameters" element="tns:GetGenesByMicroarrayReporterResponse" />
   </message>
   <!--============================================================
 
@@ -285,9 +285,9 @@
                       
   ============================================================-->
   <portType name="MaGridServicePortType" wsrp:ResourceProperties="tns:MaGridServiceResourceProperties">
-    <operation name="getGeneBySymbol">
-      <input message="tns:GetGeneBySymbolRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneBySymbolRequest" />
-      <output message="tns:GetGeneBySymbolResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneBySymbolResponse" />
+    <operation name="getGenesBySymbol">
+      <input message="tns:GetGenesBySymbolRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolRequest" />
+      <output message="tns:GetGenesBySymbolResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolResponse" />
     </operation>
     <operation name="getAgentAssociation">
       <input message="tns:GetAgentAssociationRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationRequest" />
@@ -313,13 +313,13 @@
       <input message="tns:GetStructuralVariationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsRequest" />
       <output message="tns:GetStructuralVariationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsResponse" />
     </operation>
-    <operation name="getHomologousGene">
-      <input message="tns:GetHomologousGeneRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGeneRequest" />
-      <output message="tns:GetHomologousGeneResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGeneResponse" />
+    <operation name="getHomologousGenes">
+      <input message="tns:GetHomologousGenesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGenesRequest" />
+      <output message="tns:GetHomologousGenesResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGenesResponse" />
     </operation>
-    <operation name="getGeneByMicroarrayReporter">
-      <input message="tns:GetGeneByMicroarrayReporterRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneByMicroarrayReporterRequest" />
-      <output message="tns:GetGeneByMicroarrayReporterResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGeneByMicroarrayReporterResponse" />
+    <operation name="getGenesByMicroarrayReporter">
+      <input message="tns:GetGenesByMicroarrayReporterRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesByMicroarrayReporterRequest" />
+      <output message="tns:GetGenesByMicroarrayReporterResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesByMicroarrayReporterResponse" />
     </operation>
     <wsdl:operation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="GetMultipleResourceProperties">
       <wsdl:input name="GetMultipleResourcePropertiesRequest" message="wsrpw:GetMultipleResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourceProperties" />
