@@ -75,7 +75,7 @@ public class MaGridServiceAuthorization implements PDP {
 		
 	}
 	   				
-	public void authorizeGetGeneBySymbol(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+	public void authorizeGetGenesBySymbol(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
 	   				
@@ -103,11 +103,11 @@ public class MaGridServiceAuthorization implements PDP {
 		
 	}
 	   				
-	public void authorizeGetHomologousGene(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+	public void authorizeGetHomologousGenes(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
 	   				
-	public void authorizeGetGeneByMicroarrayReporter(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+	public void authorizeGetGenesByMicroarrayReporter(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
 	   
@@ -133,8 +133,8 @@ public class MaGridServiceAuthorization implements PDP {
 		} else if(operation.getLocalPart().equals("query")){
 			authorizeQuery(peerSubject, context, operation);
 			return true;
-		} else if(operation.getLocalPart().equals("getGeneBySymbol")){
-			authorizeGetGeneBySymbol(peerSubject, context, operation);
+		} else if(operation.getLocalPart().equals("getGenesBySymbol")){
+			authorizeGetGenesBySymbol(peerSubject, context, operation);
 			return true;
 		} else if(operation.getLocalPart().equals("getAgentAssociation")){
 			authorizeGetAgentAssociation(peerSubject, context, operation);
@@ -154,11 +154,11 @@ public class MaGridServiceAuthorization implements PDP {
 		} else if(operation.getLocalPart().equals("getStructuralVariations")){
 			authorizeGetStructuralVariations(peerSubject, context, operation);
 			return true;
-		} else if(operation.getLocalPart().equals("getHomologousGene")){
-			authorizeGetHomologousGene(peerSubject, context, operation);
+		} else if(operation.getLocalPart().equals("getHomologousGenes")){
+			authorizeGetHomologousGenes(peerSubject, context, operation);
 			return true;
-		} else if(operation.getLocalPart().equals("getGeneByMicroarrayReporter")){
-			authorizeGetGeneByMicroarrayReporter(peerSubject, context, operation);
+		} else if(operation.getLocalPart().equals("getGenesByMicroarrayReporter")){
+			authorizeGetGenesByMicroarrayReporter(peerSubject, context, operation);
 			return true;
 		} 		
 		return false;
