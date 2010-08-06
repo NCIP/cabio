@@ -12,6 +12,28 @@ import java.rmi.RemoteException;
  */
 public interface MaGridServiceI {
 
+  /**
+   * Get the Gene(s) for a given symbol or organism
+   *
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns a gene’s homologous gene in a specified organism
+   *
+   * @param organism
+   * @param geneSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+
+  /**
+   * Returns the gene associated with the specified microarray reporter
+   *
+   * @param reporterSearchCriteria
+   */
+  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException ;
+
   public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException ;
 
   public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException ;
@@ -30,13 +52,6 @@ public interface MaGridServiceI {
    *	Thrown when a query is found to be improperly formed
    */
   public gov.nih.nci.cagrid.cqlresultset.CQLQueryResults query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery) throws RemoteException, gov.nih.nci.cagrid.data.faults.QueryProcessingExceptionType, gov.nih.nci.cagrid.data.faults.MalformedQueryExceptionType ;
-
-  /**
-   * Get the Gene(s) for a given symbol or organism
-   *
-   * @param geneSearchCriteria
-   */
-  public gov.nih.nci.maservice.domain.Gene[] getGeneBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
 
   /**
    * Get the Agent Associations for a given gene or organism
@@ -79,21 +94,6 @@ public interface MaGridServiceI {
    * @param geneSearchCriteria
    */
   public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
-
-  /**
-   * Returns a gene’s homologous gene in a specified organism
-   *
-   * @param organism
-   * @param geneSearchCriteria
-   */
-  public gov.nih.nci.maservice.domain.Gene[] getHomologousGene(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
-
-  /**
-   * Returns the gene associated with the specified microarray reporter
-   *
-   * @param reporterSearchCriteria
-   */
-  public gov.nih.nci.maservice.domain.Gene[] getGeneByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException ;
 
 }
 
