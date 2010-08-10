@@ -37,6 +37,8 @@
 
 <ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.maservice.domain.Gene" qname="ns2:Gene" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
 
+<ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.maservice.domain.GeneAlias" qname="ns2:GeneAlias" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+
 <ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.maservice.domain.GeneIdentifier" qname="ns2:GeneIdentifier" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
 
 <ns3:typeMapping encodingStyle="" serializer="gov.nih.nci.iso21090.grid.ser.JaxbSerializerFactory" deserializer="gov.nih.nci.iso21090.grid.ser.JaxbDeserializerFactory" type="ns1:gov.nih.nci.maservice.domain.Genome" qname="ns2:Genome" xmlns:ns1="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns2="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
