@@ -146,6 +146,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<property name="magridsvc-webapp.dist.dir" value="${dist.exploded.dir}/${magridsvc-webapp.dist.relative.dir}"/>
     <property name="magridsvc.dist.artifacts.dir" value="${dist.exploded.dir}/artifacts" />
 	
+	<property name="service.base.url" value="http://${jboss.external.http.host}:${jboss.external.http.port}" />
+	<property name="magridservice.url" value="${service.base.url}/wsrf/services/cagrid/MaGridService"/>	
+
 
 	<!-- retrive ivy.jar.files then retrieve bda files and librarires -->
 	<condition property="commonlibrary.dir" value="">
@@ -857,7 +860,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		clean,
 		init,
 		test:magridsvc-api,
-		test:magridsvc-webapp
+		test:magridsvc-webapp,
+		test:check_registration
 		" >
 	</target>
 
@@ -872,11 +876,45 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:magridsvc-webapp" depends="init" description="Calls test target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.test.file}" target="test" dir="${magridsvc-webapp.base.dir}">
-			<property name="dist.dir" value="${magridsvc-webapp.dist.dir}" />
+		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="runClient" dir="${magridsvc-webapp.base.dir}">
+			<property name="service.url" value="${magridservice.url}"/>
 		</ant>
 	</target>
 
+    <target name="test:retrieveRegistrationInfo" description="check to see whether the index registration is succesful for the target grid">   	
+	    	<echo message="Query the Index Service: ${grid.index.url}"/>
+	    	<echo message="Grid service: ${magridservice.url}"/>
+		    <condition property="wsrf.query" value="wsrf-query.bat" else="wsrf-query">
+		      <os family="windows" />	
+		    </condition>
+	        <echo message="Operating Systems: ${os.name} and command: ${wsrf.query} " />
+	    	<exec executable="cmd" dir="." output="${grid.index.service.dump}">
+	    		<arg value="/c"/>
+	    		<arg line="${wsrf.query} -a -z none -s" />
+	    		<arg line="${grid.index.url}" />
+	    	</exec>
+
+	    	<delete>
+		    	<fileset dir="." includes="${grid.index.service.dump}">
+		    	    <contains text="${service.base.url}" casesensitive="no"/>
+		    	</fileset>
+	   		</delete>    	
+	    	
+			<condition property="indexsvc.registration.success">
+				<not>
+				     <available file="${grid.index.service.dump}"/>
+				</not>
+			</condition>     	
+	</target>
+
+	<target name="test:check_registration_failure" depends="test:retrieveRegistrationInfo" unless="indexsvc.registration.success">
+	    <echo message="Registration on Index Service failed"/>
+	</target>
+		
+	<target name="test:check_registration" depends="test:retrieveRegistrationInfo,test:check_registration_failure" if="indexsvc.registration.success">
+		    <echo message="Registration Successful"/>
+	</target>
+	
 	<target name="static-analysis:all" description="Runs static-analysis target for all sub-projects" depends="
 		clean,
 		init,
