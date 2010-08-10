@@ -47,7 +47,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetAgentAssociationRequest">
+      <element name="GetAgentAssociationsRequest">
         <complexType>
           <sequence>
             <element name="geneSearchCriteria">
@@ -60,7 +60,7 @@
           </sequence>
         </complexType>
       </element>
-      <element name="GetAgentAssociationResponse">
+      <element name="GetAgentAssociationsResponse">
         <complexType>
           <sequence>
             <element ref="ns2:AgentAssociation" minOccurs="1" maxOccurs="unbounded" />
@@ -231,11 +231,11 @@
   <message name="GetGenesBySymbolResponse">
     <part name="parameters" element="tns:GetGenesBySymbolResponse" />
   </message>
-  <message name="GetAgentAssociationRequest">
-    <part name="parameters" element="tns:GetAgentAssociationRequest" />
+  <message name="GetAgentAssociationsRequest">
+    <part name="parameters" element="tns:GetAgentAssociationsRequest" />
   </message>
-  <message name="GetAgentAssociationResponse">
-    <part name="parameters" element="tns:GetAgentAssociationResponse" />
+  <message name="GetAgentAssociationsResponse">
+    <part name="parameters" element="tns:GetAgentAssociationsResponse" />
   </message>
   <message name="GetBiologicalProcessesRequest">
     <part name="parameters" element="tns:GetBiologicalProcessesRequest" />
@@ -289,9 +289,9 @@
       <input message="tns:GetGenesBySymbolRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolRequest" />
       <output message="tns:GetGenesBySymbolResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolResponse" />
     </operation>
-    <operation name="getAgentAssociation">
-      <input message="tns:GetAgentAssociationRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationRequest" />
-      <output message="tns:GetAgentAssociationResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationResponse" />
+    <operation name="getAgentAssociations">
+      <input message="tns:GetAgentAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationsRequest" />
+      <output message="tns:GetAgentAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationsResponse" />
     </operation>
     <operation name="getBiologicalProcesses">
       <input message="tns:GetBiologicalProcessesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesRequest" />

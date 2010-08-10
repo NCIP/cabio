@@ -36,6 +36,7 @@
 		<xs:element ref="ns0:HomologousAssociation" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
 		<xs:element ref="ns0:NucleicAcidPhysicalLocation" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
 		<xs:element ref="ns0:TherapeuticAgentIdentifier" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
+		<xs:element ref="ns0:GeneAlias" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
 		<xs:element ref="ns0:Disease" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
 		<xs:element ref="ns0:OntologyAnnotation" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
 		<xs:element ref="ns0:AgentAssociation" xmlns:ns0="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>

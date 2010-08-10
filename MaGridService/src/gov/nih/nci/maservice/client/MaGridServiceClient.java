@@ -146,7 +146,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
 		St symbolOrAlias = new St();
 		symbolOrAlias.setValue("BRCA1");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
-		AgentAssociation[] aas = this.getAgentAssociation(geneSearchCriteria);
+		AgentAssociation[] aas = this.getAgentAssociations(geneSearchCriteria);
 		
 		if ( aas!=null && aas.length > 0)
 		{
@@ -164,7 +164,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
 			  // test....
 			  
 			  client.testGetGeneBySymbol();
-			  //client.testGetAgentAssociation();
+			  client.testGetAgentAssociation();
 			  //client.testQuery();
 			} else {
 				usage();
@@ -252,14 +252,14 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociation(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getAgentAssociation");
-    gov.nih.nci.maservice.stubs.GetAgentAssociationRequest params = new gov.nih.nci.maservice.stubs.GetAgentAssociationRequest();
-    gov.nih.nci.maservice.stubs.GetAgentAssociationRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetAgentAssociationRequestGeneSearchCriteria();
+    gov.nih.nci.maservice.stubs.GetAgentAssociationsRequest params = new gov.nih.nci.maservice.stubs.GetAgentAssociationsRequest();
+    gov.nih.nci.maservice.stubs.GetAgentAssociationsRequestGeneSearchCriteria geneSearchCriteriaContainer = new gov.nih.nci.maservice.stubs.GetAgentAssociationsRequestGeneSearchCriteria();
     geneSearchCriteriaContainer.setGeneSearchCriteria(geneSearchCriteria);
     params.setGeneSearchCriteria(geneSearchCriteriaContainer);
-    gov.nih.nci.maservice.stubs.GetAgentAssociationResponse boxedResult = portType.getAgentAssociation(params);
+    gov.nih.nci.maservice.stubs.GetAgentAssociationsResponse boxedResult = portType.getAgentAssociations(params);
     return boxedResult.getAgentAssociation();
     }
   }

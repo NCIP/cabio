@@ -4,7 +4,9 @@
   <xs:import namespace="uri:iso.org:21090" schemaLocation="ISO_datatypes_Narrative.xsd" />
   <xs:element name="SearchCriteria" type="SearchCriteria" />
   <xs:complexType name="SearchCriteria">
-    <xs:sequence />
+    <xs:sequence>
+      <xs:element name="id" type="uri:II" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="ReporterSearchCriteria" type="ReporterSearchCriteria" />
   <xs:complexType name="ReporterSearchCriteria">

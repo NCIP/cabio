@@ -79,7 +79,7 @@ public class MaGridServiceAuthorization implements PDP {
 		
 	}
 	   				
-	public void authorizeGetAgentAssociation(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
+	public void authorizeGetAgentAssociations(Subject peerSubject, MessageContext context, QName operation) throws AuthorizationException {
 		
 	}
 	   				
@@ -136,8 +136,8 @@ public class MaGridServiceAuthorization implements PDP {
 		} else if(operation.getLocalPart().equals("getGenesBySymbol")){
 			authorizeGetGenesBySymbol(peerSubject, context, operation);
 			return true;
-		} else if(operation.getLocalPart().equals("getAgentAssociation")){
-			authorizeGetAgentAssociation(peerSubject, context, operation);
+		} else if(operation.getLocalPart().equals("getAgentAssociations")){
+			authorizeGetAgentAssociations(peerSubject, context, operation);
 			return true;
 		} else if(operation.getLocalPart().equals("getBiologicalProcesses")){
 			authorizeGetBiologicalProcesses(peerSubject, context, operation);
