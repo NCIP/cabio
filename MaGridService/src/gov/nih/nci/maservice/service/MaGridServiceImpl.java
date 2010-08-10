@@ -63,7 +63,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  agentAssocs = new AgentAssociation[ aas.size()];
 		          int i=0;
-		          for ( AgentAssociation g: agentAssocs)
+		          for ( AgentAssociation g: aas)
 		          {
 		        	  agentAssocs[i++] = g;
 		          }
@@ -88,7 +88,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new BiologicalProcess[ list.size()];
 		          int i=0;
-		          for ( BiologicalProcess g: results)
+		          for ( BiologicalProcess g: list)
 		          {
 		        	  results[i++] = g;
 		          }
@@ -113,7 +113,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new CellularComponent[ list.size()];
 		          int i=0;
-		          for ( CellularComponent g: results)
+		          for ( CellularComponent g: list)
 		          {
 		        	  results[i++] = g;
 		          }
@@ -138,7 +138,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new DiseaseAssociation[ list.size()];
 		          int i=0;
-		          for ( DiseaseAssociation g: results)
+		          for ( DiseaseAssociation g: list )
 		          {
 		        	  results[i++] = g;
 		          }
@@ -163,7 +163,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new MolecularFunction[ list.size()];
 		          int i=0;
-		          for ( MolecularFunction g: results)
+		          for ( MolecularFunction g: list )
 		          {
 		        	  results[i++] = g;
 		          }
@@ -188,7 +188,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new SingleNucleotidePolymorphism[ list.size()];
 		          int i=0;
-		          for ( SingleNucleotidePolymorphism g: results)
+		          for ( SingleNucleotidePolymorphism g: list )
 		          {
 		        	  results[i++] = g;
 		          }
@@ -238,7 +238,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new Gene[ list.size()];
 		          int i=0;
-		          for ( Gene g: results)
+		          for ( Gene g: list )
 		          {
 		        	  results[i++] = g;
 		          }
@@ -263,7 +263,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 	          {
 	        	  results = new Gene[ list.size()];
 		          int i=0;
-		          for ( Gene g: results)
+		          for ( Gene g: list )
 		          {
 		        	  results[i++] = g;
 		          }
