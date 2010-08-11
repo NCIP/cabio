@@ -1130,10 +1130,10 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		</if>
 		<!-- Begin JBoss Readers -->
 		<!-- Reader reqiures that you have only one data source defined in each *-ds.xml file -->
-		<jboss-read-dbconfig
+		<!-- jboss-read-dbconfig
 			jboss.home="${read.jboss.home}"
 			jboss.ds-xml.file="magridsvc-ds.xml"
-			/>
+			/ -->
 		<jboss-read-ldapconfig
 			jboss.home="${read.jboss.home}"
 			/>
