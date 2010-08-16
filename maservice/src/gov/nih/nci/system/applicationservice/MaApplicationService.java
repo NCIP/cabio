@@ -22,7 +22,7 @@ import java.util.List;
  * @author <a href="mailto:sunj2@mail.nih.gov">Jim Sun</a>
  */
 public interface MaApplicationService extends ApplicationService {    
-    public List<Gene> getGeneBySymbol(GeneSearchCriteria geneSearchCriteria) throws MAException;
+    public List<Gene> getGenesBySymbol(GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<AgentAssociation> getAgentAssociations(GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<BiologicalProcess> getBiologicalProcesses(GeneSearchCriteria geneSearchCriteria) throws MAException;
     public List<CellularComponent> getCellularLocations(GeneSearchCriteria geneSearchCriteria) throws MAException;
