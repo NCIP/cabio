@@ -14,6 +14,7 @@ import gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation;
 import gov.nih.nci.maservice.domain.Organism;
 import gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism;
 import gov.nih.nci.maservice.errors.MAException;
+import gov.nih.nci.maservice.errors.ErrorCodes;
 import gov.nih.nci.maservice.util.GeneSearchCriteria;
 import gov.nih.nci.maservice.util.ReporterSearchCriteria;
 import gov.nih.nci.system.applicationservice.ApplicationException;
@@ -21,6 +22,7 @@ import gov.nih.nci.system.applicationservice.MaApplicationService;
 import gov.nih.nci.system.util.ClassCache;
 
 import gov.nih.nci.iso21090.Ii;
+import gov.nih.nci.iso21090.St;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,7 +51,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
      * @return Return the gene(s) named by the specified gene symbol or gene alias and the genes organism.
      * @throws MAException
      */
-    public List<Gene> getGeneBySymbol(GeneSearchCriteria geneSearchCriteria)
+    public List<Gene> getGenesBySymbol(GeneSearchCriteria geneSearchCriteria)
 	       throws MAException {
 		List<Gene> genes = null;
 		try
@@ -59,8 +61,7 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		} 
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return genes;
@@ -80,6 +81,13 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
+	        
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
+	        
 	        list = new ArrayList<AgentAssociation>();
             for (Gene g: genes)
             {
@@ -94,10 +102,13 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
             }  // end of genes loop
 	        
 		} 
+		catch (MAException me)
+		{
+			 throw me;
+		}
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -118,6 +129,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
+
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
 	        
 	        list = new ArrayList<BiologicalProcess>();
             for (Gene g: genes)
@@ -132,10 +149,13 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           } // finish collecting the AgentAssociation
             }  // end of genes loop	        
 		} 
+		catch (MAException me)
+		{
+			 throw me;
+		}
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -155,7 +175,13 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
-	        
+
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
+	        	        
 	        list = new ArrayList<CellularComponent>();
             for (Gene g: genes)
             {
@@ -169,11 +195,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           } // finish collecting the AgentAssociation
             }  // end of genes loop
 	        
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -193,6 +222,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
+
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
 	        
 	        list = new ArrayList<DiseaseAssociation>();
             for (Gene g: genes)
@@ -207,11 +242,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           } // finish collecting the AgentAssociation
             }  // end of genes loop
 	        
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -231,6 +269,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
+
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
 	        
 	        list = new ArrayList<MolecularFunction>();
             for (Gene g: genes)
@@ -245,11 +289,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           } // finish collecting the AgentAssociation
             }  // end of genes loop
 	        
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -269,6 +316,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 		{
 	        ArrayReporter reporter = this.composeArrayReporterCriteria(reporterSearchCriteria);
 	        reporters = this.search(ArrayReporter.class, reporter);
+
+	        if ( reporters==null || reporters.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10003);
+	        }
 	        
 	        genes = new ArrayList<Gene>();
             for (ArrayReporter ar: reporters)
@@ -276,11 +329,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
                 Collection<Gene> gs = getAssociation(ar, "geneCollection");
                 genes.addAll(gs);
             }  // end of reporters loop
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return genes;
@@ -301,6 +357,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
 	        
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
+	        
 	        homologousGenes = new ArrayList<Gene>();
             for (Gene g: genes)
             {
@@ -313,11 +375,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           }
             }  // end of genes loop
 	        
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return homologousGenes;
@@ -338,6 +403,12 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	        Gene gene = composeGeneCriteria(geneSearchCriteria);
 	        genes = this.search(Gene.class, gene);
 	        
+	        if ( genes==null || genes.size() == 0)
+	        {
+	        	// throws MAException as in specification
+	        	createMAException( ErrorCodes.MAE10001);
+	        }
+	        
 	        list = new ArrayList<SingleNucleotidePolymorphism>();
             for (Gene g: genes)
             {
@@ -351,11 +422,14 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	           } // finish collecting the AgentAssociation
             }  // end of genes loop
 	        
-		} 
+		}
+		catch (MAException me)
+		{
+			 throw me;
+		}		
 		catch ( ApplicationException e)
 		{
-			MAException me = new MAException(e);
-			throw me;
+			createMAExceptionFromApplicationException(e);
 		}
 		
 		return list;
@@ -389,4 +463,35 @@ public class MaApplicationServiceImpl extends ApplicationServiceImpl
 	    return reporter;
 	}	
 
+	private void createMAException(ErrorCodes errCode) throws MAException
+	{	
+    	St code = new St();
+    	code.setValue(errCode.toString());
+    	
+    	St message = new St();
+    	message.setValue(errCode.getDesc());
+    	
+    	St severity =  new St();
+    	severity.setValue(errCode.getCondition());
+    	
+    	St type = new St();	        	
+    	type.setValue("MA Service");
+    	    	
+        throw new MAException(code, message, severity, type);	
+	}
+	
+	private void createMAExceptionFromApplicationException(ApplicationException e) throws MAException
+	{
+		ErrorCodes errCode = ErrorCodes.MAE00000;
+    	St code = new St();    	
+    	code.setValue(errCode.toString());
+    	
+    	St severity =  new St();
+    	severity.setValue(errCode.getCondition());
+    	
+    	St type = new St();	        	
+    	type.setValue("MA Service Application");
+    	    	
+        throw new MAException(code, severity, type, e );			
+	}
 }
