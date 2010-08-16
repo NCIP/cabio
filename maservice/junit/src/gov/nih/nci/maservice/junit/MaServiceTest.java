@@ -43,7 +43,7 @@ public class MaServiceTest extends MaTestBase {
 		symbolOrAlias.setValue(symbol+"*");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
 		
-		List<Gene> genes = getApplicationService().getGeneBySymbol(geneSearchCriteria);
+		List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
 		
         assertNotNull(genes);
         assertTrue("Expected at least 2 genes starting with "+symbol,genes.size()>2);
@@ -74,7 +74,7 @@ public class MaServiceTest extends MaTestBase {
         geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
         geneSearchCriteria.setOrganism(organism);
         
-        List<Gene> genes = getApplicationService().getGeneBySymbol(geneSearchCriteria);
+        List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
         
         assertNotNull(genes);
         assertEquals(1,genes.size());
@@ -106,7 +106,7 @@ public class MaServiceTest extends MaTestBase {
         geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
         geneSearchCriteria.setOrganism(organism);
         
-        List<Gene> genes = getApplicationService().getGeneBySymbol(geneSearchCriteria);
+        List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
         
         assertNotNull(genes);
         assertEquals(1,genes.size());
@@ -123,7 +123,7 @@ public class MaServiceTest extends MaTestBase {
 		GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
 		List<AgentAssociation> aas = 
 		    getApplicationService().getAgentAssociations(geneSearchCriteria);
 
@@ -154,7 +154,7 @@ public class MaServiceTest extends MaTestBase {
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
         List<BiologicalProcess> bps = 
             getApplicationService().getBiologicalProcesses(geneSearchCriteria);
         
@@ -181,7 +181,7 @@ public class MaServiceTest extends MaTestBase {
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
         List<CellularComponent> bps = 
             getApplicationService().getCellularLocations(geneSearchCriteria);
         
@@ -208,7 +208,7 @@ public class MaServiceTest extends MaTestBase {
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
         List<DiseaseAssociation> das = 
             getApplicationService().getDiseaseAssociations(geneSearchCriteria);
         
@@ -238,7 +238,7 @@ public class MaServiceTest extends MaTestBase {
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
         List<MolecularFunction> mfs = 
             getApplicationService().getFunctionalAssociations(geneSearchCriteria);
         
@@ -286,7 +286,7 @@ public class MaServiceTest extends MaTestBase {
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
 
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
 
         assertNotNull(genes);
         assertEquals(1, genes.size());
@@ -312,7 +312,7 @@ public class MaServiceTest extends MaTestBase {
 
         GeneSearchCriteria geneSearchCriteria = getCriteria("BRCA1", "human");
         List<Gene> genes = 
-            getApplicationService().getGeneBySymbol(geneSearchCriteria);
+            getApplicationService().getGenesBySymbol(geneSearchCriteria);
         List<SingleNucleotidePolymorphism> snps = 
             getApplicationService().getStructuralVariations(geneSearchCriteria);
         
