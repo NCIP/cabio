@@ -2,24 +2,36 @@ package gov.nih.nci.maservice.errors;
 
 import gov.nih.nci.system.applicationservice.ApplicationException;
 import gov.nih.nci.iso21090.St;
-import gov.nih.nci.iso21090.Cd;
-
 
 public class MAException extends ApplicationException {
-	private Cd code;
+	private St code;
 	private St message;
-	private Cd severity;
-	private Cd type;
+	private St severity;
+	private St type;
 	
 	public  MAException()
 	{
 		super();
 	}
+
+	public  MAException(St code, St message, St severity, St type)
+	{
+		super();
+		this.code = code;
+		this.message = message;
+		this.severity = severity;
+		this.type = type;		
+	}
 	
-	public  MAException(Cd code, Cd severity, Cd type, Throwable cause)
+	public  MAException(St code, St severity, St type, Throwable cause)
 	{
 		this(cause);
 		this.code = code;
+		if ( this.message == null)
+		{
+			 this.message = new St();
+		}
+		this.message.setValue( cause.getMessage());
 		this.severity = severity;
 		this.type = type;
 	}
@@ -27,13 +39,12 @@ public class MAException extends ApplicationException {
 	public  MAException(Throwable cause)
 	{		
 	    super(cause);
-	    this.message.setValue(cause.getMessage());
 	}
 	
-	public Cd getCode() {
+	public St getCode() {
 		return code;
 	}
-	public void setCode(Cd code) {
+	public void setCode(St code) {
 		this.code = code;
 	}
 	public String getMessage() {
@@ -42,16 +53,17 @@ public class MAException extends ApplicationException {
 	public void setMessage(St message) {
 		this.message = message;
 	}
-	public Cd getSeverity() {
+	
+	public St getSeverity() {
 		return severity;
 	}
-	public void setSeverity(Cd severity) {
+	public void setSeverity(St severity) {
 		this.severity = severity;
 	}
-	public Cd getType() {
+	public St getType() {
 		return type;
 	}
-	public void setType(Cd type) {
+	public void setType(St type) {
 		this.type = type;
 	}
 }
