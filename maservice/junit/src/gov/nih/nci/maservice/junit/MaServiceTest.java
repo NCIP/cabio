@@ -9,7 +9,7 @@ import gov.nih.nci.maservice.domain.CellularComponent;
 import gov.nih.nci.maservice.domain.Disease;
 import gov.nih.nci.maservice.domain.DiseaseAssociation;
 import gov.nih.nci.maservice.domain.Gene;
-import gov.nih.nci.maservice.domain.Microarray;
+import gov.nih.nci.maservice.domain.GeneAlias;
 import gov.nih.nci.maservice.domain.MolecularFunction;
 import gov.nih.nci.maservice.domain.MolecularSequenceAnnotation;
 import gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation;
@@ -45,6 +45,8 @@ public class MaServiceTest extends MaTestBase {
 		
 		List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
 		
+		System.out.println("testGetGeneBySymbol returned "+genes.size()+" genes.");
+		
         assertNotNull(genes);
         assertTrue("Expected at least 2 genes starting with "+symbol,genes.size()>2);
         
@@ -55,7 +57,20 @@ public class MaServiceTest extends MaTestBase {
             assertNotNull(gene.getFullName().getValue());
             assertNotNull(gene.getSymbol());
             assertNotNull(gene.getSymbol().getValue());
-            assertTrue(gene.getSymbol().getValue().toLowerCase().startsWith(symbol));
+            
+            boolean found = false;
+            if (gene.getSymbol().getValue().toLowerCase().startsWith(symbol)) {
+                found = true;
+            }
+            if (!found) {
+                for(GeneAlias alias : gene.getGeneAliasCollection()) {
+                    if (alias.getIdentifier().getExtension().toLowerCase().startsWith(symbol)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            assertTrue(found);
         }
 	}
 
