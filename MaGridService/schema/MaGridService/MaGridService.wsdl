@@ -279,6 +279,9 @@
   <message name="GetGenesByMicroarrayReporterResponse">
     <part name="parameters" element="tns:GetGenesByMicroarrayReporterResponse" />
   </message>
+  <message name="MolecularAnnotationServiceExceptionFaultMessage">
+    <part name="fault" element="ns0:MolecularAnnotationServiceException" />
+  </message>
   <!--============================================================
 
                        P O R T T Y P E
@@ -288,10 +291,12 @@
     <operation name="getGenesBySymbol">
       <input message="tns:GetGenesBySymbolRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolRequest" />
       <output message="tns:GetGenesBySymbolResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesBySymbolResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getAgentAssociations">
       <input message="tns:GetAgentAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationsRequest" />
       <output message="tns:GetAgentAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetAgentAssociationsResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getBiologicalProcesses">
       <input message="tns:GetBiologicalProcessesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesRequest" />
