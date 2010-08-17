@@ -12,19 +12,42 @@ import java.rmi.RemoteException;
  */
 public interface MaGridServiceI {
 
+  public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException ;
+
+  public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException ;
+
+  public org.oasis.wsrf.properties.QueryResourcePropertiesResponse queryResourceProperties(org.oasis.wsrf.properties.QueryResourceProperties_Element params) throws RemoteException ;
+
+  /**
+   * The standard caGrid Data Service query method.
+   *
+   * @param cqlQuery
+   *	The CQL query to be executed against the data source.
+   * @return The result of executing the CQL query against the data source.
+   * @throws QueryProcessingException
+   *	Thrown when an error occurs in processing a CQL query
+   * @throws MalformedQueryException
+   *	Thrown when a query is found to be improperly formed
+   */
+  public gov.nih.nci.cagrid.cqlresultset.CQLQueryResults query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery) throws RemoteException, gov.nih.nci.cagrid.data.faults.QueryProcessingExceptionType, gov.nih.nci.cagrid.data.faults.MalformedQueryExceptionType ;
+
   /**
    * Get the Gene(s) for a given symbol or organism
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Get the Agent Associations for a given gene or organism
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns annotations describing a gene's role in biological processes
@@ -75,25 +98,6 @@ public interface MaGridServiceI {
    * @param reporterSearchCriteria
    */
   public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException ;
-
-  public org.oasis.wsrf.properties.GetMultipleResourcePropertiesResponse getMultipleResourceProperties(org.oasis.wsrf.properties.GetMultipleResourceProperties_Element params) throws RemoteException ;
-
-  public org.oasis.wsrf.properties.GetResourcePropertyResponse getResourceProperty(javax.xml.namespace.QName params) throws RemoteException ;
-
-  public org.oasis.wsrf.properties.QueryResourcePropertiesResponse queryResourceProperties(org.oasis.wsrf.properties.QueryResourceProperties_Element params) throws RemoteException ;
-
-  /**
-   * The standard caGrid Data Service query method.
-   *
-   * @param cqlQuery
-   *	The CQL query to be executed against the data source.
-   * @return The result of executing the CQL query against the data source.
-   * @throws QueryProcessingException
-   *	Thrown when an error occurs in processing a CQL query
-   * @throws MalformedQueryException
-   *	Thrown when a query is found to be improperly formed
-   */
-  public gov.nih.nci.cagrid.cqlresultset.CQLQueryResults query(gov.nih.nci.cagrid.cqlquery.CQLQuery cqlQuery) throws RemoteException, gov.nih.nci.cagrid.data.faults.QueryProcessingExceptionType, gov.nih.nci.cagrid.data.faults.MalformedQueryExceptionType ;
 
 }
 
