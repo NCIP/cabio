@@ -10,7 +10,9 @@
 	
     <!-- Quick access to the server URL -->
     <bean id="RemoteServerURL" class="java.lang.String">
-        <constructor-arg><value>http://cbiovdev5051.nci.nih.gov:19080/maservice</value></constructor-arg>
+        <!-- constructor-arg><value>http://localhost:30210/maservice</value></constructor-arg -->
+        <!-- constructor-arg><value>http://cbiovdev5051.nci.nih.gov:19780/maservice</value></constructor-arg -->
+        <constructor-arg><value>http://cbiovdev5051.nci.nih.gov:19780/maservice</value></constructor-arg>
     </bean>
 
 </beans>
