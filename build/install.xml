@@ -259,7 +259,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 				<property name="database.schema" value="public"/>
 			</case>
 			<default>
-				<fail message="Invalid database type ${database.type}"/>
+				<!-- fail message="Invalid database type ${database.type}"/  -->
 			</default>
 		</switch>
 
