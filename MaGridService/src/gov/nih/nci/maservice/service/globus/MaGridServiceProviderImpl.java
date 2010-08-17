@@ -26,13 +26,13 @@ public class MaGridServiceProviderImpl{
 	}
 	
 
-    public gov.nih.nci.maservice.stubs.GetGenesBySymbolResponse getGenesBySymbol(gov.nih.nci.maservice.stubs.GetGenesBySymbolRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetGenesBySymbolResponse getGenesBySymbol(gov.nih.nci.maservice.stubs.GetGenesBySymbolRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetGenesBySymbolResponse boxedResult = new gov.nih.nci.maservice.stubs.GetGenesBySymbolResponse();
     boxedResult.setGene(impl.getGenesBySymbol(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetAgentAssociationsResponse getAgentAssociations(gov.nih.nci.maservice.stubs.GetAgentAssociationsRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetAgentAssociationsResponse getAgentAssociations(gov.nih.nci.maservice.stubs.GetAgentAssociationsRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetAgentAssociationsResponse boxedResult = new gov.nih.nci.maservice.stubs.GetAgentAssociationsResponse();
     boxedResult.setAgentAssociation(impl.getAgentAssociations(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
