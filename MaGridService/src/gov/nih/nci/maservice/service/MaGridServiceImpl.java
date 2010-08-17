@@ -5,10 +5,19 @@ import gov.nih.nci.system.client.ApplicationServiceProvider;
 import gov.nih.nci.maservice.domain.*;
 import gov.nih.nci.maservice.util.*;
 import gov.nih.nci.maservice.errors.MAException;
+import gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException;
 
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Collections;
+
+import org.oasis.wsrf.faults.BaseFaultType;
+import org.oasis.wsrf.faults.BaseFaultTypeErrorCode;
+import org.oasis.wsrf.faults.BaseFaultTypeDescription;
+
+import org.globus.wsrf.utils.FaultHelper;
+import org.apache.axis.message.MessageElement;
+import org.apache.axis.message.Text;
 
 /** 
  * TODO:I am the service side implementation class.  IMPLEMENT AND DOCUMENT ME
@@ -52,7 +61,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
       urlPart += getConfiguration().getCqlQueryProcessorConfig_applicationName();
       return urlPart;
   }  
-  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.AgentAssociation[] getAgentAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 		 AgentAssociation[] agentAssocs = null; 
 		  
 		 try
@@ -71,7 +80,8 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return agentAssocs;
@@ -202,7 +212,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 return results;
   }
 
-  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.Gene[] getGenesBySymbol(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 		 Gene[] geneArray = null; 
 		  
 		 try
@@ -221,7 +231,8 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return geneArray;
@@ -277,5 +288,56 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 return results; 
   }
 
+  private void generateMolecularAnnotationServiceException(MAException mae) throws gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException
+  {
+      if ( mae !=null )
+      {
+    	  String code = mae.getCode().getValue();
+    	  String desc = mae.getMessage();
+    	  String type = mae.getType().getValue();
+    	  String severity = mae.getSeverity().getValue(); // this is not used in the next exception
+    	  
+    	  String soapMessage = composeSoapErrorMessage(mae);
+    	  
+    	  MolecularAnnotationServiceException mase= new MolecularAnnotationServiceException();
+    	  mase.setFaultString(soapMessage);
+    	  FaultHelper faultHelper = new FaultHelper(mase);
+    	  
+    	  BaseFaultTypeErrorCode errorCode = new BaseFaultTypeErrorCode();
+    	  errorCode.setDialect(FaultHelper.EXCEPTION);
+    	  MessageElement[] any = new MessageElement[] { 
+                                new MessageElement( new Text(code)) 
+                          };
+          errorCode.set_any(any);
+    	      	   	  
+          mase.setErrorCode(errorCode);    	  
+    	   
+    	  faultHelper.addDescription(desc);
+ 
+    	  //faultCause
+          BaseFaultType[] faultCause;
+          if ( mae.getCause() != null) {
+        	  faultHelper.addFaultCause( mae.getCause() );         
+          }
+
+    	      	  
+    	  throw mase;
+      }	  
+  }
+  
+  private String composeSoapErrorMessage(MAException mae)
+  {
+      StringBuffer msg = new StringBuffer();
+	  String code = mae.getCode().getValue();
+	  String desc = mae.getMessage();
+	  String type = mae.getType().getValue();
+	  String severity = mae.getSeverity().getValue(); // this is not used in the next exception
+
+	  msg.append("<ErrorCode>" + code + "</ErrorCode>");
+	  msg.append("<Description>" + desc + "</Description>");
+	  msg.append("<Type>" + type + "</Type>");
+	  msg.append("<Severity>" + severity + "</Severity>");
+	  return msg.toString();
+  }
 }
 
