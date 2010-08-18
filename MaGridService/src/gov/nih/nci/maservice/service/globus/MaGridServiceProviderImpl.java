@@ -38,43 +38,43 @@ public class MaGridServiceProviderImpl{
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetBiologicalProcessesResponse getBiologicalProcesses(gov.nih.nci.maservice.stubs.GetBiologicalProcessesRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetBiologicalProcessesResponse getBiologicalProcesses(gov.nih.nci.maservice.stubs.GetBiologicalProcessesRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetBiologicalProcessesResponse boxedResult = new gov.nih.nci.maservice.stubs.GetBiologicalProcessesResponse();
     boxedResult.setBiologicalProcess(impl.getBiologicalProcesses(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetCellularLocationsResponse getCellularLocations(gov.nih.nci.maservice.stubs.GetCellularLocationsRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetCellularLocationsResponse getCellularLocations(gov.nih.nci.maservice.stubs.GetCellularLocationsRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetCellularLocationsResponse boxedResult = new gov.nih.nci.maservice.stubs.GetCellularLocationsResponse();
     boxedResult.setCellularComponent(impl.getCellularLocations(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetDiseaseAssociationsResponse getDiseaseAssociations(gov.nih.nci.maservice.stubs.GetDiseaseAssociationsRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetDiseaseAssociationsResponse getDiseaseAssociations(gov.nih.nci.maservice.stubs.GetDiseaseAssociationsRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetDiseaseAssociationsResponse boxedResult = new gov.nih.nci.maservice.stubs.GetDiseaseAssociationsResponse();
     boxedResult.setDiseaseAssociation(impl.getDiseaseAssociations(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetFunctionalAssociationsResponse getFunctionalAssociations(gov.nih.nci.maservice.stubs.GetFunctionalAssociationsRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetFunctionalAssociationsResponse getFunctionalAssociations(gov.nih.nci.maservice.stubs.GetFunctionalAssociationsRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetFunctionalAssociationsResponse boxedResult = new gov.nih.nci.maservice.stubs.GetFunctionalAssociationsResponse();
     boxedResult.setMolecularFunction(impl.getFunctionalAssociations(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetStructuralVariationsResponse getStructuralVariations(gov.nih.nci.maservice.stubs.GetStructuralVariationsRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetStructuralVariationsResponse getStructuralVariations(gov.nih.nci.maservice.stubs.GetStructuralVariationsRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetStructuralVariationsResponse boxedResult = new gov.nih.nci.maservice.stubs.GetStructuralVariationsResponse();
     boxedResult.setSingleNucleotidePolymorphism(impl.getStructuralVariations(params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetHomologousGenesResponse getHomologousGenes(gov.nih.nci.maservice.stubs.GetHomologousGenesRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetHomologousGenesResponse getHomologousGenes(gov.nih.nci.maservice.stubs.GetHomologousGenesRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetHomologousGenesResponse boxedResult = new gov.nih.nci.maservice.stubs.GetHomologousGenesResponse();
     boxedResult.setGene(impl.getHomologousGenes(params.getOrganism().getOrganism(),params.getGeneSearchCriteria().getGeneSearchCriteria()));
     return boxedResult;
   }
 
-    public gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterResponse getGenesByMicroarrayReporter(gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest params) throws RemoteException {
+    public gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterResponse getGenesByMicroarrayReporter(gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest params) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterResponse boxedResult = new gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterResponse();
     boxedResult.setGene(impl.getGenesByMicroarrayReporter(params.getReporterSearchCriteria().getReporterSearchCriteria()));
     return boxedResult;

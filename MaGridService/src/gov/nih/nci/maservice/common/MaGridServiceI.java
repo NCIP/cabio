@@ -53,51 +53,65 @@ public interface MaGridServiceI {
    * Returns annotations describing a gene's role in biological processes
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns annotations describing a gene's location within a cell
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns findings about a gene's role in diseases
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns annotations describing a gene's molecular function 
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns variations which are located on a given gene
    *
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns a gene's homologous gene in a specified organism
    *
    * @param organism
    * @param geneSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
   /**
    * Returns the genes associated with the specified microarray reporter
    *
    * @param reporterSearchCriteria
+   * @throws MolecularAnnotationServiceException
+   *	
    */
-  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException ;
+  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException ;
 
 }
 

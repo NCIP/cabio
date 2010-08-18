@@ -87,7 +87,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 return agentAssocs;
   }
   
-  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	     BiologicalProcess[] results = null; 
 		  
 		 try
@@ -106,13 +106,14 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results;
   }
 
-  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	     CellularComponent[] results = null; 
 		  
 		 try
@@ -131,13 +132,14 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results;
   }
 
-  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	  DiseaseAssociation[] results = null; 
 		  
 		 try
@@ -156,13 +158,14 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 // throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results;
   }
 
-  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	  MolecularFunction[] results = null; 
 		  
 	   try
@@ -181,13 +184,14 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results; 
   }
 
-  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	  SingleNucleotidePolymorphism[] results = null; 
 		  
 	   try
@@ -206,7 +210,8 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 //throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results;
@@ -238,7 +243,7 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 return geneArray;
 	}
 
-  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	  Gene[] results = null; 
 		  
 	   try
@@ -257,13 +262,14 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 // throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results;
   }
 
-  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
 	   Gene[] results = null; 
 		  
 	   try
@@ -282,7 +288,8 @@ public class MaGridServiceImpl extends MaGridServiceImplBase {
 		 }
 		 catch ( MAException e)
 		 {
-			 throw new RemoteException(e.getMessage()); 
+			 // throw new RemoteException(e.getMessage());
+			 generateMolecularAnnotationServiceException(e);
 		 }	    
 		 
 		 return results; 
