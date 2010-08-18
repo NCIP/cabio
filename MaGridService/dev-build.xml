@@ -190,7 +190,7 @@
   <!-- ============================================================== -->
   <!-- Call any tests.                                                -->
   <!-- ============================================================== -->
-  <target name="test" depends="checkGlobus" description="Runs the service's tests.">
+  <target name="junit:test" depends="checkGlobus" description="Runs the service's tests.">
     <echo message="Test results dir: ${junit.results.dir}" />
     <mkdir dir="${junit.results.dir}" />
     <junit dir="${basedir}" printsummary="yes" showoutput="true">
@@ -204,4 +204,18 @@
       </batchtest>
     </junit>
   </target>
+	
+	<!-- The test script to check whether the grid Service is up and running accordingly -->
+    <target name="test"  depends="checkGlobus" description="Run the test Client">       
+       <echo message="Connecting to service: ${service.url}" />
+       <java failonerror="true" classname="gov.nih.nci.cagrid.maservice.test.MaGridServiceTestCase" fork="yes">               	   
+           <arg value="-url" />
+           <arg value="${service.url}" />
+        <classpath>
+        	<pathelement path="${build.dir}/bin" /> 
+        	<path refid="test.run.classpath" />
+        </classpath>
+       </java>
+   </target>
+	
 </project>
