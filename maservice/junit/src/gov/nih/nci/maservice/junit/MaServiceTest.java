@@ -34,6 +34,13 @@ import org.junit.Test;
  */
 public class MaServiceTest extends MaTestBase {
    
+    private static boolean TEST_RESULTS = true;
+
+    @Test
+    public void testActuallyTesting() throws Exception {
+        assertTrue(TEST_RESULTS);
+    }
+    
 	@Test
 	public void testGetGeneBySymbol() throws Exception {
 	    String symbol = "brca";
@@ -45,7 +52,8 @@ public class MaServiceTest extends MaTestBase {
 		
 		List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
 		
-		System.out.println("testGetGeneBySymbol returned "+genes.size()+" genes.");
+		System.out.println("testGetGeneBySymbol "+genes.size());
+		if (!TEST_RESULTS) return;
 		
         assertNotNull(genes);
         assertTrue("Expected at least 2 genes starting with "+symbol,genes.size()>2);
@@ -90,6 +98,9 @@ public class MaServiceTest extends MaTestBase {
         geneSearchCriteria.setOrganism(organism);
         
         List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
+
+        System.out.println("testGetGeneBySymbolWithOrganism "+genes.size());
+        if (!TEST_RESULTS) return;
         
         assertNotNull(genes);
         assertEquals(1,genes.size());
@@ -122,6 +133,9 @@ public class MaServiceTest extends MaTestBase {
         geneSearchCriteria.setOrganism(organism);
         
         List<Gene> genes = getApplicationService().getGenesBySymbol(geneSearchCriteria);
+
+        System.out.println("testGetGeneBySymbolWithRetrievedOrganism "+genes.size());
+        if (!TEST_RESULTS) return;
         
         assertNotNull(genes);
         assertEquals(1,genes.size());
@@ -145,6 +159,9 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(aas);	
         assertTrue("Expected at least 2 agent associations",aas.size()>2);
 
+        System.out.println("testGetAgentAssociations "+aas.size());
+        if (!TEST_RESULTS) return;
+        
         List<String> aaids = new ArrayList<String>();
         for(AgentAssociation aa : aas) {
             aaids.add(aa.getId().getExtension());
@@ -176,6 +193,9 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(bps); 
         assertTrue("Expected at least 2 biological processes",bps.size()>2);
 
+        System.out.println("testGetBiologicalProcesses "+bps.size());
+        if (!TEST_RESULTS) return;
+        
         List<String> bpids = new ArrayList<String>();
         for(BiologicalProcess aa : bps) {
             bpids.add(aa.getId().getExtension());
@@ -202,6 +222,9 @@ public class MaServiceTest extends MaTestBase {
         
         assertNotNull(bps); 
         assertTrue("Expected at least 2 cellular locations",bps.size()>2);
+        
+        System.out.println("testGetCellularLocations "+bps.size());
+        if (!TEST_RESULTS) return;
 
         List<String> bpids = new ArrayList<String>();
         for(CellularComponent aa : bps) {
@@ -230,6 +253,9 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(das); 
         assertTrue("Expected at least 2 disease associations",das.size()>2);
 
+        System.out.println("testGetDiseaseAssociations "+das.size());
+        if (!TEST_RESULTS) return;
+        
         List<String> daids = new ArrayList<String>();
         for(DiseaseAssociation aa : das) {
             daids.add(aa.getId().getExtension());
@@ -260,6 +286,9 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(mfs); 
         assertTrue("Expected at least 2 functional associations",mfs.size()>2);
 
+        System.out.println("testGetFunctionalAssociations "+mfs.size());
+        if (!TEST_RESULTS) return;
+        
         List<String> mfids = new ArrayList<String>();
         for(MolecularFunction aa : mfs) {
             mfids.add(aa.getId().getExtension());
@@ -286,7 +315,10 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(genes);
         assertEquals(1, genes.size());
         Gene gene = genes.get(0);
-	    
+
+        System.out.println("testGetGeneByMicroarrayReporter "+genes.size());
+        if (!TEST_RESULTS) return;
+        
         assertNotNull(gene);
         assertNotNull(gene.getSymbol());
         assertNotNull(gene.getSymbol().getValue());
@@ -316,6 +348,9 @@ public class MaServiceTest extends MaTestBase {
 		List<Gene> genes2 = 
 		    getApplicationService().getHomologousGenes(organism, geneSearchCriteria);
 
+        System.out.println("testGetHomologousGene "+genes2.size());
+        if (!TEST_RESULTS) return;
+        
         assertNotNull(genes2);
         assertEquals(1, genes2.size());
         Gene mouseGene = genes2.get(0);
@@ -334,6 +369,9 @@ public class MaServiceTest extends MaTestBase {
         assertNotNull(snps); 
         assertTrue("Expected at least 2 SNPs",snps.size()>2);
 
+        System.out.println("testGetStructuralVariations "+snps.size());
+        if (!TEST_RESULTS) return;
+        
         List<String> snpids = new ArrayList<String>();
         for(SingleNucleotidePolymorphism snp : snps) {
             snpids.add(snp.getId().getExtension());
