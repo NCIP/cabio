@@ -301,30 +301,37 @@
     <operation name="getBiologicalProcesses">
       <input message="tns:GetBiologicalProcessesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesRequest" />
       <output message="tns:GetBiologicalProcessesResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetBiologicalProcessesResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getCellularLocations">
       <input message="tns:GetCellularLocationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetCellularLocationsRequest" />
       <output message="tns:GetCellularLocationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetCellularLocationsResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getDiseaseAssociations">
       <input message="tns:GetDiseaseAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetDiseaseAssociationsRequest" />
       <output message="tns:GetDiseaseAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetDiseaseAssociationsResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getFunctionalAssociations">
       <input message="tns:GetFunctionalAssociationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetFunctionalAssociationsRequest" />
       <output message="tns:GetFunctionalAssociationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetFunctionalAssociationsResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getStructuralVariations">
       <input message="tns:GetStructuralVariationsRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsRequest" />
       <output message="tns:GetStructuralVariationsResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetStructuralVariationsResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getHomologousGenes">
       <input message="tns:GetHomologousGenesRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGenesRequest" />
       <output message="tns:GetHomologousGenesResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetHomologousGenesResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <operation name="getGenesByMicroarrayReporter">
       <input message="tns:GetGenesByMicroarrayReporterRequest" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesByMicroarrayReporterRequest" />
       <output message="tns:GetGenesByMicroarrayReporterResponse" wsa:Action="http://maservice.nci.nih.gov/MaGridService/GetGenesByMicroarrayReporterResponse" />
+      <fault name="MolecularAnnotationServiceException" message="tns:MolecularAnnotationServiceExceptionFaultMessage" wsa:Action="http://maservice.nci.nih.gov/MaGridService/MolecularAnnotationServiceExceptionFaultMessage" />
     </operation>
     <wsdl:operation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="GetMultipleResourceProperties">
       <wsdl:input name="GetMultipleResourcePropertiesRequest" message="wsrpw:GetMultipleResourcePropertiesRequest" wsa:Action="http://docs.oasis-open.org/wsrf/2004/06/wsrf-WS-ResourceProperties/GetMultipleResourceProperties" />
