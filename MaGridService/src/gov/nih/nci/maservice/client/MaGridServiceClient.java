@@ -314,7 +314,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.BiologicalProcess[] getBiologicalProcesses(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getBiologicalProcesses");
     gov.nih.nci.maservice.stubs.GetBiologicalProcessesRequest params = new gov.nih.nci.maservice.stubs.GetBiologicalProcessesRequest();
@@ -326,7 +326,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.CellularComponent[] getCellularLocations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getCellularLocations");
     gov.nih.nci.maservice.stubs.GetCellularLocationsRequest params = new gov.nih.nci.maservice.stubs.GetCellularLocationsRequest();
@@ -338,7 +338,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.DiseaseAssociation[] getDiseaseAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getDiseaseAssociations");
     gov.nih.nci.maservice.stubs.GetDiseaseAssociationsRequest params = new gov.nih.nci.maservice.stubs.GetDiseaseAssociationsRequest();
@@ -350,7 +350,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.MolecularFunction[] getFunctionalAssociations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getFunctionalAssociations");
     gov.nih.nci.maservice.stubs.GetFunctionalAssociationsRequest params = new gov.nih.nci.maservice.stubs.GetFunctionalAssociationsRequest();
@@ -362,7 +362,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism[] getStructuralVariations(gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getStructuralVariations");
     gov.nih.nci.maservice.stubs.GetStructuralVariationsRequest params = new gov.nih.nci.maservice.stubs.GetStructuralVariationsRequest();
@@ -374,7 +374,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.Gene[] getHomologousGenes(gov.nih.nci.maservice.domain.Organism organism,gov.nih.nci.maservice.util.GeneSearchCriteria geneSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getHomologousGenes");
     gov.nih.nci.maservice.stubs.GetHomologousGenesRequest params = new gov.nih.nci.maservice.stubs.GetHomologousGenesRequest();
@@ -389,7 +389,7 @@ public class MaGridServiceClient extends MaGridServiceClientBase implements MaGr
     }
   }
 
-  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException {
+  public gov.nih.nci.maservice.domain.Gene[] getGenesByMicroarrayReporter(gov.nih.nci.maservice.util.ReporterSearchCriteria reporterSearchCriteria) throws RemoteException, gov.nih.nci.maservice.stubs.types.MolecularAnnotationServiceException {
     synchronized(portTypeMutex){
       configureStubSecurity((Stub)portType,"getGenesByMicroarrayReporter");
     gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest params = new gov.nih.nci.maservice.stubs.GetGenesByMicroarrayReporterRequest();
