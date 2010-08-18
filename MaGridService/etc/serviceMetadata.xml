@@ -22,7 +22,7 @@
       <ns2:Operation description="" name="getServiceSecurityMetadata">
        <ns2:inputParameterCollection/>
        <ns2:Output qName="ns4:ServiceSecurityMetadata" dimensionality="1" isArray="false" xmlns:ns4="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.security">
-        <ns5:UMLClass className="ServiceSecurityMetadata" description="An instance of the Security Service Metadata." id="8D891120-D508-3640-E040-BB89AD4311FD" packageName="gov.nih.nci.cagrid.metadata.security" projectName="caGrid_Metadata_Models" projectVersion="1" xmlns:ns5="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common">
+        <ns5:UMLClass className="ServiceSecurityMetadata" description="An instance of the Security Service Metadata." id="8E15E1C9-2616-376F-E040-BB89AD432B57" packageName="gov.nih.nci.cagrid.metadata.security" projectName="caGrid_Metadata_Models" projectVersion="1" xmlns:ns5="gme://caGrid.caBIG/1.0/gov.nih.nci.cagrid.metadata.common">
          <ns5:umlAttributeCollection/>
          <ns5:SemanticMetadata conceptCode="C80736" conceptDefinition="A software system providing a public need." conceptName="Software Service" order="2"/>
          <ns5:SemanticMetadata conceptCode="C25669" conceptDefinition="Security; freedom from anxiety or fear." conceptName="Security" order="1"/>
@@ -64,35 +64,45 @@
         <ns2:InputParameter qName="ns12:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns12="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns13:BiologicalProcess" dimensionality="1" isArray="true" xmlns:ns13="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns annotations describing a gene's location within a cell" name="getCellularLocations">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns14:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns14="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns15:CellularComponent" dimensionality="1" isArray="true" xmlns:ns15="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns findings about a gene's role in diseases" name="getDiseaseAssociations">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns16:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns16="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns17:DiseaseAssociation" dimensionality="1" isArray="true" xmlns:ns17="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns annotations describing a gene's molecular function " name="getFunctionalAssociations">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns18:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns18="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns19:MolecularFunction" dimensionality="1" isArray="true" xmlns:ns19="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns variations which are located on a given gene" name="getStructuralVariations">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns20:GeneSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns20="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns21:SingleNucleotidePolymorphism" dimensionality="1" isArray="true" xmlns:ns21="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns a gene's homologous gene in a specified organism" name="getHomologousGenes">
        <ns2:inputParameterCollection>
@@ -100,14 +110,18 @@
         <ns2:InputParameter qName="ns23:GeneSearchCriteria" dimensionality="1" index="1" isArray="false" isRequired="false" name="geneSearchCriteria" xmlns:ns23="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns24:Gene" dimensionality="1" isArray="true" xmlns:ns24="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
       <ns2:Operation description="Returns the genes associated with the specified microarray reporter" name="getGenesByMicroarrayReporter">
        <ns2:inputParameterCollection>
         <ns2:InputParameter qName="ns25:ReporterSearchCriteria" dimensionality="1" index="0" isArray="false" isRequired="false" name="reporterSearchCriteria" xmlns:ns25="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util"/>
        </ns2:inputParameterCollection>
        <ns2:Output qName="ns26:Gene" dimensionality="1" isArray="true" xmlns:ns26="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain"/>
-       <ns2:faultCollection/>
+       <ns2:faultCollection>
+        <ns2:Fault description="" name="MolecularAnnotationServiceException"/>
+       </ns2:faultCollection>
       </ns2:Operation>
      </ns2:operationCollection>
      <ns2:contextPropertyCollection>
