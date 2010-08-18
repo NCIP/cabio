@@ -388,8 +388,16 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			<property name="cqlQueryProcessorConfig_applicationHostPort" value="${maservice.applicationHostPort}" />
 			<property name="jboss.dir" value="target"/>			
 		</ant>		
+
+		<!--  the Javadoc for the MA Grid Service -->
+		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="javadoc" dir="${magridsvc-webapp.base.dir}">
+			<property name="javadoc.dir" value="${dist.exploded.dir}/javadocs"/>			
+		</ant>		
 		
         <zip update="false" destfile="${magridsvc.dist.dir}/${magridsvc.artifact.file}">
+        	<fileset dir="${dist.exploded.dir}">
+        		    <include name="javadocs/**/*" />
+        	</fileset>
 			<zipfileset dir="${magridsvc.artifact.dir}/server/default/deploy/wsrf.war/"/>
 		</zip>
 		
@@ -856,8 +864,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			output.file.name="generic-root-install.xml" />
 	</target>
 
+	<target name="clean.temp">
+		<delete dir="${temp.dir}" />
+	</target>
+		
 	<target name="test:all" description="Runs test target for all sub-projects" depends="
-		clean,
+		clean.temp,
 		init,
 		test:magridsvc-api,
 		test:magridsvc-webapp,
@@ -876,7 +888,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:magridsvc-webapp" depends="init" description="Calls test target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="runClient" dir="${magridsvc-webapp.base.dir}">
+		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="test" dir="${magridsvc-webapp.base.dir}">
 			<property name="service.url" value="${magridservice.url}"/>
 		</ant>
 	</target>
