@@ -175,9 +175,13 @@
 			  	    <include name="docs/**/*" />
 			  </fileset>	
 		</copy>	
+		<!-- remove the commons-logging*.jar file due to lib conflict during deploying war to JBoss -->
+		<delete file="${output.deploy.dir}/tmp/WEB-INF/lib/commons-logging-1.1.jar" />
 		<!-- xmltask source="${codegen.src.dir}/isoConstants.xml" dest="${output.deploy.dir}/tmp/WEB-INF/classes/isoConstants.xml"> 
 		     <remove path="/beans/bean[@id='gov.nih.nci.maservice.domain.GeneIdentifier.databaseName']/Property[@name='innerNodes']/list/bean/constructor-arg[@value = 'CodeSystem']"/> 
 		</xmltask --> 
+            
+            <delete file="${output.deploy.dir}/${PROJECT_NAME}.war" />
 		<war destfile="${output.deploy.dir}/${PROJECT_NAME}.war" webxml="${system.config.client.webapp.dir}/WEB-INF/web.xml"  update="true">
 			       <fileset dir="${output.deploy.dir}/tmp">
 			       	       <include name="*/**" />
@@ -201,18 +205,12 @@
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.beans.file}" todir="${output.local.client.dir}/lib" />	
 		<copy file="${output.dir}/${PROJECT_NAME}/codegen/target/${ma.schema.file}" todir="${output.local.client.dir}/lib" />
 	</target>
-	
-	<!-- The following target won't work without caCORE SDK checked out first. It will be moved to BDA scripts in the future -->
-	<target name="checkout:SDK" description="Checkout the caCORE SDK source code for MA Service">
-		      <mkdir dir="${SDK_INSTALL_DIR}" />
-		      <svn javahl="false">
-		      	    <checkout srcPath="${SDK_SVN_PATH}" destUrl="${SDK_INSTALL_DIR}" description="Checkout the caCORE SDK source code" />
-		      </svn>
-	</target>
-	
+		
 	<target name="build:SDK" description="Builds the entire system. This is used mostly by development team or BDA certification team">
 		<ant antfile="${master.build.file}" dir="${build.dir}" inheritall="false" inheritrefs="false" target="build:all" />		
-		<antcall target="build-system" />		
+		<mkdir dir="${software.dir}/target/dist/exploded" />
+   		<antcall target="build-system" />
+   			
 		<antcall target="build:maservice-custom" />
 	</target>
 	
