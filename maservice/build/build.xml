@@ -70,7 +70,7 @@
 	<echo message="* * * properties.file.name: ${properties.file.name}" />
 
 	<property name="master.build.file" value="${software.dir}/build/build-sdk-dist.xml"/>
-
+	
 	<import file="${software.dir}/build/build.xml"/>
 
 	<target name="clean:project" description="cleans this project">
@@ -209,9 +209,22 @@
 	<target name="build:SDK" description="Builds the entire system. This is used mostly by development team or BDA certification team">
 		<ant antfile="${master.build.file}" dir="${build.dir}" inheritall="false" inheritrefs="false" target="build:all" />		
 		<mkdir dir="${software.dir}/target/dist/exploded" />
-   		<antcall target="build-system" />
-   			
+   		<!-- antcall target="build-system" / -->
+		<antcall target="build:all" />
+		<antcall target="build:re-configure" />	
 		<antcall target="build:maservice-custom" />
+	</target>
+	
+	<target name="build:re-configure" description="Mimic deploy-local macro provided by BDA to overcome an dynamic invoking Ant problem"
+		           	depends="dist:installer:prep">
+		<copy todir="${dist.exploded.dir}">
+			<fileset dir="${project.build.home}">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		<ant antfile="build.xml" dir="${dist.exploded.dir}" inheritall="false" inheritrefs="false" target="install:re-configure">
+			<property file="${properties.file}"  />
+		</ant>		
 	</target>
 	
 	<target name="build:maservice" depends="build:SDK, maservice-repackage-war" />
