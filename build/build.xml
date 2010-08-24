@@ -327,9 +327,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 
 	<target name="build:maservice-webapp" depends="init, checkout:SDK, build:maservice-api" description="Call webapp sub-projects build target to produce artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->		
-        <ant inheritAll="false" inheritRefs="false" antfile="${maservice-webapp.base.dir}/build/${maservice-webapp.build.file}" target="${maservice-webapp.build.target}">                   
+        <ant inheritAll="false" inheritRefs="false" antfile="${maservice-webapp.base.dir}/build/${maservice-webapp.build.file}" target="${maservice-webapp.build.target}">
 	           <property name="dist.exploded.dir" value="${dist.exploded.dir}"/>
-                 <property name="SDK_INSTALL_DIR" value="${cacore-sdk.install.dir}" />        	
+               <property name="SDK_INSTALL_DIR" value="${cacore-sdk.install.dir}" />
+         	   <property name="DB_SERVER" value="${database.server}"/>
+         	   <property name="DB_SERVER_PORT" value="${database.port}"/>
+	      	   <property name="DB_NAME" value="${database.name}"/>
+	      	   <property name="DB_USERNAME" value="${database.user}"/>         	           	
+        	   <property name="DB_PASSWORD" value="${database.password}"/>
          </ant>		
    	     <copy file="${dist.exploded.dir}/output/${project.name}/package/server/jboss/server/default/deploy/${maservice-webapp.file.name}" todir="${maservice-webapp.dist.dir}" overwrite="true"/>
 	</target>
