@@ -26,6 +26,8 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	<replaceregexp file="${properties.file}" byline="true" match="^([\w\d.]+)=[ \t]+(.*[\w\d\/\{\}\\]+)\r*$" replace="\1=\2" />
 	<property file="${properties.file}" />
 
+	<property name="application.base.path" location="${basedir}/../magridsvc-webapp" />
+	
 	<!-- Set application.base.path based on platform -->
 	<condition property="application.base.path" value="${application.base.path.linux}">
 		<or>
@@ -34,9 +36,9 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		</or>
 	</condition>
 
-	<condition property="application.base.path" value="${application.base.path.windows}">
+	<!-- condition property="application.base.path" value="${application.base.path.windows}">
 		<os family="windows" />
-	</condition>
+	</condition -->
 	
 	<property name="jboss.home" value="${application.base.path}/${jboss.relative.path}"/>
 
@@ -752,7 +754,11 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	
-	<target name="deploy:local:install2" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
+	<!-- target name="deploy:local:install3" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers." -->
+	<target name="deploy:local:install3" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
+     	<property  name="application.base.path" location="${basedir}/../magridsvc-webapp" />		
+				
+		<echo message="application.base.path: ${application.base.path}" />
 		<!--
 		  * Requires a database installation.
 		  * Will use the target from install.xml specified in ${install.target} (defaults to install unless passed in on command line).
@@ -760,13 +766,41 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		  * Calls ant from exec task to ensure properties are do not carry over from current ant runtime and also to emulate a manual install.
 		  * This target will use differnt properties based on linux (linux-install.properties) or windows (windows-install.properties) installs.
 		  * It only supports using those properties files for now, so if you want to change install time properites edit these files.
-		-->
+		-->		
+		<!-- deploy-local
+			target.name="${deployMa2JBoss.target}"
+			/ -->
+
+		<copy todir="${dist.exploded.dir}">
+			<fileset dir="${build.dir}">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		<echo message="properties.file: ${properties.file}" />
+		<ant antfile="build.xml" dir="${dist.exploded.dir}" inheritall="false" inheritrefs="false" 
+			              target="${deployMa2JBoss.target}">            
+			<property file="${properties.file}"  />			
+		</ant>		
+			
+	</target>
+
+	<target name="deploy:local:install2" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
+		<property  name="application.base.path" location="${application.base.path}" />
+		<!--
+		  * Requires a database installation.
+		  * Will use the target from install.xml specified in ${install.target} (defaults to install unless passed in on command line).
+		  * If you want properties to be used at install time they must be included in a proeprties file.
+		  * Calls ant from exec task to ensure properties are do not carry over from current ant runtime and also to emulate a manual install.
+		  * This target will use differnt properties based on linux (linux-install.properties) or windows (windows-install.properties) installs.
+		  * It only supports using those properties files for now, so if you want to change install time properites edit these files.
+		-->		
 		<deploy-local
 			target.name="${deployMa2JBoss.target}"
 			/>
+			
 	</target>
 	
-	<target name="build:magridsvc:wsrf.war" depends="deploy:local:install2">
+	<target name="build:magridsvc:wsrf.war" depends="deploy:local:install2">		
 		<delete file="${magridsvc.dist.artifacts.dir}/${magridsvc.artifact.file}" />
 		<mkdir dir="${magridsvc.dist.artifacts.dir}" />
 		<!--  it happens to be that both magridsvc.artifact.file and the expanded directory have the same name wsrf.war -->
