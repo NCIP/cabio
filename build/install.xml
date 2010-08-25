@@ -115,9 +115,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		<format property="install.time" pattern="yyyy-MM-dd-HH-mm-ss" />
 	</tstamp>
 	<record name="${install-logs.dir}/install-${install.time}.log" action="start"/>
-
-
-
+	
 	<target name="common:init:pre">
 		<!-- Set application.base.path based on platform -->
 		<condition property="application.base.path" value="${application.base.path.linux}">
