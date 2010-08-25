@@ -15,6 +15,11 @@ import gov.nih.nci.system.applicationservice.MaApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
 import junit.framework.TestCase;
 
+/**
+ * Test base class. 
+ * 
+ * @author <a href="mailto:sunjim@mail.nih.gov">Jim Sun</a>
+ */
 public abstract class MaTestBase extends TestCase {
 	private MaApplicationService appService;
 	private String MASERVICE_URL= "http://localhost:8080/maservice";
