@@ -388,13 +388,14 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			
 			<property name="cqlQueryProcessorConfig_applicationHostName" value="${maservice.applicationHostName}" />
 			<property name="cqlQueryProcessorConfig_applicationHostPort" value="${maservice.applicationHostPort}" />
-			<property name="jboss.dir" value="target"/>			
+			<property name="jboss.dir" value="target"/>		
+			<property name="javadoc.dir" value="${dist.exploded.dir}/javadocs"/>
 		</ant>		
 
 		<!--  the Javadoc for the MA Grid Service -->
-		<ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="javadoc" dir="${magridsvc-webapp.base.dir}">
+		<!-- ant inheritAll="false" inheritRefs="false" antfile="${magridsvc-webapp.build.file}" target="javadoc" dir="${magridsvc-webapp.base.dir}">
 			<property name="javadoc.dir" value="${dist.exploded.dir}/javadocs"/>			
-		</ant>		
+		</ant -->		
 		
         <zip update="false" destfile="${magridsvc.dist.dir}/${magridsvc.artifact.file}">
         	<fileset dir="${dist.exploded.dir}">
@@ -754,8 +755,7 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	
-	<!-- target name="deploy:local:install3" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers." -->
-	<target name="deploy:local:install3" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
+	<target name="deploy:local:install2" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
      	<property  name="application.base.path" location="${basedir}/../magridsvc-webapp" />		
 				
 		<echo message="application.base.path: ${application.base.path}" />
@@ -778,25 +778,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 		</copy>
 		<echo message="properties.file: ${properties.file}" />
 		<ant antfile="build.xml" dir="${dist.exploded.dir}" inheritall="false" inheritrefs="false" 
-			              target="${deployMa2JBoss.target}">            
-			<property file="${properties.file}"  />			
+			              target="deployMa2JBoss">            
+			<property file="${properties.file}"  />
+			<property name="jboss.home" value="${application.base.path}/${jboss.binaries.relative.dir}" />
 		</ant>		
-			
-	</target>
-
-	<target name="deploy:local:install2" depends="build:all,dist:installer:prep" description="Installs and configures the application without start and stop JBoss Servers.">
-		<property  name="application.base.path" location="${application.base.path}" />
-		<!--
-		  * Requires a database installation.
-		  * Will use the target from install.xml specified in ${install.target} (defaults to install unless passed in on command line).
-		  * If you want properties to be used at install time they must be included in a proeprties file.
-		  * Calls ant from exec task to ensure properties are do not carry over from current ant runtime and also to emulate a manual install.
-		  * This target will use differnt properties based on linux (linux-install.properties) or windows (windows-install.properties) installs.
-		  * It only supports using those properties files for now, so if you want to change install time properites edit these files.
-		-->		
-		<deploy-local
-			target.name="${deployMa2JBoss.target}"
-			/>
 			
 	</target>
 	
