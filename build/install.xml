@@ -702,7 +702,7 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	</target>
 
 	
-	<target name="deployMa2JBoss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.jboss"
+	<target name="deployMa2JBoss2" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.jboss"
 		depends="
 		common:jboss:init,
 		common:init,
@@ -712,6 +712,18 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 		install:jboss:clean,
 		install:jboss:binaries,
 		install:jboss:configure,
+		install:jboss:grid,
+		install:jboss:grid:configure
+		" >
+	</target>
+
+	<target name="deployMa2JBoss" description="Wrapper scripts that calls all required targets to install the jboss container" unless="exclude.jboss"
+		depends="
+		common:jboss:init,
+		common:init,
+		install:jboss:init,		
+		install:jboss:clean,
+		install:jboss:binaries,
 		install:jboss:grid,
 		install:jboss:grid:configure
 		" >
@@ -956,8 +968,11 @@ $HeadURL: https://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build
 	</target>
 
 	<target name="install:jboss:grid:configure" description="Configure tomcat-application" unless="exclude.jboss.grid" depends="common:init">
+        <property name="appserver.dir" location="${jboss.home}" />
+		<echo message="App Server dir: ${appserver.dir}" />
 		<jboss-configure-grid
 			grid.application.relative.dir="${grid.dir.dest.jboss}"
+			jboss.home="${appserver.dir}"
 			/>
 	</target>
 
