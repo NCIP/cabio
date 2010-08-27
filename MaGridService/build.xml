@@ -356,7 +356,7 @@
 	</target>
 
 	<!-- Default target "all" builds and jars everything, including test....does not make a GAR-->
-	<target name="all" depends="jars" description="Builds the entire service." />
+	<target name="all" depends="jars, javadoc" description="Builds the entire service." />
 
 	<target name="help" description="Prints usage information.">
 		<echo message="================================================================================" />
