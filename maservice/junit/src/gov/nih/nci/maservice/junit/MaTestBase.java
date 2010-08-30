@@ -1,10 +1,5 @@
 package gov.nih.nci.maservice.junit;
 
-import java.io.PrintStream;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import gov.nih.nci.iso21090.Cd;
 import gov.nih.nci.iso21090.St;
 import gov.nih.nci.maservice.domain.Microarray;
@@ -13,6 +8,9 @@ import gov.nih.nci.maservice.util.GeneSearchCriteria;
 import gov.nih.nci.maservice.util.ReporterSearchCriteria;
 import gov.nih.nci.system.applicationservice.MaApplicationService;
 import gov.nih.nci.system.client.ApplicationServiceProvider;
+
+import java.io.PrintStream;
+
 import junit.framework.TestCase;
 
 /**
@@ -21,48 +19,18 @@ import junit.framework.TestCase;
  * @author <a href="mailto:sunjim@mail.nih.gov">Jim Sun</a>
  */
 public abstract class MaTestBase extends TestCase {
+    
 	private MaApplicationService appService;
-	private String MASERVICE_URL= "http://localhost:8080/maservice";
-	private MaApplicationService appServiceFromUrl;
 
 	protected void setUp() throws Exception {
 		super.setUp();
-	    
-		try
-		{
-		// attempt to get the right URL from the Java client configuration
-        ApplicationContext ctx = 
-            new ClassPathXmlApplicationContext("application-config-client.xml");
-            MASERVICE_URL = (String) ctx.getBean("RemoteServerURL");
-            
-		} 
-		catch ( Exception e )
-		{
-			
-		}
-		
-		appService = (MaApplicationService)this.getApplicationServiceFromUrl();
-	}
-
-
-	protected void tearDown() throws Exception 
-	{
-		appService = null;
-		super.tearDown();
+		appService = (MaApplicationService)ApplicationServiceProvider.getApplicationService();
 	}
 	
 	protected MaApplicationService getApplicationService()
 	{
 		return appService;
 	}
-	
-	
-	protected MaApplicationService getApplicationServiceFromUrl() throws Exception
-	{		
-		appServiceFromUrl = (MaApplicationService)ApplicationServiceProvider.getApplicationServiceFromUrl(MASERVICE_URL);
-		return appServiceFromUrl;
-	}
-	
 	
 	public static String getTestCaseName()
 	{

@@ -21,7 +21,7 @@
 	<bean id="maserviceApplicationService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target">
 			<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-				<property name="serviceUrl" value="http://localhost:19280/maservice/http/applicationService"/>
+				<property name="serviceUrl" value="http://localhost:8080/maservice/http/applicationService"/>
 				<property name="serviceInterface" value="gov.nih.nci.system.applicationservice.MaApplicationService"/>
 				<property name="httpInvokerRequestExecutor">
 				<bean class="gov.nih.nci.system.springframework.remoting.httpinvoker.GSIHttpInvokerRequestExecutor"/>
@@ -38,7 +38,7 @@
 				<bean class="org.acegisecurity.providers.rcp.RemoteAuthenticationProvider">
 					<property name="remoteAuthenticationManager">
 						<bean class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
-						    <property name="serviceUrl" value="http://localhost:19280/maservice/http/remoteAuthenticationManager"/>
+						    <property name="serviceUrl" value="http://localhost:8080/maservice/http/remoteAuthenticationManager"/>
 						    <property name="serviceInterface" value="org.acegisecurity.providers.rcp.RemoteAuthenticationManager"/>
 						</bean>
 					</property>
