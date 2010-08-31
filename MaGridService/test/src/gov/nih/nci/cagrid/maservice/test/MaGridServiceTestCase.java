@@ -65,22 +65,28 @@ public class MaGridServiceTestCase extends TestCase {
 		if ( genes!=null && genes.length > 0)
 		{
 			System.out.println( "Gene Symbol: " + genes[0].getSymbol().getValue()
-					            + " Full Name: " + genes[0].getFullName().getValue());
+					            + ", Full Name: " + genes[0].getFullName().getValue());
 			getGeneIdentifierCollection(genes[0]); 
 		}
 	}
 
 	public void testGetAgentAssociation() throws RemoteException
 	{
+		System.out.println("##################################");
+		System.out.println("# test GetAgentAssociation operation");
+		System.out.println("##################################");
+
 		GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
 		St symbolOrAlias = new St();
 		symbolOrAlias.setValue("BRCA1");
 		geneSearchCriteria.setSymbolOrAlias(symbolOrAlias);
 		AgentAssociation[] aas = gridSvcClient.getAgentAssociations(geneSearchCriteria);
 		
+                
 		if ( aas!=null && aas.length > 0)
 		{
-			System.out.println( "Agent Association: " + aas[0].getSource().getValue());
+                       System.out.println("Total found: " + aas.length ); 
+     		       System.out.println( "Agent Association: " + aas[0].getSource().getValue());
 		}
 	}
 
@@ -88,6 +94,10 @@ public class MaGridServiceTestCase extends TestCase {
 	{
 		try
 		{
+  		        System.out.println("##################################");
+  		        System.out.println("# test testGetAgentAssociationWithMAException");
+ 		        System.out.println("##################################");
+
 			GeneSearchCriteria geneSearchCriteria = new GeneSearchCriteria();
 			St symbolOrAlias = new St();
 			symbolOrAlias.setValue("BRCAXXX1");
@@ -144,7 +154,7 @@ public class MaGridServiceTestCase extends TestCase {
 			int cnt=0;
 			while (iterator.hasNext()) {
 				Gene x = (Gene) iterator.next();
-				System.out.println("testQuery Gene Id: " + x.getId().getExtension() + " Fullname:"+ x.getFullName().getValue());
+				System.out.println("testQuery Gene Id: " + x.getId().getExtension() + " Symbol:" + x.getSymbol().getValue() + ", Fullname:"+ x.getFullName().getValue());
 				
 				if ( cnt == 0 )
 				{
@@ -175,7 +185,7 @@ public class MaGridServiceTestCase extends TestCase {
 		CQLQueryResultsIterator iterator = new CQLQueryResultsIterator(
 				results,
 				new FileInputStream(
-						"src/gov/nih/nci/cagrid/cabio/client/client-config.wsdd"));	
+						"src/gov/nih/nci/cagrid/maservice/client/client-config.wsdd"));	
 		
 		return iterator;
 	}
@@ -247,7 +257,9 @@ public class MaGridServiceTestCase extends TestCase {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();		
 	    suite.addTest(new MaGridServiceTestCase("testGetGenesBySymbol"));
-	    	    
+            suite.addTest(new MaGridServiceTestCase("testGetAgentAssociation"));
+            suite.addTest(new MaGridServiceTestCase("testGetAgentAssociationWithMAException"));
+	    suite.addTest(new MaGridServiceTestCase("testQuery"));
 		return suite;
 	}
 }
