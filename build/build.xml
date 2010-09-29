@@ -683,8 +683,12 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 			output.file.name="generic-root-install.xml" />
 	</target>
 
+	<target name="clean:test">
+		<delete dir="${temp.dir}" />
+	</target>
+	
 	<target name="test:all" description="Runs test target for all sub-projects" depends="
-		clean,
+		clean:test,
 		init,
 		test:maservice-api,
 		test:maservice-webapp
@@ -702,8 +706,10 @@ $HeadURL: http://gforge.nci.nih.gov/svnroot/automation/trunk/software/bda-build-
 	</target>
 
 	<target name="test:maservice-webapp" depends="init" description="Calls test target for sub-project">
-		<ant inheritAll="false" inheritRefs="false" antfile="${maservice-webapp.test.file}" target="test" dir="${maservice-webapp.base.dir}">
-			<property name="dist.dir" value="${maservice-webapp.dist.dir}" />
+		<property name="client.dir" value="${dist.exploded.dir}/output/${project.name}/package/remote-client" />			
+		<ant inheritAll="false" inheritRefs="false" antfile="build.xml" 
+		        target="alltests" dir="${maservice-webapp.base.dir}/junit">
+			<property name="client.dir" value="${client.dir}" />
 		</ant>
 	</target>
 
