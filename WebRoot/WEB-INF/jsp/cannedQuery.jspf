@@ -39,7 +39,7 @@ function displayQuery(selectList) {
 Select category:
 <br/>
 
-<div id="category_range" class="category"><img src="" class="catind">
+<div id="category_range" class="category"><img src="" class="catind" alt="Toggle button">
     <a href='#'>Genome Range Queries</a></div>
 
 <div id="queries_range" class="queries">
@@ -55,7 +55,7 @@ Select category:
 
 </div>
 
-<div id="category_microarray" class="category"><img src="" class="catind">
+<div id="category_microarray" class="category"><img src="" class="catind" alt="Toggle button">
     <a href='#'>Microarray Annotations</a></div>
 
 <div id="queries_microarray" class="queries">
@@ -73,7 +73,7 @@ Select category:
 
 </div>
 
-<div id="category_genomics" class="category"><img src="" class="catind"> 
+<div id="category_genomics" class="category"><img src="" class="catind" alt="Toggle button"> 
     <a href='#'>Genomic Annotations</a></div>
 
 <div id="queries_genomics" class="queries">
@@ -90,7 +90,7 @@ Select category:
 </div>
 
  <!--  Pathway Canned Queries  -->
-<div id="category_pathways" class="category"><img src="" class="catind"> 
+<div id="category_pathways" class="category"><img src="" class="catind" alt="Toggle button"> 
     <a href='#'>Pathways</a></div>
 
 <div id="queries_pathways" class="queries">
@@ -111,7 +111,7 @@ Select category:
 </div>
 
 
-<div id="category_cancer" class="category"><img src="" class="catind"> 
+<div id="category_cancer" class="category"><img src="" class="catind" alt="Toggle button"> 
     <a href='#'>Cancer Gene Index</a></div>
 
 <div id="queries_cancer" class="queries">

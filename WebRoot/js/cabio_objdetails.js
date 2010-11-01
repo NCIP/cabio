@@ -36,7 +36,8 @@ var caBioObjectDetails = function() {
      */
     function makeDetailLink (linkClassName, linkId) {
     	 return '<a href="javascript:caBioObjectDetails.loadDetails(\''+
-    	 		linkClassName+'\','+linkId+')"><img src="'+drillDownImg+'" border="0"></a>';
+    	 		linkClassName+'\','+linkId+')"><img src="'+drillDownImg+
+    	 		'" border="0" alt="View details" title="View details"></a>';
     }
     
     /**

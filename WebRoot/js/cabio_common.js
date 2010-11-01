@@ -15,7 +15,8 @@ var caBioCommon = function() {
     var loadingImg = '/cabioportlets/images/ajax-loader.gif';
 
     // Cached HTML
-    var loadingImgHtml = '<div style="width:100%; text-align:center;"><img src="'+loadingImg+'" border="0" /></div>';
+    var loadingImgHtml = '<div style="width:100%; text-align:center;"><img src="'
+    	+loadingImg+'" border="0" alt="Loading animation" title="Loading..." /></div>';
     
     /**
      * Process a SearchResult <class> node.
@@ -104,7 +105,7 @@ var caBioCommon = function() {
         var h = jQuery(linkId);
         h.css('text-decoration','none');
         h.attr('href','javascript:caBioCommon.toggleDropBox("'+linkId+'","'+boxId+'")')
-        h.html('<img src="'+img+'" border="0" /> '+h.html());
+        h.html('<img src="'+img+'" border="0"  alt="Toggle button" /> '+h.html());
     },
     
     /**
