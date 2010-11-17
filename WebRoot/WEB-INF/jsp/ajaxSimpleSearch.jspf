@@ -104,7 +104,7 @@ var caBioSimpleSearch = function() {
 	   
 	    pageSize = parseInt(jQuery("#pageSize").val());
 	    
-        var sh = jQuery("#viewObjects").is(":checked") ? '[@queryType=HIBERNATE_SEARCH]' : '';
+        var sh = (jQuery("#viewObjects").is(":checked") && targetClass == '') ? '[@queryType=HIBERNATE_SEARCH]' : '';
         var tc = (currClass != 'All') ? '[@targetClassName='+currClass+']' : '';
         var data = 
            'relativeURL=GetXML&query=SearchQuery&SearchQuery[@keyword='+
@@ -177,9 +177,7 @@ var caBioSimpleSearch = function() {
 	        jQuery("class", qr).each(function(){
 	
 	            var r = caBioCommon.processClassNode(this);
-	
-	            var f = jQuery("#viewSimple").is(":checked") ? 
-	                caBioFormats.summary[r.className] : undefined;
+                var f = caBioFormats.summary[r.className];
 	
 	            var title = '';
 	            var desc = '';
