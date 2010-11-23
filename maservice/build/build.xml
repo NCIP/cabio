@@ -97,7 +97,7 @@
 		
 		<javadoc destdir="${ma.output.javadocs.dir}" packagenames="*" 
 				classpathref="ma.build.classpath" useexternalfile="yes" 
-				windowtitle="MA Setrvice API Documentation">
+				windowtitle="MA Service API Documentation">
 			<fileset dir="${ma.src.dir}" includes="**/*.java"/>
 			<fileset dir="${output.src.dir}" includes="**/*.java"/>
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
@@ -171,8 +171,8 @@
 		<copy todir="${output.deploy.dir}/tmp" overwrite="true" >
 			  <fileset dir="${ma.conf.system.web}" />
 			  <fileset dir="${ma.system.web}" />
-			  <fileset dir="${output.dir}/${PROJECT_NAME}">
-			  	    <include name="docs/**/*" />
+			  <fileset dir="${ma.output.javadocs.dir}">
+			  	    <include name="**/*" />
 			  </fileset>	
 		</copy>	
 		<!-- remove the commons-logging*.jar file due to lib conflict during deploying war to JBoss -->
