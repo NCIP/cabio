@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-java-binding-schema version="1.0ea">
+
+ <options package="gov.nih.nci.caBIOApp.util"/>
+
+ <element name="Config" type="class" root="true"/>
+
+ <element name="LoggerInfo" 
+          type="class">
+  <attribute name="verbose" convert="boolean"/>
+ </element>
+
+ <element name="ActionParamsInfo" 
+          type="class">
+  <content>
+   <element-ref name="Param" property="Params"/>
+  </content>
+ </element>
+
+</xml-java-binding-schema>
+

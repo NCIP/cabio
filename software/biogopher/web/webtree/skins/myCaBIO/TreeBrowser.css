@@ -1,0 +1,20 @@
+BODY 
+{
+	font-family:Times New Roman, Times, serif;
+	font-size: 13px;
+	background-color: #ccccee;
+	color : #663399;
+}
+
+A {
+	font-family: Times New Roman, Times, serif;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: normal;
+	color: #003366;
+}
+
+.highlightNode 
+{
+	background-color: #6495ED;
+}

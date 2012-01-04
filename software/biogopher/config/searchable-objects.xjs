@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-java-binding-schema version="1.0ea">
+
+ <options package="gov.nih.nci.caBIOApp.sod"/>
+
+ <!--============= SEARCHABLE OBJECT DESCRIPTIONS =================-->
+ <element name="SearchableObjectsDescription" 
+          type="class"
+	  class="SearchableObjectsDescriptionImpl"
+	  root="true">
+  <content>
+   <element-ref name="SearchableObject" property="SearchableObjects"/>
+  </content>
+ </element>
+
+ <!--============= SEARCHABLE OBJECT =================-->
+ <element name="SearchableObject"
+          class="SearchableObjectImpl"
+          type="class">
+  <content>
+   <element-ref name="Description" property="Description"/>
+   <element-ref name="Attribute" property="Attributes"/>
+   <element-ref name="Association" property="Associations"/>
+  </content>
+  <attribute name="ontological" convert="boolean"/>
+  <attribute name="displayable" convert="boolean"/>
+ </element>
+
+ <!--============= ATTRIBUTE =================-->
+ <element name="Attribute"
+          class="AttributeImpl"
+          type="class">
+  <attribute name="type" convert="AttributeType"/>
+  <content>
+      <element-ref name="Description" property="Description"/>
+  </content>
+ </element>
+
+ <!--============= ASSOCIATION =================-->
+ <element name="Association"
+          class="AssociationImpl"
+          type="class">
+  <content>
+   <element-ref name="Description" property="Description"/>
+   <element-ref property="PathItems" name="PathItem"/>
+  </content>
+  <attribute name="flatten" convert="boolean"/>
+  <attribute name="navigable" convert="boolean"/>
+ </element>
+
+ <!--============= PATH ITEM =================-->
+ <element name="PathItem"
+          class="PathItemImpl"
+          type="class">
+  <attribute name="order" convert="int"/>
+ </element>
+
+ <element name="Description" type="value"/>
+
+ <enumeration name="AttributeType" members="ALPHANUMERIC NUMERIC BOOLEAN DATE FLOAT"/>
+
+ <interface name="SearchableObjectsDescription" members="SearchableObjectsDescriptionImpl"
+            properties="SearchableObject"/>
+
+ <interface name="SearchableObject" members="SearchableObjectImpl"
+            properties="classname label ontological displayable labelProperties Description Attribute Association"/>
+
+ <interface name="Attribute" members="AttributeImpl"
+            properties="name label Description type criterionName"/>
+
+ <interface name="Association" members="AssociationImpl"
+            properties="classname label flatten role Description PathItem navigable"/>
+
+ <interface name="PathItem" members="PathItemImpl"
+            properties="classname order"/>
+
+</xml-java-binding-schema>
+

@@ -1,0 +1,93 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	color: #947927;
+	background-color: #FFFFFF;
+}
+td {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	color: #947927;
+}
+A {
+	color: #003366;
+
+}
+
+.highlightNode 
+{
+	background-color: #D0E1F0;
+}
+a:link {
+	color: #003366;
+}
+a:visited {
+	color: #3F6798;
+}
+a:hover {
+	color: #996600;
+}
+a:active {
+	color: #003366;
+}
+
+.searchResult {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	color: #003366;
+	border-bottom-width: thin;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: dashed;
+	border-left-style: none;
+	border-bottom-color: #E7E3CF;
+	border-bottom : Aqua;
+}
+
+.synonyms{
+	color: #22416F;
+	background-color: #DDEDF4;
+	padding-top: 12px;
+	padding-right: 12px;
+	padding-bottom: 12px;
+	padding-left: 12px;
+	font-style: italic;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 0.9em;
+
+}
+
+.synonymsTitle{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 0.75em;
+	font-weight: bold;
+	color: #DDEDF4;
+	background-color: #6699CC;
+	padding: 5px;
+
+}
+ 
+ .noMatches{
+	color: #8B0000;
+	font-style: italic;
+	text-align : center;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 1em;
+
+
+}
+
+.synonymsIncludedMessage{
+	text-decoration: none;
+	color: #947927;
+	font-weight: bold;
+
+
+
+
+
+
+
+ } 
