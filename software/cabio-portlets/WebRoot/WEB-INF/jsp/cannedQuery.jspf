@@ -1,0 +1,131 @@
+<%@ include file="/WEB-INF/jsp/init.jsp" %>
+
+<script type="text/javascript">
+
+var expandImg = "<c:url value='/images/expand.gif'/>";
+var collapseImg = "<c:url value='/images/collapse.gif'/>";
+	
+jQuery(document).ready(function(){
+	jQuery("div.category").click(function(e) {
+        id = jQuery(this).attr("id").split("_")[1];
+        queries = jQuery("#queries_"+id);
+        if (queries.css("display") === "none") {
+            // show
+            queries.css("display","block");
+            jQuery("img",this).attr("src",collapseImg);
+            displayQuery(jQuery("select",queries));
+        }
+        else {
+            // hide
+            queries.css("display","none");
+            jQuery("img",this).attr("src",expandImg);
+        }
+    });
+    
+    jQuery("img.catind").attr("src",expandImg);
+});
+
+function displayQuery(selectList) {
+    // hide all query divs
+    var queryDivs = jQuery("div[@class=query]",jQuery(selectList).parents("div")[0]);
+    queryDivs.css("display","none");
+    // show the selected div
+    selectedId = jQuery(":selected",selectList).val();
+    jQuery("#"+selectedId).css("display","block");
+}
+
+</script>
+
+Select category:
+<br/>
+
+<div id="category_range" class="category"><img src="" class="catind" alt="Toggle button">
+    <a href='#'>Genome Range Queries</a></div>
+
+<div id="queries_range" class="queries">
+
+	    <select onchange="displayQuery(this)">
+	    <option value="" selected="selected">Choose query...</option>
+	    <option value="queries_range_absolute">Absolute Range Query</option>
+	    <option value="queries_range_grid">Grid Id Range Query</option>
+	    </select>
+
+	    <jsp:include page="/WEB-INF/jsp/canned/absoluteRangeQuery.jsp" flush="true"/>
+	    <jsp:include page="/WEB-INF/jsp/canned/gridRangeQuery.jsp" flush="true"/>
+
+</div>
+
+<div id="category_microarray" class="category"><img src="" class="catind" alt="Toggle button">
+    <a href='#'>Microarray Annotations</a></div>
+
+<div id="queries_microarray" class="queries">
+
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+	    <option value="queries_microarray_reporterbygene">Reporter Lookup by Gene</option>
+	    <option value="queries_microarray_reporterbysnp">Reporter Lookup by SNP</option>
+	    <option value="queries_microarray_reporterbyname">Reporter Lookup by Name</option>
+        </select>
+
+        <jsp:include page="/WEB-INF/jsp/canned/reporterByGeneQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/reporterBySNPQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/reporterByNameQuery.jsp" flush="true"/>
+
+</div>
+
+<div id="category_genomics" class="category"><img src="" class="catind" alt="Toggle button"> 
+    <a href='#'>Genomic Annotations</a></div>
+
+<div id="queries_genomics" class="queries">
+
+	    <select onchange="displayQuery(this)">
+	    <option value="" selected="selected">Choose query...</option>
+	    <option value="queries_genomics_genebysymbol">Gene Lookup by Symbol</option>
+	        <option value="queries_genomics_gobysymbol">Gene Ontology Lookup by Protein</option>
+	    </select>
+	    
+	    <jsp:include page="/WEB-INF/jsp/canned/geneBySymbolQuery.jsp" flush="true"/>
+	    <jsp:include page="/WEB-INF/jsp/canned/goByProteinNameAccessionQuery.jsp" flush="true"/>
+	    
+</div>
+
+ <!--  Pathway Canned Queries  -->
+<div id="category_pathways" class="category"><img src="" class="catind" alt="Toggle button"> 
+    <a href='#'>Pathways</a></div>
+
+<div id="queries_pathways" class="queries">
+
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+        <option value="queries_pathwayByName">Pathway by Name</option>
+        <option value="queries_pathwayByGene">Pathway by Gene Symbol</option>
+        <option value="queries_pathwayBySource">Pathway by Source</option>
+        <option value="queries_pathwayByProtein">Pathway by Protein</option>          
+        </select>
+
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayByNameQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayByGeneQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayBySourceQuery.jsp" flush="true"/>        
+        <jsp:include page="/WEB-INF/jsp/canned/pathwayByProteinQuery.jsp" flush="true"/>
+
+</div>
+
+
+<div id="category_cancer" class="category"><img src="" class="catind" alt="Toggle button"> 
+    <a href='#'>Cancer Gene Index</a></div>
+
+<div id="queries_cancer" class="queries">
+
+        <select onchange="displayQuery(this)">
+        <option value="" selected="selected">Choose query...</option>
+        <option value="queries_cancer_diseasetogenes">Disease to Genes</option>
+        <option value="queries_cancer_agenttogenes">Agent to Genes</option>
+        <option value="queries_cancer_geneassociations">Gene to Diseases/Agents</option>
+        </select>
+
+        <jsp:include page="/WEB-INF/jsp/canned/diseaseToGenesQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/agentToGenesQuery.jsp" flush="true"/>
+        <jsp:include page="/WEB-INF/jsp/canned/geneAssociationsQuery.jsp" flush="true"/>
+
+</div>
+

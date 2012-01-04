@@ -1,0 +1,269 @@
+Class	Attribute Path	Display Name	Roles	External Link	Internal Link
+					
+gov.nih.nci.cabio.domain.Agent	Agent	Agents	CLASS		
+gov.nih.nci.cabio.domain.Agent	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Agent	agentAliasCollection.name	Synonyms	DETAIL		
+gov.nih.nci.cabio.domain.Agent	drugbankAccession	Drugbank Accession	SUMMARY DETAIL	http://www.drugbank.ca/drugs/%%	
+gov.nih.nci.cabio.domain.Agent	EVSId	EVS Id	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Agent	NSCNumber	NSC Number	DETAIL		
+gov.nih.nci.cabio.domain.Agent	pubchemCompoundId	PubChem Compound Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?cid=%%	
+gov.nih.nci.cabio.domain.Agent	pubchemSubstanceId	PubChem Substance Id	DETAIL	http://pubchem.ncbi.nlm.nih.gov/summary/summary.cgi?sid=%%	
+gov.nih.nci.cabio.domain.Agent	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Agent	IUPACName	Chemical IUPAC Name	DETAIL		
+gov.nih.nci.cabio.domain.Agent	chemicalFormula	Chemical Formula	DETAIL		
+gov.nih.nci.cabio.domain.Agent	casNumber	CAS Registry Number	DETAIL		
+gov.nih.nci.cabio.domain.Agent	molecularWeight	Average Molecular Weight	DETAIL		
+gov.nih.nci.cabio.domain.Agent	SMILESCode	Canonical SMILES	DETAIL		
+gov.nih.nci.cabio.domain.Agent	indication	Indication	DETAIL		
+gov.nih.nci.cabio.domain.Agent	pharmacology	Pharmacology	DETAIL		
+gov.nih.nci.cabio.domain.Agent	mechanismOfAction	Mechanism of Action	DETAIL		
+gov.nih.nci.cabio.domain.Agent	absorption	Absorption	DETAIL		
+gov.nih.nci.cabio.domain.Agent	toxicity	Toxicity	DETAIL		
+gov.nih.nci.cabio.domain.Agent	percentProteinBinding	Protein Binding	DETAIL		
+gov.nih.nci.cabio.domain.Agent	biotransformation	Biotransformation	DETAIL		
+gov.nih.nci.cabio.domain.Agent	halfLife	Half Life	DETAIL		
+gov.nih.nci.cabio.domain.Agent	comment	Comment	DETAIL		
+gov.nih.nci.cabio.domain.Agent	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.Agent	isCMAPAgent	Is CMAP agent	DETAIL		
+gov.nih.nci.cabio.domain.Agent	geneFunctionAssociationCollection	Gene Associations	DETAIL		
+					
+gov.nih.nci.cabio.domain.AgentAlias	Agent Alias	Agent Aliases	CLASS		
+gov.nih.nci.cabio.domain.AgentAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.AgentAlias	type	Type	DETAIL		
+gov.nih.nci.cabio.domain.AgentAlias	agentCollection	Agents	DETAIL		
+					
+gov.nih.nci.cabio.domain.GenePhysicalLocation	Gene Feature Location	Gene Feature Locations	CLASS		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	featureType	Feature Type	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.symbol	Gene Symbol	SUMMARY DETAIL		gene
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.fullName	Description	DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.taxon.abbreviation	Taxon	DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.geneAliasCollection.name	Aliases	DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	gene.bigid	Gene Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.GenePhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	Microarray Reporter Location	Microarray Reporter Locations	CLASS		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.microarray.manufacturer	Manufacturer	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.microarray.name	Microarray	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.name	Reporter Name	SUMMARY DETAIL		arrayReporter
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	arrayReporter.bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.ArrayReporterPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	Nucleic Acid Sequence Location	Nucleic Acid Sequence Locations	CLASS		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.accessionNumber	Accession Number	SUMMARY DETAIL		nucleicAcidSequence
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.accessionNumberVersion	Accession Number Version	DETAIL		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.description	Description	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.length	Length	DETAIL		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	nucleicAcidSequence.bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.NucleicAcidPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP Location	SNP Locations	CLASS		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.DBSNPID	dbSNP Id	SUMMARY DETAIL	http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=%%	SNP
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.alleleA	Allele A	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.alleleB	Allele B	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.aminoAcidChange	Amino Acid Change	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.chrXPseudoAutosomalRegion	ChrX Pseudo Autosomal Region	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.codingStatus	Coding Status	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.flank	Flanking Sequence	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.validationStatus	Validated	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	SNP.bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.SNPPhysicalLocation	chromosomalStartPosition	Location	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	Marker Location	Genomic Marker Locations	CLASS		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.name	Name	SUMMARY DETAIL		marker
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.type	Source	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.geneticMarkerId	Identifier 	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.markerAliasCollection.name	Aliases	DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	marker.bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.MarkerPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	Transcript Location	Transcript Locations	CLASS		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.source	Source	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.sourceId	Identifier	SUMMARY DETAIL		transcript
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	transcript.bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.TranscriptPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	Cytoband	Cytobands	CLASS		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.CytobandPhysicalLocation	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.ConstrainedRegion	Constrained Region	Constrained Regions	CLASS		
+gov.nih.nci.cabio.domain.ConstrainedRegion	score	Score	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ConstrainedRegion	pvalue	P-value	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.source	Source	DETAIL		
+gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.name	Analysis Name	SUMMARY DETAIL		multipleAlignment
+gov.nih.nci.cabio.domain.ConstrainedRegion	multipleAlignment.type	Analysis Type	DETAIL		
+gov.nih.nci.cabio.domain.ConstrainedRegion	assembly	Assembly	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosome.number	Chromosome	DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalStartPosition	Start	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.ConstrainedRegion	chromosomalEndPosition	End	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	Expression Array Reporter	Expression Array Reporters	CLASS		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.manufacturer	Manufacturer	NESTED SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	microarray.name	Microarray	NESTED SUMMARY DETAIL		microarray
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	name	Name	NESTED SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	gene.symbol	Gene Symbol	SUMMARY DETAIL		gene
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	physicalLocationCollection[0].assembly	Assembly	DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	physicalLocationCollection[0].chromosome.number	Chromosome	DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	physicalLocationCollection[0].chromosomalStartPosition	Start	DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	physicalLocationCollection[0].chromosomalEndPosition	End	DETAIL		
+gov.nih.nci.cabio.domain.ExpressionArrayReporter	cytogeneticLocationCollection[0].startCytoband.name	Cytoband	DETAIL		
+					
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP Array Reporter	SNP Array Reporters	CLASS		
+gov.nih.nci.cabio.domain.SNPArrayReporter	microarray.manufacturer	Manufacturer	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	microarray.name	Microarray	SUMMARY DETAIL		microarray
+gov.nih.nci.cabio.domain.SNPArrayReporter	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.DBSNPID	dbSNP Id	SUMMARY DETAIL	http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=%%	SNP
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.alleleA	Allele A	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.alleleB	Allele B	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.aminoAcidChange	Amino Acid Change	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.chrXPseudoAutosomalRegion	ChrX Pseudo Autosomal Region	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.codingStatus	Coding Status	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.flank	Flanking Sequence	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	SNP.validationStatus	Validated	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	physicalLocationCollection[0].assembly	Assembly	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	physicalLocationCollection[0].chromosome.number	Chromosome	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	physicalLocationCollection[0].chromosomalStartPosition	Start	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	physicalLocationCollection[0].chromosomalEndPosition	End	DETAIL		
+gov.nih.nci.cabio.domain.SNPArrayReporter	cytogeneticLocationCollection[0].startCytoband.name	Cytoband	DETAIL		
+					
+gov.nih.nci.cabio.domain.ExonArrayReporter	Exon Array Reporter	Exon Array Reporters	CLASS		
+gov.nih.nci.cabio.domain.ExonArrayReporter	microarray.manufacturer	Manufacturer	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	microarray.name	Microarray	SUMMARY DETAIL		microarray
+gov.nih.nci.cabio.domain.ExonArrayReporter	name	Name	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	geneCollection.symbol	Gene Symbols	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	physicalLocationCollection[0].assembly	Assembly	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	physicalLocationCollection[0].chromosome.number	Chromosome	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	physicalLocationCollection[0].chromosomalStartPosition	Start	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	physicalLocationCollection[0].chromosomalEndPosition	End	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	strand	Strand	DETAIL		
+gov.nih.nci.cabio.domain.ExonArrayReporter	cytogeneticLocationCollection[0].startCytoband.name	Cytoband	DETAIL		
+					
+gov.nih.nci.cabio.domain.Gene	Gene	Genes	CLASS		
+gov.nih.nci.cabio.domain.Gene	symbol	Symbol	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.Gene	hugoSymbol	HUGO Symbol	DETAIL		
+gov.nih.nci.cabio.domain.Gene	geneAliasCollection.name	Aliases	DETAIL		
+gov.nih.nci.cabio.domain.Gene	fullName	Description	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.Gene	taxon.abbreviation	Taxon	SUMMARY DETAIL		taxon
+gov.nih.nci.cabio.domain.Gene	chromosome.number	Chromosome	SUMMARY DETAIL		chromosome
+gov.nih.nci.cabio.domain.Gene	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Gene	databaseCrossReferenceCollection	Cross References	DETAIL		
+gov.nih.nci.cabio.domain.Gene	physicalLocationCollection[featureType=GENE]	Physical Locations	DETAIL		
+gov.nih.nci.cabio.domain.Gene	geneFunctionAssociationCollection[class=GeneDiseaseAssociation]	Disease Associations	DETAIL		
+gov.nih.nci.cabio.domain.Gene	geneFunctionAssociationCollection[class=GeneAgentAssociation]	Agent Associations	DETAIL		
+					
+gov.nih.nci.cabio.domain.GeneAlias	Gene Alias	Gene Aliases	CLASS		
+gov.nih.nci.cabio.domain.GeneAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	type	Source	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.GeneAlias	geneCollection	Genes	DETAIL		
+					
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	Gene/Disease Association	Gene/Disease Associations	CLASS		
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	gene.symbol	Gene Symbol	SUMMARY DETAIL NESTED		gene
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	gene.fullName	Gene Description	DETAIL		
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	diseaseOntology.name	Disease Name	SUMMARY DETAIL NESTED		diseaseOntology
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	diseaseOntology.EVSId	Disease EVS Id	DETAIL		
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	evidenceCollection.pubmedId	Pubmed References	SUMMARY 	http://www.ncbi.nlm.nih.gov/pubmed/%%	
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	evidenceCollection	Supporting Evidence	DETAIL		
+gov.nih.nci.cabio.domain.GeneDiseaseAssociation	role	Role	DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.GeneAgentAssociation	Gene/Agent Association	Gene/Agent Associations	CLASS		
+gov.nih.nci.cabio.domain.GeneAgentAssociation	gene.symbol	Gene Symbol	SUMMARY DETAIL NESTED		gene
+gov.nih.nci.cabio.domain.GeneAgentAssociation	gene.fullName	Gene Description	DETAIL		
+gov.nih.nci.cabio.domain.GeneAgentAssociation	agent.name	Agent Name	SUMMARY DETAIL NESTED		agent
+gov.nih.nci.cabio.domain.GeneAgentAssociation	agent.EVSId	Agent EVS Id	DETAIL		
+gov.nih.nci.cabio.domain.GeneAgentAssociation	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.GeneAgentAssociation	evidenceCollection.pubmedId	Pubmed References	SUMMARY 	http://www.ncbi.nlm.nih.gov/pubmed/%%	
+gov.nih.nci.cabio.domain.GeneAgentAssociation	evidenceCollection	Supporting Evidence	DETAIL		
+gov.nih.nci.cabio.domain.GeneAgentAssociation	role	Role	DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.Evidence	Evidence	Supporting Evidence	CLASS		
+gov.nih.nci.cabio.domain.Evidence	sentence	Sentence	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.Evidence	pubmedId	PubMED Id	SUMMARY DETAIL NESTED	http://www.ncbi.nlm.nih.gov/pubmed/%%	
+gov.nih.nci.cabio.domain.Evidence	evidenceCodeCollection.evidenceCode	Evidence Codes	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	negationStatus	Negation Status	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	sentenceStatus	Sentence Status	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	celllineStatus	Data from Cell Line 	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	comments	Curator Comments	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	geneFunctionAssociationCollection[class=GeneDiseaseAssociation]	Gene/Disease Associations	DETAIL		
+gov.nih.nci.cabio.domain.Evidence	geneFunctionAssociationCollection[class=GeneAgentAssociation]	Gene/Agent Associations	DETAIL		
+					
+gov.nih.nci.cabio.domain.Pathway	Pathway	Pathways	CLASS		
+gov.nih.nci.cabio.domain.Pathway	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.Pathway	displayValue	Title	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Pathway	description	Description	DETAIL		
+gov.nih.nci.cabio.domain.Pathway	taxon.abbreviation	Taxon	SUMMARY DETAIL		taxon
+gov.nih.nci.cabio.domain.Pathway	source	Source	SUMMARY DETAIL		
+gov.nih.nci.cabio.domain.Pathway	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Pathway	geneCollection	Genes	DETAIL		
+					
+gov.nih.nci.cabio.domain.Protein	Protein	Proteins	CLASS		
+gov.nih.nci.cabio.domain.Protein	name	Name	NESTED DETAIL		
+gov.nih.nci.cabio.domain.Protein	proteinAliasCollection.name	Aliases	DETAIL		
+gov.nih.nci.cabio.domain.Protein	primaryAccession	Primary Accession	NESTED DETAIL	http://www.uniprot.org/uniprot/%%	
+gov.nih.nci.cabio.domain.Protein	secondaryAccession	Secondary Accessions	DETAIL		
+gov.nih.nci.cabio.domain.Protein	uniProtCode	UniProt Code	DETAIL	http://www.uniprot.org/uniprot/%%	
+gov.nih.nci.cabio.domain.Protein	keywords	Keywords	DETAIL		
+gov.nih.nci.cabio.domain.Protein	copyrightStatement	Copyright	DETAIL		
+gov.nih.nci.cabio.domain.Protein	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.Protein	geneCollection	Genes	DETAIL		
+					
+gov.nih.nci.cabio.domain.ProteinAlias	Protein Alias	Protein Aliases	CLASS		
+gov.nih.nci.cabio.domain.ProteinAlias	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.ProteinAlias	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ProteinAlias	proteinCollection	Proteins	DETAIL		
+					
+gov.nih.nci.cabio.domain.GeneOntology	GO Term	GO Terms	CLASS		
+gov.nih.nci.cabio.domain.GeneOntology	id	GO Identifier	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.GeneOntology	name	Term	SUMMARY DETAIL NESTED		
+gov.nih.nci.cabio.domain.GeneOntology	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.GeneOntology	parentGeneOntologyRelationshipCollection.parentGeneOntology	Parent Terms	DETAIL		
+gov.nih.nci.cabio.domain.GeneOntology	childGeneOntologyRelationshipCollection.childGeneOntology	Child Terms	DETAIL		
+gov.nih.nci.cabio.domain.GeneOntology	geneCollection	Genes	DETAIL		
+					
+gov.nih.nci.cabio.domain.Taxon	Taxon	Taxons	CLASS		
+gov.nih.nci.cabio.domain.Taxon	abbreviation	Abbreviation	DETAIL		
+gov.nih.nci.cabio.domain.Taxon	scientificName	Scientific Name	DETAIL		
+gov.nih.nci.cabio.domain.Taxon	commonName	Common Name	DETAIL		
+gov.nih.nci.cabio.domain.Taxon	ethnicityStrain	Ethnicity/Strain	DETAIL		
+gov.nih.nci.cabio.domain.Taxon	bigid	Grid Id	DETAIL		
+					
+gov.nih.nci.common.domain.DatabaseCrossReference	Database Cross Reference	Database Cross References	CLASS		
+gov.nih.nci.common.domain.DatabaseCrossReference	sourceType	Source	SUMMARY DETAIL NESTED		
+gov.nih.nci.common.domain.DatabaseCrossReference	dataSourceName	Type	SUMMARY DETAIL NESTED		
+gov.nih.nci.common.domain.DatabaseCrossReference	crossReferenceId	Identifier	SUMMARY DETAIL NESTED		
+					
+gov.nih.nci.cabio.domain.DiseaseOntology	Disease	Diseases	CLASS		
+gov.nih.nci.cabio.domain.DiseaseOntology	name	Name	DETAIL		
+gov.nih.nci.cabio.domain.DiseaseOntology	EVSId	EVS Id	DETAIL		
+gov.nih.nci.cabio.domain.DiseaseOntology	bigid	Grid Id	DETAIL		
+					
+gov.nih.nci.cabio.domain.ProteinDomain	Protein Domain	Protein Domains	CLASS		
+gov.nih.nci.cabio.domain.ProteinDomain	description	Description	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	accessionNumber	Accession Number	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	source	Source	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	bigid	Grid Id	DETAIL		
+gov.nih.nci.cabio.domain.ProteinDomain	expressionArrayReporterCollection	Microarray Reporters	DETAIL		
