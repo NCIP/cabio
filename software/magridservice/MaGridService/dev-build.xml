@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<project name="Developer Modified Build File" basedir=".">
+  <!-- ============================================================== -->
+  <!-- This file is designed to allow the developer to extend the     -->
+  <!-- build process without having to edit the master build.xml      -->
+  <!-- file. DO NOT REMOVE ANY TARGETS                                -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Place any other properties you will need here                  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Create any extended Classpaths here                            -->
+  <!-- ============================================================== -->
+  <target name="defineExtendedClasspaths">
+    <path id="base.extended.classpath" />
+    <path id="service.build.extended.classpath" />
+    <path id="service.run.extended.classpath" />
+    <path id="test.build.extended.classpath" />
+    <path id="test.run.extended.classpath" />
+    <path id="run.extended.classpath" />
+    <path id="tasks.run.extended.classpath" />
+  </target>
+  <!-- ============================================================== -->
+  <!-- Pre Init Target                                                -->
+  <!-- ============================================================== -->
+  <target name="preInit" />
+  <!-- ============================================================== -->
+  <!-- Post Init Build Target                                         -->
+  <!-- ============================================================== -->
+  <target name="postInit" />
+  <!-- ============================================================== -->
+  <!-- Pre Stubs Target                                               -->
+  <!-- ============================================================== -->
+  <target name="preStubs" />
+  <!-- ============================================================== -->
+  <!-- Post Stubs Build Target                                        -->
+  <!-- ============================================================== -->
+  <target name="postStubs">
+    <replaceregexp match="org.iso._21090.BL" replace="org.iso._21090.BL" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.BLNonNull" replace="org.iso._21090.BlNonNull" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.ST" replace="org.iso._21090.ST" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.STNT" replace="org.iso._21090.StNt" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.II" replace="org.iso._21090.Ii" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TEL" replace="org.iso._21090.TEL" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TELPerson" replace="org.iso._21090.TELPerson" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TELUrl" replace="org.iso._21090.TelUrl" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TELPhone" replace="org.iso._21090.TelPhone" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TELEmail" replace="org.iso._21090.TelEmail" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.ED" replace="org.iso._21090.ED" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.EDText" replace="org.iso._21090.EdText" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.CD" replace="org.iso._21090.CD" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.SC" replace="org.iso._21090.SC" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.INT" replace="org.iso._21090.INT" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.REAL" replace="org.iso._21090.Real" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.TS" replace="org.iso._21090.TS" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.PQ" replace="org.iso._21090.PQ" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.IVL_TS" replace="org.iso._21090.IVLTS" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.IVL_PQ" replace="org.iso._21090.IVLPQ" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.IVL_REAL" replace="org.iso._21090.IVLREAL" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.IVL_INT" replace="org.iso._21090.IVLINT" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.AD" replace="org.iso._21090.Ad" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.EN" replace="org.iso._21090.EN" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.ENON" replace="org.iso._21090.EnOn" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.ENPN" replace="org.iso._21090.EnPn" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.DSET_II" replace="org.iso._21090.DSetII" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.DSET_TEL" replace="org.iso._21090.DSetTel" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.DSET_CD" replace="org.iso._21090.DSetCd" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <replaceregexp match="org.iso._21090.DSET_AD" replace="org.iso._21090.DSetAd" flags="gi" byline="true">
+      <fileset dir="${stubs.src}" includes="**/stubs/*.java" />
+    </replaceregexp>
+    <java failonerror="true" classname="org.cagrid.iso21090.extensions.FixISO21090IntroduceStubsTest" classpathref="run.classpath" fork="yes">
+      <jvmarg value="-DGLOBUS_LOCATION=${ext.globus.dir}" />
+      <arg value="${basedir}" />
+    </java>
+  </target>
+  <!-- ============================================================== -->
+  <!-- Pre Compile Stubs Build Target                                 -->
+  <!-- ============================================================== -->
+  <target name="preCompileStubs" />
+  <!-- ============================================================== -->
+  <!-- Post Compile Stubs Build Target                                -->
+  <!-- ============================================================== -->
+  <target name="postCompileStubs" />
+  <!-- ============================================================== -->
+  <!-- Pre Jar Stubs Build Target                                     -->
+  <!-- ============================================================== -->
+  <target name="preJarStubs" />
+  <!-- ============================================================== -->
+  <!-- Post Jar Stubs Build Target                                    -->
+  <!-- ============================================================== -->
+  <target name="postJarStubs" />
+  <!-- ============================================================== -->
+  <!-- Pre Compile Build Target                                       -->
+  <!-- ============================================================== -->
+  <target name="preCompile" />
+  <!-- ============================================================== -->
+  <!-- Post Compile Build Target                                       -->
+  <!-- ============================================================== -->
+  <target name="postCompile" />
+  <!-- ============================================================== -->
+  <!-- Pre Jar Build Target                                       -->
+  <!-- ============================================================== -->
+  <target name="preJar" />
+  <!-- ============================================================== -->
+  <!-- Post Jar Build Target                                          -->
+  <!-- ============================================================== -->
+  <target name="postJar" />
+  <!-- ============================================================== -->
+  <!-- Pre Compile Tests Build Target                                 -->
+  <!-- ============================================================== -->
+  <target name="preCompileTests" />
+  <!-- ============================================================== -->
+  <!-- Post Compile Tests Build Target                                -->
+  <!-- ============================================================== -->
+  <target name="postCompileTests" />
+  <!-- ============================================================== -->
+  <!-- Pre Jar Tests Build Target                                     -->
+  <!-- ============================================================== -->
+  <target name="preJarTests" />
+  <!-- ============================================================== -->
+  <!-- Post Jar Tests Build Target                                    -->
+  <!-- ============================================================== -->
+  <target name="postJarTests" />
+  <!-- ============================================================== -->
+  <!-- Pre Clean Target                                               -->
+  <!-- ============================================================== -->
+  <target name="preClean" />
+  <!-- ============================================================== -->
+  <!-- Post Clean Target                                              -->
+  <!-- ============================================================== -->
+  <target name="postClean" />
+  <!-- ============================================================== -->
+  <!-- Call any tests.                                                -->
+  <!-- ============================================================== -->
+  <target name="junit:test" depends="checkGlobus" description="Runs the service's tests.">
+    <echo message="Test results dir: ${junit.results.dir}" />
+    <mkdir dir="${junit.results.dir}" />
+    <junit dir="${basedir}" printsummary="yes" showoutput="true">
+      <classpath refid="test.run.classpath" />
+      <formatter type="xml" />
+      <batchtest fork="yes" todir="${junit.results.dir}">
+        <fileset dir="${test.src.dir}">
+          <include name="**/Test*.java" />
+          <include name="**/*TestCase.java" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+	
+	<!-- The test script to check whether the grid Service is up and running accordingly -->
+    <target name="test"  depends="checkGlobus" description="Run the test Client">       
+       <echo message="Connecting to service: ${service.url}" />
+       <java failonerror="true" classname="gov.nih.nci.cagrid.maservice.test.MaGridServiceTestCase" fork="yes">               	   
+           <arg value="-url" />
+           <arg value="${service.url}" />
+        <classpath>
+        	<pathelement path="${build.dir}/bin" /> 
+        	<path refid="test.run.classpath" />
+        </classpath>
+       </java>
+   </target>
+	
+</project>
