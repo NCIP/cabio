@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM SNP2UNIQ
+/
+
+--
+-- SNP2UNIQ  (Synonym) 
+--
+--  Dependencies: 
+--   SNP2UNIQ (Table)
+--
+CREATE PUBLIC SYNONYM SNP2UNIQ FOR SNP2UNIQ
+/
+
+

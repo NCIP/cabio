@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CLONE_DIFF
+/
+
+--
+-- CLONE_DIFF  (Synonym) 
+--
+--  Dependencies: 
+--   CLONE_DIFF (Table)
+--
+CREATE PUBLIC SYNONYM CLONE_DIFF FOR CLONE_DIFF
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM PROVENANCE
+/
+
+--
+-- PROVENANCE  (Synonym) 
+--
+--  Dependencies: 
+--   PROVENANCE (Table)
+--
+CREATE PUBLIC SYNONYM PROVENANCE FOR PROVENANCE
+/
+
+

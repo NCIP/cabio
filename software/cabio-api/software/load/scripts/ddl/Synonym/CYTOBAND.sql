@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CYTOBAND
+/
+
+--
+-- CYTOBAND  (Synonym) 
+--
+--  Dependencies: 
+--   CYTOBAND (Table)
+--
+CREATE PUBLIC SYNONYM CYTOBAND FOR CYTOBAND
+/
+
+

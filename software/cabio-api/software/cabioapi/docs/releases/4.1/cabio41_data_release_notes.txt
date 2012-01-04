@@ -1,0 +1,219 @@
+        Data Release notes for caBIO 4.1 Database  (5/08)
+
+1. Data Sources refreshed in this update
+2. Data sources not refreshed in this update
+3. Bugs fixed for this update
+4. caBIO Database and Load Scripts Enhancements
+5. Objects to which new data was added
+6. Data sources anticipated to be refreshed in the next update
+7. Access to caBIO data
+ 
+
+1. Data sources refreshed in this update
+========================================
+
+a) Unigene (Human and Mouse) 
+
+Human Build 210 (Release Date: 25 Feb 2008)
+
+Mouse Build 169 (Release Date: 05 Feb 2008)
+
+
+b) UCSC mRNA Annotations, Cytoband Annotations (GFoge Features: 6872, 7344)
+
+Human: Based on March 2006 freeze of NCBI’s GenBank (hg18)
+
+Mouse: Based on February 2006 assembly of mouse genome (mm9) from Mouse Genome Sequencing Consortium
+
+
+c) UCSC EST Annotations
+
+Human: Based on March 2006 freeze of NCBI’s GenBank (hg18)
+
+Mouse: Based on February 2006 assembly of mouse genome (mm9) from Mouse Genome Sequencing Consortium
+
+
+d) SNP annotations from NCBI (Human and Mouse) Build 128
+
+
+e) Uniprot  (Release 13 from Uniprot) 
+
+
+f) GO Ontology Annotations
+
+Updated with each caBIO data refresh
+
+
+g) cDNA libraries from CGAP, MGC, ORESTES and dbEST collections 
+
+Updated with each caBIO data refresh 
+
+
+h) HomoloGene
+
+Updated with each caBIO data refresh
+
+ 
+
+i) BioCarta Pathways
+
+Updated occasionally
+
+
+
+j) Affymetrix Human U133 Plus 2 (HG_U133_Plus_2) Array Annotations Release 24 
+
+k) Affymetrix Human Mapping250K_Nsp Array Annotations Release 24 
+
+l) Affymetrix Human Mapping250K_Sty Array Annotations Release 24 
+
+m) Affymetrix Human Mapping50K_Hind240 Array Annotations Release 24 
+
+n) Affymetrix Human Mapping50K_Xba240 Array Annotations Release 24 
+
+o) Affymetrix Human HuEx-1_0-st-v2 Array Annotations Release 24
+
+p) Affymetrix Human HT_HG-U133A Array Annotations Release 24
+
+q) Affymetrix Human HG-U133A_2 Array Annotations Release 24
+
+
+
+r) CTEP Protocols
+
+Updated as new Protocols are made available
+
+
+
+2. Data sources not refreshed in this update
+============================================
+
+
+a) Illumina Human HapMap Arrays V3.0
+ 
+
+b) Aglient aCGH 244K Human Genome Array Release 07Feb07  
+
+
+c) Agilent 44K Human Genome Array Release 07Feb07
+
+
+3. Bugs fixed in this refresh
+=============================
+
+Refer to caBIO 4.1 Software Release Notes
+
+
+4 Known Issues
+================
+
+Refer to caBIO 4.1 Software Release Notes
+
+
+4.1 Known Data Issues
+======================
+1) GF12098: Histopathology Data.
+Some caBIO Genes are associated with Histopathology data for which insufficient information is available
+
+2) GF12812: Inconsistent data from Gene to Library
+caBIO's Library object integrates Clone libraries from multitudes of sources like Unigene, ORESTS, etc, as provided by CGAP.
+Gene -> Library associates all EST Libraries from CGAP with relevant caBIO Genes. 
+
+However CloneRelativeLocation is available only for those Clones used to construct Unigene.
+Hence the number of Libraries associated with a given Gene as obtained by traversing the path Gene -> NucleicAcidSequence -> CloneRelativeLocation -> Clone -> Library may be different from those obtained by traversing the path Gene -> Library
+ 
+
+3) GF13321 : Standardize on one dataset for associating Entrez with Unigene.
+caBIO associates Entrez with Unigene using two different datasets (Entrez's gene2unigene and Unigene's data files). These two data-files are updated asynchronously, with the former being more current. 
+Entrez's dataset is used to associate Unigene to OMIM, obtain Gene Physical Locations as well as retrieve caBIO Gene Ids to make Gene-Disease or Gene-Agent associations from the CGDC dataset. 
+References to Entrez Ids in Unigene files are used to populate DatabaseCrossReference.CrossReferenceId.
+
+This may lead to caBIO Genes being associated with Entrez Gene Ids which may not have corresponding OMIM Identifiers, Physical Locations, Gene-Disease or Gene-Agent associations.
+ 
+4) GF13595 : It returns different results from Gene to ExpressionArrayReporter through different paths.
+
+Affymetrix uses Genbank sequences as representative sequences for its probes.
+Some of these Genbank sequences are not used to build Unigene and hence are not available through caBIO's NucleicAcidSequence object.
+Thus associations from NucleicAcidSequence to ExpressionReporter are available only for those probes whose representative public sequence-id is sequence also available as part of Unigene.  
+ 
+On the other hand, Gene -> ExpressionReporter association is made on the basis of the Unigene Id.
+
+Thus the results of the Gene-ExpressionReporter associations may differ from those obtained by traversing the path Gene->NucleicAcidSequence->ExpressionReporter 
+
+5) High Frequency Cancer Index Genes : Certain High Frequency Genes are to be curated in the next phase of the Cancer Gene Index Project.  For now, these uncurated gene-disease and disease-agent associations are available at 
+https://gforge.nci.nih.gov/docman/index.php?group_id=51&selected_doc_group_id=3387&language_id=1
+
+
+5. Objects to which new data was added
+======================================
+       * NucleicAcidSequence
+       * GeneRelativeLocation
+       * RelativeLocation
+       * PhysicalLocation
+       * CytogeneticLocation 
+       * CloneRelativeLocation
+       * MarkerRelativeLocation
+       * Location
+       * SNP
+       * Gene
+       * Clone
+       * Cytoband
+       * Provenance
+       * DatabaseCrossReference     
+       * SourceReference
+       * URLSourceReference
+       * ExpressionArrayReporter
+       * SNPArrayReporter 
+       * ExonArrayReporter
+       * ProteinSequence  
+       * ProteinDomain
+       * Transcript
+       * Marker
+ 
+
+6. Data sources anticipated to be refreshed in the next update
+==============================================================
+
+a) Unigene (Human and Mouse) 
+
+b) UCSC Human and Mouse EST and MRNA data
+
+c) NCBI dbSNP data
+
+
+
+7. The caBIO data can be accessed through the following resources
+
+================================================================
+
+
+Java API
+
+http://cabio.nci.nih.gov/cacore32/remoteService
+
+http://cabioapi.nci.nih.gov/cabio40
+
+http://cabioapi-dev.nci.nih.gov/cabio41
+
+  
+
+Web Services
+
+http://cabio.nci.nih.gov/cacore32/ws/caCOREService?wsdl
+
+http://cabioapi.nci.nih.gov/cabio40/services/caBIOService?wsdl
+ 
+http://cabioapi.nci.nih.gov/cabio41/services/caBIOService?wsdl
+
+
+Grid service
+
+http://cabiogrid32.nci.nih.gov:80/wsrf/services/cagrid/CaBIO32GridSvc
+
+
+Thank you for your interest in caBIO!
+ 
+
+The caBIO Team
+
+

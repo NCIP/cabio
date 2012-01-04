@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM DISEASE
+/
+
+--
+-- DISEASE  (Synonym) 
+--
+--  Dependencies: 
+--   DISEASE (Table)
+--
+CREATE PUBLIC SYNONYM DISEASE FOR DISEASE
+/
+
+

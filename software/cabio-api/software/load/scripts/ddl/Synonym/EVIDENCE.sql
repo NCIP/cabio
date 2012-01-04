@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM EVIDENCE
+/
+
+--
+-- EVIDENCE  (Synonym) 
+--
+--  Dependencies: 
+--   EVIDENCE (Column)
+--
+CREATE PUBLIC SYNONYM EVIDENCE FOR EVIDENCE
+/
+
+
