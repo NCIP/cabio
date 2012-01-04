@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util" xmlns:gov.nih.nci.maservice.domain="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" xmlns:uri="uri:iso.org:21090" targetNamespace="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.util" elementFormDefault="qualified">
+  <xs:import namespace="gme://caCORE.caCORE/3.2/gov.nih.nci.maservice.domain" schemaLocation="gov.nih.nci.maservice.domain.xsd" />
+  <xs:import namespace="uri:iso.org:21090" schemaLocation="ISO_datatypes_Narrative.xsd" />
+  <xs:element name="SearchCriteria" type="SearchCriteria" />
+  <xs:complexType name="SearchCriteria">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="ReporterSearchCriteria" type="ReporterSearchCriteria" />
+  <xs:complexType name="ReporterSearchCriteria">
+    <xs:complexContent>
+      <xs:extension base="SearchCriteria">
+        <xs:sequence>
+          <xs:element name="reporterName" type="uri:ST" minOccurs="0" maxOccurs="1" />
+          <xs:element name="microarray" type="gov.nih.nci.maservice.domain:Microarray" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GeneSearchCriteria" type="GeneSearchCriteria" />
+  <xs:complexType name="GeneSearchCriteria">
+    <xs:complexContent>
+      <xs:extension base="SearchCriteria">
+        <xs:sequence>
+          <xs:element name="symbolOrAlias" type="uri:ST" minOccurs="0" maxOccurs="1" />
+          <xs:element name="organism" type="gov.nih.nci.maservice.domain:Organism" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
