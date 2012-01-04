@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("5.2.5.2:1", "", "«artifact» : caDSR Repository", "EARoot/EA5/EA2/EA5/EA2/EA540.htm", "25.png", "538", "0", "", "Object0","{B6BCECCE-EECA-480b-90AF-20DB087CE181}");
+tocTab[tocTab.length] = new Array("5.2.5.2:2", "", "«artifact» : Thesaurus", "EARoot/EA5/EA2/EA5/EA2/EA541.htm", "25.png", "537", "0", "", "Object0","{24F01F5B-2D7D-4dbc-8244-B0814273C203}");
+tocTab[tocTab.length] = new Array("5.2.5.2:3", "", "«artifact» : Metathesaurus", "EARoot/EA5/EA2/EA5/EA2/EA542.htm", "25.png", "535", "0", "", "Object0","{0A4F2218-36AC-417c-BAE6-9AB3A4ECB473}");
+tocTab[tocTab.length] = new Array("5.2.5.2:4", "", "«artifact» stage_jdk: JDK 1.5.0_04", "EARoot/EA5/EA2/EA5/EA2/EA543.htm", "25.png", "536", "0", "", "Object0","{1357C483-1126-4d09-8ED1-8669D5DF9645}");
