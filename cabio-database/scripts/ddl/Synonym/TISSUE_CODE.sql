@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM TISSUE_CODE
+/
+
+--
+-- TISSUE_CODE  (Synonym) 
+--
+--  Dependencies: 
+--   TISSUE_CODE (Column)
+--
+CREATE PUBLIC SYNONYM TISSUE_CODE FOR TISSUE_CODE
+/
+
+

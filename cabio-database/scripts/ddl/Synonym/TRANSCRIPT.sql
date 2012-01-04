@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM TRANSCRIPT
+/
+
+--
+-- TRANSCRIPT  (Synonym) 
+--
+--  Dependencies: 
+--   TRANSCRIPT (Table)
+--
+CREATE PUBLIC SYNONYM TRANSCRIPT FOR TRANSCRIPT
+/
+
+

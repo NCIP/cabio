@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM BIO_PATHWAYS
+/
+
+--
+-- BIO_PATHWAYS  (Synonym) 
+--
+--  Dependencies: 
+--   BIO_PATHWAYS (Table)
+--
+CREATE PUBLIC SYNONYM BIO_PATHWAYS FOR BIO_PATHWAYS
+/
+
+

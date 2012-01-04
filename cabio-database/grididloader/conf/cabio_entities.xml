@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="entities.xsl"?>
+
+<!-- 
+    This file defines logical unique keys for each caBio entity. Each entity 
+    must have a "primary-key" and a "logical-key". The logical key can contain 
+    three different types of properties:
+        * attribute in the entity table
+        * attribute in a foreign table (with join information)
+        * entity reference
+    To reference another entity, it must be declared earlier in the file. 
+    When that entity is pulled in, its entire logical key is used as part of 
+    the parent entity's logical key.
+    
+    Note: open this file with Internet Explorer to see an XSL generated table 
+    of entities.
+-->
+
+<mapping package="gov.nih.nci.cabio.domain">
+
+  <entity class="EvidenceCode" table="EVIDENCE_CODE" parallel="true">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>EVIDENCE_CODE</property>
+    </logical-key>
+  </entity>
+
+  <entity class="ClinicalTrialProtocol" table="PROTOCOLS">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>DOCUMENT_NUMBER</property>
+    </logical-key>
+  </entity>
+
+  <entity class="Taxon" table="TAXON">
+    <primary-key>TAXON_ID</primary-key>
+    <logical-key>
+      <property>SCIENTIFIC_NAME</property>
+      <property>STRAIN_OR_ETHNICITY</property>
+    </logical-key>
+  </entity>
+
+  <entity class="Chromosome" table="CHROMOSOME">
+    <primary-key>CHROMOSOME_ID</primary-key>
+    <logical-key>
+      <property>CHROMOSOME_NUMBER</property>
+      <property entity="Taxon" foreign-key="TAXON_ID"/>
+    </logical-key>
+  </entity>
+
+  <entity class="Cytoband" table="CYTOBAND">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property entity="Chromosome" foreign-key="CHROMOSOME_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="DiseaseOntology" table="HISTOLOGY_CODE" parallel="false">
+    <primary-key>HISTOLOGY_CODE</primary-key>
+    <logical-key>
+      <property>HISTOLOGY_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="GeneOntology" table="GO_ONTOLOGY" parallel="true">
+    <primary-key>GO_ID</primary-key>
+    <logical-key>
+      <property>GO_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="GenericArray" table="GENERIC_ARRAY">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ARRAY_NAME</property>
+      <property>PLATFORM</property>
+      <property>TYPE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="OrganOntology" table="TISSUE_CODE">
+    <primary-key>TISSUE_CODE</primary-key>
+    <logical-key>
+      <property>TISSUE_NAME</property>
+      <property>PARENT</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Pathway" table="BIO_PATHWAYS_TV">
+    <primary-key>PATHWAY_ID</primary-key>
+    <logical-key>
+      <property>PATHWAY_NAME</property>
+      <property>TAXON</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Protein" table="NEW_PROTEIN">
+    <primary-key>PROTEIN_ID</primary-key>
+    <logical-key>
+      <property>PRIMARY_ACCESSION</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Protocol" table="PROTOCOL">
+    <primary-key>PROTOCOL_ID</primary-key>
+    <logical-key>
+      <property>PROTOCOL_NAME</property>
+      <property>PROTOCOL_TYPE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Target" table="TARGET">
+    <primary-key>TARGET_ID</primary-key>
+    <logical-key>
+      <property>TARGET_NAME</property>
+    </logical-key>
+  </entity>
+  
+ <entity class="Vocabulary" table="VOCABULARY">
+    <primary-key>VOCABULARY_ID</primary-key>
+    <logical-key>
+      <property>GENERAL_TERM</property>
+      <property>CORE_TERM</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Anomaly" table="ANOMALY">
+    <primary-key>ANOMALY_ID</primary-key>
+    <logical-key>
+      <property>ANOMALY_TYPE</property>
+      <property entity="Target" foreign-key="TARGET_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="DiseaseOntologyRelationship" table="DISEASE_RELATIONSHIP">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property table="HISTOLOGY_CODE" primary-key="HISTOLOGY_CODE" foreign-key="CHILD_ID">HISTOLOGY_NAME</property>
+      <property table="HISTOLOGY_CODE" primary-key="HISTOLOGY_CODE" foreign-key="PARENT_ID">HISTOLOGY_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Gene" table="GENE_TV">
+    <primary-key>GENE_ID</primary-key>
+    <logical-key>
+      <property>CLUSTER_ID</property>
+      <property>SYMBOL</property>
+      <property>ENTREZ_ID</property>
+      <property entity="Chromosome" foreign-key="CHROMOSOME_ID"/>
+    </logical-key>
+  </entity>
+
+ <entity class="GenericReporter" table="GENERIC_REPORTER">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property>TYPE</property>
+      <property>CLUSTER_ID</property>
+      <property entity="Gene" foreign-key="GENE_ID"/>
+    </logical-key>
+  </entity>
+   
+  <entity class="GeneAlias" table="GENE_ALIAS_OBJECT_TV">
+    <primary-key>GENE_ALIAS_ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property>ALIAS_TYPE</property>
+      <property entity="Gene" foreign-key="GENE_ID"/>
+    </logical-key>
+  </entity>
+ 
+  <entity class="GeneOntologyRelationship" table="GO_RELATIONSHIP" parallel="true">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property table="GO_ONTOLOGY" primary-key="GO_ID" foreign-key="CHILD_ID">GO_NAME</property>
+      <property table="GO_ONTOLOGY" primary-key="GO_ID" foreign-key="PARENT_ID">GO_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <!-- no unique key 
+  <entity class="Histopathology" table="HISTOPATHOLOGY_TST">
+    <primary-key>HISTOPATHOLOGY_ID</primary-key>
+    <logical-key>
+      <property>ORGAN_ID</property>
+      <property>?</property>      
+    </logical-key>
+  </entity>
+  -->
+
+  <entity class="HomologousAssociation" table="HOMOLOGOUS_ASSOCIATION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>HOMOLOGOUS_ID</property>
+      <property>HOMOLOGOUS_GENE_ID</property>
+      <property table="GENE_TV" primary-key="GENE_ID" foreign-key="HOMOLOGOUS_GENE_ID">CLUSTER_ID</property>
+    </logical-key>
+  </entity>
+
+  <entity class="Library" table="LIBRARY" parallel="true">
+    <primary-key>LIBRARY_ID</primary-key>
+    <logical-key>
+      <property>LIBRARY_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <!-- no unique key 
+  <entity class="Location" table="LOCATION_TV">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property table="PHYSICAL_LOCATION" primary-key="ID" foreign-key="ID">CHROMOSOMAL_START_POSITION</property>
+      <property table="PHYSICAL_LOCATION" primary-key="ID" foreign-key="ID">CHROMOSOMAL_END_POSITION</property>
+      <property entity="Chromosome" foreign-key="CHROMOSOME_ID"/>
+      <property entity="NucleicAcidSequence" foreign-key="NUCLEIC_ACID_ID"/>
+    </logical-key>
+  </entity>
+  -->
+
+  <!-- no unique key
+  <entity class="PhysicalLocation" table="PHYSICAL_LOCATION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ID</property>
+    </logical-key>
+  </entity>
+  -->
+ 
+  <entity class="OrganOntologyRelationship" table="ORGANONTOLOGYRELATIONSHIP">
+    <primary-key>ORGAN_ONTOLOGY_RELATIONSHIP_ID</primary-key>
+    <logical-key>
+      <property table="TISSUE_CODE" primary-key="TISSUE_CODE" foreign-key="CHILD_ID">TISSUE_NAME</property>
+      <property table="TISSUE_CODE" primary-key="TISSUE_CODE" foreign-key="PARENT_ID">TISSUE_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="ProteinAlias" table="PROTEIN_ALIAS">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property entity="Protein" foreign-key="PROTEIN_ID"/>
+      <property>NAME</property>
+    </logical-key>
+  </entity>
+
+  <entity class="ProteinSequence" table="PROTEIN_SEQUENCE">
+    <primary-key>PROTEIN_ID</primary-key>
+    <logical-key>
+      <property entity="Protein" foreign-key="PROTEIN_ID"/>
+    </logical-key>
+  </entity>
+
+  <entity class="ProtocolAssociation" table="PROTOCOL_DISEASES">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>CTEP_NAME</property>
+      <property entity="ClinicalTrialProtocol" foreign-key="PRO_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="PopulationFrequency" table="POPULATION_FREQUENCY" parallel="true">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ETHNICITY</property>
+      <property>SNP_PROBESET_AFFY_ID</property>
+    </logical-key>
+  </entity>
+  
+  <!-- only SAMPLE_ID could make this unique
+  <entity class="Tissue" table="TISSUE_OBJECT">
+    <primary-key>TISSUE_ID</primary-key>
+    <logical-key>
+      <property>TISSUE_NAME</property>
+      <property>ORGAN</property>
+      <property>SAMPLE_TAXON_ID</property>
+    </logical-key>
+  </entity>
+  -->
+  
+  <entity class="Microarray" table="MICROARRAY">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ARRAY_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="ExonArrayReporter" table="EXON_REPORTER">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property entity="Microarray" foreign-key="MICROARRAY_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="ExpressionArrayReporter" table="EXPRESSION_REPORTER">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property entity="Microarray" foreign-key="MICROARRAY_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="SNPArrayReporter" table="SNP_REPORTER">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+      <property entity="Microarray" foreign-key="MICROARRAY_ID"/>
+    </logical-key>
+  </entity>
+  
+  <entity class="Exon" table="EXON">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>MANUFACTURER_ID</property>
+      <property>SOURCE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Transcript" table="TRANSCRIPT">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>MANUFACTURER_ID</property>
+      <property>SOURCE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="ProteinDomain" table="PROTEIN_DOMAIN">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ACCESSION_NUMBER</property>
+      <property>TYPE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Marker" table="MARKER">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>MARKER_ID</property>
+      <property>TYPE</property>
+      <property>TAXON_ID</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="MarkerAlias" table="MARKER_ALIAS">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+    </logical-key>
+  </entity>
+
+<!-- Pathway package -->
+  <entity class="EntityName" table="PID_ENTITY_NAME">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>NAME</property>
+    </logical-key>
+  </entity>
+
+  <entity class="EntityAccession" table="PID_ENTITY_ACCESSION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ACCESSION</property>
+      <property>DATABASE</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Interaction" table="PID_INTERACTION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>SOURCE</property>
+      <property>MACRO_NAME</property>
+      <property>DISCRIMINATOR</property>
+    </logical-key>
+  </entity>
+
+
+  <entity class="Participant" table="PID_PARTICIPANT">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>LOCATION</property>
+      <property>PTM</property>
+      <property>CONDITION_NAME</property>
+      <property>ACTIVITY_STATE</property>
+      <property>DISCRIMINATOR</property>
+      <property entity="Interaction" foreign-key="INTERACTION_ID"/>
+    </logical-key>
+  </entity>
+
+  <entity class="PhysicalEntity" table="PID_PHYSICAL_ENTITY">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>PROT_SUBUNIT_START</property>
+      <property>PROT_SUBUNIT_STOP</property>
+      <property>DISCRIMINATOR</property>
+    </logical-key>
+  </entity>
+
+
+<entity class="SNP" table="SNP_TV">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>DB_SNP_ID</property>
+      <property entity="Chromosome" foreign-key="CHROMOSOME_ID"/>
+    </logical-key>
+  </entity>
+
+
+  <entity class="GeneRelativeLocation" table="GENE_RELATIVE_LOCATION" parallel="true">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property entity="Gene" foreign-key="GENE_ID"/>
+      <!-- Gene already maps us to Chromosome, so we can't map to the SNP entity 
+           because we'll get it again and that will confuse the SQL generator -->
+      <property table="SNP_TV" primary-key="ID" foreign-key="SNP_ID">DB_SNP_ID</property>
+    </logical-key>
+  </entity>
+  
+  <entity class="Evidence" table="EVIDENCE" parallel="false">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>PUBMED_ID</property>
+      <property>SENTENCE_SUBSTR</property>
+      <property>SENTENCE_STATUS</property>
+    </logical-key>
+  </entity> 
+  
+  <entity class="MarkerRelativeLocation" table="MARKER_RELATIVE_LOCATION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>TYPE</property>
+      <property>ORIENTATION</property>
+      <property entity="SNP" foreign-key="SNP_ID"/>
+    </logical-key>
+  </entity>
+
+  <entity class="Agent" table="AGENT">
+    <primary-key>AGENT_ID</primary-key>
+    <logical-key>
+      <property>AGENT_NAME</property>
+      <property>NSC_NUMBER</property>
+      <property>EVS_ID</property>
+    </logical-key>
+   </entity>
+   
+  <entity class="GeneFunctionAssociation" table="GENE_FUNCTION_ASSOCIATION_43" parallel="false">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property entity="Gene" foreign-key="GENE_ID"/>
+      <property entity="Agent" foreign-key="AGENT_ID"/>
+      <property entity="DiseaseOntology" foreign-key="HISTOLOGYCODE_ID"/>
+      <property>ROLE_ID</property>
+      <property entity="Evidence" foreign-key="EVIDENCE_ID"/>
+    </logical-key>
+  </entity>
+
+  <entity class="NucleicAcidSequence" table="NUCLEIC_ACID_SEQUENCE" parallel="true">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>ACCESSION_NUMBER</property>
+    </logical-key>
+   </entity> 
+ 
+  <entity class="Clone" table="CLONE_TV" parallel="true">
+    <primary-key>CLONE_ID</primary-key>
+    <logical-key>
+      <property>CLONE_NAME</property>
+      <property table="LIBRARY" primary-key="LIBRARY_ID" foreign-key="LIBRARY_ID">LIBRARY_NAME</property>
+    </logical-key>
+  </entity>
+  
+  <!-- depends on Gene being loaded first -->
+  <entity class="CytogeneticLocation" table="CYTOGENIC_LOCATION_CYTOBAND"> 
+    <primary-key>CYTOGENIC_LOCATION_ID</primary-key>
+    <logical-key>
+      	<property>START_CYTOBAND_LOC_ID</property>
+      	<property>END_CYTOBAND_LOC_ID</property>
+        <property entity="NucleicAcidSequence" foreign-key="NUCLEIC_ACID_SEQUENCE_ID"/>
+        <property entity="SNP" foreign-key="SNP_ID"/>
+	    <property table="GENE_TV" primary-key="GENE_ID" foreign-key="GENE_ID">BIG_ID</property>
+    </logical-key>
+  </entity>
+
+ <entity class="CloneRelativeLocation" table="CLONE_RELATIVE_LOCATION">
+    <primary-key>ID</primary-key>
+    <logical-key>
+      <property>TYPE</property>
+      <property entity="NucleicAcidSequence" foreign-key="NUCLEIC_ACID_SEQUENCE_ID"/>
+    </logical-key>
+  </entity>
+  
+</mapping>

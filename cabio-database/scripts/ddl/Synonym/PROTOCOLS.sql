@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM PROTOCOLS
+/
+
+--
+-- PROTOCOLS  (Synonym) 
+--
+--  Dependencies: 
+--   PROTOCOLS (Table)
+--
+CREATE PUBLIC SYNONYM PROTOCOLS FOR PROTOCOLS
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM IMT_TO_TISSUE
+/
+
+--
+-- IMT_TO_TISSUE  (Synonym) 
+--
+--  Dependencies: 
+--   IMT_TO_TISSUE (Table)
+--
+CREATE PUBLIC SYNONYM IMT_TO_TISSUE FOR IMT_TO_TISSUE
+/
+
+

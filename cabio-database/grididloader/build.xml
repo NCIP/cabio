@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+             Grid Object Identifier Framework ANT BUILD SCRIPT        
+                         <<  Modified for caBIO  >>
+                         
+  Run the big id generation and loading procedure.
+   
+  Input properties are "include" and "exclude" which define the classes to load,
+  and target.env which gives the target environment. By default, the dev 
+  environment will be loaded. 
+  
+  Example:
+  	ant -Dinclude="Gene SNP"
+  	This will generate and load big ids for the Gene and SNP objects. 
+ 
+**************************************************************************** -->
+<project name="Grid Object Identifier Framework" default="run" basedir=".">
+
+	<property name="include" value=""/>
+	<property name="exclude" value=""/>
+	<property name="target.env" value="dev"/>
+
+    <property name="lib.dir" value="lib"/>
+    <property name="build.dir" value="build"/>
+    <property name="conf.dir" value="conf"/>
+
+    <path id="libs">
+    	<pathelement location="${build.dir}/${conf.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <!-- build initialization -->
+    <target name="init">
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.dir}/${conf.dir}"/>
+    </target>
+        	
+    <!-- cleans the build artifacts -->
+    <target name="clean">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+        	
+    <!-- copy configuration into place -->
+    <target name="prepare" depends="init" 
+            description="Copies all necessary files with filtering.">
+
+        <copy file="${conf.dir}/db-${target.env}.properties"
+              tofile="${build.dir}/${conf.dir}/db.properties"
+              overwrite="true"/>
+            
+        <copy todir="${build.dir}/${conf.dir}" overwrite="true">
+            <fileset dir="${conf.dir}">
+                <include name="**/*.xml"/>
+                <include name="loader.properties"/>
+            </fileset>
+        </copy>
+        
+        <property file="${build.dir}/${conf.dir}/db.properties"/>
+        <filter token="url" value="${oracleloader.url}" />
+        <filter token="user" value="${oracleloader.user}" />
+        <filter token="password" value="${oracleloader.password}" />
+
+        <copy file="${conf.dir}/config.dct"
+              tofile="${build.dir}/${conf.dir}/config.dct"
+              overwrite="true" filtering="true"/>
+        
+    </target>
+
+    <!-- run the load procedure -->
+	<target name="run" depends="prepare" description="Runs the BidIdCreator">
+		<java classname="gov.nih.nci.grididloader.BigIdCreator" 
+			dir="${build.dir}" classpathref="libs" fork="yes">
+			<jvmarg value="-Xms512M"/>
+            <jvmarg value="-Xmx2048M"/>
+            <arg line="-I ${include}"/>
+            <arg line="-E ${exclude}"/>
+        </java>
+	</target>
+	
+</project>

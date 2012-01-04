@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM NEW_PROTEIN
+/
+
+--
+-- NEW_PROTEIN  (Synonym) 
+--
+--  Dependencies: 
+--   NEW_PROTEIN (Table)
+--
+CREATE PUBLIC SYNONYM NEW_PROTEIN FOR NEW_PROTEIN
+/
+
+
