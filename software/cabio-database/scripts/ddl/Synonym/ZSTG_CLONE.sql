@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_CLONE
+/
+
+--
+-- ZSTG_CLONE  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_CLONE (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_CLONE FOR ZSTG_CLONE
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_MOUSE_EST
+/
+
+--
+-- ZSTG_MOUSE_EST  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_MOUSE_EST (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_MOUSE_EST FOR ZSTG_MOUSE_EST
+/
+
+

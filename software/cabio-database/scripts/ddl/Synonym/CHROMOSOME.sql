@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM CHROMOSOME
+/
+
+--
+-- CHROMOSOME  (Synonym) 
+--
+--  Dependencies: 
+--   CHROMOSOME (Column)
+--
+CREATE PUBLIC SYNONYM CHROMOSOME FOR CHROMOSOME
+/
+
+

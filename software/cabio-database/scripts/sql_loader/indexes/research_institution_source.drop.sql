@@ -1,0 +1,4 @@
+
+drop index PK_RESEARCH_INSTITUTION_SOURCE;
+
+--EXIT;

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_CMAP_IDS
+/
+
+--
+-- ZSTG_CMAP_IDS  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_CMAP_IDS (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_CMAP_IDS FOR ZSTG_CMAP_IDS
+/
+
+

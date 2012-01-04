@@ -1,0 +1,4 @@
+
+drop index GDER;
+
+--EXIT;

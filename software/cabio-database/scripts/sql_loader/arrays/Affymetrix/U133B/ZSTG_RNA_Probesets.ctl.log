@@ -1,0 +1,91 @@
+
+SQL*Loader: Release 10.2.0.1.0 - Production on Tue Oct 6 13:21:27 2009
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Control File:   zstg_rna_probesets.ctl
+Data File:      /cabio/cabiodb/cabio_data/arrays/Affymetrix/U133B/HG-U133B.annot.csv
+  Bad File:     ZSTG_RNA_Probesets.ctl.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 13
+Errors allowed: 50000
+Continuation:    none specified
+Path used:      Direct
+
+Table ZSTG_RNA_PROBESETS_TMP, loaded from every logical record.
+Insert option in effect for this table: APPEND
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+PROBE_SET_ID                        FIRST     *   ,  O(") CHARACTER            
+GENECHIP_ARRAY                       NEXT     *   ,  O(") CHARACTER            
+SPECIES_SCIENTIFIC_NAME              NEXT     *   ,  O(") CHARACTER            
+ANNOTATION_DATE                      NEXT     *   ,  O(") CHARACTER            
+SEQUENCE_TYPE                        NEXT     *   ,  O(") CHARACTER            
+SEQUENCE_SOURCE                      NEXT     *   ,  O(") CHARACTER            
+TRANSCRIPT_ID                        NEXT     *   ,  O(") CHARACTER            
+TARGET_DESCRIPTION                   NEXT  4000   ,  O(") CHARACTER            
+REPRESENTATIVE_PUBLIC_ID             NEXT     *   ,  O(") CHARACTER            
+ARCHIVAL_UNIGENE_CLUSTER             NEXT     *   ,  O(") CHARACTER            
+UNIGENE_ID                           NEXT     *   ,  O(") CHARACTER            
+GENOME_VERSION                       NEXT     *   ,  O(") CHARACTER            
+ALIGNMENTS                           NEXT  2000   ,  O(") CHARACTER            
+GENE_TITLE                           NEXT 30000   ,  O(") CHARACTER            
+GENE_SYMBOL                          NEXT 30000   ,  O(") CHARACTER            
+CHROMOSOMAL_LOCATION                 NEXT 30000   ,  O(") CHARACTER            
+UNIGENE_CLUSTER_TYPE                 NEXT     *   ,  O(") CHARACTER            
+ENSEMBL                              NEXT  2000   ,  O(") CHARACTER            
+ENTREZ_GENE                          NEXT  1000   ,  O(") CHARACTER            
+SWISSPROT                            NEXT 30000   ,  O(") CHARACTER            
+EC                                   NEXT     *   ,  O(") CHARACTER            
+OMIM                                 NEXT     *   ,  O(") CHARACTER            
+REFSEQ_PROTEIN_ID                    NEXT  4000   ,  O(") CHARACTER            
+REFSEQ_TRANSCRIPT_ID                 NEXT  4000   ,  O(") CHARACTER            
+FLYBASE                              NEXT     *   ,  O(") CHARACTER            
+AGI                                  NEXT     *   ,  O(") CHARACTER            
+WORMBASE                             NEXT     *   ,  O(") CHARACTER            
+MGI_NAME                             NEXT     *   ,  O(") CHARACTER            
+RGD_NAME                             NEXT     *   ,  O(") CHARACTER            
+SGD_ACCESSION_NUMBER                 NEXT     *   ,  O(") CHARACTER            
+GO_BIOLOGICAL_PROCESS                NEXT 30000   ,  O(") CHARACTER            
+GO_CELLULAR_COMPONENT                NEXT 30000   ,  O(") CHARACTER            
+GO_MOLECULAR_FUNCTION                NEXT 30000   ,  O(") CHARACTER            
+PATHWAY                              NEXT 30000   ,  O(") CHARACTER            
+INTERPRO                             NEXT 30000   ,  O(") CHARACTER            
+TRANS_MEMBRANE                       NEXT 30000   ,  O(") CHARACTER            
+QTL                                  NEXT     *   ,  O(") CHARACTER            
+ANNOTATION_DESCRIPTION               NEXT  4000   ,  O(") CHARACTER            
+ANNOTATION_TRANSCRIPT_CLUSTER        NEXT 30000   ,  O(") CHARACTER            
+TRANSCRIPT_ASSIGNMENTS               NEXT 30000   ,  O(") CHARACTER            
+ANNOTATION_NOTES                     NEXT 30000   ,  O(") CHARACTER            
+
+SQL*Loader-292: ROWS parameter ignored when an XML, LOB or VARRAY column is loaded
+
+Table ZSTG_RNA_PROBESETS_TMP:
+  22659 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+Bind array size not used in direct path.
+Column array  rows :    5000
+Stream buffer bytes:  256000
+Read   buffer bytes: 1000000
+
+Total logical records skipped:         13
+Total logical records read:         22659
+Total logical records rejected:         0
+Total logical records discarded:        0
+Total stream buffers loaded by SQL*Loader main thread:       48
+Total stream buffers loaded by SQL*Loader load thread:      142
+
+Run began on Tue Oct 06 13:21:27 2009
+Run ended on Tue Oct 06 13:21:34 2009
+
+Elapsed time was:     00:00:07.20
+CPU time was:         00:00:03.55

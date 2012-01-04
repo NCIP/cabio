@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_SEQSTS
+/
+
+--
+-- ZSTG_SEQSTS  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_SEQSTS (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_SEQSTS FOR ZSTG_SEQSTS
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_TARGET
+/
+
+--
+-- ZSTG_TARGET  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_TARGET (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_TARGET FOR ZSTG_TARGET
+/
+
+

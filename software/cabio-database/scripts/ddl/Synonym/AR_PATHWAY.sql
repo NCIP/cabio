@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_PATHWAY
+/
+
+--
+-- AR_PATHWAY  (Synonym) 
+--
+--  Dependencies: 
+--   AR_PATHWAY (Table)
+--
+CREATE PUBLIC SYNONYM AR_PATHWAY FOR AR_PATHWAY
+/
+
+

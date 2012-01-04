@@ -1,0 +1,8 @@
+
+drop index ZSTG_PIDCTST_XREF_LWR;
+drop index ZSTG_PIDCTST_PID_PHYSIC;
+drop index ZSTG_PIDCTST_INTERACTIO;
+drop index ZSTG_PIDCTST_ORDER_OF_I;
+drop index ZSTG_PIDCTST_XREF;
+
+--EXIT;

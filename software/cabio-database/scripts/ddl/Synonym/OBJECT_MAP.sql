@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM OBJECT_MAP
+/
+
+--
+-- OBJECT_MAP  (Synonym) 
+--
+--  Dependencies: 
+--   OBJECT_MAP (Table)
+--
+CREATE PUBLIC SYNONYM OBJECT_MAP FOR OBJECT_MAP
+/
+
+
