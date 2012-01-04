@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+
+<server>
+  
+  <!--
+  <mbean code="org.jboss.varia.property.PropertyEditorManagerService" 
+	 name="jboss:type=Service,name=PropertyEditorManager">
+  </mbean>
+    -->
+
+    <mbean code="org.jboss.varia.property.SystemPropertiesService" 
+        name="jboss:type=Service,name=SystemProperties">
+  
+        <attribute name="Properties">
+            gov.nih.nci.cacore.cacoreProperties=C:/jboss-4.0.5.GA/server/default/data/cacore.properties
+        </attribute>
+    </mbean>
+
+</server>

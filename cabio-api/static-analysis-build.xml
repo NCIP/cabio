@@ -1,0 +1,747 @@
+<!-- *********************************************************************** -->
+<!-- ** PROJECT:   BDA Blueprints Web Application                         ** -->
+<!-- *********************************************************************** -->
+
+<project name="generic-sub-project" default="static-analysis" basedir="." 
+	xmlns:ivy="antlib:org.apache.ivy.ant"
+	xmlns="antlib:org.apache.tools.ant"
+	xmlns:cs="antlib:com.puppycrawl.tools.checkstyle"
+	>
+
+    <!-- ******************************************************************* -->
+    <!-- ** PROPERTIES / PATHS                                            ** -->
+    <!-- ******************************************************************* -->
+
+    <!-- Main -->
+    <property name="root.dir" location="${basedir}/../.." />
+    <property name="docs.dir" location="${root.dir}/docs" />
+    <property name="software.dir" location="${root.dir}/software" />
+    <property name="build.dir" location="${software.dir}/build" />
+    <property name="lib.dir" location="${software.dir}/target/lib" />
+    <property name="resource.dir" location="${software.dir}/common/resources" />
+    <property name="target.dir" location="${software.dir}/target/dist/exploded" />
+    <property name="reports.dir" location="${software.dir}/target/reports" />
+    <property name="common.dir" value="${software.dir}/common"/>
+
+    <property name="project.properties.file" value="${build.dir}/project.properties"/>
+    <property name="project.lib.dir" value="${software.dir}/cabioapi/build/output/cabio43/build/jar"/>
+    <property name="project.system.lib.dir" value="${software.dir}/cabioapi/system/lib"/>
+
+    <property file="${build.dir}/local.properties" />
+    <property file="${project.properties.file}"/>
+    <property file="${envpropertyfile}" />
+
+    <property name="checkstyle.config" value="${common.dir}/checkstyle/checkstyle_minimal.xml" />
+    
+    <!-- Ivy -->
+    <property name="ivy.jar" location="${lib.dir}/ivy-2.0.0-beta2.jar" />
+    <property name="ivy-cacore.file" value="ivy-cacore-2.0.0-beta2.jar"/>
+    <property name="ivy.settings.file" location="${common.dir}/ivysettings.xml" />
+    <property name="ivy.def.file" location="ivy-sub-project.xml" />
+
+    <property name="local.repo.dir" location="${software.dir}/local-ivy-repo" />
+    <property name="bda-utils.dir" location="${software.dir}/target/bda-utils" />
+
+    <property name="generic-webapp.java.dir" value="${build.dir}/src" />
+    <property name="generic-webapp.java.src.dir" value="${software.dir}/cabioapi/src" />   
+    <property name="generic-webapp.classes.dir" value="${software.dir}/cabioapi/build/output/cabio43/build/classes" />
+    <property name="generic-webapp.java.classes.dir" value="${generic-webapp.classes.dir}" /> 
+
+    <path id="ivy.classpath">
+	   <fileset dir="${software.dir}/target/lib">
+		<include name="*.jar" />
+	   </fileset>
+    </path>
+
+    <path id="cabioapi.full.classpath">
+	   <fileset dir="${project.lib.dir}">
+	   	 <include name="*.jar" />
+	   </fileset>
+	   <fileset dir="${project.system.lib.dir}">
+		 <include name="*.jar" />
+	   </fileset>
+    </path>	
+
+    <!-- Task definitions -->
+    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.classpath" />
+    <property name="bda.version" value="${bda.version}" />
+    <mkdir dir="${lib.dir}" />
+    <ant inheritAll="false" inheritRefs="false" dir="${software.dir}/common/bda-download"
+	    antfile="bda-ivy-build.xml" target="retrieve-bda">
+        <property name="bda.version" value="${bda.version}" />
+        <property name="bda-utils.dir" location="${bda-utils.dir}" />
+        <property name="lib.dir" location="${lib.dir}" />
+        <property name="software.dir" location="${software.dir}" />
+	<property name="bda.local.repo.dir" location="${software.dir}/../../bda-local-ivy-repo" />
+    </ant>
+
+    <import file="${bda-utils.dir}/bda-build-utils-${bda.version}.xml" />
+
+    <property name="reports.dir" value="${software.dir}/reports"/>
+    <property name="reports.simian.dir" value="${reports.dir}/simian"/>
+    <property name="reports.pmd.dir" value="${reports.dir}/pmd"/>
+    <property name="reports.checkstyle.dir" value="${reports.dir}/checkstyle"/>
+    <property name="reports.javancss.dir" value="${reports.dir}/javancss"/>
+    <property name="reports.findbugs.dir" value="${reports.dir}/findbugs"/>
+    <property name="reports.cobertura.dir" value="${reports.dir}/cobertura"/>
+	<property name="reports.junit.dir" value="${reports.dir}/junit"/>
+
+	<!-- Cobertura code coverage related properties -->
+    <property name="cobertura.src.dir" value="${generic-webapp.java.src.dir}"/>
+    <property name="cobertura.classes.dir" value="${software.dir}/cabioapi/build/custom/build"/>
+    <property name="cobertura.rpt.dir" value="${reports.cobertura.dir}/cabioapi"/>
+    <property name="cobertura.instrumented.dir" value="${basedir}/instrumented/cabioapi"/>
+    <property name="cobertura.report-xsl.file" value="${common.dir}/cobertura/cobertura-simple.xsl"/>
+    <property name="cobertura.ser.file" value="cobertura.ser"/>
+	<property name="cobertura.ser.updated.file" value="cobertura.updated.ser"/>
+    <property name="cobertura.config.file" value="${common.dir}/cobertura/cobertura.xml"/>
+	<property name="cobertura.includes" value="gov/nih/nci/**"/>
+    	
+	<property name="project.output.dir" value="${basedir}/output" />	
+	<property name="PROJECT_NAME" value="${cabio-webapp.project.name}"/>
+	<property name="custom.jar" value="${PROJECT_NAME}-client-framework.jar" />
+	
+	<property name="test.dir" value="${basedir}/test" />
+	
+	<target name="init:ivy">
+		<mkdir dir="${local.repo.dir}"/>
+		<!-- property name="ivy.dep.file" value="${ivy.def.file}"/ -->
+		<ivy:settings file="${ivy.settings.file}" />
+	</target>
+            
+	<target name="test:ivy-init" 
+		depends="
+		init:ivy,
+		test:ivy-test-selenium,
+		test:ivy-test-junit,
+		test:ivy-test-cobertura
+		"/>
+	<target name="test:ivy-test-selenium" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-selenium" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-selenium" />
+		<path id="project.test.selenium.classpath">
+			<fileset dir="${lib.dir}/test-selenium">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+	<target name="test:ivy-test-junit" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-junit" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-junit" />
+		<path id="project.test.junit.classpath">
+			<fileset dir="${lib.dir}/test-junit">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+	<target name="test:ivy-test-cobertura" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-cobertura" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-cobertura" />
+		<path id="cobertura.classpath">
+			<fileset dir="${lib.dir}/test-cobertura">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	    <taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+	</target>
+
+	<target name="static-analysis:ivy-init" 
+		depends="
+		init:ivy,
+		static-analysis:ivy-test-javancss,
+		static-analysis:ivy-test-checkstyle,
+		static-analysis:ivy-test-simian,
+		static-analysis:ivy-test-pmd,
+            test:ivy-test-cobertura  
+		"/>
+	<target name="static-analysis:ivy-test-javancss" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-javancss" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-javancss" />
+		<path id="project.test.javancss.classpath">
+			<fileset dir="${lib.dir}/test-javancss">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+	<target name="static-analysis:ivy-test-checkstyle" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-checkstyle" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-checkstyle" />
+		<path id="project.test.checkstyle.classpath">
+			<fileset dir="${lib.dir}/test-checkstyle">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+	<target name="static-analysis:ivy-test-pmd" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-pmd" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-pmd" />
+		<path id="project.test.pmd.classpath">
+			<fileset dir="${lib.dir}/test-pmd">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+	<target name="static-analysis:ivy-test-simian" depends="init:ivy" description="Updates the local ivy repository">
+		<ivy:resolve refresh="true" conf="test-simian" />
+		<ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision].[ext]" conf="test-simian" />
+		<path id="project.test.simian.classpath">
+			<fileset dir="${lib.dir}/test-simian">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</target>
+
+
+	<!-- This is a wrapper target for all static analysis targets -->
+	<target name="static-analysis" description="Performs static analysis"
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init,
+		static-analysis:findbugs-init,
+		static-analysis:simian,
+		static-analysis:pmd,
+		static-analysis:checkstyle,
+		static-analysis:javancss,
+		static-analysis:findbugs,
+		static-analysis:diff:pmd,
+		static-analysis:diff:checkstyle
+		">
+            <!-- 
+        	<fail if="checkstyle.failure" message="There were Checkstyle failures." />
+        	<fail if="pmd.failure" message="There were PMD failures." />
+           -->
+	</target>
+
+	<!-- Creates paths and  directories -->
+	<target name="static-analysis:init">
+		<mkdir dir="${reports.dir}"/>
+		<mkdir dir="${reports.simian.dir}"/>
+		<mkdir dir="${reports.pmd.dir}"/>
+		<mkdir dir="${reports.checkstyle.dir}"/>
+		<mkdir dir="${reports.javancss.dir}"/>
+		<mkdir dir="${reports.findbugs.dir}"/>
+		<mkdir dir="${reports.junit.dir}"/>
+	</target>
+
+	<!-- Findbugs is realy a full application that has ant support.  This target downloads the binaries for this distribution for use by ant target.  Additionaly setups a jboss installation to uses in the classpath of findbugs to cover runtime libraries -->
+	<target name="static-analysis:findbugs-init" >
+		<property name="temp.dir" value="${software.dir}/temp"/>
+		<mkdir dir="${temp.dir}"/>
+		<property name="findbugs.home.dir" value="${lib.dir}/${findbugs.binaries.relative.dir}"/>
+		<if>
+			<not>
+				<available file="${findbugs.home.dir}/lib/findbugs.jar"/>
+			</not>
+			<then>
+				<echo message="Findbugs is missing, downloading and isnstalling in ${findbugs.home.dir}"/>
+				<get src="${findbugs.src.url}"
+					dest="${temp.dir}/${findbugs.binaries.file}"/>
+				<unzip dest="${lib.dir}" src="${temp.dir}/${findbugs.binaries.file}" />
+			</then>
+		</if>
+		<path id="project.test.findbugs.classpath">
+			<fileset dir="${findbugs.home.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</path>
+	</target>
+
+	<!-- One target and one macro have been written for each static-analysis tool.  The macro runs static-analysis on an one set of values. The target then calls the macro with values for each sub-project.  If a user wanted to add options to the static-analysis tool in the the macro, they could add an attribute, refer to that attribute in the static-analysis call and then add the option to each of the calls to the marco in the wrapper target.
+	-->
+	<!-- Runs Simian a code duplication reporter.
+		You can find additional information about simian at:
+		http://www.redhillconsulting.com.au/products/simian/installation.html
+		-->
+	<target name="static-analysis:simian" depends="static-analysis:init" description="Performs code duplication analysis">
+		<static-analysis-simian
+			simian.src.dir="${generic-webapp.java.src.dir}"
+			simian.rpt.dir="${reports.simian.dir}"
+			simian.report-xsl.file="${common.dir}/simian/simian.xsl"
+			simian.xml.name="simian-generic-webapp.xml"
+			simian.html.name="simian-generic-webapp.html"
+			/>
+
+	</target>
+	<macrodef name="static-analysis-simian">
+		<attribute name="simian.src.dir"/>
+		<attribute name="simian.rpt.dir"/>
+		<attribute name="simian.report-xsl.file"/>
+		<attribute name="simian.xml.name" default="simian.xml"/>
+		<attribute name="simian.html.name" default="simian.html"/>
+		<sequential>
+			<taskdef resource="simiantask.properties" classpathref="project.test.simian.classpath" />
+			<simian
+				failureProperty="simian.failure"
+				failOnDuplication="failse"
+				>
+				<fileset dir="@{simian.src.dir}" includes="**/*.java"/>
+				<formatter type="xml" toFile="@{simian.rpt.dir}/@{simian.xml.name}"/>
+			</simian>
+			<xslt in="@{simian.rpt.dir}/@{simian.xml.name}" out="@{simian.rpt.dir}/@{simian.html.name}" style="@{simian.report-xsl.file}" />
+		</sequential>
+	</macrodef>
+
+	<target name="static-analysis:pmd"
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<static-analysis-pmd
+			pmd.src.dir="${generic-webapp.java.src.dir}"
+			pmd.rpt.dir="${reports.pmd.dir}"
+			pmd.root-dir.name="software"
+			pmd.sub-project.name="cabioapi"
+			pmd.report-xsl.file="${common.dir}/pmd/pmd-report.xslt"
+			pmd.report-preprocessor.file="${common.dir}/pmd/pmd-hudson-preprocessor.xlst"
+			pmd.rule-set.file="${common.dir}/pmd/pmd-ruleset-basic.xml"
+			pmd.xml.name="pmd-report.xml"
+			pmd.html.name="pmd-report.html"
+			/>
+	</target>
+
+	<macrodef name="static-analysis-pmd">
+		<attribute name="pmd.src.dir"/>
+		<attribute name="pmd.rpt.dir"/>
+		<attribute name="pmd.root-dir.name"/>
+		<attribute name="pmd.sub-project.name"/>
+		<attribute name="pmd.report-preprocessor.file"/>
+		<attribute name="pmd.report-xsl.file"/>
+		<attribute name="pmd.rule-set.file"/>
+		<attribute name="pmd.xml.name" default="pmd.xml"/>
+		<attribute name="pmd.html.name" default="pmd.html"/>
+		<sequential>
+			<property name="pmd.sub-project.rpt.dir" value="@{pmd.rpt.dir}/@{pmd.sub-project.name}/target"/>
+			<mkdir dir="${pmd.sub-project.rpt.dir}"/>
+			<taskdef name="pmd" 
+				classname="net.sourceforge.pmd.ant.PMDTask"
+				classpathref="project.test.pmd.classpath"/>
+			<pmd 
+				rulesetfiles="@{pmd.rule-set.file}"
+				shortFilenames="true" 
+				failonerror="false"
+				failurespropertyname="pmd.failure"
+				targetjdk="1.5"
+				>
+				<formatter type="xml"
+					toFile="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}" />
+				<fileset dir="@{pmd.src.dir}">
+					<include name="**/*.java"/>
+				</fileset>
+			</pmd>
+			<move file="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}" tofile="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"/>
+			<xslt taskname="pmd"
+				in="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"
+				out="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}"
+				style="@{pmd.report-preprocessor.file}">
+				<param name="relative.path" expression="@{pmd.root-dir.name}/@{pmd.sub-project.name}"/>
+			</xslt>
+
+			<xslt taskname="pmd"
+				in="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"
+				out="${pmd.sub-project.rpt.dir}/@{pmd.html.name}"
+				style="@{pmd.report-xsl.file}"/>
+		</sequential>
+	</macrodef>
+
+
+
+
+
+
+
+
+
+	<target name="static-analysis:diff:pmd"
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<static-analysis-diff-pmd			
+			differential.file.name="diff_list.txt"
+			pmd.src.dir="${generic-webapp.java.src.dir}"
+			pmd.rpt.dir="${reports.pmd.dir}"
+			pmd.root-dir.name="software"
+			pmd.sub-project.name="generic-webapp"
+			pmd.report-xsl.file="${common.dir}/pmd/pmd-report.xslt"
+			pmd.report-preprocessor.file="${common.dir}/pmd/pmd-hudson-preprocessor.xlst"
+			pmd.rule-set.file="${common.dir}/pmd/pmd-ruleset-basic.xml"
+			pmd.xml.name="pmd-report.xml"
+			pmd.html.name="pmd-report.html"
+			/>
+		<replaceregexp file="${project.properties.file}" byline="true" match="^(pmd.revision.number)=(.*)" replace="\1=${build.svn.revision}"/>		
+	</target>
+
+	<macrodef name="static-analysis-diff-pmd">
+		<attribute name="property.file" default="project.properties"/>
+		<attribute name="differential.file.name" default="diff_list.txt" />
+		<attribute name="pmd.src.dir"/>
+		<attribute name="pmd.rpt.dir"/>
+		<attribute name="pmd.root-dir.name"/>
+		<attribute name="pmd.sub-project.name"/>
+		<attribute name="pmd.report-preprocessor.file"/>
+		<attribute name="pmd.report-xsl.file"/>
+		<attribute name="pmd.rule-set.file"/>
+		<attribute name="pmd.xml.name" default="pmd.xml"/>
+		<attribute name="pmd.html.name" default="pmd.html"/>
+		<sequential>
+			<property name="pmd.sub-project.rpt.dir" value="@{pmd.rpt.dir}/@{pmd.sub-project.name}/target"/>			
+			<mkdir dir="${pmd.sub-project.rpt.dir}"/>
+			<taskdef name="pmd" 
+				classname="net.sourceforge.pmd.ant.PMDTask"
+				classpathref="project.test.pmd.classpath"/>
+				
+			<diffrevision old.revision.number="${pmd.revision.number}" differential.file.name="@{differential.file.name}" />	
+			<pmd 
+				rulesetfiles="@{pmd.rule-set.file}"
+				shortFilenames="true" 
+				failonerror="false"
+				failurespropertyname="pmd.failure"
+				targetjdk="1.5"
+				>
+				<formatter type="xml"
+					toFile="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}" />
+				<fileset dir="@{pmd.src.dir}">
+					<patternset>
+						<includesfile name="@{differential.file.name}"/> 
+					</patternset>				      
+				</fileset>
+			</pmd>
+			<move file="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}" tofile="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"/>
+			<xslt taskname="pmd"
+				in="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"
+				out="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}"
+				style="@{pmd.report-preprocessor.file}">
+				<param name="relative.path" expression="@{pmd.root-dir.name}/@{pmd.sub-project.name}"/>
+			</xslt>
+
+			<xslt taskname="pmd"
+				in="${pmd.sub-project.rpt.dir}/@{pmd.xml.name}.bak"
+				out="${pmd.sub-project.rpt.dir}/@{pmd.html.name}"
+				style="@{pmd.report-xsl.file}"/>				
+		</sequential>
+	</macrodef>
+
+
+	<!-- Runs JavaNCSS a tool that identifies code Cyclomatic Complexity.
+		You can find additional information about JavaNCSS at:
+		http://www.kclee.de/clemens/java/javancss/
+		-->
+	<target name="static-analysis:javancss"
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<static-analysis-javancss
+			javancss.src.dir="${generic-webapp.java.src.dir}"
+			javancss.rpt.dir="${reports.javancss.dir}"
+			javancss.report-xsl.file="${common.dir}/javancss/javancss2methodhtml.xsl"
+			javancss.xml.name="javancss_metrics_generic-webapp.xml"
+			javancss.html.name="javancss_report_generic-webapp.html"
+			/>
+	</target>
+
+	<macrodef name="static-analysis-javancss">
+		<attribute name="javancss.src.dir"/>
+		<attribute name="javancss.rpt.dir"/>
+		<attribute name="javancss.report-xsl.file"/>
+		<attribute name="javancss.xml.name" default="javancss.xml"/>
+		<attribute name="javancss.html.name" default="javancss.html"/>
+		<sequential>
+			<taskdef name="javancss" classpathref="project.test.javancss.classpath" classname="javancss.JavancssAntTask" />
+			<javancss
+				srcdir="@{javancss.src.dir}"
+				includes="**/*.java"
+				excludes="**/*test*/*"
+				generatereport="true"
+				outputfile="@{javancss.rpt.dir}/@{javancss.xml.name}"
+				ccnPerFuncMax="10"
+				format="xml">
+			</javancss>
+			<xslt taskname="javancss"
+				in="@{javancss.rpt.dir}/@{javancss.xml.name}"
+				out="@{javancss.rpt.dir}/@{javancss.html.name}"
+				style="@{javancss.report-xsl.file}"/>
+		</sequential>
+	</macrodef>
+
+      <property name="findbugs.auxclasspath" refid="cabioapi.full.classpath"/>
+
+	<!-- Runs Findbugs a tool that attempts to find bugs.
+		You can find additional information about findbugs at:
+		http://findbugs.sourceforge.net/
+		-->
+	<target name="static-analysis:findbugs" 
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:findbugs-init,
+		static-analysis:init
+		">
+		<mkdir dir="${reports.findbugs.dir}/cabioapi"/>
+
+		<static-analysis-findbugs
+			findbugs.home.dir="${findbugs.home.dir}"
+			findbugs.src.dir="${generic-webapp.java.src.dir}"
+			findbugs.classes.dir="${generic-webapp.java.classes.dir}"
+			findbugs.rpt.dir="${reports.findbugs.dir}/cabioapi"
+			findbugs.report-xsl.file="${findbugs.home.dir}/src/xsl/fancy.xsl"
+			findbugs.app.classpath.ref="cabioapi.full.classpath" 
+			findbugs.xml.name="findbugs.xml"
+			findbugs.html.name="findbugs.html"
+			/>
+	</target>
+
+	<macrodef name="static-analysis-findbugs">
+		<attribute name="findbugs.home.dir"/>
+		<attribute name="findbugs.src.dir"/>
+		<attribute name="findbugs.rpt.dir"/>
+		<attribute name="findbugs.classes.dir"/>
+		<attribute name="findbugs.report-xsl.file"/>
+		<attribute name="findbugs.app.classpath.ref"/>
+		<attribute name="findbugs.xml.name" default="findbugs.xml"/>
+		<attribute name="findbugs.html.name" default="findbugs.html"/>
+		<sequential>
+			<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="project.test.findbugs.classpath"/>
+
+			<findbugs home="@{findbugs.home.dir}"
+				output="xml:withMessages"
+				outputFile="@{findbugs.rpt.dir}/@{findbugs.xml.name}"
+				jvmargs="-Xms128m -Xmx512m"
+				>
+				<auxClasspath path="${findbugs.auxclasspath}"  />
+					<!--
+					<fileset dir="@{findbugs.app.classpath.dir}">
+						<include name="**/*.jar" />
+					</fileset>
+					-->
+					<!-- fileset refid="@{findbugs.app.classpath.ref}"/ -->				
+
+				<sourcePath path="@{findbugs.src.dir}" />
+				<class location="@{findbugs.classes.dir}" />
+			</findbugs>
+			<xslt taskname="findbugs"
+				in="@{findbugs.rpt.dir}/@{findbugs.xml.name}"
+				out="@{findbugs.rpt.dir}/@{findbugs.html.name}"
+				style="@{findbugs.report-xsl.file}"
+				/>
+		</sequential>
+	</macrodef>
+
+	<!-- Runs CheckStyle is a codeing standard violation reporter.  
+		You can find additional information about checkstyle at:
+		http://checkstyle.sourceforge.net/
+		-->
+	<target name="static-analysis:checkstyle" 
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<static-analysis-checkstyle
+			checkstyle.src.dir="${generic-webapp.java.src.dir}"
+			checkstyle.rpt.dir="${reports.checkstyle.dir}"
+			checkstyle.report-xsl.file="${common.dir}/checkstyle/checkstyle-simple.xsl"
+			checkstyle.config.file="${checkstyle.config}"
+			checkstyle.xml.name="checkstyle.xml"
+			checkstyle.html.name="checkstyle.html"
+			checkstyle.classpath.ref.name="project.test.checkstyle.classpath"
+			/>
+	</target>
+
+	<macrodef name="static-analysis-checkstyle">
+		<attribute name="checkstyle.src.dir"/>
+		<attribute name="checkstyle.rpt.dir"/>
+		<attribute name="checkstyle.report-xsl.file"/>
+		<attribute name="checkstyle.config.file"/>
+		<attribute name="checkstyle.xml.name" default="checkstyle.xml"/>
+		<attribute name="checkstyle.html.name" default="checkstyle.html"/>
+		<attribute name="checkstyle.classpath.ref.name" />
+		<sequential>
+			<taskdef resource="checkstyletask.properties"
+				uri="antlib:com.puppycrawl.tools.checkstyle"
+				classpathref="project.test.checkstyle.classpath"/>
+			<cs:checkstyle config="@{checkstyle.config.file}"
+				failureProperty="checkstyle.failure" 
+				failOnViolation="false"
+				maxerrors="0" 
+				maxwarnings="0"
+				classpathref="@{checkstyle.classpath.ref.name}"
+				>
+				<formatter type="xml" 
+					tofile="@{checkstyle.rpt.dir}/@{checkstyle.xml.name}"/>
+				<fileset dir="@{checkstyle.src.dir}">
+					<include name="**/*.java"/>
+				</fileset>
+			</cs:checkstyle>
+			<xslt taskname="checkstyle"
+				in="@{checkstyle.rpt.dir}/@{checkstyle.xml.name}"
+				out="@{checkstyle.rpt.dir}/@{checkstyle.html.name}"
+				style="@{checkstyle.report-xsl.file}"
+				>
+				<param name="output.dir" expression="@{checkstyle.rpt.dir}" />
+			</xslt>
+
+		</sequential>
+	</macrodef>
+
+	<target name="static-analysis:diff:checkstyle" 
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<static-analysis-diff-checkstyle
+			differential.file.name="diff_list.txt"
+			checkstyle.src.dir="${generic-webapp.java.src.dir}"
+			checkstyle.rpt.dir="${reports.checkstyle.dir}/changeset"
+			checkstyle.report-xsl.file="${common.dir}/checkstyle/checkstyle-simple.xsl"
+			checkstyle.config.file="${checkstyle.config}"
+			checkstyle.xml.name="checkstyle.xml"
+			checkstyle.html.name="checkstyle.html"
+			checkstyle.classpath.ref.name="project.test.checkstyle.classpath"
+			/>
+		<replaceregexp file="${project.properties.file}" byline="true" match="^(checkstyle.revision.number)=(.*)" replace="\1=${build.svn.revision}"/> 	
+	</target>
+	
+	<macrodef name="static-analysis-diff-checkstyle">
+		<attribute name="differential.file.name" default="diff_list.txt" />
+		<attribute name="checkstyle.src.dir"/>
+		<attribute name="checkstyle.rpt.dir"/>
+		<attribute name="checkstyle.report-xsl.file"/>
+		<attribute name="checkstyle.config.file"/>
+		<attribute name="checkstyle.xml.name" default="checkstyle.xml"/>
+		<attribute name="checkstyle.html.name" default="checkstyle.html"/>
+		<attribute name="checkstyle.classpath.ref.name" />
+
+		<sequential>
+                  <delete file="@{differential.file.name}" /> 
+                  <touch file="@{differential.file.name}" />
+			<diffrevision old.revision.number="${checkstyle.revision.number}" differential.file.name="@{differential.file.name}" />
+
+			<taskdef resource="checkstyletask.properties"
+				uri="antlib:com.puppycrawl.tools.checkstyle"
+				classpathref="project.test.checkstyle.classpath"/>
+
+			<mkdir dir="@{checkstyle.rpt.dir}"/>
+			
+			<cs:checkstyle config="@{checkstyle.config.file}"
+				failureProperty="checkstyle.failure" 
+				failOnViolation="false"
+				maxerrors="0" 
+				maxwarnings="0"
+				classpathref="@{checkstyle.classpath.ref.name}"
+				>
+
+				<formatter type="xml" 
+					tofile="@{checkstyle.rpt.dir}/@{checkstyle.xml.name}"/>
+
+				<fileset dir="@{checkstyle.src.dir}">
+					<patternset>
+						<includesfile name="@{differential.file.name}"/> 
+					</patternset>	    
+				</fileset>  
+			</cs:checkstyle>
+
+			<xslt taskname="checkstyle"
+			  in="@{checkstyle.rpt.dir}/@{checkstyle.xml.name}"
+			  out="@{checkstyle.rpt.dir}/@{checkstyle.html.name}"
+			  style="@{checkstyle.report-xsl.file}"
+			  />  			 
+		</sequential>
+	</macrodef>
+
+	
+	
+	<!-- Runs Cobertura a code coveragetool.
+		You can find additional information about cobertura at:
+		http://cobertura.sourceforge.net/
+		-->
+	<target name="static-analysis:cobertura" 
+		depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<mkdir dir="${basedir}/instrumented/cabioapi"/>
+		<static-analysis-cobertura
+			cobertura.src.dir="${generic-webapp.java.src.dir}"
+			cobertura.classes.dir="${software.dir}/cabioapi/build/custom/build"
+			cobertura.rpt.dir="${reports.cobertura.dir}/cabioapi"
+			cobertura.instrumented.dir="${basedir}/instrumented/cabioapi"
+			cobertura.report-xsl.file="${common.dir}/cobertura/cobertura-simple.xsl"
+			cobertura.ser.file="cobertura.ser"
+			cobertura.config.file="${common.dir}/cobertura/cobertura.xml"
+			/>
+	</target>
+
+    <target name="static-analysis:cobertura-instrument" if="ci.server" 
+	          depends="static-analysis:ivy-init, static-analysis:init"
+	          description="Instruments Cobertura test classes">
+	    <!-- wait to do this until ivy has populated the directory -->
+	    <taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+
+    	<!-- Unwar the file for easy instrument of jar files -->
+		<unzip src="${project.output.dir}/webapp/${PROJECT_NAME}.war" dest="${cobertura.instrumented.dir}/tmp">
+		    <patternset>
+		        <include name="**/${custom.jar}"/>
+		    </patternset>
+		</unzip>
+
+	    <cobertura-instrument datafile="${cobertura.instrumented.dir}/${cobertura.ser.file}">	
+      	  <fileset dir="${cobertura.instrumented.dir}/tmp/WEB-INF/lib">
+	    	   <include name="${custom.jar}" />
+	      </fileset>	
+	    </cobertura-instrument>
+	        	
+    	<zip destfile="${project.output.dir}/webapp/${PROJECT_NAME}.war" update="true">
+			<fileset dir="${cobertura.instrumented.dir}/tmp">
+				<include name="**/*"/>				
+			</fileset>
+    		<zipfileset dir="${lib.dir}/test-cobertura" includes="cobertura-*.jar" prefix="WEB-INF/lib"/>
+    	</zip>    	
+    	
+    	<delete includeEmptyDirs="true">
+    	    <fileset dir="${cobertura.instrumented.dir}/tmp" includes="**/*"/>
+    		<fileset dir="${cobertura.instrumented.dir}" includes="tmp"/>
+    	</delete>
+	</target>
+	
+	<macrodef name="static-analysis-cobertura">
+		<attribute name="cobertura.src.dir"/>
+		<attribute name="cobertura.rpt.dir"/>
+		<attribute name="cobertura.classes.dir"/>
+		<attribute name="cobertura.instrumented.dir"/>
+		<attribute name="cobertura.report-xsl.file"/>
+		<attribute name="cobertura.ser.file"/>
+		<attribute name="cobertura.config.file"/>
+		<sequential>
+			<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+			
+			<cobertura-report datafile="@{cobertura.instrumented.dir}/@{cobertura.ser.updated.file}" format="html" destdir="${cobertura.rpt.dir}">
+				<fileset dir="@{cobertura.src.dir}">
+					<include name="**/*.java" />
+				</fileset>
+			</cobertura-report>
+
+			<cobertura-check failureproperty="cobertura.failure" datafile="@{cobertura.instrumented.dir}/@{cobertura.ser.file}" haltonfailure="false" linerate="0" packagebranchrate="0" packagelinerate="0" totalbranchrate="25" totallinerate="30" />
+		</sequential>
+	</macrodef>
+	
+		
+    <target name="static-analysis:junit" if="ci.server" description="Runs all unit tests">
+        <ant dir="${test.dir}" target="report" 
+              inheritall="false" inheritrefs="false">
+        	<property name="report.dir" value="${reports.junit.dir}" />
+        </ant>
+    </target>
+
+	<target name="static-analysis:cobertura-report" if="ci.server" depends="
+		static-analysis:ivy-init,
+		static-analysis:init
+		">
+		<cobertura-report datafile="${cobertura.instrumented.dir}/${cobertura.ser.updated.file}" format="xml" destdir="${cobertura.rpt.dir}">
+			<fileset dir="${cobertura.src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cobertura-report>
+		
+		<cobertura-check failureproperty="cobertura.failure" datafile="${cobertura.instrumented.dir}/${cobertura.ser.updated.file}" haltonfailure="false" linerate="0" packagebranchrate="0" packagelinerate="0" totalbranchrate="25" totallinerate="30" />
+	</target>
+	
+</project>

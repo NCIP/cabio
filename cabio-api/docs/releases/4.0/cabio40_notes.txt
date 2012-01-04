@@ -1,0 +1,343 @@
+
+                                     caBIO 
+                                  Version 4.0
+
+                                 Release Notes
+                               December 6, 2007
+
+
+               National Cancer Institute Center for Bioinformatics
+
+================================================================================
+                                    Contents
+================================================================================
+
+1.0 New Features and Updates
+2.0 Completed Features
+3.0 Resolved Issues
+4.0 Known Issues
+5.0 CVS Tags
+6.0 Bugs and Support
+7.0 Documentation
+
+================================================================================
+                           1.0 New Features and Updates
+================================================================================
+
+--------------------------------------------------------------------------------
+ 1.1 caBIO Model 
+--------------------------------------------------------------------------------
+
+   Annotations for the following microarray platforms is now available in caBIO:
+
+   o Expression Arrays 
+       * Affymetrix U133 Plus 2.0 Array
+       * Agilent 44K Array
+       * Agilent Human Genome CGH 244K 
+   o SNP Arrays
+       * Affymetrix 500K Array
+       * Affymetrix 100K Array
+       * Illumina 550K Array
+   o Exon Arrays
+       * Affymetrix Exon 1.0 ST
+
+   The following domain objects in caBIO are new in this release:
+   
+     * Microarray
+     * ExpressionArrayReporter
+     * SNPArrayReporter
+     * ExonArrayReporter
+     * RelativeLocation
+     * MarkerRelativeLocation
+     * ProteinDomain
+     * Transcript
+     * Marker 
+     * Exon
+
+   In addition, data derived from microarray annotations added to the 
+   following objects:
+   
+     * SNP
+     * PopulationFrequency
+     * NucleicAcidSequence
+     * GeneRelativeLocation
+     * PhysicalLocation (Exon and Transcript locations)
+
+   For details, please consult the implementation document in caBIO GForge:
+   "Implemention and data specification to support Affymetrix, Illumina, 
+   and Agilent Arrays data" 
+
+
+--------------------------------------------------------------------------------
+ 1.2 caBIO API
+--------------------------------------------------------------------------------
+
+   The API has been regenerated using the caCORE SDK 4.0. The new SDK version 
+   includes many changes to its Java API, and users are encouraged to refer to 
+   the caBIO 4.0 Technical Guide for more information about migrating to the 
+   new API.
+
+--------------------------------------------------------------------------------
+ 1.3 Unit Tests
+--------------------------------------------------------------------------------
+
+   A total of 91 new unit tests were added to the cabioapi CVS repository. 
+   They may be found under the cabiodb/cabioapi/test/ directory and run with 
+   the provided Ant build script or Eclipse.
+
+--------------------------------------------------------------------------------
+ 1.4 FreestyleLM Search 
+--------------------------------------------------------------------------------
+
+  The FreestyleLM (Lexical Mine) is a text based search engine that provides an 
+  alternate machanism to search the caBIO domain objects. The FreestyleLM is 
+  built upon the Hibernate search engine which implements Lucene search.
+
+  The following features were added to the caBIO API:
+
+  o An IndexGenerator that generates indexes for selected domain objects.
+
+  o New "search" method in the ApplicationService class:
+  
+	  public List search(gov.nih.nci.search.SearchQuery searchQuery) 
+
+  o New domain objects for searching using the above method:
+  
+	  gov.nih.nci.search.SearchQuery
+	  gov.nih.nci.search.SearchResults
+	  gov.nih.nci.search.RangeFilter
+	  gov.nih.nci.search.Sort 
+
+
+================================================================================
+                             2.0 Completed Features
+================================================================================
+
+  GF5847: Add accession description to NucleicAcidSequence
+
+  GF4492: Array data modeling
+
+  GF5357: Logs should be centralized
+
+  GF6872: Newer Version of chromosome band annotation data available
+
+  GF7081: Newer version of human and mouse EST annotation data from UCSC
+
+  GF7344: Newer version of MRNA Data (downloaded from UCSC) is available
+
+  GF7627: Improve performance of caBIO data load scripts
+
+  GF8428: caBIO shall log version information for the data sources.
+
+  GF8431: Latest version of Uniprot Data available
+
+  GF8489: Add FreestyleLM search box to caBIO Home Page
+
+  GF8756: Latest version of Unigene Data available
+
+
+================================================================================
+                              3.0 Resolved Issues
+================================================================================
+
+  GF4472: PopulationFrequency alleles use forward/reverse strands inconsistently
+
+  GF4473: GeneRelativeLocation.type is loaded incorrectly
+
+  GF4507: Add CTEP dataloads to the automatic data processing steps
+
+  GF6293: SNP's should have unique rs id's
+
+  GF5847: Add accession description to NucleicAcidSequence
+
+  GF6107: Provenance queries slow
+
+  GF6293: SNP's should have unique rs id's
+
+  GF6418: Add merged SNP mapping
+ 
+  GF7080: Newer version of Uniprot data available
+
+  GF7391: it throws "Error while executing nested search criteria query"
+
+  GF7639: "caCORE HTTP Servlet Error:" when search taxon
+
+  GF7659: getDiseaseOntology returns nothing from ProtocolAssociation
+
+  GF7660: ant runevswsdemo failed to execute
+
+  GF7661: ant rundemo failed to execute
+
+  GF7663: there are two "id" search criteria in PhysicalLocation object
+
+  GF7740: Location of SNP on chromosome (for SNPs on chromosome X and Y) are 
+          not populated
+
+  GF7662: caCORE HTTP Servlet Error: when getProteinSequence from Protein
+ 
+  GF8432: Happy.jsp Page Cannot Perform Basic Gene Search on BRCA1
+
+  GF8542: HTTP Servlet Error: when Search Provenance via Happy.jsp
+
+  GF8292: HTTP Status 500 When Conducting FreeStyleLM Search
+
+  GF8053: Error on Fuzzy Search during FreeStyleLM Search Test
+
+  GF4600: TSC SNP data file download broken
+
+  GF7659: getDiseaseOntology returns nothing from ProtocolAssociation
+
+  GF7662: caCORE HTTP Servlet Error: when getProteinSequence 
+
+  GF7674: Bug in GO_Data Load
+
+  GF7739: Modify data refresh script to reflect location of Unigene Data on 
+          NCICB's FTP Servers
+
+  GF7740: Location of SNP on chromosome (for SNPs on chromosome X and Y) are 
+          not populated
+
+  GF7745: organOntologyRelationship31_LD PL/SQL procedure does not refresh
+
+  GF7746: diseaseRelationship31_ld procedure does not refresh
+
+  GF7747: Cytoband and PhysicalLocation relationship cardinality
+
+  GF7750: Too many links between Gene and SNP/endCytoband.
+
+  GF7753: geneRelativeLocation "distance" not matching "orientation" of SNP
+
+  GF7842: Gene chromosome/taxon mismatch
+
+  GF8084: GeneAlias data not populated
+
+  GF8105: Unnecessary attributes expose foreign keys in Location/Provenance
+
+  GF8117: Duplicates in CytogeneticLocation
+
+  GF8420: AllTests Failed in the latest caCORE40 QA Build
+
+  GF8543: HibernateException: CGLIB Enhancement failed when Search
+          Provenance through Java API
+
+  GF8549: ProbeSet Annotations for Affy Array Annotations on Chromosomes X and 
+          Y missing
+
+  GF8551: Multi-chromosome Probesets locations not loaded in Affymetrix HG U133 
+          Plus2 Arrays
+
+  GF8663: Leading "*" causing 500 error.
+
+  GF8665: Missing links to startCytoband and endCytoband from 
+          CytogeneticLocation.
+
+  GF8747: missing one record every page when search w* in free styl LM.
+
+  GF8850: TranscriptArrayReporter and ArrayReporter queries are slow
+
+  GF8853: Missing index on CLONE_RELATIVE_LOCATION.NUCLEIC_ACID_SEQUENCE_ID
+
+  GF8856: Queries involving RelativeLocation are slow
+
+  GF8985: BRCA* genes have no pathways
+
+  GF9014: PROTEIN_PROTEIN_ALIAS is empty
+ 
+  GF9015: PHYSICAL_LOCATION table missing indexes on foreign keys
+
+  GF9089: Duplicates in GeneRelativeLocation 
+
+  GF9107: Duplicates in Cytoband/ZSTG_SNP_AFFY
+
+  GF9243: Encounter exceptions while searching SourceReference, 
+          URLSourceReference, and WebServicesSourceReference
+
+  GF9254: FreestyleLM should recognize bigIds and do an efficient lookup 
+          instead of using the indexes
+
+  GF9257: Query Location and other object takes long time and require very 
+          large memory
+
+  GF9391: Unable to search bigid
+
+  GF9421: Using WS, getDataObject throws serialization exception
+
+  GF9545: Modify Affymetrix HuMapping parser for successful array data load
+
+  GF9554: Demo programs in demo directory did not return data
+
+  GF9555: remote client's demo program generates error messages
+  
+  GF9577: Attributes should have functional indexes on lower(attr)
+  
+  GF9608: caBIO ICON and release note need to be updated
+
+  GF9609: Query SearchQuery and GridIdQuery objects generate error message
+
+================================================================================
+                               4.0 Known Issues 
+================================================================================
+
+The following defects are known to exist in this build:
+
+  GF9264: Incorrect relationship among Library, Histopathology, Gene
+
+  GF9267: Incorrect Gene_GeneAlias relationship
+
+  GF9419: Unable to get Chromosome from CytogeneticLocation object
+
+  GF9578: Freestyle search does not accept special characters like "(" "-"
+  
+  GF9750: Gene-ExpressionArrayReporter-Sequence-Gene inconsistent association
+  
+  GF8237: Missing link between PhysicalLocation and Cytoband
+
+
+The following SDK defects are known to exist and affect caBIO functionality:
+
+  GF8638: Several UI issues in Internet Explorer
+
+  GF8641: UI stops responding in Firefox
+
+  GF8852: One-to-one associations are fetched one by one
+
+
+================================================================================
+                                 5.0 CVS Tags
+================================================================================
+
+  The caBIO code base is found in the cabiodb repository, under "cabioapi". The
+  final CVS tag for this release is:
+
+  CABIO_40_RELEASE
+
+  The version of the SDK which this release of caBIO was tested with is found 
+  in the cacoresdk repostitory, under "SDK4". The CVS tag is:
+
+  CACORE_SDK_40_RC2_11022007
+
+
+================================================================================
+                              6.0 Bugs and Support
+================================================================================
+
+There are multiple ways to get assistance with and provide feedback on caBIO:
+
+  o Contact NCICB Application Support at ncicb@pop.nci.nih.gov 
+  
+  o Post your questions to the caBIO_Users or caBIO_Developers listserv. You 
+    may join either of these mailing lists at: 
+        * https://list.nih.gov/archives/cabio_users.html 
+        * https://list.nih.gov/archives/cabio_developers.html 
+        
+  o Join the caBIO GForge project at https://gforge.nci.nih.gov/projects/cabiodb 
+    to view existing caBIO feature requests and defects
+ 
+
+================================================================================
+                               7.0 Documentation
+================================================================================
+
+The release documentation can be found at:
+http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/guide
+
