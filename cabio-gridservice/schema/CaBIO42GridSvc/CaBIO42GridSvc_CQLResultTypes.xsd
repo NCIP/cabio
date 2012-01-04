@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://cabio.cagrid.nci.nih.gov/CaBIO42GridSvc/CQLResultTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    <!-- Exposed Objects' schemas are imported here -->
+	<xs:import namespace="gme://caCORE.caBIO/4.2/gov.nih.nci.common.domain" schemaLocation="gov.nih.nci.common.domain.xsd"/>
+	<xs:import namespace="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways" schemaLocation="gov.nih.nci.cabio.pathways.xsd"/>
+	<xs:import namespace="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain" schemaLocation="gov.nih.nci.common.provenance.domain.xsd"/>
+	<xs:import namespace="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain" schemaLocation="gov.nih.nci.cabio.domain.xsd"/>
+
+
+
+    <xs:group name="PermissibleCQLObjectResults">
+        <xs:choice>        
+        <!-- element references to exposed objects -->
+		<xs:element ref="ns0:GeneRegulation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:ComplexEntity" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:EntityName" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:PhysicalParticipant" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Macroprocess" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:EntityAccession" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Interaction" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:ProteinSubunit" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:PathwayReference" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:FamilyMember" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Output" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Participant" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:PositiveControl" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:ComplexComponent" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:RNAEntity" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Input" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:BiochemicalReaction" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:SmallMoleculeEntity" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:NegativeControl" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:ProteinEntity" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:Condition" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:PhysicalEntity" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways"/>
+		<xs:element ref="ns0:DatabaseCrossReference" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.domain"/>
+		<xs:element ref="ns0:PublicationSource" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:WebServicesSourceReference" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:URLSourceReference" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:InternetSource" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:Provenance" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:Source" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:ResearchInstitutionSource" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:SourceReference" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.common.provenance.domain"/>
+		<xs:element ref="ns0:GeneDiseaseAssociation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Cytoband" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneOntology" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Histopathology" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ExonArrayReporter" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:NucleicAcidSequence" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ProteinAlias" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Target" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Library" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:MarkerRelativeLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneCytogeneticLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Transcript" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:CytogeneticLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Taxon" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneAlias" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:EvidenceCode" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:SNPPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:MarkerAlias" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Vocabulary" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ExpressionArrayReporter" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Agent" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneFunctionAssociation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Exon" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:RelativeLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Protein" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneAgentAssociation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:TranscriptArrayReporter" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:DiseaseOntology" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneRelativeLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GenePhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:PopulationFrequency" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Microarray" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:SNPArrayReporter" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:HomologousAssociation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ArrayReporterPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Location" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:OrganOntologyRelationship" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ArrayReporterCytogeneticLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:CytobandPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:OrganOntology" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:SNPCytogeneticLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Protocol" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Anomaly" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Marker" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Clone" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ProteinDomain" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Chromosome" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ProtocolAssociation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:MessengerRNA" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Gene" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Tissue" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:GeneOntologyRelationship" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:NucleicAcidPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Pathway" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:Evidence" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ProteinSequence" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ExpressedSequenceTag" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:CloneRelativeLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ClinicalTrialProtocol" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:TranscriptPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:DiseaseOntologyRelationship" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:ArrayReporter" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:SNP" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:MarkerPhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+		<xs:element ref="ns0:PhysicalLocation" xmlns:ns0="gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.domain"/>
+ 
+        </xs:choice>
+    </xs:group>
+</xs:schema>
