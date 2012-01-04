@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WebWorksHelpTOC version="5.0" xmlns="urn:WebWorks-Help-TOC-Schema">
+  <i t="Welcome to the caBIO Portlet Online Help" l="0">
+    <i t="Using the Online Help" l="1" />
+  </i>
+  <i t="Using the caBIO Portlet" l="2">
+    <i t="Understanding the caBIO Portlet" l="3" />
+    <i t="Searching caBIO Data" l="4">
+      <i t="Performing a Simple Search" l="5" />
+      <i t="Performing a Templated Search" l="6">
+        <i t="Genome Range Queries" l="7" />
+        <i t="Microarray Annotations" l="8" />
+        <i t="Genomic Annotations" l="9" />
+        <i t="Pathways" l="10" />
+        <i t="Cancer Gene Index" l="11" />
+      </i>
+    </i>
+  </i>
+  <i t="caBIO Portlet Glossary" l="12" />
+  <i t="Using Application Support" l="13" />
+</WebWorksHelpTOC>
