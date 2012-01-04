@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>create_indexes</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_status>0</trans_status>
+    <directory>&#47;</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>Y</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <modified_user>-</modified_user>
+  <modified_date>2010&#47;08&#47;18 16:45:48.186</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>cabio</name>
+    <server>${cabio_db_host_name}</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>${cabio_db_name}</database>
+    <port>${cabio_db_port_number}</port>
+    <username>${cabio_db_username}</username>
+    <password>${cabio_db_password}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${cabio_db_port_number}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  </order>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>cabio</connection>
+    <execute_each_row>N</execute_each_row>
+    <replace_variables>Y</replace_variables>
+    <sql>
+
+CREATE BITMAP index MA_FEATUTURE_DISCRIMINA_lwr on MA_FEATURE(lower(DISCRIMINATOR)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_VALIDATION_lwr on MA_FEATURE(lower(VALIDATION_STATUS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FLANK_lwr on MA_FEATURE(lower(FLANK)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_CODING_STA_lwr on MA_FEATURE(lower(CODING_STATUS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_AMINO_ACID_lwr on MA_FEATURE(lower(AMINO_ACID_CHANGE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FEATURE_TY_lwr on MA_FEATURE(lower(FEATURE_TYPE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_SYMBOL_lwr on MA_FEATURE(lower(SYMBOL)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FULL_NAME_lwr on MA_FEATURE(lower(FULL_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_CHR_X_PSEU_lwr on MA_FEATURE(lower(CHR_X_PSEUDO_AUTOSOMAL_REGION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_FEATUTURE_feature_ID on MA_FEATURE(feature_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+CREATE BITMAP index MA_FEATUTURE_DISCRIMINA on MA_FEATURE(DISCRIMINATOR) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+create index MA_FEATUTURE_VALIDATION on MA_FEATURE(VALIDATION_STATUS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FLANK on MA_FEATURE(FLANK) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_CODING_STA on MA_FEATURE(CODING_STATUS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_CHR_X_PSEU on MA_FEATURE(CHR_X_PSEUDO_AUTOSOMAL_REGION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_AMINO_ACID on MA_FEATURE(AMINO_ACID_CHANGE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FEATURE_TY on MA_FEATURE(FEATURE_TYPE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_SYMBOL on MA_FEATURE(SYMBOL) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_FEATUTURE_FULL_NAME on MA_FEATURE(FULL_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+create index MA_ARRAYRTER_NAME_lwr on MA_ARRAY_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_ARRAYRTER_MICROARRAY on MA_ARRAY_REPORTER(MICROARRAY_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_ARRAYRTER_NAME on MA_ARRAY_REPORTER(NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+
+create index MA_PHYSITION_ORIENTATIO_lwr on MA_PHYSICAL_LOCATION(lower(ORIENTATION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_PHYSITION_ARRAY_REPO on MA_PHYSICAL_LOCATION(ARRAY_REPORTER_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_PHYSITION_ORIENTATIO on MA_PHYSICAL_LOCATION(ORIENTATION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_PHYSITION_END_COORDI on MA_PHYSICAL_LOCATION(END_COORDINATE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_PHYSITION_START_COOR on MA_PHYSICAL_LOCATION(START_COORDINATE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_PHYSITION_CHROMOSOME on MA_PHYSICAL_LOCATION(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+
+create index MA_REL_LTURE_LOCATION_I on MA_REL_LOCATION_FEATURE(LOCATION_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_REL_LTURE_FEATURE_ID on MA_REL_LOCATION_FEATURE(FEATURE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+create index MA_REL_GTION_NAS_VARIAT on MA_REL_GENE_NAS_VARIATION(NAS_VARIATION_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_REL_GTION_GENE_ID on MA_REL_GENE_NAS_VARIATION(GENE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+create index MA_REL_GRTER_ARRAY_REPO on MA_REL_GENE_ARRAY_REPORTER(ARRAY_REPORTER_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_REL_GRTER_GENE_ID on MA_REL_GENE_ARRAY_REPORTER(GENE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_DISEAEASE_NAMECODE_O_lwr on MA_DISEASE(lower(NAMECODE_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C_lwr on MA_DISEASE(lower(NAMECODE_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C2_lwr on MA_DISEASE(lower(NAMECODE_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C3_lwr on MA_DISEASE(lower(NAMECODE_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C4_lwr on MA_DISEASE(lower(NAMECODE_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_ORIGI_lwr on MA_DISEASE(lower(NAME_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES_lwr on MA_DISEASE(lower(NAME_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES2_lwr on MA_DISEASE(lower(NAME_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES3_lwr on MA_DISEASE(lower(NAME_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODE_lwr on MA_DISEASE(lower(NAME_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_DISEAEASE_NAMECODE_O on MA_DISEASE(NAMECODE_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C on MA_DISEASE(NAMECODE_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C2 on MA_DISEASE(NAMECODE_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C3 on MA_DISEASE(NAMECODE_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAMECODE_C4 on MA_DISEASE(NAMECODE_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_ORIGI on MA_DISEASE(NAME_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES on MA_DISEASE(NAME_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES2 on MA_DISEASE(NAME_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODES3 on MA_DISEASE(NAME_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DISEAEASE_NAME_CODE on MA_DISEASE(NAME_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+
+
+create index MA_THERAGENT_NAMECODE_O_lwr on MA_THERAPEUTIC_AGENT(lower(NAMECODE_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C_lwr on MA_THERAPEUTIC_AGENT(lower(NAMECODE_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C2_lwr on MA_THERAPEUTIC_AGENT(lower(NAMECODE_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C3_lwr on MA_THERAPEUTIC_AGENT(lower(NAMECODE_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C4_lwr on MA_THERAPEUTIC_AGENT(lower(NAMECODE_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_ORIGI_lwr on MA_THERAPEUTIC_AGENT(lower(NAME_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES_lwr on MA_THERAPEUTIC_AGENT(lower(NAME_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES2_lwr on MA_THERAPEUTIC_AGENT(lower(NAME_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES3_lwr on MA_THERAPEUTIC_AGENT(lower(NAME_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODE_lwr on MA_THERAPEUTIC_AGENT(lower(NAME_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_DESCRIPTIO_lwr on MA_THERAPEUTIC_AGENT(lower(DESCRIPTION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_THERAGENT_NAMECODE_O on MA_THERAPEUTIC_AGENT(NAMECODE_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C on MA_THERAPEUTIC_AGENT(NAMECODE_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C2 on MA_THERAPEUTIC_AGENT(NAMECODE_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C3 on MA_THERAPEUTIC_AGENT(NAMECODE_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAMECODE_C4 on MA_THERAPEUTIC_AGENT(NAMECODE_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_ORIGI on MA_THERAPEUTIC_AGENT(NAME_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES on MA_THERAPEUTIC_AGENT(NAME_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES2 on MA_THERAPEUTIC_AGENT(NAME_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODES3 on MA_THERAPEUTIC_AGENT(NAME_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_NAME_CODE on MA_THERAPEUTIC_AGENT(NAME_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_THERAGENT_DESCRIPTIO on MA_THERAPEUTIC_AGENT(DESCRIPTION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+ 
+
+create bitmap index MA_MOLECTION_DISCRIMINA_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(DISCRIMINATOR)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_ORIGI_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(ROLE_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(ROLE_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES2_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(ROLE_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES3_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(ROLE_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODE_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(ROLE_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_ORIGI_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(TERM_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(TERM_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES2_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(TERM_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES3_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(TERM_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODE_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(TERM_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_SOURCE_lwr on MA_MOLECULAR_SEQ_ANNOTATION(lower(SOURCE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+CREATE bitmap index MA_MOLECTION_DISCRIMINA on MA_MOLECULAR_SEQ_ANNOTATION(DISCRIMINATOR) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_DISEASE_ID on MA_MOLECULAR_SEQ_ANNOTATION(DISEASE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_THERAPEUTI on MA_MOLECULAR_SEQ_ANNOTATION(THERAPEUTIC_AGENT_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_ORIGI on MA_MOLECULAR_SEQ_ANNOTATION(ROLE_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES on MA_MOLECULAR_SEQ_ANNOTATION(ROLE_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES2 on MA_MOLECULAR_SEQ_ANNOTATION(ROLE_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODES3 on MA_MOLECULAR_SEQ_ANNOTATION(ROLE_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_ROLE_CODE on MA_MOLECULAR_SEQ_ANNOTATION(ROLE_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_ORIGI on MA_MOLECULAR_SEQ_ANNOTATION(TERM_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES on MA_MOLECULAR_SEQ_ANNOTATION(TERM_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES2 on MA_MOLECULAR_SEQ_ANNOTATION(TERM_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODES3 on MA_MOLECULAR_SEQ_ANNOTATION(TERM_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_TERM_CODE on MA_MOLECULAR_SEQ_ANNOTATION(TERM_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_MOLECTION_SOURCE on MA_MOLECULAR_SEQ_ANNOTATION(SOURCE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+ 
+
+
+create index MA_REL_FTION_FEATURE_ID on MA_REL_FEATURE_MS_ANNOTATION(FEATURE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_REL_FTION_MOLECULAR_ on MA_REL_FEATURE_MS_ANNOTATION(MOLECULAR_SEQ_ANNOTATION_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+create index MA_DATABENCE_DATABASE_N_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DATABASE_NAME_ORIGINALTEXT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N2_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DATABASE_NAME_CODESYS_NAME)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N3_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DATABASE_NAME_CODESYS_VERSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N4_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DATABASE_NAME_CODESYS)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N5_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DATABASE_NAME_CODE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+CREATE bitmap index MA_DATABENCE_DISCRIMINA_lwr on MA_DATABASE_CROSS_REFERENCE(lower(DISCRIMINATOR)) local PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_IDENTIFIER_lwr on MA_DATABASE_CROSS_REFERENCE(lower(IDENTIFIER_EXTENSION)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_IDENTIFIER3_lwr on MA_DATABASE_CROSS_REFERENCE(lower(IDENTIFIER_ROOT)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_DATABENCE_DATABASE_N on MA_DATABASE_CROSS_REFERENCE(DATABASE_NAME_ORIGINALTEXT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N2 on MA_DATABASE_CROSS_REFERENCE(DATABASE_NAME_CODESYS_NAME) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N3 on MA_DATABASE_CROSS_REFERENCE(DATABASE_NAME_CODESYS_VERSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N4 on MA_DATABASE_CROSS_REFERENCE(DATABASE_NAME_CODESYS) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_DATABASE_N5 on MA_DATABASE_CROSS_REFERENCE(DATABASE_NAME_CODE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_GENE_ID on MA_DATABASE_CROSS_REFERENCE(GENE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_VARIATION_ on MA_DATABASE_CROSS_REFERENCE(VARIATION_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_THERAPEUTI on MA_DATABASE_CROSS_REFERENCE(THERAPEUTIC_AGENT_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create bitmap index MA_DATABENCE_DISCRIMINA on MA_DATABASE_CROSS_REFERENCE(DISCRIMINATOR) local PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_IDENTIFIER on MA_DATABASE_CROSS_REFERENCE(IDENTIFIER_EXTENSION) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_DATABENCE_IDENTIFIER2 on MA_DATABASE_CROSS_REFERENCE(IDENTIFIER_ROOT) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+CREATE index MA_DATABENCE_gene_alias on MA_DATABASE_CROSS_REFERENCE(gene_alias_gene_id) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+
+
+create index MA_HOMOLTION_HOMOLOGOUS on MA_HOMOLOGOUS_ASSOCIATION(HOMOLOGOUS_GENE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_HOMOLTION_GENE_ID on MA_HOMOLOGOUS_ASSOCIATION(GENE_ID) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_HOMOLTION_SIMILARITY on MA_HOMOLOGOUS_ASSOCIATION(SIMILARITY_PERCENTAGE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+create index MA_ALLELLELE_SEQUENCE_lwr on MA_ALLELE(lower(SEQUENCE)) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+create index MA_ALLELLELE_SNP_ID on MA_ALLELE(variation_id) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+create index MA_ALLELLELE_SEQUENCE on MA_ALLELE(SEQUENCE) PARALLEL NOLOGGING tablespace ${prod_tablspc};
+
+
+</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>250</xloc>
+      <yloc>140</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>process_array_data</name>
+    <description/>
+    <extended_description/>
+    <job_version/>
+    <job_status>0</job_status>
+  <directory>&#47;</directory>
+  <created_user>-</created_user>
+  <created_date>2010&#47;08&#47;25 14:38:05.627</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2010&#47;08&#47;25 14:38:05.627</modified_date>
+    <parameters>
+    </parameters>
+  <connection>
+    <name>cabio</name>
+    <server>${cabio_db_host_name}</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>${cabio_db_name}</database>
+    <port>${cabio_db_port_number}</port>
+    <username>${cabio_db_username}</username>
+    <password>${cabio_db_password}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${cabio_db_port_number}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+    <slaveservers>
+    </slaveservers>
+  <logconnection/>
+  <logtable/>
+  <size_limit_lines/>
+   <use_batchid>Y</use_batchid>
+   <pass_batchid>N</pass_batchid>
+   <use_logfield>Y</use_logfield>
+   <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>START</name>
+      <description>Special entries</description>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>77</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>load_array_report</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${code_base}${file.separator}load_array_report.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>363</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>load_microarray</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename>${code_base}${file.separator}load_microarray.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>217</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>Success 1</name>
+      <description>Success</description>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>507</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>Mail 20</name>
+      <description>Mail</description>
+      <type>MAIL</type>
+      <server>${smtp_server}</server>
+      <port/>
+      <destination>${email_to}</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>${email_from}</replyto>
+      <replytoname>MA Service ETL</replytoname>
+      <subject>MA service data processing failed</subject>
+      <include_date>N</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>stopped at &quot;load_array_report&quot;</comment>
+      <include_files>N</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>N</use_auth>
+      <use_secure_auth>N</use_secure_auth>
+      <auth_user/>
+      <auth_password>Encrypted </auth_password>
+      <only_comment>Y</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <secureconnectiontype>SSL</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>      </filetypes>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>362</xloc>
+      <yloc>218</yloc>
+      </entry>
+    <entry>
+      <name>Mail 19</name>
+      <description>Mail</description>
+      <type>MAIL</type>
+      <server>${smtp_server}</server>
+      <port/>
+      <destination>${email_to}</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>${email_from}</replyto>
+      <replytoname>MA Service ETL</replytoname>
+      <subject>MA service data processing failed</subject>
+      <include_date>N</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>stopped at &quot;load_microarray&quot;</comment>
+      <include_files>N</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>N</use_auth>
+      <use_secure_auth>N</use_secure_auth>
+      <auth_user/>
+      <auth_password>Encrypted </auth_password>
+      <only_comment>Y</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <secureconnectiontype>SSL</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>      </filetypes>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>214</xloc>
+      <yloc>217</yloc>
+      </entry>
+    <entry>
+      <name>Abort job 1</name>
+      <description>Abort job</description>
+      <type>ABORT</type>
+      <message/>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>286</xloc>
+      <yloc>325</yloc>
+      </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>START</from>
+      <to>load_microarray</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>load_microarray</from>
+      <to>load_array_report</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_array_report</from>
+      <to>Success 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_microarray</from>
+      <to>Mail 19</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>load_array_report</from>
+      <to>Mail 20</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Mail 19</from>
+      <to>Abort job 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Mail 20</from>
+      <to>Abort job 1</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+</job>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+                             MA Service unit tests
+**************************************************************************** -->
+<project name="MAService Unit Tests" default="alltests" basedir=".">
+
+	<property name="test" value="MaServiceTest" />
+    <property name="client.dir" value="../target/dist/exploded/output/maservice/package/remote-client" />	
+    <property name="lib.dir" value="lib" />
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="build" />
+	<property name="report.dir" value="report" />
+
+    <path id="libs">
+        <!-- pathelement location="${client.dir}/conf"/ -->
+    	<pathelement location="conf"/>
+        <pathelement location="${build.dir}"/>
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${client.dir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for building the tests                                   -->
+	<!-- ********************************************************************-->
+
+	<target name="check-built-condition">
+		<condition property="system-built">
+			<available file="${client.dir}"/>
+		</condition>
+	</target>
+		
+	<target name="check-built" depends="check-built-condition" 
+			unless="system-built">
+		<echo message="System must be built before running demos." />
+	</target>
+	
+    <target name="clean"
+    		description="Removes generated artifacts">
+        <delete dir="${build.dir}" quiet="true"/>
+    </target>
+        	
+	<target name="init" depends="clean" 
+			description="Creates necessary directories">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${report.dir}"/>
+	</target>
+				
+    <target name="compile" depends="init,check-built" if="system-built"
+            description="Compiles the unit tests">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" 
+            encoding="cp1252" debug="true" debuglevel="lines,source">
+            <classpath refid="libs"/>
+        </javac>        
+    </target>
+
+	<!-- ********************************************************************-->
+	<!--    Targets for running the tests                                    -->
+	<!-- ********************************************************************-->
+
+    <target name="report" depends="alltests">
+		<junitreport todir="${report.dir}">
+		    <fileset dir="${basedir}">
+		      <include name="TEST-*.xml" />
+		    </fileset>
+		    <report todir="${report.dir}" />
+		</junitreport>
+	</target>
+		
+    <target name="alltests" depends="compile" if="system-built">
+		<junit printsummary="yes" fork="yes" dir="${basedir}">
+	      <classpath refid="libs" />
+		  <formatter type="xml"/>
+		  <test name="gov.nih.nci.maservice.junit.MaServiceTest"/>
+		</junit>
+	</target>
+
+    <target name="run" depends="compile" if="system-built">
+		<junit printsummary="yes" fork="yes" dir="${basedir}">
+	      <classpath refid="libs" />
+		  <formatter type="plain"/>
+		  <test name="gov.nih.nci.maservice.junit.${test}"/>
+		</junit>
+	</target>	
+</project>

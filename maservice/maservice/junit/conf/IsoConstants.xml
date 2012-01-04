@@ -1,0 +1,2251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd	http://www.springframework.org/schema/util	http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+	default-lazy-init="false" default-dependency-check="none" default-autowire="no">
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.alleles" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="alleles"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.aminoAcidChange" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="aminoAcidChange"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.chrXPseudoAutosomalRegion" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="chrXPseudoAutosomalRegion"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Bl"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.codingStatus" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="codingStatus"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.flank" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="flank"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.validationStatus" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="validationStatus"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Bl"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.featureType" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="featureType"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.SingleNucleotidePolymorphism.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Genome.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Genome.assemblySource" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="assemblySource"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Genome.assemblyVersion" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="assemblyVersion"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.AgentAssociation.role" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="role"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.AgentAssociation.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.AgentAssociation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.ArrayReporter.name" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="name"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.ArrayReporter.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.MolecularFunction.term" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="term"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.MolecularFunction.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.MolecularFunction.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Chromosome.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Chromosome.name" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="name"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.annotationDate" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="annotationDate"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ts"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.annotationVersion" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="annotationVersion"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.dbSNPVersion" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="dbSNPVersion"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.description" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="description"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.genomeVersion" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="genomeVersion"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.LSID" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="LSID"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.manufacturer" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="manufacturer"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.name" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="name"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Microarray.type" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="type"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.MolecularSequenceAnnotation.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.MolecularSequenceAnnotation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation.featureType" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="featureType"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidSequenceVariation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Organism.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Organism.commonName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="commonName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Organism.ncbiTaxonomyId" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="ncbiTaxonomyId"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Organism.scientificName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="scientificName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Organism.taxonomyRank" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="taxonomyRank"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.FunctionalAssociation.role" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="role"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.FunctionalAssociation.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.FunctionalAssociation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.BiologicalProcess.term" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="term"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.BiologicalProcess.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.BiologicalProcess.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DiseaseAssociation.role" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="role"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DiseaseAssociation.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DiseaseAssociation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Gene.fullName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="fullName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Gene.symbol" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="symbol"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Gene.featureType" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="featureType"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Gene.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidPhysicalLocation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidPhysicalLocation.endCoordinate" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="endCoordinate"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Int"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidPhysicalLocation.startCoordinate" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="startCoordinate"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Int"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidPhysicalLocation.orientation" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="orientation"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.GeneIdentifier.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.GeneIdentifier.databaseName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="databaseName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.GeneIdentifier.identifier" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="identifier"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgent.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgent.description" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="description"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgent.name" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="name"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.VariationIdentifier.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.VariationIdentifier.databaseName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="databaseName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.VariationIdentifier.identifier" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="identifier"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DatabaseCrossReference.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DatabaseCrossReference.databaseName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="databaseName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.DatabaseCrossReference.identifier" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="identifier"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.OntologyAnnotation.term" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="term"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.OntologyAnnotation.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.OntologyAnnotation.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.CellularComponent.term" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="term"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.CellularComponent.source" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="source"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.St"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.CellularComponent.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgentIdentifier.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgentIdentifier.databaseName" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="databaseName"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.TherapeuticAgentIdentifier.identifier" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="identifier"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Disease.name" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="name"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.Disease.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidSequenceFeature.featureType" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="featureType"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Cd"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystem"/>
+                    <property name="constantValue" value="CD Code System"/>
+                    <property name="instance" value="CD Code System"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemName"/>
+                    <property name="constantValue" value="CD Code System Name"/>
+                    <property name="instance" value="CD Code System Name"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="codeSystemVersion"/>
+                    <property name="constantValue" value="1.1 HF2"/>
+                    <property name="instance" value="1.1 HF2"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+      <bean id="gov.nih.nci.maservice.domain.NucleicAcidSequenceFeature.id" class="gov.nih.nci.iso21090.hibernate.node.ComplexNode">
+          <constructor-arg value="id"/>
+          <property name="isoClassName" value="gov.nih.nci.iso21090.Ii"/>
+          <property name="innerNodes">
+              <list>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="root"/>
+                    <property name="constantValue" value="2.16.12.123.456.1"/>
+                    <property name="instance" value="2.16.12.123.456.1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="displayable"/>
+                    <property name="constantValue" value="1"/>
+                    <property name="instance" value="1"/>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="scope"/>
+                    <property name="constantValue" value="OBJ"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierScope.OBJ"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="reliability"/>
+                    <property name="constantValue" value="ISS"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.IdentifierReliability.ISS"/>
+                    </property>
+                 </bean>
+                 <bean class="gov.nih.nci.iso21090.hibernate.node.ConstantNode">
+                    <constructor-arg value="nullFlavor"/>
+                    <property name="constantValue" value="NI"/>
+                    <property name="instance">
+                       <util:constant static-field="gov.nih.nci.iso21090.NullFlavor.NI"/>
+                    </property>
+                 </bean>
+              </list>
+          </property>
+      </bean>
+</beans>
