@@ -1,1 +1,0 @@
-package gov.nih.nci.caBIOApp.sod;import gov.nih.nci.caBIOApp.util.ConfigurationException;public interface SODFactory {    public SearchableObjectsDescription getSOD()    throws ConfigurationException;}
