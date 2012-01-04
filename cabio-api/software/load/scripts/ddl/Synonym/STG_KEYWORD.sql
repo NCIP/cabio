@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM STG_KEYWORD
+/
+
+--
+-- STG_KEYWORD  (Synonym) 
+--
+--  Dependencies: 
+--   STG_KEYWORD (Table)
+--
+CREATE PUBLIC SYNONYM STG_KEYWORD FOR STG_KEYWORD
+/
+
+

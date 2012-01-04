@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_PATHWAY_TMP
+/
+
+--
+-- AR_PATHWAY_TMP  (Synonym) 
+--
+--  Dependencies: 
+--   AR_PATHWAY_TMP (Table)
+--
+CREATE PUBLIC SYNONYM AR_PATHWAY_TMP FOR AR_PATHWAY_TMP
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM SNP_REPORTER
+/
+
+--
+-- SNP_REPORTER  (Synonym) 
+--
+--  Dependencies: 
+--   SNP_REPORTER (Table)
+--
+CREATE PUBLIC SYNONYM SNP_REPORTER FOR SNP_REPORTER
+/
+
+

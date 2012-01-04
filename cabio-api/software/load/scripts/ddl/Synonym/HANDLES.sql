@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM HANDLES
+/
+
+--
+-- HANDLES  (Synonym) 
+--
+--  Dependencies: 
+--   HANDLES (Table)
+--
+CREATE PUBLIC SYNONYM HANDLES FOR HANDLES
+/
+
+

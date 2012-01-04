@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_UNIGENE_ID
+/
+
+--
+-- AR_UNIGENE_ID  (Synonym) 
+--
+--  Dependencies: 
+--   AR_UNIGENE_ID (Table)
+--
+CREATE PUBLIC SYNONYM AR_UNIGENE_ID FOR AR_UNIGENE_ID
+/
+
+

@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM LOCATION_TV
+/
+
+--
+-- LOCATION_TV  (Synonym) 
+--
+--  Dependencies: 
+--   LOCATION_TV (Table)
+--
+CREATE PUBLIC SYNONYM LOCATION_TV FOR LOCATION_TV
+/
+
+

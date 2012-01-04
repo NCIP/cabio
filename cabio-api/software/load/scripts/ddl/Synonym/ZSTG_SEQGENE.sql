@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM ZSTG_SEQGENE
+/
+
+--
+-- ZSTG_SEQGENE  (Synonym) 
+--
+--  Dependencies: 
+--   ZSTG_SEQGENE (Table)
+--
+CREATE PUBLIC SYNONYM ZSTG_SEQGENE FOR ZSTG_SEQGENE
+/
+
+

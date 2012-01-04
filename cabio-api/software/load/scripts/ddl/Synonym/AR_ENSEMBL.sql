@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM AR_ENSEMBL
+/
+
+--
+-- AR_ENSEMBL  (Synonym) 
+--
+--  Dependencies: 
+--   AR_ENSEMBL (Table)
+--
+CREATE PUBLIC SYNONYM AR_ENSEMBL FOR AR_ENSEMBL
+/
+
+

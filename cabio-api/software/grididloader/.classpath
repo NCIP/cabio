@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="src" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"/>
+	<classpathentry path="lib/commons-cli-1.0.jar" kind="lib"/>
+	<classpathentry path="lib/dom4j.jar" kind="lib"/>
+	<classpathentry path="lib/handle.jar" kind="lib"/>
+	<classpathentry path="lib/ojdbc14.jar" kind="lib"/>
+	<classpathentry path="build" kind="output"/>
+</classpath>

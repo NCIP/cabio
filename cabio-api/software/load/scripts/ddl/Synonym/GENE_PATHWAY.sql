@@ -1,0 +1,13 @@
+DROP PUBLIC SYNONYM GENE_PATHWAY
+/
+
+--
+-- GENE_PATHWAY  (Synonym) 
+--
+--  Dependencies: 
+--   GENE_PATHWAY (Table)
+--
+CREATE PUBLIC SYNONYM GENE_PATHWAY FOR GENE_PATHWAY
+/
+
+
