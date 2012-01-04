@@ -1,4 +1,0 @@
-
-alter trigger EVIDENCE_CODE_ID_TRIGGER DISABLE;
-
---EXIT;

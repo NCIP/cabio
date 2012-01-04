@@ -1,4 +1,0 @@
-
-create index GENE_KEYWORD_KEYWORD_lwr on GENE_KEYWORDS(lower(KEYWORD)) PARALLEL NOLOGGING tablespace CABIO;
-
---EXIT;

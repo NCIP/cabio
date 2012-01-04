@@ -1,8 +1,0 @@
-
-drop index ZSTG_PIDNAME_NAMETYPE_LWR;
-drop index ZSTG_PIDNAME_NAME_LWR;
-drop index ZSTG_PIDNAME_PHYSICALEN;
-drop index ZSTG_PIDNAME_NAMETYPE;
-drop index ZSTG_PIDNAME_NAME;
-
---EXIT;
