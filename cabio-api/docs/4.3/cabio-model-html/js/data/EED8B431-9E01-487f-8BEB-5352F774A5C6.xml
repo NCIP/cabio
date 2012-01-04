@@ -1,7 +1,0 @@
-tocTab[tocTab.length] = new Array("5.2.3.1:1", "", "«Application» cabio: caBIO API Version 3.0", "EARoot/EA5/EA2/EA3/EA1/EA492.htm", "25.png", "495", "0", "", "Object0","{B3E05824-31E6-4aa3-99F7-A806B7E25599}");
-tocTab[tocTab.length] = new Array("5.2.3.1:2", "", "«Application» cadsr: caDSR MOD PL/SQL Application", "EARoot/EA5/EA2/EA3/EA1/EA493.htm", "25.png", "496", "0", "", "Object0","{DD313CE6-02B9-4ba9-B029-D0990670B635}");
-tocTab[tocTab.length] = new Array("5.2.3.1:3", "", "«Application» cadsr: caDSR API Version 3.1", "EARoot/EA5/EA2/EA3/EA1/EA494.htm", "25.png", "493", "0", "", "Object0","{27C46BB3-E527-4d23-8C12-3243C62CFFED}");
-tocTab[tocTab.length] = new Array("5.2.3.1:4", "", "«Application» ccrr: CCRR", "EARoot/EA5/EA2/EA3/EA1/EA495.htm", "25.png", "497", "0", "", "Object0","{E4B02FAF-994B-4228-86FF-16A1808D9CAA}");
-tocTab[tocTab.length] = new Array("5.2.3.1:5", "", "«Application» cdebrowser: CDEBrowser", "EARoot/EA5/EA2/EA3/EA1/EA496.htm", "25.png", "494", "0", "", "Object0","{3C9CB320-4B9B-4d4a-98A9-37321F476662}");
-tocTab[tocTab.length] = new Array("5.2.3.1:6", "", "«Application» EVSSearch: EVSSearch", "EARoot/EA5/EA2/EA3/EA1/EA497.htm", "25.png", "492", "0", "", "Object0","{10C82098-8898-460f-AF5B-AE2001A1DCDD}");
-tocTab[tocTab.length] = new Array("5.2.3.1:7", "", "«Application» umlmodelbrowser: UMLModelBrowser", "EARoot/EA5/EA2/EA3/EA1/EA498.htm", "25.png", "491", "0", "", "Object0","{081E4A6D-AA4A-4886-ABA5-8C1B800D7565}");

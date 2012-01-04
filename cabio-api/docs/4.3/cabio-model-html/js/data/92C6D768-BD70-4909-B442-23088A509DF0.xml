@@ -1,7 +1,0 @@
-tocTab[tocTab.length] = new Array("5.2.4:1", "", "caDSR QA Deployment Model", "EARoot/EA5/EA2/EA4/EA503.htm", "179.png", "134", "0", "", "Deployment diagram0","{BC1D2336-5D38-4833-B061-64E207692438}");
-tocTab[tocTab.length] = new Array("5.2.4:2", "", "«server» : cbioapp201-d", "EARoot/EA5/EA2/EA4/EA505.htm", "9.png", "505", "0", "", "Node0","{A7433FA9-372A-43ee-9FA0-0B8F6DD58BBA}");
-tocTab[tocTab.length] = new Array("5.2.4:3", "", "«server» : cbioqa101", "EARoot/EA5/EA2/EA4/EA506.htm", "9.png", "506", "0", "", "Node0","{AA4D1AD6-CD09-43ee-AEB3-48FB73347143}");
-tocTab[tocTab.length] = new Array("5.2.4:4", "", "«server» CBTEST: cbiodb2-d", "EARoot/EA5/EA2/EA4/EA509.htm", "9.png", "502", "0", "", "Node0","{114203D9-4698-4814-9AA4-86F32C5E7D0C}");
-tocTab[tocTab.length] = new Array("5.2.4:5", "", "«server» iasqa: cbioapp201 ", "EARoot/EA5/EA2/EA4/EA510.htm", "9.png", "503", "0", "", "Node0","{7BF3A24B-DAE4-4a4e-8CAB-38F8CF2629D4}");
-tocTab[tocTab.length] = new Array("5.2.4.1", "1", "Applications", "EARoot/EA5/EA2/EA4/EA507.htm", "4.png", "", "", "{37CB57BD-721D-4a52-903F-F8C94C58106A}", "Package");
-tocTab[tocTab.length] = new Array("5.2.4.2", "1", "Artifacts", "EARoot/EA5/EA2/EA4/EA508.htm", "4.png", "", "", "{47E9A644-7E3D-4778-AA9D-F9FE9AD94B7D}", "Package");

@@ -1,4 +1,0 @@
-tocTab[tocTab.length] = new Array("3.1.2:1", "", "COMMON-PROVENANCE-Data Model", "EARoot/EA3/EA1/EA2/EA211.htm", "175.png", "74", "0", "", "Logical diagram0","{608B3A28-1B09-485d-8383-DA58DF2449F5}");
-tocTab[tocTab.length] = new Array("3.1.2:2", "", "COMMON-PROVENANCE-Mapping", "EARoot/EA3/EA1/EA2/EA213.htm", "175.png", "75", "0", "", "Logical diagram0","{A3FBA089-3B03-44a4-8BB2-F30BE6EF8ACC}");
-tocTab[tocTab.length] = new Array("3.1.2:3", "", "COMMON-UTIL", "EARoot/EA3/EA1/EA2/EA215.htm", "175.png", "76", "0", "", "Logical diagram0","{8EF60B77-EF02-4337-9FC3-9FA1515F8277}");
-tocTab[tocTab.length] = new Array("3.1.2:4", "", "COMMON-UTIL-Mapping", "EARoot/EA3/EA1/EA2/EA217.htm", "175.png", "77", "0", "", "Logical diagram0","{F3171CFB-1D50-41f3-80D7-DACFF794E104}");
