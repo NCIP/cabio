@@ -1,0 +1,388 @@
+/** Portlet div */
+
+div#cabio {
+	background-color: #fff;
+	border: 1px solid #9999BB;
+	padding: 1em;
+	line-height: 1.2em;
+}
+
+/** Errors */
+
+div.error {
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
+/** Work-around for IE6 bug with the Portal's CSS. 
+    It defines this as "absolute", here we revert it to "static". */
+
+img,.png{
+    position:static;
+}
+
+/** Navigation Bars */
+
+div.caBioNav {
+    border: 1px solid #99d;
+    border-top: none;
+    background: #ddf;
+    width: 100%;
+    margin-top: 15px;
+}
+
+div.caBioNav div.caBioNavBack {
+    border-top: 1px solid #99b;
+    padding: 3px;
+}
+
+div.caBioNav div.caBioNavBack a {
+    text-decoration: none;
+}
+
+div.caBioNav div.caBioNavBack a:hover {
+    text-decoration: underline;
+}
+
+div.caBioNav div.caBioNumResults {
+    border-top: 1px solid #99b;
+    padding: 3px;
+}
+
+div.caBioSummary {
+    border: 1px solid #99d;
+    border-top: none;
+    background: #fafadd;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+div.caBioSummary div.summaryInner {
+    padding: 3px;
+}
+
+/** Pager */
+
+div.pages {
+    width: 100%;
+    padding: 2px;
+    margin-top: 20px;
+}
+
+
+/** Simple Search Results */
+
+div.result {
+    margin-top: 10px;
+}
+
+div.result h2 {
+    font-size: 1.0em;
+    font-weight: normal;
+    margin: 0px;
+}
+
+div.result span.desc {
+    display: block;
+    font-size: 1.0em;
+}
+
+div.result span.className {
+    display: block;
+    font-size: 0.9em;
+    color: #226600;
+}
+
+
+/** Advanced Options */
+
+div.advancedOptions {
+    margin-left: 10px;
+    margin-top: 2px;
+    padding: 3px;
+    display: none;
+}
+
+
+/** Object Details */
+
+table.properties {
+    border-collapse: collapse;
+    margin: 5px;
+    min-width: 30em; 
+}
+
+table.properties th {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #aaa;
+    padding: 2px;
+    background-color: #ddd;
+}
+
+table.properties .propertyName {
+    min-width: 12em;
+}
+
+table.properties td {
+    font-weight: normal;
+    border: 1px solid #aaa;
+    padding: 2px;
+    vertical-align: top;
+}
+
+table.properties td div.height-limited {
+    height: expression( this.scrollHeight > 139 ? "140px" : "auto" ); /* sets max-height for IE */
+    max-height: 140px; /* sets max-height value for all standards-compliant browsers */
+    /* can't set IE max-width because a scrollbar will obscure a single line... */ 
+    /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
+    /*max-width: 500px;  sets max-width value for all standards-compliant browsers */
+    overflow: auto;
+    max-width: 30em;
+}
+
+div.height-limited {
+    height: expression( this.scrollHeight > 139 ? "140px" : "auto" ); /* sets max-height for IE */
+    max-height: 140px; /* sets max-height value for all standards-compliant browsers */
+    /* can't set IE max-width because a scrollbar will obscure a single line... */ 
+    /* width: expression( this.scrollWidth > 499 ? "500px" : "auto" ); */
+    /*max-width: 500px;  sets max-width value for all standards-compliant browsers */
+    overflow: auto;
+    max-width: auto;
+}
+
+#objectAttributes h3 {
+    margin: 1em 0 0;
+    border: none;
+    font: 1.1em Verdana, sans-serif; 
+    font-weight: bold; 
+    color: #882200;
+}
+
+#objectAssociations div.assoc h3 {
+    margin: 1em 0 0;
+    border: none;
+    font: 1em Verdana, sans-serif; 
+    font-weight: bold;
+}
+
+#objectAssociations div.assoc h3 a {
+    text-decoration: none;
+}
+
+#objectLinks h3 {
+    margin: 1em 0 0;
+    border: none;
+    font: 1em Verdana, sans-serif; 
+    font-weight: bold; 
+    color: #882200;
+}
+
+#cabio div.externalLinks ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    background: none;
+    margin-top: 0px;
+}
+
+
+/** Modal overlay */
+
+#modalOverlay {
+    background-color: #000;
+    cursor:wait;
+}
+
+#modalContainer {
+    top: 15%;
+    left: 50%;
+    margin-left: -300px;
+    background-color:#000;
+}
+
+/** Tooltips */
+
+#tooltip {
+    position: absolute;
+    z-index: 3000;
+    border: 1px solid #111;
+    background-color: #FFFFCC;
+    padding: 5px;
+    width: 30em;
+}
+
+#tooltip h3 { 
+	font-size: 1.1em;
+	font-weight: normal;
+}
+
+
+/** Templated Searches */
+
+div.category {
+    display: block;
+}
+
+div.category a {
+    text-decoration: none;
+}
+
+div.category a:hover {
+    text-decoration: underline;
+}
+
+div.queries {
+    display: none;
+    margin: 10px 0px 10px 20px;
+}
+
+div.queries table tr td {
+    vertical-align: top;
+}
+
+div.query {
+    display: none;
+    padding: 5px;
+}
+
+div.query table tr td {
+    vertical-align: center;
+    padding: 3px;
+}
+
+
+/** Templated Searches Results */
+
+div.cannedResults h3 {
+    margin: 1em 0 0;
+    border: none;
+    font: 1.1em Verdana, sans-serif;
+    font-weight: bold;
+    color: #882200;
+}
+
+div.cannedResults table {
+    border-collapse: collapse;
+    margin: 1em 0 0;
+}
+
+div.cannedResults table th {
+    background-color: #ddd;
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+div.cannedResults table td {
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    vertical-align: top;
+}
+
+div.cannedResults table tr.highlight td {
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 2px;
+    vertical-align: top;
+    background-color: #ffcc66;
+    cursor:pointer;
+    cursor:hand;
+    font-weight: normal;
+}
+
+
+/** Auto-Complete */
+    
+.ac_results {
+    border: 1px solid gray;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    z-index: 10000;
+    display: none;
+}
+
+.ac_results li {
+    list-style-type: none;
+    padding: 2px 5px;
+    white-space: nowrap;
+    color: #101010;
+    text-align: left;
+}
+
+.ac_over {
+    cursor: pointer;
+    background-color: #F0F0B8;
+}
+
+.ac_match {
+    font-weight: bold;
+    color: #3876C1;
+}
+
+/** Styles copied over from the old caGrid Portal */
+
+.link-extenal {
+    background: transparent url( ../images/linkext_icon.gif ) no-repeat scroll right center;
+    padding: 1px 16px 1px 0px;
+}
+
+#cabio .tabs {
+    border-bottom: 1px solid #8DB2E3;
+    margin: 0 0 1.5em 0;
+    padding: 0 0 2.6em 1em;
+    height: 0px;
+}
+
+#cabio .tabs li {
+    background: url(../images/tabs_bg.png) 100% -50px;
+    display: inline;
+    float: left;
+    line-height: 2.25;
+    margin-right: 0.8em;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+}
+
+#cabio .tabs li a, .tabs li span {
+    background: url(../images/tabs_bg.png) 0 -150px;
+    display: block;
+    float: left;
+    padding: 0.35em 1em 0;
+    text-decoration: none;
+    color: black;
+    border: none;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+}
+
+#cabio .tabs li.current {
+    background: url(../images/tabs_bg.png) 100% 0;
+    font-weight: bold;
+    top: 0.15em;
+}
+
+#cabio .tabs li.current a, .tabs li.current span {
+    background: url(../images/tabs_bg.png) 0 -100px;
+    color: #333;
+    padding: 0.15em 1em;
+}
+
+#cabio .ie .tabs li {
+    line-height: 2.35;
+}
+
+#cabio .ie .tabs li.current {
+    top: 0.2em;
+}
+

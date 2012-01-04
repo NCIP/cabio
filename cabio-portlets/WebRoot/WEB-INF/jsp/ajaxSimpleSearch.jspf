@@ -1,0 +1,355 @@
+<script type="text/javascript" src="<c:url value="/js/jquery.history.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery.simplemodal-1.1.1.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery.bgiframe.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery.dimensions.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/jquery.suggest.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/cabio_formats.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/cabio_objdetails.js"/>"></script>
+
+<script type="text/javascript">
+
+var caBioSimpleSearch = function() {
+
+	// Current state
+	var currClass = 'All'; 
+	var currPage = 1;
+    var pageSize = 5;
+    var numRecords = 0;
+    var numRecords = 0;
+    var startRecord = 0;
+    var endRecord = 0;
+    var numPages = 0;
+	var searchString = '';
+	var classes = [];
+	
+	/**
+	 * Concatenate the values of the specified attributes.
+	 * @param p hash of attribute names -> values
+	 * @param f array of attribute names
+	 */
+	function concatFields(p, f) { 
+	    var r = '';
+	    var i = 0;
+	    if (!f) return r;
+	    for(var k=0; k<f.length; k++) {
+	        if (p[f[k]] != undefined) {
+	            if (i++>0) r+=", ";
+	            r += p[f[k]];
+	        }
+	    }
+	    return r;
+	}
+	
+	/**
+	 * Create the summary display from the data in the classes array.
+	 */
+    function updateSummary() {
+    
+        // Print the list as a result summary, and replace the loading gif
+        var caBioSummary = '';
+        for (var i=0; i<classes.length; i++) {
+        
+            var ch = classes[i];
+            var c = ch['name'];
+            var cf = caBioCommon.formatClassName(c);
+            
+            var classHtml = (c == currClass) ? '<b>'+cf+'</b>' :
+                '<a href="javascript:caBioSimpleSearch.loadSearch(\''+c+'\')">'+cf+'</a>';
+                
+            if (caBioSummary != '') caBioSummary += ', ';
+            caBioSummary += '<nobr>'+classHtml+' ('+ch['hits']+')</nobr>';
+            
+        }
+        summaryHtml = '<div class="summaryInner">'+caBioSummary+'</div>';
+        jQuery("#caBioSearch>.caBioSummary").empty().append(summaryHtml);
+    } 
+    
+	function doSearch(targetClass,page) {
+	
+        var searchText = jQuery.trim(jQuery("#searchText").val());
+        
+        // Do we need to do a new summary query?
+        if (searchText != searchString) {
+            classes = [];
+        }
+        	
+        // Update the state
+        searchString = searchText;
+	    currClass = targetClass;
+        currPage = page;
+	    
+	    // Handle empty search
+	    if (searchString == '') {
+            jQuery("#caBioSearch").hide();
+	        return;
+	    }
+	    
+	    // Disable the UI while the search is running
+        caBioCommon.enabledUI(false);
+	     
+        // remove special FreestyleLM syntax chars and collapse spaces
+	    caBioCommon.searchWords = caBioCommon.tokenize(searchString.replace(
+		    new RegExp("(\\\\|\\+|\\-|\\&|\\||\\!|\\(|\\)|\\{|\\}|\\[|\\]|\\^|~|\\*|\\?|\\:)\\s?","g")," ").replace(
+		    new RegExp("\\s+","g")," "));
+	
+	    // add AND if the query string is not already a quoted phrase
+	    if (jQuery("#matchAll").is(":checked")) {
+	        var a = caBioCommon.tokenize(searchString);
+	        for (var i=0; i<a.length; i++) if (a[i].match(" ")) a[i] = '"'+a[i]+'"';
+	        searchString = a.join(' AND ');
+	    }
+	    var exclude = jQuery.trim(jQuery("#exclude").val()).replace(
+	    				new RegExp("\\s+")," ").split(" ").join(" -");
+	    if (exclude) searchString += " -"+exclude;
+	   
+	    pageSize = parseInt(jQuery("#pageSize").val());
+	    
+        var sh = (jQuery("#viewObjects").is(":checked") && targetClass == '') ? '[@queryType=HIBERNATE_SEARCH]' : '';
+        var tc = (currClass != 'All') ? '[@targetClassName='+currClass+']' : '';
+        var data = 
+           'relativeURL=GetXML&query=SearchQuery&SearchQuery[@keyword='+
+            searchString+']'+tc+sh+'&pageSize='+
+            pageSize+'&startIndex='+((currPage-1)*pageSize);        
+        //jQuery("#debug").append(PROXY_URL+"?"+data)
+        
+        // Make the search request
+        jQuery.ajax({ 
+            type: "GET", dataType: "xml", url: PROXY_URL, data: data,
+            success: processResults
+        });
+	}
+	
+	function processResults(xml) {
+	
+	    jQuery("#searchResults").empty();
+	    
+	    qr = jQuery("queryResponse",xml);
+	    if (qr.length == 0) {
+	        var caBioNumResults = '<div class="caBioNumResults">No results found for <b>'+searchString+'</b></div>';
+	        jQuery("#caBioSearch>.caBioNav").empty().append(caBioNumResults);
+	        jQuery("#caBioSearch>.caBioSummary").hide();
+	        jQuery("#searchResults").hide();
+	    }
+	    else {
+	    
+	        if (classes.length == 0) {
+	            // Load summary while we're processing results 
+	            h = jQuery("#caBioSearch>.caBioSummary").html(caBioCommon.getLoadingImage());
+	            
+		        var data = 'relativeURL=GetXML&query=SummaryQuery&SummaryQuery[@keyword='+searchString+']';
+		        jQuery.ajax({ 
+		            type: "GET", dataType: "xml", url: PROXY_URL, data: data,
+		            success: processSummary
+		        });
+		    }
+		    else {
+		        // No need to rerun the summary query, just recreate the html
+		        updateSummary();
+		    }
+		    
+		    // Process results
+		    
+	        numRecords = parseInt(jQuery("recordCounter:first",qr).text());
+	        startRecord = parseInt(jQuery("start:first",qr).text());
+	        endRecord = parseInt(jQuery("end:first",qr).text());
+            numPages = Math.ceil(numRecords / pageSize);
+            
+            var inHtml = (currClass == 'All') ? '':'in <b>'+caBioCommon.formatClassName(currClass)+'</b>';
+	        var caBioNumResults = '<div class="caBioNumResults">Results <b>'+startRecord+'</b> - <b>'
+	                +endRecord+'</b> of <b>'+numRecords+'</b> result for <b>'+searchString+'</b> '+inHtml+'</div>';
+	                
+	        jQuery("#caBioSearch>.caBioNav").empty().append(caBioNumResults);
+	        jQuery("#caBioSearch>.caBioSummary").show();
+            jQuery("#searchResults").show();
+	
+	        // Attempt to show enough text to fill the current portlet width
+	        var width = jQuery("#cabio")[0].offsetWidth;
+	        // The conversion numbers are based on linear regression of the 
+	        // following "optimal" line lengths establised by experimentation
+	        // with different portal layouts:
+	        //   columns  width  maxTitleLen  maxDescLen
+	        //   50/50    465    70           170
+	        //   70/30    665    100          240
+	        //   100/0    970    150          350
+	        maxTitleLen = parseInt(width*0.15);
+	        maxDescLen = parseInt(width*0.36);
+	
+	        jQuery("class", qr).each(function(){
+	
+	            var r = caBioCommon.processClassNode(this);
+                var f = caBioFormats.summary[r.className];
+	
+	            var title = '';
+	            var desc = '';
+	            
+	            if (f != undefined) {
+	                title = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['title']), maxTitleLen), caBioCommon.searchWords);
+	                desc = caBioCommon.highlight(caBioCommon.trunc(concatFields(r.properties, f['desc']), maxDescLen), caBioCommon.searchWords);
+	            }
+	            else {
+		            if (r.properties) {
+	                    for(var k=0; k<r.properties.length; k++) {
+	                        if ((k.substring(0,1) != '_') && (k != 'id')) {
+	                            desc += k+': '+caBioCommon.highlight(caBioCommon.trunc(caBioCommon.escapeXML(r.properties[k]),maxDescLen), caBioCommon.searchWords)+"<br/>";
+	                        }
+	                    }
+	                }
+	            }
+	
+	            if (title == '') title = r.className+'#'+r.id;
+	
+	            detailsUrl = GETHTML_URL+r.className+'&'+r.className+'[@id='+r.id+']';
+	
+	            h = '<div class="result"><h2><a href="javascript:caBioObjectDetails.loadDetails(\''+r.className+'\','+r.id+')">';
+	            h += title+'</a></h2><span class="desc">'+desc+'</span>';
+	            h += '<span class="className">'+caBioCommon.formatClassName(r.className)+'</span>';
+	            h += '</div>';
+	            jQuery("#searchResults").append(h);
+	            
+	        });
+	
+	        if (numPages > 1) {
+	            caBioCommon.createPager(numPages, currPage, "caBioSimpleSearch");
+	            jQuery("#searchResults").append(pages);
+	        }
+	    }
+	    
+        // Clear any object details state and hide it
+        caBioObjectDetails.resetHistory();
+        jQuery("#caBioDetails").hide();
+        
+        // Show the results
+        jQuery("#caBioSearch").show();
+	    caBioCommon.enabledUI(true);
+	}
+	
+    function processSummary(xml) {
+    
+        // We've got new summary data, wipe out the old 
+        classes = [];
+        
+        // Parse the response XML
+        qr = jQuery("queryResponse",xml);
+        
+        if (qr.length == 0) {
+            // This should never happen. Presumably, we just got results for 
+            // this search term a moment ago, so we should be able to get a summary. 
+            jQuery("#caBioSearch>.caBioSummary").empty().append('Could not retrieve result summary at this time.');
+        }
+        else {
+            // Create a list of result classes sorted by number of results per class
+            jQuery("class", qr).each(function(){
+                var r = caBioCommon.processClassNode(this);
+                classes.push({'name':r.properties['className'],'hits':parseInt(r.properties['hits'])});
+            });
+            
+            var sortByHitsDesc = function (a, b){
+                return b['hits'] - a['hits'];
+            }    
+            classes.sort(sortByHitsDesc);
+            
+            // Add "All" as the first result class
+            classes.unshift({'name':'All','hits':numRecords});
+            
+            // Now update the display
+            updateSummary();
+        }
+        caBioCommon.enabledUI(true);
+    }
+    
+	/**** public API ****/
+	
+	return {
+		
+	loadSearch : function (param) {
+	    var c,p;
+        if (typeof param == "number") {
+            c = currClass;
+            p = parseInt(param);
+        }
+        else {
+            c = param;
+            p = 1;
+        }
+        jQuery.historyLoad("caBioSimpleSearch_search_"+c+"_"+p);
+	},
+	
+    search : function(hash) {
+        var hashValues = hash.split('_');
+        doSearch(hashValues[0],parseInt(hashValues[1]));
+    }
+
+	};
+}();
+
+</script>
+
+<input id="searchText" type="text" value="" size="40"/>
+<input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch('All')"/>
+<br/>
+
+<a id="adv_link">Advanced Options</a>
+<div id="adv_box" class="advancedOptions">
+	Match Terms:
+	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
+	<input type="radio" name="matchMode" id="matchAll"> all 
+	<br/>
+	Exclude: <input id="exclude" type="text"/>
+	<br/>
+    View:
+    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> simple 
+    <input type="radio" name="viewMode" id="viewObjects"> objects
+    <br/>
+	Results per page: 
+	<select id="pageSize"> 
+	<option value="5" selected="selected">5</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	</select>
+</div>
+
+<div id="caBioSearch" style="display: none">
+	<div class="caBioNav"></div>
+	<div class="caBioSummary"></div>
+	<div id="searchResults"></div>
+</div>
+
+<div id="caBioDetails" style="display: none">
+    <div class="caBioNav"></div>
+    <div id="objectDetails"></div>
+</div>
+
+<script type="text/javascript">
+
+jQuery(document).ajaxError(caBioCommon.restError);
+
+jQuery(document).ready(function(){
+
+    caBioCommon.createDropBox("#adv_link","#adv_box");
+    
+    jQuery.historyInit(caBioCommon.loadFromHash);
+    
+    // override enabledUI function to add search form toggling
+    caBioCommon.enabledUI = function (enabled) {
+        if (enabled) {
+            jQuery("#searchText").removeAttr("disabled");
+            jQuery("#searchButton").removeAttr("disabled");
+            jQuery("#searchButton").attr("value","Search");
+            document.body.style.cursor = "default";
+        }
+        else {
+            jQuery("#searchText").attr("disabled","disabled");
+            jQuery("#searchButton").attr("disabled","disabled");
+            jQuery("#searchButton").attr("value","Loading...");
+            document.body.style.cursor = "wait";
+        }
+    };
+});
+
+jQuery(function() {
+    jQuery("#searchText").suggest(PROXY_URL+"?relativeURL=suggest",{
+         minchars:1
+    });
+});
+
+</script>
