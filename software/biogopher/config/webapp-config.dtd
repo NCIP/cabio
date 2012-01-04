@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Config (LoggerInfo, SpreadsheetParserInfo, SODFactoryInfo, ActionConfigInfo?, OntologyInfo*, MatrixInfo?)>
+
+<!ELEMENT LoggerInfo (Info, Warning, Error)>
+<!ATTLIST LoggerInfo
+   verbose (true|false) "false"
+>
+<!ELEMENT Info (#PCDATA)>
+<!ELEMENT Warning (#PCDATA)>
+<!ELEMENT Error (#PCDATA)>
+
+<!ELEMENT SpreadsheetParserInfo EMPTY>
+<!ATTLIST SpreadsheetParserInfo
+   classname CDATA #REQUIRED
+>
+
+<!ELEMENT SODFactoryInfo EMPTY>
+<!ATTLIST SODFactoryInfo
+   classname CDATA #REQUIRED
+>
+
+<!ELEMENT ActionConfigInfo (ActionParamsInfo*)>
+
+<!ELEMENT ActionParamsInfo (Param+)>
+<!ATTLIST ActionParamsInfo
+   path CDATA #REQUIRED
+>
+<!ELEMENT Param (#PCDATA)>
+<!ATTLIST Param
+   name CDATA #REQUIRED
+   value CDATA #REQUIRED
+>
+<!ELEMENT OntologyInfo EMPTY>
+<!ATTLIST OntologyInfo
+   ontologyName CDATA #REQUIRED
+   rootTerm CDATA #IMPLIED
+   serializationFilename CDATA #REQUIRED
+   treeBuilder CDATA #REQUIRED
+>
+<!ELEMENT MatrixInfo EMPTY>
+<!ATTLIST MatrixInfo
+   maxSize CDATA #REQUIRED
+>

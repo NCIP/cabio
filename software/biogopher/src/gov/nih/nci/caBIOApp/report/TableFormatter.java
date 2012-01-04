@@ -1,0 +1,1 @@
+package gov.nih.nci.caBIOApp.report;import java.io.IOException;public interface TableFormatter {    public byte[] format(Table t)    throws IOException;}

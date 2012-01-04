@@ -1,0 +1,1832 @@
+                          Release Notes
+    
+                             caCORE
+                          Version 2.0
+                        October 31, 2003
+
+       National Cancer Institute Center for Bioinformatics
+    
+================================================================
+                            Contents
+================================================================
+    
+    1.0 caCORE Introduction and History
+    2.0 caBIO
+          2.1 Release History
+          2.2 New Features and Updates
+          2.3 Bugs Fixed Since Last Release
+          2.4 Known Issues
+    3.0 caDSR
+          3.1 Release History
+          3.2 New Features and Updates
+          3.3 Bugs Fixed Since Last Release
+          3.4 Known Issues
+    4.0 EVS
+          4.1 Release History
+          4.2 New Features and Updates
+          4.3 Bugs Fixed Since Last Release
+          4.4 Known Issues
+    5.0 Bug Reports and Support
+    6.0 Documentation
+    7.0 NCICB Web Pages
+    
+================================================================
+                1.0 caCORE Introduction and History
+================================================================
+    
+    caCORE 2.0: 31 October  2003
+    caCORE 1.2: 13 June     2003
+    caCORE 1.1:  7 February 2003
+    caCORE 1.0: 29 August   2002 
+
+caCORE consists of three main components: Cancer Bioinformatics 
+Infrastructure Objects (caBIO), Cancer Data Standards Repository 
+(caDSR), and Enterprise Vocabulary Services (EVS).  Each 
+component has both standalone functionality as well as 
+integration points with the rest of caCORE.  
+
+caCORE is a product of the NCI Center for Bioinformatics and its
+partners. Visit the caCORE web site for more information: 
+http://ncicb.nci.nih.gov/core.
+
+================================================================
+                           2.0 caBIO
+================================================================
+    
+----------------------------------------------------------------
+2.1 Release History
+----------------------------------------------------------------
+    
+    caBIO 2.0:   31 October   2003
+    
+    caBIO 1.2.1: 27 June      2003
+    
+    caBIO 1.2:   13 June      2003
+    
+    caBIO 1.1.1: 11 April     2003
+    
+    caBIO 1.1:    7 February  2003
+    
+    caBIO 1.0:   29 August    2002
+    
+    caBIO .91:      April     2002
+    
+    caBIO .90:      October   2001
+    
+----------------------------------------------------------------
+2.2 New Features and Updates
+----------------------------------------------------------------
+    
+    +-------+
+    | caBIO |
+    +-------+
+    
+    Added APIs to caDSR, caMOD, and EVS
+    -----------------------------------
+    caBIO ver 2.0 integrates all the major infrastructure
+    technologies that make up the caCORE: caBIO, caDSR, and EVS.
+    caCORE now provides a programmatic interface to the NCICB 
+    supported Cancer Models Database (caMOD).
+
+        - EVS: 
+          The caBIO API has been extended to provide access to 
+          both the NCI Distributed Terminology Server (DTS), 
+          which hosts the NCI Thesaurus and several other 
+          vocabularies, as well as an extended access to NCI 
+          Metaphrase. The caBIO EVS domain object model describes 
+          in detail the objects, associations, and attributes 
+          now accessible via programmatic interface in the 
+          gov.nih.nci.EVS package.
+
+        - caDSR:
+          The caBIO caDSR domain object model describes in detail 
+          the objects, associations, and attributes now accessible 
+          via programmatic interface in the gov.nih.nci.caDSR 
+          package.
+
+        - caMOD:
+          caBIO 2.0 via the caMOD Domain Objects now provides an 
+          Application Programming Interface (API) to the Cancer 
+          Models Database at NCI. The database contains information 
+          about animal models that have been contributed by the 
+          broader research community, including the MMHCC 
+          consortium members.
+
+    DAO layer was replaced with Apache's OJB
+    ----------------------------------------
+    The caBIO custom (Data Access Object) DAO layer was replaced 
+    with Apache's ObJectRelationalBridge project. caBIO 2.0 now 
+    uses OJB for the persistence layer for caBIO, caMOD, and 
+    caDSR. OJB is an Object/Relational mapping tool that allows 
+    transparent persistence for Java Objects against relational 
+    databases. More information about OJB is available at:
+    
+        - http://db.apache.org/ojb/
+    
+    gov.nih.nci.common package
+    --------------------------
+    Since we have expanded the caBIO API to incorporate three 
+    other major interfaces: EVS, caDSR, and caMOD, we moved a lot 
+    of our common code from the gov.nih.nci.caBIO package to the 
+    gov.nih.nci.common package. 
+    
+    gov.nih.nci.caBIO.search
+    ------------------------
+    We have included an Advanced Search Package under 
+    gov.nih.nci.caBIO.search, which allows creation of dynamic queries, 
+    and returns flattened results set. The classes of most interest 
+    in this package are ObjectGrid and SelectionNode. For more 
+    information, please refer to the Technical Guide.
+
+    Other
+    -----
+    Added accession version attribution to the Sequence object.
+    
+    Added disease attribute to the ClinicalTrailsProtocols 
+    object.
+    
+    Added association from Gene to Clone.
+
+    Added "caBIO Quick Start" to website:
+
+        - http://ncicb.nci.nih.gov/NCICB/core/caBIO/
+          technical_resources/guides/quick_start
+
+    Added "query=" syntax in the HTTP API.
+
+    +--------------------+
+    | MAGE-OM API ver1.0 |
+    +--------------------+
+
+    caCORE now provides a programmatic interface to the NCICB 
+    Cancer Array Informatics Project's (caARRAY) Gene Expression 
+    Data Portal (GEDP) via the new MAGE-OM ver 1.0 API. caCORE's 
+    MAGE-OM project is the application programming interface to 
+    the GEDP. 
+
+        - http://caarray.nci.nih.gov/
+
+    The caCORE MAGE-OM API objects access data in the GEDP 
+    database via remote method invocations issued to a dedicated 
+    MAGE server at NCI. There are two primary types of objects 
+    defined in the API: 
+
+        - MAGE-OM-compliant objects
+        - Custom MAGE-OM Impl (implementation) objects. 
+
+    The MAGE-compliant objects are implemented as Java interfaces,
+    which the custom MAGE-OM Impl objects implement as concrete 
+    Java classes.
+
+    The MAGE-OM API is a set of Java objects that adhere to the 
+    object model defined by OMG's Gene Expression v1.0 (2003-02-03). 
+
+       - http://www.omg.org/technology/documents/formal/
+         gene_expression.htm
+
+    The MGED Society web site is an excellent source for 
+    supplemental material on the MAGE object model.
+
+        - http://www.mged.org/Workgroups/MAGE/mage.html
+
+    +------------------------+
+    | Pathway diagrams (SVG) |
+    +------------------------+
+
+    Added 93 new pathway diagrams. The pathway object is a 
+    representation of a molecular/cellular pathway compiled by 
+    BioCarta. Pathways are associated with specific Taxon objects,
+    and contain multiple Gene objects, which may be Targets for 
+    treatment. caBIO serves pathway diagrams that have been 
+    converted to the Scalable Vector Graphics (SVG) format. The
+    SVGs are available in the caBIO source code download.
+        
+        agrPathway
+        akap13Pathway
+        akapcentrosomePathway
+        antisensePathway
+        appPathway
+        arapPathway
+        arfPathway
+        barrestinPathway
+        barrestinsrcPathway
+        barrmapkPathway
+        bcellsurvivalPathway
+        cacamPathway
+        calcineurinPathway
+        cdmacPathway
+        ceramidePathway
+        cftrPathway
+        cremPathway
+        ctbp1Pathway
+        dicerPathway
+        dspPathway
+        edg1Pathway
+        efpPathway
+        egfr_smrtePathway
+        eifPathway
+        erbb3Pathway
+        extrinsicPathway
+        fibrinolysisPathway
+        flumazenilPathway
+        g1pPathway
+        ghrelinPathway
+        glycinePathway
+        her2Pathway
+        hesPathway
+        hopPathway
+        il12Pathway
+        il2Pathway-temp
+        intrinsicPathway
+        iresPathway
+        isoleucinePathway
+        lactosePathway
+        leucinePathway
+        longevityPathway
+        lysinePathway
+        malPathway
+        mcalpainPathway
+        mcmPathway
+        mef2dPathway
+        melanocytePathway
+        mrpPathway
+        ndkdynaminPathway
+        neurotransmittersPathway
+        no1Pathway
+        nos1Pathway
+        p35alzheimersPathway
+        pcsynthesisPathway
+        pelp1Pathway
+        pentosePathway
+        pepiPathway
+        pgc1aPathway
+        phenylalaninePathway
+        pitx2Pathway
+        plasmalogenPathway
+        plateletappPathway
+        plcePathway
+        plk3Pathway
+        pmlPathway
+        ppargPathway
+        prionPathway
+        prolinePathway
+        pspepcPathway
+        ptc1Pathway
+        ptdinsPathway
+        ranbp2Pathway
+        ranmsPathway
+        ranPathway
+        reelinPathway
+        rnapol3Pathway
+        s1pPathway
+        salmonellaPathway
+        shhPathway
+        slrp2Pathway
+        sppaPathway
+        spryPathway
+        sucrosePathway
+        sumoPathway
+        telPathway
+        tryptophanPathway
+        ucalpainPathway
+        ureacyclePathway
+        vifPathway
+        vitcbPathway
+        vobesityPathway
+        wntlrp6Pathway
+
+    +-----------+
+    | BIOgopher |
+    +-----------+
+
+    BIOgopher 2.0 is released: 
+
+        - http://biogopher.nci.nih.gov/
+
+    BIOgopher is an ad hoc querying and reporting tool that 
+    enables researchers to integrate their local bioinformatics 
+    data with public bioinformatics data sources. In particular, 
+    BIOgopher presents a web-based, graphical user interface in 
+    which a user can build complex queries that incorporate data 
+    from any number of user-supplied Excel spreadsheets. The 
+    results of such queries are then delivered to the user as 
+    an Excel spreadsheet in which the user's data and the public 
+    data are merged. BIOgopher is powered by caBIO.
+    
+    BIOgopher provides a graphical user interface to access
+    the objects served by the caBIO API, including the new APIs
+    merged into caBIO 2.0: caMOD, caDSR, and EVS (correct?).
+
+    The source code for BIOgopher is available for download:
+
+        - http://ncicb.nci.nih.gov/download/
+
+    More information is available at: 
+
+        - http://ncicb.nci.nih.gov/NCICB/core/caBIO/
+          technical_resources/guides/biogopher_readme
+
+    +--------------+
+    | caBIO server |
+    +--------------+
+
+    The caBIO source code distribution contains the caBIO 
+    source code and instructions for installing a local version 
+    of caBIO.
+
+        - http://ncicb.nci.nih.gov/download/
+
+    More information is available at: 
+
+        - http://ncicb.nci.nih.gov/NCICB/core/caBIO/
+          technical_resources/guides/source_readme
+
+    +----------------+
+    | caBIO database |
+    +----------------+
+
+    The caBIO database distribution contains the caBIO schema, 
+    data, and instructions for installing a local version of 
+    caBIO.
+
+        - http://ncicb.nci.nih.gov/download/
+
+    More information is available at: 
+
+        - http://ncicb.nci.nih.gov/NCICB/core/caBIO/
+          technical_resources/guides/database_readme
+
+----------------------------------------------------------------
+2.3 Bugs Fixed Since Last Release
+----------------------------------------------------------------
+
+    +-------------+
+    | caBIO 1.2.1 |
+    +-------------+
+    
+    DAS utilities in caBIO had stopped working.
+
+        The bug associated with this fix was a very peculiar 
+        one as we were using the string object to hold the XML 
+        being returned by the DAS URI. It had worked without a 
+        glitch forever. We guess the size of returned data 
+        changed and the string object was no longer able to 
+        store the returned data.  Once we switched the String 
+        to StringBuffer class, every thing worked.
+
+    During testing of BIOgopher, the query "select expression 
+    measurement array id and expression measurement name where 
+    expression measurement id =18" would generate an error.
+
+	This was not a BIOgopher bug, but rather a caBIO bug. 
+        SessionPersistence was not comparing classnames strictly 
+        enough. So, it was confusing ExpressionMeasurementArray 
+        with ExpressionMeasurement. The fix was made to do 
+        strict string matching.
+
+    Configuration file (server.properties) identified server 
+    address that was not available outside the NIH firewall.
+
+	Changed WEB_HOST to cabio.nci.nih.gov from lpgprod101.
+        nci.nih.gov and WEB_PORT to 80 instead of port 18080,
+        which are available outside the NIH firewall.
+
+    +-----------+
+    | caBIO 2.0 |
+    +-----------+
+    
+    None.    
+
+    +-----------------+
+    | BIOgopher 1.0.2 |
+    +-----------------+
+
+    Added NCICB URL to BIOgopher homepage.
+
+    Added link from "Powered by caBIO" image to NCICB website.
+
+    Corrected email address to NCICB Application Support. 
+
+    Changed OntologyTree to use caBIO's ConceptSearch rather than
+    the one in the NCICB project, which removed a dependency on 
+    proprietary jars.     
+
+    +---------------+
+    | BIOgopher 2.0 |
+    +---------------+
+
+    Resolved some issues relating to using BIOgopher with a
+    Netscape browser.
+    
+----------------------------------------------------------------
+2.4 Known Issues
+----------------------------------------------------------------
+    
+    Previous releases of the caBIO.jar will not work with 
+    caBIO 2.0 or BIOgopher 2.0. 
+
+        - Download the caBIO distribution to obtain the latest
+          caBIO.jar: http://ncicb.nci.nih.gov/download/
+
+    caBIO uses string-based orderBy by default, even if the 
+    field is numeric.
+
+    Two attribute field names for the Gene object, "name" and 
+    "title", are inconsistent with the HUGO human gene 
+    nomenclature (http://www.gene.ucl.ac.uk/nomenclature). 
+    The caBIO Gene "name" field corresponds to the HUGO "Symbol" 
+    field. The caBIO "title" field corresponds to the HUGO 
+    "Name" field.
+
+    The pathway description from BioCarta is not available in
+    caBIO 2.0. This issue will be addressed in an upcoming 
+    release.
+    
+    If any criterion value contains a wildcard, caBIO will use 
+    LIKE matching rather than EQUAL_TO matching. There is no 
+    way to force EQUAL_TO matching if some of the criterion 
+    values contain wildcards. This is the behavior that existed 
+    in caBIO1.2. In most cases, this is the behavior that you 
+    want, however, sometimes it would be much more efficient/
+    correct to use EQUAL_TO matching. For exammple, if a user 
+    wants to get Gene data associated with a list of Affy probe 
+    set IDs, then since these probe set IDs contain underscore 
+    characters (which are wildcards), caBIO will use LIKE 
+    matching. This will be slower than using EQUAL_TO matching 
+    and could potentially result in false positives.
+    
+    +-------------+
+    | EVSOntology | 
+    +-------------+
+    
+    Bug caused by caBIO, and manifested in BIOgopher.
+    
+    BIOgopher manifestation:
+    When the user attempts to view EVSOntology data an error 
+    will occur.
+    
+        - If the user tries to browse EVSOntology data, he will 
+          be redirected to the start page
+          
+        - If the user tries to generate a report containing 
+          EVSOntology data, will recieve an error message. The 
+          exception received by the webapp is this:
+          
+    java.lang.ClassNotFoundException: null.EVSOntologyImplSearchCriteria
+            at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1444)
+            at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1289)
+            at java.lang.ClassLoader.loadClassInternal(ClassLoader.java:302)
+            at java.lang.Class.forName0(Native Method)
+            at java.lang.Class.forName(Class.java:141)
+            at gov.nih.nci.caBIO.search.SelectionNodeImpl.getFilterSC(Unknown Source)
+    	...
+    
+    caBIO root cause:
+    gov.nih.nci.caBIO.search.SelectionNodeImpl.getFilter() 
+    
+        - Does not handle the "Impl" part of the EVSOntologyImpl
+          class when trying to create a SearchCriteria.
+
+    +----------+
+    | SOAP API |
+    +----------+
+
+    Using either the -resultStart or -resultCount parameters
+    in the geneClient.pl demo program results in an error being 
+    returned from the server.
+
+    These search criteria attributes do not work with these 
+    objects:
+
+          attribute          object(s)
+          ---------------    -----------------------------
+          includeBoth        Disease
+                             GoOntology
+    
+          orderBy            ExpressionMeasurement
+                             ExpressionMeasurementArray
+                             Gene
+                             GoOntology
+                             Histopathology
+                             Library
+                             Pathway
+                             Protocol
+                             Target
+    
+          tissueType         Gene
+    
+          includeParents     Organ
+          includeChildren
+          includeBoth
+          orderBy         
+   
+    +----------------+
+    | GetXML servlet |
+    +----------------+
+
+    The getChildRelationships method does not return the count
+    of search results.
+
+================================================================
+                            3.0 caDSR
+================================================================
+    
+----------------------------------------------------------------
+    3.1 Release History
+----------------------------------------------------------------
+    
+    caDSR 2.0
+        -  31 October 2003 
+    
+    caDSR 1.2
+        -  13 June 2003    
+    
+    caDSR 1.1
+        -  7 February 2003
+    
+    caDSR 1.0
+        - 29 August 2002
+    
+----------------------------------------------------------------
+    3.2 New Features and Updates
+----------------------------------------------------------------
+    
+    +----------------------+
+    | All caDSR Tools      |
+    +----------------------+
+    
+    User Interface Label Changes
+    ----------------------------
+    Field label changes (to the caDSR Administration Tool Browse/
+    Maintain and Search screens et al) have been made to reflect 
+    ISO naming and cross-tool label consistency.  
+    
+    Know Issues
+    -----------
+    
+    "Search Tips"
+    
+    While we strive for consistency in our User Interfaces, please 
+    note the following items can account for differences when 
+    comparing search results between CDE Browser, Curation Tool 
+    and Administration Tool: 
+    
+    -  Versions: Curation Tool and CDE Browser searches default 
+       to "All Versions"; the Administration tool defaults to 
+       "Latest Version"
+    
+    -  Wildcard: Curation Tool and CDE Browser wildcard character
+       is an asterisk "*"; the Administration Tool uses a percent 
+       sign "%"
+    
+    -  Public ID: Curation Tool looks for an exact match, wildcard
+       characters are ignored; you may use wildcard characters in 
+       the CDE Browser and Administration Tool Public ID Search e.g.
+       %123 will return Public ID's = 123, 2004123 
+    
+    +------------------------------------+
+    | caDSR Administration Tool          |
+    +------------------------------------+
+    
+    caDSR Web Interface Renamed
+    ---------------------------
+    The caDSR Web Interface has been renamed the caDSR 
+    Administration Tool to more clearly define the application 
+    features and functions in support of the caDSR repository. 
+    
+    Public Identifier
+    -----------------
+    A new column, a publicly accessible, repository-wide, unique 
+    identifier has been added to    data element concepts, value 
+    domains, conceptual domains, classifications, object classes,
+    properties, representations, protocols, and question content.
+    This public identifier will remain the same for all versions 
+    of an administered component.  All Browse/Maintain screens for
+    administered components have been updated to display this field.
+    
+    This public identifier will be stored in the caDSR repository
+    as a DESIGNATION with a DESIGNATION TYPE value (example:  a
+    conceptual domain having a public identifier of '99' will have
+    a designation value of '99' with a designation type of 'CD_ID').
+    Public ids for all existing data in the caDSR have been 
+    generated.
+    
+    NOTE:  The name of the public identifier for data elements, 
+    previously called CDE_ID, has been changed but the value of the 
+    identifier itself has remained the same.  
+    
+    Origin
+    ------
+    A new column, ORIGIN, has been added to capture the source of 
+    origination for all administered components.  Now, when users 
+    create/maintain administered components they will be able to 
+    enter the origin of the component.  
+    
+    Data element origin information that was previously captured and 
+    stored in the reference_docs (table) doc_text column has been 
+    copied into the new origin column in the data_elements table.
+    
+    Classification Schemes
+    ----------------------
+    CTEP classification scheme data that were incorrectly assigned 
+    to the Disease classification, have been reassigned to the CRF 
+    Disease classification.
+    
+    Added Trial Type Usage-Disease linkage to Classification Scheme.
+    
+    Workflow Statuses
+    -----------------
+    The list of valid workflow statuses for all administered 
+    components except protocols and CRFs has been modified to 
+    reflect the list of approved, consensus workflow statuses 
+    provided by the CDE Content Group. 'Extinct' statuses have been
+    mapped to corresponding current statuses per the CDE Content 
+    Group documentation. This documentation is available: [please 
+    fill in where on a web site this document is accessible, 
+    otherwise delete this sentence].
+    
+    Workflow Status Maintenance Screen
+    ----------------------------------
+    A new Maintenance Screen has been added to allow caDSR 
+    administrators to maintain the workflow status / administered 
+    component relationships. 
+    
+    Designations
+    ------------
+    A new type of designation has been created, HISTORICAL_CDE_ID, 
+    for data elements representing the same concept but having 
+    multiple CDE IDs.  The unique CDE ID for this type of data element 
+    now is the lowest numbered CDE ID of the group of IDs, and all 
+    the other IDs are stored as HISTORICAL_CDE_IDs.  Users can search 
+    on this designation type using the redesigned Name Search feature.
+    
+    User Interface Label Changes
+    ----------------------------
+    Field label changes to the Browse/Maintain and Search screens 
+    have been made to reflect ISO naming and cross-tool label 
+    consistency.
+    
+    Sort all Lists Of Values (LOVs) in Alphabetical Order
+    -----------------------------------------------------
+    All lists of values are now sorted and displayed in alphabetical 
+    order without regard to case per users' request.
+    
+    Name Search Redesign
+    --------------------
+    The Search By Name function has been modified to allow selection 
+    of one or more Name fields on which to perform a search.  Use 
+    the computer keyboard Shift or Ctrl key to select multiple names 
+    for a search.
+    
+    Value Meanings
+    --------------
+    Several enhancements have been made related to value meanings, 
+    including:
+    
+      - the ability to create value meanings from the Conceptual 
+        Domain Screen,
+      - Restrict Value Meaning LOV by Value Domain 
+        Conceptual Domain in the Value Domain Maintenance Screen,
+      - A new Value Meaning added from the Value Domain screen is 
+        now automatically added to the associated conceptual domain.
+      - You can no longer change the Value Meaning Description when 
+        an existing Value Meaning is selected from the Value Meaning 
+        LOV.
+    
+    +-------------------------+
+    | caDSR Database          |
+    +-------------------------+
+    
+    caDSR UML Class Object Loader
+    -----------------------------
+    New functionality allows users to bulk load UML class objects 
+    into the caDSR repository as CDEs.  UML class objects are loaded 
+    as Data Element Concepts, the class attributes as Data Elements.
+    Relationships between UML class objects are loaded as relationships 
+    between Data Element Concepts.    A UML Loader Defaults interface 
+    is provided to allow curators to specify default values for several
+    DEC and DE attributes.
+    
+    caBIO Search of caDSR UML Class Objects
+    ---------------------------------------
+    New functionality provided via the caBIO Search allows users to 
+    query caDSR UML class objects.  This is a view-only feature.
+    
+    Excel Loader
+    ------------
+    The New Excel Loader provides the capability to bulk load common 
+    data element metadata (CD, VD, DEC, DE, CS, and CSI) in Microsoft 
+    Excel spreadsheet file format into the caDSR repository. Users are 
+    provided with a template spreadsheet, instructions, and one-on-one 
+    training (upon request) to define the data to be loaded.  caDSR 
+    administrators work closely with users to load the data and 
+    validate it in the caDSR after loading. CDE Browser downloaded 
+    Excel files (DE) are also uploadable using this tool.
+    
+    Open Source Download
+    --------------------
+    The caDSR metadata repository (without data) and Administration 
+    Tool source code will be available for download from the 
+    NCICB web site using the following url:  
+
+        http://ncicb.nci.nih.gov/. 
+
+    Instructions on how to download open source tools are provided 
+    on the web site under the "Download" tab.
+    
+    +-----------------+
+    | CRF Loader      |
+    +-----------------+
+    
+    CRF Name Uniqueness
+    -------------------
+    The Case Report Form (CRF) Name uniqueness rule has been modified 
+    from the original rule, which enforced uniqueness across all 
+    contexts and all protocols, to uniqueness within context and 
+    protocol.  With this change, the same CRF name can be used in 
+    different protocols in different contexts.
+    
+    +----------------------------------------+
+    | CRF CDE Review Response (CCRR) Tool    |
+    +----------------------------------------+
+    
+    Group Comments
+    --------------
+    The Group Comments field has been changed to mandatory input 
+    when the group action, "modify recommended CDE", is selected 
+    by the user.
+    
+    Group Internal Comments
+    -----------------------
+    A new field, Group Internal Comments, has been added. This
+    field is intended for use by users to document change history.
+    
+    Valid Values
+    ------------
+    When adding a term to a CRF, the Valid Values associated with 
+    the term's Value Domain are automatically populated. 
+    
+    +-------------------+
+    | CDE Browser       |
+    +-------------------+
+    
+    Public ID
+    ---------
+    The new caDSR feature, a global, unique identifier for 
+    administered components, has been implemented in the CDE 
+    Browser display screens.  This field is called Public ID for 
+    all administered component types.  
+    
+    Hierarchical Classification Schemes
+    -----------------------------------
+    Administered components assigned to the 'Disease - Trial 
+    Type Usage' classification scheme are now displayed in 
+    hierarchical format in the navigation tree for all contexts.
+    
+    External Application Link to the 
+    CDE Data Element Details Web Page
+    ---------------------------------
+    A new url-based application programming interface (API) is 
+    available that provides the capability for external web 
+    applications to display specific caDSR Common Data Element 
+    (CDE) metadata information in the format of the CDE Browser 
+    Data Element Details web page.
+    
+    Keyword Search
+    --------------
+    The search function has been enhanced to allow users to 
+    select one or multiple domains (i.e., metadata fields) on 
+    which to perform a keyword search.  The search domains 
+    supported in this release include: All (domains), Long Name,
+    Preferred Name, Doc Text, and Historic Short CDE Name.  You 
+    may select 'All' to search in all of the domain fields or 
+    select one or multiple of the other domains to control the 
+    domains in which search engine performs a search.  Use the 
+    computer keyboard Shift or Ctrl key to select multiple domains 
+    for a search.
+    
+    Workflow Status Search
+    ----------------------
+    The search function Workflow Status search criterion has 
+    been enhanced to allow users to select one or multiple 
+    workflow statuses to perform a search.  The list of workflow 
+    statuses now includes an 'All' status for quick selection if 
+    you want to search on all statuses.  Use the computer keyboard 
+    Shift or Ctrl key to select multiple statuses for a search.
+    
+    All Contexts Search  
+    -------------------
+    The capability to reset the search for all contexts has been 
+    included.  Simply click on the caDSR Contexts node of the 
+    navigation tree to get a complete list of all data elements 
+    from all contexts.  
+    
+    Doc Text Search
+    ---------------
+    The Doc Text field may searched and is included in the search 
+    results display.
+    
+    Screen Navigation
+    -----------------
+    A HOME icon now displays in the upper right hand corner of 
+    the CDE Browser web page.  Clicking on this icon clears the 
+    search screen results and Context selection, returning the 
+    page to its pre-search state.  This allows users to more 
+    easily and quickly clear the Search page to perform a new 
+    search. 
+    
+    XML Formatted Download
+    ----------------------
+    The XML DTD and Schema have been updated to include the new 
+    Public ID and Origin metadata where appropriate for 
+    administered components.
+    
+    Excel Formatted Download
+    ------------------------
+    The Excel download file format has been updated to include 
+    the new Public ID and Origin metadata where appropriate for
+    administered components.
+    
+    Open Source Download
+    --------------------
+    The public version of the CDE Browser is now available for 
+    download at the NCICB web site using the following url:  
+ 
+          http://ncicb.nih.gov/core/caDSR/
+
+    Instructions on how to download open source tools are 
+    provided on the web site under the "Download" tab.
+    
+    +-------------------+
+    | CDE Curation Tool |
+    +-------------------+
+    
+    * See "Search Tips" at the end of this section for tips on 
+      Curation Tool searching. 
+    
+    Search:
+    - Users are now able to Designate and Edit an administered
+    component (Data Element, Data Element Concept, Value Domain) 
+    from the main search results window.
+    
+    - Users can now search for Conceptual Domain and Classification 
+    Scheme Item.
+    
+    - Users are now able to search by multiple Workflow Statuses.
+    
+    Search Results: 
+    - Workflow Status is now a default Displayed Attribute for 
+    search returns.
+    
+    - The Origin is now displayed and can be selected from a 
+    drop-down list in the Create and Edit screens for all 
+    administered components.
+    
+    Block Editing: users now have the ability to edit one or 
+    more attributes of multiple administered components of the 
+    same type (Data Element, Data Element Concept, Value Domain) 
+    at the same time.
+    
+      -  Users are able to block version as part of the block 
+         edit process.
+    
+      -  Users are able to block edit Classification Schemes 
+         and Classification Scheme Items for Data Elements.
+    
+    Block Designation: users are now able to designate multiple
+    administered components of the same type (DE, DEC, VD) at 
+    the same time.
+    
+    Designations:  users are now able to designate administered 
+    components (DE, DEC, VD) with workflow status of Approved 
+    for Trial Use, Committee Submitted Used, Committee Approved, 
+    Draft Mod, Released Non-compliant and Released.  
+    
+    Undesignate: users are now able to undesignate a single 
+    administered component.
+    
+    Create/Edit Value Domains: users now have the ability to
+    select Values from EVS (NCI Thesaurus and NCI Metathesaurus).
+    
+    The date format (Begin Date and End Date) has been changed 
+    to MM/DD/YYYY from DD/MM/YYYY.
+    
+    Get Associated Administered Components: Users are now able 
+    to get a list of associated administered components for a 
+    selected search result item.  For administered components, 
+    the user can get a list of associated administered components 
+    as indicated in the following:
+
+      - Data Element Concept: get associated Data Elements
+      - Value Domain: get associated Data Elements 
+      - Conceptual Domain: get associated Data Elements, Data 
+        Element Concepts and Value Domains
+      - Classification Scheme Item: get associated Data Elements 
+      - Permissible Value: get associated Data Elements and 
+        Value Domains
+    
+    Labels and field names have been updated to be consistent 
+    across caCORE tools.
+    
+    Value Meaning Description is now an optional, rather than 
+    mandatory, attribute of Value Meaning when creating.
+    
+    When creating or selecting a Permissible Value, users can 
+    now associate the Permissible Value to an origin via a 
+    drop-down list.
+    
+    Object Class, Property and Representation Term are now 
+    optional attributes, rather than mandatory, on Data Element 
+    Concept and Value Domain screens.
+    
+    There is no limit to the number of Permissible Values that 
+    can be associated to a Value Domain.
+    
+    Public IDs are now displayed for Data Element Concept, Value 
+    Domain and Conceptual Domain. Users are also able to search 
+    by Public ID on these administered components.
+    
+    A newly created Data Element is identified as the latest 
+    version when written to the database.
+    
+    Maximum Length and Minimum Length columns can be sorted in 
+    proper order when the column heading is clicked.
+    
+    Append: users are now able to append multiple search results 
+    into one search results list.  This is useful for block edit 
+    and block designation purposes.
+    
+    Show Details: the Curation Tool provides a link to the 
+    Oracle Browser to display details for a selected DE.
+    
+    Permissible Value search includes searches of both the caDSR 
+    and EVS (Thesaurus and Metathesaurus).  
+    
+    The Description field in the create Permissible Value page 
+    has been removed. 
+      
+    On the Create Value Meaning screen the Conceptual Domain is 
+    pre-populated with the Conceptual Domain selected on the Value 
+    Domain screen.
+    
+    Curation Tool Search Tips
+    -------------------------
+      - Search by Names and Definitions allows wildcard 
+        searching using a star ( * ) 
+
+      - Search by Public ID is an exact-match search. Wildcards 
+        do not work and will result in "No records found". 
+  
+      - Search for CRF Questions is entirely dependant on what 
+        CRF (if any) the logged on username has checked out for 
+        review. The search returns only Questions on the CRF with 
+        the reviewer Action of DRAFT NEW. Even though there are 
+        fields for Protocol ID and CRF Name that a user may enter 
+        text into, these two fields are not used when searching 
+        for CRF Questions. 
+
+      - The Search for Data Element in Protocol ID/ CRF does use 
+        these two fields. The tool will return: 
+
+        - If only a Protocol ID is entered, the Curation Tool 
+          returns all Data Elements matched to questions on CRFs 
+          from that Protocol 
+ 
+        - If only a CRF Name is entered, the Curation Tool 
+          returns all Data Elements matched to questions on that 
+          CRF. In rare cases, a CRF Name on one Protocol may be
+          identical to a CRF on another Protocol. If this is 
+          the case, the Curation Tool will return all Data 
+          Elements matched to questions on both CRFs. The search 
+          results include a column for Protocol ID. 
+ 
+        - If a Protocol ID and CRF Name are entered, the Curation 
+          Tool will return all Data Elements matched to 
+          questions on the CRF from that Protocol. 
+
+        - The Protocol ID field does not accept wildcards. This 
+          field is an exact match. 
+
+        - The CRF Name field accepts the wildcard star ( * ). 
+
+      - The Search for Permissible Values launched from the 
+        Create/ Edit Value Domain (as opposed to the Search 
+        For Permissible Value on the main search screen) is 
+        limited to permissible values only in the Conceptual 
+        Domain selected on the Create/ Edit Value Domain screen. 
+
+        - Even though the drop down list for Context is enabled 
+          on this screen (launched from Create/ Edit Value 
+          Domain), it is not used in the search. Each Conceptual 
+          Domain is in a particular Context. The Curation Tool 
+          searches for Permissible Values in the Context of 
+          the selected Conceptual Domain. 
+
+        - The Context drop down list on the main Search screen 
+          for Permissible Value is also not used. The Curation 
+          Tool searches in whatever Context the selected 
+          Conceptual Domain is in. 
+
+      - The searches for Permissible Values, building block 
+        components (Object Qualifier, Object Class, Property, 
+        etc.), and Definitions queries different data sources. 
+        One of the data sources is the NCI Metathesaurus. This 
+        data source uses a period ( . ) as its wildcard. 
+
+        - If the user enters a search term containing a period, 
+          the Curation Tool will only return results from the 
+          NCI Metathesaurus. 
+
+        - If a star is used ( * ) in the search term (without a 
+          period), the Curation Tool will use it as it does on 
+          other searches. 
+
++-------------------+
+| CRT               |
++-------------------+
+
+    User Interface text altered:
+    
+        - All references to 'CDE ID' have been changed to 
+          'Public ID'
+          
+        - All references to 'Status" have been changed to 
+          'Workflow Status'
+          
+        - All references to 'Original Context' have been 
+          changed to 'Owned By'
+          
+        - All references to 'Used By Context' have been 
+          changed to 'Used By'
+          
+        - All references to 'Source' have been changed 
+          to 'Origin'
+
+    Confirmation message displayed when user selects Mark 
+    'CRF Review Complete' from the Compliance Review menu has 
+    been expanded to state: 
+    
+        - "You are about to mark this CRF as 'CRF Review 
+           Complete'. Any Questions with a Reviewer Action of 
+           'Draft Modified' must have been matched to a DE from 
+           a context within your write privileges for the 
+           completion of the review to be successful. Do you 
+           wish to proceed?"
+
+    When the user selects Clear Term Match from the Compliance 
+    Review menu, any instances of the text "<missing>" in the 
+    Submitted Valid Values column are now correctly removed.
+
+    When the user selects Clear Term Match from the Compliance 
+    Review menu, any instances of the text "No Action Required" 
+    in the Reviewer Action column are now correctly removed.
+
+    AutoMatch and Match always search against the Designations 
+    table.
+
+    Match search results display Owned By and Used By data
+
+    
+----------------------------------------------------------------
+3.3 Bugs Fixed Since Last Release
+----------------------------------------------------------------
+    
+    +-------------------+
+    | CDE Browser       |
+    +-------------------+
+    
+    CDE Browser Excel Download
+    --------------------------
+    The Data Element Concept and Value Domain label positions 
+    were reversed in the CDE Excel formatted extract file.  This 
+    has been corrected in release 2.0.
+     
+    +-------------------+
+    | CRT               |
+    +-------------------+
+    
+    Classification Scheme Assignment for New Data Elements
+    ------------------------------------------------------
+    In release 1.2, new data elements were automatically assigned 
+    to classification scheme, Disease instead of CRF-Disease.  
+    This has been corrected in release 2.0. 
+    
+----------------------------------------------------------------
+    3.4 Known Issues
+----------------------------------------------------------------
+    
+    +-------------------------+
+    | caDSR Database          |
+    +-------------------------+
+    
+    CaDSR UML Class Object Loader
+    -----------------------------
+    Occasionally, when loading objects, you may run into a problem 
+    in which a duplicate data element already exists in the 
+    caDSR causing data elements not to be loaded.  This can 
+    occur because the data element preferred name in the caDSR 
+    is restricted to a maximum 30 characters and the UML Class 
+    Object Loader's method of naming a data element is to 
+    concatenate the data element concept preferred name with 
+    the UML attribute's name.  Occasionally, this may cause more 
+    than one element to have the same preferred name.  When 
+    this load problem occurs, the conflict must be corrected 
+    manually by the user.
+    
+    The UML Class Object Loader does not load the data element 
+    Document Language attribute during load processing, but 
+    the attribute is "Mandatory" in the caDSRAdmin Tool.  To 
+    resolve this in the Admin Tool, edit the Reference Document 
+    by entering a Document Language value.
+    
+      - When loading multiple versions of the same class 
+        objects, the caDSR Latest Version indicator is not 
+        updated for old versions of the data elements.  Currently, 
+        the load demand is for single versions only of the 
+        caBIO 2.0, EVS 2.0, caMOD 2.0, and caDSR 2.0.  Thus, 
+        this will not be a problem.  The next release of this 
+        product will correct this.
+    
+    +--------------------+
+    | caDSR  Admin Tool  |
+    +--------------------+
+    
+    EVS Search Results Are Different From Curation Tool
+    ---------------------------------------------------
+    The caDSR Admin Tool Release 2 uses APIs developed by 
+    Oracle for Release 1.2 and the Curation Tool Release 2 uses 
+    new caBIO Release 2.0 APIs. Since the underlying algorithm 
+    of the caBIO and caDSR Admin Tool's APIs are different 
+    starting with Release 2.0, search results from these tools 
+    might be different.
+    
+      - Refer to Curation Tool
+    
+    Pressing Applying Button More Than Once Lists Value Meanings
+    ------------------------------------------------------------
+    Clicking on the Apply button second time after adding a new
+    value meaning in the Conceptual Domain's Insert Value Meaning
+    screen lists whole value meanings. Suggestion: the Apply 
+    button should be changed to Add New button when value meaning 
+    is successfully entered into database to prevent the user from
+    pressing the button more than once. 
+    
+      - A workaround is to only click the button once
+    
+    Data Element Search returns 
+    incorrect results when searching by Used By Clause
+    --------------------------------------------------
+    In the Data Element Search screen, entering "CCR" for Context 
+    and "Used By" for Search Context does not find any records 
+    used by CCR.
+      
+      - Use the CDE Browser or Curation Tool 
+    
+    Help Link Does Not Work For Conceptual Domain Modify Screen
+    -----------------------------------------------------------
+    In the Modify Conceptual Domain screen, pressing the Help 
+    tab displays error messages.  This is a new problem introduced 
+    with release 2.0, which will be corrected in the next product
+    release.  
+    
+      - A workaround is to not click on the Help tab. 
+    
+    Uploaded Files Missing When A New Version Is Created
+    ----------------------------------------------------
+    In the Conceptual Domain Modify Screen, after pressing the 
+    Version button to create a new version, the uploaded file 
+    name shown in the right frame no longer shows after a new 
+    version is created.  (The uploaded file names are displayed 
+    by pressing on the Documents node in the left hand side tree.)
+    
+      - No workaround
+    
+    Error Message When An Invalid Date Entered Needs Correct Format
+    ---------------------------------------------------------------
+    Invalid date entry displays following error message (Effective
+    Begin Date: ORA-01843: not a valid month (Format Mask is
+    'MM/DD/FXYYYY')). This applies to any date field.
+    
+    Inconsistent Label For Short Meaning And Description
+    ----------------------------------------------------
+    In the Conceptual Domain Search screen, pressing the List 
+    hyper link displays the Value Meaning List Of Values screen. 
+    In it, the label Short Meaning should be Value Meaning and 
+    Description should be Value Meaning Description.
+    
+      - cosmetic, no workaround
+    
+    Value Meanings Without Conceptual Domains
+    -----------------------------------------
+    When adding value meanings using the Value Meaning Lookup 
+    Maintenance screen, there isn't a way to specify which 
+    Conceptual Domain it belongs in.  It violates the ISO model 
+    and would leave value meanings hanging without proper 
+    Conceptual Domain relationships. 
+    
+      - Use Conceptual Domain maintenance function to add 
+        Value Meanings
+    
+    Copy Value Domain Does Not Copy All Values
+    ------------------------------------------
+    In the Value Domain Maintenance screen, pressing the Copy 
+    button creates a new Value Domain. The copied version is 
+    missing Description, Detail Description, Admin Notes, 
+    Comments, Documents, Contacts and all the attachments 
+    information
+    
+      - Use the Curation Tool "Create>>Value Domain>>New 
+        using Existing Value Domain" function
+    
+    Unable To Modify Value Meaning 
+    Description For Conceptual Domain
+    ---------------------------------
+    The Maintain Value Meanings screen brought up from the 
+    Conceptual Domain search screen displays editable Value 
+    Meaning and display-only Value Meaning Description. 
+    Therefore, Value Meaning Description cannot be modified 
+    and maintained.
+    
+      - Use the Table Lookup Maintenance Screen to modify 
+        existing Value meaning descriptions
+    
+    Tree Structure Becomes Inactive When Screen 
+    Is Idle For A While In Modify Administered Component Screens
+    ------------------------------------------------------------
+    In any modify administered component screen, the tree in 
+    the left frame becomes inactive/unusable if the screen is 
+    idle for a while.
+    
+      - click on the web browser "refresh" button
+    
+    Clicking On Help Tab Prevents 
+    Access To Any Other Tab On Modify AC Screens
+    --------------------------------------------
+    Once the Help tab in Modify Administered Component screens 
+    is pressed, it is not possible to access any of the other 
+    tabs/data for the component worked on.
+    
+      - click on the web browser "refresh" button 
+    
+    During Insert, Clicking On the folder tab Throws Exception
+    ----------------------------------------------------------
+    In any administered component insert screen, clicking on the 
+    active administered component folder tab in the upper right 
+    corner of the display throws error messages.
+    
+      - When inserting an administered component, do not use 
+        the folder tab.  
+    
+    
+    Origin LOV window title 
+    Incorrectly displays "Status" LOV label
+    ---------------------------------------
+    When creating a new administered component from its 
+    respective Insert screen, clicking on the Origin List 
+    hyperlink displays the Origin LOV pop-up window.  The title 
+    of this window is incorrect.  It displays "Administered 
+    Component Status List of Values" when it should say 
+    "Administered Component Origin List of Values".  This is 
+    true for the following Administered Components' Origin LOV 
+    pop-up windows:  protocol, data element, conceptual domain, 
+    and classification scheme.
+    
+      - cosmetic, no workaround
+    
+    Conceptual Domain Insert Screen Origin Label is Incorrect
+    ---------------------------------------------------------
+    The Conceptual Domain Insert screen incorrectly displays 
+    the label "Source" for the "Origin" column.
+    
+      - cosmetic, no workaround
+    
+    Unable To Delete Alternate 
+    Names From Administered Components Maintain Screen
+    --------------------------------------------------
+    From any maintain administered component screen, click on 
+    the Alternate Names tree link to list the current alternate 
+    names for the selected administered component. Checking on 
+    the 'Delete?' check box beside the alternate name of 
+    type = "Context Name" and clicking on the Apply button to 
+    perform the deletion will throw error messages.
+    
+      - No workaround
+    
+    +-------------------+
+    | CDE Browser       |
+    +-------------------+
+    
+    Clear Button Does Not Clear All Fields In Search Screen
+    -------------------------------------------------------
+    Sometimes the clear button does not clear all fields in the 
+    search screen. 
+    
+      - The user will need to remove remaining values manually 
+        or use the "Home" key to clear the search settings.
+    
+    Unexpected Application Error Message When Searching
+    ---------------------------------------------------
+    Unexpected Application Error is generated intermittently 
+    when performing a number of queries. 
+      
+      - Retry or simplify search criteria 
+    
+    +-----------------+
+    | CCRR            |
+    +-----------------+
+    
+    Next Page Hyper Link Temporary Fix
+    ----------------------------------
+    Under the Submit Review and Response tab, the display page 
+    size is set to 150. If drop down list is more than 150, the 
+    next page hyper link will not scroll to the next page.
+    
+      - No workaround
+    
+    Field Name Inconsistency
+    ------------------------
+    Fields are named inconsistently. 
+    
+      - These will be considered during the ongoing task to 
+        review label naming consistency across all caDSR tools.  
+    
+    CRF Field Not Cleared
+    ---------------------
+    CRF field is not cleared when a new Protocol is selected.
+    
+      - Clear fields manually
+    
+    Reset Does Not Clear CRF Field
+    ------------------------------
+    Pressing the Reset button does not clear the CRF Name in 
+    the Add New Term to CRF screen.
+    
+      - Clear fields manually
+    
+    Edit Submitted Term Button Disappears
+    -------------------------------------
+    Selecting a CRF Name from the dropdown list on the Add New 
+    Term to CRF screen makes the Edit Submitted Term button 
+    disappear.
+    
+      - No workaround
+    
+    Search Screen Reset Button Does Not Clear All Fields
+    ----------------------------------------------------
+    Pressing the Reset button does not clear all fields in the 
+    Search Screen.
+    
+      - Clear fields manually
+    
+    Does Not Clear LOV Search Field
+    -------------------------------
+    Whenever an LOV screen is opened, the search field retains 
+    the old search string instead of blank spaces.
+    
+      - Overwrite the search string with a new search string
+    
+    No Default For Module Name
+    --------------------------
+    The Module name field contains no default name in the Create 
+    Term screen even though the Display Order field is defaulted 
+    to 1.
+    
+      - Enter a value selecting from the Question Display 
+        Order LOV 
+    
+    Inconsistent Usage of Wild Card Character
+    -----------------------------------------
+    Some of the LOV search screens have '*' as a wild card 
+    character while others have '%'.
+    
+      - No workaround
+    
+    Wrong Tab Active Inconsistently
+    -------------------------------
+    After a term is edited, sometimes a wrong tab is activated 
+    inconsistently.
+    
+      - No workaround
+    
+    CRF Is Still Listed After Submission
+    ------------------------------------
+    Even after a CRF is submitted, the screen does not remove 
+    the submitted CRF from the candidate submission list.
+    
+      - No workaround
+    
+    +-------------------+
+    | CDE Curation Tool |
+    +-------------------+
+    
+    Prior to performing a search, Object Class and Property 
+    search windows do not display all the default attribute 
+    columns. However, when after a search is conducted all the 
+    default attributes display properly. 
+    
+      - None needed.
+    
+    When searching for a term to use as an Object Class, 
+    Property or Representation Term from EVS, the CDE Curation 
+    Tool does not currently return any concepts that have blank
+    definitions in EVS.
+    
+      - If no suitable EVS term is found, request that EVS
+        make the desired term available with a definition. 
+    
+    After editing a single administered component from a search 
+    results screen, the "Search For" dropdown list only contains 
+    the administered component type the user just edited. The 
+    "Search For" dropdown list does not include all other 
+    searchable administered components.
+    
+      - Click the Search button on the top menu bar and then 
+        select the "Search For" dropdown list to display the 
+        entire list of searchable administered components.
+    
+    Occasionally during editing, if a user selects an un-editable 
+    field and hits the backspace key, they will be taken back 
+    to the previous screen. An error will appear on the screen 
+    stating: "A Runtime Error has occurred. Do you wish to 
+    debug? Line: 369 Error: 'opener document' is null or not 
+    an object". 
+    
+      - Do not try to edit or double-click an un-editable field. 
+        If the message displays, click 'No'. The tool will 
+        likely malfunction after receiving this error message. 
+        It is recommended that the user close the tool and login 
+        again.
+    
+    If a user Block Designates or Block Edits more than 50 items 
+    at one time, the submission confirmation window extends off 
+    the bottom of the page so the user cannot click on the "OK" 
+    button at the bottom of the window.  Also the user will not 
+    be able to see the complete list of the designated/edited 
+    administered components in the confirmation window.
+    
+      - Press the "Enter" key or click on the "X" in the top 
+        right corner of the confirmation window to close the 
+        window.
+    
+    There is a limit of 100 returns for the NCI Metathesaurus 
+    portion of an EVS search.
+    
+      - Refine search parameters so that returns are limited to 
+        less than 100.
+    
+    The "." acts as a wildcard during the NCI Metathesaurus 
+    portion of an EVS search.  Since the standard wildcard for 
+    searches in the Curation Tool is "*", this can inadvertently 
+    cause the search string to be truncated.  (E.g., "123.4*" 
+    would be searched as "123." for the Metathesaurus portion of 
+    a search.)
+    
+      - Do not include "." in search terms.
+    
+    If a Permissible Value has been assigned to a Form in the 
+    caDSR, it cannot be removed during the edit of a Value Domain. 
+    The confirmation message will state: "This Value Domain is 
+    used by a form.  Create a new version of the Value Domain 
+    to remove values. Your other edits were successfully made 
+    to the Value Domain."
+    
+      - Create a new version of the Value Domain to remove the 
+        Permissible Value.
+
+    The level of each item in a hierarchical Classification Scheme
+    is not displayed in the Classification Scheme Item window when
+    assigning a classification scheme item to an administered component.
+      
+      - View the Classfication Scheme Item's level using the 
+      caDSR Administration Tool Classification Scheme maintenance
+      function to determine its 'level' 
+    
+    When an incomplete Draft New question from a Case Report Form 
+    (CRF) has been completed in the Curation Tool, the Public 
+    ID column on the Search CRF Questions results screen displays 
+    the word "Created" to indicate the associated Data Element 
+    has been created in the caDSR.  If the user selects and 
+    completes another Draft New question from the CRF, the word 
+    "Created" is missing from the Public ID column for previously 
+    completed questions.
+    
+      - Refer to the "Attributes Completed" in the Curation 
+        Status column to determine whether a question has been 
+        completed and its associated Data Element has been created.
+    
+    If during the completion of a Draft New question from a 
+    Case Report Form (CRF) using the Create Data Element screen, 
+    the user clicks the Create Value Domain link, then clicks 
+    the Back button to return to the Create Data Element screen 
+    and then repeats these two actions, the Back button on the 
+    Create Data Element screen disappears.
+    
+      - Restart the process for completing Draft New questions
+        by re-selecting Search For: CRF Questions.
+    
+    During a Search For: CRF Questions, the "Enter Protocol ID" 
+    and "Enter CRF Name" fields are not active.  Even though 
+    the user may enter terms in these two fields, the text is 
+    not used in the performance of the search.  The Search For: 
+    CRF Questions is an "automatic" search that locates the 
+    Case Report Form (CRF) currently checked out by the user 
+    and searches for and displays Data Elements matched to 
+    "DRAFT NEW" questions on the CRF.
+    
+      - Do not enter Protocol ID's or CRF Names for the search.
+    
+    Permissible Value origin is located in the mandatory 
+    attribute area of the Create/Edit Value Domain screen, but 
+    is not a mandatory attribute.
+    
+      - The Permissible Value Origin dropdown list is only 
+        located in the mandatory area to maintain an easy-to-use 
+        interface. Please note that its label does not include 
+        an asterisk, which indicates a mandatory attribute.  
+    
+    User selected optional displayed attributes are not retained 
+    in the search results list if the user toggles from "Names &
+    Definitions" to "Public ID" in the "Search In" field on the 
+    Search screen.
+    
+      - Re-select the desired optional displayed attributes.
+    
+    Duplicate items can exist in an Appended search results list 
+    when the items are in results from separate searches; therefore 
+    it is possible for a user to select two identical records for 
+    block edit or block designate purposes.  There are not actually 
+    duplicate records in the database.  The system will not make 
+    duplicate changes to a record selected more than once in the 
+    search results.
+    
+      - To identify duplicate items in the search results list,
+        the user may sort the list by an attribute.
+    
+    If the user selects multiple Definitions from a definition 
+    search and then unselects all but one of them, the system 
+    will populate the Definition field on the Search or Edit 
+    screen with the first definition that was checked.
+    
+      - Select only one definition to use.  If multiple selections 
+        are made accidentally, re-conduct the definition search 
+        and then select the one desired definition.
+    
+    After selecting and editing a single Data Element from a 
+    Search Results list, the Data Element remains checked on the 
+    search results screen. 
+    
+      - Un-check the Data Element if desired.
+    
+    After the user conducts a search for an Object Class or 
+    Property, the search term entered for the search will 
+    populate the Object Class or Property search field in future 
+    search screens. 
+    
+      - Key in the desired search term in place of the previous 
+        search term.
+    
+    Tool will not create a new Value Domain (even though a 
+    success message is displayed) IF the Maximum Length field 
+    has over eight (8) characters. Also, if during an Edit of 
+    a Value Domain, the user places more than eight characters 
+    in the Maximum Length field, the new Maximum Length will not 
+    be retained. The existing Maximum Length will not be changed. 
+    All other edits will be retained. 
+    
+      - Do not enter more than eight characters into the Maximum 
+        Length field.
+    
+    Tool allows the user to select duplicate Permissible Values 
+    on the Create and Edit Value Domain screens.  The duplicate 
+    permissible value is not written to the database.
+    
+      - Select a desired Permissible Value only one time.
+    
+    Tool allows the user to select duplicate Permissible Values 
+    on the Create and Edit Value Domain screens.  The duplicate 
+    permissible value is not written to the database.
+    
+      - Select a desired Permissible Value only one time.
+    
+    The tool allows the user to Designate an Administered 
+    Component to its original context.
+    
+      - If the Administered Component is inadvertently 
+        designated to its original context, select the 
+        component from the search results list and Undesignate 
+        it from the context.
+
+    +-------------------+
+    | CRT               |
+    +-------------------+
+
+    If a user DOES NOT have Context write privileges and selects 
+    "Clear Term Match" from the Compliance Review menu, a series 
+    of seven error messages are displayed, resulting in database 
+    disconnect.
+
+         - Do not review CRF's for which user does not have Context 
+           write privileges.
+
+    If a user DOES NOT have Context write privileges the tool does 
+    not retain changes in Reviewer Actions. No error message displays.
+
+         - Do not review CRF's for which user does not have Context
+           write privileges.
+
+    If the user clicks repeatedly around the Search button on the 
+    Search window while the search is in progress, a series of four 
+    error messages are displayed, resulting in application shutdown.
+
+         - Click only once on the Search button.
+
+    If the user navigates to the Search Results tab of the Search 
+    window before any search is initiated, and clicks once on the 
+    untitled far left column a series of four error messages are 
+    displayed, resulting in application shutdown.
+ 
+         - User should not navigate to the Search Results tab of the 
+           Search window before any search is initiated.
+
+    When a reviewer action of "Exact Match Approved" is selected 
+    and then later cleared, the text "Exact match found for the 
+    question. Valid values may or may not have matched." fails to 
+    clear in the Search / Match MSG column of the spreadsheet view 
+    as it should.
+
+         - No workaround. The earlier production version of the tool 
+           functioned in this manner with no apparent adverse consequences.  
+
+    Internal Comments & Reviewer Comments to Submitter are not being 
+    cleared when Clear Term Match is performed.
+
+         - User can successfully delete/ edit comment via the Comments
+           tab of the Resolution Details window launched when "Details..." 
+           is selected from the Compliance Review menu.
+
+
+================================================================
+                            4.0 EVS
+================================================================
+    
+----------------------------------------------------------------
+4.1 Release History
+----------------------------------------------------------------
+
+    NCI Thesaurus V 2.0 (released in caCORE 2.0)
+        - 31 October 2003
+
+    NCI Thesaurus V 1.1 (released in caCORE 1.1)
+        - 7 February 2003
+    
+    NCI Thesaurus V 1.0 (released in caCORE 1.0)
+        - 29 August 2002
+    
+    CTRM V 6.5 (released in caCORE 1.0)
+        - 29 August 2002
+    
+----------------------------------------------------------------
+4.2 New Features and Updates
+----------------------------------------------------------------
+    
+    The caCORE 2.0 release includes the following changes in EVS
+    products and services.
+
+        - NCI Thesaurus concept history.
+
+        - DTSRPC client/server software added to EVS infra-
+          structure, facilitates access to DTS-served 
+          vocabularies.
+
+        - Gene Ontology (GO) converted to Ontylog and served 
+          programmatically via the DTS.
+
+        - NCI Thesaurus released in OWL as well as in flat-file 
+          and Ontylog xml formats.
+
+     NCI Thesaurus Concept History
+     -----------------------------
+     Editing history of NCI Thesaurus concepts is being made 
+     available from the DTS terminology server via the API.  The 
+     editing changes being tracked are concept creation, 
+     modification, split, merge, and retirement.  Users will be 
+     able to track the editing history of a concept across baseline 
+     releases.  More information on concept history is available 
+     in the caCORE 2.0 Technical Guide. 
+
+     DTSRPC Client/Server
+     --------------------
+     The DTSRPC (version 1.3) client/server software simplifies 
+     a number of DTS terminology server queries.  For some 
+     queries of interest, a number of DTS API calls have been 
+     collapsed into a single DTSRPC call and processed server-side
+     to speed up their performance.  Other Apelon DTS 
+     functionalities are wrapped and accessible via the DTSRPC API, 
+     including NCI Thesaurus concept history.  The DTSRPC API is 
+     wrapped in the new gov.nih.nci.EVS package also being released 
+     in caCORE 2.0.  However, end-users do not need to access the 
+     DTSRPC or the DTS servers directly, all access to vocabularies 
+     provided by EVS will be through the gov.nih.nci.EVS 
+     functionalities.
+
+     Gene Ontology Available from the EVS DTS Servers
+     ------------------------------------------------
+     To provide programmatic access to GO, the monthly GO XML 
+     releases by the Gene Ontology Consortium will be converted 
+     to Ontylog XML and served from the DTS.  The conversion 
+     involves XSL transformation followed by a processing step to 
+     ensure that some of the constraints imposed by the DTS
+     environment are not broken.  This will not solve other 
+     problems related to DL and classification that might arise 
+     occasionally, but we will attempt to provide the latest GO 
+     release, and notify the GO consortium if some issues arise 
+     that we believe might require GO to be modified. The mapping 
+     of GO elements to Ontylog entities is documented in the
+     Technical Guide.
+
+     NCI Thesaurus Release Formats
+     -----------------------------
+     The translation of the Thesaurus from Ontylog to OWL was 
+     made in collaboration with J. Hendler and J. Golbeck of the 
+     MindSwap Institute (U of MD).  Beginning with this release 
+     of caCORE, we will release the NCI Thesaurus monthly in a 
+     flat file, in Ontylog XML, and in OWL XML formats.  The 
+     specifics of the OWL conversion are available in the 
+     Technical Guide.
+
+----------------------------------------------------------------
+4.3 Bugs Fixed Since Last Release
+----------------------------------------------------------------
+    
+    None.
+    
+----------------------------------------------------------------
+4.4 Known Issues
+----------------------------------------------------------------
+    
+    DTSRPC handles some concept history exceptions inadequately.  
+    These inadequacies have been identified and a bug release 
+    will be made available in the near future.  Only affects 
+    internal NCICB clients.
+
+================================================================
+                  5.0 Bug Reports and Support
+================================================================
+    
+    Send email to ncicb@pop.nci.nih.gov to request support or
+    report a bug.  
+
+    In addition, mailing lists are used by the caCORE developer 
+    and user community to exchange ideas and make announcements. 
+    You can subscribe at these addresses:
+
+    caBIO users
+        http://list.nih.gov/archives/cabio_users.html
+    
+    caBIO developers
+        http://list.nih.gov/archives/cabio_devel.html
+
+    caDSR users
+        http://list.nih.gov/archives/sbr_users.html
+
+    EVS users 
+        http://list.nih.gov/archives/ncievs-l.html
+    
+================================================================
+                        6.0 Documentation
+================================================================
+    
+    The caCORE 2.0 Technical Guide can be downloaded
+    via FTP:
+    
+        - ftp://ftp1.nci.nih.gov/pub/cacore/
+          caCORE2.0_Tech_Guide.pdf
+    
+================================================================
+                        7.0 NCICB Web Pages
+================================================================
+    
+    The NCI Center for Bioinformatics
+        - http://ncicb.nci.nih.gov/
+    
+    NCICB Application Support     
+        - http://ncicbsupport.nci.nih.gov/sw/
+
+    NCICB Download Center
+        - http://ncicb.nci.nih.gov/download/
+
+    caCORE
+        - http://ncicb.nci.nih.gov/core
+    
+    caBIO
+        - http://ncicb.nci.nih.gov/core/caBIO
+    
+    caDSR
+        - http://ncicb.nci.nih.gov/core/caDSR 
+        - http://ncicb.nci.nih.gov/xml 
+    
+    EVS
+        - http://ncicb.nci.nih.gov/core/EVS
+
+//end
+
