@@ -1,8 +1,0 @@
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:1", "", "InternetSource", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA411.htm", "5.png", "408", "0", "", "Class0","{67225C94-8FE4-4676-BA21-43E002644DDC}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:2", "", "Provenance", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA412.htm", "5.png", "411", "0", "", "Class0","{E8A88E8D-647E-4bec-9800-16BC42981CC7}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:3", "", "PublicationSource", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA413.htm", "5.png", "405", "0", "", "Class0","{0348E3A4-88D9-4e66-89C6-480C0FF844E7}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:4", "", "ResearchInstitutionSource", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA414.htm", "5.png", "409", "0", "", "Class0","{AF9525C2-5E33-40dd-AA20-BFABB8DFC2CE}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:5", "", "Source", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA415.htm", "5.png", "412", "0", "", "Class0","{F44BDC98-DC0F-433f-9447-009869731BFC}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:6", "", "SourceReference", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA416.htm", "5.png", "410", "0", "", "Class0","{BA814887-9AC0-4891-B03E-E860EEF56B85}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:7", "", "URLSourceReference", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA417.htm", "5.png", "407", "0", "", "Class0","{5FA54448-EBD1-41d2-A74F-8FA31CC442A8}");
-tocTab[tocTab.length] = new Array("3.2.2.1.1.2.2.1:8", "", "WebServicesSourceReference", "EARoot/EA3/EA2/EA2/EA1/EA1/EA2/EA2/EA1/EA418.htm", "5.png", "406", "0", "", "Class0","{580A3BDC-A250-427e-8B90-23C4AD78411B}");

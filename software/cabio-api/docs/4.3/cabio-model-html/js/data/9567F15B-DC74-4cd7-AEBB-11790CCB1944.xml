@@ -1,8 +1,0 @@
-tocTab[tocTab.length] = new Array("5.2.3:1", "", "caDSR Production Deployment Model", "EARoot/EA5/EA2/EA3/EA480.htm", "179.png", "133", "0", "", "Deployment diagram0","{3D19055D-F863-4752-B2C8-9A7A74BDAA5C}");
-tocTab[tocTab.length] = new Array("5.2.3:2", "", "«server» cbioapp102 Secondary: Application Server", "EARoot/EA5/EA2/EA3/EA484.htm", "9.png", "488", "0", "", "Node0","{FFD5F700-7B5A-445f-8253-EA7FC55CCD3D}");
-tocTab[tocTab.length] = new Array("5.2.3:3", "", "«server» cbioapp104 Primary: Application Server", "EARoot/EA5/EA2/EA3/EA485.htm", "9.png", "485", "0", "", "Node0","{DFB4E880-9C5F-479d-8A85-CD25F7BE7C2F}");
-tocTab[tocTab.length] = new Array("5.2.3:4", "", "«server» cbioapp201 : Application Server", "EARoot/EA5/EA2/EA3/EA486.htm", "9.png", "487", "0", "", "Node0","{FC118000-88E3-4da8-9E03-5C83FE89D428}");
-tocTab[tocTab.length] = new Array("5.2.3:5", "", "«server» cbiodb10: Database Server", "EARoot/EA5/EA2/EA3/EA487.htm", "9.png", "484", "0", "", "Node0","{DF32655C-36BC-4c33-A9D0-020DDEEE96A7}");
-tocTab[tocTab.length] = new Array("5.2.3:6", "", "«server» iasprod: cbioapp201 ", "EARoot/EA5/EA2/EA3/EA488.htm", "9.png", "486", "0", "", "Node0","{E56A6FF6-5AB8-4a8e-8932-BD1DDDF4BADE}");
-tocTab[tocTab.length] = new Array("5.2.3.1", "1", "Applications", "EARoot/EA5/EA2/EA3/EA482.htm", "4.png", "", "", "{EED8B431-9E01-487f-8BEB-5352F774A5C6}", "Package");
-tocTab[tocTab.length] = new Array("5.2.3.2", "1", "Artifacts", "EARoot/EA5/EA2/EA3/EA483.htm", "4.png", "", "", "{F81AC094-9A27-4527-A8E9-FF28284A09D3}", "Package");
