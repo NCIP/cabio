@@ -1,7 +1,0 @@
-
-drop index ZSTG_PIDUNIT_WHOLE_PROT;
-drop index ZSTG_PIDUNIT_SUBUNIT_PR;
-drop index ZSTG_PIDUNIT_START_LOC;
-drop index ZSTG_PIDUNIT_STOP_LOC;
-
---EXIT;

@@ -1,4 +1,0 @@
-
-create index CLONE_RETION_TYPE_lwr on CLONE_RELATIVE_LOCATION(lower(TYPE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
---EXIT;

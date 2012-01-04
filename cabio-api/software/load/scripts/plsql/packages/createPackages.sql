@@ -1,3 +1,0 @@
-@LOAD_DATA.sql;
-@LOAD_GOEVSMOD.sql;
-EXIT;
