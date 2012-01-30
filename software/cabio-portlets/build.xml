@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<project name="caBIO-portlets" basedir="." default="dist">
-
-	<property file="project.properties" />
+<project name="cabio-portlet" basedir="." default="dist">
 	<property file="build.properties" />
+	<property file="project.properties" />
 	<property name="project.dir" value="." />
 	<property name="common.dir" value="../common" />
 	<property name="project.build.dir" value="build" />
@@ -60,9 +59,9 @@
 	</target>
 
 	<target name="tag-build" description="tag the portlet build information">
-		<property name="build_url" value="build.url" />
-		<propertyregex override="true" property="build_svn_revision" input="${build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
-		<propertyregex override="true" property="build_svn_url" input="${build.svn.url}" regexp="\$HeadURL\: (.*)/project.properties \$" select="\1" />
+		<property name="build_url" value="portlet.build.url" />
+		<propertyregex override="true" property="build_svn_revision" input="${portlet.build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
+		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*)/project.properties \$" select="\1" />
 		<tstamp>
 			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
@@ -80,8 +79,8 @@
 			<include name="cabioportlet.properties" />
 			<replacefilter token="CABIO_URL" value="${remote.api.url}" />
 			<replacefilter token="CABIO_VERSION" value="${remote.api.version}" />
-			<replacefilter token="ONLINE_HELP_URL" value="${online.help.url}" />
-			<replacefilter token="BUILD_VERSION" value="${build.version}" />
+			<replacefilter token="ONLINE_HELP_URL" value="${portlet.online.help.url}" />
+			<replacefilter token="BUILD_VERSION" value="${portlet.build.version}" />
 			<replacefilter token="BUILD_SVN_TAG" value="${build_svn_url}" />
 			<replacefilter token="BUILD_SVN_REVISION" value="${build_svn_revision}" />
 			<replacefilter token="BUILD_DATE" value="${build.date}" />
