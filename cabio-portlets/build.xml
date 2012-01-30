@@ -18,11 +18,12 @@
 	<property name="deploy.specific.wars" value="${war.file}" />
 
 	<!-- antcontrib task-->
-	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
-		<classpath>
-			<pathelement location="${common.dir}/lib/ant-contrib-1.0b3.jar" />
-		</classpath>
-	</taskdef>
+	<path id="common.classpath">
+		<fileset dir="${common.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="common.classpath" />
 
 	<path id="project.classpath">
 		<fileset dir="${lib.dir}" />
