@@ -2,30 +2,30 @@
 
 <table class="properties">
 <tr>
-    <th colspan="2" class="header">caBIO Portlet Properties</th>
+    <th colspan="2" class="header" scope="row">caBIO Portlet Properties</th>
 </tr>
 <tr>
-    <td>Portlet Version</td>
+    <td scope="row">Portlet Version</td>
     <td><bean:message key="build.version"/></td>
 </tr>
 <tr>
-    <td>Build Date</td>
+    <td scope="row">Build Date</td>
     <td><bean:message key="build.date"/></td>
 </tr>
 <tr>
-    <td>Release Notes</td>
+    <td scope="row">Release Notes</td>
     <td><span class="link-extenal"><a href="<bean:message key="link.release.notes"/>" target="_blank">Portlet <bean:message key="build.version"/> Release Notes</a></span></td>
 </tr>
 <tr>
-    <td>caBIO API Backend</td>
+    <td scope="row">caBIO API Backend</td>
     <td><span class="link-extenal"><a href="<bean:message key="cabio.restapi.url"/>" target="_blank"><bean:message key="cabio.restapi.url"/></a></span></td>
 </tr>
 <tr>
-    <td>SVN Tag</td>
+    <td scope="row">SVN Tag</td>
     <td><span class="link-extenal"><a href="<bean:message key="build.svn.url"/>" target="_blank"><bean:message key="build.svn.url"/></a></span></td>
 </tr>
 <tr>
-    <td>SVN Revision</td>
+    <td scope="row">SVN Revision</td>
     <td><bean:message key="build.svn.revision"/></td>
 </tr>
 </table>
