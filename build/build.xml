@@ -70,7 +70,7 @@
 	</target>
 
 	<target name="deploy:cabio-portlet">
-		<ant antfile="${cabio-portlet.build.file}" target="deploy" dir="${cabio-porlet.base.dir}">
+		<ant antfile="${cabio-portlet.build.file}" target="deploy" dir="${cabio-portlet.base.dir}">
 			<property name="dist.dir" location="${cabio-portlet.dist.dir}" />
 		</ant>
 	</target>
