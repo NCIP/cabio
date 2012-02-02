@@ -283,7 +283,7 @@ var caBioSimpleSearch = function() {
 }();
 
 </script>
-
+<label for="searchText" style="display:none">Search Text</label>
 <input id="searchText" type="text" value="" size="40"/>
 <input type="submit" value="Search" id="searchButton" onclick="caBioSimpleSearch.loadSearch('All')"/>
 <br/>
@@ -291,16 +291,16 @@ var caBioSimpleSearch = function() {
 <a id="adv_link">Advanced Options</a>
 <div id="adv_box" class="advancedOptions">
 	Match Terms:
-	<input type="radio" name="matchMode" id="matchAny" checked="checked"> any 
-	<input type="radio" name="matchMode" id="matchAll"> all 
+	<input type="radio" name="matchMode" id="matchAny" checked="checked"> <label for="matchAny">any</label> 
+	<input type="radio" name="matchMode" id="matchAll"> <label for="matchAll">all</label> 
 	<br/>
-	Exclude: <input id="exclude" type="text"/>
+	<label for="exclude">Exclude:</label> <input id="exclude" type="text"/>
 	<br/>
     View:
-    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> simple 
-    <input type="radio" name="viewMode" id="viewObjects"> objects
+    <input type="radio" name="viewMode" id="viewSimple" checked="checked"> <label for="viewSimple">simple</label> 
+    <input type="radio" name="viewMode" id="viewObjects"> <label for="viewObjects">objects</label>
     <br/>
-	Results per page: 
+	<label for="pageSize">Results per page:</label> 
 	<select id="pageSize"> 
 	<option value="5" selected="selected">5</option>
 	<option value="10">10</option>

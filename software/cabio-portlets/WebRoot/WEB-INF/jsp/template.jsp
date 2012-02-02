@@ -9,16 +9,16 @@
 
 <div id="cabio">
 
-<a href="<bean:message key="online.help.url"/>" target="_blank">
+<a href="<bean:message key="online.help.url"/>" target="_blank" title="link to caBIO Portlet Online Help">
     <img src="<c:url value="/images/questionMark.gif"/>" alt="Button to access to online help" title="Access Online Help" 
         style="float: right; margin-left: 8px;"/>
 </a>
 
 <div style="color: #444;">
 <img src="<c:url value="/images/sdkLogoSmall.gif"/>" alt="caBIO logo" title="caBIO logo" style="float: left; margin-right: 8px;"/>
-The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>" target="_blank">caBIO Portlet</a></span>
+The <span class="link-extenal"><a href="<bean:message key="link.cabio.portlet"/>" target="_blank" title="link to caBIO Portlet wiki">caBIO Portlet</a></span>
 &nbsp;is a portal user interface built on top of the caBIO APIs. 
-<span class="link-extenal"><a href="<bean:message key="link.cabio.api"/>" target="_blank">caBIO</a></span> 
+<span class="link-extenal"><a href="<bean:message key="link.cabio.api"/>" target="_blank" title="link to caBIO API">caBIO</a></span> 
 &nbsp;is a repository of data useful in biomedical research, compiled from multiple primary sources. 
 </div>
 
