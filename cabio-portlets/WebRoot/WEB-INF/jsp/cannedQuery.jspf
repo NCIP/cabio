@@ -40,11 +40,11 @@ Select category:
 <br/>
 
 <div id="category_range" class="category"><img src="" class="catind" alt="Toggle button">
-    <a href='#'>Genome Range Queries</a></div>
+    <a href='#'><label for="rangeQueries">Genome Range Queries</label></a></div>
 
 <div id="queries_range" class="queries">
 
-	    <select onchange="displayQuery(this)">
+	    <select onchange="displayQuery(this)" id="rangeQueries">
 	    <option value="" selected="selected">Choose query...</option>
 	    <option value="queries_range_absolute">Absolute Range Query</option>
 	    <option value="queries_range_grid">Grid Id Range Query</option>
@@ -56,11 +56,11 @@ Select category:
 </div>
 
 <div id="category_microarray" class="category"><img src="" class="catind" alt="Toggle button">
-    <a href='#'>Microarray Annotations</a></div>
+    <a href='#'><label for="microarrayQueries">Microarray Annotations</label></a></div>
 
 <div id="queries_microarray" class="queries">
 
-        <select onchange="displayQuery(this)">
+        <select onchange="displayQuery(this)" id="microarrayQueries">
         <option value="" selected="selected">Choose query...</option>
 	    <option value="queries_microarray_reporterbygene">Reporter Lookup by Gene</option>
 	    <option value="queries_microarray_reporterbysnp">Reporter Lookup by SNP</option>
@@ -74,11 +74,11 @@ Select category:
 </div>
 
 <div id="category_genomics" class="category"><img src="" class="catind" alt="Toggle button"> 
-    <a href='#'>Genomic Annotations</a></div>
+    <a href='#'><label for="genomicQueries">Genomic Annotations</label></a></div>
 
 <div id="queries_genomics" class="queries">
 
-	    <select onchange="displayQuery(this)">
+	    <select onchange="displayQuery(this)" id="genomicQueries">
 	    <option value="" selected="selected">Choose query...</option>
 	    <option value="queries_genomics_genebysymbol">Gene Lookup by Symbol</option>
 	        <option value="queries_genomics_gobysymbol">Gene Ontology Lookup by Protein</option>
@@ -91,11 +91,10 @@ Select category:
 
  <!--  Pathway Canned Queries  -->
 <div id="category_pathways" class="category"><img src="" class="catind" alt="Toggle button"> 
-    <a href='#'>Pathways</a></div>
+    <a href='#'><label for="pathwayQueries">Pathways</label></a></div>
 
 <div id="queries_pathways" class="queries">
-
-        <select onchange="displayQuery(this)">
+        <select onchange="displayQuery(this)" id="pathwayQueries">
         <option value="" selected="selected">Choose query...</option>
         <option value="queries_pathwayByName">Pathway by Name</option>
         <option value="queries_pathwayByGene">Pathway by Gene Symbol</option>
@@ -112,11 +111,11 @@ Select category:
 
 
 <div id="category_cancer" class="category"><img src="" class="catind" alt="Toggle button"> 
-    <a href='#'>Cancer Gene Index</a></div>
+    <a href='#'><label for="cancerQueries">Cancer Gene Index</label></a></div>
 
 <div id="queries_cancer" class="queries">
 
-        <select onchange="displayQuery(this)">
+        <select onchange="displayQuery(this)" id="cancerQueries">
         <option value="" selected="selected">Choose query...</option>
         <option value="queries_cancer_diseasetogenes">Disease to Genes</option>
         <option value="queries_cancer_agenttogenes">Agent to Genes</option>

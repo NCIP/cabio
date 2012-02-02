@@ -46,11 +46,11 @@
     <c:choose>
     <c:when test="${classConfig != null}">
 	    <c:forEach var="attr" items="${classConfig.summaryAttributes}">
-	        <th><c:out value="${attr.label}"/></th>
+	        <th scope="col"><c:out value="${attr.label}"/></th>
 	    </c:forEach>
     </c:when>
     <c:otherwise>
-        <th><c:out value="Id"/></th>
+        <th scope="col"><c:out value="Id"/></th>
     </c:otherwise>
     </c:choose>
 	
