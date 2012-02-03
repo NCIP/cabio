@@ -14,12 +14,13 @@
 
     <table>
     
-    <tr><td title="Disease Name or EVS concept code Id">Disease (name or concept code)</td><td>
-    <html:text property="disease" size="30"/>
+    <tr><td title="Disease Name or EVS concept code Id"><label for="queries_cancer_diseasetogenes_disease">Disease (name or concept code)</label></td><td>
+    <html:text property="disease" size="30" styleId="queries_cancer_diseasetogenes_disease"/>
     </td></tr>
     <tr><td colspan=2>
         <a id="evidence_link2">Advanced search criteria</a>
 		<div id="evidenceproperties_box2" class="advancedOptions">
+		<c:set var="parent" value="diseaseToGenes" scope="request"/>
          <jsp:include page="/WEB-INF/jsp/canned/cgiEvidenceProperties.jsp" flush="true"/>
         </div>
     </td></tr>    

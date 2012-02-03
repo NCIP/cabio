@@ -7,8 +7,8 @@
 
     <table>
     
-    <tr><td title="Protein Name or Accession">Protein Name or UniProt Accession</td><td>
-    <html:text property="proteinNameAccession" size="30"/>
+    <tr><td title="Protein Name or Accession"><label for="queries_pathwayByProtein_proteinNameAccession">Protein Name or UniProt Accession</label></td><td>
+    <html:text property="proteinNameAccession" size="30" styleId="queries_pathwayByProtein_proteinNameAccession"/>
     </td></tr>
 
     </table>

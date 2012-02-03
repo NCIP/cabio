@@ -7,8 +7,8 @@
 
     <table>
 
-    <tr><td title="Name of the pathway">Pathway Name</td><td>
-    <html:text property="pathwayName" size="30"/>
+    <tr><td title="Name of the pathway"><label for="queries_pathwayByName_pathwayName">Pathway Name</label></td><td>
+    <html:text property="pathwayName" size="30" styleId="queries_pathwayByName_pathwayName"/>
     </td></tr>
 
     </table>

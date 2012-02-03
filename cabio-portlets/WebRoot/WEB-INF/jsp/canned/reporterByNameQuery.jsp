@@ -7,15 +7,15 @@
 
     <table>
 
-    <tr><td title="Microarray platform">Microarray</td><td>
-    <html:select property="microarray">
+    <tr><td title="Microarray platform"><label for="queries_microarray_reporterbyname_microarrayName">Microarray</label></td><td>
+    <html:select property="microarray" styleId="queries_microarray_reporterbyname_microarrayName">
     <html:option value="">Select...</html:option>
     <html:optionsCollection name="globalQueries" property="microarrays" value="name" label="description"/>
     </html:select>
     </td></tr>
     
-    <tr><td title="Name of the microarray reporter">Reporter Name</td><td>
-    <html:text property="reporterId" size="30"/>
+    <tr><td title="Name of the microarray reporter"><label for="reporterId">Reporter Name</label></td><td>
+    <html:text property="reporterId" size="30" styleId="reporterId"/>
     </td></tr>
 
     </table>

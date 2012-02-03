@@ -7,8 +7,8 @@
 
     <table>
     
-    <tr><td title="Id of the dbSNP beginning with 'rs'">dbSNP Id</td><td>
-    <html:text property="dbsnpId" size="20"/>
+    <tr><td title="Id of the dbSNP beginning with 'rs'"><label for="queries_microarray_reporterbysnp_dbsnpId">dbSNP Id</label></td><td>
+    <html:text property="dbsnpId" size="20" styleId="queries_microarray_reporterbysnp_dbsnpId"/>
     </td></tr>
 
     </table>

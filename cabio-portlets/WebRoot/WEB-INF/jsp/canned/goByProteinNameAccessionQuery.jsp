@@ -7,8 +7,8 @@
 
     <table>
     
-    <tr><td title="Protein Name or UniProt Accession">Protein Name or UniProt Accession<br></td><td>
-    <html:text property="proteinNameAccession" size="20"/>
+    <tr><td title="Protein Name or UniProt Accession"><label for="queries_genomics_gobysymbol_proteionNameAccession">Protein Name or UniProt Accession</label><br></td><td>
+    <html:text property="proteinNameAccession" size="20" styleId="queries_genomics_gobysymbol_proteionNameAccession"/>
     </td></tr>
 
     </table>
