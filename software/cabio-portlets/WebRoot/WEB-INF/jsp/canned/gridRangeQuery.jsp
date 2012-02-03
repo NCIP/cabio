@@ -7,26 +7,26 @@
 
     <table>
 
-    <tr><td title="Grid identifier (bigid) of a genomic feature">Grid Id</td><td>
-    <html:text property="gridId" size="40"/>
+    <tr><td title="Grid identifier (bigid) of a genomic feature"><label for="gridId">Grid Id</label></td><td>
+    <html:text property="gridId" size="40" styleId="gridId"/>
     </td></tr>
 
-    <tr><td title="Genome assembly">Assembly</td><td>
-    <html:select property="assembly">
+    <tr><td title="Genome assembly"><label for="grid_id_range_queries_assembly">Assembly</label></td><td>
+    <html:select property="assembly" styleId="grid_id_range_queries_assembly">
     <html:optionsCollection name="globalQueries" property="assemblies" value="value" label="name"/>
     </html:select>
     </td></tr>
     
-    <tr><td title="Distance downstream from the feature to search">Downstream Distance</td><td>
-    <html:text property="downstreamPad" size="10"/>
+    <tr><td title="Distance downstream from the feature to search"><label for="grid_id_range_queries_downstreamPad">Downstream Distance</label></td><td>
+    <html:text property="downstreamPad" size="10" styleId="grid_id_range_queries_downstreamPad"/>
     </td></tr>
 
-    <tr><td title="Distance upstream from the feature to search">Upstream Distance</td><td>
-    <html:text property="upstreamPad" size="10"/>
+    <tr><td title="Distance upstream from the feature to search"><label for="grid_id_range_queries_upstreamPad">Upstream Distance</label></td><td>
+    <html:text property="upstreamPad" size="10" styleId="grid_id_range_queries_upstreamPad"/>
     </td></tr>
 
-    <tr><td title="Genomic feature type(s) to view">Display</td><td>
-    <html:select property="classFilter">
+    <tr><td title="Genomic feature type(s) to view"><label for="grid_id_range_queries_classFilter">Display</label></td><td>
+    <html:select property="classFilter" styleId="grid_id_range_queries_classFilter">
     <html:option value="">All</html:option>
     <html:optionsCollection name="globalQueries" property="classFilterValues" 
                             value="value" label="label"/>

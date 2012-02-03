@@ -7,8 +7,8 @@
 
     <table>
 
-    <tr><td title="Pathway Source">Pathway Source</td><td>
-    <html:select property="pathwaySource">
+    <tr><td title="Pathway Source"><label for="pathwaySource">Pathway Source</label></td><td>
+    <html:select property="pathwaySource" styleId="pathwaySource">
     <html:option value="">Select...</html:option>
     <html:optionsCollection name="globalQueries" property="pathwaySources" label="name"/>
     </html:select>

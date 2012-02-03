@@ -7,8 +7,8 @@
 
     <table>
     
-    <tr><td title="Gene symbol or alias">Gene Symbol or Alias</td><td>
-    <html:text property="geneSymbol" size="30"/>
+    <tr><td title="Gene symbol or alias"><label for="queries_microarray_reporterbygene_geneSymbol">Gene Symbol or Alias</label></td><td>
+    <html:text property="geneSymbol" size="30" styleId="queries_microarray_reporterbygene_geneSymbol"/>
     </td></tr>
 
     </table>

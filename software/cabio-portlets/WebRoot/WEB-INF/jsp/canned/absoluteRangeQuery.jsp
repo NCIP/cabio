@@ -52,7 +52,7 @@
     
     <table>
 
-    <tr><td title="Species or taxon">Species</td><td>
+    <tr><td title="Species or taxon"><label for="queries_range_absolute_taxonList">Species</label></td><td>
     <html:select property="taxon" styleId="queries_range_absolute_taxonList" onchange="populateChromosome(this)">
     <html:option value="">Select...</html:option>
     <html:optionsCollection name="globalQueries" property="taxonValues" 
@@ -60,27 +60,27 @@
     </html:select>
     </td></tr>
     
-    <tr><td title="Chromosome number">Chromosome</td><td>
+    <tr><td title="Chromosome number"><label for="queries_range_absolute_chromList">Chromosome</label></td><td>
     <html:select property="chromosomeNumber" styleId="queries_range_absolute_chromList">
     </html:select>
     </td></tr>
 
-    <tr><td title="Genome assembly">Assembly</td><td>
-    <html:select property="assembly">
+    <tr><td title="Genome assembly"><label for="queries_range_absolute_assembly">Assembly</label></td><td>
+    <html:select property="assembly" styleId="queries_range_absolute_assembly">
     <html:optionsCollection name="globalQueries" property="assemblies" value="value" label="name"/>
     </html:select>
     </td></tr>
     
-    <tr><td title="Start position on the chromosome">Start Position</td><td>
-    <html:text property="start" size="10"/>
+    <tr><td title="Start position on the chromosome"><label for="queries_range_absolute_startPosition">Start Position</label></td><td>
+    <html:text property="start" size="10" styleId="queries_range_absolute_startPosition"/>
     </td></tr>
 
-    <tr><td title="End position on the chromosome">End Position</td><td>
-    <html:text property="end" size="10"/>
+    <tr><td title="End position on the chromosome"><label for="queries_range_absolute_endPosition">End Position</label></td><td>
+    <html:text property="end" size="10" styleId="queries_range_absolute_endPosition"/>
     </td></tr>
 
-    <tr><td title="Genomic feature type(s) to view">Display</td><td>
-    <html:select property="classFilter">
+    <tr><td title="Genomic feature type(s) to view"><label for="queries_range_absolute_classFilter">Display</label></td><td>
+    <html:select property="classFilter" styleId="queries_range_absolute_classFilter">
     <html:option value="">All</html:option>
     <html:optionsCollection name="globalQueries" property="classFilterValues" 
                             value="value" label="label"/>
