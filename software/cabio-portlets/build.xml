@@ -60,7 +60,6 @@
 	</target>
 
 	<target name="tag-build" description="tag the portlet build information">
-		<property name="build_url" value="portlet.build.url" />
 		<propertyregex override="true" property="build_svn_revision" input="${portlet.build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
 		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*)/project.properties \$" select="\1" />
 		<tstamp>
