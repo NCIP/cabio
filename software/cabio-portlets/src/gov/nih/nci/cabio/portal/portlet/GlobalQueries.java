@@ -212,25 +212,24 @@ public class GlobalQueries {
             log.info("Loading assembly data...");
 
             String hql = "select assembly, count(*) " +
-                    "from gov.nih.nci.cabio.domain.Location " +
+                    "from gov.nih.nci.cabio.domain.PhysicalLocation " +
                     "group by assembly " +
                     "order by count(*) desc ";
             
             List<Object[]> results = as.query(new HQLCriteria(hql,
                 QueryUtils.createCountQuery(hql),null));
-            
+         
             assemblies = new ArrayList<NameValuePair>();
             
             for(Object[] row : results) {
-                String assembly = (String)row[0];
-                Long count = (Long)row[1];
-                if (count >= MIN_ASSEMBLY_COUNT) {
+                String assembly = (String)row[0];                
+                Long count = (Long)row[1];                
+                if (count >= MIN_ASSEMBLY_COUNT) {                	
                     NameValuePair nv = new NameValuePair(
                         assembly+" ("+count.toString()+" locations)",assembly);
-                    assemblies.add(nv);
+                    assemblies.add(nv);                    
                 }
-            }
-            
+            }            
             log.info("Done loading assembly data.");
         }
         catch (Exception e) {
