@@ -60,14 +60,18 @@
 	</target>
 
 	<target name="tag-build" description="tag the portlet build information">
+		<!--matches either tags or trunk -->
 		<propertyregex override="true" property="build_svn_revision" input="${portlet.build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
-		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*)/project.properties \$" select="\1" />
+		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*/cabio/tags/[^/]*)/.*" select="\1" />			
+		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*/cabio/trunk/[^/]*)/.*" select="\1" />
 		<tstamp>
 			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
+		<echo message="${portlet.build.svn.url}"/>
+		<echo message="${build_svn_url}"/>
 		<property name="build.date" value="${timestamp}" />
 	</target>
-	
+
 	<target name="copy-resources" depends="tag-build" description="Copy resource files">
 		<copy todir="${classes.build.dir}" overwrite="true">
 			<fileset dir="${conf.dir}">
