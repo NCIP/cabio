@@ -67,8 +67,6 @@
 		<tstamp>
 			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
 		</tstamp>
-		<echo message="${portlet.build.svn.url}"/>
-		<echo message="${build_svn_url}"/>
 		<property name="build.date" value="${timestamp}" />
 	</target>
 
