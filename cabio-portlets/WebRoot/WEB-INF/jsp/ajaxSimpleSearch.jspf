@@ -156,7 +156,7 @@ var caBioSimpleSearch = function() {
             
             var inHtml = (currClass == 'All') ? '':'in <b>'+caBioCommon.formatClassName(currClass)+'</b>';
 	        var caBioNumResults = '<div class="caBioNumResults">Results <b>'+startRecord+'</b> - <b>'
-	                +endRecord+'</b> of <b>'+numRecords+'</b> result for <b>'+searchString+'</b> '+inHtml+'</div>';
+	                +endRecord+'</b> of <b>'+numRecords+'</b> for <b>'+searchString+'</b> '+inHtml+'</div>';
 	                
 	        jQuery("#caBioSearch>.caBioNav").empty().append(caBioNumResults);
 	        jQuery("#caBioSearch>.caBioSummary").show();
