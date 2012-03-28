@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+                               "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans>
+
+		<form-bean name="AbsoluteRangeQueryForm" 
+			type="gov.nih.nci.cabio.portal.portlet.canned.AbsoluteRangeQueryForm"/>
+        <form-bean name="GridRangeQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GridRangeQueryForm"/>
+        <form-bean name="ReporterByNameQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByNameQueryForm"/>
+        <form-bean name="ReporterBySNPQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.ReporterBySNPQueryForm"/>
+        <form-bean name="ReporterByGeneQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryForm"/>
+        <form-bean name="GeneBySymbolQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryForm"/>
+        <form-bean name="GoByProteinNameAccessionQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GoByProteinNameAccessionQueryForm"/>
+        <form-bean name="AgentToGenesQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryForm"/>
+        <form-bean name="DiseaseToGenesQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.DiseaseToGenesQueryForm"/>
+        <form-bean name="GeneAssociationsQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.GeneAssociationsQueryForm"/>
+ 		<form-bean name="PathwayByNameQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByNameQueryForm"/>
+        <form-bean name="PathwayByGeneQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByGeneQueryForm"/>
+        <form-bean name="PathwayBySourceQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayBySourceQueryForm"/>
+		<form-bean name="PathwayByProteinQueryForm" 
+            type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByProteinQueryForm"/>
+    </form-beans>
+	
+    <action-mappings>
+    
+        <action path="/cabioportlet/view" forward="cabioportlet.view"/>
+        <action path="/cabioportlet/error" forward="cabioportlet.error" />
+        
+        <action path="/cabioportlet/absoluteRangeQuery"
+	            type="gov.nih.nci.cabio.portal.portlet.canned.AbsoluteRangeQueryAction"
+	            name="AbsoluteRangeQueryForm"
+	            scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.absoluteRangeQuery.results" path="/portlet_action/cabioportlet/absoluteRangeQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/gridRangeQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GridRangeQueryAction"
+                name="GridRangeQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.gridRangeQuery.results" path="/portlet_action/cabioportlet/gridRangeQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/reporterByNameQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByNameQueryAction"
+                name="ReporterByNameQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.reporterByNameQuery.results" path="/portlet_action/cabioportlet/reporterByNameQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/reporterBySNPQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.ReporterBySNPQueryAction"
+                name="ReporterBySNPQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.reporterBySNPQuery.results" path="/portlet_action/cabioportlet/reporterBySNPQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/reporterByGeneQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.ReporterByGeneQueryAction"
+                name="ReporterByGeneQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.reporterByGeneQuery.results" path="/portlet_action/cabioportlet/reporterByGeneQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/geneBySymbolQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GeneBySymbolQueryAction"
+                name="GeneBySymbolQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.geneBySymbolQuery.results" path="/portlet_action/cabioportlet/geneBySymbolQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+
+        <action path="/cabioportlet/goByProteinNameAccessionQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GoByProteinNameAccessionQueryAction"
+                name="GoByProteinNameAccessionQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.goByProteinNameAccessionQuery.results" path="/portlet_action/cabioportlet/goByProteinNameAccessionQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>        
+
+        <action path="/cabioportlet/agentToGenesQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.AgentToGenesQueryAction"
+                name="AgentToGenesQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.agentToGenesQuery.results" path="/portlet_action/cabioportlet/agentToGenesQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/diseaseToGenesQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.DiseaseToGenesQueryAction"
+                name="DiseaseToGenesQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.diseaseToGenesQuery.results" path="/portlet_action/cabioportlet/diseaseToGenesQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/geneAssociationsQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.GeneAssociationsQueryAction"
+                name="GeneAssociationsQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.geneAssociationsQuery.results" path="/portlet_action/cabioportlet/geneAssociationsQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/pathwayByNameQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByNameQueryAction"
+                name="PathwayByNameQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByNameQuery.results" path="/portlet_action/cabioportlet/pathwayByNameQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/pathwayByGeneQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByGeneQueryAction"
+                name="PathwayByGeneQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByGeneQuery.results" path="/portlet_action/cabioportlet/pathwayByGeneQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+       <action path="/cabioportlet/pathwayBySourceQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayBySourceQueryAction"
+                name="PathwayBySourceQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayBySourceQuery.results" path="/portlet_action/cabioportlet/pathwayBySourceQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+       <action path="/cabioportlet/pathwayByProteinQuery"
+                type="gov.nih.nci.cabio.portal.portlet.canned.PathwayByProteinQueryAction"
+                name="PathwayByProteinQueryForm"
+                scope="request" validate="false" input="cabioportlet.view">
+            <forward name="cabioportlet.pathwayByProteinQuery.results" path="/portlet_action/cabioportlet/pathwayByProteinQuery/results" redirect="true"/>
+            <forward name="cabioportlet.error" path="/portlet_action/cabioportlet/error" redirect="true"/>
+        </action>
+        
+        <action path="/cabioportlet/absoluteRangeQuery/results" 
+                forward="cabioportlet.absoluteRangeQuery.results" />
+        <action path="/cabioportlet/gridRangeQuery/results" 
+                forward="cabioportlet.gridRangeQuery.results" />
+        
+        <action path="/cabioportlet/reporterByNameQuery/results" 
+                forward="cabioportlet.reporterByNameQuery.results" />
+        <action path="/cabioportlet/reporterBySNPQuery/results" 
+                forward="cabioportlet.reporterBySNPQuery.results" />
+        <action path="/cabioportlet/reporterByGeneQuery/results" 
+                forward="cabioportlet.reporterByGeneQuery.results" />
+                
+        <action path="/cabioportlet/geneBySymbolQuery/results" 
+                forward="cabioportlet.geneBySymbolQuery.results" />
+        <action path="/cabioportlet/goByProteinNameAccessionQuery/results" 
+                forward="cabioportlet.goByProteinNameAccessionQuery.results" />
+                
+        <action path="/cabioportlet/agentToGenesQuery/results" 
+                forward="cabioportlet.agentToGenesQuery.results" />
+        <action path="/cabioportlet/diseaseToGenesQuery/results" 
+                forward="cabioportlet.diseaseToGenesQuery.results" />
+        <action path="/cabioportlet/geneAssociationsQuery/results" 
+                forward="cabioportlet.geneAssociationsQuery.results" />
+
+        <action path="/cabioportlet/pathwayByNameQuery/results" 
+                forward="cabioportlet.pathwayByNameQuery.results" />
+        <action path="/cabioportlet/pathwayByGeneQuery/results" 
+                forward="cabioportlet.pathwayByGeneQuery.results" />
+        <action path="/cabioportlet/pathwayBySourceQuery/results" 
+                forward="cabioportlet.pathwayBySourceQuery.results" />
+        <action path="/cabioportlet/pathwayByProteinQuery/results" 
+                forward="cabioportlet.pathwayByProteinQuery.results" />
+    </action-mappings>
+    
+    <message-resources parameter="cabioportlet" null="false" />
+    
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+        <set-property property="moduleAware" value="true"/>
+        <set-property property="definitions-parser-validate" value="true"/>
+    </plug-in>
+     
+    <plug-in className="gov.nih.nci.cabio.portal.portlet.AppLoadPlugin">
+    </plug-in>
+    
+</struts-config>
