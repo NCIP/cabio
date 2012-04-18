@@ -8,4 +8,23 @@
 ###  PORTLET SETTINGS  ###
 ##########################
 ## The caBIO Remote API
-remote.api.url=http://cabioapi-dev.nci.nih.gov/cabio43/
+remote.api.url=http\://cabioapi-dev.nci.nih.gov/cabio43/
+
+########################
+### API SETTINGS ###
+########################
+# where to deposit the SDK codebase
+sdk.home.dir=
+data.path=
+
+########################
+### database setting ###
+########################
+database.server=NCIDB-BIO-D.NCI.NIH.GOV
+database.port=1553
+database.name=BIODEV
+database.user=cabiodev
+database.password=bteam#1
+
+## whether or not packaging index generation
+package.indexgen=false
