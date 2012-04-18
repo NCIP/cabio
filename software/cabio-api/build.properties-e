@@ -1,0 +1,20 @@
+# where to deposit the SDK codebase
+sdk.home.dir=C:/apps/cacore_sdk_411
+data.path=C:/temp/cabioapi
+
+########################
+### database setting ###
+########################
+database.server=NCIDB-BIO-D.NCI.NIH.GOV
+database.port=1553
+database.name=BIODEV
+database.user=cabiodev
+database.password=xxxxxxxxx
+
+## whether or not packaging index generation
+package.indexgen=true
+
+#####################################################
+### JBOSS SETTINGS used for the deploy target only###
+#####################################################
+jboss.server.dir=C:/apps/jboss-4.0.5.GA/server/default
