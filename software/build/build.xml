@@ -19,7 +19,7 @@
 	</path>
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="common.classpath" />
 
-	<!--<property name="tier" value="qa"/>-->
+	<property name="tier" value="qa"/>
 	<if>
 		<isset property="tier" />
 		<then>
@@ -47,7 +47,7 @@
 	<property name="cabio-portlet.build.file" value="build.xml" />
 
 	<!-- The target name that should be called from the sub-project build file -->
-	<property name="cabio-api.build.target" value="build-system" />
+	<property name="cabio-api.build.target" value="dist" />
 	<property name="cabio-portlet.build.target" value="dist" />
 	<property name="cabio-grid.build.target" value="distWebApp" />
 
@@ -55,6 +55,7 @@
        		Use project.propertie relative dir names becasue they are used by install also-->
 	<property name="dist.exploded.dir" location="${dist.dir}/exploded" />
 	<property name="cabio-portlet.dist.dir" location="${dist.exploded.dir}/cabio-portlets" />
+	<property name="cabio-api.dist.dir" location="${dist.exploded.dir}/cabio-api" />
 
 	<target name="clean">
 		<delete dir="${dist.dir}" />
@@ -66,15 +67,33 @@
 		<ant antfile="${cabio-portlet.build.file}" target="${cabio-portlet.build.target}" dir="${cabio-portlet.base.dir}">
 			<!--overwrite distribution directory for the war file-->
 			<property name="dist.dir" location="${cabio-portlet.dist.dir}" />
+			<property name="portlet.build.svn.url" value="${build.svn.url}" />
+			<property name="portlet.build.svn.revision" value="${build.svn.revision}" />
 		</ant>
 	</target>
+
+	<!-- the init targets for the portlet and API are handled by the subproject build files already-->
+	<target name="dist:cabio-api" description="Call api sub-project build target to produce build artifiacts">
+		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
+		<ant antfile="${cabio-api.build.file}" target="${cabio-api.build.target}" dir="${cabio-api.base.dir}">
+			<!--overwrite distribution directory for the war file-->
+			<property name="dist.dir" location="${cabio-api.dist.dir}" />
+		</ant>
+	</target>
+
+	<target name="dist:all" description="Builds all the sub projects, putting artifacts in the project level target directory, and distribute targets to make distributions" depends="clean, dist:cabio-portlet, dist:cabio-api" />
 
 	<target name="deploy:cabio-portlet">
 		<ant antfile="${cabio-portlet.build.file}" target="deploy" dir="${cabio-portlet.base.dir}">
 			<property name="dist.dir" location="${cabio-portlet.dist.dir}" />
+			<property name="portlet.build.svn.url" value="${build.svn.url}" />
+			<property name="portlet.build.svn.revision" value="${build.svn.revision}" />
 		</ant>
 	</target>
 
-	<target name="dist:all" description="Builds all the sub projects, putting artifacts in the project level target directory, and distribute targets to make distributions" depends="clean, dist:cabio-portlet">
+	<target name="deploy:cabio-api">
+		<ant antfile="${cabio-api.build.file}" target="deploy" dir="${cabio-api.base.dir}">
+			<property name="dist.dir" location="${cabio-api.dist.dir}" />
+		</ant>
 	</target>
 </project>
