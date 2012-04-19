@@ -72,10 +72,8 @@
 	</target>
 
 	<target name="build" depends="customize-sdk,tag-build" description="Generate the entire system">
-		<ant antfile="build-project.xml" inheritAll="false">
-			<property name="basedir" location="${project.build.dir}" />
-		</ant>
-
+		<ant antfile="build-project.xml" inheritAll="false"/>
+		
 		<copy tofile="${project.output.dir}/remote-client/README.txt" file="docs/README-client.txt">
 		</copy>
 

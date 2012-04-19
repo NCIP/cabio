@@ -76,7 +76,7 @@
 	<!-- the init targets for the portlet and API are handled by the subproject build files already-->
 	<target name="dist:cabio-api" description="Call api sub-project build target to produce build artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
-		<ant antfile="${cabio-api.build.file}" target="${cabio-api.build.target}" dir="${cabio-api.base.dir}">
+		<ant antfile="${cabio-api.base.dir}/${cabio-api.build.file}" target="${cabio-api.build.target}" inheritAll="false">
 			<!--overwrite distribution directory for the war file-->
 			<property name="dist.dir" location="${cabio-api.dist.dir}" />
 		</ant>

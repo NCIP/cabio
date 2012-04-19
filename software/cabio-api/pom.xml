@@ -14,10 +14,9 @@
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>com.oracle</groupId>
+			<groupId>oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
-			<scope>provided</scope>
+			<version>10.2.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
