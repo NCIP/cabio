@@ -33,7 +33,7 @@
 
 	<!--set up required dependencies jars for compile time and run time thru Maven -->
 	<artifact:pom id="cabio-api-pom" file="pom.xml" />
-	<artifact:dependencies pathId="dependency.classpath" filesetId="dependency.fileset" pomRefId="cabio-api-pom" useScope="compiletime" />
+	<artifact:dependencies pathId="dependency.classpath" filesetId="dependency.fileset" pomRefId="cabio-api-pom" useScope="compile" />
 
 	<target name="help" description="Lists commonly used targets">
 		<echo>========================</echo>
