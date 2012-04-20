@@ -78,7 +78,8 @@
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
 		<ant antfile="${cabio-api.base.dir}/${cabio-api.build.file}" target="${cabio-api.build.target}" inheritAll="false">
 			<!--overwrite distribution directory for the war file-->
-			<property name="dist.dir" location="${cabio-api.dist.dir}" />
+			<property name="api.dist.dir" location="${cabio-api.dist.dir}" />
+			<property name="common.dist.dir" location="${common.dist.dir}" />
 		</ant>
 	</target>
 
@@ -93,8 +94,9 @@
 	</target>
 
 	<target name="deploy:cabio-api">
-		<ant antfile="${cabio-api.build.file}" target="deploy" dir="${cabio-api.base.dir}">
-			<property name="dist.dir" location="${cabio-api.dist.dir}" />
+		<ant antfile="${cabio-api.base.dir}/${cabio-api.build.file}" target="deploy" inheritAll="false">
+			<property name="api.dist.dir" location="${cabio-api.dist.dir}" />
+			<property name="common.dist.dir" location="${common.dist.dir}" />
 		</ant>
 	</target>
 </project>
