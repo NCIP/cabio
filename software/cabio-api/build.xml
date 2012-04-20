@@ -8,7 +8,6 @@
 *************************************************************************-->
 
 <project name="cabio-api" default="dist" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant" xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
-
 	<description>Build script for the caBIO API</description>
 	<property file="build.properties" />
 	<property file="project.properties" />
@@ -120,8 +119,7 @@
 
 	</target>
 
-	<target name="load-project" description="Copy the project's custom conf files and model over the SDK">
-
+	<target name="load-project" description="Copy the project's custom conf files and model over the SDK">		
 		<!-- copy model -->
 		<copy todir="${project.build.dir}/models" overwrite="true">
 			<fileset dir="${basedir}/models">
@@ -143,6 +141,7 @@
 				<exclude name="local.properties" />
 			</fileset>
 		</copy>
+		
 		<!-- replace token in deploy.properties with values from properties -->
 		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{webapp.version.abbrev\}" replace="${webapp.version.abbrev}" flags="g" />
 		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{webapp.version\}" replace="${webapp.version}" flags="g" />
@@ -410,7 +409,7 @@
 	<!--copy cacore.properties and replace handler.path info-->
 	<copy overwrite="true" tofile="${common.dist.dir}/cacore.properties" file="${common.dir}/resources/jboss-conf/cacore.properties">
 		<filterset>
-			<filter token="cabio-conf.handler_path" value="${cabio-conf.handler_path}" />
+			<filter token="cabio.conf.handler.path" value="${cabio.conf.handler.path}" />
 		</filterset>
 	</copy>
 
