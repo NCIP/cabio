@@ -11,7 +11,7 @@
 	<description>Helper build script</description>
 	<property name="project.home.dir" value=".." />
 	<property name="project.output.dir" value="${project.home.dir}/output" />
-	<import file="build/build.xml" />
+	<import file="${basedir}/build.xml" />
 
 	<property name="custom.src.dir" value="${project.home.dir}/src" />
 	<property name="custom.build.dir" value="${basedir}/custom" />
@@ -56,7 +56,6 @@
          -->
 		<SDKecho message="${ant.project.name}: Completed the system build" />
 	</target>
-
 
 	<!-- Classpath that includes everything -->
 

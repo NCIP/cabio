@@ -14,7 +14,7 @@
 	<property file="project.properties" />
 
 	<property name="common.dir" value="../common" />
-	<property name="dist.dir" value="${basedir}/dist" />
+	<property name="api.dist.dir" value="${basedir}/dist" />
 	<property name="download.dir" value="${basedir}/download" />
 	<property name="common.dist.dir" value="${basedir}/dist/common" />
 	<property file="${basedir}/conf/deploy.properties" />
@@ -58,20 +58,13 @@
 	<property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
 	<property name="indexgen.dir" value="${project.output.dir}/indexgen" />
 
-	<condition property="project.ready">
-		<available file="${project.build.dir}/build.xml" />
-	</condition>
-
-	<condition property="webapp.ready">
-		<available file="${project.warfile}" />
-	</condition>
-
 	<target name="clean" description="Removes generated files">
 		<delete dir="${project.build.dir}" quiet="true" />
 		<delete dir="${project.output.dir}" quiet="true" />
+		<delete dir="${api.dist.dir}" quiet="true" />
 	</target>
 
-	<target name="build" depends="customize-sdk,tag-build" description="Generate the entire system">
+	<target name="build" depends="clean, customize-sdk,tag-build" description="Generate the entire system">
 		<ant antfile="build-project.xml" inheritAll="false"/>
 		
 		<copy tofile="${project.output.dir}/remote-client/README.txt" file="docs/README-client.txt">
@@ -107,7 +100,7 @@
 		<unzip src="${download.dir}/${cacore-sdk.binaries.file}" dest="${sdk.home.dir}" />
 	</target>
 
-	<target name="load-sdk" depends="install:cacore-sdk" unless="project.ready" description="Make a local copy of the SDK">
+	<target name="load-sdk" depends="install:cacore-sdk" description="Make a local copy of the SDK">
 
 		<mkdir dir="${project.build.dir}" />
 		<mkdir dir="${project.build.dir}/models" />
@@ -172,7 +165,7 @@
 		</copy>
 
 		<!-- copy mobile web app -->
-		<!-- if>                 
+		<if>                 
             <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
             <then>
                 <echo message="Include caBIO Mobile Application in the deployment"/>
@@ -183,7 +176,7 @@
                     </fileset>
                 </copy>
             </then>
-        </if -->
+        </if>
 		<antcall target="copy-mobile-src" />
 
 		<replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
@@ -429,7 +422,7 @@
 	</copy>
 
 	<!-- copy war file -->
-	<copy todir="${dist.dir}" overwrite="true" file="${project.warfile}" />
+	<copy todir="${api.dist.dir}" overwrite="true" file="${project.warfile}" />
 
 	<!-- copy database jdbc driver from maven repository-->
 	<copy todir="${common.dist.dir}" overwrite="true">
@@ -446,7 +439,7 @@
 		<equals arg1="${package.indexgen}" arg2="true" />
 		<then>
 			<antcall target="package-indexgen" />
-			<zip destfile="${dist.dir}/${project.indexgen}.zip">
+			<zip destfile="${api.dist.dir}/${project.indexgen}.zip">
 				<zipfileset prefix="${project.indexgen}" dir="${indexgen.dir}" />
 			</zip>
 		</then>
@@ -457,7 +450,7 @@
 <target name="deploy" depends="dist">
 	<!-- deploy WAR and xml to JBOSS deploy location-->
 	<copy todir="${jboss.deploy.dir}" overwrite="true">
-		<fileset dir="${dist.dir}">
+		<fileset dir="${api.dist.dir}">
 			<include name="${PROJECT_NAME}.war" />
 		</fileset>
 		<fileset dir="${common.dist.dir}">
