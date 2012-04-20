@@ -57,7 +57,7 @@
 	<property name="cabio-portlet.dist.dir" location="${dist.exploded.dir}/cabio-portlets" />
 	<property name="cabio-api.dist.dir" location="${dist.exploded.dir}/cabio-api" />
 	<property name="common.dist.dir" location="${dist.exploded.dir}/common" />
-	
+
 	<target name="clean">
 		<delete dir="${dist.dir}" />
 	</target>
@@ -73,6 +73,19 @@
 		</ant>
 	</target>
 
+
+	<propertyset id="properties-to-inherit">
+		<propertyref prefix="build." />
+		<propertyref prefix="webapp." />
+		<propertyref prefix="display." />
+		<propertyref prefix="cacoresdk." />
+		<propertyref prefix="database." />
+		<propertyref prefix="jboss." />
+		<propertyref prefix="sdk." />
+		<propertyref prefix="package." />
+		<propertyref regex="^(.*)\.path$$" />
+	</propertyset>
+
 	<!-- the init targets for the portlet and API are handled by the subproject build files already-->
 	<target name="dist:cabio-api" description="Call api sub-project build target to produce build artifiacts">
 		<!-- setting the property in the ant call overrides the property in the sub-project allowing the artifact to be produced where needed -->
@@ -80,6 +93,7 @@
 			<!--overwrite distribution directory for the war file-->
 			<property name="api.dist.dir" location="${cabio-api.dist.dir}" />
 			<property name="common.dist.dir" location="${common.dist.dir}" />
+			<propertyset refid="properties-to-inherit"/>
 		</ant>
 	</target>
 
@@ -97,6 +111,7 @@
 		<ant antfile="${cabio-api.base.dir}/${cabio-api.build.file}" target="deploy" inheritAll="false">
 			<property name="api.dist.dir" location="${cabio-api.dist.dir}" />
 			<property name="common.dist.dir" location="${common.dist.dir}" />
+			<propertyset refid="properties-to-inherit"/>
 		</ant>
 	</target>
 </project>
