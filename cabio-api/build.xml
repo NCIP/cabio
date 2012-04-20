@@ -65,8 +65,8 @@
 	</target>
 
 	<target name="build" depends="clean, customize-sdk,tag-build" description="Generate the entire system">
-		<ant antfile="build-project.xml" inheritAll="false"/>
-		
+		<ant antfile="build-project.xml" inheritAll="false" />
+
 		<copy tofile="${project.output.dir}/remote-client/README.txt" file="docs/README-client.txt">
 		</copy>
 
@@ -165,18 +165,18 @@
 		</copy>
 
 		<!-- copy mobile web app -->
-		<if>                 
-            <equals arg1="${cabio-webapp.mobile.included}" arg2="true"/>
-            <then>
-                <echo message="Include caBIO Mobile Application in the deployment"/>
-                <copy todir="${project.build.dir}/system/web" overwrite="true">
-                    <fileset dir="${basedir}/mobile">
-                       <include name="**/*" />
-                       <exclude name="src/**/*" />
-                    </fileset>
-                </copy>
-            </then>
-        </if>
+		<if>
+			<equals arg1="${cabio-webapp.mobile.included}" arg2="true" />
+			<then>
+				<echo message="Include caBIO Mobile Application in the deployment" />
+				<copy todir="${project.build.dir}/system/web" overwrite="true">
+					<fileset dir="${basedir}/mobile">
+						<include name="**/*" />
+						<exclude name="src/**/*" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
 		<antcall target="copy-mobile-src" />
 
 		<replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
@@ -297,7 +297,7 @@
 
 	<!-- package index generator -->
 	<target name="package-indexgen">
-		<echo message="*** Packaging index generation ****"/>
+		<echo message="*** Packaging index generation ****" />
 		<delete dir="${indexgen.dir}" quiet="true" />
 		<mkdir dir="${indexgen.dir}" />
 		<mkdir dir="${indexgen.dir}/conf" />
@@ -363,12 +363,10 @@
 
 		<!-- remove JNDI data source name -->
 		<replace file="${indexgen.dir}/conf/hibernate.cfg.xml" value="">
-			<replacetoken>
-				<![CDATA[<property name="connection.datasource">java:/cabio</property>]]>
-			</replacetoken>
-	</replace>
-
-	<copy todir="${indexgen.dir}/lib" overwrite="true">
+            <replacetoken><![CDATA[<property name="connection.datasource">java:/cabio</property>]]></replacetoken>
+        </replace>	
+		
+		<copy todir="${indexgen.dir}/lib" overwrite="true">
 		<fileset dir="${project.build.dir}/system/lib">
 			<include name="antlr*.jar" />
 			<include name="log4j*.jar" />
@@ -432,7 +430,7 @@
 		</restrict>
 		<mapper classpathref="maven-ant-tasks.classpath" type="flatten" />
 	</copy>
-
+	
 	<!-- package index generation into a zip file -->
 	<if>
 		<!--if package indexgene is true -->
@@ -458,6 +456,7 @@
 			<include name="cabio-oracle-ds.xml" />
 		</fileset>
 	</copy>
+	
 	<!-- deploy jar to JBOSS lib location-->
 	<copy todir="${jboss.lib.dir}" overwrite="true">
 		<fileset dir="${common.dist.dir}">
