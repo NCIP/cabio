@@ -464,7 +464,7 @@
 	</copy>
 	<!-- deploy cacore.properties and config.dct location-->
 	<copy tofile="${cacore.properties.path}" overwrite="true" file="${common.dist.dir}/cacore.properties" />
-	<copy todir="${cabio-conf.handler_path}" overwrite="true">
+	<copy todir="${cabio.conf.handler.path}" overwrite="true">
 		<fileset dir="${common.dist.dir}">
 			<include name="config.dct" />
 		</fileset>
