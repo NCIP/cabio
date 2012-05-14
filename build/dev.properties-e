@@ -20,11 +20,17 @@ data.path=
 ########################
 ### database setting ###
 ########################
-database.server=NCIDB-BIO-D.NCI.NIH.GOV
-database.port=1553
-database.name=BIODEV
-database.user=cabiodev
-database.password=bteam#1
+database.server=
+database.port=
+database.name=
+database.user=
+database.password=
+
+#database.server=NCIDB-BIO-D.NCI.NIH.GOV
+#database.port=1553
+#database.name=BIODEV
+#database.user=cabiodev
+#database.password=bteam#1
 
 ## whether or not packaging index generation
 package.indexgen=false
