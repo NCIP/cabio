@@ -1,6 +1,0 @@
-
-drop index SYS_IL0000012979C00002$$;
-drop index ZSTG_BIOESCR_PATH_ID_LWR;
-drop index ZSTG_BIOESCR_PATH_ID;
-
---EXIT;

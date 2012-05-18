@@ -1,1 +1,0 @@
-package gov.nih.nci.caBIOApp.report;import java.io.ByteArrayOutputStream;public interface Formatter {    public ByteArrayOutputStream format(Table finalTable);}
