@@ -168,7 +168,7 @@
 											<!-- did you know? begins -->
 											<tr>
 												<td valign="top">
-												<table summary="" cellpadding="0" cellspacing="0" border="0"
+												<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 													width="100%" height="100%" class="sidebarSection">
 													<tr>
 														<td class="sidebarTitle" height="20">Text Search</td>
@@ -186,8 +186,8 @@
 																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/x/NbSl"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
-																<td width="60%" align="right"><LABEL for="search">&nbsp;</LABEL>
-																    <input type="submit" name="search" value="Search" id="search"></td>
+																<td width="60%" align="right">
+																    <input type="submit" name="search" value="Search"></td>
 																<td class="welcomeContent" align="right"><a href="IndexService">more options ...</a></td>
 															<tr>
 														</table>
