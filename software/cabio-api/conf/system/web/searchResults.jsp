@@ -183,14 +183,15 @@ div.classHeader {
 <tr>
 	<td valign="top" width="200">
 	   <a href="indexSearch.jsp">
-	       <img src="images/smallsearchlogo.png" name="FreestyleLM Search" border="0" align=middle>
+	       <img src="images/smallsearchlogo.png" name="FreestyleLM Search" border="0" align=middle alt="small freestyle search logo">
 	   </a>
 	</td>
 		
 	<td valign="middle">
         <form method="POST" action="IndexService">
+        <label for="freestyleLM">&nbsp;</label>
 		<input type="TEXT" size="60" id="freestyleLM" name="searchString" value="<%=searchString%>">
-		<a href="https://wiki.nci.nih.gov/x/NbSl" target="_BLANK"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align="middle"></a>					
+		<a href="https://wiki.nci.nih.gov/x/NbSl" target="_BLANK"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align="middle" alt="Lucene Query Syntax help"></a>					
 		<input type="submit" name="submit" value="Search">
 		</form>
 	</td>
