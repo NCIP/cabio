@@ -83,21 +83,21 @@ var getHTMLURL = context+"/GetHTML";
 
 </head>
 <body class="yui-skin-sam">
-<table cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
+<table cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" summary="layout">
 
     <%@ include file="WEB-INF/jsp/include/header.inc" %>
 	
     <tr>
         <td height="100%" align="center" valign="top">
         <table summary="" cellpadding="0" cellspacing="0" border="0"
-            height="100%" width="871">
+            height="100%" width="871" summary="layout">
 
             <%@ include file="WEB-INF/jsp/include/applicationHeader.inc"%>
 
             <tr>
                 <td valign="top">
                 <table summary="" cellpadding="0" cellspacing="0" border="0"
-                    height="100%" width="100%">
+                    height="100%" width="100%" summary="layout">
                     <tr>
                         <td height="20" class="mainMenu"><%@ include
                             file="WEB-INF/jsp/include/mainMenu.inc"%></td>
@@ -108,17 +108,17 @@ var getHTMLURL = context+"/GetHTML";
                         <td valign="top"><!-- target of anchor to skip menus --> <a
                             name="content" />
                         <table summary="" cellpadding="0" cellspacing="0" border="0"
-                            class="contentPage" height="100%" width="100%">
+                            class="contentPage" height="100%" width="100%" summary="layout">
                             
                             <tr>
                                 <td width="100%" valign="top">
 
                                 <table summary="" cellpadding="0" cellspacing="0" border="0"
-                                    height="100%" width="100%">
+                                    height="100%" width="100%" summary="layout">
                                     <tr>
                                         <td width="70%" valign="top"><!-- welcome begins -->
                                         <table summary="" cellpadding="0" cellspacing="0" border="0"
-                                            width="100%" class="example">
+                                            width="100%" class="example" summary="layout">
                                             <tr>
                                                 <td class="header" height="20">EXAMPLES OF AJAX WITH REST-API</td>
                                             </tr>
@@ -135,7 +135,7 @@ All the source code is embedded in the page itself
                                         </table>
                         
                                         <table summary="" cellpadding="2" cellspacing="0" border="0"
-                                            width="100%" class="example">
+                                            width="100%" class="example" summary="layout">
                                             <tr>
                                                 <td class="header" height="20">Gene->Reporters</td>
                                             </tr>

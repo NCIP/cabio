@@ -156,7 +156,7 @@ div.classHeader {
 <body>
 
 <!-- NIH header begins -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG">
+<table summary="layout" width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG">
   <tr>
     <td width="283" height="37" align="left">
     <a href="http://www.cancer.gov"><img alt="National Cancer Institute" src="images/logotype.gif" width="283" height="37" border="0"/></a>
@@ -179,7 +179,7 @@ div.classHeader {
 	String searchURL = searchUtils.getSearchURL();
     Set openTabs = searchUtils.getOpenedTabs();
 %>
-<table width="100%">
+<table width="100%" summary="layout">
 <tr>
 	<td valign="top" width="200">
 	   <a href="indexSearch.jsp">
@@ -275,7 +275,7 @@ jQuery(function() {
 tabdropdown.init("bluemenu", 3);
 </script>
 
-<table width="100%"><tr><td width="10"></td><td>
+<table width="100%" summary="layout"><tr><td width="10"></td><td>
 <div class="topPager">
 <%
 if(searchUtils.getResultCount() >= pageSize){
@@ -316,13 +316,13 @@ for(int i=0; i<results.size(); i++){
 	  
 		%><div class="classHeader"><%=className%></div><%
         %><table class="fsResults" width="100%"><tr><%       
-        %><th>Class/Id</th><%
+        %><th scope="col">Class/Id</th><%
         props = new ArrayList();
 		for(Iterator it=result.getProperties().keySet().iterator();it.hasNext();){
 			String key = (String) it.next();					
 			if(!key.equalsIgnoreCase("_hibernate_class") && !key.equalsIgnoreCase("id")){
 				%>						
-				<th><%=FormatUtils.formatCamelCaseAsLabel(key)%></th>						
+				<th scope="col"><%=FormatUtils.formatCamelCaseAsLabel(key)%></th>						
 				<%
 				props.add(key);
 			}
@@ -374,7 +374,7 @@ if(searchUtils.getResultCount() >= pageSize){
 <hr>
 
 <!-- NIH footer begins -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftrTable">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftrTable" layout="summary">
   <tr>
     <td valign="top">
       <div align="center">

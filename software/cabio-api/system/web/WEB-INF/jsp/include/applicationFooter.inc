@@ -1,5 +1,5 @@
                   <!-- application ftr begins -->                  
-                  <table summary="" cellpadding="0" cellspacing="0" border="0" width="100%">
+                  <table summary="layout" cellpadding="0" cellspacing="0" border="0" width="100%">
                     <tr>
                       <td align="center" height="20" class="footerMenuItem" onmouseover="changeMenuStyle(this,'footerMenuItemOver'),showCursor()" onmouseout="changeMenuStyle(this,'footerMenuItem'),hideCursor()" onclick="document.location.href='#'">
                         &nbsp;&nbsp;<a class="footerMenuLink" href="mailto:ncicb@pop.nci.nih.gov">CONTACT US</a>&nbsp;&nbsp;

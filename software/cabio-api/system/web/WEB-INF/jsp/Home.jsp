@@ -17,21 +17,21 @@
 <script src="js/jquery.suggest.js" type="text/javascript"></script>
 </head>
 <body>
-<table summary="" cellpadding="0" cellspacing="0" border="0"
+<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 	width="100%" height="100%">
 
 	<%@ include file="include/header.inc"%>
 
 	<tr>
 		<td height="100%" align="center" valign="top">
-		<table summary="" cellpadding="0" cellspacing="0" border="0"
+		<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 			height="100%" width="871">
 
 			<%@ include file="include/applicationHeader.inc"%>
 
 			<tr>
 				<td valign="top">
-				<table summary="" cellpadding="0" cellspacing="0" border="0"
+				<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 					height="100%" width="100%">
 					<tr>
 						<td height="20" class="mainMenu"><%@ include
@@ -42,18 +42,18 @@
 					<tr>
 						<td valign="top"><!-- target of anchor to skip menus --> <a
 							name="content" />
-						<table summary="" cellpadding="0" cellspacing="0" border="0"
+						<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 							class="contentPage" width="100%" height="100%">
 
 							<tr>
 								<td height="100%" width="100%"><!-- target of anchor to skip menus -->
 								<a name="content" />
 
-								<table summary="" cellpadding="0" cellspacing="0" border="0"
+								<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 									height="100%" width="100%">
 									<tr>
 										<td width="70%"><!-- welcome begins -->
-										<table summary="" cellpadding="0" cellspacing="0" border="0"
+										<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 											height="100%" width="100%">
 											<tr>
 												<td class="welcomeTitle" height="20">WELCOME TO CABIO v<s:text name="build.version"/></td>
@@ -118,14 +118,14 @@
 										</table>
 										<!-- welcome ends --></td>
 										<td valign="top" width="30%"><!-- sidebar begins -->
-										<table summary="" cellpadding="0" cellspacing="0" border="0"
+										<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 											height="100%" width="100%">
 
 											<!-- login/continue form begins -->
 											<tr>
 												<td valign="top">
 
-												<table summary="" cellpadding="2" cellspacing="0" border="0"
+												<table summary="layout" cellpadding="2" cellspacing="0" border="0"
 													width="100%" class="sidebarSection">
 													<tr>
 														<td class="sidebarTitle" height="20">Search for Biological Entities</td>
@@ -147,7 +147,7 @@
 											<!-- what's new begins -->
 											<tr>
 												<td valign="top">
-												<table summary="" cellpadding="0" cellspacing="0" border="0"
+												<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 													width="100%" class="sidebarSection">
 													<tr>
 														<td class="sidebarTitle" height="20">WHAT'S NEW</td>
@@ -176,7 +176,7 @@
 													<tr>
 														<td class="sidebarContent" valign="top"><!-- freestyle search -->
 														<form method="POST" action="IndexService">
-														<table width="100%">
+														<table width="100%" summary="layout">
 															<tr valign="top" align="center">
 																<td colspan="2"><img src="images/smallsearchlogo.png"
 																	name="FreestyleLM Search" border="0" align=middle ALT=""></td>
@@ -207,7 +207,7 @@
 											<!-- spacer cell begins (keep for dynamic expanding) -->
 											<tr>
 												<td valign="top" height="100%">
-												<table summary="" cellpadding="0" cellspacing="0" border="0"
+												<table summary="layout" cellpadding="0" cellspacing="0" border="0"
 													width="100%" height="100%" class="sidebarSection">
 													<tr>
 														<td class="sidebarContent" valign="top">&nbsp;</td>
