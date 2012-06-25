@@ -41,15 +41,14 @@
 <table width="100%">
 	<tr valign="top" align="center">
 		<td>
- 			<img src="images/largesearchlogo.png" name="caCORE Search API" border="0" align="middle" ALT="">
+ 			<img src="images/largesearchlogo.png" name="caCORE Search API" border="0" align="middle" ALT="large freestyle search logo">
  		</td>
 	</tr>
  		
 	<tr>
  		<td align=center><LABEL for="freestyleLM">&nbsp;</LABEL>
  			<input type="text" size="60" id="freestyleLM" name="searchString" value="<%=searchString%>">					
- 			<LABEL for="search">&nbsp;</LABEL>
-			<input type="submit" name="search" value="Search" id="search">
+			<input type="submit" name="search" value="Search">
  		</td>
  	<tr>
  	</table>
@@ -76,7 +75,7 @@
 	</tr>
 	<tr>
 		<td>
-			Results per page: <select name="pageSize">
+			<label for="pageSize">Results per page: </label><select name="pageSize" id="pageSize">
 			<option>10</option>
 			<option>20</option>
 			<option>25</option>
