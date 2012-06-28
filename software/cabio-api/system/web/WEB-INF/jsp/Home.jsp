@@ -183,7 +183,7 @@
 															</tr>
 															<tr>
 																<td colspan="2" align=center nowrap><LABEL for="freestyleLM">&nbsp;</LABEL>
-																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/x/NbSl"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
+																<input type="text" size="60" name="searchString" id="freestyleLM" value="">&nbsp;<a href="https://wiki.nci.nih.gov/display/caBIO/Apache+Lucene+Query+Syntax+for+FreestyleLM+Search" target="blank"><img src="images/help.png" alt="Lucene Query Syntax" name="Lucene Query Syntax" border="0" align=middle></a></td>
 															</tr>
 															<tr>
 																<td width="60%" align="right">
