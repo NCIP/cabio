@@ -107,13 +107,19 @@
 
 		<copy todir="${project.build.dir}">
 			<fileset dir="${sdk.home.dir}">
+				<!-- caBIO customization will supply a new version struts borrowed from caCORE SDK 4.4.1 -->
+				<!-- exclude jars associated with old struts2 -->
+				<exclude name="system/lib/struts2*.jar"/>
+				<exclude name="system/lib/xwork*.jar" />
+				<exclude name="system/lib/ognl*.jar" />
+				<exclude name="system/lib/freemarker*.jar" />
 				<include name="build.*" />
 				<include name="build-scripts/**/*" />
 				<include name="codegen/**/*" />
 				<include name="conf/**/*" />
 				<include name="system/**/*" />
 				<include name="grid/**/*" />
-				<include name="writable-api/**/*" />
+				<include name="writable-api/**/*" />				
 			</fileset>
 		</copy>
 
