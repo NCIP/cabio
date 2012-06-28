@@ -12,7 +12,7 @@
 <BODY>
 
 <!-- nci hdr begins -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="hdrBG" summary="layout">
   <tr>
     <td width="283" height="37" align="left">
     <a href="http://www.cancer.gov"><img alt="National Cancer Institute" src="images/logotype.gif" width="283" height="37" border="0"/></a>
@@ -38,7 +38,7 @@
 
 <br>
 <form method="POST" action="IndexService">
-<table width="100%">
+<table width="100%" summary="layout">
 	<tr valign="top" align="center">
 		<td>
  			<img src="images/largesearchlogo.png" name="caCORE Search API" border="0" align="middle" ALT="large freestyle search logo">
@@ -52,7 +52,7 @@
  		</td>
  	<tr>
  	</table>
-	<table align=center>
+	<table align=center summary="layout">
 	<tr>
 		<td> 
 		    Match Terms: 
@@ -101,7 +101,7 @@ jQuery(function() {
 <hr>
 
 <!-- footer begins -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftrTable">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftrTable" summary="layout">
   <tr>
     <td valign="top">
       <div align="center">
