@@ -1,0 +1,295 @@
+
+                                     caBIO 
+                                  Version 4.1
+
+                                 Release Notes
+                                   May, 2008
+
+
+               National Cancer Institute Center for Bioinformatics
+
+================================================================================
+                                    Contents
+================================================================================
+
+1.0 New Features and Updates
+2.0 Completed Features
+3.0 Resolved Issues
+4.0 Known Issues
+5.0 CVS Tags
+6.0 Bugs and Support
+7.0 Documentation
+
+
+================================================================================
+                           1.0 New Features and Updates
+================================================================================
+
+--------------------------------------------------------------------------------
+ 1.1 Location Model and Range Query API
+--------------------------------------------------------------------------------
+
+  The Location model has been refactored by adding a second level of subclasses.
+  These subclasses make it easy to what feature is being located with a given
+  Location instance.
+  
+  CytogeneticLocation
+    * ArrayReporterCytogeneticLocation
+    * GeneCytogeneticLocation
+    * SNPCytogeneticLocation
+    
+  PhysicalLocation
+    * ArrayReporterPhysicalLocation
+    * CytobandPhysicalLocation
+    * GenePhysicalLocation
+    * MarkerPhysicalLocation
+    * NucleicAcidPhysicalLocation
+    * SNPPhysicalLocation
+    * TranscriptPhysicalLocation
+    
+  In addition, the following new attributes and associations were added to 
+  better identify location data:
+    * GenePhysicalLocation.featureType
+    * PhysicalLocation.assembly
+    * Cytoband.chromosome
+        
+  The new Range Query API allows dynamic querying for genomic features in chromosomal 
+  regions of interest. 
+
+  The RangeQuery API methods are located in CaBioApplicationService:
+    * List search(RangeQuery rangeQuery) 
+    * List search(Class targetClass, RangeQuery rangeQuery)
+
+  The RangeQuery objects are grouped into the following class hierarchy:
+    * RelativeRangeQuery
+      * GridIdRangeQuery
+      * FeatureRangeQuery
+      * PhysicalRangeQuery
+    * AbsoluteRangeQuery
+    
+  For details, please consult the caBIO Technical Guide.
+  
+    
+--------------------------------------------------------------------------------
+ 1.2 Gene and Marker Modeling
+--------------------------------------------------------------------------------
+    
+  The Marker class has been redesigned as a UniSTS-centric object. The semantics 
+  of the attributes have been changed. For example, the geneticMarkerId now 
+  contains a UniSTS id. For more information, refer to the Migration Guide in 
+  the appendix of the caBIO Technical Guide.
+  
+  New Gene model features:
+    * Gene.hugoSymbol
+    * Gene.markerCollection
+    * HomologousAssociation.homologousGene
+    
+  New Marker model features:
+    * Marker.taxon
+    * Marker.name
+    * Marker.physicalLocationCollection
+    * Marker.geneCollection
+    * MarkerAlias
+    
+    
+--------------------------------------------------------------------------------
+ 1.3 Cancer Gene Index
+--------------------------------------------------------------------------------
+  
+  The following domain objects are new for modeling of Cancer Gene Index data:
+    * Evidence
+    * EvidenceCode
+    * GeneFunctionAssociation
+      * GeneAgentAssociation
+      * GeneDiseaseAssociation
+    
+  The following attributes are new in this release:
+    * DiseaseOntology.EVSId
+    
+  Uncurated High Frequency Cancer Index Genes
+    Certain additional genes are to be curated in the next phase of the Cancer Gene 
+    Index Project. For now, these are available at 
+    https://gforge.nci.nih.gov/docman/index.php?group_id=51&selected_doc_group_id=3387
+    
+--------------------------------------------------------------------------------
+ 1.4 Array Annotation API
+--------------------------------------------------------------------------------
+
+  ArrayAnnotationService is a new client-side interface for querying microarray 
+  annotations. Instantiate the ArrayAnnotationServiceImpl class to start 
+  using it. More information on the available methods is presented in the 
+  JavaDocs, accessible here: http://cabioapi.nci.nih.gov/cabio41/docs/
+       
+  Futhermore, some new attributes have been added to the Microarray model:
+    * Microarray.description 
+    * Microarray.LSID 
+  
+  Finally, as described in the Location Model (Section 1.1), ArrayReporter 
+  instances now have associated physical and cytogenetic locations where 
+  available (i.e. provided by the manufacturer). 
+        
+  Annotations for the following microarray platforms are now available in caBIO:
+    * Human Genome U133A 2.0 Array
+    * Human Genome U133A Array
+    
+    
+--------------------------------------------------------------------------------
+ 1.5 caBIG Standards
+--------------------------------------------------------------------------------
+  Adopting the caBIG standards enables caBIO objects to be identified in a caBIG 
+  compatible form and enabling better interoperability with other caBIG-compatible
+  systems.
+  
+  Two subclasses of NucleicAcidSequence have been added to better meet caBIG
+  modeling standards:
+    * ExpressedSequenceTag
+    * MessengerRNA
+    
+
+================================================================================
+                             2.0 Completed Features
+================================================================================
+
+  GF4208: Fix the caBIO Gene Object to use the caBIG standard for Gene
+  
+  GF7767: Missing comparable Gene in HomologousAssociation
+
+  GF8148: Incorrect data obtaining SNP from Gene
+
+  GF8427: Modify the caBIO 4.0 model to use the caBIG standards
+  
+  GF8666: Populate CytogeneticLocation.endCytoband
+  
+  GF8925: Remodel "location" related objects.
+
+  GF9200: Add Cancer Gene Index Data to caBIO
+  
+  GF9770: Add Gene - Marker association
+ 
+  GF10889: Create link from Cytoband to its Chromosome
+  
+  GF11269: Add physicalLocation to genetic markers
+ 
+ 
+================================================================================
+                              3.0 Resolved Issues
+================================================================================
+
+  GF8237: Missing link between PhysicalLocation and Cytoband
+  
+  GF8662: GeneAlias missing.
+  
+  GF9095: Add post-GridId load test for duplicates
+  
+  GF9264: Incorrect relationship among Library, Histopathology, Gene
+  
+  GF9267: Incorrect Gene_GeneAlias relationship
+  
+  GF9419: Unable to get Chromosome from CytogeneticLocation object
+  
+  GF9474: Switch to "table per class hierarchy" inheritance mapping
+  
+  GF9578: Freestyle search does not accept special characters like "(" "-"
+
+  GF9631: Upgrade to version mm9 of EST, MRNA and Cytoband datasets for mouse
+
+  GF9750: Gene-ExpressionArrayReporter-Sequence-Gene inconsistent association
+ 
+  GF10998: Remove junk data in Cytoband
+
+  GF11180: It throws HTTP servlet error when submit GridIdRangeQuery
+  
+  GF11181: It throws caCORE HTTP servlet error when search CytogeneticLocation from Gene object.
+  
+  GF11182: It returns "service temporarily unavailable when search Location from Chromosome object
+  
+  GF11438: Add UniSTS data source
+  
+  GF11730: Marker contains mixed mouse and human data
+  
+  GF11731: Association between Marker and MarkerRelativeLocation is not fully populated
+  
+  GF11825: RelativeLocation.orientation consistency
+  
+  GF12202: Duplicate relative locations
+  
+  GF12397: Gene alias to gene relationship
+  
+  GF12464: Mis-links between marker and SNPs.
+   
+  GF12783: gene->taxon returns 1 taxon, while gene->marker->taxon returns 2 taxons.
+  
+  GF12839: invalid chromosomes in location data
+   
+  GF13290: getHomologousGene and getGene from HomologousAssociation point to the same Gene.
+  
+  GF13306: ArrayAnnotationService.getAliasesForGene returns duplicates
+  
+  GF13423: it returns 0 result for gene->geneCytogeneticLocation->cytoband->physicalLocation
+  
+  GF13498: Microarray.LSID data missing
+  
+  GF13869: Nested queries broken with REST API 
+  
+  
+================================================================================
+                               4.0 Known Issues 
+================================================================================
+
+The following defects are known to exist in this build:
+
+  GF13669: null big id for GeneRelativeLocation
+
+  GF13683: GeneRelativeLocation missing for rs200577
+
+The following SDK defects are known to affect caBIO functionality:
+
+  GF8638: Several UI issues in Internet Explorer
+
+  GF8641: UI stops responding in Firefox
+  
+  GF12785: DatabaseCrossReference is not listed on the search dropdown list
+
+  GF12987: Problems with queries across more than 1 level of inheritance
+  
+  GF12864: Search Object not populated with 1-1 associations to classes in other packages
+  
+
+================================================================================
+                                 5.0 CVS Tags
+================================================================================
+
+  The caBIO code base is found in the cabiodb repository, under "cabioapi". The
+  final CVS tag for this release is:
+
+  CABIO_41_RELEASE
+
+  The version of the SDK which this release of caBIO was tested with is found 
+  in the cacoresdk repostitory, under "SDK4". The CVS tag is:
+
+  CACORE_SDK_401_RC1_04152008
+
+
+================================================================================
+                              6.0 Bugs and Support
+================================================================================
+
+There are multiple ways to get assistance with and provide feedback on caBIO:
+
+  o Contact NCICB Application Support at ncicb@pop.nci.nih.gov 
+  
+  o Post your questions to the caBIO_Users or caBIO_Developers listserv. You 
+    may join either of these mailing lists at: 
+        * https://list.nih.gov/archives/cabio_users.html 
+        * https://list.nih.gov/archives/cabio_developers.html 
+        
+  o Join the caBIO GForge project at https://gforge.nci.nih.gov/projects/cabiodb 
+    to view existing caBIO feature requests and defects
+ 
+
+================================================================================
+                               7.0 Documentation
+================================================================================
+
+The release documentation can be found at:
+http://ncicb.nci.nih.gov/NCICB/infrastructure/cacore_overview/caBIO/guide
