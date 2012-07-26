@@ -47,11 +47,11 @@ Select category:
 	    <select onchange="displayQuery(this)" id="rangeQueries">
 	    <option value="" selected="selected">Choose query...</option>
 	    <option value="queries_range_absolute">Absolute Range Query</option>
-	    <option value="queries_range_grid">Grid Id Range Query</option>
+	    <!-- <option value="queries_range_grid">Grid Id Range Query</option> -->
 	    </select>
 
 	    <jsp:include page="/WEB-INF/jsp/canned/absoluteRangeQuery.jsp" flush="true"/>
-	    <jsp:include page="/WEB-INF/jsp/canned/gridRangeQuery.jsp" flush="true"/>
+	    <!--<jsp:include page="/WEB-INF/jsp/canned/gridRangeQuery.jsp" flush="true"/>-->
 
 </div>
 
