@@ -1,7 +1,7 @@
 #!/bin/sh
 export CABIO_DIR=/cabio/cabiodb/cabio43_load
 export CABIO_DATA_DIR=/cabio/cabiodb/cabio_data
-export GRIDID_PATH=/cabio/cabiodb/cabio43_load/gridid
+#export GRIDID_PATH=/cabio/cabiodb/cabio43_load/gridid
 export LOAD=/cabio/cabiodb/cabio43_load/scripts/sql_loader
 
 # executables 
@@ -30,6 +30,6 @@ export stat_LOG=STATS.$dt.log
 export stat_BAD=STATS.$dt.bad
 export sqlldr_LOG=SQLLDR.$dt.log
 export sqlldr_BAD=SQLLDR.$dt.bad
-export grididload_LOG=GRIDIDLOAD.$dt.log
-export grididload_BAD=GRIDIDLOAD.$dt.bad
+#export grididload_LOG=GRIDIDLOAD.$dt.log
+#export grididload_BAD=GRIDIDLOAD.$dt.bad
 chmod +x "$CABIO_DIR"/bin/mkpath.pl

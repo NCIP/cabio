@@ -168,7 +168,8 @@ mail -s "ArrayReporter, etc. Load Log " $EMAIL < $LOAD/arrays/Array_PLSQL_Ld.log
 mail -s "Cancer Gene Data Curation Load Log " $EMAIL < $LOAD/cgdc/cgdcLoad.log 
 mail -s "PID Dump Load Log " $EMAIL < $LOAD/pid_dump/pidLoader.log 
 
-echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
+#echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
+echo "Finished Load P4 " 
 cd $LOAD/provenance
 echo "Loading provenance, source_reference, url_source_reference tables"
 rm *.bad *.log
@@ -177,24 +178,24 @@ time sh provenance_DataLoader.sh $1 1>provenance_load.log 2>&1 &
 time sqlplus $1  @$LOAD/keywords/keyword_load.sql &
 
 # Grid Id Load
-time sqlplus $1  @$LOAD/bigid_lower_idx.sql
-time sqlplus $1  @$LOAD/indexes/drop.sql
+#time sqlplus $1  @$LOAD/bigid_lower_idx.sql
+#time sqlplus $1  @$LOAD/indexes/drop.sql
 
-time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>bigid.log 
-time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log 
+#time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>bigid.log 
+#time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log 
 
 
-echo "Beginning Grid Id Load"
+#echo "Beginning Grid Id Load"
 
-cd $CABIO_DIR/grididloader/
-rm *.bad *.log
-time ant -Dtarget.env=$TARGET_ENV  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
+#cd $CABIO_DIR/grididloader/
+#rm *.bad *.log
+#time ant -Dtarget.env=$TARGET_ENV  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
 
-mail -s " Finished grid-id part 1 " $EMAIL  
-mail -s " Grid Id Load Log " $EMAIL < $CABIO_DIR/gridid/$grididload_LOG 
+#mail -s " Finished grid-id part 1 " $EMAIL  
+#mail -s " Grid Id Load Log " $EMAIL < $CABIO_DIR/gridid/$grididload_LOG 
 
-time sqlplus $1  @$LOAD/indexes/bigid_cols.sql 
-time sqlplus $1  @$LOAD/indexes/bigid_lower.sql 
+#time sqlplus $1  @$LOAD/indexes/bigid_cols.sql 
+#time sqlplus $1  @$LOAD/indexes/bigid_lower.sql 
 
 cd $CABIO_DIR/scripts/sql_loader/arrays
 echo "Starting post big id load -> arrays (array reporter class hierarchy tables)"
@@ -236,10 +237,10 @@ mail -s " DrugBank Load Log " $EMAIL < $LOAD/drugbank/drugbank.log
 mail -s "Starting Grid Id Load for remaining objects " $EMAIL
 
 # run the bigid for the other objects
-cd $CABIO_DIR/grididloader/
-time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>>$grididload_LOG 2>&1
+#cd $CABIO_DIR/grididloader/
+#time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>>$grididload_LOG 2>&1
 
-echo "Finished GridId Load Part 2" | mail -s "Finished GridId Load Part 2" $EMAIL < $grididload_LOG 
+#echo "Finished GridId Load Part 2" | mail -s "Finished GridId Load Part 2" $EMAIL < $grididload_LOG 
 
 cd $LOAD
 time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
