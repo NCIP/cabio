@@ -1,0 +1,122 @@
+/**
+ * Summary formatting for caBIO domain objects. 
+ */
+var caBioFormats = function() {
+    return {
+    
+    summary : {
+	    "gov.nih.nci.cabio.domain.Agent":{
+	        "title":["name"],
+	        "desc":["EVSId","drugbankAccession"]
+	    },
+	    "gov.nih.nci.cabio.domain.Anomaly":{
+	        "title":["description"]
+	    },
+        "gov.nih.nci.cabio.domain.Chromosome":{
+            "title":["number"]
+        },
+	    "gov.nih.nci.cabio.domain.ClinicalTrialProtocol":{
+	        "title":["title"],
+	        "desc":["leadOrganizationId","leadOrganizationName"]
+	    },
+        "gov.nih.nci.cabio.pathways.Condition":{
+            "title":["name"]
+        },
+        "gov.nih.nci.cabio.domain.Cytoband":{
+            "title":["name"]
+        },
+	    "gov.nih.nci.cabio.domain.DiseaseOntology":{
+	        "title":["name"],
+	        "desc":["EVSId"]
+	    },
+        "gov.nih.nci.cabio.pathways.EntityAccession":{
+            "title":["accession"],
+            "desc":["database"]
+        },
+        "gov.nih.nci.cabio.pathways.EntityName":{
+            "title":["name"]
+        },
+	    "gov.nih.nci.cabio.domain.Evidence":{
+	        "title":["sentence"],
+	        "desc":["comments"],
+	        "ids":["pubmedId"]
+	    },
+        "gov.nih.nci.cabio.domain.EvidenceCode":{
+            "title":["evidenceCode"]
+        },
+	    "gov.nih.nci.cabio.domain.Gene":{
+	        "title":["symbol"],
+	        "desc":["fullName"]
+	    },
+	    "gov.nih.nci.cabio.domain.GeneAlias":{
+	        "title":["name"],
+	        "desc":["type"]
+	    },
+	    "gov.nih.nci.cabio.domain.GeneOntology":{
+	        "title":["name"]
+	    },
+	    "gov.nih.nci.cabio.domain.Histopathology":{
+	        "title":["grossDescription"],
+	        "desc":["comments"]
+	    },
+	    "gov.nih.nci.cabio.domain.Library":{
+	        "title":["name"],
+	        "desc":["keyword"]
+	    },
+        "gov.nih.nci.cabio.pathways.Macroprocess":{
+            "title":["name"]
+        },
+	    "gov.nih.nci.cabio.domain.Microarray":{
+	        "title":["manufacturer","name"],
+	        "desc":["description"]
+	    },
+	    "gov.nih.nci.cabio.domain.OrganOntology":{
+	        "title":["name"]
+	    },
+	    "gov.nih.nci.cabio.domain.Pathway":{
+	        "title":["name", "displayValue"],
+	        "desc":["description"]
+	    },
+        "gov.nih.nci.cabio.pathways.PhysicalParticipant":{
+            "title":["location","activityState","postTranslationalMod"]
+        },
+	    "gov.nih.nci.cabio.domain.Protein":{
+	        "title":["primaryAccession","name"],
+	        "desc":["keywords"]
+	    },
+	    "gov.nih.nci.cabio.domain.ProteinAlias":{
+	        "title":["name"]
+	    },
+        "gov.nih.nci.cabio.domain.ProteinDomain":{
+            "title":["source","accessionNumber"],
+            "desc":["description"]
+        },
+	    "gov.nih.nci.cabio.domain.Protocol":{
+	        "title":["name"],
+	        "desc":["type"]
+	    },
+	    "gov.nih.nci.cabio.domain.ProtocolAssociation":{
+	        "title":["CTEPNAME"],
+	        "desc":["diseaseCategory"]
+	    },
+        "gov.nih.nci.cabio.domain.Target":{
+            "title":["name"],
+            "desc":["type"]
+        },
+        "gov.nih.nci.cabio.domain.Taxon":{
+            "title":["commonName"],
+            "desc":["scientificName","ethnicityStrain"]
+        },
+	    "gov.nih.nci.cabio.domain.Tissue":{
+	        "title":["name", "displayValue"],
+	        "desc":["description"]
+	    },
+	    "gov.nih.nci.cabio.domain.Vocabulary":{
+	        "title":["coreTerm"],
+	        "desc":["generalTerm"]
+	    }
+    }
+        
+    };
+}();
+        

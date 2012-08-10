@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--************************************************************************
+* This is the top-level build file for the project. It creates a local copy 
+* of the caCORE SDK, copies this project's custom file versions over top of 
+* it and then calls the build-project.xml ant script to actually build the 
+* system. 
+*************************************************************************-->
+
+<project name="cabio-api" default="dist" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant" xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+	<description>Build script for the caBIO API</description>
+	<property file="build.properties" />
+	<property file="project.properties" />
+
+	<property name="common.dir" value="../common" />
+	<property name="api.dist.dir" value="${basedir}/dist" />
+	<property name="download.dir" value="${basedir}/download" />
+	<property name="common.dist.dir" value="${basedir}/dist/common" />
+	<property file="${basedir}/conf/deploy.properties" />
+
+	<!-- antcontrib task-->
+	<path id="common.classpath">
+		<fileset dir="${common.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="common.classpath" />
+
+	<!-- maven ant task -->
+	<path id="maven-ant-tasks.classpath" path="${common.dir}/lib/maven-ant-tasks-2.1.3.jar" />
+	<typedef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />
+
+	<!--set up required dependencies jars for compile time and run time thru Maven -->
+	<artifact:pom id="cabio-api-pom" file="pom.xml" />
+	<artifact:dependencies pathId="dependency.classpath" filesetId="dependency.fileset" pomRefId="cabio-api-pom" useScope="compile" />
+
+	<target name="help" description="Lists commonly used targets">
+		<echo>========================</echo>
+		<echo> caBIO API Build Script</echo>
+		<echo>========================</echo>
+		<echo>ant clean        - Remove generated build artifacts</echo>
+		<echo>ant build-system - Build entire system</echo>
+		<echo>ant dist-zips    - Create distribution zips</echo>
+	</target>
+
+	<property name="project.build.dir" value="${basedir}/build" />
+	<property name="project.output.dir" value="${basedir}/output" />
+	<property name="project.sourcedist.dir" value="${project.output.dir}/cabioapi" />
+	<property name="project.javaclientdist.dir" value="${project.output.dir}/remote-client" />
+	<property name="project.wsclientdist.dir" value="${project.output.dir}/ws-client" />
+	<property name="project.javadoc.dir" value="${project.output.dir}/docs" />
+	<property name="project.warfile" value="${project.output.dir}/webapp/${PROJECT_NAME}.war" />
+	<property name="project.sourcedist" value="${PROJECT_NAME}_source" />
+	<property name="project.javaclientdist" value="${PROJECT_NAME}_java_client" />
+	<property name="project.wsclientdist" value="${PROJECT_NAME}_ws_client" />
+	<property name="project.javadoc" value="${PROJECT_NAME}_javadocs" />
+	<property name="project.indexgen" value="${PROJECT_NAME}_indexgen" />
+	<property name="indexgen.dir" value="${project.output.dir}/indexgen" />
+
+	<target name="clean" description="Removes generated files">
+		<delete dir="${project.build.dir}" quiet="true" />
+		<delete dir="${project.output.dir}" quiet="true" />
+		<delete dir="${api.dist.dir}" quiet="true" />
+	</target>
+
+	<target name="build" depends="clean, customize-sdk,tag-build" description="Generate the entire system">
+		<ant antfile="build-project.xml" inheritAll="false" />
+
+		<copy tofile="${project.output.dir}/remote-client/README.txt" file="docs/README-client.txt">
+		</copy>
+
+	</target>
+
+	<target name="customize-sdk">
+		<antcall target="load-sdk" />
+		<antcall target="load-project" />
+	</target>
+
+	<!-- check whether sdk binary file from the common library has been downloaded-->
+	<condition property="cacore-sdk.downloaded">
+		<available file="${download.dir}/${cacore-sdk.binaries.file}" />
+	</condition>
+
+	<!-- download the sdk binary only if it's not yet in the download directory -->
+	<target name="retrieve:cacore-sdk" unless="cacore-sdk.downloaded">
+		<echo message="Retrieving caCORE SDK ..." />
+		<mkdir dir="${download.dir}" />
+		<get src="${cacore-sdk.src.url}" dest="${download.dir}/${cacore-sdk.binaries.file}" />
+	</target>
+
+	<!-- check whether sdk has already been installed at sdk.home.dir -->
+	<condition property="cacore-sdk.installed">
+		<available file="${sdk.home.dir}" />
+	</condition>
+
+	<!-- install sdk only if sdk.home.dir is not empty -->
+	<target name="install:cacore-sdk" unless="cacore-sdk.installed">
+		<antcall target="retrieve:cacore-sdk" />
+		<unzip src="${download.dir}/${cacore-sdk.binaries.file}" dest="${sdk.home.dir}" />
+	</target>
+
+	<target name="load-sdk" depends="install:cacore-sdk" description="Make a local copy of the SDK">
+
+		<mkdir dir="${project.build.dir}" />
+		<mkdir dir="${project.build.dir}/models" />
+		<mkdir dir="${project.build.dir}/models/database-scripts" />
+
+		<copy todir="${project.build.dir}">
+			<fileset dir="${sdk.home.dir}">
+				<!-- caBIO customization will supply a new version struts borrowed from caCORE SDK 4.4.1 -->
+				<!-- exclude jars associated with old struts2 -->
+				<exclude name="system/lib/struts2*.jar"/>
+				<exclude name="system/lib/xwork*.jar" />
+				<exclude name="system/lib/ognl*.jar" />
+				<exclude name="system/lib/freemarker*.jar" />
+				<include name="build.*" />
+				<include name="build-scripts/**/*" />
+				<include name="codegen/**/*" />
+				<include name="conf/**/*" />
+				<include name="system/**/*" />
+				<include name="grid/**/*" />
+				<include name="writable-api/**/*" />				
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="load-project" description="Copy the project's custom conf files and model over the SDK">		
+		<!-- copy model -->
+		<copy todir="${project.build.dir}/models" overwrite="true">
+			<fileset dir="${basedir}/models">
+				<include name="*.xmi" />
+			</fileset>
+		</copy>
+
+		<!-- copy codegen templates -->
+		<copy todir="${project.build.dir}/codegen" overwrite="true">
+			<fileset dir="${basedir}/codegen">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<!-- copy conf folder -->
+		<copy todir="${project.build.dir}/conf" overwrite="true">
+			<fileset dir="${basedir}/conf">
+				<include name="**/*" />
+				<exclude name="local.properties" />
+			</fileset>
+		</copy>
+		
+		<!-- replace token in deploy.properties with values from properties -->
+		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{webapp.version.abbrev\}" replace="${webapp.version.abbrev}" flags="g" />
+		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{webapp.version\}" replace="${webapp.version}" flags="g" />
+		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{cache.path}" replace="${cache.path}" flags="g" />
+		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{index.path}" replace="${index.path}" flags="g" />
+		<replaceregexp file="${project.build.dir}/conf/deploy.properties" match="\$\{display.version}" replace="${display.version}" flags="g" />
+
+		<!-- copy SDK configuration -->
+		<copy todir="${project.build.dir}" overwrite="true">
+			<fileset dir="${basedir}/conf">
+				<include name="local.properties" />
+			</fileset>
+		</copy>
+
+		<!-- copy system -->
+		<copy todir="${project.build.dir}/system" overwrite="true">
+			<fileset dir="${basedir}/system">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+		<!-- copy mobile web app -->
+		<if>
+			<equals arg1="${cabio-webapp.mobile.included}" arg2="true" />
+			<then>
+				<echo message="Include caBIO Mobile Application in the deployment" />
+				<copy todir="${project.build.dir}/system/web" overwrite="true">
+					<fileset dir="${basedir}/mobile">
+						<include name="**/*" />
+						<exclude name="src/**/*" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
+		<antcall target="copy-mobile-src" />
+
+		<replace dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
+			<replacefilter token="@INDEXBASE@" value="${INDEXBASE}" />
+		</replace>
+
+	</target>
+
+	<target name="copy-mobile-src" if="cabio-webapp.mobile.included">
+		<echo message="Include caBIO Mobile Application in the deployment" />
+		<copy todir="${project.build.dir}/system/web" overwrite="true">
+			<fileset dir="${basedir}/mobile">
+				<include name="**/*" />
+				<exclude name="src/**/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="tag-build" description="tag the portlet build information">
+		<!--matches either tags or trunk -->
+		<propertyregex override="true" property="build_svn_revision" input="${build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
+		<propertyregex override="true" property="build_svn_url" input="${build.svn.url}" regexp="\$HeadURL\: (.*/cabio/tags/[^/]*)/.*" select="\1" />
+		<propertyregex override="true" property="build_svn_url" input="${build.svn.url}" regexp="\$HeadURL\: (.*/cabio/trunk/[^/]*)/.*" select="\1" />
+		<tstamp>
+			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<property name="build.date" value="${timestamp}" />
+
+		<echo file="${project.build.dir}/version.properties" message="build.version=${display.version}${line.separator}" />
+
+		<echo file="${project.build.dir}/version.properties" append="true" message="build.version.webapp=${webapp.version}${line.separator}" />
+
+		<echo file="${project.build.dir}/version.properties" append="true" message="build.svn.url=${build_svn_url}${line.separator}" />
+
+		<echo file="${project.build.dir}/version.properties" append="true" message="build.svn.revision=${build_svn_revision}${line.separator}" />
+
+		<echo file="${project.build.dir}/version.properties" append="true" message="build.date=${build.date}" />
+	</target>
+
+	<target name="dist-source" description="Create a source distribution ready to be zipped">
+
+		<fail message="Project must be built before calling this target. Type 'ant help' for more information.">
+			<condition>
+				<not>
+					<available file="${project.warfile}" />
+				</not>
+			</condition>
+		</fail>
+
+		<delete dir="${project.sourcedist.dir}" quiet="true" />
+		<mkdir dir="${project.sourcedist.dir}" />
+
+		<!-- copy system java code -->
+		<copy todir="${project.sourcedist.dir}/system" overwrite="true">
+			<fileset dir="${basedir}/system">
+				<include name="**/*.java" />
+			</fileset>
+			<filterchain>
+				<concatfilter prepend="docs/LICENSE.txt" />
+			</filterchain>
+		</copy>
+
+		<!-- copy system  -->
+		<copy todir="${project.sourcedist.dir}/system" overwrite="true">
+			<fileset dir="${basedir}/system">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+
+		<!-- copy the rest -->
+		<copy todir="${project.sourcedist.dir}" overwrite="true">
+			<fileset dir="${basedir}">
+				<include name="models/*.xmi" />
+				<include name="conf/**/*" />
+				<include name="codegen/**/*" />
+				<include name="test/**/*" />
+				<include name="docs/*" />
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+
+		<!-- copy deployment files -->
+		<!--
+		<copy todir="${project.sourcedist.dir}/deploy" overwrite="true">
+			<fileset dir="${basedir}/docs/deploy">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+-->
+		<!-- copy war file -->
+		<!--
+		<copy todir="${project.sourcedist.dir}/deploy" overwrite="true" file="${project.warfile}" />
+-->
+	</target>
+
+	<target name="dist-zips" depends="dist-source" description="Creates all the distribution zips">
+
+		<delete>
+			<fileset dir="${project.output.dir}" includes="*.zip" />
+		</delete>
+
+		<zip destfile="${project.output.dir}/${project.sourcedist}.zip">
+			<zipfileset prefix="${project.sourcedist}" dir="${project.sourcedist.dir}" />
+		</zip>
+
+		<zip destfile="${project.output.dir}/${project.javaclientdist}.zip">
+			<zipfileset prefix="${project.javaclientdist}" dir="${project.javaclientdist.dir}" />
+		</zip>
+
+		<zip destfile="${project.output.dir}/${project.wsclientdist}.zip">
+			<zipfileset prefix="${project.wsclientdist}" dir="${project.wsclientdist.dir}" />
+		</zip>
+
+		<zip destfile="${project.output.dir}/${project.javadoc}.zip">
+			<zipfileset prefix="${project.javadoc}" dir="${project.javadoc.dir}" />
+		</zip>
+	</target>
+
+	<!-- package index generator -->
+	<target name="package-indexgen">
+		<echo message="*** Packaging index generation ****" />
+		<delete dir="${indexgen.dir}" quiet="true" />
+		<mkdir dir="${indexgen.dir}" />
+		<mkdir dir="${indexgen.dir}/conf" />
+		<mkdir dir="${indexgen.dir}/lib" />
+		<jar destfile="${indexgen.dir}/lib/${PROJECT_NAME}-indexgen.jar" update="false">
+			<manifest>
+				<attribute name="Generated-By" value="caCORE SDK Code Generator" />
+				<attribute name="Project-Title" value="${PROJECT_NAME}" />
+				<attribute name="Model-File" value="${MODEL_FILE}" />
+				<attribute name="Main-class" value="gov.nih.nci.common.util.search.IndexGenerator" />
+			</manifest>
+			<fileset dir="${project.build.dir}/custom/build">
+				<include name="**/indexgen/**/*" />
+			</fileset>
+			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/build/classes">
+				<include name="**/domain/*" />
+				<include name="**/pathways/*" />
+			</fileset>
+			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
+				<include name="**/domain/*.hbm.xml" />
+				<include name="**/pathways/*.hbm.xml" />
+			</fileset>
+			<fileset dir="${project.build.dir}/system/build/classes">
+				<include name="**/system/util/StringClobType.class" />
+				<include name="**/system/util/indexgen/ObjectBridge.class" />
+			</fileset>
+		</jar>
+
+		<copy todir="${indexgen.dir}" overwrite="true">
+			<fileset dir="${project.build.dir}/conf/indexgen">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+
+		<!-- replace token in build.xml -->
+		<replace dir="${indexgen.dir}">
+			<replacefilter token="@DISPLAY_VERSION@" value="${DISPLAY_VERSION}" />
+		</replace>
+
+		<copy overwrite="true" tofile="${indexgen.dir}/conf/hibernate.properties" file="${project.build.dir}/conf/indexgen/hibernate.properties">
+			<!-- replace tokens with values from build properties -->
+			<filterset id="db.filterset">
+				<filter token="DRIVER" value="${database.driver}" />
+				<filter token="USER_NAME" value="${database.user}" />
+				<filter token="PASSWORD" value="${database.password}" />
+				<filter token="CONNECTION_URL" value="${database.url}" />
+				<filter token="SHOWSQL" value="${HIBERNATE_SHOW_SQL}" />
+			</filterset>
+		</copy>
+
+		<copy todir="${indexgen.dir}/conf" overwrite="true">
+			<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/src">
+				<include name="indexedFields.properties" />
+				<include name="hibernate.cfg.xml" />
+			</fileset>
+			<fileset dir="${project.build.dir}/conf/system/web/WEB-INF/classes">
+				<include name="searchapiconfig.properties" />
+			</fileset>
+			<fileset dir="${project.build.dir}/conf/indexgen">
+				<include name="log4j.properties" />
+			</fileset>
+		</copy>
+
+		<!-- remove JNDI data source name -->
+		<replace file="${indexgen.dir}/conf/hibernate.cfg.xml" value="">
+            <replacetoken><![CDATA[<property name="connection.datasource">java:/cabio</property>]]></replacetoken>
+        </replace>	
+		
+		<copy todir="${indexgen.dir}/lib" overwrite="true">
+		<fileset dir="${project.build.dir}/system/lib">
+			<include name="antlr*.jar" />
+			<include name="log4j*.jar" />
+			<include name="commons-logging*.jar" />
+			<include name="dom4j*.jar" />
+			<include name="asm*.jar" />
+			<include name="cglib*.jar" />
+			<include name="commons-*.jar" />
+			<include name="ehcache*.jar" />
+			<include name="jta.jar" />
+			<include name="ojdbc*.jar" />
+			<include name="hibernate*.jar" />
+			<include name="ejb*.jar" />
+			<include name="lucene*.jar" />
+		</fileset>
+		<fileset dir="${project.build.dir}/output/${PROJECT_NAME}/build/jar">
+			<include name="${PROJECT_NAME}-beans.jar" />
+		</fileset>
+	</copy>
+</target>
+
+<target name="dist" depends="build">
+	<!--copy cabio-oracle-ds.xml and replace database connection info-->
+	<copy overwrite="true" tofile="${common.dist.dir}/cabio-oracle-ds.xml" file="${common.dir}/resources/jboss-conf/cabio-oracle-ds.xml">
+		<!-- replace tokens with values from build properties -->
+		<filterset id="db.filterset">
+			<filter token="database.url" value="${database.url}" />
+			<filter token="database.user" value="${database.user}" />
+			<filter token="database.password" value="${database.password}" />
+			<filter token="database.driver" value="${database.driver}" />
+		</filterset>
+	</copy>
+
+	<!--copy properties-service.xml and replace cacore.properties.path info-->
+	<copy overwrite="true" tofile="${common.dist.dir}/properties-service.xml" file="${common.dir}/resources/jboss-conf/properties-service.xml">
+		<filterset>
+			<filter token="cacore.properties.path" value="${cacore.properties.path}" />
+		</filterset>
+	</copy>
+
+	<!--copy cacore.properties and replace handler.path info-->
+	<copy overwrite="true" tofile="${common.dist.dir}/cacore.properties" file="${common.dir}/resources/jboss-conf/cacore.properties">
+		<filterset>
+			<filter token="cabio.conf.handler.path" value="${cabio.conf.handler.path}" />
+		</filterset>
+	</copy>
+
+	<!--copy config.dct and replace database info-->
+	<copy overwrite="true" tofile="${common.dist.dir}/config.dct" file="${common.dir}/resources/jboss-conf/config.dct">
+		<filterset refid="db.filterset" />
+	</copy>
+
+	<!-- copy war file -->
+	<copy todir="${api.dist.dir}" overwrite="true" file="${project.warfile}" />
+
+	<!-- copy database jdbc driver from maven repository-->
+	<copy todir="${common.dist.dir}" overwrite="true">
+		<restrict>
+			<fileset refid="dependency.fileset" />
+			<rsel:name name="**ojdbc*.jar" />
+		</restrict>
+		<mapper classpathref="maven-ant-tasks.classpath" type="flatten" />
+	</copy>
+	
+	<!-- package index generation into a zip file -->
+	<if>
+		<!--if package indexgene is true -->
+		<equals arg1="${package.indexgen}" arg2="true" />
+		<then>
+			<antcall target="package-indexgen" />
+			<zip destfile="${api.dist.dir}/${project.indexgen}.zip">
+				<zipfileset prefix="${project.indexgen}" dir="${indexgen.dir}" />
+			</zip>
+		</then>
+	</if>
+
+</target>
+
+<target name="deploy" depends="dist">
+	<!-- deploy WAR and xml to JBOSS deploy location-->
+	<copy todir="${jboss.deploy.dir}" overwrite="true">
+		<fileset dir="${api.dist.dir}">
+			<include name="${PROJECT_NAME}.war" />
+		</fileset>
+		<fileset dir="${common.dist.dir}">
+			<include name="properties-service.xml" />
+			<include name="cabio-oracle-ds.xml" />
+		</fileset>
+	</copy>
+	
+	<!-- deploy jar to JBOSS lib location-->
+	<copy todir="${jboss.lib.dir}" overwrite="true">
+		<fileset dir="${common.dist.dir}">
+			<include name="ojdbc*.jar" />
+		</fileset>
+	</copy>
+	<!-- deploy cacore.properties and config.dct location-->
+	<copy tofile="${cacore.properties.path}" overwrite="true" file="${common.dist.dir}/cacore.properties" />
+	<copy todir="${cabio.conf.handler.path}" overwrite="true">
+		<fileset dir="${common.dist.dir}">
+			<include name="config.dct" />
+		</fileset>
+	</copy>
+</target>
+</project>
