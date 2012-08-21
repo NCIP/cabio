@@ -84,15 +84,15 @@
 													caBIO Download site</a> - Contains download packages and
 													release notes</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3646">caBIO
+														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO
 													<s:text name="build.version"/> Release Notes</a> - Latest release notes for caBIO</li>
 													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3646">caBIO <s:text name="build.version"/>
+														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO <s:text name="build.version"/>
 													Data Refresh Release Notes</a> - Release notes describing
 													the current data content of caBIO</li>
 													<li><a href="docs">caBIO <s:text name="build.version"/> javadocs</a> - Java API
 													documentation</li>
-													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51&release_id=3646">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
+													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
 													Guide</li>
 												</ul>
 												
