@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<project name="cabio-portlet" basedir="." default="dist">
+	<property file="build.properties" />
+	<property file="project.properties" />
+	<property name="project.dir" value="." />
+	<property name="common.dir" value="../common" />
+	<property name="project.build.dir" value="build" />
+	<property name="ant.project.name" value="caBIO Portlets" />
+	<property name="dist.dir" value="dist" />
+	<property name="src.dir" value="src" />
+	<property name="conf.dir" value="conf" />
+	<property name="lib.dir" value="lib" />
+	<property name="webroot.dir" value="WebRoot" />
+	<property name="classes.build.dir" value="${project.build.dir}/WEB-INF/classes" />
+	<property name="war.file" value="cabioportlets.war" />
+
+	<property name="liferay.deploy.dir" value="${liferay.deploy.dir}" />
+	<property name="deploy.specific.wars" value="${war.file}" />
+
+	<!-- antcontrib task-->
+	<path id="common.classpath">
+		<fileset dir="${common.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="common.classpath" />
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}" />
+		<fileset dir="${webroot.dir}/WEB-INF/lib" />
+	</path>
+
+	<target name="clean" description="Removes generated files">
+
+		<delete dir="${dist.dir}" quiet="true" />
+		<delete dir="${project.build.dir}" quiet="true" />
+
+	</target>
+
+	<target name="create-build">
+
+		<mkdir dir="${project.build.dir}" />
+		<mkdir dir="${classes.build.dir}" />
+
+		<copy todir="${project.build.dir}">
+			<fileset dir="${webroot.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="compile" depends="create-build" description="Compiles the Java source files">
+
+		<javac srcdir="${src.dir}" destdir="${classes.build.dir}" debug="true">
+			<classpath refid="project.classpath" />
+			<include name="**/*.java" />
+		</javac>
+
+	</target>
+
+	<target name="tag-build" description="tag the portlet build information">
+		<!--matches either tags or trunk -->
+		<propertyregex override="true" property="build_svn_revision" input="${portlet.build.svn.revision}" regexp="\$Revision\: (.*)\$" select="\1" />
+		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*/cabio/tags/[^/]*)/.*" select="\1" />			
+		<propertyregex override="true" property="build_svn_url" input="${portlet.build.svn.url}" regexp="\$HeadURL\: (.*/cabio/trunk/[^/]*)/.*" select="\1" />
+		<tstamp>
+			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<property name="build.date" value="${timestamp}" />
+	</target>
+
+	<target name="copy-resources" depends="tag-build" description="Copy resource files">
+		<copy todir="${classes.build.dir}" overwrite="true">
+			<fileset dir="${conf.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<replace dir="${classes.build.dir}">
+			<include name="application-config-client*.xml" />
+			<include name="cabioportlet.properties" />
+			<replacefilter token="CABIO_URL" value="${remote.api.url}" />
+			<replacefilter token="CABIO_VERSION" value="${remote.api.version}" />
+			<replacefilter token="ONLINE_HELP_URL" value="${portlet.online.help.url}" />
+			<replacefilter token="BUILD_VERSION" value="${portlet.build.version}" />
+			<replacefilter token="BUILD_SVN_TAG" value="${build_svn_url}" />
+			<replacefilter token="BUILD_SVN_REVISION" value="${build_svn_revision}" />
+			<replacefilter token="BUILD_DATE" value="${build.date}" />
+		</replace>
+
+	</target>
+
+	<target name="dist" depends="clean,compile,copy-resources" description="Creates portlet WAR file distribution">
+
+		<echo message="${ant.project.name}: Creates portlet WAR file distribution" />
+		<mkdir dir="${dist.dir}" />
+		<zip destfile="${dist.dir}/${war.file}" whenempty="skip">
+			<zipfileset dir="${project.build.dir}" prefix="" />
+		</zip>
+
+	</target>
+
+	<target name="deploy" depends="dist">
+		<!-- deploy WAR to Liferay deploy location-->
+		<copy todir="${liferay.deploy.dir}" overwrite="true">
+			<fileset dir="${dist.dir}">
+				<include name="${war.file}" />
+			</fileset>
+		</copy>
+	</target>
+</project>

@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <include file="struts-ajax.xml" />
+    <include file="struts-cacoresdk.xml" />
+    
+	<package name="miner" extends="struts-default">
+
+		<action name="MinerHome"
+			class="gov.nih.nci.system.web.struts.action.Home">
+			<result name="input">webui/main.jsp</result>
+			<result>webui/main.jsp</result>
+		</action>				
+	</package>
+
+</struts>
