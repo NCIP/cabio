@@ -24,6 +24,7 @@ time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/sql/cgap_dataLoad.sql 1>$LO
 wait
 
 echo "Done download " | mail -s "Finished download and library-load " $EMAIL
+
 # start parse of drug bank data
 #cd $CABIO_DIR/scripts/parse/drugbank
 #perl drug_parser.pl &
@@ -50,5 +51,5 @@ rm *.bad
 
 time sh scripts_load.sh $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB 1>$sqlldr_LOG 2>$sqlldr_BAD  
 
-echo "Done Part 4 " | mail -s "Finished data load " $EMAIL
+echo "Done Database Load " | mail -s "Finished data load " $EMAIL
 exit
