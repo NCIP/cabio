@@ -18,6 +18,9 @@ export SCHEMA='cabiodev'
 export SCHEMA_PWD='cabiodev506'
 export SCHEMA_DB='BIODEV'
 
+# email to send load status to
+export EMAIL=jiangho@mail.nih.gov; pansu@mail.nih.gov
+
 export dt=`date '+%m_%d_%y'`
 
 # Log files
