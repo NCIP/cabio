@@ -3,7 +3,7 @@
 # Configure enviroment variables
 `source setup_env.sh`
 
-echo "Starting load " | mail -s "Starting load " gustafss@mail.nih.gov
+echo "Starting load " | mail -s "Starting load " $EMAIL
 # Download data
 echo "Starting download"
 cd $CABIO_DIR/scripts/download
@@ -23,8 +23,7 @@ echo "Beginning PL/SQL procedures that load from CGAP (LIBRARIES, etc)";
 time sqlplus $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB @$LOAD/sql/cgap_dataLoad.sql 1>$LOAD/sql/cgapLoad.log 2>&1 &
 wait
 
-echo "Done download " | mail -s "Finished download and library-load " gustafss@mail.nih.gov
-
+echo "Done download " | mail -s "Finished download and library-load " $EMAIL
 # start parse of drug bank data
 #cd $CABIO_DIR/scripts/parse/drugbank
 #perl drug_parser.pl &
@@ -41,7 +40,7 @@ echo "Starting parse of array data"
 cd $CABIO_DIR/scripts/parse
 sh parse_MicroArray_Data.sh 1>>$parse_LOG 2>>$parse_BAD 
 
-echo "Done Parse " | mail -s "Finished parse " gustafss@mail.nih.gov
+echo "Done Parse " | mail -s "Finished parse " $EMAIL
 
 # Load Data
 echo "Beginning Data Loads"
@@ -51,5 +50,5 @@ rm *.bad
 
 time sh scripts_load.sh $SCHEMA\/$SCHEMA_PWD\@$SCHEMA_DB 1>$sqlldr_LOG 2>$sqlldr_BAD  
 
-echo "Done Part 4 " | mail -s "Finished data load " gustafss@mail.nih.gov
+echo "Done Part 4 " | mail -s "Finished data load " $EMAIL
 exit
