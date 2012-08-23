@@ -381,17 +381,6 @@ public class ReadFile {
 
 	/** Main method */
 	public static void main(String[] args) {
-		/*
-		 * // for testing on local window args[0] =
-		 * "/cgap/schaefec/current/CGAP/data"; args[1] = "lpgfs.nci.nih.gov";
-		 * args[2] = "gustafss"; args[3] = "allie1"; args[4] =
-		 * "C:/cabio21/database/test/"; args[5] =
-		 * "jdbc:oracle:thin:@cbiodb20.nci.nih.gov:1521:CBDEV"; args[6] =
-		 * "cabiodev31"; args[7] = "dev!234"; //
-		 * /cgap/schaefec/current/CGAP/data lpgfs.nci.nih.gov gustafss allie1 $1
-		 * $2 $3 $4
-		 */
-
 		new ReadFile(args);
 	}
 
