@@ -39,7 +39,6 @@
 				classpathref="libs" fork="yes">
 			<jvmarg value="-Xms512M"/>
             <jvmarg value="-Xmx1024M"/>
-            <arg line="/ ncicbftp2.nci.nih.gov cgapftp cg@p+tp"/>
             <arg line="../data/ncbi_unigene/"/>
             <arg line="${db.url} ${db.user} ${db.pass}"/>
         </java>
