@@ -35,8 +35,8 @@ public class ReadFile {
 
 	/** Construct the application */
 	public ReadFile(String[] arguments) {
-		String logfile = "UNIGENE_CGAP_parser.log";
-		String badfile = "UNIGENE_CGAP_parser.bad";
+		String logfile = "UNIGENE_parser.log";
+		String badfile = "UNIGENE_parser.bad";
 
 		int idCount = 0, geneCount = 0, seqCount = 0, cloneCount = 0;
 
@@ -90,8 +90,7 @@ public class ReadFile {
 			BufferedReader geneFile = new BufferedReader(isr, 1280000);
 			currentGene = new Gene(filePath);
 
-			/** step through gene by gene to get data by gene */
-			logwrite.write("Finished downloading human Unigene data Hs.data from CGAP");
+			/** step through gene by gene to get data by gene */			
 			logwrite.write("Parsing human Unigene data Hs.data");
 			logwrite.write("Data Source: Hs.data");
 

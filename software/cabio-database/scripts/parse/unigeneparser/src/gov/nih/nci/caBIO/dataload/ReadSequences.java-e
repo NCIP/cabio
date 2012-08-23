@@ -55,8 +55,8 @@ public class ReadSequences {
 
 		String lineItem = null;
 		String previousLine = null;
-		String logfile = "UNIGENE_parser.log";
-		String badfile = "UNIGENE_parser.bad";
+		String logfile = "UNIGENE_seq_parser.log";
+		String badfile = "UNIGENE_seq_parser.bad";
 
 		int file1 = 0, badRecords = 0;
 		try {
