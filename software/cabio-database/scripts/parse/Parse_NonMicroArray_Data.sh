@@ -1,7 +1,7 @@
 #!/bin/sh
 ORACLE_HOME=/app/oracle/product/10gClient
 export ORACLE_HOME
-echo "Parsing the NCBI-SNP, Uniprot-Protein and IMAGE-Clone data"
+echo "Parsing the NCBI-SNP data"
 cd "$CABIO_DIR"/scripts/parse/snp
 rm *.log  
 rm *.bad 
@@ -21,13 +21,14 @@ count=`egrep -c "^ID  " UNIPROT_parser.bad`
 count1="$count UNIPROT_parser.bad"
 echo $count1
 
-echo "Parsing the clone data from IMAGE"
-cd "$CABIO_DIR"/scripts/parse/image_clone
-rm *.log  
-rm *.bad  
-sh IMAGE_Clone_DataParser.sh &
-echo `ls -a *.log`
-echo `wc -l *.bad` 
+#image_clone data files are no longer loaded
+#echo "Parsing the clone data from IMAGE"
+#cd "$CABIO_DIR"/scripts/parse/image_clone
+#rm *.log  
+#rm *.bad  
+#sh IMAGE_Clone_DataParser.sh &
+#echo `ls -a *.log`
+#echo `wc -l *.bad` 
 
 echo "Parsing the human and mouse cytoband data from UCSC"
 cd "$CABIO_DIR"/scripts/parse/cytoband
@@ -60,13 +61,14 @@ sh parseAll.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD &
 echo `ls -a *.log`
 echo `wc -l *.bad` 
 
-echo "\nParsing Pathway data"
-cd $CABIO_DIR/scripts/parse/pid 
-rm *.log
-rm *.bad
+# pid data are no longer parsed. The dump file is loaded from sql_loader
+#echo "\nParsing Pathway data"
+#cd $CABIO_DIR/scripts/parse/pid 
+#rm *.log
+#rm *.bad
 #sh pidParser.sh   &
-echo `ls -a *.log`
-echo `wc -l *.bad` 
+#echo `ls -a *.log`
+#echo `wc -l *.bad` 
 
 wait
-echo "Finished parsing NCBI SNP, Uniprot, Unigene, EST, MRNA, Cytoband, Pathway and Image Clone Data"
+echo "Finished parsing NCBI SNP, Uniprot, Cytoband, UniSTS, Gene Aliases, EST, mRNA and Unigene data"
