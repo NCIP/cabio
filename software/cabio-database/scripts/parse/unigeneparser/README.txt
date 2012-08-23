@@ -1,13 +1,7 @@
 Description
 -----------
-The unigeneparser downloads and parses the Unigene datafiles (containing 
+The unigeneparser parses the Unigene datafiles (containing 
 data for loading the Gene, Clone, and NucleicAcidSequence ).
-
-It also potentially does some data loading, if values are missing, 
-although it is hard to tell if that code is ever called. 
-
-TODO: Determine if Java code needs to update the database and remove
-	  the dead code if necessary.
 
 Running
 -------
