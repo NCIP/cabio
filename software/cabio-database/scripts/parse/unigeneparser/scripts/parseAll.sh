@@ -14,7 +14,7 @@ sh readLocation.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD &
 echo "\nParsing Unigene Data for Human and Mouse from Unigene"
 sh runReadData_g.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD &
 
-echo "\nSplitting Unigene Data for Human and Mouse from Unigene"
+echo "\nParsing Unigene Sequences for Human and Mouse from Unigene"
 sh runseq_g.sh $CONNECT_STRING $SCHEMA $SCHEMA_PWD &
 wait
 
