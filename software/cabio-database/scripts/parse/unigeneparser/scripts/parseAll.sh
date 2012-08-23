@@ -34,8 +34,6 @@ echo `ls *EST*.log`
 echo `wc -l *EST*.bad`
 echo `ls *MRNA*.log`
 echo `wc -l *MRNA*.bad`
-echo `ls *CGAP*.*`
-echo `wc -l *CGAP*.bad`
 echo `ls UNIGENE_*.log`
 echo `wc -l UNIGENE_*.bad`
 wait
