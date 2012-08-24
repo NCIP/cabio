@@ -15,7 +15,8 @@ our @EXPORT    = qw(queryEVS getLatestNcitVersion evsLookup);
 our @EXPORT_OK = qw($EVSAPI_URL);
 
 our $DEBUG = 0;
-our $EVSAPI_URL = "http://lexevsapi.nci.nih.gov/lexevsapi50";
+#our $EVSAPI_URL = "http://lexevsapi.nci.nih.gov/lexevsapi50";
+our $EVSAPI_URL = "http://lexevsapi60.nci.nih.gov/lexevsapi60";
 our $MATCH_ON_ALIASES = 0;
 
 INIT {
