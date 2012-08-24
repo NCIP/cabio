@@ -1,6 +1,6 @@
 LOAD DATA 
  
-INFILE '$CABIO_DATA_DIR/temp/protein/PROTEIN_EMBL.dat'
+INFILE '$CABIO_DATA_DIR/temp/protein/protein_embl.dat'
  
 APPEND
  
