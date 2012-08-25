@@ -8,7 +8,7 @@ rm -rf *
 echo "\nDownloading EST Annotations for human from UCSC"
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/all_est.txt.gz 
 #wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Homo_sapiens/sequence/BUILD.37.1/initial_release/seq_gene.md.gz 
-wget -nv ftp://ftp.ncbi.nlm.nih.gov/genomes/MapView/Homo_sapiens/sequence/current/updates/seq_gene.md.gz 
+wget -nv ftp://ftp.ncbi.nlm.nih.gov/genomes/MapView/Homo_sapiens/sequence/current/initial_release/seq_gene.md.gz 
 echo "Unzipping downloaded files"
 gunzip -f all_est.txt.gz &
 gunzip -f seq_gene.md.gz
@@ -21,7 +21,7 @@ rm -rf *
 
 echo "Downloading EST Annotations for mouse from UCSC"
 wget -nv ftp://hgdownload.cse.ucsc.edu/goldenPath/mm9/database/all_est.txt.gz 
-wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Mus_musculus/sequence/current/updates/seq_gene.md.gz &
+wget -nv ftp://ftp.ncbi.nih.gov/genomes/MapView/Mus_musculus/sequence/current/initial_release/seq_gene.md.gz &
 
 gunzip -f all_est.txt.gz &
 gunzip -f seq_gene.md.gz
