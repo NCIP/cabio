@@ -11,7 +11,7 @@ wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2unigene
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2accession.gz
 wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene_refseq_uniprotkb_collab.gz  	 
-wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz  	 
+#wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz  	 
 wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene2refseq.gz  	 
 wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene2go.gz  	 
 wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene2pubmed.gz  	 
@@ -21,7 +21,7 @@ wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Mus_musculus.ge
  
 
 gunzip -f gene2accession.gz
-gunzip -f gene_info.gz
+#gunzip -f gene_info.gz
 gunzip -f gene2refseq.gz
 gunzip -f gene2go.gz
 gunzip -f gene2pubmed.gz
