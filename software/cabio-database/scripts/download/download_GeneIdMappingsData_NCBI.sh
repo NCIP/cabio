@@ -4,7 +4,10 @@ mkpath.pl $CABIO_DATA_DIR/unigene2gene
 cd $CABIO_DATA_DIR/unigene2gene
 
 echo "Removing files from $CABIO_DATA_DIR/unigene2gene"
-rm -rf *
+rm -rf gene2*
+rm -rf gene_refseq*
+rm -rf Homo_sapiens*
+rm -rf Mus_musculus*
 
 echo "Downloading Accession numbers mapping (NCBI-Unigene, OMIM-Unigene, Gene-Accession)"
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2unigene
@@ -45,7 +48,8 @@ mkpath.pl $CABIO_DATA_DIR/refseq
 cd $CABIO_DATA_DIR/refseq
 
 echo "Removing files from $CABIO_DATA_DIR/refseq"
-rm -rf *
+rm -rf human.rna.*
+rm -rf mouse.rna.*
 
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/refseq/H_sapiens/mRNA_Prot/human.rna.fna.gz
 wget -nv ftp://ftp.ncbi.nlm.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.rna.fna.gz
