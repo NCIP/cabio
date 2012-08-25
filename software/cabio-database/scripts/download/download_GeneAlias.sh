@@ -2,7 +2,7 @@
 
 mkpath.pl $CABIO_DATA_DIR/unigene2gene
 cd $CABIO_DATA_DIR/unigene2gene
-rm gene_info.txt
+rm gene_info.*
 wget -nv ftp://ftp.ncbi.nih.gov/gene/DATA/gene_info.gz
 
 gunzip gene_info.gz
