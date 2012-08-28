@@ -12,6 +12,10 @@ perl xmlCorrecter.pl combined.xml wellFormed.xml
 # parse this clean file  
 perl xmlParser.pl wellFormed.xml 
 
+# convert agents.txt to agent_out.txt
+# change delimiter to %| and remove trailing spaces
+sed 's/,/%|/' agents.txt| awk '{sub(/[ \t]+$/, "")};1'> agent_out.txt
+
 cd $LOAD/cgdc
 sqlplus $1 @cgdc_preprocess.sql;
 $SQLLDR $1 readsize=1000000  rows=100000 control=Agent.ctl log=Agent.log bad=Agent.bad direct=true  errors=5000 skip=1 
