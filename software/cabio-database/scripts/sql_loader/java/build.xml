@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- ***************************************************************************
+                         data loading for caBIO  
+**************************************************************************** -->
+<project name="caBIO data loading" default="build" basedir=".">
+	<property file="build.properties" />
+	<property name="db.url" value="jdbc:oracle:thin:@${database.server}:${database.port}:${database.name}" />
+	<property name="db.user" value="${database.user}" />
+	<property name="db.pass" value="${database.password}" />
+
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+
+	<path id="libs">
+		<pathelement location="${build.dir}" />
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}" quiet="true" />
+	</target>
+
+	<target name="build" depends="init" description="This target compiles the project.">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" encoding="cp1252">
+			<classpath refid="libs" />
+		</javac>
+	</target>
+
+	<target name="histo" depends="build">
+		<java classname="gov.nih.nci.cabio.dataload.Histopathology" classpathref="libs" fork="yes">
+			<jvmarg value="-Xms512M" />
+			<jvmarg value="-Xmx1024M" />
+			<arg line="${db.url} ${db.user} ${db.pass}" />
+			<arg line="${out.dir} ${file1} ${file2}"/>
+		</java>
+	</target>
+
+</project>
