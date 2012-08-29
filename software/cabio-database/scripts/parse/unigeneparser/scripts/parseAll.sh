@@ -28,7 +28,7 @@ sh readmRefSeqHs.sh
 sh readmRefSeqMm.sh
 
 # Generate clone_seq_end.dat
-awk -F '[%][|]' '{print $16"%|"$6"%|"$19"%|"}' $CABIO_DATA_DIR/ncbi_unigene/nas.dat_nas_hsmm_revised.dat_clone_nas_revised.dat > $CABIO_DATA_DIR/ncbi_unigene/clone_seq_end.dat 
+sh clone_seq_end.sh
 
 echo `ls *EST*.log`
 echo `wc -l *EST*.bad`
