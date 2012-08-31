@@ -28,7 +28,8 @@ sh readmRefSeqHs.sh
 sh readmRefSeqMm.sh
 
 # Generate clone_seq_end.dat
-sh clone_seq_end.sh
+rm -rf $CABIO_DATA_DIR/ncbi_unigene/clone_seq_end.dat
+perl clone_seq_end.pl
 
 echo `ls *EST*.log`
 echo `wc -l *EST*.bad`
