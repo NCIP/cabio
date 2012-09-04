@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# Configure enviroment variables
-`source setup_env.sh`
+#Please be sure configure enviroment variables first through 'source setup_env.sh'
 
-echo "Starting load " | mail -s "Starting load" $EMAIL
+echo "Starting download " | mail -s "Starting download" $EMAIL
 # Download data
 echo "Starting download"
 cd $CABIO_DIR/scripts/download
@@ -25,12 +24,6 @@ wait
 
 echo "Done download " | mail -s "Finished download and library-load " $EMAIL
 
-# start parse of drug bank data
-# drug bank data is not updated
-# new DrugBank 3.0 format will need to be downloaded and parsed in the future
-#cd $CABIO_DIR/scripts/parse/drugbank
-#perl drug_parser.pl &
-
 # Parse data
 echo "Starting parse of non-array data"
 cd $CABIO_DIR/scripts/parse
@@ -44,7 +37,6 @@ cd $CABIO_DIR/scripts/parse
 sh parse_MicroArray_Data.sh 1>>$parse_LOG 2>>$parse_BAD 
 
 echo "Done Parse " | mail -s "Finished parse " $EMAIL
-
 
 # Load Data
 echo "Beginning Data Loads"
