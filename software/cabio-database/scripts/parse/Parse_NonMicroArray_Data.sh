@@ -1,6 +1,11 @@
 #!/bin/sh
 ORACLE_HOME=/app/oracle/product/10gClient
 export ORACLE_HOME
+
+echo "Parsing the Canada Drug Bank data"
+cd $CABIO_DIR/scripts/parse/drugbank
+perl drug_parser.pl & 
+
 echo "Parsing the NCBI-SNP data"
 cd "$CABIO_DIR"/scripts/parse/snp
 rm *.log  
