@@ -107,9 +107,9 @@ cd $LOAD/sql
 echo "Loading gene_protein_tv association"
 time sqlplus $1 @Gene_Protein_TV_LD.sql 1>sqlLoad.log 2>&1 &
 
-cd $LOAD/sql
-echo "Loading target-related tables"
---time sqlplus $1 @target_ld.sql 1>>sqlLoad.log 2>&1 &
+#cd $LOAD/sql
+#echo "Loading target-related tables"
+#time sqlplus $1 @target_ld.sql 1>>sqlLoad.log 2>&1 &
 
 cd $LOAD/sql
 echo "Loading gene_organontology table"
@@ -123,10 +123,10 @@ time sqlplus $1 @loadPathways.sql 1>>sqlLoad.log 2>&1
 #Add Entrez here
 cd $LOAD/sql
 echo "Loading Gene-Alias tables"
- time sqlplus $1 @geneAlias_ld.sql 1>>sqlLoad.log 2>&1 
+time sqlplus $1 @geneAlias_ld.sql 1>>sqlLoad.log 2>&1 
 
-cd $LOAD/pid 
-echo "Loading PID tables (not related to model)"
+#cd $LOAD/pid 
+#echo "Loading PID tables (not related to model)"
 #time sh pidLoader.sh $1 1>pidLoader.log 2>&1 &
 
 wait
@@ -135,7 +135,7 @@ mail -s "Misc SQL Load Log " $EMAIL < $LOAD/sql/sqlLoad.log
 mail -s "GO Load Log " $EMAIL < $LOAD/GO/GO.log 
 mail -s "Homologene Load Log " $EMAIL < $LOAD/homologene/homoloGene.log 
 mail -s "DatabaseCrossReference Log " $EMAIL < $LOAD/dbcrossref/dbCrossRef.log 
-mail -s "PID (not related to model) Log " $EMAIL < $LOAD/pid/pidLoader.log 
+#mail -s "PID (not related to model) Log " $EMAIL < $LOAD/pid/pidLoader.log 
 
 cd $LOAD/location
 echo "Loading LOCATION tables (Part 1)"
@@ -168,8 +168,9 @@ mail -s "ArrayReporter, etc. Load Log " $EMAIL < $LOAD/arrays/Array_PLSQL_Ld.log
 mail -s "Cancer Gene Data Curation Load Log " $EMAIL < $LOAD/cgdc/cgdcLoad.log 
 mail -s "PID Dump Load Log " $EMAIL < $LOAD/pid_dump/pidLoader.log 
 
-#echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
+echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
 echo "Finished Load P4 " 
+
 cd $LOAD/provenance
 echo "Loading provenance, source_reference, url_source_reference tables"
 rm *.bad *.log
@@ -223,7 +224,7 @@ echo "Loading CTEP data (NCI Ctep)"
 rm *.bad *.log
 time sh ctep.sh $1 1>ctep_load.log 2>&1 &
 
-sqlplus $1 @$LOAD/unigene/unigeneTempData/coalse_unigene.sql 1>@$LOAD/unigene/unigeneTempData/coalse_unigene.log
+sqlplus $1 @$LOAD/unigene/unigeneTempData/coalse_unigene.sql 1>$LOAD/unigene/unigeneTempData/coalse_unigene.log
 
 # indexes for some objects not covered above 
 sqlplus $1 @$LOAD/misc_indexes.sql 
@@ -242,20 +243,20 @@ mail -s "Starting Grid Id Load for remaining objects " $EMAIL
 
 #echo "Finished GridId Load Part 2" | mail -s "Finished GridId Load Part 2" $EMAIL < $grididload_LOG 
 
-cd $LOAD
-time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
-time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
+#cd $LOAD
+#time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
+#time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
 
 
 # check which objects don't have big id loaded
-time sqlplus $1 @$LOAD/bigid_notnull_check.sql 1> /dev/null 
-time sqlplus $1 @$LOAD/constraints/bigid.notnullcheck.sql 1> bigid.notnull.check.log 
+#time sqlplus $1 @$LOAD/bigid_notnull_check.sql 1> /dev/null 
+#time sqlplus $1 @$LOAD/constraints/bigid.notnullcheck.sql 1> bigid.notnull.check.log 
 
 
 # enable ref constraints
 time sqlplus $1 @$LOAD/constraints/enable.referential.sql 1>>refConstraints.log
 
-echo "Not Null Check for Big Id Load" |  mail -s " Not Null Check for Big Id Load" $EMAIL < bigid.notnull.check.log
+#echo "Not Null Check for Big Id Load" |  mail -s " Not Null Check for Big Id Load" $EMAIL < bigid.notnull.check.log
 echo "Finished Data Load" |  mail -s " Finished Load P8; finished enabling ref constraints " $EMAIL < refConstraints.log
 
 exit
