@@ -76,24 +76,11 @@
 													<li><a
 														href="https://wiki.nci.nih.gov/x/4Q9y">
 													caBIO Overview</a> - High-level overview of caBIO</li>
-													<li><a href="https://gforge.nci.nih.gov/projects/cabiodb/">
-													caBIO GForge site</a> - Contains news, information,
-													documents, defects, feedback, and reports</li>
 													<li><a
 														href="http://ncicb.nci.nih.gov/download/downloadcabio.jsp">
-													caBIO Download site</a> - Contains download packages and
-													release notes</li>
-													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO
-													<s:text name="build.version"/> Release Notes</a> - Latest release notes for caBIO</li>
-													<li><a
-														href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO <s:text name="build.version"/>
-													Data Refresh Release Notes</a> - Release notes describing
-													the current data content of caBIO</li>
+													caBIO Download site</a> - Contains download packages, release notes and caBIO Technical Guide</li>													
 													<li><a href="docs">caBIO <s:text name="build.version"/> javadocs</a> - Java API
-													documentation</li>
-													<li><a href="http://gforge.nci.nih.gov/frs/?group_id=51">caBIO <s:text name="build.version"/> Tech Guide</a> - Technical
-													Guide</li>
+													documentation</li>													
 												</ul>
 												
 												<br>
@@ -155,8 +142,8 @@
 													<tr>
 														<td class="sidebarContent">
 														<ul>
-														    <li>Introduce Entrez Genes that are not in Unigene</li>
-														    <li>Enhancement on the display for the search results for FreestyleLM search</li>
+														    <li>Technology stack upgrade (JBoss 5.1, JDK 6.0)</li>
+														    <li>508 compliance</li>
 														</ul>
 														</td>
 													</tr>
