@@ -77,9 +77,9 @@
 														href="https://wiki.nci.nih.gov/x/4Q9y">
 													caBIO Overview</a> - High-level overview of caBIO</li>
 													<li><a
-														href="http://ncicb.nci.nih.gov/download/downloadcabio.jsp">
+														href="https://wiki.nci.nih.gov/display/caBIO/caBIO+Wiki+Home+Page#caBIOWikiHomePage-InstallationandDownloads">
 													caBIO Download site</a> - Contains download packages, release notes and caBIO Technical Guide</li>													
-													<li><a href="docs">caBIO <s:text name="build.version"/> javadocs</a> - Java API
+													<li><a href="docs">caBIO <s:text name="build.version"/> JavaDocs</a> - Java API
 													documentation</li>													
 												</ul>
 												
