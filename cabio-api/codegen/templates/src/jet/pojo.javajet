@@ -1,0 +1,144 @@
+<%@ jet package="gov.nih.nci.codegen.transformer.jet" 
+        class="POJOTransformer"
+        skeleton="ClassTransformerBase.skeleton" %>
+package <%=transformerUtils.getFullPackageName(klass)%>;
+
+<%=transformerUtils.getImports(klass)%>
+import java.io.Serializable;
+
+<%
+boolean createIndex = false;
+if(isClassIndexed(klass)){
+    createIndex=true;
+    %>
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.Entity;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.FieldBridge;
+    <%
+}
+%>
+
+<%=transformerUtils.getJavaDocs(klass)%>
+
+<%=transformerUtils.getHibernateValidatorConstraints(klass)%>
+<%
+if(createIndex){
+    %>
+@Entity
+@Indexed    
+@MappedSuperclass
+    <%
+}
+%>
+public<%=transformerUtils.isAbstract(klass)? " abstract" : "" %> class <%=klass.getName()%> <%=transformerUtils.getSuperClassString(klass)%> implements Serializable<%=transformerUtils.getInterfaceString(klass)%>
+{
+    /**
+    * An attribute to allow serialization of the domain objects
+    */
+    private static final long serialVersionUID = 1234567890L;
+
+    <%for(UMLAttribute attr:klass.getAttributes()){%>
+    <%=transformerUtils.getJavaDocs(attr)%>
+    <%=transformerUtils.getHibernateValidatorConstraints(klass,attr)%>
+    <%
+    if(createIndex){        
+        if(isFieldId(attr)){
+%>
+@DocumentId
+@Id
+<%
+        }else if(isFieldIndexed(attr)){
+        
+            if(transformerUtils.getDataType(attr).indexOf("Collection")>-1){
+%>
+@FieldBridge(impl = gov.nih.nci.system.util.indexgen.ObjectBridge.class)        
+<%
+            }
+%>
+@Field(name="<%=attr.getName()%>",index=Index.TOKENIZED,store=Store.YES)
+<%          
+        }
+    }
+    %>
+    <%=attr.getVisibility().getName()%> <%=transformerUtils.getDataType(attr)%> <%=attr.getName()%>;
+    <%=transformerUtils.getGetterMethodJavaDocs(attr)%>
+    public <%=transformerUtils.getDataType(attr)%> <%=transformerUtils.getGetterMethodName(attr)%>(){
+        return <%=attr.getName()%>;
+    }
+
+    <%=transformerUtils.getSetterMethodJavaDocs(attr)%>
+    public void <%=transformerUtils.getSetterMethodName(attr)%>(<%=transformerUtils.getDataType(attr)%> <%=attr.getName()%>){
+        this.<%=attr.getName()%> = <%=attr.getName()%>;
+    }
+    <%}
+    for(UMLAssociation assoc:klass.getAssociations()){
+        List<UMLAssociationEnd> assocEnds = assoc.getAssociationEnds();
+        UMLAssociationEnd thisEnd = transformerUtils.getThisEnd(klass,assocEnds);
+        UMLAssociationEnd otherEnd = transformerUtils.getOtherEnd(klass,assocEnds);
+    
+        if(otherEnd.isNavigable())
+        {
+            UMLClass assocKlass = (UMLClass)otherEnd.getUMLElement();
+            if(transformerUtils.isAssociationEndMany(otherEnd))
+            {%>
+    <%=transformerUtils.getJavaDocs(klass, assoc)%>         
+    private Collection<<%=assocKlass.getName()%>> <%=otherEnd.getRoleName()%>;
+    <%=transformerUtils.getGetterMethodJavaDocs(klass, assoc)%>
+    public Collection<<%=assocKlass.getName()%>> <%=transformerUtils.getGetterMethodName(otherEnd)%>(){
+        return <%=otherEnd.getRoleName()%>;
+    }
+
+    <%=transformerUtils.getSetterMethodJavaDocs(klass, assoc)%>
+    public void <%=transformerUtils.getSetterMethodName(otherEnd)%>(Collection<<%=assocKlass.getName()%>> <%=otherEnd.getRoleName()%>){
+        this.<%=otherEnd.getRoleName()%> = <%=otherEnd.getRoleName()%>;
+    }
+        <%}else{%>
+    <%=transformerUtils.getJavaDocs(klass, assoc)%>         
+    private <%=assocKlass.getName()%> <%=otherEnd.getRoleName()%>;
+    <%=transformerUtils.getGetterMethodJavaDocs(klass, assoc)%> 
+    public <%=assocKlass.getName()%> <%=transformerUtils.getGetterMethodName(otherEnd)%>(){
+        return <%=otherEnd.getRoleName()%>;
+    }
+    <%=transformerUtils.getSetterMethodJavaDocs(klass, assoc)%>
+    public void <%=transformerUtils.getSetterMethodName(otherEnd)%>(<%=assocKlass.getName()%> <%=otherEnd.getRoleName()%>){
+        this.<%=otherEnd.getRoleName()%> = <%=otherEnd.getRoleName()%>;
+    }
+            <%}
+        }
+    }
+
+    String idGetter = transformerUtils.getClassIdGetterMthod(klass); 
+    if(idGetter!=null){%>
+    /**
+    * Compares <code>obj</code> to it self and returns true if they both are same
+    *
+    * @param obj
+    **/
+    public boolean equals(Object obj)
+    {
+        if(obj instanceof <%=klass.getName() %>) 
+        {
+            <%=klass.getName() %> c =(<%=klass.getName()%>)obj;              
+            if(<%=idGetter%>() != null && <%=idGetter%>().equals(c.<%=idGetter%>()))
+                return true;
+        }
+        return false;
+    }
+        
+    /**
+    * Returns hash code for the primary key of the object
+    **/
+    public int hashCode()
+    {
+        if(<%=idGetter%>() != null)
+            return <%=idGetter%>().hashCode();
+        return 0;
+    }
+    <%}%>
+}
