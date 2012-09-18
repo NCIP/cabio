@@ -17,6 +17,7 @@ TRUNCATE TABLE zstg_missing_agent_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_missing_diseaseontol_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_disease_evid_cgid REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_agent_evidence_cgid REUSE STORAGE;
+TRUNCATE TABLE agent REUSE STORAGE;
 
 @$LOAD/indexer_new.sql zstg_agent_cgid
 @$LOAD/indexer_new.sql zstg_rolecode_cgid
