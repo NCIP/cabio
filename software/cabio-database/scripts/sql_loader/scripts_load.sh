@@ -4,13 +4,6 @@ rm constraints/*
 rm triggers/*
 rm *.log *.bad
 
-echo "Disabling all referential integrity constraints \n";
-cd $CABIO_DIR/scripts/sql_loader
-time sqlplus $1 @$LOAD/all_ref_constraints.sql 1>refConstraints.log
-time sqlplus $1 @$LOAD/constraints/disable.referential.sql >>refConstraints.log
-
-mail -s "Disabling ref integrity constraints " $EMAIL < refConstraints.log 
-
 cd $LOAD/arrays
 rm *.log
 rm *.bad
@@ -80,7 +73,6 @@ mail -s "Entrez Load log" $EMAIL < $LOAD/unigene/unigeneTempData/entrez.log
 mail -s "Uniprot Protein Load log" $EMAIL < $LOAD/protein/protein_load.log
 mail -s "UniSTS Marker load Log " $EMAIL < $LOAD/marker/marker_load.log 
 mail -s "UCSC cytoband Load Log " $EMAIL < $LOAD/cytoband/cytoband_load.log 
-mail -s "NCI CTEP Load Log " $EMAIL < $LOAD/ctep/ctep_load.log 
 mail -s "UCSC est mrna Log " $EMAIL < $LOAD/relative_clone/estmrna_load.log 
 mail -s "Unigene nas Log " $EMAIL < $LOAD/unigene/nas/nas_load.log 
 mail -s "Unigene Gene Log " $EMAIL < $LOAD/unigene/gene/geneTv_load.log 
@@ -107,10 +99,6 @@ cd $LOAD/sql
 echo "Loading gene_protein_tv association"
 time sqlplus $1 @Gene_Protein_TV_LD.sql 1>sqlLoad.log 2>&1 &
 
-#cd $LOAD/sql
-#echo "Loading target-related tables"
-#time sqlplus $1 @target_ld.sql 1>>sqlLoad.log 2>&1 &
-
 cd $LOAD/sql
 echo "Loading gene_organontology table"
 time sqlplus $1 @gene_organontology.sql 1>>sqlLoad.log 2>&1 &
@@ -125,10 +113,6 @@ cd $LOAD/sql
 echo "Loading Gene-Alias tables"
 time sqlplus $1 @geneAlias_ld.sql 1>>sqlLoad.log 2>&1 
 
-#cd $LOAD/pid 
-#echo "Loading PID tables (not related to model)"
-#time sh pidLoader.sh $1 1>pidLoader.log 2>&1 &
-
 wait
 
 mail -s "Misc SQL Load Log " $EMAIL < $LOAD/sql/sqlLoad.log 
@@ -139,7 +123,7 @@ mail -s "DatabaseCrossReference Log " $EMAIL < $LOAD/dbcrossref/dbCrossRef.log
 
 cd $LOAD/location
 echo "Loading LOCATION tables (Part 1)"
-# rm *.bad *.log
+rm *.bad *.log
 time sh locationLoad.sh $1 1>locationLoad.log 2>&1 &
 
 cd $LOAD/histopathology
@@ -155,9 +139,8 @@ cd $LOAD/cgdc
 echo "Loading cancer-gene-index data"
 rm *.bad *.log
 time sh cgdc_sqlldr.sh $1 1>cgdcLoad.log 2>&1 &
+
 wait
-
-
 
 cd $LOAD/pid_dump 
 echo "Loading PID tables (PID Dump)"
@@ -168,7 +151,6 @@ mail -s "ArrayReporter, etc. Load Log " $EMAIL < $LOAD/arrays/Array_PLSQL_Ld.log
 mail -s "Cancer Gene Data Curation Load Log " $EMAIL < $LOAD/cgdc/cgdcLoad.log 
 mail -s "PID Dump Load Log " $EMAIL < $LOAD/pid_dump/pidLoader.log 
 
-echo "Finished Load P4 " |  mail -s " Beginning grid id " $EMAIL
 echo "Finished Load P4 " 
 
 cd $LOAD/provenance
@@ -177,26 +159,6 @@ rm *.bad *.log
 time sh provenance_DataLoader.sh $1 1>provenance_load.log 2>&1 &
 
 time sqlplus $1  @$LOAD/keywords/keyword_load.sql &
-
-# Grid Id Load
-#time sqlplus $1  @$LOAD/bigid_lower_idx.sql
-#time sqlplus $1  @$LOAD/indexes/drop.sql
-
-#time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>bigid.log 
-#time sqlplus $1 @$LOAD/constraints/disable.bigid.sql 1>>bigid.log 
-
-
-#echo "Beginning Grid Id Load"
-
-#cd $CABIO_DIR/grididloader/
-#rm *.bad *.log
-#time ant -Dtarget.env=$TARGET_ENV  -Dinclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>$grididload_LOG 2>&1
-
-#mail -s " Finished grid-id part 1 " $EMAIL  
-#mail -s " Grid Id Load Log " $EMAIL < $CABIO_DIR/gridid/$grididload_LOG 
-
-#time sqlplus $1  @$LOAD/indexes/bigid_cols.sql 
-#time sqlplus $1  @$LOAD/indexes/bigid_lower.sql 
 
 cd $CABIO_DIR/scripts/sql_loader/arrays
 echo "Starting post big id load -> arrays (array reporter class hierarchy tables)"
@@ -234,29 +196,8 @@ mail -s " Merged SNPs Load Log " $EMAIL < $LOAD/mergedSnpRsIds_processing/merged
 mail -s " Location Load Log " $EMAIL < $LOAD/location/locationLoad.log 
 mail -s " Compara Load Log " $EMAIL < $LOAD/compara/compara.log 
 mail -s " DrugBank Load Log " $EMAIL < $LOAD/drugbank/drugbank.log 
+mail -s "NCI CTEP Load Log " $EMAIL < $LOAD/ctep/ctep_load.log 
 
-mail -s "Starting Grid Id Load for remaining objects " $EMAIL
-
-# run the bigid for the other objects
-#cd $CABIO_DIR/grididloader/
-#time ant -Dtarget.env=$TARGET_ENV  -Dexclude="Gene CytogeneticLocation MarkerRelativeLocation GeneRelativeLocation ExonArrayReporter ExpressionArrayReporter SNPArrayReporter" 1>>$grididload_LOG 2>&1
-
-#echo "Finished GridId Load Part 2" | mail -s "Finished GridId Load Part 2" $EMAIL < $grididload_LOG 
-
-#cd $LOAD
-#time sqlplus $1 @$LOAD/bigid_unique_constraints.sql 1>>bigid.log 
-#time sqlplus $1 @$LOAD/constraints/enable.bigid.sql 1>>bigid.log 
-
-
-# check which objects don't have big id loaded
-#time sqlplus $1 @$LOAD/bigid_notnull_check.sql 1> /dev/null 
-#time sqlplus $1 @$LOAD/constraints/bigid.notnullcheck.sql 1> bigid.notnull.check.log 
-
-
-# enable ref constraints
-time sqlplus $1 @$LOAD/constraints/enable.referential.sql 1>>refConstraints.log
-
-#echo "Not Null Check for Big Id Load" |  mail -s " Not Null Check for Big Id Load" $EMAIL < bigid.notnull.check.log
 echo "Finished Data Load" |  mail -s " Finished Load P8; finished enabling ref constraints " $EMAIL < refConstraints.log
 
 exit
