@@ -8,9 +8,9 @@ DROP SEQUENCE agent_ID_SEQ;
 --CREATE SEQUENCE agent_ID_SEQ START WITH &V_MAXROW INCREMENT BY 1;
 CREATE SEQUENCE agent_ID_SEQ;
 -- get agent name from zstg_agent_nsc
-UPDATE agent H SET AGENT_NAME = (SELECT AGENT_NAME
-                                   FROM zstg_agents_nsc Z
-                             WHERE H.NSC_NUMBER = Z.NSC_NUMBER AND ROWNUM = 1);
+--UPDATE agent H SET AGENT_NAME = (SELECT AGENT_NAME
+                   --                FROM zstg_agents_nsc Z
+                   --          WHERE H.NSC_NUMBER = Z.NSC_NUMBER AND ROWNUM = 1);
 
 INSERT
   INTO agent(AGENT_ID, AGENT_NAME, NSC_NUMBER) SELECT AGENT_ID_SEQ.NEXTVAL, 
