@@ -3,7 +3,7 @@ SET SERVEROUTPUT ON;
 --WHENEVER OSERROR EXIT 9;
 DROP DATABASE LINK cmap;
 CREATE DATABASE LINK cmap
-CONNECT TO cmap IDENTIFIED BY "qa!cmap1234"
+CONNECT TO cmap IDENTIFIED BY "cm#ap0831"
 USING 'BIOQA';
 column columnprod new_value prod_tablspc;
 select globals.get_production_tablespace as columnprod from dual;
