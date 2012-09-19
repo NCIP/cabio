@@ -24,6 +24,13 @@ DROP SEQUENCE cytoband_PHYLOC_ID;
 CREATE SEQUENCE cytoband_PHYLOC_ID START WITH 1 INCREMENT BY 1;
 ALTER TRIGGER SET_CYTO_PHYLOC_ID ENABLE;
 
+---because UCSC database using 0-sart and 1-end coordinates 
+update  zstg_human_cytoband set chromstart = chromstart + 1;
+commit;
+
+update  zstg_mouse_cytoband set chromstart = chromstart + 1;
+commit; 
+
 INSERT
  INTO cytoband(NAME, chromosome_ID) SELECT DISTINCT CYTOBAND, CHROMOSOME_ID FROM 
 zstg_human_cytoband
