@@ -44,11 +44,19 @@ column columnprod new_value prod_tablspc;
 select globals.get_production_tablespace as columnprod from dual;
 column columnload new_value load_tablspc;
 select globals.get_load_tablespace as columnload from dual;
-INSERT INTO go_ontology(go_id,go_name,hs_genes,mm_genes) SELECT a.go_id, a.go_name, hs_count, mm_count FROM (SELECT g.go_id, g.go_name, NVL (COUNT(UNIQUE c.cluster_number), 0) hs_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.hs_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) a, (SELECT g.go_id, g.go_name, NVL (COUNT (UNIQUE c.cluster_number), 0) MM_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.MM_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) b WHERE a.go_id = b.go_id;
+--INSERT INTO go_ontology(go_id,go_name,hs_genes,mm_genes) SELECT a.go_id, a.go_name, hs_count, mm_count FROM (SELECT g.go_id, g.go_name, NVL (COUNT(UNIQUE c.cluster_number), 0) hs_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.hs_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) a, (SELECT g.go_id, g.go_name, NVL (COUNT (UNIQUE c.cluster_number), 0) MM_count FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.MM_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name) b WHERE a.go_id = b.go_id;
+
+
+
+INSERT INTO go_ontology(go_id,go_name,hs_genes,mm_genes, accession, go_class) SELECT a.go_id, a.go_name, hs_count, mm_count, a.accession, a.go_class FROM (SELECT g.go_id, g.go_name, NVL (COUNT(UNIQUE c.cluster_number), 0) hs_count, 'GO:'||g.go_id as accession,  go_class FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.hs_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name,  'GO:'||g.go_id, go_class) a, (SELECT g.go_id, g.go_name, NVL (COUNT (UNIQUE c.cluster_number), 0) MM_count,  'GO:'||g.go_id as accession,  g.go_class FROM CGAP.GO_NAME@WEB.NCI.NIH.GOV g, CGAP.LL_GO@WEB.NCI.NIH.GOV l, CGAP.MM_cluster@WEB.NCI.NIH.GOV c WHERE  g.go_id = l.go_id (+) AND  l.ll_id = c.locuslink (+) GROUP BY g.go_id, g.go_name, 'GO:'||g.go_id, go_class) b WHERE a.go_id = b.go_id;
+
 COMMIT;
 
+update   zstg_gene2go set go_id_trimmed = to_number(substr(go_id,4));
 -- add data from entrez
-insert into go_ontology(go_id, go_name, taxon_id) select go_id_trimmed, go_term, tax_id from zstg_gene2go where go_id_trimmed NOT in (select distinct go_id from go_ontology);
+--insert into go_ontology(go_id, go_name, taxon_id) select go_id_trimmed, go_term, tax_id from zstg_gene2go where go_id_trimmed NOT in (select distinct go_id from go_ontology);
+
+INSERT INTO go_ontology(go_id,go_name, accession, go_class) select distinct go_id_trimmed, go_term,  go_id, decode (category, 'Process',  'BP', 'Function', 'MF', 'Component', 'CC') as go_class from zstg_gene2go  where go_id_trimmed in ( select go_id_trimmed from zstg_gene2go minus select go_id from go_ontology);
 commit;
 
 
@@ -72,7 +80,9 @@ INSERT INTO go_genes(gene_id,go_id,taxon_id)SELECT gene_id,go_id,organism FROM  
 
 commit;
 
-insert into go_Genes(gene_id, go_id, taxon_id) select distinct g.gene_id, go.go_id, g.taxon_id from go_ontology go, zstg_gene2go z, gene_Tv g where go.go_id=z.go_id_trimmed and z.ENTREZ_GENEID = g.ENTREZ_ID and z.tax_id=g.taxon_id and go.taxon_id=z.tax_id;
+--insert into go_Genes(gene_id, go_id, taxon_id) select distinct g.gene_id, go.go_id, g.taxon_id from go_ontology go, zstg_gene2go z, gene_Tv g where go.go_id=z.go_id_trimmed and z.ENTREZ_GENEID = g.ENTREZ_ID and z.tax_id=g.taxon_id and go.taxon_id=z.tax_id;
+
+insert into go_Genes(gene_id, go_id, taxon_id) select distinct g.gene_id, go.go_id, g.taxon_id from go_ontology go, zstg_gene2go z, gene_Tv g where go.go_id=z.go_id_trimmed and z.ENTREZ_GENEID = g.ENTREZ_ID and z.tax_id=g.taxon_id minus select gene_id, go_id, taxon_id from go_genes;
 
 commit;
 
