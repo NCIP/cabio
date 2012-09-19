@@ -10,7 +10,7 @@ ID SEQUENCE(MAX,1),
 gene_ID,
 data_source filler,
 CROSS_REFERENCE_ID,
-TYPE CONSTANT "gov.nih.nci.domain.Gene",
+TYPE CONSTANT "gov.nih.nci.cabio.domain.Gene",
 source_NAME CONSTANT "LOCUS_LINK_ID",
 source_TYPE CONSTANT "Entrez gene"
 )
