@@ -38,6 +38,7 @@ SPOOL &SPOOLFILENAME;
 @$LOAD/constraints/library_keyword.disable.sql;
 @$LOAD/triggers/library_keyword.disable.sql;
 
+truncate table LIBRARY_HISTOPATHOLOGY;
 execute load_data.load_libraries;
 
 @$LOAD/indexes/library.cols.sql;
