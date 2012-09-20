@@ -57,6 +57,11 @@ insert into zstg_pid_intr_partcpant_ptm select  field1, field3, field4, field2 f
 --insert into zstg_pid_intr_partcpant_ptm select  field1, field2, field3, null from zstg_pid_dump where identifier = 'pid_interaction_participant_ptm';
 commit;
 
+update zstg_pid_dump set field4 =field3 where identifier = 'pid_interactioncondition' and field4 is null;
+commit;
+update zstg_pid_dump set field3 = null where identifier = 'pid_interactioncondition' and field3 = field4;
+commit;
+
 
 insert into zstg_pid_interactionreference select field1, field2 from zstg_pid_dump where identifier = 'pid_interaction_reference';
 commit;
@@ -64,7 +69,7 @@ commit;
 --pathwayreference not there
 
 --interactioncondition
-insert into zstg_pid_interactioncondition select field1, field2, field3 from zstg_pid_dump where identifier = 'pid_interactioncondition';
+insert into zstg_pid_interactioncondition(condition_id, conditionname, xref) select field1, field2, field3 from zstg_pid_dump where identifier = 'pid_interactioncondition';
 commit;
 
 insert into zstg_pid_macroprocess_type select field1, field2, field3 from zstg_pid_dump where identifier = 'pid_macroprocess';
@@ -109,5 +114,9 @@ commit;
 
 
 insert into zstg_pid_geneentity select 'pid_geneentity' as identifier, field1, field3, field2 from zstg_pid_dump where identifier = 'pid_geneentity';
+commit;
+
+insert into  zstg_pid_reference_pubmed(reference_id, pubmed_id) select field1, field2 from  zstg_pid_dump where identifier =  'pid_pubmed_reference';
+
 commit;
 exit;
