@@ -23,6 +23,9 @@ truncate table ZSTG_PID_INTERACTION;
 truncate table ZSTG_PID_PATHWAY;
 truncate table ZSTG_PID_INTERACTIONCONDITION;
 truncate table ZSTG_PID_COMPLEX_COMPONENT;
+truncate table zstg_pid_evidencecode;
+truncate table zstg_pid_geneentity;
+truncate table ZSTG_PID_reference_pubmed;
 
 @$LOAD/indexer_new.sql ZSTG_PID_INTERACTIONREFERENCE
 @$LOAD/indexer_new.sql ZSTG_PID_ENTITYNAME
