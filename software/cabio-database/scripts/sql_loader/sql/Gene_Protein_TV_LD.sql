@@ -45,8 +45,10 @@ delete from gene_protein_tv where gene_id not in (select distinct gene_id from g
 commit;
 
 --creates 833 rows now
-insert into gene_protein_tv(gene_id, protein_id) select distinct
-g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where g.SOURCE='Entrez' and g.ENTREZ_ID=x.GENEID and substr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6);
+--insert into gene_protein_tv(gene_id, protein_id) select distinct g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where g.SOURCE='Entrez' and g.ENTREZ_ID=x.GENEID and substr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6);
+
+insert into gene_protein_tv(gene_id, protein_id) select g.gene_id, p.protein_id from gene_tv g, new_protein p, zstg_gene2accession x where  g.ENTREZ_ID=x.GENEID and substr(x.PROTEIN_ACCESSION,0, instr(x.protein_accession,'.')-1)=p.PRIMARY_ACCESSION and g.taxon_id=decode(x.tax_id,9606,5,10090,6) minus select gene_id, protein_id from gene_protein_tv;
+
 commit;
 
 
