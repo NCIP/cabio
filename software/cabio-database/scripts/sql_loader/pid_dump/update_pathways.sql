@@ -179,12 +179,16 @@ END;
 /
 
 -- inserted rows..but the id does not help find any associated interactions..so what are these conditions for?
-insert into pid_participant(condition_name, discriminator, pid_interaction_id) select distinct conditionname,'Condition' as discriminator, interaction_id from zstg_pid_interactioncondition;
+--insert into pid_participant(condition_name, discriminator, pid_interaction_id) select distinct conditionname,'Condition' as discriminator, interaction_id from zstg_pid_interactioncondition;
+
+
+insert into pid_participant(condition_name, discriminator, pid_interaction_id, PID_COMPLEX_COMPONENT_ORDER,INTERACTION_ID) select distinct conditionname, 'Condition', pid_interaction_id, order_of_interactants, pi.id from zstg_pid_interactioncondition c, zstg_pid_interactants i, pid_interaction pi where  role = 'condition' and pi.pid_interaction_id = i.interaction_id and I.physicalentity_id =C.condition_id;
+
 commit;
 
 -- Added on the basis of the May 09 dump
-update pid_participant p set p.CONDITION_NAME = (select distinct conditionname from zstg_pid_interactioncondition x 
-where p.PID_PHYSICALENTITY_ID = x.INTERACTION_ID) where condition_name is null and p.discriminator = 'Condition';
+--update pid_participant p set p.CONDITION_NAME = (select distinct conditionname from zstg_pid_interactioncondition x 
+--where p.PID_PHYSICALENTITY_ID = x.INTERACTION_ID) where condition_name is null and p.discriminator = 'Condition';
 commit;
 
 
@@ -206,7 +210,10 @@ BEGIN
 END;
 /
 
-insert into evidence(pubmed_id, sentence) select distinct pubmed_id, 'Pathway publication' from zstg_pid_interactionreference minus select distinct pubmed_id, to_char(dbms_lob.substr(sentence, 1, 4000)) from evidence;
+--insert into evidence(pubmed_id, sentence) select distinct pubmed_id, 'Pathway publication' from zstg_pid_interactionreference minus select distinct pubmed_id, to_char(dbms_lob.substr(sentence, 1, 4000)) from evidence;
+
+insert into evidence(pubmed_id, sentence)
+select distinct pubmed_id, 'Pathway publication' from zstg_pid_reference_pubmed minus select distinct pubmed_id, to_char(dbms_lob.substr(sentence, 50,1)) from evidence;
 commit;
 
 SELECT MAX(ID) + 1 AS V_MAXROW
@@ -238,7 +245,11 @@ insert into pid_interaction_ec(interaction_id, evidence_code_id) select distinct
 
 commit;
 
-insert into pid_interaction_evidence(interaction_id, evidence_id) select distinct i.id, e.id from pid_interaction i, evidence e, zstg_pid_interactionreference z where z.interaction_id = i.pid_interaction_id and z.pubmed_id=e.pubmed_id and to_char(substr(e.sentence, 1, 4000))='Pathway publication';
+--insert into pid_interaction_evidence(interaction_id, evidence_id) select distinct i.id, e.id from pid_interaction i, evidence e, zstg_pid_interactionreference z where z.interaction_id = i.pid_interaction_id and z.pubmed_id=e.pubmed_id and to_char(substr(e.sentence, 1, 4000))='Pathway publication';
+
+
+insert into pid_interaction_evidence(interaction_id, evidence_id) select distinct i.id, e.id from pid_interaction i, evidence e, zstg_pid_interactionreference z, zstg_pid_reference_pubmed z2 where z.interaction_id = i.pid_interaction_id and z.pubmed_id= z2.reference_id and z2.pubmed_id = e.pubmed_id and to_char(substr(e.sentence, 1, 4000))='Pathway publication';
+
 commit;
 
 -- load into pid_entityName and pid_entityAccession
@@ -311,7 +322,7 @@ create sequence phys_part_id;
 
 -- inserting pathway conditions here also
 -- why?
-insert into pid_participant(id, discriminator, pid_interaction_id, pid_physicalentity_id, pid_complex_component_order) select phys_part_id.nextval, decode(role, 'input', 'Input', 'output', 'Output', 'positivecontrol', 'PositiveControl', 'negativecontrol', 'NegativeControl', 'condition', 'Condition'),interaction_id, physicalentity_id, order_of_interactants from zstg_pid_interactants;
+insert into pid_participant(id, discriminator, pid_interaction_id, pid_physicalentity_id, pid_complex_component_order) select phys_part_id.nextval, decode(role, 'input', 'Input', 'output', 'Output', 'positivecontrol', 'PositiveControl', 'negativecontrol', 'NegativeControl' ),interaction_id, physicalentity_id, order_of_interactants from zstg_pid_interactants where role <> 'condition';
 commit;
 
 update zstg_pid_complex_component z set z.complex_id = (select x.id from pid_physical_entity x where z.pid_complex_id = x.PID_PHYSICALENTITY_ID);
@@ -404,8 +415,8 @@ insert into pid_entity_protein(physical_entity_id, protein_id) select distinct p
 commit; 
 
 -- association between SmallMoleculeEntity and Agent
-insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.ID, g.AGENT_ID from pid_physical_entity p, pid_entity_name a , agent g where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and lower(trim(a.NAME)) = lower(trim(g.AGENT_NAME));
-commit;
+--insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.ID, g.AGENT_ID from pid_physical_entity p, pid_entity_name a , agent g where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and lower(trim(a.NAME)) = lower(trim(g.AGENT_NAME));
+--commit;
 
 
 -- See if one can add agents on the basis of Unigene cluster number
