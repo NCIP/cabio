@@ -26,6 +26,7 @@ truncate table ZSTG_PID_COMPLEX_COMPONENT;
 truncate table zstg_pid_evidencecode;
 truncate table zstg_pid_geneentity;
 truncate table ZSTG_PID_reference_pubmed;
+truncate table ZSTG_PROTEIN_PATHWAY_FROM_PID;
 
 @$LOAD/indexer_new.sql ZSTG_PID_INTERACTIONREFERENCE
 @$LOAD/indexer_new.sql ZSTG_PID_ENTITYNAME
