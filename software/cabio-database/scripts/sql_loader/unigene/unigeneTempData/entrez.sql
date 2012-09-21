@@ -40,14 +40,38 @@ ALTER TRIGGER nas_ID_trigger ENABLE;
 
 --insert into nucleic_acid_sequence
 -- around 30,000 rows
-insert into nucleic_acid_sequence(accession_number, version, sequence_type, value, length, description, discriminator) select substr(refseq_accession, 0, instr(refseq_accession,'.')-1), substr(refseq_accession, instr(refseq_accession,'.')+1), '1', seq, length(seq), description,
+/* insert into nucleic_acid_sequence(accession_number, version, sequence_type, value, length, description, discriminator) select substr(refseq_accession, 0, instr(refseq_accession,'.')-1), substr(refseq_accession, instr(refseq_accession,'.')+1), '1', seq, length(seq), description,
 'MessengerRNA' from zstg_refseq_mrna where substr(refseq_accession, 0, instr(refseq_accession,'.')-1) in (select substr(refseq_accession, 0, instr(refseq_accession,'.')-1) from zstg_refseq_mrna minus select distinct accession_number from nucleic_acid_sequence);
+*/
+
+insert into nucleic_acid_sequence(accession_number, version, sequence_type, value, length, description, discriminator) 
+select substr(refseq_accession, 0, instr(refseq_accession,'.')-1), substr(refseq_accession, instr(refseq_accession,'.')+1), '1', seq, 
+	   length(seq), description, 'MessengerRNA' 
+from zstg_refseq_mrna 
+where substr(refseq_accession, 0, instr(refseq_accession,'.')-1) 
+in (select substr(refseq_accession, 0, instr(refseq_accession,'.')-1) 
+    from zstg_refseq_mrna 
+	minus 
+	select distinct accession_number 
+	from nucleic_acid_sequence)
+and rowid in
+(select min(rowid)
+from zstg_refseq_mrna 
+where substr(refseq_accession, 0, instr(refseq_accession,'.')-1) 
+in (select substr(refseq_accession, 0, instr(refseq_accession,'.')-1) 
+    from zstg_refseq_mrna 
+	minus 
+	select distinct accession_number 
+	from nucleic_acid_sequence)
+	group by substr(refseq_accession, 0, instr(refseq_accession,'.')-1), 
+       substr(refseq_accession, instr(refseq_accession,'.')+1), '1', length(seq), description, 'MessengerRNA');
 
 commit;
 
 -- creates 17126 rows
 insert into gene_nucleic_acid_sequence(gene_id, gene_sequence_id)
 select distinct g.GENE_ID, n.ID from gene_tv g, nucleic_acid_sequence n, zstg_gene2refseq z where g.ENTREZ_ID = z.GENEID and g.taxon_id=decode(z.tax_id,9606,5,10090,6) and substr(z.RNA_NUCLEOTIDE_ACC, 0, instr(z.RNA_NUCLEOTIDE_ACC,'.')-1) = n.ACCESSION_NUMBER minus select distinct gene_id, gene_sequence_id from gene_nucleic_acid_sequence;
+
 commit;  
 
 exit;
