@@ -82,6 +82,7 @@ truncate table pid_pathway_interaction;
 truncate table pid_physical_entity ;
 truncate table pid_physical_entity_accession; 
 truncate table pid_physical_entity_name ;
+truncate table PATHWAY_GENE_OBJECT;
 
 VAR V_MAXROW NUMBER;
 COLUMN V_MAXROW NEW_VALUE V_MAXROW;
@@ -415,15 +416,15 @@ insert into pid_entity_protein(physical_entity_id, protein_id) select distinct p
 commit; 
 
 -- association between SmallMoleculeEntity and Agent
---insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.ID, g.AGENT_ID from pid_physical_entity p, pid_entity_name a , agent g where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and lower(trim(a.NAME)) = lower(trim(g.AGENT_NAME));
---commit;
+insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.ID, g.AGENT_ID from pid_physical_entity p, pid_entity_name a , agent g where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and lower(trim(a.NAME)) = lower(trim(g.AGENT_NAME));
+commit;
 
 
 -- See if one can add agents on the basis of Unigene cluster number
 -- and on the basis of Locus link id
--- insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.id, gfa.agent_id from zstg_pid_geneentity z, pid_physical_entity p, gene_tv g, gene_function_association gfa where z.PID_PE_ID = p.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and substr(z.UNIGENE_CLUSTER,instr(z.unigene_cluster,'.')+1) = g.CLUSTER_ID and g.TAXON_ID = 5 and g.GENE_ID = gfa.GENE_ID union select distinct p.id, gfa.agent_id from zstg_pid_geneentity z, pid_physical_entity p, database_cross_reference d, gene_function_association gfa  where z.PID_PE_ID = p.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and z.LOCUSLINK = d.CROSS_REFERENCE_ID and d.SOURCE_TYPE = 'Entrez Gene' and d.GENE_ID = gfa.GENE_ID;
+insert into pid_entity_agent(physical_entity_id, agent_id) select distinct p.id, gfa.agent_id from zstg_pid_geneentity z, pid_physical_entity p, gene_tv g, gene_function_association gfa where z.PID_PE_ID = p.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and substr(z.UNIGENE_CLUSTER,instr(z.unigene_cluster,'.')+1) = g.CLUSTER_ID and g.TAXON_ID = 5 and g.GENE_ID = gfa.GENE_ID union select distinct p.id, gfa.agent_id from zstg_pid_geneentity z, pid_physical_entity p, database_cross_reference d, gene_function_association gfa  where z.PID_PE_ID = p.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'SmallMoleculeEntity' and z.LOCUSLINK = d.CROSS_REFERENCE_ID and d.SOURCE_TYPE = 'Entrez Gene' and d.GENE_ID = gfa.GENE_ID;
 
--- commit;
+commit;
 
 -- association between RNAEntity and NucleicAcidSequence
 insert into pid_entity_sequence(physical_entity_id, nucleic_acid_sequence_id) select p.ID, n.ID from pid_physical_entity p, pid_entity_accession a, nucleic_acid_sequence n where p.discriminator = 'RNAEntity' and p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and n.ACCESSION_NUMBER=a.ACCESSION union select p.id, n.id from pid_entity_name pen, pid_physical_entity p, nucleic_acid_sequence n where pen.PID_PHYSICALENTITY_ID in (select distinct pid_physicalentity_id from pid_physical_entity where discriminator = 'RNAEntity') and pen.NAME = n.DESCRIPTION and pen.pid_physicalentity_id = p.pid_physicalentity_id union select pe.id, gs.gene_sequence_id from zstg_pid_geneentity p, gene_tv g, gene_nucleic_acid_sequence gs, pid_physical_entity pe where p.PID_PE_ID = pe.PID_PHYSICALENTITY_ID and substr(p.UNIGENE_CLUSTER, instr(p.Unigene_cluster,'.')+1) = g.CLUSTER_ID and g.TAXON_ID = 5 and g.GENE_ID = gs.GENE_ID and pe.DISCRIMINATOR = 'RNAEntity';
@@ -432,7 +433,7 @@ commit;
 
 
 -- try on the basis of Entrez Gene Id and Uniprot 
-  insert into pid_entity_sequence(physical_entity_id, nucleic_acid_sequence_id) select distinct p.ID, GS.GENE_SEQUENCE_ID from pid_physical_entity p, pid_entity_accession a, new_protein n, gene_protein_tv gp, gene_nucleic_acid_sequence gs where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'RNAEntity'  and lower(trim(a.ACCESSION)) = lower(trim(n.PRIMARY_ACCESSION)) and a.DATABASE = 'UniProt' and n.PROTEIN_ID = gp.PROTEIN_ID and gp.PROTEIN_ID = gs.GENE_SEQUENCE_ID union select pe.ID, gn.GENE_SEQUENCE_ID from pid_entity_accession p, database_cross_reference d, gene_nucleic_acid_sequence gn, pid_physical_entity pe where p.DATABASE = 'EntrezGene' and p.ACCESSION = d.CROSS_REFERENCE_ID and d.GENE_ID = gn.GENE_ID  and p.PID_PHYSICALENTITY_ID = pe.PID_PHYSICALENTITY_ID and pe.discriminator='RNAEntity';
+insert into pid_entity_sequence(physical_entity_id, nucleic_acid_sequence_id) select distinct p.ID, GS.GENE_SEQUENCE_ID from pid_physical_entity p, pid_entity_accession a, new_protein n, gene_protein_tv gp, gene_nucleic_acid_sequence gs where p.PID_PHYSICALENTITY_ID = a.PID_PHYSICALENTITY_ID and p.DISCRIMINATOR = 'RNAEntity'  and lower(trim(a.ACCESSION)) = lower(trim(n.PRIMARY_ACCESSION)) and a.DATABASE = 'UniProt' and n.PROTEIN_ID = gp.PROTEIN_ID and gp.PROTEIN_ID = gs.GENE_SEQUENCE_ID union select pe.ID, gn.GENE_SEQUENCE_ID from pid_entity_accession p, database_cross_reference d, gene_nucleic_acid_sequence gn, pid_physical_entity pe where p.DATABASE = 'EntrezGene' and p.ACCESSION = d.CROSS_REFERENCE_ID and d.GENE_ID = gn.GENE_ID  and p.PID_PHYSICALENTITY_ID = pe.PID_PHYSICALENTITY_ID and pe.discriminator='RNAEntity';
 commit;
 
 
@@ -442,22 +443,39 @@ commit;
 
 
 -- delete associations from gene_pathway and from biogenes
---delete from gene_pathway where bc_id in (select distinct to_char(b.long_name) from bio_pathways_tv b where source <> 'BioCarta');
+delete from gene_pathway where bc_id in (select distinct to_char(b.long_name) from bio_pathways_tv b where source <> 'BioCarta');
 commit;
 
---delete from biogenes where bc_id in (select distinct to_char(b.long_name) from bio_pathways_tv b where source <> 'BioCarta');
+delete from biogenes where bc_id in (select distinct to_char(b.long_name) from bio_pathways_tv b where source <> 'BioCarta');
 commit;
 
 -- Now populate the association between Gene and Pathway with this Id
---insert into biogenes(organism, bc_id, gene_id) select distinct to_char(b.TAXON), to_char(b.LONG_NAME), pe.gene_id from pid_participant p, pid_entity_protein pe, pid_pathway_interaction pi, bio_pathways_tv b  where pe.PHYSICAL_ENTITY_ID = p.PHYSICAL_ENTITY_ID and pe.GENE_ID is not null and pi.INTERACTION_ID = p.interaction_id and pi.PATHWAY_ID = b.PATHWAY_ID and b.SOURCE <> 'BioCarta' minus 
---select distinct organism, bc_id, gene_id from biogenes;
-commit;
+-- insert into biogenes(organism, bc_id, gene_id) select distinct to_char(b.TAXON), to_char(b.LONG_NAME), pe.gene_id from pid_participant p, pid_entity_protein pe, pid_pathway_interaction pi, bio_pathways_tv b  where pe.PHYSICAL_ENTITY_ID = p.PHYSICAL_ENTITY_ID and pe.GENE_ID is not null and pi.INTERACTION_ID = p.interaction_id and pi.PATHWAY_ID = b.PATHWAY_ID and b.SOURCE <> 'BioCarta' minus 
+select distinct organism, bc_id, gene_id from biogenes;
+-- commit;
 
 
---insert into gene_pathway(bc_id, pathway_id) select distinct to_char(b.LONG_NAME),b.PATHWAY_ID from pid_participant p, pid_entity_protein pe, pid_pathway_interaction pi, bio_pathways_tv b  where pe.PHYSICAL_ENTITY_ID = p.PHYSICAL_ENTITY_ID and pe.GENE_ID is not null and pi.INTERACTION_ID = p.interaction_id and pi.PATHWAY_ID = b.PATHWAY_ID and b.SOURCE <> 'BioCarta' minus 
---select distinct bc_id, pathway_id from gene_pathway;
+-- insert into gene_pathway(bc_id, pathway_id) select distinct to_char(b.LONG_NAME),b.PATHWAY_ID from pid_participant p, pid_entity_protein pe, pid_pathway_interaction pi, bio_pathways_tv b  where pe.PHYSICAL_ENTITY_ID = p.PHYSICAL_ENTITY_ID and pe.GENE_ID is not null and pi.INTERACTION_ID = p.interaction_id and pi.PATHWAY_ID = b.PATHWAY_ID and b.SOURCE <> 'BioCarta' minus 
+select distinct bc_id, pathway_id from gene_pathway;
 
-commit;
+-- commit;
+
+insert into PATHWAY_GENE_OBJECT(GENE_ID, PATHWAY_ID)
+select unique GPT.GENE_ID, BPT.PATHWAY_ID 
+from ZSTG_PROTEIN_PATHWAY_FROM_PID PTA, 
+     NEW_PROTEIN NP, 
+	 GENE_PROTEIN_TV GPT, 
+	 BIO_PATHWAYS_TV BPT 
+where PTA.PROTEIN_ID = NP.PRIMARY_ACCESSION 
+and NP.PROTEIN_ID = GPT.PROTEIN_ID 
+AND PTA.SHORT_NAME = SUBSTR(BPT.PATHWAY_NAME, 3) 
+union 
+SELECT unique bg.gene_id, gp.pathway_id FROM 
+GENE_PATHWAY gp, BIOGENES bg 
+WHERE gp.bc_id = bg.bc_id;
+
+COMMIT;
+
 
 -- In the above, there are currently 41 Pathways where more than one gene id matches, currently picking only the smallest of it
 
