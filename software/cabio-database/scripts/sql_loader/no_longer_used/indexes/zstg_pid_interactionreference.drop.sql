@@ -1,0 +1,5 @@
+
+drop index ZSTG_PIDENCE_INTERACTIO;
+drop index ZSTG_PIDENCE_PUBMED_ID;
+
+--EXIT;

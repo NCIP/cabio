@@ -1,0 +1,5 @@
+
+drop index ZSTG_MISCGID_DISEASEONT_LWR;
+drop index ZSTG_MISCGID_DISEASEONT;
+
+--EXIT;
