@@ -1,4 +1,0 @@
-
-create index ZSTG_GENE_KW_KEYWORD_lwr on ZSTG_GENE_KW(lower(KEYWORD)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
---EXIT;

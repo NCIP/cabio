@@ -1,5 +1,0 @@
-
-drop index ZSTG_PIDENCE_EVIDENCE_C_LWR;
-drop index ZSTG_PIDENCE_EVIDENCE_C;
-
---EXIT;

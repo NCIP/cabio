@@ -1,4 +1,0 @@
-
-create index ARRAY_RERTER_NAME_lwr on ARRAY_REPORTER(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
-
---EXIT;

@@ -1,4 +1,0 @@
-
-create index ZSTG_PIDANTS_ROLE_lwr on ZSTG_PID_INTERACTANTS(lower(ROLE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
-
---EXIT;
