@@ -9,7 +9,7 @@ database.server=NCIDB-BIO-D.NCI.NIH.GOV
 database.port=1553
 database.name=BIODEV
 database.user=cabiodev
-database.password=xxxxxxxxx
+database.password=
 
 ## whether or not packaging index generation
 package.indexgen=true
