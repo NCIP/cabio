@@ -14,7 +14,7 @@ import java.util.Map;
  * The ReadFile is responsible for reading some of the unigene datafiles it
  * outputs the items of concern to delimited text files which are then loaded to
  * the database
- * 
+ *
  * @author CORE Team
  * @version 1.0
  */
@@ -66,7 +66,7 @@ public class GenerateCRL {
 					fis), BUFFER_SIZE);
 
 			long number = 0;
-	
+
 			File clone_nas = new File(filePath, fileToProcess
 					+ "_clone_nas_revised.dat");
 
@@ -114,7 +114,7 @@ public class GenerateCRL {
 					bad.write(lineItem);
 				}
 
-			     }   
+			     }
 			}
 
 			seqFile.close();
@@ -157,7 +157,7 @@ public class GenerateCRL {
 
 	private void readCloneFile(String filePath, String CloneDataFile) {
 		try {
-			 CloneDataFile = CloneDataFile.trim();	
+			 CloneDataFile = CloneDataFile.trim();
 			File cloneFile = new File(filePath, CloneDataFile);
 			FileInputStream cloneclone = new FileInputStream(cloneFile);
 			BufferedReader clonenasfilereader = new BufferedReader(
@@ -182,8 +182,8 @@ public class GenerateCRL {
 					System.out.println("Finished reading " + counter
 							+ " records");
 				}
-			    }	
-			 
+			    }
+
 			}
 			System.out.println("Number of lines read in clone file " + counter);
 		} catch (Exception e) {
@@ -200,18 +200,18 @@ public class GenerateCRL {
 		// /repository/UniGene/Homo_sapiens
 		// ftp.ncbi.nih.gov anonymous gustafss@mail.nih.gov
 		// ../data/ncbi_unigene Hs.seq.all.gz
-		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31 dev!234
+		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31
 
 		// /repository/UniGene/Mus_musculus ftp.ncbi.nih.gov anonymous
 		// gustafss@mail.nih.gov ../data/ncbi_unigene Mm.seq.all.gz
-		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31 dev!234
+		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31
 		/*
 		 * args[0] = "/repository/UniGene/Mus_musculus"; args[1] =
 		 * "ftp.ncbi.nih.gov"; args[2] = "anonymous"; args[3] =
 		 * "gustafss@mail.nih.gov"; args[4] = "C:/cabio21/database/test/";
 		 * args[5] = "Mm.seq.all.gz"; args[6] =
 		 * "jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV"; args[7] =
-		 * "cabiodev31"; args[8] = "dev!234";
+		 * "cabiodev31"; args[8] = "";
 		 */
 
 		new GenerateCRL(args);

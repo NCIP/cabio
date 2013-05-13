@@ -11,4 +11,4 @@ as parameters the JDBC database connection information.
 
 For example, to load qa31:
 
-parseAll.sh jdbc:oracle:thin:@cbiodb30.nci.nih.gov:1521:CBTEST cabioqa31 dev!234
+parseAll.sh jdbc:oracle:thin:@cbiodb30.nci.nih.gov:1521:CBTEST cabioqa31 

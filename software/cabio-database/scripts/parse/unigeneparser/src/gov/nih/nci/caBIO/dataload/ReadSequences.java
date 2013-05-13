@@ -12,7 +12,7 @@ import java.util.Date;
  * The ReadFile is responsible for reading some of the unigene datafiles it
  * outputs the items of concern to delimited text files which are then loaded to
  * the database
- * 
+ *
  * @author CORE Team
  * @version 1.0
  */
@@ -211,18 +211,18 @@ public class ReadSequences {
 		// /repository/UniGene/Homo_sapiens
 		// ftp.ncbi.nih.gov anonymous gustafss@mail.nih.gov
 		// ../data/ncbi_unigene Hs.seq.all.gz
-		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31 xxxxxxxxx
+		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31
 
 		// /repository/UniGene/Mus_musculus ftp.ncbi.nih.gov anonymous
 		// gustafss@mail.nih.gov ../data/ncbi_unigene Mm.seq.all.gz
-		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31 xxxxxxxxx
+		// jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV cabiodev31
 		/*
 		 * args[0] = "/repository/UniGene/Mus_musculus"; args[1] =
 		 * "ftp.ncbi.nih.gov"; args[2] = "anonymous"; args[3] =
 		 * "gustafss@mail.nih.gov"; args[4] = "C:/cabio21/database/test/";
 		 * args[5] = "Mm.seq.all.gz"; args[6] =
 		 * "jdbc:oracle:thin:@cbiodb2-d.nci.nih.gov:1521:CBDEV"; args[7] =
-		 * "cabiodev31"; args[8] = "xxxxxxxxx";
+		 * "cabiodev31"; args[8] = "";
 		 */
 
 		new ReadSequences(args);
