@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index RESEARCH_INS_NAME_lwr on RESEARCH_INSTITUTION_SOURCE(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index RESEARCH_INS_INSTITUTION__lwr on RESEARCH_INSTITUTION_SOURCE(lower(INSTITUTION_NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;

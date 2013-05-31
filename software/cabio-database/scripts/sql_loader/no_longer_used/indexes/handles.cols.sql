@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index HANDLES_PREFIX on HANDLES(PREFIX) tablespace CABIO_FUT;
 create index HANDLES_HANDLE on HANDLES(HANDLE) tablespace CABIO_FUT;

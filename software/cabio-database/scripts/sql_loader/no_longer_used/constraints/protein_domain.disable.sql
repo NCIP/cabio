@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 alter table PROTEIN_DOMAIN disable constraint SYS_C004653;
 alter table PROTEIN_DOMAIN disable constraint SYS_C004654;

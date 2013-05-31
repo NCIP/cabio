@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 <SearchableObjectsDescription>
   <SearchableObject classname="gov.nih.nci.caDSR.bean.CaseReportForm" label="Case Report Form" labelProperties="id preferredName preferredDefinition longName version workflowStatusName workflowStatusDescription latestVersionIndicator beginDate endDate deletedIndicator changeNote unresolvedIssue origin dateCreated dateModified publicId displayName ">
     <Description>A questionnaire that documents all the patient data stipulated in the protocol and used by clinicians to record information about patient's visits while on the clinical trial.</Description>

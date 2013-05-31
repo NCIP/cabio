@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021126_idx on NEW_PROTEIN
 (NAME,COPYRIGHTSTATEMENT,KEYWORD,UNIPROTCODE,SECONDARY_ACCESSION,PRIMARY_ACCESSION,PROTEIN_ID) tablespace CABIO_FUT;
 alter table NEW_PROTEIN enable constraint SYS_C0021126 using index SYS_C0021126_idx;

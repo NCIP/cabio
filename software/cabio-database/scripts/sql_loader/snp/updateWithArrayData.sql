@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 -- update SNP with Affy data
 UPDATE snp_tv S SET (FLANK, CHR_X_PSEUDO_AUTOSOMAL_REGION) =
         (SELECT Z.FLANK, Z.CHRX_PSEUDO_AUTOSOMAL_REGION

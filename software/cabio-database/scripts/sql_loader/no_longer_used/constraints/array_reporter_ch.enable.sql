@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021037_idx on ARRAY_REPORTER_CH
 (DISCRIMINATOR,MICROARRAY_ID,NAME) tablespace CABIO_FUT;
 alter table ARRAY_REPORTER_CH enable constraint SYS_C0021037 using index SYS_C0021037_idx;

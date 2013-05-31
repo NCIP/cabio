@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index AR_CHROM_TMP_CHROMOSOME on AR_CHROMOSOMAL_LOCATION_TMP(CHROMOSOME_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index AR_CHROM_TMP_GENECHIP_A on AR_CHROMOSOMAL_LOCATION_TMP(GENECHIP_ARRAY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

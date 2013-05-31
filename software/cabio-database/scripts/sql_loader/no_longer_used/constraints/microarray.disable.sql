@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 alter table MICROARRAY disable constraint SYS_C0021124;
 alter table MICROARRAY disable constraint SYS_C0016542;

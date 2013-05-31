@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("3.2.4:1", "", "«CADSR Value Domain» CodingStatus", "EARoot/EA3/EA2/EA4/EA432.htm", "5.png", "585", "0", "", "Class0","{331F1503-B60A-429d-AB78-6D457FF1BE9B}");
 tocTab[tocTab.length] = new Array("3.2.4:2", "", "«CADSR Value Domain» GeneFeatureType", "EARoot/EA3/EA2/EA4/EA433.htm", "5.png", "618", "0", "", "Class0","{30A5DC3C-4D1E-46a9-8ABD-451F4C2CA070}");
 tocTab[tocTab.length] = new Array("3.2.4:3", "", "«CADSR Value Domain» GeneticMarkerType", "EARoot/EA3/EA2/EA4/EA434.htm", "5.png", "615", "0", "", "Class0","{A6B687A3-011B-453a-AA25-BE8D678B5953}");

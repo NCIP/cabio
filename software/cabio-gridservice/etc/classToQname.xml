@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 <ns1:ClassMappings xmlns:ns1="http://gov.nih.nci.cagrid.data">
  <ns2:mapping className="gov.nih.nci.cabio.pathways.GeneRegulation" qname="{gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways}GeneRegulation" xsi:type="ns2:classToQname" xmlns:ns2="http://gov.nih.nci.cagrid.data/ClassMappings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
  <ns3:mapping className="gov.nih.nci.cabio.pathways.ComplexEntity" qname="{gme://caCORE.caBIO/4.2/gov.nih.nci.cabio.pathways}ComplexEntity" xsi:type="ns3:classToQname" xmlns:ns3="http://gov.nih.nci.cagrid.data/ClassMappings" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>

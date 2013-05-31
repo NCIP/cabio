@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index POPULATIENCY_MAJOR_FREQ on POPULATION_FREQUENCY(MAJOR_FREQUENCY) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index POPULATIENCY_ETHNICITY on POPULATION_FREQUENCY(ETHNICITY) PARALLEL NOLOGGING tablespace CABIO_FUT;

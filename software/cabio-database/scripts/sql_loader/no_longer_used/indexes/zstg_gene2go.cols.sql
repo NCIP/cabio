@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_GENE2GO_GO_ID_TRIM on ZSTG_GENE2GO(GO_ID_TRIMMED) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_GENE2GO_CATEGORY on ZSTG_GENE2GO(CATEGORY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

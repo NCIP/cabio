@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 truncate table zstg_drugbank_drugs REUSE STORAGE;
 truncate table zstg_drugbank_drug_targets REUSE STORAGE;
 truncate table zstg_drugbank_targets REUSE STORAGE;

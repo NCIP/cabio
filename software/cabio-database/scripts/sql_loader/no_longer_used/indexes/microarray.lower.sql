@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index MICROARRRRAY_LSID_lwr on MICROARRAY(lower(LSID)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index MICROARRRRAY_ACCESSION_lwr on MICROARRAY(lower(ACCESSION)) PARALLEL NOLOGGING tablespace CABIO_FUT;

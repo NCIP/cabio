@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_SNPMINA_PHAST_CONS_lwr on ZSTG_SNP_ILLUMINA(lower(PHAST_CONSERVATION)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_SNPMINA_ID_WITH_MO_lwr on ZSTG_SNP_ILLUMINA(lower(ID_WITH_MOUSE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

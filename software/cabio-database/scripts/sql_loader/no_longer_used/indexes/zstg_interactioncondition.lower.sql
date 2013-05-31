@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_INTTION_CONDITION_lwr on ZSTG_INTERACTIONCONDITION(lower(CONDITION)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_INTTION_CONDITION__lwr on ZSTG_INTERACTIONCONDITION(lower(CONDITION_TYPE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

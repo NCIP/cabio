@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index AR_ENSEM_TMP_GENECHIP_A_lwr on AR_ENSEMBL_TMP(lower(GENECHIP_ARRAY)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index AR_ENSEM_TMP_ENSEMBL_ID_lwr on AR_ENSEMBL_TMP(lower(ENSEMBL_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

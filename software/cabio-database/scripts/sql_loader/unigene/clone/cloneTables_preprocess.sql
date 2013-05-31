@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE clone_tv REUSE STORAGE;
 TRUNCATE TABLE zstg_clone REUSE STORAGE;
 TRUNCATE TABLE clone_taxon REUSE STORAGE;

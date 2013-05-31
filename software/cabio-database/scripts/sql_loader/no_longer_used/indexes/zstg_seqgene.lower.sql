@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_SEQGENE_EVIDENCE_C_lwr on ZSTG_SEQGENE(lower(EVIDENCE_CODE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_SEQGENE_TRANSCRIPT_lwr on ZSTG_SEQGENE(lower(TRANSCRIPT)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_SNPAFFY_CHROMOSOME on ZSTG_SNP_AFFY(CHROMOSOME) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_SNPAFFY_DBSNP_RS_I on ZSTG_SNP_AFFY(DBSNP_RS_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

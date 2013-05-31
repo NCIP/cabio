@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 # REBUILD indexes FOR gene_tv
 @$LOAD/indexes/gene_tv.cols.sql
 @$LOAD/indexes/gene_tv.lower.sql

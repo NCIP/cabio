@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index PL_PK_idx on PHYSICAL_LOCATION
 (ID) tablespace CABIO_FUT;
 alter table PHYSICAL_LOCATION enable constraint PL_PK using index PL_PK_idx;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index AR_GO_CENENT_GENECHIP_A on AR_GO_CELLULAR_COMPONENT(GENECHIP_ARRAY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index AR_GO_CENENT_EVIDENCE on AR_GO_CELLULAR_COMPONENT(EVIDENCE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

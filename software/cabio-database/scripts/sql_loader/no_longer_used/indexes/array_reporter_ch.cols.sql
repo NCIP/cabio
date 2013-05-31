@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ARRAY_RER_CH_EXON_ID on ARRAY_REPORTER_CH(EXON_ID) PARALLEL NOLOGGING tablespace cabio_fut;
 create index ARRAY_RER_CH_TRANSCRIPT on ARRAY_REPORTER_CH(TRANSCRIPT_ID) PARALLEL NOLOGGING tablespace cabio_fut;

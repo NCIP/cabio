@@ -11,7 +11,7 @@ The caBIO system is primarily a repository of molecular biology data; the entiti
 The caBIO is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
-You will find more details about the caCORE SDK in the following links:
+You will find more details about the caBIO in the following links:
  * [Home Page] (https://wiki.nci.nih.gov/display/caBIO/caBIO+Wiki+Home+Page)
  * [Binaries packages] (http://gforge.nci.nih.gov/frs/?group_id=51)
  * [NCI OSDI] (https://wiki.nci.nih.gov/display/caBIGCommunityCode/CBIIT+Open+Source+Development+Initiative)

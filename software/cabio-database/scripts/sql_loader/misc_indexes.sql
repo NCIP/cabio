@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 column columnprod new_value prod_tablspc;
 select globals.get_production_tablespace as columnprod from dual;
 create index biopath_idx on BIO_PATHWAYS(PATHWAY_DIAGRAM) tablespace &prod_tablspc;

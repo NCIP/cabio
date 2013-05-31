@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_MOLBELS_VALUE_lwr on ZSTG_MOLECULECOMPONENTLABELS(lower(VALUE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_MOLBELS_LABEL_TYPE_lwr on ZSTG_MOLECULECOMPONENTLABELS(lower(LABEL_TYPE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

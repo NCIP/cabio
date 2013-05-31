@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_PATWAYS_SOURCE_ID_lwr on ZSTG_PATHWAYS(lower(SOURCE_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_PATWAYS_SHORTNAME_lwr on ZSTG_PATHWAYS(lower(SHORTNAME)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

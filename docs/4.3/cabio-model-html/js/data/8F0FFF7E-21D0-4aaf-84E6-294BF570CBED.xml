@@ -1,1 +1,8 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("2.2:1", "", "Interactions", "EARoot/EA2/EA2/EA20.htm", "185.png", "4", "0", "", "Sequence diagram0","{F3FCD52D-3ED2-455b-BCFA-27433B5C9210}");

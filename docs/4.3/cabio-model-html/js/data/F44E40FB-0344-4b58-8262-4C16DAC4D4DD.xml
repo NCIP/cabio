@@ -1,1 +1,8 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("5.2.6.1:1", "", "Clients", "EARoot/EA5/EA2/EA6/EA1/EA549.htm", "179.png", "127", "0", "", "Deployment diagram0","{955565BA-5F1D-4cdb-BF59-89C02043BB1A}");

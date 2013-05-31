@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index PID_PARTPANT_DISCRIMINA_lwr on PID_PARTICIPANT(lower(DISCRIMINATOR)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index PID_PARTPANT_CONDITION__lwr on PID_PARTICIPANT(lower(CONDITION_NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;

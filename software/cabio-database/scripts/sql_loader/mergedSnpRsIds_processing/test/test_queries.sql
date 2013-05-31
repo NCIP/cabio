@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 -- Should return 0 rows
 -- Get those rows from SNP REPORTER THAT have NULL SNP ID 
 -- and are present in SNP AFFY and have a mapping to MERGED SNP IDs table

@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("3.2.3.1:1", "", "Boolean", "EARoot/EA3/EA2/EA3/EA1/EA422.htm", "5.png", "416", "0", "", "Class0","{1F7B5C69-E520-480a-AAF8-ADBE67679C80}");
 tocTab[tocTab.length] = new Array("3.2.3.1:2", "", "Double", "EARoot/EA3/EA2/EA3/EA1/EA423.htm", "5.png", "420", "0", "", "Class0","{B607839D-A660-4325-B189-E2FED71C5A6E}");
 tocTab[tocTab.length] = new Array("3.2.3.1:3", "", "Float", "EARoot/EA3/EA2/EA3/EA1/EA424.htm", "5.png", "418", "0", "", "Class0","{35CA8BCB-45E6-4efd-A699-7F7CC38750A2}");

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 @$LOAD/indexes/ar_ec.cols.sql
 @$LOAD/indexes/ar_ensembl.cols.sql
 @$LOAD/indexes/ar_omim_id.cols.sql

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index TISSUE_SMPLE_TISSUE_NAM_lwr on TISSUE_SAMPLE(lower(TISSUE_NAME)) PARALLEL NOLOGGING tablespace CABIO;
 create index TISSUE_SMPLE_ORGAN_lwr on TISSUE_SAMPLE(lower(ORGAN)) PARALLEL NOLOGGING tablespace CABIO;

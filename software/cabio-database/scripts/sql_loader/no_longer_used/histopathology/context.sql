@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 INSERT INTO context(CONTEXT_CODE, histology_code, tissue_code) VALUES(3001,99,1184);
 INSERT INTO context(CONTEXT_CODE, histology_code, tissue_code) VALUES(3002,99,1314);
 INSERT INTO context(CONTEXT_CODE, histology_code, tissue_code) VALUES(3003,99,1218);

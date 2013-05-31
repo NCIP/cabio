@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021069_idx on AR_UNIGENE_ID
 (GENECHIP_ARRAY,UNIGENE_ID,PROBE_SET_ID) tablespace CABIO_MAP_FUT;
 alter table AR_UNIGENE_ID enable constraint SYS_C0021069 using index SYS_C0021069_idx;

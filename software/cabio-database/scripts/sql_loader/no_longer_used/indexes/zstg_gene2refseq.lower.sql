@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_GENFSEQ_ASSEMBLY_lwr on ZSTG_GENE2REFSEQ(lower(ASSEMBLY)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_GENFSEQ_ORIENTATIO_lwr on ZSTG_GENE2REFSEQ(lower(ORIENTATION)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

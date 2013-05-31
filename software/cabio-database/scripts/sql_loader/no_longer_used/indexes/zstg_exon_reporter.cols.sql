@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_EXORTER_STOP_LOCAT on ZSTG_EXON_REPORTER(STOP_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_EXORTER_START_LOCA on ZSTG_EXON_REPORTER(START_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

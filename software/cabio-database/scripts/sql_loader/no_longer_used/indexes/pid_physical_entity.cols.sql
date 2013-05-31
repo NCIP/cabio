@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index PID_PHYSTITY_PID_PHYSIC on PID_PHYSICAL_ENTITY(PID_PHYSICALENTITY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index PID_PHYSTITY_PROTEIN_EN on PID_PHYSICAL_ENTITY(PROTEIN_ENTITY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

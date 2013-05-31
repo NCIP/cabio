@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index ARREPBIGID_idx on ARRAY_REPORTER_CH
 (BIG_ID) tablespace CABIO_FUT;
 alter table ARRAY_REPORTER_CH enable constraint ARREPBIGID using index ARREPBIGID_idx;

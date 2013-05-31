@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index LIBRARYRARY_LIBRARY_ID on LIBRARY(LIBRARY_ID) PARALLEL NOLOGGING tablespace CABIO;
 create index LIBRARYRARY_CLONES_TO_ on LIBRARY(CLONES_TO_DATE) PARALLEL NOLOGGING tablespace CABIO;

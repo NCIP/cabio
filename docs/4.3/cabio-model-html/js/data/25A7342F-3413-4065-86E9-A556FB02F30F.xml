@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("3.2.1.1:1", "", "Agent-Anomaly", "EARoot/EA3/EA2/EA1/EA1/EA225.htm", "175.png", "81", "0", "", "Logical diagram0","{F28F85A2-CFCF-431d-A406-5FD01AEE7376}");
 tocTab[tocTab.length] = new Array("3.2.1.1:2", "", "Annotations", "EARoot/EA3/EA2/EA1/EA1/EA227.htm", "175.png", "155", "0", "", "Logical diagram0","{683540C6-C691-408a-8E86-AB03DB0F9F43}");
 tocTab[tocTab.length] = new Array("3.2.1.1:3", "", "Arrays", "EARoot/EA3/EA2/EA1/EA1/EA229.htm", "175.png", "143", "0", "", "Logical diagram0","{7754179B-3D79-4cac-8D88-5204941C4934}");

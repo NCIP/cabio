@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021104_idx on GENE_RELATIVE_LOCATION
 (TYPE,PROBE_SET_ID,SNP_ID,GENE_ID,DISTANCE,ORIENTATION) tablespace CABIO_FUT;
 alter table GENE_RELATIVE_LOCATION enable constraint SYS_C0021104 using index SYS_C0021104_idx;

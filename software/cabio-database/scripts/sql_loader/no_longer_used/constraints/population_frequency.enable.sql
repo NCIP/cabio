@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C004646_idx on POPULATION_FREQUENCY
 (ID) tablespace CABIO_FUT;
 alter table POPULATION_FREQUENCY enable constraint SYS_C004646 using index SYS_C004646_idx;

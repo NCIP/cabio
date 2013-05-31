@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("5.2.5:1", "", "caDSR Stage Deployment Model", "EARoot/EA5/EA2/EA5/EA524.htm", "179.png", "135", "0", "", "Deployment diagram0","{9C38BB99-044F-4e51-B75E-8E4A2F05939A}");
 tocTab[tocTab.length] = new Array("5.2.5:2", "", "«server» : cbioapp101", "EARoot/EA5/EA2/EA5/EA526.htm", "9.png", "522", "0", "", "Node0","{43263FFC-2000-44db-B14F-81F9F74F5B07}");
 tocTab[tocTab.length] = new Array("5.2.5:3", "", "«server» : cbiodb20", "EARoot/EA5/EA2/EA5/EA527.htm", "9.png", "524", "0", "", "Node0","{9D62D660-51A3-4d5e-A1ED-EA894748AE5B}");

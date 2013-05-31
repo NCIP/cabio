@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_SNPGENE_ASSOCIATED_lwr on ZSTG_SNP_ASSOCIATED_GENE(lower(ASSOCIATED_GENE_NAME)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_SNPGENE_ASSOCIATED_lwr on ZSTG_SNP_ASSOCIATED_GENE(lower(ASSOCIATED_GENE_SYMBOL)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

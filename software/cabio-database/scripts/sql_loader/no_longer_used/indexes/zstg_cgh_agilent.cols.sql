@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_CGHLENT_PROBE_END on ZSTG_CGH_AGILENT(PROBE_END) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_CGHLENT_PROBE_STAR on ZSTG_CGH_AGILENT(PROBE_START) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

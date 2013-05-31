@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index SNP_TVP_TV_AMINO_ACID_lwr on SNP_TV(lower(AMINO_ACID_CHANGE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index SNP_TVP_TV_CODING_STA_lwr on SNP_TV(lower(CODING_STATUS)) PARALLEL NOLOGGING tablespace CABIO_FUT;

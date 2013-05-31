@@ -1,1 +1,8 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("1.1:1", "", "Business Process Model", "EARoot/EA1/EA1/EA11.htm", "189.png", "2", "0", "", "Analysis diagram0","{FC90D09C-ABD6-4136-A786-F7A9AF41E4BA}");

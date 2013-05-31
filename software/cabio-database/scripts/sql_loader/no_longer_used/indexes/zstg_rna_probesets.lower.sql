@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_RNASETS_ANNOTATION_lwr on ZSTG_RNA_PROBESETS(lower(ANNOTATION_DESCRIPTION)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_RNASETS_QTL_lwr on ZSTG_RNA_PROBESETS(lower(QTL)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

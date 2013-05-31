@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_MOLERMS_MODIFICATI on ZSTG_MOLECULECOMPPTMTERMS(MODIFICATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_MOLERMS_AA on ZSTG_MOLECULECOMPPTMTERMS(AA) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

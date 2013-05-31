@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021074_idx on CLONE_RELATIVE_LOCATION
 (NUCLEIC_ACID_SEQUENCE_ID,CLONE_ID,TYPE) tablespace CABIO_FUT;
 alter table CLONE_RELATIVE_LOCATION enable constraint SYS_C0021074 using index SYS_C0021074_idx;

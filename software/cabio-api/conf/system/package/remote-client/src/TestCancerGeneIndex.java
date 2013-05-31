@@ -1,3 +1,10 @@
+/*L
+ *  Copyright SAIC
+ *
+ *  Distributed under the OSI-approved BSD 3-Clause License.
+ *  See http://ncip.github.com/cabio/LICENSE.txt for details.
+ */
+
 import gov.nih.nci.cabio.domain.DiseaseOntology;
 import gov.nih.nci.cabio.domain.Evidence;
 import gov.nih.nci.cabio.domain.EvidenceCode;

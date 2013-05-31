@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index HISTOPAT_TST_ANIMALMODE on HISTOPATHOLOGY_TST(ANIMALMODEL_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index HISTOPAT_TST_METASTASIS on HISTOPATHOLOGY_TST(METASTASISOF) PARALLEL NOLOGGING tablespace CABIO_FUT;

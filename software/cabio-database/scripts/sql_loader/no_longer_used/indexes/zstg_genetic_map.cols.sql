@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_GEN_MAP_SECOND_MAR on ZSTG_GENETIC_MAP(SECOND_MARKER_NAME) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_GEN_MAP_SECOND_MAR on ZSTG_GENETIC_MAP(SECOND_MARKER_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index AGENT_CGID_ID on AGENT_CGID(ID) tablespace CABIO_MAP;
 create index AGENT_CGID_DRUG on AGENT_CGID(DRUG) tablespace CABIO_MAP;

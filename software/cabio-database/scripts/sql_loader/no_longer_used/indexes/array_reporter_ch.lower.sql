@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ARRAY_RER_CH_STRAND_lwr on ARRAY_REPORTER_CH(lower(STRAND)) PARALLEL NOLOGGING tablespace cabio_fut;
 create index ARRAY_RER_CH_PROBE_COUN_lwr on ARRAY_REPORTER_CH(lower(PROBE_COUNT)) PARALLEL NOLOGGING tablespace cabio_fut;

@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("3.2.2.1.1.1.2:1", "", "BiochemicalReaction", "EARoot/EA3/EA2/EA2/EA1/EA1/EA1/EA2/EA384.htm", "5.png", "641", "0", "", "Class0","{B52D5D72-E101-4eee-8145-820A1D8A7330}");
 tocTab[tocTab.length] = new Array("3.2.2.1.1.1.2:2", "", "ComplexComponent", "EARoot/EA3/EA2/EA2/EA1/EA1/EA1/EA2/EA385.htm", "5.png", "636", "0", "", "Class0","{623E13CC-4A5F-4784-A82E-F08AE616D40F}");
 tocTab[tocTab.length] = new Array("3.2.2.1.1.1.2:3", "", "ComplexEntity", "EARoot/EA3/EA2/EA2/EA1/EA1/EA1/EA2/EA386.htm", "5.png", "627", "0", "", "Class0","{26EDB88C-FDDC-4a29-AE18-34CC169D3852}");

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index NAS_PK_idx on NUCLEIC_ACID_SEQUENCE
 (ID) tablespace CABIO_FUT;
 alter table NUCLEIC_ACID_SEQUENCE enable constraint NAS_PK using index NAS_PK_idx;

@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("5.2.1:1", "", "«Application» caBIO API Version 3.0", "EARoot/EA5/EA2/EA1/EA452.htm", "82.png", "459", "0", "", "Artifact0","{5FCE80CF-2369-41a9-8CD3-3289871D28BF}");
 tocTab[tocTab.length] = new Array("5.2.1:2", "", "«Application» caDSR API Version 3.1", "EARoot/EA5/EA2/EA1/EA453.htm", "82.png", "461", "0", "", "Artifact0","{EBDBD358-D4CC-4b86-BFB0-DF3CBA2C90CE}");
 tocTab[tocTab.length] = new Array("5.2.1:3", "", "«Application» caDSR MOD PL/SQL Application", "EARoot/EA5/EA2/EA1/EA454.htm", "82.png", "457", "0", "", "Artifact0","{52C1F532-FC25-447a-B967-FFFABF7F2F80}");

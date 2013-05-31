@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_MOUBAND_CYTOBAND on ZSTG_MOUSE_CYTOBAND(CYTOBAND) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_MOUBAND_ID on ZSTG_MOUSE_CYTOBAND(ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

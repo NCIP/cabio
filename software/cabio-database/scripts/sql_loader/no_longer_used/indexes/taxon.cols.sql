@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index TAXONAXON_PERFERED on TAXON(PERFERED) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index TAXONAXON_TAXON_ID on TAXON(TAXON_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

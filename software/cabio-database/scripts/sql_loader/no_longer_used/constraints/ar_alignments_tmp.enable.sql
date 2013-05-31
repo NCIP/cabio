@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021039_idx on AR_ALIGNMENTS_TMP
 (GENECHIP_ARRAY,ASSEMBLY,TRIM_CHR,DIRECTION,END_POSITION,START_POSITION,CHROMOSOME,PROBE_SET_ID) tablespace CABIO_MAP_FUT;
 alter table AR_ALIGNMENTS_TMP enable constraint SYS_C0021039 using index SYS_C0021039_idx;

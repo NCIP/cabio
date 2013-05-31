@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 CREATE OR REPLACE procedure GENE_ALIAS_OBJECT31_TV_LD as
 
   CURSOR GENEALIASOBJECTTVCUR IS

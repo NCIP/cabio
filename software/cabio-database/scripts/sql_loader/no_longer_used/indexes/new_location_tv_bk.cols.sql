@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index NEW_LOCATION__MARKER_ID on NEW_LOCATION_TV_BK(MARKER_ID) tablespace CABIO_MAP_FUT;
 create index NEW_LOCATION__ID on NEW_LOCATION_TV_BK(ID) tablespace CABIO_MAP_FUT;

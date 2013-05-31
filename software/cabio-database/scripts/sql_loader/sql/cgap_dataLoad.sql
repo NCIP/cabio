@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 SET SERVEROUTPUT ON;
 WHENEVER OSERROR EXIT 9;
 VAR SPOOLFILENAME VARCHAR2(30);

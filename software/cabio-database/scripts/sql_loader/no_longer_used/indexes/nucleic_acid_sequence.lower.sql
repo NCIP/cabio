@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index NUCLEIC_ENCE_DISCRIMINA_lwr on NUCLEIC_ACID_SEQUENCE(lower(DISCRIMINATOR)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index NUCLEIC_ENCE_DESCRIPTIO_lwr on NUCLEIC_ACID_SEQUENCE(lower(DESCRIPTION)) PARALLEL NOLOGGING tablespace CABIO_FUT;

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE new_protein REUSE STORAGE;
 TRUNCATE TABLE protein_alias REUSE STORAGE;
 TRUNCATE TABLE protein_protein_alias REUSE STORAGE;

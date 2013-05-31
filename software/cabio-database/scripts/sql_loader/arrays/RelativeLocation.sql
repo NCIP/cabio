@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE relative_location REUSE STORAGE;
 @$LOAD/indexer_new.sql relative_location
 @$LOAD/constraints.sql relative_location

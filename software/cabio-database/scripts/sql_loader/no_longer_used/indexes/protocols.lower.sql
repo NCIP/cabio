@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index PROTOCOLCOLS_PDQ_PROTOC_lwr on PROTOCOLS(lower(PDQ_PROTOCOL_CODE)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index PROTOCOLCOLS_REVIEWER_N_lwr on PROTOCOLS(lower(REVIEWER_NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;

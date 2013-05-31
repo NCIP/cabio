@@ -1,3 +1,10 @@
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 tocTab[tocTab.length] = new Array("5.2.4.2:1", "", "«artifact» : Metathesaurus", "EARoot/EA5/EA2/EA4/EA2/EA520.htm", "25.png", "520", "0", "", "Object0","{E58F28D5-4A37-4219-8835-8A1CE84A72D4}");
 tocTab[tocTab.length] = new Array("5.2.4.2:2", "", "«artifact» : Thesaurus", "EARoot/EA5/EA2/EA4/EA2/EA521.htm", "25.png", "518", "0", "", "Object0","{713D82D1-63C9-4243-BBEE-F9F13EC73954}");
 tocTab[tocTab.length] = new Array("5.2.4.2:3", "", "«artifact» : caDSR Repository", "EARoot/EA5/EA2/EA4/EA2/EA522.htm", "25.png", "517", "0", "", "Object0","{145B61AC-F981-4ce7-BEDB-F258A2E79977}");

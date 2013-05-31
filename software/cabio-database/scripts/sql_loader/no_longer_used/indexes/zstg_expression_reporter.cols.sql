@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_EXPRTER_ASSEMBLY on ZSTG_EXPRESSION_REPORTER(ASSEMBLY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_EXPRTER_CYTO_STOP on ZSTG_EXPRESSION_REPORTER(CYTO_STOP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

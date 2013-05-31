@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 <project name="cabio" default="dist:all" basedir=".">
 	<description>
 	This is the master build file for the caBIO project.  caBIO portlet, caBIO API and caBIO grid service are three sub-projects
