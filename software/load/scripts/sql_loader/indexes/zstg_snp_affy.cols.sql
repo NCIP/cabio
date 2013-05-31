@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_SNPAFFY_COPY_NUM_V on ZSTG_SNP_AFFY(COPY_NUM_VARIATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_SNPAFFY_STRAND_VS_ on ZSTG_SNP_AFFY(STRAND_VS_DBSNP) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

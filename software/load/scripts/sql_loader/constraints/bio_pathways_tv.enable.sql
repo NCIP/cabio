@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index PATHWAYS_UNIQ_idx on BIO_PATHWAYS_TV
 (SOURCE,TAXON,PATHWAY_NAME) tablespace CABIO_FUT;
 alter table BIO_PATHWAYS_TV enable constraint PATHWAYS_UNIQ using index PATHWAYS_UNIQ_idx;

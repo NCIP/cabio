@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 alter table ZSTG_HUMAN_CYTOBAND disable constraint SYS_C004972;
 alter table ZSTG_HUMAN_CYTOBAND disable constraint SYS_C004973;

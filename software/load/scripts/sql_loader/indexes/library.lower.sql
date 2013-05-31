@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index LIBRARYRARY_IDS_LIB_TI_lwr on LIBRARY(lower(IDS_LIB_TISSUE_SAMPLE)) PARALLEL NOLOGGING tablespace CABIO;
 create index LIBRARYRARY_IMAGE_LEGE_lwr on LIBRARY(lower(IMAGE_LEGEND)) PARALLEL NOLOGGING tablespace CABIO;

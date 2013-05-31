@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE gene_expressed_in; 
 @$LOAD/indexer_new.sql gene_expressed_in 
 @$LOAD/constraints.sql gene_expressed_in 

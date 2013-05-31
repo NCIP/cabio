@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021119_idx on MARKER
 (ACCNO,TAXON_ID,TYPE,MARKER_ID,NAME) tablespace CABIO_FUT;
 alter table MARKER enable constraint SYS_C0021119 using index SYS_C0021119_idx;

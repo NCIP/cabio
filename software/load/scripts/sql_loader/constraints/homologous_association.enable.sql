@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021113_idx on HOMOLOGOUS_ASSOCIATION
 (HOMOLOGOUS_GENE_ID,HOMOLOGOUS_ID,SIMILARITY_PERCENTAGE) tablespace CABIO_FUT;
 alter table HOMOLOGOUS_ASSOCIATION enable constraint SYS_C0021113 using index SYS_C0021113_idx;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 drop index NEW_LOCATION_DISCRIMINATO_LWR;
 drop index NEW_LOCATION__CHROMOSOMAL_END;

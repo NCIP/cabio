@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_INTRPRO_GENECHIP_A on ZSTG_INTERPRO(GENECHIP_ARRAY) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_INTRPRO_SCORE on ZSTG_INTERPRO(SCORE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

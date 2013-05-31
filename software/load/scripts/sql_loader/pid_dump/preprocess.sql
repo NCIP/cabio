@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 truncate table zstg_pid_dump;
 truncate table ZSTG_PID_INTERACTIONREFERENCE;
 truncate table ZSTG_PID_ENTITYNAME;

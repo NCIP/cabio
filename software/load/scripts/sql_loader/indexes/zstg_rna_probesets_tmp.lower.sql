@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_RNA_TMP_OMIM_lwr on ZSTG_RNA_PROBESETS_TMP(lower(OMIM)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_RNA_TMP_EC_lwr on ZSTG_RNA_PROBESETS_TMP(lower(EC)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 DROP TABLE ZSTG_SNP;
 DROP TABLE GENE_STG31;
 DROP TABLE SEQUENCE_STG31A;

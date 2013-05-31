@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index GENE_PATHWAY_PK_idx on GENE_PATHWAY
 (PATHWAY_ID,BC_ID) tablespace CABIO_FUT;
 alter table GENE_PATHWAY enable constraint GENE_PATHWAY_PK using index GENE_PATHWAY_PK_idx;

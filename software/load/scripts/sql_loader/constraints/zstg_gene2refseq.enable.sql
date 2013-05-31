@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0020836_idx on ZSTG_GENE2REFSEQ
 (ASSEMBLY,PROTEIN_ID,ORIENTATION,END_POSITON,START_POSITION,GENOMIC_NUCLEOTIDE_GI,GENOMIC_NUCLEOTIDE_ACC,PROTEIN_GI,PROTEIN_ACCESSION,RNA_NUCLEOTIDE_GI,RNA_NUCLEOTIDE_ACC,STATUS,GENEID,TAX_ID) tablespace CABIO_MAP_FUT;
 alter table ZSTG_GENE2REFSEQ enable constraint SYS_C0020836 using index SYS_C0020836_idx;

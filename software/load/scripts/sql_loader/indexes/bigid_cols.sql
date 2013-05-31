@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index PROTOCOSES_BIG_ID on PROTOCOL_DISEASES(BIG_ID) tablespace CABIO_FUT;
 create index PROTOCOOLS_BIG_ID on PROTOCOLS(BIG_ID) tablespace CABIO_FUT;

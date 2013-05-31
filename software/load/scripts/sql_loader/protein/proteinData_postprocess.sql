@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 -- GF16793 -- Remove new prefixes and suffixes
 -- TBD : Move logic to parser
 update new_protein set name = replace(name,'RecName: Full=','');

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 -- create all PL/SQL procedures needed for loading
 @population_frequency.sql;
 @snp_tv.sql;

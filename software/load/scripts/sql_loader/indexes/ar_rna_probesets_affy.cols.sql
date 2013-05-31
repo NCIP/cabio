@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index AR_RNA_PAFFY_ANNOTATION on AR_RNA_PROBESETS_AFFY(ANNOTATION_DATA) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index AR_RNA_PAFFY_SPECIES_SC on AR_RNA_PROBESETS_AFFY(SPECIES_SCIENTIFIC_NAME) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

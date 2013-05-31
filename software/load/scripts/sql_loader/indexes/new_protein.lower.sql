@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index NEW_PROTTEIN_NAME_lwr on NEW_PROTEIN(lower(NAME)) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index NEW_PROTTEIN_COPYRIGHTS_lwr on NEW_PROTEIN(lower(COPYRIGHTSTATEMENT)) PARALLEL NOLOGGING tablespace CABIO_FUT;

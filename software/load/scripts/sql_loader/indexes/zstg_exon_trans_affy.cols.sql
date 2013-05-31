@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_EXOAFFY_TOTAL_PROB on ZSTG_EXON_TRANS_AFFY(TOTAL_PROBES) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_EXOAFFY_STOP_LOCAT on ZSTG_EXON_TRANS_AFFY(STOP_LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

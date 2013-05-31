@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_POPENCY_SNP_PROBES_lwr on ZSTG_POPULATION_FREQUENCY(lower(SNP_PROBESET_AFFY_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_POPENCY_MINOR_ALLE_lwr on ZSTG_POPULATION_FREQUENCY(lower(MINOR_ALLELE)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

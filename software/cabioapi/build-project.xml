@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 <!--************************************************************************
 * This is the a helper build file for the caBIO project that builds the 
 * system once the SDK and custom code is in place. Much of this script

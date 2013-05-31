@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index HISTOLOGCODE_EVS_ID on HISTOLOGY_CODE(EVS_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index HISTOLOGCODE_RELATIONSH on HISTOLOGY_CODE(RELATIONSHIP) PARALLEL NOLOGGING tablespace CABIO_FUT;

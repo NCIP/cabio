@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index CYTOGENIBAND_END_CYTOBA on CYTOGENIC_LOCATION_CYTOBAND(END_CYTOBAND_LOC_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index CYTOGENIBAND_START_CYTO on CYTOGENIC_LOCATION_CYTOBAND(START_CYTOBAND_LOC_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

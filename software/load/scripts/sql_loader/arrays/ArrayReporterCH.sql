@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE array_reporter_ch REUSE STORAGE;
 TRUNCATE TABLE zstg_array_reporter_ch REUSE STORAGE;
 @$LOAD/indexer_new.sql zstg_array_reporter_ch

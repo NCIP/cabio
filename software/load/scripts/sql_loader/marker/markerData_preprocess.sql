@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE marker REUSE STORAGE;
 TRUNCATE TABLE marker_alias REUSE STORAGE;
 TRUNCATE TABLE marker_marker_alias REUSE STORAGE;

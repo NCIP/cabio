@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE zstg_cmap_genes REUSE STORAGE;
 TRUNCATE TABLE zstg_cmap_agents REUSE STORAGE;
 TRUNCATE TABLE zstg_cmap_targets REUSE STORAGE;

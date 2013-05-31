@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_PID_LOC_XREF on ZSTG_PID_COMPL_PARTICIPANT_LOC(XREF) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_PID_LOC_LOCATION on ZSTG_PID_COMPL_PARTICIPANT_LOC(LOCATION) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

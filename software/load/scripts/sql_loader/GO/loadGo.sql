@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE go_ontology REUSE STORAGE;
 TRUNCATE TABLE go_relationship REUSE STORAGE;
 TRUNCATE TABLE zstg_gene_ontology REUSE STORAGE;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_POPENCY_ALLELE_B on ZSTG_POP_FREQUENCY(ALLELE_B) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_POPENCY_ALLELE_A on ZSTG_POP_FREQUENCY(ALLELE_A) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

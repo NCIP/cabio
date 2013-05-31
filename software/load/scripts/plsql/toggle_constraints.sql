@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 CREATE OR REPLACE PROCEDURE toggle_constraints(p_table_name IN VARCHAR, p_enabled IN BOOLEAN)
 AS
 	CURSOR c_constraints IS

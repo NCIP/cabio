@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 drop index BIN$ZCoa+fS8+4PgQLuJIbZfqA==$0;
 drop index BIN$ZCoa+fTX+4PgQLuJIbZfqA==$0;

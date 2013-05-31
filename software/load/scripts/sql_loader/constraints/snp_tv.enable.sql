@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SNPTVPK_idx on SNP_TV
 (ID) tablespace CABIO_FUT;
 alter table SNP_TV enable constraint SNPTVPK using index SNPTVPK_idx;

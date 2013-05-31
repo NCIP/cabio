@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
+<!--L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L-->
+
 <!--
 $Id: install.xml 4757 2008-05-15 20:43:31Z zengje $
 $HeadURL: http://gforge.nci.nih.gov/svnroot/cabiodb/cabioapi/trunk/software/build/install.xml $

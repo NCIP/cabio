@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 @AGENT_OBJECT.vw
 @ANOMALY_TARGET_VW.vw
 @ANOMALY_TISSUE_CODE.vw

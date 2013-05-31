@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index HOMOLOGOUS_AS_ID on HOMOLOGOUS_ASSOCIATION_NEW(ID) tablespace CABIO_MAP_FUT;
 create index HOMOLOGOUS_AS_SIMILARITY_PERC on HOMOLOGOUS_ASSOCIATION_NEW(SIMILARITY_PERCENTAGE) tablespace CABIO_MAP_FUT;
