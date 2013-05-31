@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index CLONE_TVE_TV_TYPE on CLONE_TV(TYPE) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index CLONE_TVE_TV_LIBRARY_ID on CLONE_TV(LIBRARY_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

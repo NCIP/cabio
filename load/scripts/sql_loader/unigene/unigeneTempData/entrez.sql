@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 delete from gene_tv where source='Entrez';
 update gene_tv set entrez_id=null where source='Unigene';
 

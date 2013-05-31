@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 drop index ZSTG_MERGED_SNP_RSIDS_MAP_PK;
 drop index ZSTG_MERPING_OLD_RS_ID_LWR;

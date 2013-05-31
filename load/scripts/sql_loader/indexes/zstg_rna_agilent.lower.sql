@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_RNALENT_CHROMOSOME_lwr on ZSTG_RNA_AGILENT(lower(CHROMOSOME_NUMBER)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_RNALENT_CYTO_STOP_lwr on ZSTG_RNA_AGILENT(lower(CYTO_STOP)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

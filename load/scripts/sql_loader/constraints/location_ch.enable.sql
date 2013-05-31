@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index LCH_PK_idx on LOCATION_CH
 (ID) tablespace CABIO_FUT;
 alter table LOCATION_CH enable constraint LCH_PK using index LCH_PK_idx;

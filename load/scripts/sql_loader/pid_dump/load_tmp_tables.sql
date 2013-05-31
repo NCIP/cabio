@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
  insert into zstg_pid_complex_component(pid_complex_id, order_of_complex, pid_component_id, complex_id, component_id) select field1, field2, field3, null, null from zstg_pid_dump where identifier = 'pid_complex_component';
 commit;

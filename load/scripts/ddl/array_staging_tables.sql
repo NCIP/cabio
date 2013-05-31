@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 DROP TABLE ZSTG_SNP_AFFY;
 DROP TABLE ZSTG_RNA_PROBESETS;
 DROP TABLE ZSTG_RNA_AGILENT;

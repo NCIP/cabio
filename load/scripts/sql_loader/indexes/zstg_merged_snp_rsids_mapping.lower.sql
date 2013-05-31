@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_MERPING_ORIEN2CURR_lwr on ZSTG_MERGED_SNP_RSIDS_MAPPING(lower(ORIEN2CURRENT)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_MERPING_CURRENT_RS_lwr on ZSTG_MERGED_SNP_RSIDS_MAPPING(lower(CURRENT_RS_ID)) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 TRUNCATE TABLE clone_relative_location reuse storage;
 CREATE INDEX CLONE_IDX on zstg_clone(CLONE_ID, RELATIVE_TYPE);
 CREATE INDEX CLONE_REL_TYPE_IDX on zstg_clone(RELATIVE_TYPE);

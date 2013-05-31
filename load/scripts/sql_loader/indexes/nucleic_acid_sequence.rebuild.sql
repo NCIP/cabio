@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 alter index NUCLEIC_ACID_DISCRIMINATO_LWR rebuild tablespace CABIO_FUT;
 alter index NUCLEIC_ACID_SEQUENCE_TYP_LWR rebuild tablespace CABIO_FUT;

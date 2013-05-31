@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create  index NUCLEIC_ACID__ACCESSION_NUMBE on NUCLEIC_ACID_SEQUENCE (
 ACCESSION_NUMBER ASC

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index DISEASE_SHIP_ID on DISEASE_RELATIONSHIP(ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index DISEASE_SHIP_PARENT_ID on DISEASE_RELATIONSHIP(PARENT_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

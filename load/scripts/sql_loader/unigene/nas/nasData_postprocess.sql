@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 @$LOAD/indexes/nucleic_acid_sequence.cols.sql;
 @$LOAD/indexes/nucleic_acid_sequence.lower.sql;
 @$LOAD/constraints/nucleic_acid_sequence.enable.sql;

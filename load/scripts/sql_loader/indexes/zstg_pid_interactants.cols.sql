@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index ZSTG_PIDANTS_ROLE on ZSTG_PID_INTERACTANTS(ROLE) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;
 create index ZSTG_PIDANTS_PHYSICALEN on ZSTG_PID_INTERACTANTS(PHYSICALENTITY_ID) PARALLEL NOLOGGING tablespace CABIO_MAP_FUT;

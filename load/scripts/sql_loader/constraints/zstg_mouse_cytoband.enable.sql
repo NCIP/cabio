@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index MOUSE_CYT_ID_idx on ZSTG_MOUSE_CYTOBAND
 (ID) tablespace CABIO_MAP_FUT;
 alter table ZSTG_MOUSE_CYTOBAND enable constraint MOUSE_CYT_ID using index MOUSE_CYT_ID_idx;

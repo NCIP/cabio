@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create index biopath_idx on BIO_PATHWAYS(PATHWAY_DIAGRAM) tablespace cabio_fut;
 create index biopath_idx_lwr on BIO_PATHWAYS(lower(PATHWAY_DIAGRAM)) tablespace cabio_fut;
 

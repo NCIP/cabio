@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005223;
 alter table ZSTG_SNP_AFFY disable constraint SYS_C005224;

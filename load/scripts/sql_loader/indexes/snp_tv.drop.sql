@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 drop index SNP_TVP_TV_AMINO_ACID;
 drop index SNP_TVP_TV_DB_SNP_ID_LWR;

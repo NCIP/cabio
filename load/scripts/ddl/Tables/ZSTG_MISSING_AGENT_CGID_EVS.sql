@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 ALTER TABLE ZSTG_MISSING_AGENT_CGID_EVS
  DROP PRIMARY KEY CASCADE
 /

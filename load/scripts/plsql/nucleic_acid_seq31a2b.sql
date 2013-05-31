@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create or replace procedure NUCLEIC_ACID_SEQ31A2B_LD as
 
   cursor GTVCUR is

@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 create unique index SYS_C0021100_idx on GENE_ALIAS_OBJECT_TV
 (GENE_ID,NAME,ALIAS_TYPE,GENE_ALIAS_ID) tablespace CABIO_FUT;
 alter table GENE_ALIAS_OBJECT_TV enable constraint SYS_C0021100 using index SYS_C0021100_idx;

@@ -1,3 +1,9 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
 
 create index PHYSICALTION_MARKER_ID on PHYSICAL_LOCATION(MARKER_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;
 create index PHYSICALTION_CYTOBAND_I on PHYSICAL_LOCATION(CYTOBAND_ID) PARALLEL NOLOGGING tablespace CABIO_FUT;

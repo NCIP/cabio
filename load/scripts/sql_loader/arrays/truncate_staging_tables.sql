@@ -1,3 +1,10 @@
+/*L
+   Copyright SAIC
+
+   Distributed under the OSI-approved BSD 3-Clause License.
+   See http://ncip.github.com/cabio/LICENSE.txt for details.
+L*/
+
 -- Truncate all array staging tables.
 -- These tables will be loaded with SQL*Loader
 TRUNCATE TABLE ar_alignments REUSE STORAGE;
