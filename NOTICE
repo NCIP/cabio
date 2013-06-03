@@ -52,6 +52,9 @@ This project includes as sub-components other projects that are copyrighted by t
 12)dojo/cldr
    Copyright by UNICODE, INC
    http://www.unicode.org/copyright.html
+13)wwhelp (generated code)
+   Copyright by Quadralay Corporation
+   Distributed under BSD 3-Clause License
 
 
 ==================== Copyright notice by Joe Hewitt =========================
