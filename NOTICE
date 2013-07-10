@@ -4,20 +4,16 @@ Copyright (c) 2006, SAIC
 This project is distributed under the BSD 3-Clause License.
 Please see LICENSE file for details.
 
-
 This project was developed as part of the NCI caBIG initiative.
-
-The cancer Bioinformatics Infrastructure Objects (caBIO) model and architecture was the first model-driven information system built using caCORE, a synthesis of software, vocabulary, and metadata models for cancer research. Each of the caBIO domain objects represents an entity found in biomedical research such as Gene, Chromosome, Sequence, SNP, Library, Clone, and Pathway.
-
-The project was initially developed by Science Applications International Corporation ("SAIC") under funding from the CBIIT office of the National Cancer Institute.
 
 In 2013, as part of the National Cancer Informatics Program (NCIP) Open Development Initiative, 
 the caBIO source code was migrated to GitHub to allow further development by the broader community.
 
-This project includes as sub-components other projects that are copyrighted by third parties and that distributed under various licenses. Please find a summary in the list below:
+This project includes as sub-components other projects that are copyrighted by third parties and that distributed 
+under various licenses. Please find a summary in the list below:
 
 1) jquery.tooltip.js:
-   Copyright by Jörn Zaefferer, Stefan Petre
+   Copyright by Jï¿½rn Zaefferer, Stefan Petre
    Distributed under the MIT and GPL licenses
 2) jquery.bgiframe.js:
    Copyright by Brandon Aaron 
@@ -372,7 +368,7 @@ UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE TERMS AND CONDITIONS 
 AGREEMENT. IF YOU DO NOT AGREE, DO NOT DOWNLOAD, INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.
 
 COPYRIGHT AND PERMISSION NOTICE
-Copyright © 1991-2007 Unicode, Inc. All rights reserved. Distributed under the Terms of Use in http://www.unicode.org/copyright.html.
+Copyright ï¿½ 1991-2007 Unicode, Inc. All rights reserved. Distributed under the Terms of Use in http://www.unicode.org/copyright.html.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files and any associated
 documentation (the "Data Files") or Unicode software and any associated documentation (the "Software") to deal in the Data 
