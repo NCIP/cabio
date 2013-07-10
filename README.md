@@ -3,7 +3,7 @@ Welcome to the caBIO Project!
 
 The caBIO doman model and architecture is an effort to model the rapidly-changing genomics and proteomics domain and to integrate data from numerous sources providing a holistic view of the human and mouse genomes.
 
-The caBIO provides a variety of Application Programming Interfaces (APIs) as well as a web user interface called the caBIO Portlet. The system also provides a number of utilities to search for and manipulate data objects programmatically.
+caBIO provides a variety of Application Programming Interfaces (APIs) as well as a web user interface called the caBIO Portlet. The system also provides a number of utilities to search for and manipulate data objects programmatically.
 
 The caBIO is  written in Java using caGrid, caCORE CSM, caCORE SDK, Struts, Tiles, Hibernate, Spring Framework, Lucene technologies.
 
