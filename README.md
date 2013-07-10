@@ -1,5 +1,7 @@
 Welcome to the caBIO Project!
-=====================================The caBIO doman model and architecture is an effort to model the rapidly-changing genomics and proteomics domain and to integrate data from numerous sources providing a holistic view of the human and mouse genomes.
+=====================================
+
+The caBIO doman model and architecture is an effort to model the rapidly-changing genomics and proteomics domain and to integrate data from numerous sources providing a holistic view of the human and mouse genomes.
 
 The caBIO data can be accessed via a variety of Application Programming Interfaces (APIs) as well as a web user interface called the caBIO Portlet, which you can access through the caGrid Portal (for more information on the caGrid Portal, see http://cagridportal.nci.nih.gov/). The system also provides a number of utilities to search for and manipulate data objects programmatically.
 
