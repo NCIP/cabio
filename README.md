@@ -1,7 +1,5 @@
 Welcome to the caBIO Project!
-=====================================
-
-The cancer Bioinformatics Infrastructure Objects (caBIO) model and architecture was the first model-driven information system built using caCORE, a synthesis of software, vocabulary, and metadata models for cancer research. Each of the caBIO domain objects represents an entity found in biomedical research such as Gene, Chromosome, Sequence, SNP, Library, Clone, and Pathway. Examining the relationships between these objects can reveal biomedical knowledge that was previously buried in the various primary data sources. Given the dynamic nature of this information, the data in caBIO is updated on a monthly basis through a series of ETL (Extract, Transform, and Load) processes.
+=====================================The caBIO doman model and architecture is an effort to model the rapidly-changing genomics and proteomics domain and to integrate data from numerous sources providing a holistic view of the human and mouse genomes.
 
 The caBIO data can be accessed via a variety of Application Programming Interfaces (APIs) as well as a web user interface called the caBIO Portlet, which you can access through the caGrid Portal (for more information on the caGrid Portal, see http://cagridportal.nci.nih.gov/). The system also provides a number of utilities to search for and manipulate data objects programmatically.
 
