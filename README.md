@@ -7,6 +7,7 @@ The caBIO data can be accessed via a variety of Application Programming Interfac
 
 The caBIO system is primarily a repository of molecular biology data; the entities that concern the central dogma of molecular biology are the core of this model. Data for these classes come from a variety of sources. For a full list of primary data sources, see https://wiki.nci.nih.gov/display/ICR/caBIO+Data+Sources
 
+The caBIO is  written in Java using caGrid, caCORE CSM, caCORE SDK, Struts, Tiles, Hibernate, Spring Framework, Lucene technologies.
 
 The caBIO is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
@@ -22,7 +23,5 @@ You will find more details about the caBIO in the following links:
 
 Please join us in further developing and improving caBIO.
 
-# Prerequisites
- * Ant 1.7.x, Java 1.6.x, JBoss 5.1.x, Oracle 10.2.x
- 
+
  
