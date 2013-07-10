@@ -6,12 +6,11 @@ Please see LICENSE file for details.
 
 This project was developed as part of the NCI caBIG initiative.
 
-The cancer Bioinformatics Infrastructure Objects (caBIO) model and architecture was the first model-driven information system built using caCORE, a synthesis of software, vocabulary, and metadata models for cancer research. Each of the caBIO domain objects represents an entity found in biomedical research such as Gene, Chromosome, Sequence, SNP, Library, Clone, and Pathway.
-
 In 2013, as part of the National Cancer Informatics Program (NCIP) Open Development Initiative, 
 the caBIO source code was migrated to GitHub to allow further development by the broader community.
 
-This project includes as sub-components other projects that are copyrighted by third parties and that distributed under various licenses. Please find a summary in the list below:
+This project includes as sub-components other projects that are copyrighted by third parties and that distributed 
+under various licenses. Please find a summary in the list below:
 
 1) jquery.tooltip.js:
    Copyright by J�rn Zaefferer, Stefan Petre
