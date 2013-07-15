@@ -1,7 +1,7 @@
 Welcome to the caBIO Project!
 =====================================
 
-The caBIO domain model and architecture is an effort to model the rapidly-changing genomics and proteomics domain and to integrate data from numerous sources providing a holistic view of the human and mouse genomes.
+The caBIO domain model and architecture models genomics and proteomics domain and integrates data from numerous sources providing a holistic view of the human and mouse genomes.
 
 caBIO provides a variety of Application Programming Interfaces (APIs) as well as a web user interface called the caBIO Portlet. The system also provides a number of utilities to search for and manipulate data objects programmatically.
 
