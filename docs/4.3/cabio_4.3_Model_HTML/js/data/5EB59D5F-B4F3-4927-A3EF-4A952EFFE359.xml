@@ -1,0 +1,3 @@
+tocTab[tocTab.length] = new Array("0.2.1.3:1", "", "Cytogenetic Locations", "EARoot/EA2/EA1/EA3/EA275.htm", "175.png", "149", "0", "", "Logical diagram0","{2C4B8AB0-168E-4dbb-97F5-59D312A3C1DF}");
+tocTab[tocTab.length] = new Array("0.2.1.3:2", "", "Physical Locations", "EARoot/EA2/EA1/EA3/EA277.htm", "175.png", "148", "0", "", "Logical diagram0","{19E7FA14-381E-4099-A5C7-A8FFA9122E0D}");
+tocTab[tocTab.length] = new Array("0.2.1.3:3", "", "Relative Locations of SNPs", "EARoot/EA2/EA1/EA3/EA279.htm", "175.png", "100", "0", "", "Logical diagram0","{EB01C1BC-645C-4a1c-819F-66FCACB936D6}");

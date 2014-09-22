@@ -1,0 +1,3 @@
+tocTab[tocTab.length] = new Array("0.2.1.4:1", "", "Disease Ontology", "EARoot/EA2/EA1/EA4/EA292.htm", "175.png", "84", "0", "", "Logical diagram0","{47C124E7-3B2A-4cd3-A215-21CDCE0AAFFF}");
+tocTab[tocTab.length] = new Array("0.2.1.4:2", "", "Gene Ontology", "EARoot/EA2/EA1/EA4/EA294.htm", "175.png", "80", "0", "", "Logical diagram0","{D31D6829-FA22-413b-8DA7-B3A9D6C5BFF4}");
+tocTab[tocTab.length] = new Array("0.2.1.4:3", "", "Organ Ontology", "EARoot/EA2/EA1/EA4/EA296.htm", "175.png", "87", "0", "", "Logical diagram0","{8771D665-F055-4a30-A073-94C1BADE2D09}");

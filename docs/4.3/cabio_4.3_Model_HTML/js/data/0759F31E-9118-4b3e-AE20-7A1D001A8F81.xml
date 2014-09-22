@@ -1,0 +1,2 @@
+tocTab[tocTab.length] = new Array("0.1", "1", "Data Model", "", "4.png", "", "", "{73208C4F-9FAB-4267-8A0C-BEB18923124C}", "Package");
+tocTab[tocTab.length] = new Array("0.2", "1", "Logical Model", "", "4.png", "", "", "{BC7FC9B2-F8D3-43e0-BA21-3B7CE72BD406}", "Package");

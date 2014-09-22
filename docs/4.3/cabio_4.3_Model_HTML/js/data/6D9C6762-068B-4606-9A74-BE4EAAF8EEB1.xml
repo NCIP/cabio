@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.2.1.1:1", "", "Cancer Gene Index", "EARoot/EA2/EA1/EA1/EA226.htm", "175.png", "152", "0", "", "Logical diagram0","{B3D39191-8461-46df-BDA2-4892662ABE73}");
+tocTab[tocTab.length] = new Array("0.2.1.1:2", "", "CGAP", "EARoot/EA2/EA1/EA1/EA228.htm", "175.png", "86", "0", "", "Logical diagram0","{9BF8540D-DBE6-4c18-824D-7FE0B4D69EB4}");
+tocTab[tocTab.length] = new Array("0.2.1.1:3", "", "DrugBank", "EARoot/EA2/EA1/EA1/EA230.htm", "175.png", "163", "0", "", "Logical diagram0","{BCEFCD40-C605-4083-9525-B95F9B0228CB}");
+tocTab[tocTab.length] = new Array("0.2.1.1:4", "", "Ensembl Compara", "EARoot/EA2/EA1/EA1/EA232.htm", "175.png", "162", "0", "", "Logical diagram0","{E3D522A6-3476-4d35-B691-0D15F82936E0}");
+tocTab[tocTab.length] = new Array("0.2.1.1:5", "", "Microarray Manufacturers", "EARoot/EA2/EA1/EA1/EA234.htm", "175.png", "143", "0", "", "Logical diagram0","{7754179B-3D79-4cac-8D88-5204941C4934}");
+tocTab[tocTab.length] = new Array("0.2.1.1:6", "", "PID", "EARoot/EA2/EA1/EA1/EA236.htm", "175.png", "158", "0", "", "Logical diagram0","{99013A8F-4CA1-47da-AB07-010104BD1A51}");

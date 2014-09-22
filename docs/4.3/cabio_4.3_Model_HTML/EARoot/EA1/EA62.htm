@@ -1,0 +1,946 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Data Model::NUCLEIC_ACID_SEQUENCE</title>
+<link href="../../css/ea.css" rel="stylesheet" type="text/css" />
+<script>
+function initPage(src) {	
+	if(parent==this&&(this.location+"").indexOf('EARoot')!=-1)
+		document.location=(this.location+"").substring(0,(this.location+"").indexOf('EARoot'))+"index"+(this.location+"").substring((this.location+"").lastIndexOf('.'))+"?goto="+((this.location+"").substring((this.location+"").indexOf('EARoot')+7,(this.location+"").lastIndexOf('.')).replace(/\//g,':').replace(/EA/g,""));
+	else
+		parent.initPage(src);
+}
+
+function nameClassifier(name, separator)
+{
+  var str = name;
+  var classifierName;
+  var node = document.getElementById('name_classifier');
+  if(node != null)
+  {
+    classifierName = node.innerHTML;
+  }
+  if(classifierName != "")
+  {
+   str += separator + classifierName;
+  }
+  
+  return str;
+}
+</script>
+</head>
+<body onload="initPage(this);" class="Content">
+<div class="pageHeader"></div>
+<div class="PageBody">
+	<div id="name_classifier" style="display: none;"></div>
+	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("NUCLEIC_ACID_SEQUENCE", " : "))</script>  : Public  &lt;&lt;table&gt;&gt; Class</span>
+	<table border="0" cellpadding="0" cellspacing="0" class="ObjectDetails">
+		<tr>
+			<td width="15%" class="ObjectDetailsTopic">Created:</td>
+			<td width="85%" class="ObjectDetailsValue">10/20/2004 12:12:05 PM</td>
+		</tr>
+		<tr>
+			<td class="ObjectDetailsTopic">Modified:</td>
+			<td class="ObjectDetailsValue">12/20/2005 10:01:28 AM</td>
+		</tr>
+		<tr style="height: 10px"><td colspan="2"></td></tr>
+		<tr>
+			<td class="ObjectDetailsTopic"><img src="../../images/plus03.gif" align="absmiddle" id="proj" onclick="parent.toggleData(this.id)" />Project:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj00" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Author:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj01" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Version:</td>
+			<td class="ObjectDetailsValue">1.0</td>
+		</tr>
+		<tr id="proj02" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Phase:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj03" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Status:</td>
+			<td class="ObjectDetailsValue">Proposed</td>
+		</tr>
+		<tr id="proj04" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Complexity:</td>
+			<td class="ObjectDetailsValue">Medium</td>
+		</tr>
+		<tr id="proj05" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Difficulty:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj06" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Priority:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj05" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Multiplicity:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr>
+			<td class="ObjectDetailsTopic"><img src="../../images/plus03.gif" align="absmiddle" id="adv" onclick="parent.toggleData(this.id)" />Advanced:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="adv00" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">UUID:</td>
+			<td class="ObjectDetailsValue">{04BEB7DA-89CA-4c72-8C48-05D6ABA0DA77}</td>
+		</tr>
+		<tr id="adv01" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Appears In:</td>
+			<td class="ObjectDetailsValue"><a href="./EA1/EA127.htm">Data Model</a>, <a href="./EA1/EA159.htm">Mapping</a>, <a href="./EA1/EA123.htm">Clone</a>, <a href="./EA1/EA139.htm">Gene</a>, <a href="./EA1/EA145.htm">GeneSequence</a>, <a href="./EA1/EA181.htm">SNP-Gene-Location</a>, <a href="./EA1/EA125.htm">Cytoband</a>, <a href="./EA1/EA157.htm">Location</a>, <a href="./EA1/EA129.htm">DatabaseCrossReference</a>, <a href="./EA1/EA167.htm">NucleicAcidSequence</a>, <a href="./EA1/EA117.htm">Arrays</a>, <a href="./EA1/EA163.htm">MessengerRNAModel</a></td>
+		</tr>
+	</table>
+	
+	<div class="TableGroup" id="TableGroup">
+		<ul class="ItemTitle">
+			<li onClick="parent.toggleItem('Attributes');" id="AttributesTitle">Attributes</li>
+			<li onClick="parent.toggleItem('Operations');" id="OperationsTitle">Operations</li>
+			<li onClick="parent.toggleItem('AssociationsTo');" id="AssociationsToTitle">Associations To</li>
+			<li onClick="parent.toggleItem('AssociationsFrom');" id="AssociationsFromTitle">Associations From</li>
+			<li onClick="parent.toggleItem('TaggedVal');" id="TaggedValTitle">Tagged Values</li>
+			<li onClick="parent.toggleItem('Links');" id="LinksTitle">Other Links</li>
+		</ul>
+<div class="ItemBody" id="AttributesTable">
+	<table border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="100%" class="TableHeading">Attribute</td>
+		</tr>
+						<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;ID</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes895')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes895" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes895_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes895_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes895_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes895_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td>Ordered <br /></td>
+						</tr>
+						<tr id="DetailsImageAttributes895_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={6DAFC2C1-6553-493b-B105-5F3053D38BC2}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.id<br>ordered=0<br>position=0<br>precision=0<br>rose_uuid=40574E8601D0<br>scale=0<br>type=BIGINT<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(50)</i><br /><strong>&nbsp;&nbsp;ACCESSION_NUMBER</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes896')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes896" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes896_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes896_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes896_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes896_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes896_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={4F1B03C8-CC5E-4a17-967E-98A3E8707396}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.accessionNumber<br>ordered=0<br>position=1<br>precision=0<br>rose_uuid=40574E8601DA<br>scale=0<br>type=VARCHAR<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(50)</i><br /><strong>&nbsp;&nbsp;VERSION</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes897')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes897" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes897_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes897_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes897_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes897_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes897_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={9D0A04C2-5427-4b05-847D-ADF66030D0E1}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.accessionNumberVersion<br>ordered=0<br>position=2<br>precision=0<br>rose_uuid=40574E8601E4<br>scale=0<br>type=VARCHAR<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(50)</i><br /><strong>&nbsp;&nbsp;SEQUENCE_TYPE</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes898')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes898" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes898_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes898_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes898_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes898_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes898_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={5424918E-2793-4700-8932-147DF3F9F71E}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.type<br>ordered=0<br>position=7<br>precision=0<br>rose_uuid=40574E86020C<br>scale=0<br>type=BIGINT<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;CLONE_ID</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes899')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes899" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes899_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes899_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes899_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes899_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes899_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					implements-association=gov.nih.nci.cabio.domain.NucleicAcidSequence.clone<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public CLOB</i><br /><strong>&nbsp;&nbsp;VALUE</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes900')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes900" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes900_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes900_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes900_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes900_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes900_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.value<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;LENGTH</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes901')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes901" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes901_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes901_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes901_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes901_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes901_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.length<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(1000)</i><br /><strong>&nbsp;&nbsp;DESCRIPTION</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes902')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes902" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes902_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes902_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes902_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes902_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes902_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.description<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(512)</i><br /><strong>&nbsp;&nbsp;BIG_ID</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes903')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes903" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes903_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes903_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes903_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes903_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes903_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					mapped-attributes=gov.nih.nci.cabio.domain.NucleicAcidSequence.bigid<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(50)</i><br /><strong>&nbsp;&nbsp;DISCRIMINATOR</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes904')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes904" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes904_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes904_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes904_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes904_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes904_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					discriminator=gov.nih.nci.cabio.domain.NucleicAcidSequence<br>
+						&nbsp;
+						
+				</td>
+			</tr>
+	</table>
+</div>
+<div class="ItemBody" id="OperationsTable">
+	<table border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="100%" class="TableHeading">Operation</td>
+		</tr>
+						<tr>
+				<td width="100%" class="TableRow">
+					<i>Public</i><br />
+					<strong>FK_GENE_SEQUENCE_OBJE_CLONE_TV</strong>(					<a href="#" onclick="parent.toggleData('param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}')" style="text-decoration: none; color: #000000;"><img src="../../images/plus03.gif" align="absmiddle" id="param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}" border="0" />CLONE_ID: NUMBER</a>, 
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+						<tr id="param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}00" style="display: none;">
+							<td width="50"><strong>Default:</strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}01" style="display: none;">
+							<td width="50"><strong>Kind:</strong></td>
+							<td>in</td>
+						</tr>
+						<tr id="param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}02" style="display: none;">
+							<td width="50"><strong>Stereotype: </strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{C233EA02-F4F7-495f-913F-FFC14FA7D8A7}03" style="display: none;">
+							<td width="50"></td>
+							<td></td>
+						</tr>
+					</table>
+):
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageOperations905" onclick="parent.toggleDiv('detailsDIVOperations905','DetailsImageOperations905')" />Details:
+						<div id="detailsDIVOperations905" class="DetailsDiv" >
+					<i> &lt;&lt;FK&gt;&gt; </i>
+					<table>
+						<tr>
+							<td valign = "top"><i></i><span style="margin-left: .7cm;"> </span></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					
+					
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public</i><br />
+					<strong>PK_GENE_SEQUENCE_OBJECT</strong>(					<a href="#" onclick="parent.toggleData('param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}')" style="text-decoration: none; color: #000000;"><img src="../../images/plus03.gif" align="absmiddle" id="param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}" border="0" />ID: NUMBER</a>, 
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+						<tr id="param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}00" style="display: none;">
+							<td width="50"><strong>Default:</strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}01" style="display: none;">
+							<td width="50"><strong>Kind:</strong></td>
+							<td>in</td>
+						</tr>
+						<tr id="param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}02" style="display: none;">
+							<td width="50"><strong>Stereotype: </strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{6EABC5FA-14DB-4795-80EF-1394AF0240AF}03" style="display: none;">
+							<td width="50"></td>
+							<td></td>
+						</tr>
+					</table>
+):
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageOperations906" onclick="parent.toggleDiv('detailsDIVOperations906','DetailsImageOperations906')" />Details:
+						<div id="detailsDIVOperations906" class="DetailsDiv" >
+					<i> &lt;&lt;PK&gt;&gt; </i>
+					<table>
+						<tr>
+							<td valign = "top"><i></i><span style="margin-left: .7cm;"> </span></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					
+					
+						</div>
+					</div>
+				</td>
+			</tr>
+
+		</table>
+</div>		<div class="ItemBody" id="AssociationsToTable">
+			<table border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="40%" class="TableHeading">Element</td>
+					<td width="30%" class="TableHeading">Source Role</td>
+					<td width="30%" class="TableHeading">Target Role</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA15.htm">«Table» CLONE_TV</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_GENE_SEQUENCE_OBJE_CLONE_TV<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_CLONE<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink907" onclick="parent.toggleDiv('detailsDIVLink907','DetailsImageLink907')" />Details:
+							<div id="detailsDIVLink907" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+		<div class="ItemBody" id="AssociationsFromTable">
+			<table border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="40%" class="TableHeading">Element</td>
+					<td width="30%" class="TableHeading">Source Role</td>
+					<td width="30%" class="TableHeading">Target Role</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA9.htm">«Table» ARRAY_REPORTER_CH</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_REPORTER_NAS<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_SEQUENCE<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink908" onclick="parent.toggleDiv('detailsDIVLink908','DetailsImageLink908')" />Details:
+							<div id="detailsDIVLink908" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA53.htm">«Table» LOCATION_CH_43</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_NEW_LOCATION__NUCLEIC_ACID_<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GENE_SEQUENCE_OBJECT<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink909" onclick="parent.toggleDiv('detailsDIVLink909','DetailsImageLink909')" />Details:
+							<div id="detailsDIVLink909" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA33.htm">«Table» GENE_NUCLEIC_ACID_SEQUENCE</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_GENE_NUCLEIC__NUCLEIC_ACID_<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GENE_SEQUENCE_OBJECT<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink910" onclick="parent.toggleDiv('detailsDIVLink910','DetailsImageLink910')" />Details:
+							<div id="detailsDIVLink910" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA18.htm">«Table» DATABASE_CROSS_REFERENCE</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_DATABASE_CROS_NUCLEIC_ACID<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GENE_SEQUENCE_OBJECT<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink911" onclick="parent.toggleDiv('detailsDIVLink911','DetailsImageLink911')" />Details:
+							<div id="detailsDIVLink911" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA13.htm">«Table» CLONE_RELATIVE_LOCATION</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_CLONE_RELATIV_NUCLEIC_ACID_<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GENE_SEQUENCE_OBJECT<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink912" onclick="parent.toggleDiv('detailsDIVLink912','DetailsImageLink912')" />Details:
+							<div id="detailsDIVLink912" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA72.htm">«Table» PID_ENTITY_SEQUENCE</a><br />
+						Class &nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> &nbsp;<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> &nbsp;<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink913" onclick="parent.toggleDiv('detailsDIVLink913','DetailsImageLink913')" />Details:
+							<div id="detailsDIVLink913" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+<div class="ItemBody" id="TaggedValTable">
+	<table align="center" border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="50%" class="TableHeading">Tag</td>
+			<td width="50%" class="TableHeading">Value</td>
+		</tr>
+					<tr>
+				<td width="50%" class="TableRow" valign="top">date_created</td>
+				<td width="50%" class="TableRow" valign="top">2004-10-20 10:54:24</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario914" onclick="parent.toggleDiv('detailsDIVScenario914','DetailsImageScenario914')" />Details:
+						<div id="detailsDIVScenario914" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">date_modified</td>
+				<td width="50%" class="TableRow" valign="top">2004-10-20 10:54:24</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario915" onclick="parent.toggleDiv('detailsDIVScenario915','DetailsImageScenario915')" />Details:
+						<div id="detailsDIVScenario915" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">ea_ntype</td>
+				<td width="50%" class="TableRow" valign="top">0</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario916" onclick="parent.toggleDiv('detailsDIVScenario916','DetailsImageScenario916')" />Details:
+						<div id="detailsDIVScenario916" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">ea_stype</td>
+				<td width="50%" class="TableRow" valign="top">Class</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario917" onclick="parent.toggleDiv('detailsDIVScenario917','DetailsImageScenario917')" />Details:
+						<div id="detailsDIVScenario917" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">isSpecification</td>
+				<td width="50%" class="TableRow" valign="top">false</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario918" onclick="parent.toggleDiv('detailsDIVScenario918','DetailsImageScenario918')" />Details:
+						<div id="detailsDIVScenario918" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">package</td>
+				<td width="50%" class="TableRow" valign="top">EAPK_F6F4DF48_DB69_450b_9CB9_5D4FBBB3E75B</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario919" onclick="parent.toggleDiv('detailsDIVScenario919','DetailsImageScenario919')" />Details:
+						<div id="detailsDIVScenario919" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">package_name</td>
+				<td width="50%" class="TableRow" valign="top">CABIO</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario920" onclick="parent.toggleDiv('detailsDIVScenario920','DetailsImageScenario920')" />Details:
+						<div id="detailsDIVScenario920" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">persistence</td>
+				<td width="50%" class="TableRow" valign="top">transient</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario921" onclick="parent.toggleDiv('detailsDIVScenario921','DetailsImageScenario921')" />Details:
+						<div id="detailsDIVScenario921" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">rose_uuid</td>
+				<td width="50%" class="TableRow" valign="top">40574E70001F</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario922" onclick="parent.toggleDiv('detailsDIVScenario922','DetailsImageScenario922')" />Details:
+						<div id="detailsDIVScenario922" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">rose_uuid</td>
+				<td width="50%" class="TableRow" valign="top">40574E70001F</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario923" onclick="parent.toggleDiv('detailsDIVScenario923','DetailsImageScenario923')" />Details:
+						<div id="detailsDIVScenario923" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">stereotype</td>
+				<td width="50%" class="TableRow" valign="top">Table</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario924" onclick="parent.toggleDiv('detailsDIVScenario924','DetailsImageScenario924')" />Details:
+						<div id="detailsDIVScenario924" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">style</td>
+				<td width="50%" class="TableRow" valign="top">BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario925" onclick="parent.toggleDiv('detailsDIVScenario925','DetailsImageScenario925')" />Details:
+						<div id="detailsDIVScenario925" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">tagged</td>
+				<td width="50%" class="TableRow" valign="top">0</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario926" onclick="parent.toggleDiv('detailsDIVScenario926','DetailsImageScenario926')" />Details:
+						<div id="detailsDIVScenario926" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>
+	</table>
+</div>		<div class="ItemBody" id="LinksTable">
+			<table align="center" border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="30%" class="TableHeading">Object</td>
+					<td width="15%" class="TableHeading">Type</td>
+					<td width="15%" class="TableHeading">Connection</td>
+					<td width="40%" class="TableHeading">Notes</td>
+				</tr>
+				<tr>
+					<td width="30%" class="TableRow" valign="top"><a href="../EA2/EA2/EA1/EA1/EA1/EA1/EA354.htm">MessengerRNA</a></td>
+					<td width="15%" class="TableRow" valign="top">Class</td>
+					<td width="15%" class="TableRow" valign="top">Dependency</td>
+					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="30%" class="TableRow" valign="top"><a href="../EA2/EA2/EA1/EA1/EA1/EA1/EA334.htm">ExpressedSequenceTag</a></td>
+					<td width="15%" class="TableRow" valign="top">Class</td>
+					<td width="15%" class="TableRow" valign="top">Dependency</td>
+					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="30%" class="TableRow" valign="top"><a href="../EA2/EA2/EA1/EA1/EA1/EA1/EA357.htm">NucleicAcidSequence</a></td>
+					<td width="15%" class="TableRow" valign="top">Class</td>
+					<td width="15%" class="TableRow" valign="top">Dependency</td>
+					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+<div class="pageFooter"></div>
+ 
+</body>
+</html>

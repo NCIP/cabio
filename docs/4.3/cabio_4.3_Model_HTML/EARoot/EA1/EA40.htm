@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Data Model::GO_ONTOLOGY</title>
+<link href="../../css/ea.css" rel="stylesheet" type="text/css" />
+<script>
+function initPage(src) {	
+	if(parent==this&&(this.location+"").indexOf('EARoot')!=-1)
+		document.location=(this.location+"").substring(0,(this.location+"").indexOf('EARoot'))+"index"+(this.location+"").substring((this.location+"").lastIndexOf('.'))+"?goto="+((this.location+"").substring((this.location+"").indexOf('EARoot')+7,(this.location+"").lastIndexOf('.')).replace(/\//g,':').replace(/EA/g,""));
+	else
+		parent.initPage(src);
+}
+
+function nameClassifier(name, separator)
+{
+  var str = name;
+  var classifierName;
+  var node = document.getElementById('name_classifier');
+  if(node != null)
+  {
+    classifierName = node.innerHTML;
+  }
+  if(classifierName != "")
+  {
+   str += separator + classifierName;
+  }
+  
+  return str;
+}
+</script>
+</head>
+<body onload="initPage(this);" class="Content">
+<div class="pageHeader"></div>
+<div class="PageBody">
+	<div id="name_classifier" style="display: none;"></div>
+	<span class="ObjectTitle"><script type="text/javascript">document.write(nameClassifier("GO_ONTOLOGY", " : "))</script>  : Public  &lt;&lt;table&gt;&gt; Class</span>
+	<table border="0" cellpadding="0" cellspacing="0" class="ObjectDetails">
+		<tr>
+			<td width="15%" class="ObjectDetailsTopic">Created:</td>
+			<td width="85%" class="ObjectDetailsValue">10/20/2004 12:12:05 PM</td>
+		</tr>
+		<tr>
+			<td class="ObjectDetailsTopic">Modified:</td>
+			<td class="ObjectDetailsValue">12/20/2005 10:01:25 AM</td>
+		</tr>
+		<tr style="height: 10px"><td colspan="2"></td></tr>
+		<tr>
+			<td class="ObjectDetailsTopic"><img src="../../images/plus03.gif" align="absmiddle" id="proj" onclick="parent.toggleData(this.id)" />Project:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj00" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Author:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj01" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Version:</td>
+			<td class="ObjectDetailsValue">1.0</td>
+		</tr>
+		<tr id="proj02" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Phase:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj03" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Status:</td>
+			<td class="ObjectDetailsValue">Proposed</td>
+		</tr>
+		<tr id="proj04" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Complexity:</td>
+			<td class="ObjectDetailsValue">Medium</td>
+		</tr>
+		<tr id="proj05" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Difficulty:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj06" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Priority:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="proj05" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Multiplicity:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr>
+			<td class="ObjectDetailsTopic"><img src="../../images/plus03.gif" align="absmiddle" id="adv" onclick="parent.toggleData(this.id)" />Advanced:</td>
+			<td class="ObjectDetailsValue"></td>
+		</tr>
+		<tr id="adv00" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">UUID:</td>
+			<td class="ObjectDetailsValue">{36396B99-7512-40b4-A01E-B715D0722345}</td>
+		</tr>
+		<tr id="adv01" style="display: none;">
+			<td class="ObjectDetailsTopic" style="padding-left: 18px;">Appears In:</td>
+			<td class="ObjectDetailsValue"><a href="./EA1/EA127.htm">Data Model</a>, <a href="./EA1/EA159.htm">Mapping</a>, <a href="./EA1/EA139.htm">Gene</a>, <a href="./EA1/EA147.htm">GoOntology</a></td>
+		</tr>
+	</table>
+	
+	<div class="TableGroup" id="TableGroup">
+		<ul class="ItemTitle">
+			<li onClick="parent.toggleItem('Attributes');" id="AttributesTitle">Attributes</li>
+			<li onClick="parent.toggleItem('Operations');" id="OperationsTitle">Operations</li>
+			<li onClick="parent.toggleItem('AssociationsFrom');" id="AssociationsFromTitle">Associations From</li>
+			<li onClick="parent.toggleItem('TaggedVal');" id="TaggedValTitle">Tagged Values</li>
+			<li onClick="parent.toggleItem('Links');" id="LinksTitle">Other Links</li>
+		</ul>
+<div class="ItemBody" id="AttributesTable">
+	<table border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="100%" class="TableHeading">Attribute</td>
+		</tr>
+						<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;GO_ID</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes534')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes534" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes534_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes534_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes534_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes534_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td>Ordered <br /></td>
+						</tr>
+						<tr id="DetailsImageAttributes534_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={C01BFE44-405F-4950-8C4F-84AEC323A40A}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.GeneOntology.id<br>ordered=0<br>position=0<br>precision=0<br>rose_uuid=40574E8502B5<br>scale=0<br>type=BIGINT<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;MM_GENES</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes535')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes535" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes535_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes535_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes535_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes535_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes535_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={3FED38A4-A970-4526-972A-755E5E0229F3}<br>length=0<br>lowerBound=1<br>ordered=0<br>position=1<br>precision=0<br>rose_uuid=40574E8502C0<br>scale=0<br>type=BIGINT<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public NUMBER(0)</i><br /><strong>&nbsp;&nbsp;HS_GENES</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes536')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes536" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes536_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes536_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes536_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes536_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes536_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={C74534AB-A0EF-43b0-B0F2-2516477AD379}<br>length=0<br>lowerBound=1<br>ordered=0<br>position=2<br>precision=0<br>rose_uuid=40574E8502C9<br>scale=0<br>type=BIGINT<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR(0)</i><br /><strong>&nbsp;&nbsp;GO_NAME</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes537')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes537" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes537_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes537_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes537_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes537_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes537_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					collection=false<br>ea_guid={D42551A0-9996-48d1-AE4C-FA83FD79CB6C}<br>length=0<br>lowerBound=1<br>mapped-attributes=gov.nih.nci.cabio.domain.GeneOntology.name<br>ordered=0<br>position=3<br>precision=0<br>rose_uuid=40574E8502D3<br>scale=0<br>type=VARCHAR<br>upperBound=1<br>
+						&nbsp;
+						
+				</td>
+			</tr>			<tr>
+				<td width="100%" class="TableRow">
+					<i>Public VARCHAR2(512)</i><br /><strong>&nbsp;&nbsp;BIG_ID</strong>
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">										
+					<a href="#" onclick="parent.toggleData('DetailsImageAttributes538')" style="text-decoration: none; color: #000000;"></BR><img src="../../images/plus03.gif" align="absmiddle" id="DetailsImageAttributes538" border="0" />Details:
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+					
+						<tr id="DetailsImageAttributes538_00" style="display: none;">
+							<td width="75"><i>Alias:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes538_01" style="display: none;">
+							<td width="75"><i>Initial:</i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes538_02" style="display: none;">
+							<td width="75"><i>Stereotype: </i></td>
+							<td>&lt;&lt;column&gt;&gt;</td>
+						</tr>
+						<tr id="DetailsImageAttributes538_03" style="display: none;">
+							<td width="75"><i>Ordered: </i></td>
+							<td></td>
+						</tr>
+						<tr id="DetailsImageAttributes538_03" style="display: none;">
+							<td width="75"><i>Range: </i></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					mapped-attributes=gov.nih.nci.cabio.domain.GeneOntology.bigid<br>
+						&nbsp;
+						
+				</td>
+			</tr>
+	</table>
+</div>
+<div class="ItemBody" id="OperationsTable">
+	<table border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="100%" class="TableHeading">Operation</td>
+		</tr>
+						<tr>
+				<td width="100%" class="TableRow">
+					<i>Public</i><br />
+					<strong>PK_GO_ONTOLOGY</strong>(					<a href="#" onclick="parent.toggleData('param{2DFC146B-9D35-4f84-8E31-798E31B6049F}')" style="text-decoration: none; color: #000000;"><img src="../../images/plus03.gif" align="absmiddle" id="param{2DFC146B-9D35-4f84-8E31-798E31B6049F}" border="0" />GO_ID: NUMBER</a>, 
+					<table border="0" cellspacing="0" cellpadding="0" class="Table" style="padding: 4px 18px;">
+						<tr id="param{2DFC146B-9D35-4f84-8E31-798E31B6049F}00" style="display: none;">
+							<td width="50"><strong>Default:</strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{2DFC146B-9D35-4f84-8E31-798E31B6049F}01" style="display: none;">
+							<td width="50"><strong>Kind:</strong></td>
+							<td>in</td>
+						</tr>
+						<tr id="param{2DFC146B-9D35-4f84-8E31-798E31B6049F}02" style="display: none;">
+							<td width="50"><strong>Stereotype: </strong></td>
+							<td></td>
+						</tr>
+						<tr id="param{2DFC146B-9D35-4f84-8E31-798E31B6049F}03" style="display: none;">
+							<td width="50"></td>
+							<td></td>
+						</tr>
+					</table>
+):
+				</td>
+			</tr>
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="1">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageOperations539" onclick="parent.toggleDiv('detailsDIVOperations539','DetailsImageOperations539')" />Details:
+						<div id="detailsDIVOperations539" class="DetailsDiv" >
+					<i> &lt;&lt;PK&gt;&gt; </i>
+					<table>
+						<tr>
+							<td valign = "top"><i></i><span style="margin-left: .7cm;"> </span></td>
+							<td></td>
+						</tr>
+					</table>
+					
+					
+					
+						</div>
+					</div>
+				</td>
+			</tr>
+
+		</table>
+</div>		<div class="ItemBody" id="AssociationsFromTable">
+			<table border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="40%" class="TableHeading">Element</td>
+					<td width="30%" class="TableHeading">Source Role</td>
+					<td width="30%" class="TableHeading">Target Role</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA41.htm">«Table» GO_RELATIONSHIP</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> childRelationshipCollection<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> parentGoOntology<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink540" onclick="parent.toggleDiv('detailsDIVLink540','DetailsImageLink540')" />Details:
+							<div id="detailsDIVLink540" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA39.htm">«Table» GO_GENES</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_GO_GENES_GO_ONTOLOGY<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GO_ONTOLOGY<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink541" onclick="parent.toggleDiv('detailsDIVLink541','DetailsImageLink541')" />Details:
+							<div id="detailsDIVLink541" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA41.htm">«Table» GO_RELATIONSHIP</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> parentRelationshipCollection<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> childGoOntology<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink542" onclick="parent.toggleDiv('detailsDIVLink542','DetailsImageLink542')" />Details:
+							<div id="detailsDIVLink542" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA38.htm">«Table» GO_CLOSURE</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_GO_ONTOLOGY<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GO_ONTOLOGY<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink543" onclick="parent.toggleDiv('detailsDIVLink543','DetailsImageLink543')" />Details:
+							<div id="detailsDIVLink543" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td width="40%" class="TableRow" valign="top">
+						<a href="EA38.htm">«Table» GO_CLOSURE</a><br />
+						Class «FK» 
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> FK_GO_CLOSURE_GO_ONTOLOGY<br />
+						&nbsp;
+					</td>
+					<td width="30%" class="TableRow" valign="top">
+						<strong>Name:</strong> PK_GO_ONTOLOGY<br />
+						&nbsp;	
+					</td>
+				</tr>
+				<tr>
+					<td class="TableRowBottomDashed"  colspan="3">
+						<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageLink544" onclick="parent.toggleDiv('detailsDIVLink544','DetailsImageLink544')" />Details:
+							<div id="detailsDIVLink544" class="DetailsDiv" >
+							&nbsp;
+							</div>
+						</div>
+					</td>
+				</tr>
+
+			</table>
+		</div>
+<div class="ItemBody" id="TaggedValTable">
+	<table align="center" border="0" cellspacing="0" cellpadding="0" class="Table">
+		<tr>
+			<td width="50%" class="TableHeading">Tag</td>
+			<td width="50%" class="TableHeading">Value</td>
+		</tr>
+					<tr>
+				<td width="50%" class="TableRow" valign="top">date_created</td>
+				<td width="50%" class="TableRow" valign="top">2004-10-20 10:54:23</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario545" onclick="parent.toggleDiv('detailsDIVScenario545','DetailsImageScenario545')" />Details:
+						<div id="detailsDIVScenario545" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">date_modified</td>
+				<td width="50%" class="TableRow" valign="top">2004-10-20 10:54:23</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario546" onclick="parent.toggleDiv('detailsDIVScenario546','DetailsImageScenario546')" />Details:
+						<div id="detailsDIVScenario546" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">ea_ntype</td>
+				<td width="50%" class="TableRow" valign="top">0</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario547" onclick="parent.toggleDiv('detailsDIVScenario547','DetailsImageScenario547')" />Details:
+						<div id="detailsDIVScenario547" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">ea_stype</td>
+				<td width="50%" class="TableRow" valign="top">Class</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario548" onclick="parent.toggleDiv('detailsDIVScenario548','DetailsImageScenario548')" />Details:
+						<div id="detailsDIVScenario548" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">isSpecification</td>
+				<td width="50%" class="TableRow" valign="top">false</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario549" onclick="parent.toggleDiv('detailsDIVScenario549','DetailsImageScenario549')" />Details:
+						<div id="detailsDIVScenario549" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">package</td>
+				<td width="50%" class="TableRow" valign="top">EAPK_F6F4DF48_DB69_450b_9CB9_5D4FBBB3E75B</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario550" onclick="parent.toggleDiv('detailsDIVScenario550','DetailsImageScenario550')" />Details:
+						<div id="detailsDIVScenario550" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">package_name</td>
+				<td width="50%" class="TableRow" valign="top">CABIO</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario551" onclick="parent.toggleDiv('detailsDIVScenario551','DetailsImageScenario551')" />Details:
+						<div id="detailsDIVScenario551" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">persistence</td>
+				<td width="50%" class="TableRow" valign="top">transient</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario552" onclick="parent.toggleDiv('detailsDIVScenario552','DetailsImageScenario552')" />Details:
+						<div id="detailsDIVScenario552" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">rose_uuid</td>
+				<td width="50%" class="TableRow" valign="top">40574E6F03B8</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario553" onclick="parent.toggleDiv('detailsDIVScenario553','DetailsImageScenario553')" />Details:
+						<div id="detailsDIVScenario553" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">rose_uuid</td>
+				<td width="50%" class="TableRow" valign="top">40574E6F03B8</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario554" onclick="parent.toggleDiv('detailsDIVScenario554','DetailsImageScenario554')" />Details:
+						<div id="detailsDIVScenario554" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">stereotype</td>
+				<td width="50%" class="TableRow" valign="top">Table</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario555" onclick="parent.toggleDiv('detailsDIVScenario555','DetailsImageScenario555')" />Details:
+						<div id="detailsDIVScenario555" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">style</td>
+				<td width="50%" class="TableRow" valign="top">BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=0;HSwimLanes=0;BorderStyle=0;</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario556" onclick="parent.toggleDiv('detailsDIVScenario556','DetailsImageScenario556')" />Details:
+						<div id="detailsDIVScenario556" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>			<tr>
+				<td width="50%" class="TableRow" valign="top">tagged</td>
+				<td width="50%" class="TableRow" valign="top">0</td>
+			</tr>	
+			<tr>
+				<td class="TableRowBottomDashed"  colspan="2">
+					<div class="DetailsDivParent"><img src="../../images/minus03.gif" align="absmiddle" id="DetailsImageScenario557" onclick="parent.toggleDiv('detailsDIVScenario557','DetailsImageScenario557')" />Details:
+						<div id="detailsDIVScenario557" class="DetailsDiv" >
+						&nbsp;
+						</div>
+					</div>
+				</td>
+			</tr>
+	</table>
+</div>		<div class="ItemBody" id="LinksTable">
+			<table align="center" border="0" cellspacing="0" cellpadding="0" class="Table">
+				<tr>
+					<td width="30%" class="TableHeading">Object</td>
+					<td width="15%" class="TableHeading">Type</td>
+					<td width="15%" class="TableHeading">Connection</td>
+					<td width="40%" class="TableHeading">Notes</td>
+				</tr>
+				<tr>
+					<td width="30%" class="TableRow" valign="top"><a href="../EA2/EA2/EA1/EA1/EA1/EA1/EA342.htm">GeneOntology</a></td>
+					<td width="15%" class="TableRow" valign="top">Class</td>
+					<td width="15%" class="TableRow" valign="top">Dependency</td>
+					<td width="40%" class="TableRow" valign="top">&nbsp;</td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+<div class="pageFooter"></div>
+ 
+</body>
+</html>

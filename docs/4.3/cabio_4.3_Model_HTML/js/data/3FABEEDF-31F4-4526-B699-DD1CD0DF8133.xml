@@ -1,0 +1,6 @@
+tocTab[tocTab.length] = new Array("0.2.4:1", "", "«CADSR Value Domain» AgentAliasType", "EARoot/EA2/EA4/EA430.htm", "5.png", "690", "0", "", "Class0","{13726145-237A-4bdd-AE24-FE2742120CB6}");
+tocTab[tocTab.length] = new Array("0.2.4:2", "", "«CADSR Value Domain» CodingStatus", "EARoot/EA2/EA4/EA431.htm", "5.png", "585", "0", "", "Class0","{331F1503-B60A-429d-AB78-6D457FF1BE9B}");
+tocTab[tocTab.length] = new Array("0.2.4:3", "", "«CADSR Value Domain» GeneFeatureType", "EARoot/EA2/EA4/EA432.htm", "5.png", "618", "0", "", "Class0","{30A5DC3C-4D1E-46a9-8ABD-451F4C2CA070}");
+tocTab[tocTab.length] = new Array("0.2.4:4", "", "«CADSR Value Domain» GeneticMarkerType", "EARoot/EA2/EA4/EA433.htm", "5.png", "615", "0", "", "Class0","{A6B687A3-011B-453a-AA25-BE8D678B5953}");
+tocTab[tocTab.length] = new Array("0.2.4:5", "", "«CADSR Value Domain» GenomicOrientation", "EARoot/EA2/EA4/EA434.htm", "5.png", "582", "0", "", "Class0","{A6876B05-9A61-4f34-9F77-D2A52B02F20C}");
+tocTab[tocTab.length] = new Array("0.2.4:6", "", "«CADSR Value Domain» MarkerRelativeLocationType", "EARoot/EA2/EA4/EA435.htm", "5.png", "584", "0", "", "Class0","{FE9C7457-0062-46fc-830F-7F6DD3F6B129}");
