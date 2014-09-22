@@ -1,8 +1,0 @@
-<!--L
-   Copyright SAIC
-
-   Distributed under the OSI-approved BSD 3-Clause License.
-   See http://ncip.github.com/cabio/LICENSE.txt for details.
-L-->
-
-tocTab[tocTab.length] = new Array("4.1:1", "", "Component Model", "EARoot/EA4/EA1/EA438.htm", "178.png", "125", "0", "", "Component diagram0","{A8F1259D-7A7E-4827-9B51-3D4412650A74}");

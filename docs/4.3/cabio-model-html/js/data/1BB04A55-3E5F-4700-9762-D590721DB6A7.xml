@@ -1,9 +1,0 @@
-<!--L
-   Copyright SAIC
-
-   Distributed under the OSI-approved BSD 3-Clause License.
-   See http://ncip.github.com/cabio/LICENSE.txt for details.
-L-->
-
-tocTab[tocTab.length] = new Array("5.1", "1", "Deployment Model", "", "4.png", "", "", "{01F5F61E-A198-4f5b-9E54-133D93C2D9E8}", "Package");
-tocTab[tocTab.length] = new Array("5.2", "1", "caDSR Deployment Model", "EARoot/EA5/EA441.htm", "4.png", "", "", "{0A159B25-8185-42e3-B50D-78E14A1F80CE}", "Package");

@@ -1,9 +1,0 @@
-<!--L
-   Copyright SAIC
-
-   Distributed under the OSI-approved BSD 3-Clause License.
-   See http://ncip.github.com/cabio/LICENSE.txt for details.
-L-->
-
-tocTab[tocTab.length] = new Array("3.1", "1", "Data Model", "", "4.png", "", "", "{73208C4F-9FAB-4267-8A0C-BEB18923124C}", "Package");
-tocTab[tocTab.length] = new Array("3.2", "1", "Logical Model", "", "4.png", "", "", "{BC7FC9B2-F8D3-43e0-BA21-3B7CE72BD406}", "Package");
