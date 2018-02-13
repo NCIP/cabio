@@ -11,12 +11,11 @@ The caBIO is distributed under the BSD 3-Clause License.
 Please see the NOTICE and LICENSE files for details.
 
 You will find more details about the caBIO in the following links:
- * [Community Wiki] (https://wiki.nci.nih.gov/x/4Q9y)
+ * [Community Wiki] (https://wiki.nci.nih.gov/x/4Q9y) (Requires login. Email [NCI CBIIT Application Support](mailto:ncicbiit@mail.nih.gov) for access.)
  * [Binaries packages] (http://gforge.nci.nih.gov/frs/?group_id=51)
- * [Issue Tracker] (https://tracker.nci.nih.gov/browse/caBIO)
  * [Code Repository] (https://github.com/NCIP/cabio)
- * [User Guide] (https://wiki.nci.nih.gov/x/CyySB)
- * [Release Notes] (https://wiki.nci.nih.gov/x/bgDzB)
+ * [User Guide] (https://wiki.nci.nih.gov/x/CyySB) (Requires login. Email [NCI CBIIT Application Support](mailto:ncicbiit@mail.nih.gov) for access.)
+ * [Release Notes] (https://wiki.nci.nih.gov/x/bgDzB) (Requires login. Email [NCI CBIIT Application Support](mailto:ncicbiit@mail.nih.gov) for access.)
  * [Listserv] (https://list.nih.gov/cgi-bin/wa.exe?A0=CABIO_USERS)
 
 Please join us in further developing and improving caBIO.
